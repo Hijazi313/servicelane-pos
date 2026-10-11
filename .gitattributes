@@ -1,0 +1,2 @@
+# Normalize text files to LF; let Git detect binary files.
+* text=auto eol=lf
