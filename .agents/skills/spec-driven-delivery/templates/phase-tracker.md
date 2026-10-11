@@ -50,7 +50,7 @@ Link to the actual criterion section; an ID alone is a lookup key, not evidence.
 | --- | --- | --- | --- |
 | <AC-01> | <Unavailable / partial / implemented> | <Source inspection / user-run / device or operational verification; link> | <Outcome or pending> |
 
-Report `implemented, unverified` when implementation exists without behavioral evidence. Source evidence alone does not establish runtime or user acceptance. Keep required pending acceptance explicit; respect the existing verification restriction.
+Report `implemented, unverified` when implementation exists without behavioral evidence. Source evidence alone does not establish runtime or user acceptance. Keep required pending acceptance explicit; follow the repository verification policy.
 
 ## Handoff
 

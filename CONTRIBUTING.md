@@ -32,4 +32,4 @@ Use `feat`, `fix`, `docs`, `refactor`, `test`, `chore`, `build`, `ci`, `perf` or
 
 ## Verification
 
-Agent-run tests, builds, lints and runtime/device checks are prohibited unless the user explicitly changes the policy. Do not introduce hooks or installation scripts that bypass it. Prepare user-run acceptance steps for behavior changes and report checks not run and acceptance still pending. Source inspection is not proof of successful runtime behavior.
+Follow the canonical [verification policy](docs/project-scope.md#verification-policy). Run the smallest relevant checks using existing tooling; broader checks require justification. Report results, unverified behavior and pending user acceptance. Hooks and installation scripts must respect the same authorization boundaries. Source inspection is not proof of successful runtime behavior.

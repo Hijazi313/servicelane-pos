@@ -1,0 +1,5 @@
+packages:
+  - apps/*
+
+# Dependency installation must not execute lifecycle scripts.
+ignoreScripts: true
