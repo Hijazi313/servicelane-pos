@@ -10,6 +10,16 @@ Coordinator/integrator: <Owner>
 | --- | --- | --- | --- |
 | <Approved work; link phase/criteria> | <Agent/person> | <Exclusive scope> | <Prerequisite and coordination owner> |
 
+## Checkout and integration
+
+- Mode: <Shared checkout / separate worktrees; use existing environment where suitable>
+- Checkout paths and branch/base: <Per owner; do not assume chat isolation>
+- Shared-state owners: <Git branch/index operations, manifests/lockfile, migrations/contracts as relevant>
+- Integration method/order: <Combined-diff review or branch integration; integrator owns it>
+- Runtime resources: <Separate disposable database/ports if relevant; otherwise not applicable>
+
+Follow the checkout/integration rules in the skill workflow. Do not duplicate task status here.
+
 ## Required context
 
 <Link only relevant spec sections, scoped instructions, contracts and decisions per assignment. Do not require reading every feature document.>

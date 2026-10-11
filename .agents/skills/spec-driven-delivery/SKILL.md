@@ -39,6 +39,6 @@ Load only the template needed for the current document:
 
 Challenge P0 scope using `docs/decision-making.md`. Resolve blocking choices instead of inventing answers. Specify intended behavior before implementation; approved contracts are not claims of availability.
 
-Keep progress in trackers and lasting behavior in specifications. Link canonical schemas and decisions rather than copying them. Source review cannot establish runtime, hardware or recovery success. Pending required acceptance remains explicit; follow repository verification restrictions.
+Keep progress in trackers and lasting behavior in specifications. Link canonical schemas and decisions rather than copying them. Source review cannot establish runtime, hardware or recovery success. Pending required acceptance remains explicit; follow the verification policy in repository `docs/project-scope.md#verification-policy`.
 
 This skill defines project conventions, not an industry-mandated file layout. It does not authorize implementation, external actions or scope expansion.

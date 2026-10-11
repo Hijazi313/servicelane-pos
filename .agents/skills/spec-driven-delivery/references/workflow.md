@@ -6,7 +6,7 @@ Start with the repository `docs/planning/TRACKER.md`, then the assigned phase an
 
 - Locate work through the global tracker; follow its links rather than recursively loading documentation.
 - Read the assigned tracker and the specification sections needed for the current task. Read parent module boundaries when ownership or dependencies matter.
-- Load architecture decisions, compliance guidance, consumer contracts and source code only where the task touches them. Do not reread unchanged documents already available in context.
+- Load architecture decisions, compliance guidance, consumer contracts and source code only where the task touches them. Reuse unchanged documents already available in context; reload when changed or no longer available.
 - If a relevant constraint is missing, retrieve its owning document; selective reading must not become guessing. Handoffs link to authoritative details rather than copying them.
 
 ## Targeted retrieval
@@ -29,7 +29,7 @@ Start with the repository `docs/planning/TRACKER.md`, then the assigned phase an
 ## Phase closeout and handoff
 
 1. Review the affected diff/files against approved scope and acceptance criteria. Preserve unrelated changes; document intentional deferrals and unresolved risks.
-2. Reconcile each activated P0 criterion with suitable evidence. Do not run prohibited checks. Record implemented-but-unverified behavior and pending user acceptance explicitly; rescoping requires a recorded decision, not unchecked work relabeled as done.
+2. Reconcile each activated P0 criterion with suitable evidence. Use the smallest relevant checks under the repository verification policy; do not expand verification without justification. Record implemented-but-unverified behavior and pending user acceptance explicitly; rescoping requires a recorded decision, not unchecked work relabeled as done.
 3. Apply the architecture capability-upkeep rules to affected indexes and references.
 4. Update evidence, status and completion shape in the owning tracker. Update other documents only when their owned behavior, contracts, decisions or assignments changed.
 5. Leave one concrete next action and relevant changed-file cautions in the tracker's current handoff. Report the outcome and evidence limits concisely rather than copying the entire tracker into chat.
@@ -91,9 +91,13 @@ Use `proposed`, `ready`, `active`, `blocked`, `awaiting acceptance`, `complete` 
 - One coordinating agent owns the global tracker and module-level status; each delegated feature has one named owner. These are work assignments, not new application architecture.
 - Before delegation, specify outcome, phase, file ownership, allowed scope, dependencies, acceptance expectations and verification restrictions. The user permits multiple-agent work for this workflow; do not create user-facing chats unless explicitly requested.
 - Parallelize independent tasks inside the active module after shared contracts are agreed. Keep dependent work sequential. Cross-module changes require an explicit coordination assignment.
-- Avoid concurrent edits to the same files, schema migrations or shared contracts. Assign one owner to each shared change; others propose changes through the coordinator.
+- Before concurrent implementation, record checkout paths, integration branch/base, shared-file owners and integration method in the collaboration document. Do not assume separate chats have isolated files.
+- In a shared checkout, use non-overlapping file ownership and one owner for branch/index operations, dependency manifests/lockfiles, migrations and shared contracts. Serialize conflicting edits and commands affecting shared state; do not switch branches or stage another agent's work.
+- Use separate worktrees when independent branch work is needed and authorized. They share repository history, not uncommitted changes; pass required specifications/contracts explicitly and avoid shared database or port collisions. Worktrees are an option, not mandatory overhead.
+- The integrator reviews assigned diffs, reconciles shared changes and runs justified focused checks under the verification policy. With separate branches, agree the merge/cherry-pick order and integrate on the named branch. With a shared checkout, review the combined diff without an unnecessary merge. Do not discard unrelated changes or treat integration as acceptance.
+- If checkout/file ownership is unclear or overlaps, pause conflicting edits and resolve assignments; independent authorized work can continue.
 - Each handoff states changed files, decisions, completed/remaining work, blockers and evidence, including checks not run. The coordinator reconciles results and updates the module/global state.
-- Do not claim acceptance from another agent's confidence or source review. Preserve the user-led verification policy.
+- Do not claim acceptance from another agent's confidence or source review. Distinguish agent checks from required user acceptance under the repository verification policy.
 
 ## Scoped instructions
 

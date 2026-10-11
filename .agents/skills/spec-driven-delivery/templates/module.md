@@ -46,6 +46,6 @@ Deferred P1: <Useful follow-ups and why deferred>
 
 Completion shape: <Capabilities delivered, behavior still absent and next-phase boundary. Link the feature tracker when it owns this detail.>
 
-Verification: <User-run acceptance steps/evidence required; existing agent restrictions apply>
+Verification: <Focused checks and required user acceptance/evidence under the repository verification policy>
 
 Handoff: <Current state, next action and blockers; replace stale state rather than accumulating routine logs>

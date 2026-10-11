@@ -2,11 +2,11 @@
 
 ## Current focus
 
-- Stage: discovery and planning; implementation is not active.
-- Active phase: project foundation planning; no implementation phase is activated.
-- Current activity: prepare the runnable NestJS/Fastify backend foundation before business-module work, per user direction on 2026-10-11.
-- Next action: review the [foundation specification](project-foundation/spec.md) and agree tooling/scope; then authorize implementation. Detailed progress: [foundation phase tracker](project-foundation/phase-tracker.md).
-- Prerequisites: package manager and database tooling for foundation; vendor isolation/deployment before business persistence and access implementation. Verification permissions remain unchanged.
+- Stage: Project Foundation complete; user accepted revised schema-free development scope on 2026-10-12.
+- Closed phase: Project Foundation F-01; [acceptance and evidence limits](project-foundation/phase-tracker.md#closeout--2026-10-12).
+- Current activity: foundation closeout; no business implementation activated.
+- Next action: decide vendor isolation/deployment, then specify Business/Branch and Authentication/Access together.
+- Deferred validation: migration application with the first real schema; trusted TLS and operational checks before production/deployment. See [acceptance record](../acceptance/project-foundation.md).
 
 ## Module roadmap
 
@@ -14,7 +14,7 @@ Project foundation precedes Business/Branch and Authentication/Access, which pre
 
 | Order | Module | Status | Active phase / plan |
 | --- | --- | --- | --- |
-| 0 | Project foundation | proposed | [Specification](project-foundation/spec.md) / [phase tracker](project-foundation/phase-tracker.md); proposal prepared, setup not implemented |
+| 0 | Project foundation | complete | [Specification](project-foundation/spec.md) / [phase tracker](project-foundation/phase-tracker.md); development foundation accepted; limits recorded |
 | 1 | Business/Branch foundation | proposed | P0 direction agreed; detailed plan pending |
 | 2 | Authentication and Access | proposed | MVP P0 agreed; plan alongside foundation |
 | 3 | Menu | proposed | Follows accepted foundation; plan pending |

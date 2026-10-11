@@ -1,0 +1,15 @@
+{
+  "name": "servicelane-pos",
+  "private": true,
+  "packageManager": "pnpm@12.11.2",
+  "engines": {
+    "node": ">=24.21.0 <25"
+  },
+  "scripts": {
+    "build": "pnpm --filter @servicelane/api build",
+    "start": "pnpm --filter @servicelane/api start",
+    "db:migrate": "pnpm --filter @servicelane/api db:migrate",
+    "db:generate": "pnpm --filter @servicelane/api db:generate",
+    "dev": "pnpm --filter @servicelane/api dev"
+  }
+}
