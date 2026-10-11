@@ -1,0 +1,27 @@
+name: PR title
+
+on:
+  pull_request:
+    types: [opened, edited, synchronize, reopened, ready_for_review]
+
+permissions: {}
+
+jobs:
+  conventional-title:
+    name: Conventional PR title
+    runs-on: ubuntu-latest
+    steps:
+      - name: Validate title
+        env:
+          PR_TITLE: ${{ github.event.pull_request.title }}
+        run: |
+          python3 - <<'PY'
+          import os
+          import re
+          import sys
+
+          pattern = r"(?:feat|fix|docs|refactor|test|chore|build|ci|perf|revert)(?:\([a-z0-9][a-z0-9/-]*\))?!?: \S[^\r\n]*"
+          if not re.fullmatch(pattern, os.environ["PR_TITLE"]):
+              print("Use type(scope): description; scope is optional and ! marks a breaking change.")
+              sys.exit(1)
+          PY
