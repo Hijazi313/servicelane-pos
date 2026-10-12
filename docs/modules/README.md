@@ -1,6 +1,6 @@
 # Module behavior
 
-Actual module specifications live beside their owning code in `apps/api/src/modules/<module>/docs/README.md`, with substantial features under `docs/features/<feature>/`. This global document holds cross-cutting operational guidance only. Use the [spec-driven delivery skill](../../.agents/skills/spec-driven-delivery/SKILL.md) for workflow and templates. No module-specific scope is approved yet.
+Actual module specifications live beside their owning code in `apps/api/src/modules/<module>/docs/README.md`, with substantial features under `docs/features/<feature>/`. This global document holds cross-cutting operational guidance only. Use the [spec-driven delivery skill](../../.agents/skills/spec-driven-delivery/SKILL.md) for workflow and templates. BA-01 was accepted on staging and closed on 2026-10-12; BA-02/BA-03 remain inactive. The [joint Business/Branch and Authentication/Access planning pack](../planning/business-access/phase-tracker.md) owns integrated delivery status and links to module-owned specifications. Public capabilities are indexed in [Business](../../apps/api/src/modules/business/docs/README.md) and [Authentication](../../apps/api/src/modules/authentication/docs/README.md). BA-02/BA-03 remain inactive.
 
 ## Cross-cutting operational requirements
 

@@ -8,7 +8,9 @@
     "start": "node --env-file-if-exists=../../.env dist/main.js",
     "db:migrate": "node --env-file-if-exists=../../.env dist/infrastructure/database/migrate.js",
     "db:generate": "drizzle-kit generate --config=drizzle.config.ts",
-    "dev": "tsc-watch -p tsconfig.json --noEmitOnError --onSuccess \"node --env-file-if-exists=../../.env dist/main.js\""
+    "dev": "tsc-watch -p tsconfig.json --noEmitOnError --onSuccess \"node --env-file-if-exists=../../.env dist/main.js\"",
+    "provision-installation": "node --env-file-if-exists=../../.env dist/operator/provision-installation.js",
+    "test:bootstrap": "tsc -p tsconfig.json --outDir dist/ba01-check --sourceMap false && node --test tests/bootstrap.test.mjs"
   },
   "dependencies": {
     "@nestjs/common": "12.1.2",

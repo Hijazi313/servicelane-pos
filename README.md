@@ -1,6 +1,6 @@
 # ServiceLane POS
 
-Backend foundation for a reusable restaurant POS. Development foundation accepted; no business workflows or authentication exist yet. See the [foundation tracker](docs/planning/project-foundation/phase-tracker.md).
+Backend foundation for a reusable restaurant POS. Development foundation accepted; BA-01 adds schema and operator bootstrap source, accepted on staging. No business HTTP workflows or login/sessions exist yet. See the [foundation tracker](docs/planning/project-foundation/phase-tracker.md).
 
 ## Requirements
 
@@ -39,7 +39,7 @@ pnpm db:migrate
 pnpm start
 ```
 
-`db:migrate` is an explicit database write: confirm the target first. There are no business migrations yet; an empty migration set does not connect to the database. When an authorized module adds schema, run `pnpm db:generate` offline, review and commit the generated SQL and metadata, then build and run `pnpm db:migrate`. See [migration conventions](apps/api/migrations/README.md). Recover with reviewed forward corrective migrations; no rollback command is provided.
+`db:migrate` is an explicit database write: confirm the target first. BA-01 includes the first generated business migration; running `db:migrate` performs database writes; it was verified on authorized staging, and other targets/runs must remain within explicit authorization. When an authorized module adds schema, run `pnpm db:generate` offline, review and commit the generated SQL and metadata, then build and run `pnpm db:migrate`. See [migration conventions](apps/api/migrations/README.md). Recover with reviewed forward corrective migrations; no rollback command is provided.
 
 Default HTTP binding is `127.0.0.1:3000`. `HOST`, `PORT` and `NODE_ENV` are validated before listening. Invalid configuration exits nonzero with field names rather than secret values. Built-in Nest logging/error handling is used; request-body logging is not enabled.
 
@@ -55,9 +55,9 @@ See the [acceptance record](docs/acceptance/project-foundation.md) for verified 
 
 - `apps/api/src/app.module.ts`: Nest composition point.
 - `apps/api/src/infrastructure/`: configuration, injected `DatabaseService` and technical health route.
-- `apps/api/migrations/`: ordered SQL migrations, empty of business schema until authorized.
+- `apps/api/migrations/`: reviewed offline SQL migrations; application remains separately authorized.
 - `docs/`: scope, architecture, specifications and acceptance evidence.
 
-Future authorized modules may import `DatabaseModule` and inject `DatabaseService`; its `db` exposes Drizzle over the same PostgreSQL pool and is technical infrastructure, not a cross-module repository. Each business module will own its persistence and public interfaces. Vendor isolation must be resolved before business persistence and access implementation.
+Future authorized modules may import `DatabaseModule` and inject `DatabaseService`; its `db` exposes Drizzle over the same PostgreSQL pool and is technical infrastructure, not a cross-module repository. Each business module will own its persistence and public interfaces. The approved initial topology is one business per LAN installation with its own database and local client assets; deployment is not implemented.
 
-No frontend, business tables, accounts, provider SDK, generic repositories or synchronization are included. See [contribution rules](CONTRIBUTING.md).
+Business and administrator bootstrap were verified on staging; synthetic records were removed, leaving the migrated tables empty. No frontend, HTTP authentication/sessions, provider SDK, generic repositories or synchronization is included. See the [operator instructions](apps/api/src/operator/README.md), [Business capability index](apps/api/src/modules/business/docs/README.md), [Authentication capability index](apps/api/src/modules/authentication/docs/README.md) and [BA-01 evidence](docs/planning/business-access/phase-tracker.md). See [contribution rules](CONTRIBUTING.md).

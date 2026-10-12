@@ -4,6 +4,8 @@ Owning context: [architecture](../../architecture/README.md). Current authorizat
 Specification status: approved for F-01 implementation by user instruction “let's get this done” on 2026-10-11. Acceptance is separate; see the phase tracker.
 Progress and availability: [phase tracker](phase-tracker.md).
 
+Historical scope note: F-01 is closed. Its open topology statements below describe foundation-time constraints; the [subsequent topology approval](../../architecture/vendor-isolation-proposal.md) supersedes that unresolved decision. Current business/access planning belongs to the [joint tracker](../business-access/phase-tracker.md), without changing foundation acceptance or implementation contracts.
+
 ## Outcome and scope
 
 Provide a minimal NestJS/Fastify API foundation that later business modules can consume. This is technical foundation work, not a usable POS or an authorization boundary.

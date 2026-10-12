@@ -1,0 +1,15 @@
+{
+  "business": {
+    "name": "Example Restaurant",
+    "currencyCode": "PKR",
+    "timezone": "Asia/Karachi"
+  },
+  "branch": {
+    "name": "Example Main Branch",
+    "address": "Example address"
+  },
+  "administrator": {
+    "username": "initial.admin",
+    "displayName": "Initial administrator"
+  }
+}

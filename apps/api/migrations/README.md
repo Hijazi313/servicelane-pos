@@ -1,6 +1,6 @@
 # Database migrations
 
-Drizzle Kit generates SQL and metadata from `src/infrastructure/database/schema.ts`. That entry point re-exports future module-owned schema declarations. No business tables or migrations exist yet. API startup never applies migrations.
+Drizzle Kit generates SQL and metadata from `src/infrastructure/database/schema.ts`. That entry point re-exports module-owned schema declarations. BA-01 adds the offline `0000_business_bootstrap.sql` and metadata for Business/Branch/binding and administrator accounts/credentials/grants. It was applied and rerun successfully on user-authorized staging during BA-01 acceptance, including additive-DDL rollback recovery. Other targets require explicit authorization; no automatic application at startup. API startup never applies migrations.
 
 From repository root:
 
