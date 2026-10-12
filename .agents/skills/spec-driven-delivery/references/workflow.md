@@ -26,9 +26,14 @@ Start with the repository `docs/planning/TRACKER.md`, then the assigned phase an
 6. State the completion shape: intended capabilities after this phase, important behavior still absent and the usable interface/boundary for the next phase. Describe intent now and reconcile it with evidence at closeout.
 7. Proceed within clear authorization. Ask only about material blocking choices and pause their dependent work; continue independent authorized work.
 
+## Phase transitions and requirement provenance
+
+- Keep a closed phase tracker for its evidence, corrections and explicitly recorded reopening. New work belongs in its owning plan/tracker; leave only a transition link in the closed phase and update global focus. For a small planning task without a separate tracker, the global tracker can own its status and link to the proposal; do not create documents merely to satisfy routing.
+- Distinguish confirmed requirements, proposed solutions and open decisions. Before describing behavior as required, identify the supporting user decision or applicable authoritative obligation. Label unsupported inferences as proposals/questions; a confirmed outcome does not automatically confirm a particular technical solution.
+
 ## Phase closeout and handoff
 
-1. Review the affected diff/files against approved scope and acceptance criteria. Preserve unrelated changes; document intentional deferrals and unresolved risks.
+1. Review the affected diff/files against approved scope and acceptance criteria. Check that progress is recorded in its owning plan and that requirement claims have supporting decisions or obligations. Preserve unrelated changes; document intentional deferrals and unresolved risks.
 2. Reconcile each activated P0 criterion with suitable evidence. Use the smallest relevant checks under the repository verification policy; do not expand verification without justification. Record implemented-but-unverified behavior and pending user acceptance explicitly; rescoping requires a recorded decision, not unchecked work relabeled as done.
 3. Apply the architecture capability-upkeep rules to affected indexes and references.
 4. Update evidence, status and completion shape in the owning tracker. Update other documents only when their owned behavior, contracts, decisions or assignments changed.

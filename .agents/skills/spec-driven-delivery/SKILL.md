@@ -24,6 +24,10 @@ Follow the entry/resume and closeout gates in [workflow guidance](references/wor
 
 The spec and tracker are the default pair for substantial features. Small features can stay in the module plan. Create supporting documents when relevant: `frontend-integration.md` before frontend integration, `agent-collaboration.md` for multiple-agent delivery, and `decisions.md` when material feature-specific choices arise. They are first-class documents, not mandatory empty files. A separate risk register remains optional. Do not scaffold application modules merely to hold empty plans.
 
+## User prompts
+
+When composing a startup/continuation prompt or explaining the delivery sequence, use [prompt examples](references/prompts.md). Do not load this guide during ordinary implementation.
+
 ## Templates
 
 Load only the template needed for the current document:
