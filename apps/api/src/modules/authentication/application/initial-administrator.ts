@@ -17,7 +17,7 @@ export function validateInitialAdministrator(value: unknown): InitialAdministrat
 }
 
 export function validateInitialPassword(value: unknown): asserts value is string {
-  if (typeof value !== 'string' || [...value].length < 15 || [...value].length > 128 || /\p{Cs}/u.test(value)) {
+  if (typeof value !== 'string' || value.length > 256 || [...value].length < 15 || [...value].length > 128 || /\p{Cs}/u.test(value)) {
     throw new AdministratorValidationError('Password must contain 15–128 Unicode characters');
   }
 }

@@ -1,27 +1,26 @@
 import { Injectable } from '@nestjs/common';
-import { randomUUID } from 'node:crypto';
-import { BusinessService, InstallationConflictError } from '../../business/public.js';
+import { BusinessService } from '../../business/public.js';
 import { transactionDatabase, type TransactionContext } from '../../../infrastructure/database/transaction.js';
-import { validateInitialAdministrator } from '../application/initial-administrator.js';
+import { ProvisionInitialAdministrator, type AdministratorPersistence } from '../application/administrator-provisioner.js';
 import { hashInitialPassword } from './password-hash.js';
 import { staffAccounts, staffBranchGrants, staffCredentials } from './schema.js';
 
-@Injectable()
-export class AdministratorProvisioner {
-  constructor(private readonly business: BusinessService) {}
-
-  async createInitialAdministrator(input: unknown, password: string, businessId: string, branchId: string, context: TransactionContext): Promise<{ accountId: string }> {
-    const administrator = validateInitialAdministrator(input);
-    const db = transactionDatabase(context);
-    if ((await db.select({ id: staffAccounts.id }).from(staffAccounts).limit(1)).length) throw new InstallationConflictError();
-    await this.business.validateBranchOwnership(businessId, branchId, context);
-    const passwordHash = await hashInitialPassword(password);
-    const accountId = randomUUID();
-    await db.insert(staffAccounts).values({
-      id: accountId, businessId, ...administrator, status: 'active', role: 'administrator', passwordChangeRequired: true,
-    });
-    await db.insert(staffCredentials).values({ accountId, passwordHash });
-    await db.insert(staffBranchGrants).values({ businessId, accountId, branchId });
-    return { accountId };
+class SqlAdministratorPersistence implements AdministratorPersistence {
+  async hasAccounts(context: TransactionContext): Promise<boolean> {
+    return (await transactionDatabase(context).select({ id: staffAccounts.id }).from(staffAccounts).limit(1)).length > 0;
   }
+  async create(input: Parameters<AdministratorPersistence['create']>[0], context: TransactionContext): Promise<void> {
+    const db = transactionDatabase(context);
+    await db.insert(staffAccounts).values({
+      id: input.accountId, businessId: input.businessId, username: input.username, displayName: input.displayName,
+      status: 'active', role: 'administrator', passwordChangeRequired: true,
+    });
+    await db.insert(staffCredentials).values({ accountId: input.accountId, passwordHash: input.passwordHash });
+    await db.insert(staffBranchGrants).values({ businessId: input.businessId, accountId: input.accountId, branchId: input.branchId });
+  }
+}
+// Compatibility entry point for accepted bootstrap callers and Nest composition.
+@Injectable()
+export class AdministratorProvisioner extends ProvisionInitialAdministrator {
+  constructor(business: BusinessService) { super(business, new SqlAdministratorPersistence(), hashInitialPassword); }
 }

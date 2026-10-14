@@ -4,25 +4,25 @@
 
 - Stage: Foundation F-01 remains complete; [acceptance and evidence limits](project-foundation/phase-tracker.md#closeout--2026-10-12).
 - Approved topology: one business per LAN installation, dedicated local PostgreSQL, locally served client assets and one maintained codebase; explicit user approval on 2026-10-12. [Decision and rationale](../architecture/vendor-isolation-proposal.md).
-- Current activity: BA-01 closed after authorized staging acceptance on 2026-10-12; next is BA-02 decision review/planning. [Owning tracker](business-access/phase-tracker.md), [Business/Branch spec](../../apps/api/src/modules/business/docs/features/foundation/spec.md), [Authentication/Access spec](../../apps/api/src/modules/authentication/docs/features/access/spec.md).
-- Current phase: BA-01 complete; no active implementation phase. BA-D01/BA-D02/BA-D05 approved; BA-02/BA-03 inactive and remaining decisions open.
+- Current activity: BA-01 closed after authorized staging acceptance on 2026-10-12; BA-02 source is complete and awaiting acceptance. [Owning tracker](business-access/phase-tracker.md), [Business/Branch spec](../../apps/api/src/modules/business/docs/features/foundation/spec.md), [Authentication/Access spec](../../apps/api/src/modules/authentication/docs/features/access/spec.md).
+- Current phase: BA-01 complete; BA-02 awaiting acceptance under [authorization](business-access/phase-tracker.md#ba-02-authorization--2026-10-12); BA-D01–06 approved; BA-03 inactive.
 - Deferred validation remains in the [canonical foundation handoff](project-foundation/phase-tracker.md#current-handoff--2026-10-12) and [acceptance record](../acceptance/project-foundation.md).
 
 ## Current planning handoff — 2026-10-12
 
-User approved the topology and subsequently authorized BA-01-T01/T02 implementation with BA-D01/BA-D02/BA-D05. Authorization, task IDs, evidence and checkout cautions are owned by the [joint phase tracker](business-access/phase-tracker.md#ba-01-authorization--2026-10-12). Necessary dependency installation is authorized but was not needed. Subsequent user-authorized staging writes/migration acceptance completed successfully; [BA-01 closeout](business-access/phase-tracker.md#closeout--2026-10-12) records evidence. Infrastructure provisioning, deployment and later phases remain unauthorized.
+User approved the topology and subsequently authorized BA-01-T01/T02 implementation with BA-D01/BA-D02/BA-D05. Authorization, task IDs, evidence and checkout cautions are owned by the [joint phase tracker](business-access/phase-tracker.md#ba-01-authorization--2026-10-12). Historical BA-01 installation permission was not needed; BA-02 installation is prohibited. Subsequent user-authorized staging writes/migration acceptance completed successfully; [BA-01 closeout](business-access/phase-tracker.md#closeout--2026-10-12) records evidence. BA-02 source is authorized under its own record; database execution, infrastructure provisioning/deployment and BA-03 remain unauthorized.
 
-Next action: review BA-02 decisions BA-D03/BA-D04/BA-D06 and the authentication design before implementation authorization. Preserve staged workflow changes and unrelated work. Foundation F-01 is not reopened.
+Next action: review BA-02 source/diff and prepare separately authorized database acceptance; trusted-browser/target-host gates remain pending. Preserve staged workflow changes and unrelated work. Foundation F-01 is not reopened.
 
 ## Proposed foundation follow-ups — 2026-10-12
 
-User requested application versioning and consideration of Swagger documentation and other necessary project foundations. Recorded for planning; no implementation phase activated and accepted F-01 scope remains closed.
+User requested application versioning and consideration of Swagger documentation and other necessary project foundations. BA-D06 scope was subsequently approved for BA-02 source; accepted F-01 scope remains closed.
 
-- Versioning is requested; clarify whether this means release/build identification, HTTP API compatibility versioning, or both. Proposed direction: identify deployed releases for support/migration compatibility and define API compatibility policy before the first business API consumer. Exact version format, route/header strategy and backward-compatibility commitment remain unapproved; do not introduce parallel API versions without a consumer need.
-- Swagger/OpenAPI is a candidate for documenting business HTTP contracts and authentication, with documentation exposure decided explicitly for each environment. OpenAPI UI remains a recorded F-01 P1 deferral, not a failed foundation requirement. Reassess priority with the first business API/integration specification; generated documentation alone does not verify behavior.
+- Approved BA-D06 selects `/api/v1` for new business routes while retaining technical `/health`; one API version only. Separate semantic application version and immutable build identity are defined for later packaging, not a rollout claim. [Owning proposal](../../apps/api/src/modules/authentication/docs/features/access/spec.md#ba-d06--api-and-release-identification-swagger-boundary).
+- Swagger generation/UI remains P1: explicit validated contracts and focused checks are sufficient for the current backend increment. No Swagger dependency or F-01 reopening is authorized. Exposure policy must be reviewed if later added.
 - Review other foundations against concrete workflows and existing capabilities before proposing scope: request validation, consistent errors, secret-safe diagnostics, access controls and focused CI checks. This is a discovery list, not approval for packages, custom frameworks or a generic industry-standard checklist. Distinguish required behavior from optional tooling and avoid duplicating framework capabilities.
 
-Next planning treatment: resolve the versioning meaning and propose the smallest justified follow-up scope with acceptance outcomes. These items do not select vendor isolation or alter the foundation’s canonical deferred verification limits.
+Versioning/documentation implementation follows the approved BA-D06 boundary; release packaging remains deferred. These items do not select vendor isolation or alter the foundation’s canonical deferred verification limits.
 
 ## Module roadmap
 
@@ -31,8 +31,8 @@ Project foundation precedes Business/Branch and Authentication/Access, which pre
 | Order | Module | Status | Active phase / plan |
 | --- | --- | --- | --- |
 | 0 | Project foundation | complete | [Specification](project-foundation/spec.md) / [phase tracker](project-foundation/phase-tracker.md); development foundation accepted; limits recorded |
-| 1 | Business/Branch foundation | proposed | [Specification; BA-01 slice approved](../../apps/api/src/modules/business/docs/features/foundation/spec.md) / [joint tracker](business-access/phase-tracker.md); BA-01 accepted on staging; later lifecycle/access work inactive |
-| 2 | Authentication and Access | proposed | [Specification; BA-01 slice approved](../../apps/api/src/modules/authentication/docs/features/access/spec.md) / [joint tracker](business-access/phase-tracker.md); BA-01 accepted on staging; later lifecycle/access work inactive |
+| 1 | Business/Branch foundation | proposed | [Specification; BA-01 slice approved](../../apps/api/src/modules/business/docs/features/foundation/spec.md) / [joint tracker](business-access/phase-tracker.md); BA-01 accepted on staging; BA-02 access source complete, awaiting acceptance |
+| 2 | Authentication and Access | proposed | [Specification; BA-01 slice approved](../../apps/api/src/modules/authentication/docs/features/access/spec.md) / [joint tracker](business-access/phase-tracker.md); BA-01 accepted on staging; BA-02 access source complete, awaiting acceptance |
 | 3 | Menu | proposed | Follows accepted foundation; plan pending |
 | 4 | Orders | proposed | Not activated |
 | 5 | Kitchen | proposed | Not activated |

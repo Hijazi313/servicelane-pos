@@ -12,6 +12,8 @@
     "db:generate": "pnpm --filter @servicelane/api db:generate",
     "dev": "pnpm --filter @servicelane/api dev",
     "provision-installation": "pnpm --filter @servicelane/api provision-installation",
-    "test:bootstrap": "pnpm --filter @servicelane/api test:bootstrap"
+    "test:bootstrap": "pnpm --filter @servicelane/api test:bootstrap",
+    "recover-administrator": "pnpm --filter @servicelane/api recover-administrator",
+    "test:access": "pnpm --filter @servicelane/api test:access"
   }
 }

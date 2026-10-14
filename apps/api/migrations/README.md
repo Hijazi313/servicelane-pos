@@ -18,3 +18,7 @@ Run only one migrator at a time; this workflow does not provide the previous run
 If node-pg-migrate was used against an existing database, stop and plan an explicit baseline/history transition first. Drizzle does not import `pgmigrations` history automatically. No such database has been inspected by this project.
 
 See the [acceptance record](../../../docs/acceptance/project-foundation.md). No-op execution alone is not evidence of database migration success.
+
+## BA-02 source-only migration
+
+`0001_staff_access.sql` adds four Authentication-owned tables: sessions, pre-login CSRF state, throttle counters and security events, plus their checks/indexes and account-ownership FK. Existing six BA-01 tables are unchanged. Generated offline with metadata; source review does not prove application, locking, cleanup or recovery. Do not run `db:migrate` under BA-02 source-only authorization. Accepted BA-01 history is preserved; its staging harness expects the earlier six-table state and is not a BA-02 acceptance runner.

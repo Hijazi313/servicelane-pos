@@ -34,8 +34,9 @@ export class BusinessService {
     if (rows.length !== 1) throw new InstallationContextError();
   }
 
-  async resolveInstallationContext(): Promise<InstallationContext> {
-    const rows = await this.database.db.select({
+  async resolveInstallationContext(context?: TransactionContext): Promise<InstallationContext> {
+    const db = context ? transactionDatabase(context) : this.database.db;
+    const rows = await db.select({
       businessId: businesses.id, branchId: branches.id,
       businessName: businesses.name, currencyCode: businesses.currencyCode, timezone: businesses.timezone,
       branchName: branches.name, address: branches.address,

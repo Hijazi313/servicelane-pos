@@ -1,8 +1,8 @@
 # Business/Branch and Authentication/Access — Joint phase tracker
 
-Parent: [global tracker](../TRACKER.md). Owner: primary agent, solo documentation assignment.
+Parent: [global tracker](../TRACKER.md). Owner: primary agent; BA-02 assignments in [collaboration record](../../../apps/api/src/modules/authentication/docs/features/access/agent-collaboration.md).
 Specifications: [Business/Branch](../../../apps/api/src/modules/business/docs/features/foundation/spec.md), [Authentication/Access](../../../apps/api/src/modules/authentication/docs/features/access/spec.md).
-Status: BA-01 complete, accepted on 2026-10-12 under user-authorized staging acceptance. Active implementation phase: none; BA-02/BA-03 remain proposed.
+Status: BA-01 complete, accepted on 2026-10-12 under user-authorized staging acceptance. BA-02 source complete, awaiting acceptance; no active execution authorization beyond source checks. BA-03 remains proposed.
 
 ## Authorization
 
@@ -25,31 +25,45 @@ Solo assignment: API Business and Authentication bootstrap slices, technical tra
 | BA-01-T01 | complete | [BB-AC01](../../../apps/api/src/modules/business/docs/features/foundation/spec.md#bb-ac01--explicit-ownership-and-configuration): schema, validated binding, offline validation and staging persistence passed; see closeout |
 | BA-01-T02 | complete | [BB-AC02](../../../apps/api/src/modules/business/docs/features/foundation/spec.md#bb-ac02--atomic-and-repeatable-provisioning): actual operator, shared PostgreSQL transaction, rollback/concurrency/retry passed; see closeout |
 
+## BA-02 authorization — 2026-10-12
+
+User explicitly approved the dated implementation-review design, BA-D03/BA-D04/BA-D06 and service/hash treatment, and authorized BA-02-T01/T02/T03 source implementation only. Record of instruction: “Start BA-02 … Authorize BA-02-T01/T02/T03 source implementation only. Record this authorization before implementation.”
+
+Deliver lifecycle, versioned authentication/staff/context HTTP interfaces, sessions/CSRF/throttling, access enforcement, local recovery, reviewed offline migrations and focused database-free checks. No installation, database connection/write, migration application, provisioning/deployment, TLS trust changes, frontend, Swagger or BA-03. Existing BA-01 staging authorization does not extend to BA-02. Missing necessary dependencies require scoped approval; independent work continues. Source completion remains awaiting acceptance.
+
+| Active P0 task | Status | Acceptance / expected evidence |
+| --- | --- | --- |
+| BA-02-T01 | awaiting acceptance; source complete | AA-AC01; lifecycle/last-admin/credentials and bootstrap regressions, offline migrations |
+| BA-02-T02 | awaiting acceptance; source complete | AA-AC02/03; injection/clock/CSRF/throttle/session checks; database/browser evidence deferred |
+| BA-02-T03 | awaiting acceptance; source complete | AA-AC01/03/04; action/branch denial, transactional recheck and local recovery boundary |
+
+Completion shape: source HTTP API and operator command with focused offline evidence. Not accepted persistence, trusted browser or deployment readiness. Assignment and shared-file ownership: [collaboration record](../../../apps/api/src/modules/authentication/docs/features/access/agent-collaboration.md). Preserve the three pre-existing planning-document edits; no Git index/branch/commit/push changes.
+
 ## Phase and task IDs
 
-BA-00 planning is complete and BA-01 implementation is authorized as recorded above. Later rows are proposed sequencing and scope handles for review; approving a specification is separate from authorizing a row. Database execution/installation permissions must be explicit when an implementation phase needs them.
+BA-00 planning and BA-01 acceptance are complete; BA-02 source is complete and awaiting required runtime acceptance under the limits above. Later rows are proposed sequencing and scope handles for review; approving a specification is separate from authorizing a row. Database execution/installation permissions must be explicit when an implementation phase needs them.
 
 | Phase | Proposed P0 tasks / outcome | Status | Exit criteria / evidence |
 | --- | --- | --- | --- |
 | BA-00 | BA-00-T01 record topology; BA-00-T02 draft linked specifications; BA-00-T03 reconcile tracking/review decisions | complete | Topology approval recorded; both specs and proposed task/acceptance links prepared; documentation checks only |
 | BA-01 | BA-01-T01 Business/Branch schema and validated binding; BA-01-T02 atomic operator bootstrap including first administrator | complete | [BB-AC01](../../../apps/api/src/modules/business/docs/features/foundation/spec.md#bb-ac01--explicit-ownership-and-configuration), [BB-AC02](../../../apps/api/src/modules/business/docs/features/foundation/spec.md#bb-ac02--atomic-and-repeatable-provisioning); reviewed first migration and focused authorized runtime evidence |
-| BA-02 | BA-02-T01 staff lifecycle/credential policy; BA-02-T02 local login, sessions and revocation; BA-02-T03 branch/action enforcement and controlled recovery | proposed | [AA-AC01](../../../apps/api/src/modules/authentication/docs/features/access/spec.md#aa-ac01--staff-lifecycle-and-permissions), [AA-AC02](../../../apps/api/src/modules/authentication/docs/features/access/spec.md#aa-ac02--login-and-browser-session), [AA-AC03](../../../apps/api/src/modules/authentication/docs/features/access/spec.md#aa-ac03--revocation-and-concurrency), [AA-AC04](../../../apps/api/src/modules/authentication/docs/features/access/spec.md#aa-ac04--local-recovery-and-denial-on-failure) |
+| BA-02 | BA-02-T01 staff lifecycle/credential policy; BA-02-T02 local login, sessions and revocation; BA-02-T03 branch/action enforcement and controlled recovery | awaiting acceptance | [AA-AC01](../../../apps/api/src/modules/authentication/docs/features/access/spec.md#aa-ac01--staff-lifecycle-and-permissions), [AA-AC02](../../../apps/api/src/modules/authentication/docs/features/access/spec.md#aa-ac02--login-and-browser-session), [AA-AC03](../../../apps/api/src/modules/authentication/docs/features/access/spec.md#aa-ac03--revocation-and-concurrency), [AA-AC04](../../../apps/api/src/modules/authentication/docs/features/access/spec.md#aa-ac04--local-recovery-and-denial-on-failure) |
 | BA-03 | BA-03-T01 integrated context and two-installation access acceptance | proposed | [BB-AC03](../../../apps/api/src/modules/business/docs/features/foundation/spec.md#bb-ac03--independent-installations), [BB-AC04](../../../apps/api/src/modules/business/docs/features/foundation/spec.md#bb-ac04--fail-closed-on-invalid-context), [AA-AC05](../../../apps/api/src/modules/authentication/docs/features/access/spec.md#aa-ac05--business-and-branch-isolation), plus accepted BA-01/BA-02 |
 
 BA-01 needs approved shared provisioning/transaction and credential contracts from both specs; it implements only the administrator bootstrap slice of Authentication. BA-02 builds remaining lifecycle and HTTP access on that boundary. BA-03 must pass before Menu implementation is proposed. Detail implementation checklists only upon specific phase activation; no later business module is activated by this pack.
 
 ## Review decisions
 
-BA-D01, BA-D02 and BA-D05 are approved by explicit user instruction on 2026-10-12; implementation is limited to BA-01. BA-D03, BA-D04 detailed controls and BA-D06 remain open. Recovery, later staff lifecycle and HTTP permissions are not activated by approving their direction.
+BA-D01/BA-D02/BA-D05 were approved for BA-01; BA-D03/BA-D04/BA-D06 and the review design are now approved for BA-02 source implementation. Activation is the explicit BA-02 authorization above, not merely the decision table.
 
 | ID | Proposed choice / question | Impact and review boundary |
 | --- | --- | --- |
 | BA-D01 | Operator-command initial provisioning; one cross-module transaction; local privileged command for administrator recovery | Approve bootstrap/recovery responsibility and transaction ownership before BA-01. Host operator identity/custody requires a runbook before deployment. |
 | BA-D02 | Local normalized username/password, administrator/staff roles, explicit initial branch grant and forced initial/reset password change | Approve role matrix and credential policy before implementing account schema/credentials in BA-01/BA-02. No shared PIN or cloud identity dependency. |
-| BA-D03 | Opaque server-side sessions in same-origin protected cookies; 30-minute idle/12-hour absolute expiry; agreed throttling and CSRF | Approve session approach before BA-02. Proposed throttle starting point: account key allows five failed attempts per 15 minutes before temporary delay, source address allows 30 per minute; all workers share local PostgreSQL state, expired counters are cleaned, no permanent lockout. Validate this proposal against shared restaurant devices and target-host load; these values are not industry mandates. |
-| BA-D04 | Trusted LAN HTTPS and local same-origin client serving | Approved topology needs these operational controls, but no hosting/packaging/front-end implementation belongs here. Select certificate trust/distribution, hostname and client hosting before browser/deployment acceptance. |
+| BA-D03 | Recommend PostgreSQL opaque sessions, 30-minute idle/12-hour absolute expiry, synchronizer CSRF, fixed-window atomic throttling | Detailed policy and acceptance cases in the [BA-02 design](../../../apps/api/src/modules/authentication/docs/features/access/spec.md#ba-d03--session-csrf-and-bounded-login-work); approved for BA-02 source; runtime acceptance pending. |
+| BA-D04 | Recommend one canonical HTTPS origin; separate backend checks from trusted-browser acceptance | [Acceptance boundary](../../../apps/api/src/modules/authentication/docs/features/access/spec.md#ba-d04--origin-and-https-acceptance-boundary); deployment/trust provisioning separately authorized. |
 | BA-D05 | Validated business/branch configuration and installation binding; no editor in first increment | Approve initial fields/validation and controlled setup before BA-01. Operator/backup custodian, host/power ownership and downtime/data-loss targets remain open before deployment. |
-| BA-D06 | Clarify requested release versioning versus HTTP API versioning; decide first business API prefix and OpenAPI scope | No versioning solution is approved. Decide prefix before BA-02 routes are implemented. Swagger/OpenAPI remains a candidate, not silently added P0. Release/build identification must be scoped before rollout. |
+| BA-D06 | Recommend `/api/v1`, separate semantic release/build identity, defer Swagger generation/UI | [Version/documentation scope](../../../apps/api/src/modules/authentication/docs/features/access/spec.md#ba-d06--api-and-release-identification-swagger-boundary); approved for BA-02 source; runtime acceptance pending. |
 
 ## Initial implementation evidence (historical; superseded by closeout)
 
@@ -91,10 +105,74 @@ Observed PostgreSQL version: 17.11. Runtime/migration connection settings were i
 
 ## Current handoff — 2026-10-12
 
-- BA-01 closed; no active implementation phase. BA-D01/BA-D02/BA-D05 approved; BA-D03, detailed BA-D04 controls and BA-D06 remain open. BA-02/BA-03 inactive.
-- Staging now has the first migration applied with six empty application tables; no configured restaurant or administrator remains after synthetic-data cleanup. Provider schemas and the Odoo reference were untouched.
-- Latest edits: terminal cleanup fix and regression; manual staging harness/terminal driver/sanitized evidence; acceptance/scope/module/migration/operator/global tracker documentation. Existing work, including the concurrently updated root AGENTS.md context-reuse rule, was preserved. User authorized local commits on 2026-10-12; workflow guidance and BA-01 delivery are grouped separately. No installs, infrastructure provisioning, deployment or push.
-- One next action: planning/review for BA-02 from this tracker—resolve BA-D03 session/throttling/CSRF, BA-D04 origin/HTTPS acceptance boundary and BA-D06 versioning/documentation scope; review authentication service placement/hash-adapter risk. Do not implement BA-02 until exact decisions/tasks are authorized.
+- BA-01 remains accepted/closed. BA-02-T01/T02/T03 source is complete, awaiting acceptance; BA-02 is not closed. BA-03 remains inactive. All BA-D01–06 decisions and the dated review design were approved; runtime execution was not.
+- Source delivers `/api/v1` staff lifecycle, local login/session/CSRF/throttling, branch/action denial, revocation and operator recovery. HTTP origin/proxy configuration is explicit; no TLS/assets/frontend/Swagger or rollout packaging is delivered. [Current contracts](../../../apps/api/src/modules/authentication/docs/features/access/spec.md#source-contract-details--ba-02).
+- Existing three planning-document edits were preserved and extended. New source, focused tests, offline second migration/metadata and owning docs are uncommitted. No index/branch/commit/push operations. [Assignments](../../../apps/api/src/modules/authentication/docs/features/access/agent-collaboration.md) own agent file boundaries; primary reconciled source and final checks.
+- No installation, database connection/write, migration application, provisioning, deployment, TLS trust change or real-browser test occurred. Staging is unchanged: first migration and six empty application tables. Existing BA-01 evidence remains historical and intact; its six-table acceptance harness must not be reused for BA-02.
+- Next action: implementation review of this source/diff, then separately authorize a scoped BA-02 database acceptance plan before any execution. Include second migration, lifecycle/recovery, real races, worker/restart counters, cleanup and outage behavior; trusted-HTTPS browser acceptance and target-host hashing require their own operational prerequisites. Do not activate BA-03 or close BA-02 on source-only evidence.
+
+## BA-02 source evidence — 2026-10-12
+
+| Criterion / check | Evidence / result | Limits |
+| --- | --- | --- |
+| AA-AC01 lifecycle/roles | Serialized application-double checks cover forced change, safe output, role denial and last-active-admin rejection including concurrent removals | PostgreSQL locking/rollback and real lifecycle acceptance pending |
+| AA-AC02 login/CSRF/throttles | Generic unknown/disabled/wrong failures, single-use pre-login state, expiry, fixed windows, pending attempts, source/account capacities and hash saturation checked; real Nest/Fastify injection covers origin/Host/protocol, cookies, no token JSON, default deny, limits/errors and no CORS | Application doubles and HTTP service stubs are separate layers; no real database-backed HTTP or trusted-browser/TLS acceptance |
+| AA-AC03 revocation/concurrency | Clock boundaries, rotation, reset/disable/re-enable, multiple logical sessions and revocation during hash work checked against a serialized store double | Real cross-worker/restart persistence, database races and device behavior pending |
+| AA-AC04 recovery/fail-closed | Application recovery/foreign target/outage checks; CLI rejects invalid args/non-TTY before connection; actual Nest operator composition resolves with zero pool connections | No recovery invocation, database outage or host-custody acceptance; restore invalidation remains operational gate |
+| BA-01 regressions | 12 existing Node tests passed after current source compilation to ignored `dist/ba01-check`; bootstrap public entry, shared scope, terminal handling and zero-connection operator composition retained | Historical staging evidence not rerun; no BA-02 database claim |
+| BA-02 focused checks | `pnpm test:access`: TypeScript compilation and 23 Node tests passed (11 application, 6 HTTP/configuration, 4 credential/bootstrap, 2 recovery boundary) | No installed tooling or production build; serialized doubles do not prove PostgreSQL semantics |
+| Offline migration | Generated/reviewed `0001_staff_access.sql`, snapshot and journal; migration-file parsing reads two artifacts; new snapshot chains to previous ID and preserves all six original table definitions exactly | Four added tables only; not applied, no runtime/recovery proof |
+| Source/diff/docs | Reviewed scope, bootstrap service split, bounded PHC adapter, short locking transactions/post-hash rechecks; whitespace and changed-document relative links passed | Source review is not runtime acceptance |
+
+Review corrected non-ASCII CSRF input handling so invalid equal-character-length input returns 403 rather than a timing-safe comparison exception/503; regression covered. Technical `/health` retains accepted 200/503 response bodies and is explicitly public; health/database behavior is stubbed in HTTP regression checks. Successful administrator mutations refresh idle time before any self-revocation, preserving revocation. Denied mutations retain safe actor/validated target IDs in failure events without recording request bodies; focused regression passed in the final 23-test run.
+
+Observed Node 24.18.1 and pnpm 9.15.0 differ from pinned Node >=24.21.0 and pnpm 12.11.2. Experimental Argon2 compatibility and target-host memory/latency/concurrency remain release gates. No new dependency was necessary. Trusted database TLS, connection mode/budget, shutdown/fault recovery, backup/restore and LAN trust/assets remain deferred as previously recorded. Release identity is a defined contract only; no release packaging/automation claim.
+
+## BA-02 planning review — 2026-10-12 (historical; subsequently approved)
+
+User requested planning only: resolve BA-D03/04/06, review service placement and experimental hashing, recommend justified P0, update specification/tracker and prepare authorization. This instruction authorizes documentation only and does not approve the recommended design.
+
+| Proposed task | Review status / scope | Acceptance and expected evidence |
+| --- | --- | --- |
+| BA-02-T01 | proposed, ready for authorization review: lifecycle, credential verification, application/persistence separation preserving bootstrap | AA-AC01; focused fixed-role/last-admin/credential and BA-01 regression checks; offline migration review; persistence races pending authorized database evidence |
+| BA-02-T02 | proposed, ready for authorization review: login, session/CSRF/throttle policy, versioned HTTP boundaries | AA-AC02/03; focused injection/clock/parallel-counter checks; actual shared PostgreSQL and trusted-browser checks remain pending until authorized |
+| BA-02-T03 | proposed, ready for authorization review: explicit branch/action enforcement, local recovery, fail-closed behavior | AA-AC01/03/04; negative policy and operator-boundary checks; actual recovery/outage/concurrency evidence pending authorized runtime acceptance |
+
+Simplest justified P0: reuse Nest/Fastify and PostgreSQL; one API version and client origin; no Redis, JWT revocation framework, generic repository/permission engine, frontend or Swagger package. Preserve existing Argon2id PHC hashes behind a private verification adapter; explicitly retain experimental-runtime and host-load release gates. Detailed intended behavior and P1 exclusions live in the specification, not this tracker.
+
+Planning evidence: inspected current public exports, Nest composition, bootstrap orchestration, hash adapter and package capabilities; checked current primary Node/OWASP/Nest guidance. Documentation whitespace and relative-file-link checks passed for all three changed documents. No implementation tests rerun for documentation; no runtime, database, browser, TLS, capacity benchmark or release acceptance claimed. BA-01 evidence is preserved, not newly reproduced.
+
+### Concrete implementation-authorization prompt (historical; user subsequently supplied it)
+
+```text
+Approve the BA-02 review design dated 2026-10-12 in
+apps/api/src/modules/authentication/docs/features/access/spec.md,
+including BA-D03, BA-D04, BA-D06 and the service/hash-adapter treatment.
+Authorize source implementation of BA-02-T01/T02/T03 only from
+docs/planning/business-access/phase-tracker.md. Follow AGENTS.md and
+spec-driven-delivery. Record this approval before implementation.
+
+Deliver the specified lifecycle, /api/v1 authentication/staff/context,
+sessions/CSRF/throttling, access enforcement and local recovery, plus
+reviewed offline migration artifacts and focused database-free checks.
+Preserve BA-01 public bootstrap behavior, work and evidence. Use the
+existing experimental Node Argon2id adapter behind the specified bounded
+verification boundary; retain pinned-runtime and target-host release gates.
+
+No dependency installation is authorized. If a necessary Fastify-compatible
+dependency is missing, identify the exact package/purpose and obtain scoped
+installation authorization before that dependent work. Do not substitute
+unsafe custom cryptography to avoid this boundary.
+
+Do not connect to or write databases, apply migrations, provision/deploy,
+change TLS trust, build a frontend, add Swagger or activate BA-03. Database
+acceptance, trusted-HTTPS browser acceptance and target-host benchmarking
+remain separately authorized follow-ups. Report source completion as awaiting
+acceptance; do not close BA-02 without its required evidence. Update the
+specification/tracker with actual contracts, checks and remaining limits.
+```
+
+This prompt is a proposed future user instruction; its presence here is not authorization. If dependency approval is needed, source work that does not depend on it can continue. No BA-02 activation occurred in this review.
 
 ## Verification follow-up — 2026-10-12
 
