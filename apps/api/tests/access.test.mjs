@@ -121,6 +121,28 @@ test('CSRF proof, prelogin lifetime and single consumption protect login and log
   await denies(f.service.login({ username: a.username, password: secret }, expired, 'socket'), 403);
 });
 
+test('active logout rejects prelogin proof and only succeeds after server-side revocation', async () => {
+  const f = fixture(), a = f.account(), session = await f.login(a), pre = await f.pre();
+  for (const csrf of [pre.csrf, undefined, token(), 'é'.repeat(43)]) {
+    await denies(f.service.logout({ session: session.sessionToken, prelogin: pre.prelogin, csrf }), 403);
+    assert.equal((await f.service.me(f.proof(session))).id, a.id);
+  }
+  await f.service.logout({ ...f.proof(session), prelogin: pre.prelogin });
+  await denies(f.service.me(f.proof(session)), 401);
+  await f.service.logout(f.proof(session));
+});
+
+test('logout retains prelogin fallback for expired, revoked and absent sessions', async () => {
+  for (const state of ['expired', 'revoked', 'absent']) {
+    const f = fixture(), a = f.account(), session = await f.login(a);
+    if (state === 'expired') f.advance(30 * 60_000);
+    if (state === 'revoked') await f.service.logout(f.proof(session));
+    const pre = await f.pre();
+    await f.service.logout({ ...pre, ...(state === 'absent' ? {} : { session: session.sessionToken }) });
+    if (state !== 'absent') await denies(f.service.me(f.proof(session)), 401);
+  }
+});
+
 test('idle and absolute expiry reject exact boundaries even after activity', async () => {
   const f = fixture(), a = f.account(), s = await f.login(a), p = f.proof(s);
   f.advance(29 * 60_000); await f.service.me(p);
@@ -195,4 +217,101 @@ test('parallel login reservations count pending work before password verificatio
   release();
   const results = await Promise.allSettled(attempts);
   assert.equal(results.filter(r => r.status === 'rejected' && r.reason.status === 401).length, 5);
+});
+
+test('unchanged temporary passwords cannot clear forced change or revoke sessions', async () => {
+  for (const role of ['administrator', 'staff']) {
+    const f = fixture(), a = f.account({ role, passwordChangeRequired: true });
+    const session = await f.login(a), other = await f.login(a), before = structuredClone(f.state().accounts.get(a.id));
+    await denies(f.service.changePassword({ currentPassword: secret, newPassword: secret }, f.proof(session)), 400);
+    assert.deepEqual(f.state().accounts.get(a.id), before);
+    await f.service.authorize(f.proof(session), false, true);
+    await f.service.authorize(f.proof(other), false, true);
+    await denies(f.service.me(f.proof(session)), 403);
+    const changed = await f.service.changePassword({ currentPassword: secret, newPassword: replacement }, f.proof(session));
+    assert.equal((await f.service.me(f.proof(changed))).passwordChangeRequired, false);
+    await denies(f.service.me(f.proof(other)), 401);
+  }
+});
+
+test('successful login preserves other pending attempts and the shared account cap', async () => {
+  const f = fixture(), a = f.account(), waiting = [], jobs = [];
+  f.hasher.verify = async () => new Promise(resolve => waiting.push(resolve));
+  async function start() {
+    const pre = await f.pre();
+    const job = f.service.login({ username: a.username, password: secret }, pre, 'shared').then(value => ({ value }), error => ({ error }));
+    jobs.push(job); return { job };
+  }
+  try {
+    for (let i = 0; i < 5; i++) await start();
+    for (let i = 0; i < 100 && waiting.length < 5; i++) await new Promise(resolve => setImmediate(resolve));
+    assert.equal(waiting.length, 5);
+    waiting[0](true); assert.ok((await jobs[0]).value);
+    assert.equal(f.state().limits.get(`account:${digest(a.username)}`)?.attempts, 4);
+    await start();
+    for (let i = 0; i < 100 && waiting.length < 6; i++) await new Promise(resolve => setImmediate(resolve));
+    assert.equal(waiting.length, 6);
+    let outcome;
+    const excess = await start(); excess.job.then(value => { outcome = value; });
+    for (let i = 0; i < 100 && !outcome && waiting.length < 7; i++) await new Promise(resolve => setImmediate(resolve));
+    assert.equal(waiting.length, 6, 'excess attempt must not enter password verification');
+    assert.equal(outcome?.error?.status, 429);
+  } finally {
+    for (const resolve of waiting.slice(1)) resolve(false);
+    await Promise.all(jobs);
+  }
+  assert.equal(f.state().limits.get(`account:${digest(a.username)}`)?.attempts, 5);
+});
+
+test('hashing errors and rejected login completion settle only their own reservations', async () => {
+  for (const mode of ['hash-error', 'consumed-csrf', 'transaction-rollback']) {
+    const f = fixture(), a = f.account(), pre = await f.pre();
+    if (mode === 'hash-error') f.hasher.verify = async () => { throw new Error('Hash unavailable'); };
+    if (mode === 'consumed-csrf') f.hasher.verify = async () => { f.state().prelogin.clear(); return true; };
+    if (mode === 'transaction-rollback') {
+      f.hasher.verify = async () => { f.business.validateBranchOwnership = async () => { throw new Error('Ownership unavailable'); }; return true; };
+    }
+    await denies(f.service.login({ username: a.username, password: secret }, pre, 'socket'), mode === 'consumed-csrf' ? 403 : 503);
+    const limit = f.state().limits.get(`account:${digest(a.username)}`);
+    assert.equal(limit.attempts, 1);
+    assert.deepEqual(limit.pendingIds, []);
+    assert.equal(f.state().sessions.size, 0);
+  }
+});
+
+test('late attempt settlement cannot overwrite a newer throttle window', async () => {
+  const f = fixture(), a = f.account(), waiting = [];
+  f.hasher.verify = async () => new Promise(resolve => waiting.push(resolve));
+  const older = f.service.login({ username: a.username, password: secret }, await f.pre(), 'socket').catch(error => error);
+  for (let i = 0; i < 100 && waiting.length < 1; i++) await new Promise(resolve => setImmediate(resolve));
+  f.advance(15 * 60_000);
+  const newer = f.service.login({ username: a.username, password: secret }, await f.pre(), 'socket');
+  for (let i = 0; i < 100 && waiting.length < 2; i++) await new Promise(resolve => setImmediate(resolve));
+  assert.equal(waiting.length, 2);
+  const before = structuredClone(f.state().limits.get(`account:${digest(a.username)}`));
+  waiting[0](false); assert.equal((await older).status, 401);
+  assert.deepEqual(f.state().limits.get(`account:${digest(a.username)}`), before);
+  waiting[1](true); await newer;
+  assert.equal(f.state().limits.has(`account:${digest(a.username)}`), false);
+});
+
+test('lost commit acknowledgement does not settle another attempt twice', async () => {
+  const f = fixture(), a = f.account(), waiting = [];
+  f.hasher.verify = async () => new Promise(resolve => waiting.push(resolve));
+  const run = f.store.run.bind(f.store); let loseAck = true;
+  f.store.run = async work => {
+    const value = await run(work);
+    if (loseAck && value?.sessionToken) { loseAck = false; throw new Error('Commit acknowledgement lost'); }
+    return value;
+  };
+  const one = f.service.login({ username: a.username, password: secret }, await f.pre(), 'socket').catch(error => error);
+  const two = f.service.login({ username: a.username, password: secret }, await f.pre(), 'socket').catch(error => error);
+  for (let i = 0; i < 100 && waiting.length < 2; i++) await new Promise(resolve => setImmediate(resolve));
+  assert.equal(waiting.length, 2);
+  waiting[0](true); assert.equal((await one).status, 503);
+  const limit = f.state().limits.get(`account:${digest(a.username)}`);
+  assert.equal(limit.attempts, 1); assert.equal(limit.pendingIds.length, 1);
+  waiting[1](false); assert.equal((await two).status, 401);
+  assert.equal(f.state().limits.get(`account:${digest(a.username)}`).attempts, 1);
+  assert.deepEqual(f.state().limits.get(`account:${digest(a.username)}`).pendingIds, []);
 });

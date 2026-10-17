@@ -15,6 +15,13 @@
       "when": 1791826161070,
       "tag": "0001_staff_access",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1792223553789,
+      "tag": "0002_login_reservations",
+      "breakpoints": true
     }
   ]
 }

@@ -4,15 +4,15 @@
 
 - Stage: Foundation F-01 remains complete; [acceptance and evidence limits](project-foundation/phase-tracker.md#closeout--2026-10-12).
 - Approved topology: one business per LAN installation, dedicated local PostgreSQL, locally served client assets and one maintained codebase; explicit user approval on 2026-10-12. [Decision and rationale](../architecture/vendor-isolation-proposal.md).
-- Current activity: BA-01 closed after authorized staging acceptance on 2026-10-12; BA-02 source is complete and awaiting acceptance. [Owning tracker](business-access/phase-tracker.md), [Business/Branch spec](../../apps/api/src/modules/business/docs/features/foundation/spec.md), [Authentication/Access spec](../../apps/api/src/modules/authentication/docs/features/access/spec.md).
-- Current phase: BA-01 complete; BA-02 awaiting acceptance under [authorization](business-access/phase-tracker.md#ba-02-authorization--2026-10-12); BA-D01–06 approved; BA-03 inactive.
+- Current activity: BA-01 closed after authorized staging acceptance on 2026-10-12; BA-02 is complete and user-accepted on 2026-10-17 under revised development scope. [Owning tracker](business-access/phase-tracker.md), [Business/Branch spec](../../apps/api/src/modules/business/docs/features/foundation/spec.md), [Authentication/Access spec](../../apps/api/src/modules/authentication/docs/features/access/spec.md).
+- Current phase: BA-01 complete; BA-02 complete under [user acceptance](business-access/phase-tracker.md#ba-02-acceptance--2026-10-17); BA-D01–06 approved; BA-03 inactive.
 - Deferred validation remains in the [canonical foundation handoff](project-foundation/phase-tracker.md#current-handoff--2026-10-12) and [acceptance record](../acceptance/project-foundation.md).
 
 ## Current planning handoff — 2026-10-12
 
-User approved the topology and subsequently authorized BA-01-T01/T02 implementation with BA-D01/BA-D02/BA-D05. Authorization, task IDs, evidence and checkout cautions are owned by the [joint phase tracker](business-access/phase-tracker.md#ba-01-authorization--2026-10-12). Historical BA-01 installation permission was not needed; BA-02 installation is prohibited. Subsequent user-authorized staging writes/migration acceptance completed successfully; [BA-01 closeout](business-access/phase-tracker.md#closeout--2026-10-12) records evidence. BA-02 source is authorized under its own record; database execution, infrastructure provisioning/deployment and BA-03 remain unauthorized.
+User approved the topology and subsequently authorized BA-01-T01/T02 implementation with BA-D01/BA-D02/BA-D05. Authorization, task IDs, evidence and checkout cautions are owned by the [joint phase tracker](business-access/phase-tracker.md#ba-01-authorization--2026-10-12). Historical BA-01 installation permission was not needed; BA-02 installation is prohibited. Subsequent user-authorized staging writes/migration acceptance completed successfully; [BA-01 closeout](business-access/phase-tracker.md#closeout--2026-10-12) records evidence. BA-02 source is authorized under its own record; database execution is limited to the separately recorded 2026-10-17 staging verification authorization; infrastructure provisioning/deployment and BA-03 remain unauthorized.
 
-Next action: review BA-02 source/diff and prepare separately authorized database acceptance; trusted-browser/target-host gates remain pending. Preserve staged workflow changes and unrelated work. Foundation F-01 is not reopened.
+Next action after the authorized local integration: user selects and authorizes the next phase from the accepted `main` baseline; BA-03 remains inactive. [BA-02 acceptance](business-access/phase-tracker.md#ba-02-acceptance--2026-10-17) records the explicit user decision, passed evidence and deferred backend verification. Current scope is API-only; browser/client HTTPS checks are not applicable to BA-02. Do not resume the expanded acceptance harness automatically or represent deferred checks as passed. Preserve existing work and BA-01 evidence.
 
 ## Proposed foundation follow-ups — 2026-10-12
 
@@ -31,8 +31,8 @@ Project foundation precedes Business/Branch and Authentication/Access, which pre
 | Order | Module | Status | Active phase / plan |
 | --- | --- | --- | --- |
 | 0 | Project foundation | complete | [Specification](project-foundation/spec.md) / [phase tracker](project-foundation/phase-tracker.md); development foundation accepted; limits recorded |
-| 1 | Business/Branch foundation | proposed | [Specification; BA-01 slice approved](../../apps/api/src/modules/business/docs/features/foundation/spec.md) / [joint tracker](business-access/phase-tracker.md); BA-01 accepted on staging; BA-02 access source complete, awaiting acceptance |
-| 2 | Authentication and Access | proposed | [Specification; BA-01 slice approved](../../apps/api/src/modules/authentication/docs/features/access/spec.md) / [joint tracker](business-access/phase-tracker.md); BA-01 accepted on staging; BA-02 access source complete, awaiting acceptance |
+| 1 | Business/Branch foundation | proposed | [Specification; BA-01 slice approved](../../apps/api/src/modules/business/docs/features/foundation/spec.md) / [joint tracker](business-access/phase-tracker.md); BA-01 accepted on staging; BA-02 accepted under revised development scope; release verification deferred |
+| 2 | Authentication and Access | proposed | [Specification; BA-01 slice approved](../../apps/api/src/modules/authentication/docs/features/access/spec.md) / [joint tracker](business-access/phase-tracker.md); BA-01 accepted on staging; BA-02 accepted under revised development scope; release verification deferred |
 | 3 | Menu | proposed | Follows accepted foundation; plan pending |
 | 4 | Orders | proposed | Not activated |
 | 5 | Kitchen | proposed | Not activated |

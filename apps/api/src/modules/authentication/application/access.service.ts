@@ -85,56 +85,73 @@ export class AccessService {
       return { preloginToken, csrfToken };
     }));
   }
-  private async reserve(unit: AccessUnit, kind: 'account' | 'source', key: string, max: number, duration: number) {
+  private async reserve(unit: AccessUnit, kind: 'account' | 'source', key: string, max: number, duration: number, reservationId?: string) {
     const now = this.now();
     const old = await unit.getLimit(kind, key);
     const current = old && old.expiresAt.getTime() > now.getTime() ? old : undefined;
     if (current && current.attempts >= max) return Math.max(1, Math.ceil((current.expiresAt.getTime() - now.getTime()) / 1000));
     if (!old && await unit.countLimits(kind) >= 10_000) return 60;
-    await unit.saveLimit({ kind, key, attempts: (current?.attempts ?? 0) + 1, expiresAt: current?.expiresAt ?? new Date(now.getTime() + duration) });
+    await unit.saveLimit({ kind, key, attempts: (current?.attempts ?? 0) + 1, expiresAt: current?.expiresAt ?? new Date(now.getTime() + duration), pendingIds: reservationId ? [...(current?.pendingIds ?? []), reservationId] : [] });
     return 0;
+  }
+  private async settleLogin(unit: AccessUnit, key: string, reservationId: string, success: boolean) {
+    const limit = await unit.getLimit('account', key);
+    if (!limit || limit.expiresAt.getTime() <= this.now().getTime() || !limit.pendingIds?.includes(reservationId)) return;
+    const pendingIds = limit.pendingIds.filter((id) => id !== reservationId);
+    // The ID makes repeated settlement safe even if a commit acknowledgement was lost.
+    if (success && !pendingIds.length) await unit.deleteLimit('account', key);
+    else await unit.saveLimit({ ...limit, pendingIds, attempts: success ? pendingIds.length : limit.attempts });
   }
   async login(value: unknown, proof: Proof, source: string) {
     return this.execute('login', async () => {
       const input = object(value, ['username', 'password']);
       const username = identity({ username: input.username }).username;
-      const secret = password(input.password); const accountKey = digest(username);
+      const secret = password(input.password); const accountKey = digest(username); const reservationId = randomUUID();
       // Commit reservations even when denied; throwing inside this transaction would roll them back.
       const reservation = await this.store.run(async (unit) => {
         await this.prelogin(unit, proof);
         const context = await this.bound(unit);
         const sourceRetry = await this.reserve(unit, 'source', digest(source), 30, 60_000);
         if (sourceRetry) return { retry: sourceRetry };
-        const retry = await this.reserve(unit, 'account', accountKey, 5, 15 * 60_000);
+        const retry = await this.reserve(unit, 'account', accountKey, 5, 15 * 60_000, reservationId);
         const account = retry ? undefined : await unit.findAccount(context.businessId, { username });
         return { retry, account };
       });
       if (reservation.retry) throw new AccessError(429, 'Try again later', reservation.retry);
-      const candidate = reservation.account;
-      const valid = candidate?.status === 'active' ? await this.hasher.verify(secret, candidate.passwordHash) : await this.hasher.dummy(secret);
-      if (!valid || !candidate || candidate.status !== 'active') throw new AccessError(401, 'Invalid credentials');
-      return this.store.run(async (unit) => {
-        const pre = await this.prelogin(unit, proof);
-        const context = await this.bound(unit);
-        const fresh = await unit.findAccount(context.businessId, { id: candidate.id });
-        if (!fresh || fresh.status !== 'active' || fresh.passwordHash !== candidate.passwordHash || !fresh.branchIds.includes(context.branchId)) throw new AccessError(401, 'Invalid credentials');
-        await this.business.validateBranchOwnership(context.businessId, context.branchId, unit.context);
-        await unit.deletePrelogin(pre.digest);
-        await unit.deleteLimit('account', accountKey);
-        const oldDigest = tokenDigest(proof.session);
-        if (oldDigest) {
-          const old = await unit.getSession(oldDigest);
-          if (old) await unit.saveSession({ ...old, revokedAt: this.now() });
-        }
-        const result = await this.issue(unit, fresh);
-        await this.event(unit, 'login', fresh.id, fresh.id);
+      let completed = false;
+      try {
+        const candidate = reservation.account;
+        const valid = candidate?.status === 'active' ? await this.hasher.verify(secret, candidate.passwordHash) : await this.hasher.dummy(secret);
+        if (!valid || !candidate || candidate.status !== 'active') throw new AccessError(401, 'Invalid credentials');
+        const result = await this.store.run(async (unit) => {
+          const pre = await this.prelogin(unit, proof);
+          const context = await this.bound(unit);
+          const fresh = await unit.findAccount(context.businessId, { id: candidate.id });
+          if (!fresh || fresh.status !== 'active' || fresh.passwordHash !== candidate.passwordHash || !fresh.branchIds.includes(context.branchId)) throw new AccessError(401, 'Invalid credentials');
+          await this.business.validateBranchOwnership(context.businessId, context.branchId, unit.context);
+          await unit.deletePrelogin(pre.digest);
+          await this.settleLogin(unit, accountKey, reservationId, true);
+          const oldDigest = tokenDigest(proof.session);
+          if (oldDigest) {
+            const old = await unit.getSession(oldDigest);
+            if (old) await unit.saveSession({ ...old, revokedAt: this.now() });
+          }
+          const result = await this.issue(unit, fresh);
+          await this.event(unit, 'login', fresh.id, fresh.id);
+          return result;
+        });
+        completed = true;
         return result;
-      });
+      } finally {
+        if (!completed) await this.store.run((unit) => this.settleLogin(unit, accountKey, reservationId, false));
+      }
     }, { proof });
   }
   async logout(proof: Proof) {
     return this.execute('logout', () => this.store.run(async (unit) => {
       const key = tokenDigest(proof.session); const session = key ? await unit.getSession(key) : undefined;
+      // Pre-login proof must not turn an active-session logout into a no-op.
+      if (session && sessionActive(session, this.now())) this.csrf(proof, session.csrfToken);
       if (session && sameToken(proof.csrf, session.csrfToken)) {
         // A retained expired/revoked session can prove an idempotent logout, but never authorize work.
         await unit.saveSession({ ...session, revokedAt: session.revokedAt ?? this.now() });
@@ -225,6 +242,7 @@ export class AccessService {
       const currentPassword = password(input.currentPassword); const nextPassword = password(input.newPassword);
       const original = await this.store.run(async (unit) => { const principal = await this.principal(unit, proof, false, true); this.csrf(proof, principal.session.csrfToken); return principal.account; });
       if (!await this.hasher.verify(currentPassword, original.passwordHash)) throw new AccessError(401, 'Invalid credentials');
+      if (currentPassword === nextPassword) throw new AccessError(400, 'New password must differ from current password');
       const hash = await this.hasher.hash(nextPassword);
       return this.store.run(async (unit) => {
         const { session, account } = await this.principal(unit, proof, false, true); this.csrf(proof, session.csrfToken);

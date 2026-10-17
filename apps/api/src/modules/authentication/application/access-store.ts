@@ -11,7 +11,7 @@ export interface Session {
   createdAt: Date; lastActivityAt: Date; revokedAt: Date | null;
 }
 export interface Prelogin { digest: string; csrfToken: string; expiresAt: Date }
-export interface Limit { kind: 'account' | 'source'; key: string; attempts: number; expiresAt: Date }
+export interface Limit { kind: 'account' | 'source'; key: string; attempts: number; expiresAt: Date; pendingIds?: string[] }
 export interface SecurityEvent {
   action: string; success: boolean; actorId?: string; targetId?: string; operator?: string;
 }

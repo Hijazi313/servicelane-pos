@@ -63,6 +63,7 @@ export const accessLimits = pgTable(
       .notNull(),
     key: varchar("key", { length: 64 }).notNull(),
     attempts: integer("attempts").notNull(),
+    pendingIds: uuid("pending_ids").array().notNull().default(sql`'{}'::uuid[]`),
     expiresAt: timestamp("expires_at", { withTimezone: true }).notNull(),
   },
   (table) => [
@@ -70,6 +71,8 @@ export const accessLimits = pgTable(
     index("limit_expiry").on(table.expiresAt),
     check("limit_kind_values", sql`${table.kind} in ('account', 'source')`),
     check("limit_positive_attempts", sql`${table.attempts} > 0`),
+    check("limit_pending_bound", sql`cardinality(${table.pendingIds}) <= 5 and cardinality(${table.pendingIds}) <= ${table.attempts}`),
+    check("limit_source_no_pending", sql`${table.kind} = 'account' or cardinality(${table.pendingIds}) = 0`),
   ],
 );
 export const accessSecurityEvents = pgTable(

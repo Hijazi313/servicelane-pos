@@ -90,6 +90,10 @@ test('login/password cookie transport hides session tokens and logout clears hos
     assert.equal(logout.statusCode, 204);
     assert.equal(logout.body, '');
     assert.ok(logout.headers['set-cookie'].every((cookie) => cookie.includes('Max-Age=0')));
+    h.stub.logout = async () => { throw new AccessError(403, 'Invalid CSRF proof'); };
+    const deniedLogout = await h.request({ method: 'POST', url: '/api/v1/auth/logout' });
+    assert.equal(deniedLogout.statusCode, 403);
+    assert.equal(deniedLogout.headers['set-cookie'], undefined);
   } finally { await h.app.close(); }
 });
 

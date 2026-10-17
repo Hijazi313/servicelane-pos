@@ -38,7 +38,7 @@ class PostgresAccessUnit implements AccessUnit {
   async savePrelogin(prelogin: Prelogin): Promise<void> { await this.db.insert(accessPrelogins).values(prelogin); }
   async deletePrelogin(digest: string): Promise<void> { await this.db.delete(accessPrelogins).where(eq(accessPrelogins.digest, digest)); }
   async getLimit(kind: Limit['kind'], key: string): Promise<Limit | undefined> { return (await this.db.select().from(accessLimits).where(and(eq(accessLimits.kind, kind), eq(accessLimits.key, key))))[0]; }
-  async saveLimit(limit: Limit): Promise<void> { await this.db.insert(accessLimits).values(limit).onConflictDoUpdate({ target: [accessLimits.kind, accessLimits.key], set: { attempts: limit.attempts, expiresAt: limit.expiresAt } }); }
+  async saveLimit(limit: Limit): Promise<void> { await this.db.insert(accessLimits).values(limit).onConflictDoUpdate({ target: [accessLimits.kind, accessLimits.key], set: { attempts: limit.attempts, expiresAt: limit.expiresAt, pendingIds: limit.pendingIds ?? [] } }); }
   async deleteLimit(kind: Limit['kind'], key: string): Promise<void> { await this.db.delete(accessLimits).where(and(eq(accessLimits.kind, kind), eq(accessLimits.key, key))); }
   async countLimits(kind: Limit['kind']): Promise<number> { return (await this.db.select({ value: count() }).from(accessLimits).where(eq(accessLimits.kind, kind)))[0]!.value; }
   async event(event: SecurityEvent, now: Date): Promise<void> { await this.db.insert(accessSecurityEvents).values({ id: randomUUID(), ...event, occurredAt: now }); }

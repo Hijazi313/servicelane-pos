@@ -24,8 +24,12 @@ try:
         if child.poll() is not None and not ready:
             break
     if child.poll() is None:
-        child.kill()
-        raise RuntimeError('terminal timeout')
+        try:
+            child.wait(timeout=max(0.1, deadline - time.monotonic()))
+        except subprocess.TimeoutExpired:
+            child.kill()
+            child.wait()
+            raise RuntimeError('terminal timeout')
     if os.environ['BA01_TEST_PASSWORD'].encode() in output:
         raise RuntimeError('password appeared in terminal output')
     sys.stdout.buffer.write(output)

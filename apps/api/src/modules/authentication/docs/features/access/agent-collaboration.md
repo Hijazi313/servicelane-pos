@@ -1,4 +1,6 @@
-# BA-02 source assignment — 2026-10-12
+# BA-02 source assignment — 2026-10-12 (historical)
+
+Current status: BA-02 complete under [user acceptance dated 2026-10-17](../../../../../../../../docs/planning/business-access/phase-tracker.md#ba-02-acceptance--2026-10-17); no active agent assignment. Earlier restrictions below describe the historical source assignment.
 
 Authorized scope and acceptance limits: [joint tracker](../../../../../../../../docs/planning/business-access/phase-tracker.md#ba-02-authorization--2026-10-12). Shared current checkout, existing HEAD; no branches/worktrees/index operations. Primary agent integrates all changes sequentially in this checkout. Parallel work is permitted by spec-driven-delivery workflow; no user-facing chats.
 
