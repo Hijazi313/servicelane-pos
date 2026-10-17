@@ -25,6 +25,31 @@ Read this document when designing or changing backend structure, dependencies or
 - `docs/architecture/` records architecture decisions and boundaries; module-local `docs/` records business rules and feature lifecycles; global `docs/modules/` holds cross-cutting guidance; `docs/compliance/` records applicability and evidence; `docs/acceptance/` records user-run scenarios and outcomes.
 - Create files and folders only when useful; do not manufacture empty layers or interfaces for every class.
 
+## File naming and responsibility boundaries
+
+Use NestJS component conventions and the existing module pattern for new or changed code. Filenames use lowercase kebab-case with the component suffix; class names use PascalCase matching their purpose. These suffixes follow NestJS documentation examples; the layered placement below is a repository rule, not a universal NestJS folder requirement.
+
+| Component | Filename | Placement and responsibility |
+| --- | --- | --- |
+| Module | `<name>.module.ts` | Module composition: imports, providers and exports |
+| Controller | `<name>.controller.ts` | `http/`: route declarations, transport input and application calls |
+| Guard | `<name>.guard.ts` | `http/`: request/route admission and delegation to application authorization |
+| Exception filter | `<name>.filter.ts` | `http/`: safe HTTP status, header and response mapping |
+| Route decorator | `<name>.decorator.ts` | `http/`: route metadata or request extraction; no business rules |
+| Pipe / interceptor / middleware, when needed | `<name>.pipe.ts` / `<name>.interceptor.ts` / `<name>.middleware.ts` | Transport integration in the owning module; use supported NestJS mechanisms |
+| Application service | `<name>.service.ts` | `application/`: use cases, authorization and transaction coordination through owned ports/public contracts |
+| Domain rules | Descriptive concept/rule filename | `domain/`: framework-independent concepts and invariants |
+| Persistence/integration adapter | Descriptive adapter filename; `.service.ts` when a Nest service | `infrastructure/`: storage, hashing and external integration implementations |
+| HTTP types/helpers | Focused descriptive filename, e.g. `access-http.helpers.ts` | Beside HTTP consumers; request/reply shapes, headers, cookies and transport conversion |
+
+Keep each Nest component in its own role-named file. Small private helpers and types may stay with their sole consumer; extract only when useful for shared use or clarity. Avoid catch-all files such as `boundary.ts`, `utils.ts` or `types.ts` combining unrelated responsibilities. Do not create empty layers, one file per trivial type, generic frameworks or dependencies to satisfy this table. Existing filenames outside the changed scope do not authorize a repository-wide rename.
+
+HTTP guards may check transport constraints and invoke application authorization. Current role, account/session status, business/branch grants and mutation authorization remain in Authentication application operations; do not duplicate them in controllers, decorators or separate RBAC guards. Application/domain rules must not depend on HTTP request/reply objects, decorators or status mapping. Infrastructure implements application ports; application code must not import concrete persistence adapters. Keep cross-module access behind supported `public.ts` and Nest exports as defined above.
+
+Before adding or moving code, inspect the owning capability index, representative components, exports and callers. Select the role and layer before implementation; reuse the established pattern. For a necessary deviation, explain the concrete constraint and smallest alternative in the change; consequential architecture changes require the existing decision process, not an agent-invented convention.
+
+Before handoff, review affected imports and calls for transport leakage, duplicated authorization, foreign persistence access, circular dependencies and public/provider export mismatches. Update affected links and capability documentation in the same change. Run the smallest relevant existing checks and state their limits: compilation and HTTP tests alone do not prove architecture-wide boundary compliance. No dedicated architecture enforcement tooling is currently established by this guidance.
+
 ## Persistence and public contracts
 
 - Put Drizzle table declarations in the owning module's `infrastructure/schema.ts`. Re-export them through `src/infrastructure/database/schema.ts` for migration generation; this entry point is not a public interface for other modules.
@@ -81,6 +106,10 @@ Record consequential new decisions in `docs/architecture/decisions/` when needed
 
 ## References
 
+- NestJS controllers and filename examples: https://docs.nestjs.com/controllers
+- NestJS guards: https://docs.nestjs.com/guards
+- NestJS exception filters: https://docs.nestjs.com/exception-filters
+- NestJS custom decorators: https://docs.nestjs.com/custom-decorators
 - NestJS modules: https://docs.nestjs.com/modules
 - NestJS Fastify adapter: https://docs.nestjs.com/techniques/performance
 
