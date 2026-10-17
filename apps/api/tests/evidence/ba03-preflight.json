@@ -1,0 +1,490 @@
+{
+  "startedAt": "2026-10-17T17:05:44.630Z",
+  "authorizationDate": "2026-10-17",
+  "mode": "read-only migrated-state preflight",
+  "candidate": {
+    "revision": "bf1fc84ac0cd89f82e60d0bd28055c7d96102bf0",
+    "files": [
+      {
+        "path": "apps/api/migrations/0000_business_bootstrap.sql",
+        "sha256": "0a8a058d3a4038eb4d9ffb3ceda3037f0fabcbe6c39b62f95b9b7004b2659f97"
+      },
+      {
+        "path": "apps/api/migrations/0001_staff_access.sql",
+        "sha256": "f70af5681eca5b98fb0eb080f779127f45c26314ed309a9fe495c908b0c304da"
+      },
+      {
+        "path": "apps/api/migrations/0002_login_reservations.sql",
+        "sha256": "abafdd843017daa4962559f8e53734d4a0ded51803a75991640864a2feec5c28"
+      },
+      {
+        "path": "apps/api/migrations/README.md",
+        "sha256": "3441bd010980bae0e29571dad4b08a7aee919aa1721c3a71997b983b1e334043"
+      },
+      {
+        "path": "apps/api/migrations/meta/0000_snapshot.json",
+        "sha256": "62e010fbf3a1487600507dd26a1bf521af8069bc7d92bf0582b998c60f92fc79"
+      },
+      {
+        "path": "apps/api/migrations/meta/0001_snapshot.json",
+        "sha256": "58f580511bd8c4e865bdeb72c1d3ba978129d6b21adba08267f9d4e5181f4624"
+      },
+      {
+        "path": "apps/api/migrations/meta/0002_snapshot.json",
+        "sha256": "9a6326e26b962e596c6111a6411facf6ea7c08923e91b883cbfca4a15948f1b8"
+      },
+      {
+        "path": "apps/api/migrations/meta/_journal.json",
+        "sha256": "539f599d6b129c32065548f59d3996e4fcba1a6113051c2d58ed0d848bc7a5b6"
+      },
+      {
+        "path": "apps/api/package.json",
+        "sha256": "c58e84a5339c374744207e49690fe545a574ac8dae5a4496c5b7a203a397a756"
+      },
+      {
+        "path": "apps/api/src/app.module.ts",
+        "sha256": "d9414bc8e89377a9e53251be2a60bfaba5cb5af07c68a55443fb8e1d69fd1e35"
+      },
+      {
+        "path": "apps/api/src/application/provision-installation.ts",
+        "sha256": "1f621b89fcc5eb04211eb283b16fef1373ed01c69a95b78b78bb918a6fe2d4e6"
+      },
+      {
+        "path": "apps/api/src/infrastructure/configuration.ts",
+        "sha256": "8bca9e41409001fe1e72048da74f9468b82d3e61b353dd410ffc7d5a27db3882"
+      },
+      {
+        "path": "apps/api/src/infrastructure/database/database.module.ts",
+        "sha256": "ab3420090971dd593be74608c37d3e6057cf55f25da99de6236b6a79843178be"
+      },
+      {
+        "path": "apps/api/src/infrastructure/database/database.service.ts",
+        "sha256": "36514f861866b986fb6e9c30efce0fbc58c8d4a5b0bf8d7ee2c6158cd8c7eba6"
+      },
+      {
+        "path": "apps/api/src/infrastructure/database/migrate.ts",
+        "sha256": "b5444fb1f07c6603e2b6f4f1a81184054761c0469e6f9e3c8d8cb850cd56aaa0"
+      },
+      {
+        "path": "apps/api/src/infrastructure/database/schema.ts",
+        "sha256": "1c4af1e4d48e3bbc479501a513e2a52a5bf533feaa920e8c95ff64a7ac84c9ae"
+      },
+      {
+        "path": "apps/api/src/infrastructure/database/transaction.ts",
+        "sha256": "1bafa848bce0a0d34870a25ec4ccd5768fa0bebc93e8046962565366fa4feb3a"
+      },
+      {
+        "path": "apps/api/src/infrastructure/health.controller.ts",
+        "sha256": "cd63557bf808dda1465e03737454f17d8f58664b35bf22a47a1e423156796920"
+      },
+      {
+        "path": "apps/api/src/main.ts",
+        "sha256": "251e022ad4acf6fb4d2e8f775b13166c6b37e63bfe1409e7b1b96ee2b87c956e"
+      },
+      {
+        "path": "apps/api/src/modules/authentication/application/access-policy.ts",
+        "sha256": "96b664a8c7a9a25a22ac5c8351c0a14bfa0092f38df7040a3e09354b813f5e1b"
+      },
+      {
+        "path": "apps/api/src/modules/authentication/application/access-store.ts",
+        "sha256": "c355bc304a29a7cac43dd757d2d15c874b3b9ecdd313437e5c665e2c410d41ce"
+      },
+      {
+        "path": "apps/api/src/modules/authentication/application/access.service.ts",
+        "sha256": "617dcd3295ff9b47dcbbbd7d32f606876e257db1dbb63dbab1980004e0120722"
+      },
+      {
+        "path": "apps/api/src/modules/authentication/application/administrator-provisioner.ts",
+        "sha256": "ecd26603576fea75ff69024c3cec7d08310d83564a8379bb695b2a9df4bf7cb8"
+      },
+      {
+        "path": "apps/api/src/modules/authentication/application/initial-administrator.ts",
+        "sha256": "febece9534996eb032c1811ea69845d1007cd2ae5c2de586d1025cc466817b0d"
+      },
+      {
+        "path": "apps/api/src/modules/authentication/authentication.module.ts",
+        "sha256": "8a54be718f8138c26d802d9a174015f552171fc4f8cc288b72126ee4a59ec172"
+      },
+      {
+        "path": "apps/api/src/modules/authentication/docs/README.md",
+        "sha256": "4461220f1dcb67b0016f53681340c19d9ae114c2a451b08cd91da69cd0982bd5"
+      },
+      {
+        "path": "apps/api/src/modules/authentication/docs/features/access/agent-collaboration.md",
+        "sha256": "f04db7d4edc87c87b1338425edc2f7258612dff3aa8c3ac23d8803f6151ed9c9"
+      },
+      {
+        "path": "apps/api/src/modules/authentication/docs/features/access/spec.md",
+        "sha256": "b4076b0961282b5777aa284954e76fe1940319de120f00b9bc9bfb4dc74ef4a8"
+      },
+      {
+        "path": "apps/api/src/modules/authentication/http/access-http.module.ts",
+        "sha256": "1f13bbe94ebaf72c9437d16ec5f09efbf5a14c689529d34facf1b1af55d59963"
+      },
+      {
+        "path": "apps/api/src/modules/authentication/http/access.controller.ts",
+        "sha256": "95f64968c98cf247da5ef4849f1c45089973e74d066eb876a2905f233eacb0f4"
+      },
+      {
+        "path": "apps/api/src/modules/authentication/http/boundary.ts",
+        "sha256": "bf6af49445d0dabac8865f041a0e8df0e63b26a99a905e7e9e2343c5103b30d1"
+      },
+      {
+        "path": "apps/api/src/modules/authentication/http/configuration.ts",
+        "sha256": "7f9bc39c30aea4a3e3173477c8fbaef8dcbe1ba5fe706c378656291f77beae87"
+      },
+      {
+        "path": "apps/api/src/modules/authentication/infrastructure/access-schema.ts",
+        "sha256": "2d1c3ba77d0b1668130ad7f88defcf3d932287da6a0b32bad2955f3d7117bbda"
+      },
+      {
+        "path": "apps/api/src/modules/authentication/infrastructure/access-store.ts",
+        "sha256": "32582733f9c0080b24bbd3fe0f43eb94288b7073fb45e9952d48b35b4ada78e1"
+      },
+      {
+        "path": "apps/api/src/modules/authentication/infrastructure/administrator-provisioner.service.ts",
+        "sha256": "e2276d9530cefbc95381bbc55b528448170647f7012a2cab7f6454d7e558ea38"
+      },
+      {
+        "path": "apps/api/src/modules/authentication/infrastructure/password-hash.ts",
+        "sha256": "edc3808182adedcf14cb8dc949fcbd2f62590b95217cfd9e4253e4118aed3dbb"
+      },
+      {
+        "path": "apps/api/src/modules/authentication/infrastructure/password-hasher.ts",
+        "sha256": "b9dde41aa96811a0ddcec036c05b7e73870788b489321105c59c6fb8d3f34ed5"
+      },
+      {
+        "path": "apps/api/src/modules/authentication/infrastructure/schema.ts",
+        "sha256": "7386ad05a8857f01acb8a3b04c3533dafcd1959196f8351d42fa24f930207870"
+      },
+      {
+        "path": "apps/api/src/modules/authentication/public.ts",
+        "sha256": "cddd0efc31832e30354815a04bd4bf238233148f6d75b82e6062fcd4afee723f"
+      },
+      {
+        "path": "apps/api/src/modules/business/application/business-configuration.ts",
+        "sha256": "bfe8f3d494a3d705ac9cf21ac4b1fc5411e0522072c5b6791e6e273d7170788a"
+      },
+      {
+        "path": "apps/api/src/modules/business/business.module.ts",
+        "sha256": "53c46c0408ca4e0061cbf7b4641874361c8e00d2a26b18560dd3dbd20b5a4ebe"
+      },
+      {
+        "path": "apps/api/src/modules/business/docs/README.md",
+        "sha256": "6ffb11e238fdbc71b7fe013aa5a0f854f522eaa15c87a7393a8aaa7d1bade588"
+      },
+      {
+        "path": "apps/api/src/modules/business/docs/features/foundation/spec.md",
+        "sha256": "5f8195bdcd9f14bea3da7ed851736d185cdccf63d9e068d290770b85e0c283bf"
+      },
+      {
+        "path": "apps/api/src/modules/business/infrastructure/business.service.ts",
+        "sha256": "07d5ef82c9de0bd68536cd30f52f566509efa6f679af83156dedee296816888d"
+      },
+      {
+        "path": "apps/api/src/modules/business/infrastructure/schema.ts",
+        "sha256": "3e127228f7f8e15a9ff59a3492a7f488e2a365caecbb60355ac7add86b26bbdd"
+      },
+      {
+        "path": "apps/api/src/modules/business/public.ts",
+        "sha256": "2f23ced3959fde04c6bd04118a40e94309979e37140781a491741f1cfe8bb203"
+      },
+      {
+        "path": "apps/api/src/operator/README.md",
+        "sha256": "3b76cde9c40d30696d52ae5189cabc101de6db9d3bfbd0a7427c6253526bd798"
+      },
+      {
+        "path": "apps/api/src/operator/hidden-password.ts",
+        "sha256": "e2659b29cdd976a098c0bd2320a63c064ae7b30d6ae90f987354b95ae183c579"
+      },
+      {
+        "path": "apps/api/src/operator/provision-installation.example.json",
+        "sha256": "9144abed562a03a6eadf1135378918f8a94e440a1c847347079c5fea20d31303"
+      },
+      {
+        "path": "apps/api/src/operator/provision-installation.ts",
+        "sha256": "7cbfbc597f4f42a1a480be2c8a3abdb7d671591dd8206c651eefc7d27a2c581d"
+      },
+      {
+        "path": "apps/api/src/operator/provisioning.module.ts",
+        "sha256": "2696f5a4997dff7db7d5f37c7483948129d3b3dcaec7fa0cc65edee2186574f0"
+      },
+      {
+        "path": "apps/api/src/operator/recover-administrator.ts",
+        "sha256": "8daf314d75c3d80df594cab534ee10447d0de99d4d8a9ea3c556fc3decf6dfc3"
+      },
+      {
+        "path": "apps/api/tests/acceptance-terminal.py",
+        "sha256": "608e336a4a4002bb17fdc50adc41a326e2382198f601445df3f9d089d7ec5ac9"
+      },
+      {
+        "path": "apps/api/tests/access-http.test.mjs",
+        "sha256": "c0e9afcd10676dbf2093c4abdbba3e183f86ae8d21260de6b7e49a14c19aaa2b"
+      },
+      {
+        "path": "apps/api/tests/access.test.mjs",
+        "sha256": "590f3ab46fd2572e7e39c4dce4b2972135776d085d95939d591fd27f25eae0f1"
+      },
+      {
+        "path": "apps/api/tests/ba02-backend-acceptance.mjs",
+        "sha256": "5f4de70ed67f59fb1e4bc8a92f542b619d4362b13821c6970de736d853a98b0a"
+      },
+      {
+        "path": "apps/api/tests/ba02-owned-state.mjs",
+        "sha256": "84f3a634e9e3e303ac049744e05112393d14471fba595e9491f4c8b72aececd4"
+      },
+      {
+        "path": "apps/api/tests/ba02-session-inspection.mjs",
+        "sha256": "19a188b3af0bc28f4e24288e7c612c1e84349b11ca3702a4e4e64d0ef25919bf"
+      },
+      {
+        "path": "apps/api/tests/ba02-staging-acceptance.mjs",
+        "sha256": "632469569ffaea8f349cdf925ac1b8bc0f6efcd0404831eb8bc1d5534de7facb"
+      },
+      {
+        "path": "apps/api/tests/ba03-context.test.mjs",
+        "sha256": "6ff2ed253ce753381c7f0b72a1f79376b0ed42c3dc72246445ec0323d78c25c1"
+      },
+      {
+        "path": "apps/api/tests/ba03-preflight.mjs",
+        "sha256": "55c5c55d7106a9d3251504cea373d52c2f67519e8d502f07cb068c96a703e36c"
+      },
+      {
+        "path": "apps/api/tests/ba03-single-target.mjs",
+        "sha256": "f2c130e344861c55bcabb3333e8ad7ce61850015a8188e053a4a53f202dfd22f"
+      },
+      {
+        "path": "apps/api/tests/bootstrap.test.mjs",
+        "sha256": "8d532ce88f026a659237c0396b6af59b6a7ef6699bc4e7814aa31259ba8ef43d"
+      },
+      {
+        "path": "apps/api/tests/credentials.test.mjs",
+        "sha256": "9b74d329b0aa117eaf729a617e82d1fb7d97821c8f53735be95b8ed9b5d561f8"
+      },
+      {
+        "path": "apps/api/tests/recovery.test.mjs",
+        "sha256": "25d69d54a597a899a21f04f0fa82b3a036b15085a198015a47fabee8d9179702"
+      },
+      {
+        "path": "apps/api/tests/staging-acceptance.mjs",
+        "sha256": "86978b4f8a5f8dad03c38ca23c468ed22c67f0ab600e58f9f1ef03b90d77aced"
+      },
+      {
+        "path": "apps/api/tsconfig.json",
+        "sha256": "c2d99416df5f5e9202b11aea59a963810901774e09b3192d0953a34014049c0f"
+      },
+      {
+        "path": "pnpm-lock.yaml",
+        "sha256": "0fe9fe57d24724fd331132c43c06ba5bd421271772d16ac66cb3352454ff5bf1"
+      }
+    ],
+    "sha256": "b900270d5ddd4d95dc3d1d3fed71adc21b47bc932d524e2b9a0393820867344a"
+  },
+  "runtime": {
+    "node": "v24.18.1",
+    "pnpm": "9.15.0",
+    "pinnedNode": "24.21.0",
+    "pinnedPnpm": "12.11.2"
+  },
+  "tls": {
+    "verification": false,
+    "note": "Existing staging verification exception preserved; not trusted TLS acceptance"
+  },
+  "connectionAccounting": {
+    "maximum": 2,
+    "poolMax": 1,
+    "otherSessionsTerminated": false,
+    "allHarnessPoolsClosed": true
+  },
+  "preflight": {
+    "result": "passed",
+    "observations": {
+      "sameResolvedTarget": true,
+      "applicationTableCount": 10,
+      "exactExpectedTables": true,
+      "counts": {
+        "access_limits": 0,
+        "access_prelogins": 0,
+        "access_security_events": 0,
+        "access_sessions": 0,
+        "branches": 0,
+        "businesses": 0,
+        "installation_binding": 0,
+        "staff_accounts": 0,
+        "staff_branch_grants": 0,
+        "staff_credentials": 0
+      },
+      "migrationCount": 3,
+      "accessLimitColumns": [
+        {
+          "column_name": "kind",
+          "data_type": "character varying",
+          "is_nullable": "NO",
+          "column_default": null
+        },
+        {
+          "column_name": "key",
+          "data_type": "character varying",
+          "is_nullable": "NO",
+          "column_default": null
+        },
+        {
+          "column_name": "attempts",
+          "data_type": "integer",
+          "is_nullable": "NO",
+          "column_default": null
+        },
+        {
+          "column_name": "expires_at",
+          "data_type": "timestamp with time zone",
+          "is_nullable": "NO",
+          "column_default": null
+        },
+        {
+          "column_name": "pending_ids",
+          "data_type": "ARRAY",
+          "is_nullable": "NO",
+          "column_default": "'{}'::uuid[]"
+        }
+      ],
+      "accessLimitConstraints": [
+        {
+          "conname": "access_limits_kind_key_pk",
+          "definition": "PRIMARY KEY (kind, key)"
+        },
+        {
+          "conname": "limit_kind_values",
+          "definition": "CHECK (((kind)::text = ANY ((ARRAY['account'::character varying, 'source'::character varying])::text[])))"
+        },
+        {
+          "conname": "limit_pending_bound",
+          "definition": "CHECK (((cardinality(pending_ids) <= 5) AND (cardinality(pending_ids) <= attempts)))"
+        },
+        {
+          "conname": "limit_positive_attempts",
+          "definition": "CHECK ((attempts > 0))"
+        },
+        {
+          "conname": "limit_source_no_pending",
+          "definition": "CHECK ((((kind)::text = 'account'::text) OR (cardinality(pending_ids) = 0)))"
+        }
+      ],
+      "originalMigrationMatches": true,
+      "nonExtensionArtifacts": {
+        "triggers": 0,
+        "functions": 0
+      },
+      "otherDatabaseClientSessions": [
+        {
+          "application_name": "PostgREST 14.18",
+          "state": "idle",
+          "same_role": false,
+          "service_role": "authenticator",
+          "open_transaction": false,
+          "assigned_transaction": false,
+          "held_snapshot": false,
+          "application_relation_lock": false,
+          "state_age_seconds": "520412"
+        },
+        {
+          "application_name": "postgres_exporter",
+          "state": "idle",
+          "same_role": false,
+          "service_role": "supabase_admin",
+          "open_transaction": false,
+          "assigned_transaction": false,
+          "held_snapshot": false,
+          "application_relation_lock": false,
+          "state_age_seconds": "43"
+        },
+        {
+          "application_name": "",
+          "state": "idle",
+          "same_role": false,
+          "service_role": "supabase_admin",
+          "open_transaction": false,
+          "assigned_transaction": false,
+          "held_snapshot": false,
+          "application_relation_lock": false,
+          "state_age_seconds": "1235"
+        },
+        {
+          "application_name": "",
+          "state": "idle",
+          "same_role": false,
+          "service_role": "pgbouncer",
+          "open_transaction": false,
+          "assigned_transaction": false,
+          "held_snapshot": false,
+          "application_relation_lock": false,
+          "state_age_seconds": "13"
+        },
+        {
+          "application_name": "Supavisor (auth_query)",
+          "state": "idle",
+          "same_role": false,
+          "service_role": "pgbouncer",
+          "open_transaction": false,
+          "assigned_transaction": false,
+          "held_snapshot": false,
+          "application_relation_lock": false,
+          "state_age_seconds": "0"
+        }
+      ]
+    }
+  },
+  "results": [
+    {
+      "id": "BA-03-V01",
+      "result": "not run",
+      "reason": "Read-only entry gate; write scenarios not started"
+    },
+    {
+      "id": "BA-03-V02",
+      "result": "not run",
+      "reason": "Read-only entry gate; write scenarios not started"
+    },
+    {
+      "id": "BA-03-V03",
+      "result": "not run",
+      "reason": "Read-only entry gate; write scenarios not started"
+    },
+    {
+      "id": "BA-03-V04",
+      "result": "not run",
+      "reason": "Read-only entry gate; write scenarios not started"
+    },
+    {
+      "id": "BA-03-V05",
+      "result": "not run",
+      "reason": "Read-only entry gate; write scenarios not started"
+    },
+    {
+      "id": "BA-03-V06",
+      "result": "not run",
+      "reason": "Read-only entry gate; write scenarios not started"
+    },
+    {
+      "id": "BA-03-V07",
+      "result": "not run",
+      "reason": "Read-only entry gate; write scenarios not started"
+    },
+    {
+      "id": "BA-03-V08",
+      "result": "not run",
+      "reason": "Read-only entry gate; write scenarios not started"
+    },
+    {
+      "id": "BA-03-V09",
+      "result": "not run",
+      "reason": "Read-only entry gate; write scenarios not started"
+    }
+  ],
+  "cleanup": {
+    "result": "not required",
+    "reason": "No writes or fixtures are permitted by this entry point"
+  },
+  "remaining": "Single-database subset only; BB-AC03 and two-installation AA-AC05 remain pending.",
+  "serverVersion": "17.11",
+  "finishedAt": "2026-10-17T17:05:51.133Z"
+}

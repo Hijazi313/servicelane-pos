@@ -1,17 +1,17 @@
 # Business/Branch foundation — Specification
 
-Status: BB-R01–BB-R03 provisioning/configuration and internal binding slice approved for BA-01 on 2026-10-12 via BA-D01/BA-D05. HTTP context/access remains deferred.
+Status: BA-01 provisioning accepted; BA-02 supplies authenticated context/access. BA-03 acceptance scope revised by user on 2026-10-17; evidence and acceptance status belong to the joint tracker.
 Ownership: Business module. Joint progress: [phase-tracker.md](../../../../../../../../docs/planning/business-access/phase-tracker.md).
 
 ## Outcome and provenance
 
 An operator provisions one independent restaurant business and one explicit operational branch in its dedicated installation. Authenticated staff receive only their permitted business/branch context. The same code supports a second independently configured business.
 
-Confirmed inputs: [project scope](../../../../../../../../docs/project-scope.md) establishes Business → Branch ownership, one operational branch initially and configurable business identity. The user approved local API, local PostgreSQL, locally served client assets and one maintained codebase on 2026-10-12; [topology record](../../../../../../../../docs/architecture/vendor-isolation-proposal.md) owns that decision. Controlled provisioning/configuration is approved for BA-01; only internal operations and operator bootstrap are authorized. HTTP contracts remain proposed for later phases.
+Confirmed inputs: [project scope](../../../../../../../../docs/project-scope.md) establishes Business → Branch ownership, one operational branch initially and configurable business identity. The user approved local API, local PostgreSQL, locally served client assets and one maintained codebase on 2026-10-12; [topology record](../../../../../../../../docs/architecture/vendor-isolation-proposal.md) owns that decision. Controlled provisioning/configuration was approved for BA-01; BA-02 subsequently implemented HTTP context/access. On 2026-10-17 the user explicitly deferred actual two-database execution to future installation/provisioning validation while retaining focused API isolation, branch-permission and fail-closed acceptance; [decision and evidence assessment](../../../../../../../../docs/planning/business-access/phase-tracker.md#ba-03-revised-acceptance-scope--2026-10-17).
 
 ## Proposed P0 requirements
 
-Rows describe product P0 for the first integrated milestone; current authorization implements BB-R01–BB-R03 and the internal binding portion of BB-R04 only. Acceptance scenarios below are the sufficiency test.
+Rows describe product P0 for the first integrated milestone. BA-01/BA-02 implement these capabilities; the revised acceptance examples below define BA-03 verification without expanding execution authorization.
 
 | ID | Requirement | Why needed / simpler alternative |
 | --- | --- | --- |
@@ -33,7 +33,7 @@ Rows describe product P0 for the first integrated milestone; current authorizati
 
 ## Proposed interfaces and failures
 
-BA-01 operator/internal contracts passed staging acceptance; HTTP contracts remain proposed and unavailable. No canonical machine-readable schema exists yet. The HTTP prefix/API version is open under BA-D06 in the joint tracker; route suffixes below do not decide it.
+BA-01 operator/internal contracts passed staging acceptance. BA-02 implements authenticated context under `/api/v1`; the Authentication specification links executable route/input contracts. Route suffixes below omit that prefix. Verification status and limits belong to the joint tracker.
 
 | Interface | Inputs | Success / constraints |
 | --- | --- | --- |
@@ -56,7 +56,9 @@ Provision A with an administrator, then repeat and attempt concurrent initializa
 
 ### BB-AC03 — Independent installations
 
-Using the same release, provision A and B on separately authorized disposable databases with distinct configuration/credentials. Changing IDs in A's requests never selects B's database or returns B's records. Configuration, reports/jobs when introduced, backups and restores must preserve this boundary. First milestone verifies existing context/access paths; backup/restore and future-module claims await their own release evidence.
+Each installation uses its server-configured database connection; request-supplied business/account/branch IDs must not select another connection or expose another business's records. For BA-03 development acceptance, review fixed connection configuration and server-bound context/scoped lookup paths, reuse focused service checks for foreign identities/session-business mismatch, and verify existing authorized context and rejected unsupported identity fields on the disposable test target. Distinguish source/double evidence from database-backed observations; no claim of two-installation runtime acceptance follows.
+
+Actual same-release provisioning of A/B on two independently configured databases, reciprocal cookie/ID checks and operational credential/target separation are **deferred, unrun**, for future installation/provisioning validation under separate authorization. They do not block the revised BA-03 development exit. Configuration, reports/jobs when introduced, backups and restores must preserve the isolation boundary; future-module and backup/restore claims retain their own release evidence.
 
 ### BB-AC04 — Fail closed on invalid context
 
