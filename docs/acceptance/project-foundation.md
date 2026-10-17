@@ -13,8 +13,8 @@ Status: accepted for the schema-free development foundation on 2026-10-12 by use
 
 ## Deferred checks and limits
 
-- First real schema migration: review SQL, apply to a disposable database, verify repeatability and recovery appropriate to the migration's risk. No synthetic database fixture exercise is required now.
-- Before deployment: verify graceful API shutdown/session release, outage recovery, provider connection mode/budget and actual PostgreSQL version. Fresh-checkout installation with pinned tooling remains unverified; observed tooling differed from the pins.
+- First real schema migration: fulfilled subsequently by user-authorized BA-01 staging acceptance on 2026-10-12: reviewed/applied first SQL, repeatability and controlled additive-DDL transaction rollback verified. [BA-01 evidence and limits](../planning/business-access/phase-tracker.md#closeout--2026-10-12). This does not prove backup/restore or future destructive-migration recovery.
+- Before deployment: verify graceful API shutdown/session release, outage recovery, provider connection mode/budget. PostgreSQL 17.11 was subsequently observed during BA-01 acceptance; deployment compatibility still needs confirmation for its selected target. Fresh-checkout installation with pinned tooling remains unverified; observed tooling differed from the pins.
 - Before production: enable certificate verification and establish trusted TLS. Current local configuration explicitly bypasses server verification while retaining encryption; this is not evidence of certificate trust.
 - Injected error routes and broad network-fault exercises are not foundation exit requirements. Unexpected-error handling and shutdown are source-reviewed rather than operationally proven.
 

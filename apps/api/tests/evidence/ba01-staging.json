@@ -1,0 +1,50 @@
+{
+  "date": "2026-10-12",
+  "target": "user-authorized empty staging; connection details omitted",
+  "serverVersion": "17.11",
+  "tlsVerification": false,
+  "results": [
+    {
+      "check": "Resume verified prior BA-01 synthetic records only; cleared them without changing migrated schema",
+      "result": "passed"
+    },
+    {
+      "check": "First migration DDL rollback after controlled failure",
+      "result": "passed",
+      "source": "preceding acceptance run, before terminal cleanup defect; recorded tool output"
+    },
+    {
+      "check": "Actual migration runner applies once and reruns without duplicate history/data",
+      "result": "passed"
+    },
+    {
+      "check": "Invalid configuration leaves no rows; missing installation binding fails closed",
+      "result": "passed"
+    },
+    {
+      "check": "Actual hidden-terminal CLI provisions correct business, branch, administrator, hash and explicit grant",
+      "result": "passed"
+    },
+    {
+      "check": "Repeated setup rejects replacement without changing existing configuration or account",
+      "result": "passed"
+    },
+    {
+      "check": "Two real concurrent transactions produce exactly one complete installation",
+      "result": "passed"
+    },
+    {
+      "check": "Database-injected credential failure rolls back business, branch, binding and administrator together",
+      "result": "passed"
+    },
+    {
+      "check": "Corrected retry succeeds after removing the controlled failure",
+      "result": "passed"
+    },
+    {
+      "check": "Synthetic records and failure artifacts removed; six migrated tables retained empty",
+      "result": "passed"
+    }
+  ],
+  "remaining": "Migration remains applied; six BA-01 tables are empty. No BA-02/BA-03 or production acceptance."
+}

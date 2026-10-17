@@ -1,6 +1,6 @@
 # Database migrations
 
-Drizzle Kit generates SQL and metadata from `src/infrastructure/database/schema.ts`. That entry point re-exports future module-owned schema declarations. No business tables or migrations exist yet. API startup never applies migrations.
+Drizzle Kit generates SQL and metadata from `src/infrastructure/database/schema.ts`. That entry point re-exports module-owned schema declarations. BA-01 adds the offline `0000_business_bootstrap.sql` and metadata for Business/Branch/binding and administrator accounts/credentials/grants. It was applied and rerun successfully on user-authorized staging during BA-01 acceptance, including additive-DDL rollback recovery. Other targets require explicit authorization; no automatic application at startup. API startup never applies migrations.
 
 From repository root:
 
@@ -18,3 +18,9 @@ Run only one migrator at a time; this workflow does not provide the previous run
 If node-pg-migrate was used against an existing database, stop and plan an explicit baseline/history transition first. Drizzle does not import `pgmigrations` history automatically. No such database has been inspected by this project.
 
 See the [acceptance record](../../../docs/acceptance/project-foundation.md). No-op execution alone is not evidence of database migration success.
+
+## BA-02 source-only migration
+
+`0001_staff_access.sql` adds four Authentication-owned tables: sessions, pre-login CSRF state, throttle counters and security events, plus their checks/indexes and account-ownership FK. Existing six BA-01 tables are unchanged. Generated offline with metadata; source review does not prove application, locking, cleanup or recovery. Do not run `db:migrate` under BA-02 source-only authorization. Accepted BA-01 history is preserved; its staging harness expects the earlier six-table state and is not a BA-02 acceptance runner.
+
+`0002_login_reservations.sql` is the forward source correction for pending login attempts. It adds a default-empty UUID array bounded to five entries (and no more than charged attempts), restricted to account counters. It preserves prior tables/columns and attempts; no applied migration is rewritten. Review/apply this and pending `0001` only after separate BA-02 database authorization. No migration was applied during the source correction.

@@ -1,3 +1,5 @@
-// Re-export module-owned schema declarations here as business modules are authorized.
-// No business tables belong to the project foundation.
-export {};
+// Offline migration composition only; not a public interface for business callers.
+export { businesses, branches, installationBinding } from '../../modules/business/infrastructure/schema.js';
+export { staffAccounts, staffCredentials, staffBranchGrants } from '../../modules/authentication/infrastructure/schema.js';
+
+export { accessSessions, accessPrelogins, accessLimits, accessSecurityEvents } from '../../modules/authentication/infrastructure/access-schema.js';

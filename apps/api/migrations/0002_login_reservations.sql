@@ -1,0 +1,3 @@
+ALTER TABLE "access_limits" ADD COLUMN "pending_ids" uuid[] DEFAULT '{}'::uuid[] NOT NULL;--> statement-breakpoint
+ALTER TABLE "access_limits" ADD CONSTRAINT "limit_pending_bound" CHECK (cardinality("access_limits"."pending_ids") <= 5 and cardinality("access_limits"."pending_ids") <= "access_limits"."attempts");--> statement-breakpoint
+ALTER TABLE "access_limits" ADD CONSTRAINT "limit_source_no_pending" CHECK ("access_limits"."kind" = 'account' or cardinality("access_limits"."pending_ids") = 0);

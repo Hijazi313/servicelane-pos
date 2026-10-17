@@ -14,7 +14,7 @@ The user replaced the blanket ban with [focused verification](../../project-scop
 
 ## Assignment
 
-Solo owner: root workspace/API source, foundation docs, startup/acceptance instructions and affected scope/tracker links. No business modules or Odoo changes. Existing planning changes preserved; implementation is on `codex/project-foundation`. Existing staged documentation is left in place; this turn did not stage or commit files.
+Foundation delivery owner: primary backend agent. Implementation branch `codex/project-foundation` was squash-merged and deleted; current checkout/handoff details are below. No business implementation assignment is active.
 
 ## Feature phase tracker
 
@@ -69,9 +69,22 @@ Authorization: user instruction “let's make this project work with drizzle”.
 
 This supersedes the earlier no-compiler evidence for AC-01 and establishes offline generation for AC-03; database and full behavioral acceptance remain pending.
 
-## Current handoff
+## Current handoff — 2026-10-12
 
-Foundation F-01 is complete under the revised acceptance scope. Next: decide vendor isolation/deployment before specifying Business/Branch and Authentication/Access together. See the [acceptance record](../../acceptance/project-foundation.md) for deferred checks. Business implementation, production deployment and migration execution remain unauthorized by this closeout.
+### Completed work and evidence
+
+Foundation F-01 is accepted under the explicitly revised schema-free scope. [Closeout](#closeout--2026-10-12) records evidence per criterion; [acceptance record](../../acceptance/project-foundation.md) owns the concise validation limits. Implemented Nest/Fastify startup, Drizzle/pool/TLS configuration, health, watch mode, explicit migration workflow and module persistence/API boundaries. Typechecks, offline generation/configuration/watch checks and observed hosted read-only/HTTP behavior are recorded above and in the dated evidence below; no migration application is claimed.
+
+Git delivery completed: [PR #2](https://github.com/Hijazi313/servicelane-pos/pull/2) squash-merged as `a725fd3d70f878804f5e290d7a7089247374564e`; required Conventional PR title check passed and no merge conflict was reported. Local `main` was fast-forwarded; foundation branch deleted locally/remotely. No application CI suite exists; the title check is not code-validation evidence.
+
+### Transition to new planning
+
+F-01 remains closed. Current vendor-isolation planning, versioning/Swagger follow-ups, authorization and checkout cautions now belong to the [global tracker](../TRACKER.md#current-planning-handoff--2026-10-12), following the revised delivery workflow. Topology was subsequently approved on 2026-10-12; joint specification planning is linked from the global tracker. Subsequent BA-01 authorization and evidence belong to the joint tracker; F-01 is not reopened.
+
+### Remaining work, blockers and acceptance
+
+- No remaining P0 work or pending acceptance within revised F-01 scope. Subsequent [BA-01 staging acceptance](../business-access/phase-tracker.md#closeout--2026-10-12) fulfilled first-real-migration application/repeatability and additive-DDL rollback recovery; PostgreSQL 17.11 was observed. Deployment/release preparation still owns operational shutdown/fault recovery, pinned-toolchain clean installation, provider mode/budget and target-version suitability; production requires trusted TLS. Backup/restore and future migration risks remain outside that limited recovery evidence. See the acceptance record.
+- Foundation closeout does not authorize a subsequent implementation phase; current planning authorization is owned by the global tracker linked above.
 
 ## Running API check — 2026-10-11
 

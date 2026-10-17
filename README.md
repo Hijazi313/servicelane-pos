@@ -1,6 +1,6 @@
 # ServiceLane POS
 
-Backend foundation for a reusable restaurant POS. Development foundation accepted; no business workflows or authentication exist yet. See the [foundation tracker](docs/planning/project-foundation/phase-tracker.md).
+Backend foundation for a reusable restaurant POS. Development foundation accepted; BA-01 adds schema and operator bootstrap source, accepted on staging. BA-02 source now supplies staff lifecycle, login/sessions, access enforcement and local recovery; database/browser acceptance remains pending. See the [joint tracker](docs/planning/business-access/phase-tracker.md). See the [foundation tracker](docs/planning/project-foundation/phase-tracker.md).
 
 ## Requirements
 
@@ -23,7 +23,7 @@ Edit the ignored `.env` locally. Use a PostgreSQL connection URL with percent-en
 
 For Supabase, use a direct endpoint or a session-mode pooler when direct access is unavailable on your network. Use a direct/session connection for migrations, not a transaction pooler. `MIGRATION_DATABASE_URL` optionally supplies a separate endpoint/role; it defaults to `DATABASE_URL`. Both connections currently use the same optional CA file. A project requiring different CA roots can supply a PEM bundle. Select a dedicated development project and record its actual PostgreSQL version and connection budget. Supabase's other platform services are not dependencies.
 
-The API requires a database URL even if the database is currently unreachable. It creates its pool lazily; startup does not create databases or apply migrations.
+The API requires a database URL and canonical HTTPS `CLIENT_ORIGIN` even if the database is currently unreachable. It creates its pool lazily; startup does not create databases or apply migrations. BA-02 cleanup runs after 60 seconds only when the application is deliberately started; do not start it under source-only authorization against an unauthorized database.
 
 ## Development watch mode
 
@@ -39,7 +39,7 @@ pnpm db:migrate
 pnpm start
 ```
 
-`db:migrate` is an explicit database write: confirm the target first. There are no business migrations yet; an empty migration set does not connect to the database. When an authorized module adds schema, run `pnpm db:generate` offline, review and commit the generated SQL and metadata, then build and run `pnpm db:migrate`. See [migration conventions](apps/api/migrations/README.md). Recover with reviewed forward corrective migrations; no rollback command is provided.
+`db:migrate` is an explicit database write: confirm the target first. BA-01 includes the first generated business migration; running `db:migrate` performs database writes; it was verified on authorized staging, and other targets/runs must remain within explicit authorization. When an authorized module adds schema, run `pnpm db:generate` offline, review and commit the generated SQL and metadata, then build and run `pnpm db:migrate`. See [migration conventions](apps/api/migrations/README.md). Recover with reviewed forward corrective migrations; no rollback command is provided.
 
 Default HTTP binding is `127.0.0.1:3000`. `HOST`, `PORT` and `NODE_ENV` are validated before listening. Invalid configuration exits nonzero with field names rather than secret values. Built-in Nest logging/error handling is used; request-body logging is not enabled.
 
@@ -55,9 +55,15 @@ See the [acceptance record](docs/acceptance/project-foundation.md) for verified 
 
 - `apps/api/src/app.module.ts`: Nest composition point.
 - `apps/api/src/infrastructure/`: configuration, injected `DatabaseService` and technical health route.
-- `apps/api/migrations/`: ordered SQL migrations, empty of business schema until authorized.
+- `apps/api/migrations/`: reviewed offline SQL migrations; application remains separately authorized.
 - `docs/`: scope, architecture, specifications and acceptance evidence.
 
-Future authorized modules may import `DatabaseModule` and inject `DatabaseService`; its `db` exposes Drizzle over the same PostgreSQL pool and is technical infrastructure, not a cross-module repository. Each business module will own its persistence and public interfaces. Vendor isolation must be resolved before business persistence and access implementation.
+Future authorized modules may import `DatabaseModule` and inject `DatabaseService`; its `db` exposes Drizzle over the same PostgreSQL pool and is technical infrastructure, not a cross-module repository. Each business module will own its persistence and public interfaces. The approved initial topology is one business per LAN installation with its own database and local client assets; deployment is not implemented.
 
-No frontend, business tables, accounts, provider SDK, generic repositories or synchronization are included. See [contribution rules](CONTRIBUTING.md).
+Business and administrator bootstrap were verified on staging; synthetic records were removed, leaving the migrated tables empty. No frontend, HTTP authentication/sessions, provider SDK, generic repositories or synchronization is included. See the [operator instructions](apps/api/src/operator/README.md), [Business capability index](apps/api/src/modules/business/docs/README.md), [Authentication capability index](apps/api/src/modules/authentication/docs/README.md) and [BA-01 evidence](docs/planning/business-access/phase-tracker.md). See [contribution rules](CONTRIBUTING.md).
+
+## BA-02 access source
+
+New authentication, staff and context routes use `/api/v1`; `/health` retains its technical contract. Set `CLIENT_ORIGIN` to the intended canonical HTTPS origin, without a trailing slash. `TRUSTED_PROXY_ADDRESSES` optionally lists exact reverse-proxy IPs; default is no forwarded-header trust. The API enforces HTTPS protocol/origin/Host and always emits Secure cookies. TLS trust, proxy/asset hosting and browser acceptance require separately authorized deployment work; no login-over-plain-LAN-HTTP mode exists.
+
+`pnpm test:access` runs focused database-free checks. Source-only authorization does not permit `pnpm start`, migration application, provisioning or `pnpm recover-administrator` against staging. See the [Authentication specification](apps/api/src/modules/authentication/docs/features/access/spec.md) for contracts and [operator guide](apps/api/src/operator/README.md) for controlled recovery after separate authorization.
