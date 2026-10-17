@@ -1,0 +1,62 @@
+{
+  "recordedAt": "2026-10-17T17:05:00.060177+00:00",
+  "type": "database-free checks and source review",
+  "checks": [
+    {
+      "command": "pnpm test:access",
+      "result": "passed",
+      "tests": 30,
+      "includes": "TypeScript compilation plus existing credentials/service/HTTP/recovery checks"
+    },
+    {
+      "command": "node --test apps/api/tests/ba03-context.test.mjs",
+      "result": "passed",
+      "tests": 2,
+      "includes": "Real resolver with query doubles: absent/ambiguous binding, invalid configuration and failure after prior successful context"
+    }
+  ],
+  "runtime": {
+    "node": "24.18.1",
+    "pnpm": "9.15.0",
+    "pinnedNode": "24.21.0",
+    "pinnedPnpm": "12.11.2",
+    "limitation": "Existing runtime mismatch; no installation or pinned-runtime acceptance"
+  },
+  "routeReview": {
+    "result": "reviewed",
+    "sources": [
+      "apps/api/src/modules/authentication/http/access.controller.ts",
+      "apps/api/src/modules/authentication/http/boundary.ts",
+      "apps/api/src/modules/authentication/application/access.service.ts",
+      "apps/api/src/infrastructure/health.controller.ts"
+    ],
+    "publicExceptions": [
+      "GET /health",
+      "GET /api/v1/auth/csrf",
+      "POST /api/v1/auth/login",
+      "POST /api/v1/auth/logout (service validates session CSRF or prelogin proof)"
+    ],
+    "protectedPolicies": {
+      "staff": [
+        "GET /api/v1/auth/me",
+        "GET /api/v1/context"
+      ],
+      "restricted": [
+        "POST /api/v1/auth/password"
+      ],
+      "administrator": [
+        "GET /api/v1/staff",
+        "POST /api/v1/staff",
+        "PATCH /api/v1/staff/:id",
+        "POST /api/v1/staff/:id/password-reset"
+      ]
+    },
+    "default": "Undeclared routes denied; existing HTTP test passed",
+    "recovery": "Operator only; no HTTP recovery route"
+  },
+  "limits": [
+    "Source/double evidence does not prove PostgreSQL isolation",
+    "BB-AC03 and cross-installation AA-AC05 require a second independently authorized database",
+    "No physical outage/recovery, browser, deployment or API-process-count claim"
+  ]
+}
