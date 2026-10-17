@@ -401,3 +401,11 @@ User explicitly clarified: there is currently only an API, with no browser clien
 User requested committing this branch and its changes, merging into `main`, then continuing development from the integrated baseline. This supersedes the historical no-index/commit/branch-operation restriction for this closeout only. All pending files were reviewed as BA-02 source corrections, additive migration, opt-in harness/evidence and acceptance documentation. Fetched origin refs; local `main` matches `origin/main` at `a725fd3` and is an ancestor of `codex/vendor-isolation`. Preserve the existing branch commits; commit the reviewed pending files, then fast-forward local `main`. No remote push is included in this local integration. No next-phase execution is authorized by the merge.
 
 Verification reused the 30 passing BA-02 checks and scoped staging results above; final whitespace, manual-harness syntax and evidence JSON/secret-payload checks passed. BA-01 evidence is unchanged. Handoff after integration: `main` is the accepted BA-01/BA-02 development baseline; user selects/authorizes the next phase, with remaining verification limits above retained. The skill requires phase scope/evidence/closeout, not implementation directly on `main`; a new focused branch from integrated `main` is the recommended next implementation workflow.
+
+### Incident-learning handoff — 2026-10-17
+
+Incidents: [INC-20261017-01](../../quality/agent-incidents.md#inc-20261017-01--workflow-recommendation-omitted-an-existing-incident-learning-draft), [INC-20261017-02](../../quality/agent-incidents.md#inc-20261017-02--terminal-failure-cause-presented-more-conclusively-than-retained-evidence-supports), [INC-20261017-03](../../quality/agent-incidents.md#inc-20261017-03--local-installation-treated-as-a-confirmed-single-process-topology).
+
+Correction task: reconcile process-count wording with accepted BA-02 scope; evidence and rationale belong to INC-20261017-03. Owner: current agent; documentation only, no new execution or phase activation.
+
+Unconfirmed review question: did V01–V09 planning exceed justified P0 scope? Owner: current agent; inspect the approved rationale and later API-only clarification if that review is requested. This is not a confirmed incident or authorization to rerun checks.

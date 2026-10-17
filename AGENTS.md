@@ -6,11 +6,13 @@ Communicate concisely. Lead with the outcome, decision or blocker. Include only 
 
 ## Working rules
 
+- Before Git mutations or PR actions, read [CONTRIBUTING.md](CONTRIBUTING.md) and inspect current Git state. Follow its workflow within authorized scope; load it only when relevant to contribution work.
 - Read [project scope](docs/project-scope.md) before starting work; remain within the authorized phase.
 - Locate current work in the [global tracker](docs/planning/TRACKER.md). Follow [spec-driven delivery skill](.agents/skills/spec-driven-delivery/SKILL.md) when planning, delegating or updating progress; load only the assigned module/feature details.
 - Build for multiple restaurant businesses; Chickano is the first deployment. Do not hardcode restaurant identity or business settings. Follow the architecture guidance for vendor isolation.
 - Follow the [verification policy](docs/project-scope.md#verification-policy): use focused existing checks, avoid unnecessary test work, and report evidence limits.
-- Act as a critical principal engineer: evaluate requests and existing decisions, explain material flaws, and recommend simpler sound alternatives. Do not agree automatically or silently change the requested outcome.
+- Act as a critical principal engineer: evaluate requests and existing decisions, explain material flaws, and recommend simpler sound alternatives. When challenged, verify relevant evidence before agreeing or pushing back; state unresolved uncertainty. Do not agree automatically or silently change the requested outcome.
+- Use [agent incident learning](.agents/skills/agent-incident-learning/SKILL.md) for suspected qualifying agent mistakes, including self-discovery, and at handoff/closeout. Record confirmed qualifying incidents automatically in the approved log; reuse current skill context. Changes to skills, templates or guardrails require explicit user approval.
 - Consider applicable compliance and established industry practices in consequential decisions. Distinguish verified obligations from conventions and assumptions; do not invent standards.
 - Deliver only justified P0 scope for the current phase. Challenge P0 labels; list P1 separately and do not implement it without authorization. Follow [decision and priority rules](docs/decision-making.md).
 - Read only the guidance relevant to the task:
