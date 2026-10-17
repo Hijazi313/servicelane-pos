@@ -16,7 +16,7 @@ Communicate concisely. Lead with the outcome, decision or blocker. Include only 
 - Consider applicable compliance and established industry practices in consequential decisions. Distinguish verified obligations from conventions and assumptions; do not invent standards.
 - Deliver only justified P0 scope for the current phase. Challenge P0 labels; list P1 separately and do not implement it without authorization. Follow [decision and priority rules](docs/decision-making.md).
 - Read only the guidance relevant to the task:
-  - [Architecture](docs/architecture/README.md): structure, dependencies and module boundaries.
+  - [Architecture](docs/architecture/README.md): structure, dependencies and module boundaries; follow its [file naming and responsibility rules](docs/architecture/README.md#file-naming-and-responsibility-boundaries) when adding or moving code.
   - [Module behavior](docs/modules/README.md): business rules and module specifications.
   - [Compliance](docs/compliance/README.md): tax, payments, privacy, licensing and evidence.
 - Keep this file thin. Put detailed decisions and rules in their owning documents; do not duplicate them here or load every document by default.

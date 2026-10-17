@@ -14,12 +14,12 @@ import {
   type SessionResult,
 } from "../application/access.service.js";
 import {
-  AccessEntry,
   cookie,
   proof,
   type AccessRequest,
   type AccessReply,
-} from "./boundary.js";
+} from "./access-http.helpers.js";
+import { AccessEntry } from "./access-entry.decorator.js";
 import { canonicalSource } from "./configuration.js";
 
 @Controller("api/v1")
