@@ -38,7 +38,7 @@ Start with the repository `docs/planning/TRACKER.md`, then the assigned phase an
 3. Apply the architecture capability-upkeep rules to affected indexes and references.
 4. Update evidence, status and completion shape in the owning tracker. Update other documents only when their owned behavior, contracts, decisions or assignments changed.
 5. Leave one concrete next action and relevant changed-file cautions in the tracker's current handoff. Report the outcome and evidence limits concisely rather than copying the entire tracker into chat.
-6. After a meaningful correction, consider whether a reusable rule would prevent recurrence. Update only its owning document when justified; consolidate obsolete guidance instead of growing universal checklists.
+6. For incident assessment at closeout/handoff, follow [agent incident learning](../../agent-incident-learning/SKILL.md); that skill owns its recording and review requirements.
 
 ## Reading by assignment
 
