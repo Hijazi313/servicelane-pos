@@ -18,6 +18,8 @@ Start with the repository `docs/planning/TRACKER.md`, then the assigned phase an
 
 ## Phase entry and resume
 
+When Git work is authorized, follow repository `CONTRIBUTING.md` for branch setup and commit checkpoints. Identify coherent increments as implementation progresses; do not postpone all commits until phase closeout.
+
 1. Confirm the active phase, assignment, authorization and applicable verification limits. If none is selected, propose the smallest eligible phase; do not infer implementation permission from a roadmap.
 2. Apply repository `docs/architecture/README.md#capability-discovery-and-documentation-upkeep` before adding or reusing behavior.
 3. Inspect relevant repository state and existing changes before edits (including Git status when the directory is a Git repository). Preserve unrelated work and reconcile a stale handoff with current files.
