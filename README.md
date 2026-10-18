@@ -1,6 +1,6 @@
 # ServiceLane POS
 
-Backend for a reusable restaurant POS. Foundation and BA-01/02/03 are accepted under their recorded development scopes; staff login/sessions, access enforcement and local recovery are implemented. MN-00 transactional authorization reuse is accepted. MN-01 Menu catalogue source now supports sizes, optional extras, configurable combos and selection pricing, with focused offline and bounded database evidence delivered; user acceptance remains pending. [Global tracker](docs/planning/TRACKER.md) owns current authorization and evidence limits.
+Backend for a reusable restaurant POS. Foundation and BA-01/02/03 are accepted under their recorded development scopes; staff login/sessions, access enforcement and local recovery are implemented. MN-00 transactional authorization reuse is accepted. MN-01 Menu catalogue source now supports sizes, optional extras, configurable combos and selection pricing, accepted on 2026-10-19 under its recorded backend development scope and evidence limits. [Global tracker](docs/planning/TRACKER.md) owns current authorization and evidence limits.
 
 ## Requirements
 
@@ -70,4 +70,4 @@ New authentication, staff and context routes use `/api/v1`; `/health` retains it
 
 ## Menu catalogue source
 
-[Menu contracts](apps/api/src/modules/menu/docs/features/catalogue/spec.md#source-contracts--mn-01) define protected `/api/v1/menu` routes, complete definition editing and non-persisting selection resolution. `pnpm test:menu` runs focused database-free checks on the supported runtime. Migration `0003_menu_catalogue.sql` was applied on the authorized disposable test target; bounded persistence, fresh API process, rollback and concurrency checks passed, with owned fixtures cleaned. MN-01 user acceptance remains pending; the one-run execution permission is consumed. No Menu UI or order/payment workflow is included.
+[Menu contracts](apps/api/src/modules/menu/docs/features/catalogue/spec.md#source-contracts--mn-01) define protected `/api/v1/menu` routes, complete definition editing and non-persisting selection resolution. `pnpm test:menu` runs focused database-free checks on the supported runtime. Migration `0003_menu_catalogue.sql` was applied on the authorized disposable test target; bounded persistence, fresh API process, rollback and concurrency checks passed, with owned fixtures cleaned. MN-01 development scope is user-accepted; the one-run execution permission is consumed. No Menu UI or order/payment workflow is included.

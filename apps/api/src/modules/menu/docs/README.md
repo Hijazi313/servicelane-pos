@@ -8,7 +8,7 @@ Maintain business-owned items, sizes, optional extras and fixed/selectable combo
 
 ## Public capabilities
 
-Source capabilities have focused offline and bounded PostgreSQL evidence; migration 0003 is applied on the authorized disposable test target. See the tracker for passing cleanup, remaining evidence limits and pending user acceptance.
+Source capabilities have focused offline and bounded PostgreSQL evidence; migration 0003 is applied on the authorized disposable test target. MN-01 was explicitly user-accepted on 2026-10-19 under the recorded backend development limits; Git integration is pending.
 
 | Capability | Public entry point | Purpose | Important constraints |
 | --- | --- | --- | --- |
@@ -24,7 +24,7 @@ Source capabilities have focused offline and bounded PostgreSQL evidence; migrat
 | Phase | Outcome | Dependency / exit |
 | --- | --- | --- |
 | MN-00 (accepted) | Existing Authentication authorization reused for transactional module writes | [Authentication contract/acceptance](../../authentication/docs/features/access/spec.md#mn-00--transactional-module-authorization); accepted before MN-01 writes |
-| MN-01 (evidence delivered; unaccepted) | Protected catalogue maintenance/read and current selection/pricing APIs | Accepted MN-00, separate source authorization and MN-AC01–06 evidence |
+| MN-01 (accepted development scope) | Protected catalogue maintenance/read and current selection/pricing APIs | Accepted MN-00, separate source authorization and MN-AC01–06 evidence |
 | Later Orders integration | Consume selections and preserve sale-time details | Separate discovery/authorization; no detailed tasks activated |
 
 ## Project after accepted MN-01

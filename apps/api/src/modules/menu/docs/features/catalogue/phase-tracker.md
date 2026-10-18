@@ -2,7 +2,7 @@
 
 Parent: [Menu](../../README.md) / [global tracker](../../../../../../../../docs/planning/TRACKER.md). Solo owner: primary agent.
 Catalogue: [spec](spec.md) / [decisions](decisions.md). MN-00 contract: [Authentication specification](../../../../authentication/docs/features/access/spec.md#mn-00--transactional-module-authorization).
-Status: active. Current phase: MN-01 (source and bounded database evidence delivered; user acceptance pending). Sequence: MN-00 → MN-01.
+Status: complete under accepted backend development scope. MN-01 accepted 2026-10-19; Git integration pending PR review/explicit merge decision. Sequence: MN-00 → MN-01.
 
 ## Authorization — 2026-10-18
 
@@ -22,9 +22,9 @@ Assignment: solo primary agent owns MN-00 Authentication application/public HTTP
 | --- | --- | --- | --- |
 | Planning revision | complete | Spec, decisions, phase sequence and independent acceptance checks documented | Current documentation instruction; no implementation acceptance implied |
 | MN-00-T01 — transactional authorization reuse | complete | [MN00-AC01–05](../../../../authentication/docs/features/access/spec.md#mn-00-acceptance); focused seam evidence and explicit user development acceptance | Contract recorded above; current user authorizes MN-00 source/offline checks only |
-| MN-01-T01 — protected catalogue and selection resolution | active | [MN-AC01–06 families](spec.md#acceptance-steps), focused evidence and explicit user development acceptance | Accepted MN-00; scope/decision review and separate MN-01 source authorization |
+| MN-01-T01 — protected catalogue and selection resolution | complete | [MN-AC01–06 families](spec.md#acceptance-steps), focused evidence and explicit user development acceptance | Accepted MN-00; scope/decision review and separate MN-01 source authorization |
 
-MN-00 was explicitly user-accepted on 2026-10-18; its recorded development evidence/limits remain unchanged. MN-01 source/offline evidence is delivered. The latest authorization permitted the narrow session-loop repair and one bounded run; that run passed. The earlier pre-execution stop is historical; user MN-01 acceptance remains pending. No further database execution is authorized by that consumed one-run permission.
+MN-00 was explicitly user-accepted on 2026-10-18; its recorded development evidence/limits remain unchanged. MN-01 source/offline evidence is delivered. The latest authorization permitted the narrow session-loop repair and one bounded run; that run passed. The earlier pre-execution stop is historical; MN-01 was explicitly accepted on 2026-10-19 under the closeout below. No further database execution is authorized by that consumed one-run permission.
 
 Before database-backed acceptance, prepare the concrete procedure/fixtures and obtain authorization for one named disposable target, migration/write scope and cleanup. No inherited BA execution permission, database contact or provisioning. Focused offline checks do not prove actual transaction rollback, revocation ordering or persistence. Record unrun criteria rather than closing either phase on source inspection alone.
 
@@ -38,7 +38,7 @@ Before database-backed acceptance, prepare the concrete procedure/fixtures and o
 | MN00-AC03 | Implemented; scoped database evidence | V01/V02 pass on PostgreSQL 17.11: revocation-first denial and callback-first ordering with observed advisory-lock contention; latest report below |
 | MN00-AC04 | Implemented; scoped database evidence | V03 passes: original consumer error preserved, callback transaction aborted, session activity rolled back and retained opaque scope invalid; latest report below |
 | MN00-AC05 | Implemented; focused offline evidence | Public HTTP policy/proof/filter checks plus six existing HTTP regressions pass; no new production probe route |
-| Menu / MN-AC01–06 | Source/offline and bounded PostgreSQL evidence delivered; user acceptance pending | See latest database results below; no deployment or operational-readiness claim |
+| Menu / MN-AC01–06 | Accepted backend development scope, 2026-10-19 | See latest database results below; no deployment or operational-readiness claim |
 
 ### Checks and environment
 
@@ -50,11 +50,7 @@ Before database-backed acceptance, prepare the concrete procedure/fixtures and o
 
 ## Handoff — 2026-10-18
 
-- Delivered: F01 complete edit-size admission and F02 child idle-error failure signaling corrected with focused offline evidence. [Current readiness assessment](#f02-repair-evidence-and-current-readiness--2026-10-18); F01 checkpoint `59cc0fc`.
-- Next user decision: explicitly accept MN-01 development scope or request a specific change, then authorize the outstanding Menu branch review/push/PR integration scope with merge permission explicit. Orders planning stays on hold until the intended Menu integration sequence is handled. MN-01 remains active/unaccepted; no additional database run is justified/inferred.
-- Limits: unchanged historical database report/ledger; no new database observations. Fresh compilation, relevant HTTP/application and offline child lifecycle checks passed. Production persistence/schema/auth semantics unchanged. Deferred release/TLS identity limitations remain recorded.
-- Incidents: [03](../../../../../../../../docs/quality/agent-incidents.md#inc-20261018-03--accepted-menu-creation-can-exceed-the-edit-transport-limit-after-id-assignment) and [04](../../../../../../../../docs/quality/agent-incidents.md#inc-20261018-04--fresh-api-acceptance-probe-ignores-required-idle-connection-failure-signal) corrected; 01/02 correction evidence preserved. All incident closure/prevention decisions remain with user. Subsequent process assessment: [INC-20261019-01](../../../../../../../../docs/quality/agent-incidents.md#inc-20261019-01--excessive-context-rereading-and-repeated-repair-reporting), open. Continuation handoff: [INC-20261019-02](../../../../../../../../docs/quality/agent-incidents.md#inc-20261019-02--continuation-prompt-omitted-menu-branch-integration), open.
-- Checkout: reused `codex/menu-catalogue`; preserve the pre-existing untracked run ledger. No installation, database access/migrations, provisioning, deployment, push/PR/merge performed or authorized.
+Current update — 2026-10-19: MN-01 explicitly accepted and locally closed; [acceptance and integration review](#mn-01-acceptance-and-integration-review--2026-10-19). Authorized next action is normal topic-branch push and PR to verified `origin/main`; merge requires a separate explicit decision. Orders stays on hold until Menu integration is complete. No database execution or installation; preserve the untracked local run ledger. Incident closure/prevention decisions remain pending in the owning log; no new incident identified in closeout.
 
 ## Verification preparation follow-up — 2026-10-18
 
@@ -217,3 +213,17 @@ Final focused evidence across both repairs: compilation passed, two new F01 HTTP
 Readiness assessment: F01/F02 confirmed findings are corrected within their focused evidence scope; no additional unresolved defect was found during the repair review. Combined with preserved prior domain/HTTP and bounded PostgreSQL observations, the evidence again supports a user decision on MN-01 backend development acceptance. No new database run is justified: F01 rejects before the unchanged persistence path, and F02's event/lifecycle signaling is directly exercised offline. Historical database results remain pre-repair evidence, not a claim that their recorded hashes match current changed files. Broader deployment/AppModule/HTTPS/crash-recovery/installation and TLS server-identity limits remain unchanged.
 
 Next user decision: explicitly accept MN-01 under these recorded development limits, or name a specific remaining requirement/change. MN-01 remains active, not complete/accepted. Incidents 03/04 corrected with evidence; 01/02 prior correction evidence retained. No incident closed, prevention change approved or new incident identified in this repair work.
+
+## MN-01 acceptance and integration review — 2026-10-19
+
+User explicitly accepted MN-01 under the recorded backend development scope/evidence limits and authorized local closeout, complete-branch integration review, normal push and PR creation/reuse. No merge, Orders work, database access/rerun, migrations, installation, provisioning or deployment. Reused `codex/menu-catalogue` at `b2c49f5`; preserved the sole untracked MN-01 run ledger and excluded it from integration. Verified remote `Hijazi313/servicelane-pos`, default/integration branch `main`; fetched base remains `9c7b565`, with no base-only commits and no existing open PR for this head at review time.
+
+| Exit family | Reconciled evidence |
+| --- | --- |
+| MN-AC01–04 | Existing focused rule/application/HTTP checks and bounded persistence/FK/restart observations; F01 full-edit admission and boundary regressions at `59cc0fc` |
+| MN-AC05 | Prior observed ordering/rollback/coherent-read assertions; no transaction/persistence changes in subsequent fixes; F02 offline failure-signal checks at `0ceef8a` |
+| MN-AC06 | Explicit user acceptance in the 2026-10-19 closeout/push/PR instruction |
+
+Integration review found no new material defect in the complete branch scope: MN-00 is the accepted prerequisite for Menu's authorized transactions; production cross-module calls use supported exports; composition/provider/schema wiring and both repaired paths were reviewed. Offline schema comparison confirms prior tables unchanged, exactly three added Menu tables/three ownership FKs and only journal entry 0003 added. Branch whitespace checks passed; tracked-content review found no environment/private-key/credential-URL inclusion and excludes the local MN-01 ledger. This is a scoped review, not exhaustive security certification. No executable changes since the recorded repair checks, so passing compile/tests/database observations are reused without rerun.
+
+MN-00 and MN-01 are locally complete under accepted development scope; PR review/integration remains separate. Limits persist: no deployment/packaged-startup/browser HTTPS/crash/installation recovery evidence, approved test TLS server identity unverified, historical PostgreSQL results describe pre-repair hashes/fixtures, and the corrected child lifecycle is verified offline. Incident correction evidence is not closure/prevention approval. Next action: push and create/reuse the focused PR, then stop for review and explicit merge decision; Orders remains on hold.
