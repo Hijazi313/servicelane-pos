@@ -132,7 +132,7 @@ try {
     ledger.businessId=context.businessId; ledger.branchId=context.branchId; await saveLedger();
     await unit.saveAccount({id:ledger.accountId,businessId:ledger.businessId,username:tag,displayName:tag,status:'active',role:'administrator',passwordChangeRequired:false,passwordHash:credentialHash,branchIds:[ledger.branchId]});
     const now = new Date(Date.now()-5000);
-    for (const proof of [proofA,proofB,proofC]) await unit.saveSession({digest:digest(proof.session),businessId:ledger.businessId,accountId:ledger.accountId,csrfToken:proof.csrf,createdAt:now,lastActivityAt:now,revokedAt:null});
+    for (const proof of [proofB,proofC]) await unit.saveSession({digest:digest(proof.session),businessId:ledger.businessId,accountId:ledger.accountId,csrfToken:proof.csrf,createdAt:now,lastActivityAt:now,revokedAt:null});
   });
   setupCommitted=true;
   const run = work => access.runAuthorized(proofC,'administrator',work);

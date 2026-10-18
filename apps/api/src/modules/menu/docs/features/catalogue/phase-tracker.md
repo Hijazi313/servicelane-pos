@@ -24,7 +24,7 @@ Assignment: solo primary agent owns MN-00 Authentication application/public HTTP
 | MN-00-T01 — transactional authorization reuse | complete | [MN00-AC01–05](../../../../authentication/docs/features/access/spec.md#mn-00-acceptance); focused seam evidence and explicit user development acceptance | Contract recorded above; current user authorizes MN-00 source/offline checks only |
 | MN-01-T01 — protected catalogue and selection resolution | active | [MN-AC01–06 families](spec.md#acceptance-steps), focused evidence and explicit user development acceptance | Accepted MN-00; scope/decision review and separate MN-01 source authorization |
 
-MN-00 was explicitly user-accepted on 2026-10-18; its recorded development evidence/limits remain unchanged. MN-01 source/offline evidence is delivered. The latest one-run execution authorization below was stopped at pre-execution review. Harness correction and renewed execution permission are pending; user MN-01 acceptance remains pending.
+MN-00 was explicitly user-accepted on 2026-10-18; its recorded development evidence/limits remain unchanged. MN-01 source/offline evidence is delivered. The latest authorization permits the narrow session-loop repair and renewed one-run execution below. The earlier pre-execution stop is historical; user MN-01 acceptance remains pending.
 
 Before database-backed acceptance, prepare the concrete procedure/fixtures and obtain authorization for one named disposable target, migration/write scope and cleanup. No inherited BA execution permission, database contact or provisioning. Focused offline checks do not prove actual transaction rollback, revocation ordering or persistence. Record unrun criteria rather than closing either phase on source inspection alone.
 
@@ -50,11 +50,10 @@ Before database-backed acceptance, prepare the concrete procedure/fixtures and o
 
 ## Handoff — 2026-10-18
 
-- Delivered: source/offline evidence in `51b8fdb`, accepted MN-00 checkpoint `d98b91e`, and acceptance preparation checkpoint `5b9a53a`. The authorized database run was stopped at pre-execution review; [current execution assessment](#database-execution-review--2026-10-18).
-- Current completion shape: source capabilities and the bounded procedure remain available. Executable acceptance harness requires a narrow repair before renewed review/execution. No production source changes made during this attempt.
-- Next action: user authorizes the narrow harness correction, focused offline validation and renewed one-run execution under the existing target/gates/migration/fixture/cleanup scope. Current instruction explicitly requires stopping on material harness defects.
-- Limits: no compilation, `.env` loading, database contact, migration or fixture execution in this attempt. Migration remains unapplied per last recorded state, not a new live observation. All database acceptance criteria remain unrun; MN-01 active and unaccepted. Reused clean `codex/menu-catalogue` at `5b9a53a`; preserve subsequent documentation checkpoint.
-- Incidents: [INC-20261018-01](../../../../../../../../docs/quality/agent-incidents.md#inc-20261018-01--delivered-mn-01-harness-retained-an-undefined-fixture-proof). Prior incident reviews remain pending in the owning log.
+- Current work: [session-loop repair and renewed one-run authorization](#harness-repair-and-renewed-execution--2026-10-18). Narrow repair and focused offline validation completed; database execution pending the repair checkpoint and fresh compilation.
+- Next action: execute the already-authorized bounded procedure once; stop on its recorded gates, without automatic retry. No additional approval needed for this authorized run.
+- Limits: no database contact during repair; migration/application baseline remains last-recorded, not newly observed. MN-01 active/unaccepted. Reused clean `codex/menu-catalogue` at `8f3a288`; no unrelated work.
+- Incidents: [INC-20261018-01](../../../../../../../../docs/quality/agent-incidents.md#inc-20261018-01--delivered-mn-01-harness-retained-an-undefined-fixture-proof); corrected session loop, user review pending.
 
 ## Verification preparation follow-up — 2026-10-18
 
@@ -139,3 +138,11 @@ Checkout review: clean `codex/menu-catalogue` at `5b9a53a`, with expected `51b8f
 Source search establishes the unresolved identifier; no failing database reproduction is needed. No prior passing suites were repeated. All live baseline, schema/migration, cleanup, persistence/restart and concurrency conclusions remain unavailable. User acceptance evidence is insufficient until the corrected harness is reviewed and actually executed. The one-run permission was not exercised; renewed permission after correction is required by this explicit stop gate, rather than an automatic retry/resume.
 
 Next decision: authorize replacing the stale three-proof setup loop with the two declared/ledgered proofs, focused offline validation of that setup path and renewed one-run execution of the same bounded procedure. Leave migration scope, baseline gates and owned cleanup unchanged. Incidents: [INC-20261018-01](../../../../../../../../docs/quality/agent-incidents.md#inc-20261018-01--delivered-mn-01-harness-retained-an-undefined-fixture-proof). No executable source, skills, templates or guardrails changed.
+
+## Harness repair and renewed execution — 2026-10-18
+
+User explicitly authorized correcting the stale fixture loop to the two declared/ledgered B/C sessions, focused offline validation/review, a coherent repair checkpoint, fresh compilation and one execution of the same bounded procedure. User reconfirmed the existing `.env` target unchanged, disposable and exclusively reserved. Stop on another material harness defect, baseline mismatch, unexpected data, ambiguous migration outcome or failed cleanup; no automatic retry or gate/deletion expansion. No installation, provisioning, deployment, push/PR/merge. Solo primary agent reused clean `codex/menu-catalogue` at `8f3a288`; no unrelated work.
+
+Repair changes only the session-setup array. Focused offline check executed the actual declarations, ledger assignment and setup loop with an in-memory `saveSession` recorder: exactly two distinct sessions, correct account/business scope and digests matching the two ledger entries; no remaining `proofA`. Syntax and whitespace checks pass on existing Node 24.21.0. No `.env` loading or database contact in this repair check. Prior passing rule/HTTP/refusal checks reused. Procedure review retains unchanged target/fingerprint, schema/history/empty gates, migration 0003, concurrency barriers, restart boundary and owned cleanup.
+
+Repair checkpoint precedes fresh compilation and the one authorized run. Database criteria remain unrun until actual results below. [Incident correction evidence](../../../../../../../../docs/quality/agent-incidents.md#inc-20261018-01--delivered-mn-01-harness-retained-an-undefined-fixture-proof) records the narrow repair; no incident closure or prevention-policy approval inferred. Next action: compile and execute once; preserve all stop gates and retain sanitized results.
