@@ -12,7 +12,7 @@ Source capabilities have focused offline and bounded PostgreSQL evidence; migrat
 
 | Capability | Public entry point | Purpose | Important constraints |
 | --- | --- | --- | --- |
-| Catalogue maintenance | [MenuController](../http/menu.controller.ts) (`POST/PUT /api/v1/menu/offerings`, deactivate) | Maintain item/size/extra/combo definitions | Administrator + MN-00 session/CSRF; business scoped, per-offering revision; complete definition writes; schema verified on disposable test target only |
+| Catalogue maintenance | [MenuController](../http/menu.controller.ts) (`POST/PUT /api/v1/menu/offerings`, deactivate) | Maintain item/size/extra/combo definitions | Administrator + MN-00 session/CSRF; business scoped, per-offering revision; complete definition writes; prospective compact edit envelope must fit 16 KiB after generated IDs/money; schema verified on disposable test target only |
 | Active catalogue read | [MenuController](../http/menu.controller.ts) (`GET /offerings`) | List saleable offerings and choices | Authorized current-branch staff/admin; inactive variants/options filtered; one business snapshot |
 | Definition inspection | [MenuController](../http/menu.controller.ts) (`GET /definitions`) | Inspect inactive definitions for maintenance | Administrator only |
 | Selection pricing | [MenuController](../http/menu.controller.ts) (`POST /resolve`) | Validate selections and calculate exact configured-currency price/composition | Session/CSRF; nonbinding preview, no order or stock writes; no supported cross-module service contract until Orders discovery |

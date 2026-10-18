@@ -4,7 +4,7 @@
 
 - Stage: Foundation F-01 remains complete; [acceptance and evidence limits](project-foundation/phase-tracker.md#closeout--2026-10-12).
 - Approved topology: one business per LAN installation, dedicated local PostgreSQL, locally served client assets and one maintained codebase; explicit user approval on 2026-10-12. [Decision and rationale](../architecture/vendor-isolation-proposal.md).
-- Current activity: MN-01 active/unaccepted. Prior bounded database cases/cleanup passed, but subsequent [critical review](../../apps/api/src/modules/menu/docs/features/catalogue/phase-tracker.md#critical-review--2026-10-18) found a create/edit payload-size defect and a restart-probe failure-signal gap. Acceptance readiness is on hold pending narrow fixes; historical evidence preserved. No further database execution, installation, provisioning, deployment, push/PR/merge.
+- Current activity: MN-01 active/unaccepted. User authorized narrow F01/F02 repairs and focused offline checks; [owning repair/evidence](../../apps/api/src/modules/menu/docs/features/catalogue/phase-tracker.md#f01f02-repair-authorization-and-intended-behavior--2026-10-18). F01 corrected/offline-validated; F02 pending. Prior database results preserved, with no rerun. No installation, provisioning, database access, deployment, push/PR/merge.
 - Current phase: BA-01 complete; BA-02 complete under [user acceptance](business-access/phase-tracker.md#ba-02-acceptance--2026-10-17); BA-D01–06 approved; BA-03-T01 complete and [user-accepted](business-access/phase-tracker.md#ba-03-acceptance-and-closeout--2026-10-17) under its revised development scope; two-database execution deferred, unrun.
 - Deferred validation remains in the [canonical foundation handoff](project-foundation/phase-tracker.md#current-handoff--2026-10-12) and [acceptance record](../acceptance/project-foundation.md).
 
@@ -12,7 +12,7 @@
 
 BA-01/02/03 accepted development scope and historical execution permissions are owned by the [joint BA tracker](business-access/phase-tracker.md). They do not authorize new Menu or database work.
 
-Current handoff: BA-03 and MN-00 remain accepted. MN-01 remains active/unaccepted. [Latest critical review](../../apps/api/src/modules/menu/docs/features/catalogue/phase-tracker.md#critical-review--2026-10-18) supersedes the earlier recommendation to accept MN-01: authorize narrow create/edit payload-size and restart-probe error-signal fixes with focused offline regressions next. Production public Business/Authentication reuse was reviewed against the capability indexes; no duplicate production authorization or wrong public API was established. Prior passing database observations/cleanup remain preserved; ledger local/untracked. Review made no production edits or database calls.
+Current handoff: BA-03/MN-00 remain accepted; MN-01 active/unaccepted. The user authorized only two review-finding repairs with focused offline regressions, necessary compilation, docs/incidents and local checkpoints. F01 now rejects prospective generated edit envelopes exceeding the unchanged 16 KiB budget; focused HTTP/boundary and affected application checks pass. [Owning evidence](../../apps/api/src/modules/menu/docs/features/catalogue/phase-tracker.md#f01-repair-evidence--2026-10-18). Next: already-authorized F02 restart failure-signal repair. Historical database report/ledger unchanged; no database rerun or adjacent work.
 
 ## Proposed foundation follow-ups — 2026-10-12
 

@@ -1,8 +1,11 @@
 import { Injectable } from '@nestjs/common';
+import { REQUEST_BODY_LIMIT_BYTES } from '../../../infrastructure/request-limits.js';
 import type { InstallationContext } from '../../business/public.js';
 import type { AuthorizedScope } from '../../authentication/public.js';
 import { MenuStore } from './menu-store.js';
 import { MenuError, activeView, definition, id, integer, object, precision, resolveSelection, validateReferences, type Offering } from '../domain/catalogue.js';
+
+const MAX_EDIT_REVISION = 2147483646;
 
 @Injectable()
 export class MenuService {
@@ -31,17 +34,23 @@ export class MenuService {
     if (offeringId !== undefined) {
       const parsed = id(offeringId); previous = catalogue.find(row => row.id === parsed);
       if (!previous) throw new MenuError(404, 'Resource not found');
-      revision = integer(input.expectedRevision, 1, 2147483646);
+      revision = integer(input.expectedRevision, 1, MAX_EDIT_REVISION);
       if (previous.revision !== revision) throw new MenuError(409, 'Stale offering revision');
     } else if (catalogue.length >= 500) throw new MenuError(409, 'Catalogue capacity reached');
     const offering = definition(input.definition, scope.installation.business.currencyCode, previous);
     validateReferences(offering, catalogue);
+    // Reserve a full-width edit revision; root response metadata is not writable.
+    const { id: _id, revision: _revision, currencyCode: _currency, scale: _scale, ...editable } = offering;
+    const futureEdit = { definition: editable, expectedRevision: MAX_EDIT_REVISION };
+    if (Buffer.byteLength(JSON.stringify(futureEdit), 'utf8') > REQUEST_BODY_LIMIT_BYTES) {
+      throw new MenuError(400, 'Definition exceeds editable size limit');
+    }
     await this.store.save(scope.installation.businessId, offering, revision, scope.transaction);
     return offering;
   }
   async deactivate(scope: AuthorizedScope, value: unknown, body: unknown) {
     const offeringId = id(value), input = object(body, ['expectedRevision']);
-    const revision = integer(input.expectedRevision, 1, 2147483646);
+    const revision = integer(input.expectedRevision, 1, MAX_EDIT_REVISION);
     const catalogue = await this.snapshot(scope.installation, scope.transaction);
     const previous = catalogue.find(row => row.id === offeringId);
     if (!previous) throw new MenuError(404, 'Resource not found');

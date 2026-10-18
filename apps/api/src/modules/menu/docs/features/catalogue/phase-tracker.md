@@ -50,10 +50,10 @@ Before database-backed acceptance, prepare the concrete procedure/fixtures and o
 
 ## Handoff — 2026-10-18
 
-- Latest assessment: [user-requested critical review](#critical-review--2026-10-18) found an acceptance-blocking create/edit size defect and a restart-probe failure-signal gap. Earlier passing cases/reports remain preserved; the earlier readiness recommendation is superseded. MN-01 active/unaccepted.
-- Next decision: authorize the two narrow fixes and focused offline regressions, or resolve their intended behavior. No implementation/database work performed during review; no automatic database rerun, Orders activation, push/PR/merge.
-- Database state remains the prior run's recorded state: migration 0003 retained, all thirteen tables empty after owned cleanup. No new live observation. Ledger remains local/untracked.
-- Incidents: [01](../../../../../../../../docs/quality/agent-incidents.md#inc-20261018-01--delivered-mn-01-harness-retained-an-undefined-fixture-proof) corrected; [02](../../../../../../../../docs/quality/agent-incidents.md#inc-20261018-02--capability-indexes-skipped-before-business-and-authentication-reuse) retrospective assessment complete; [03](../../../../../../../../docs/quality/agent-incidents.md#inc-20261018-03--accepted-menu-creation-can-exceed-the-edit-transport-limit-after-id-assignment) and [04](../../../../../../../../docs/quality/agent-incidents.md#inc-20261018-04--fresh-api-acceptance-probe-ignores-required-idle-connection-failure-signal) open. User incident/prevention review remains pending.
+- Current repair: [F01/F02 authorization and evidence](#f01f02-repair-authorization-and-intended-behavior--2026-10-18). F01 admission/transport-size compatibility corrected and offline-validated; F02 restart failure signal remains pending.
+- Next action: implement the already-authorized narrow F02 lifecycle repair and focused offline regression. No further database execution, installation, provisioning, deployment, push/PR/merge.
+- Historical database observations and run ledger remain unchanged; no new live observation. MN-01 active/unaccepted; readiness assessment remains pending F02.
+- Incidents: [03](../../../../../../../../docs/quality/agent-incidents.md#inc-20261018-03--accepted-menu-creation-can-exceed-the-edit-transport-limit-after-id-assignment) corrected and [04](../../../../../../../../docs/quality/agent-incidents.md#inc-20261018-04--fresh-api-acceptance-probe-ignores-required-idle-connection-failure-signal) open; prior 01/02 correction evidence preserved. All user incident/prevention reviews remain pending.
 
 ## Verification preparation follow-up — 2026-10-18
 
@@ -183,3 +183,22 @@ Cross-module assessment: no duplicate production RBAC/session/CSRF or Business o
 Rejected suspected issue: a role-only test mutation between guard/context reads returned 200, but real AccessService.patch revokes affected sessions. Repeating that focused scenario with the actual demotion semantics returned 401, so no supported-path privilege bypass was established. Do not present the role-only double as a product security finding. No database/production security certification is claimed by this review.
 
 Earlier passing database observations remain valid for the hashed harness/fixtures. Earlier conclusion of sufficient MN-AC01–05 coverage is superseded: fix F01 and F02 before recommending acceptance. No automatic full-suite or PostgreSQL rerun is justified; select checks for the actual repair once authorized. Logging is automatic under adopted incident-learning policy; no skills/templates/guardrails changed and no incident closed.
+
+## F01/F02 repair authorization and intended behavior — 2026-10-18
+
+User authorized only the two confirmed findings, focused meaningful offline regressions, necessary compilation, affected docs/incident correction evidence and local Conventional Commit checkpoints. No database access/migrations, installation, provisioning, deployment, push/PR/merge. Reuse `codex/menu-catalogue` at `0ab2e40`; only pre-existing untracked run ledger present, preserved. Solo primary agent; no worktree/delegation. Relevant Menu, Business and Authentication capability indexes and candidate contracts were consulted before reuse; authorization/store/error boundaries stay unchanged.
+
+| Task | Intended behavior / checks | Status |
+| --- | --- | --- |
+| F01 / AC01 maintenance | Before create/update persistence, compact UTF-8 future edit envelope with generated IDs, canonical money and max supported expected revision must fit the unchanged 16 KiB transport budget. Inclusive boundary; oversized prospective definitions return 400 atomically. Actual HTTP round trips, create/update rejections and UTF-8/escape/revision boundary checks | complete; focused offline evidence |
+| F02 / acceptance probe | Idle-error flag spans probe work and pool shutdown. Even successful later requests must not produce a success marker after an idle error; propagate a fixed sanitized failure and close resources. Focused offline lifecycle/failure-signal regression, no database imports in test path | pending |
+
+F01 reuses the existing transport budget through one shared technical constant; no generic validation framework or new Business/Auth API. F02 may isolate the probe's small test-only lifecycle so the real error/shutdown path is exercised with an EventEmitter pool, rather than copying the error handler into a test. Historical report remains immutable; no hidden idle error is inferred. MN-01 stays active/unaccepted; readiness will be reassessed after focused evidence.
+
+### F01 repair evidence — 2026-10-18
+
+One shared `REQUEST_BODY_LIMIT_BYTES` constant retains the production 16,384-byte limit; MenuService rejects a prospective compact full edit envelope above that budget before persistence. Root response-only metadata is removed for sizing, nested IDs/canonical money retained, and expectedRevision reserves 2147483646. This is an application admission bound, not an HTTP request/reply dependency or duplicated Business/Auth validation.
+
+Existing Node 24.21.0 compilation passed. Two new HTTP regressions passed; after expanding the boundary case with actual transport assertions, that case passed again. Four affected existing checks (two Menu HTTP authorization/lifecycle tests plus application reconfiguration/deactivation) passed because the new save admission touches those paths. Unchanged pure pricing/selection tests were not repeated. Rejections preserve catalogue/revision and session state in the existing offline transactional double. No database/runtime persistence claim added; historical report remains unchanged and identifies pre-repair source hashes.
+
+F01 is corrected within the focused evidence scope. F02 remains pending; do not restore acceptance-readiness recommendation until its repair is validated. Incidents: 03 corrected, review pending; 04 open. No new incident identified in F01 repair.
