@@ -54,7 +54,7 @@ Before database-backed acceptance, prepare the concrete procedure/fixtures and o
 - Database state at run completion: only migration 0003 added; its schema/history retained. Run-owned fixtures removed; all thirteen application tables verified empty, pools closed. Ledger retained locally/untracked; reviewed sanitized report is checkpointed. No automatic retry or further database work.
 - Next decision: user reviews the combined offline/database evidence and explicitly accepts or requests a specific change to MN-01 development scope. MN-01 remains active/unaccepted; do not activate Orders or infer push/PR/merge permission.
 - Limits: scoped development evidence with TLS server identity unverified; no packaged startup, deployment, browser/client HTTPS, database-server restart/crash recovery or installation validation. No wider suite repeated.
-- Incidents: [INC-20261018-01](../../../../../../../../docs/quality/agent-incidents.md#inc-20261018-01--delivered-mn-01-harness-retained-an-undefined-fixture-proof), corrected, user review pending; no new incident in this execution.
+- Incidents: [INC-20261018-01](../../../../../../../../docs/quality/agent-incidents.md#inc-20261018-01--delivered-mn-01-harness-retained-an-undefined-fixture-proof), corrected; [INC-20261018-02](../../../../../../../../docs/quality/agent-incidents.md#inc-20261018-02--capability-indexes-skipped-before-business-and-authentication-reuse), open. User review pending. The latter records a subsequently confirmed discovery-process omission; owning assessment/next action remains in the incident log.
 
 ## Verification preparation follow-up — 2026-10-18
 
