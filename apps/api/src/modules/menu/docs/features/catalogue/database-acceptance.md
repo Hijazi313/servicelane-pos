@@ -1,6 +1,6 @@
-# MN-01 bounded database acceptance — prepared, unrun
+# MN-01 bounded database acceptance — blocked before execution
 
-Owner: primary agent. [Tracker](phase-tracker.md#database-acceptance-preparation--2026-10-18) owns authorization/status; [acceptance criteria](spec.md#acceptance-steps) own behavior. Harness: [mn01-acceptance.mjs](../../../../../../tests/mn01-acceptance.mjs); fresh API probe: [mn01-restart.mjs](../../../../../../tests/mn01-restart.mjs). Preparation does not authorize execution or accept MN-01.
+Owner: primary agent. [Tracker](phase-tracker.md#database-acceptance-preparation--2026-10-18) owns authorization/status; [acceptance criteria](spec.md#acceptance-steps) own behavior. Harness: [mn01-acceptance.mjs](../../../../../../tests/mn01-acceptance.mjs); fresh API probe: [mn01-restart.mjs](../../../../../../tests/mn01-restart.mjs). Preparation does not authorize execution or accept MN-01. The subsequent one-run authorization was stopped at [pre-execution review](phase-tracker.md#database-execution-review--2026-10-18); correct and re-review the harness before renewed execution permission. The procedure below remains the reviewed scope; no database steps have run.
 
 ## Target and stop gates
 
