@@ -1,4 +1,5 @@
 import 'reflect-metadata';
+import { REQUEST_BODY_LIMIT_BYTES } from './infrastructure/request-limits.js';
 import { readAccessHttpConfiguration } from './modules/authentication/http/configuration.js';
 import { Logger } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
@@ -13,7 +14,7 @@ async function bootstrap(): Promise<void> {
   const access = readAccessHttpConfiguration(process.env);
   const { AppModule } = await import('./app.module.js');
   const app = await NestFactory.create<NestFastifyApplication>(
-    AppModule, new FastifyAdapter({ logger: false, bodyLimit: 16384, trustProxy: access.trustedProxies.length ? access.trustedProxies : false }), { abortOnError: false },
+    AppModule, new FastifyAdapter({ logger: false, bodyLimit: REQUEST_BODY_LIMIT_BYTES, trustProxy: access.trustedProxies.length ? access.trustedProxies : false }), { abortOnError: false },
   );
   app.enableShutdownHooks();
   try {

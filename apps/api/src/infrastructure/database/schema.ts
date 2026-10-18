@@ -3,3 +3,5 @@ export { businesses, branches, installationBinding } from '../../modules/busines
 export { staffAccounts, staffCredentials, staffBranchGrants } from '../../modules/authentication/infrastructure/schema.js';
 
 export { accessSessions, accessPrelogins, accessLimits, accessSecurityEvents } from '../../modules/authentication/infrastructure/access-schema.js';
+
+export { menuOfferings, menuVariants, menuReferences } from '../../modules/menu/infrastructure/schema.js';

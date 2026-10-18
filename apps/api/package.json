@@ -12,7 +12,8 @@
     "provision-installation": "node --env-file-if-exists=../../.env dist/operator/provision-installation.js",
     "test:bootstrap": "tsc -p tsconfig.json --outDir dist/ba01-check --sourceMap false && node --test tests/bootstrap.test.mjs",
     "recover-administrator": "node --env-file-if-exists=../../.env dist/operator/recover-administrator.js",
-    "test:access": "tsc -p tsconfig.json --outDir dist/ba02-check --sourceMap false && node --test tests/credentials.test.mjs tests/access.test.mjs tests/access-http.test.mjs tests/recovery.test.mjs"
+    "test:access": "tsc -p tsconfig.json --outDir dist/ba02-check --sourceMap false && node --test tests/credentials.test.mjs tests/access.test.mjs tests/access-http.test.mjs tests/authorized-operation.test.mjs tests/recovery.test.mjs",
+    "test:menu": "tsc -p tsconfig.json --outDir dist/menu-check --sourceMap false && node --test tests/menu.test.mjs tests/menu-http.test.mjs tests/mn01-restart.test.mjs"
   },
   "dependencies": {
     "@nestjs/common": "12.1.2",

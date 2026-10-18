@@ -3,6 +3,12 @@ import { randomUUID } from 'node:crypto';
 import { BusinessService } from '../../business/public.js';
 import { AccessStore, type AccessUnit, type Account, type Session } from './access-store.js';
 import { AccessError, PasswordHasher, token, tokenDigest, digest, sameToken, sessionActive, safeAccount, object, uuid, password, identity, role } from './access-policy.js';
+import type { AuthorizedOperation, AuthorizedPolicy } from './authorized-operation.js';
+
+// Keep consumer failures distinct from access/transaction failures until rollback finishes.
+class CallbackFailure extends Error {
+  constructor(readonly original: unknown) { super('Authorized operation failed'); }
+}
 
 export interface Proof { session?: string; prelogin?: string; csrf?: string }
 export interface SessionResult { sessionToken: string; csrfToken: string; account: ReturnType<typeof safeAccount> }
@@ -70,6 +76,23 @@ export class AccessService {
   }
   async authorize(proof: Proof, admin = false, restricted = false): Promise<void> {
     await this.execute('read', () => this.store.run(async (unit) => { await this.principal(unit, proof, admin, restricted); }));
+  }
+  async runAuthorized<T>(proof: Proof, policy: AuthorizedPolicy, work: AuthorizedOperation<T>): Promise<T> {
+    try {
+      // Fail closed for untyped callers too; an unknown policy must not become staff access.
+      if (policy !== 'staff' && policy !== 'administrator') throw new AccessError(403, 'Access denied');
+      return await this.store.run(async (unit) => {
+        const { session, context } = await this.principal(unit, proof, policy === 'administrator');
+        this.csrf(proof, session.csrfToken);
+        await this.touch(unit, session);
+        try { return await work({ installation: context, transaction: unit.context }); }
+        catch (error) { throw new CallbackFailure(error); }
+      });
+    } catch (error) {
+      // A rollback/commit failure replacing the callback marker is an infrastructure failure.
+      if (error instanceof CallbackFailure) throw error.original;
+      throw error instanceof AccessError ? error : new AccessError(503, 'Service unavailable');
+    }
   }
   async bootstrap(proof: Proof) {
     return this.execute('read', () => this.store.run(async (unit) => {

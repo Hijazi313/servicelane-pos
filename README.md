@@ -1,16 +1,51 @@
 # ServiceLane POS
 
-Backend foundation for a reusable restaurant POS. Development foundation accepted; BA-01 adds schema and operator bootstrap source, accepted on staging. BA-02 source now supplies staff lifecycle, login/sessions, access enforcement and local recovery; database/browser acceptance remains pending. See the [joint tracker](docs/planning/business-access/phase-tracker.md). See the [foundation tracker](docs/planning/project-foundation/phase-tracker.md).
+ServiceLane POS is a restaurant point-of-sale system designed for independent restaurant businesses using one maintained codebase.
 
-## Requirements
+The product is intended to support restaurant operations from menu configuration through ordering, kitchen fulfilment, billing, and reporting. The planned deployment model is one installation per restaurant business, running on its local network with a dedicated PostgreSQL database and locally served client assets.
 
-- Node.js 24.21.0 (recorded in `.node-version`).
-- pnpm 12.11.2 (recorded in `package.json`).
-- A user-managed, dedicated hosted PostgreSQL development database. No local database or Docker setup is provided.
+Restaurant identity, branding, currency, timezone, and fiscal settings belong to business configuration.
 
-Direct package versions were selected from official registry metadata. Runtime compatibility still needs user-run acceptance. Install the pinned Node/pnpm versions using your normal tooling; this repository does not install global tools.
+## Project status
 
-## Setup
+**Active development · Backend API only · Not production-ready**
+
+The backend currently includes:
+
+| Area | Available functionality |
+| --- | --- |
+| Business setup | Business and branch foundation, installation provisioning, and initial administrator setup |
+| Authentication and access | Staff login, sessions, server-enforced permissions, and administrator recovery |
+| Menu catalogue | Catalogue maintenance, selectable sizes, optional extras, configurable combos, and selection pricing |
+
+Business setup, authentication/access, and menu catalogue are accepted under their recorded backend development scopes. Menu integration through PR review and merge remains pending.
+
+The frontend, ordering, kitchen, billing, payments, shifts, inventory, and reporting are planned. Deployment, backup, and recovery validation remain incomplete.
+
+See the [project tracker](docs/planning/TRACKER.md) for the roadmap, current acceptance status, and verification limits.
+
+## Technology stack
+
+| Layer | Technology |
+| --- | --- |
+| Language | TypeScript |
+| API framework | NestJS |
+| Database | PostgreSQL |
+| Database tooling | Drizzle |
+| Runtime | Node.js |
+| Package manager | pnpm |
+
+## Development setup
+
+### Prerequisites
+
+- Node.js **24.21.0**, as specified in [`.node-version`](.node-version).
+- pnpm **12.11.2**, as specified in [`package.json`](package.json).
+- A dedicated, user-managed hosted PostgreSQL development database.
+
+The current development workflow uses hosted PostgreSQL. Local database provisioning and Docker configuration are not included. Install the pinned runtime and package manager using your normal tooling.
+
+### Installation and configuration
 
 From the repository root:
 
@@ -19,51 +54,109 @@ pnpm install --frozen-lockfile --ignore-scripts
 cp .env.example .env
 ```
 
-Edit the ignored `.env` locally. Use a PostgreSQL connection URL with percent-encoded credentials and **no query parameters**. TLS verifies the certificate and hostname by default; use `DATABASE_CA_FILE` when your provider requires its CA certificate. Relative certificate paths are resolved from repository root. For the user-approved staging exception, set `DATABASE_TLS_VERIFY=false` in staging environment configuration. TLS remains encrypted, but the server identity is not verified; this applies to API and migration connections. Keep verification enabled in production. The switch is explicit and is not inferred from `NODE_ENV`; staging can still use `NODE_ENV=production`. Environment variables already set in the shell take precedence over `.env`.
+Configure `.env` using [`.env.example`](.env.example). Provide `DATABASE_URL` and `CLIENT_ORIGIN`, the canonical HTTPS client origin without a trailing slash. Keep credentials out of version control.
 
-For Supabase, use a direct endpoint or a session-mode pooler when direct access is unavailable on your network. Use a direct/session connection for migrations, not a transaction pooler. `MIGRATION_DATABASE_URL` optionally supplies a separate endpoint/role; it defaults to `DATABASE_URL`. Both connections currently use the same optional CA file. A project requiring different CA roots can supply a PEM bundle. Select a dedicated development project and record its actual PostgreSQL version and connection budget. Supabase's other platform services are not dependencies.
+Read the [development configuration guide](docs/development-setup.md) for connection URL requirements, provider endpoints, TLS certificates, and reverse-proxy settings before connecting. Database TLS verifies certificates and hostnames by default.
 
-The API requires a database URL and canonical HTTPS `CLIENT_ORIGIN` even if the database is currently unreachable. It creates its pool lazily; startup does not create databases or apply migrations. BA-02 cleanup runs after 60 seconds only when the application is deliberately started; do not start it under source-only authorization against an unauthorized database.
+### Database setup
 
-## Development watch mode
-
-From repository root, run `pnpm dev`. TypeScript compiles once and watches source changes; after each successful compilation, the API process restarts. Compilation errors prevent a new start. Ctrl-C stops the watcher and API. This uses the same ignored `.env` as `pnpm start`; restart the command after changing environment configuration. Migrations remain explicit and are never run by watch mode.
-
-## User-run commands
-
-Build before starting the API or applying migrations:
+Build the application, then apply the reviewed migrations:
 
 ```sh
 pnpm build
 pnpm db:migrate
+```
+
+**Migrations modify the configured database.** Confirm the intended, authorized development target before running them. Application startup does not apply migrations.
+
+See [migration conventions](apps/api/migrations/README.md) for generation, review, and corrective changes.
+
+### Run the API
+
+For development with compilation and automatic restart:
+
+```sh
+pnpm dev
+```
+
+To run the compiled application after building:
+
+```sh
 pnpm start
 ```
 
-`db:migrate` is an explicit database write: confirm the target first. BA-01 includes the first generated business migration; running `db:migrate` performs database writes; it was verified on authorized staging, and other targets/runs must remain within explicit authorization. When an authorized module adds schema, run `pnpm db:generate` offline, review and commit the generated SQL and metadata, then build and run `pnpm db:migrate`. See [migration conventions](apps/api/migrations/README.md). Recover with reviewed forward corrective migrations; no rollback command is provided.
+The default address is `http://127.0.0.1:3000`. Restart the process after changing environment configuration. Starting the API activates background database cleanup, so use an authorized development target.
 
-Default HTTP binding is `127.0.0.1:3000`. `HOST`, `PORT` and `NODE_ENV` are validated before listening. Invalid configuration exits nonzero with field names rather than secret values. Built-in Nest logging/error handling is used; request-body logging is not enabled.
+### Verify connectivity
 
 ```sh
 curl -i http://127.0.0.1:3000/health
 ```
 
-`GET /health` returns 200 `{"status":"ok"}` when a read-only database query succeeds, or 503 `{"status":"unavailable"}` on failure. Its database operation has a three-second deadline covering pool acquisition and query execution. This is reachability, not migration currency or POS readiness. An unavailable database does not stop HTTP startup. Ctrl-C/SIGTERM closes the server and pool.
+A successful database connectivity check returns HTTP `200`:
 
-See the [acceptance record](docs/acceptance/project-foundation.md) for verified development behavior and deferred migration, TLS and operational checks. Hosted development requires internet and does not establish offline restaurant-LAN operation.
+```json
+{"status":"ok"}
+```
 
-## Structure and next boundary
+The endpoint returns HTTP `503` with `{"status":"unavailable"}` when the database is unavailable. It checks reachability, not migration currency or complete application readiness.
 
-- `apps/api/src/app.module.ts`: Nest composition point.
-- `apps/api/src/infrastructure/`: configuration, injected `DatabaseService` and technical health route.
-- `apps/api/migrations/`: reviewed offline SQL migrations; application remains separately authorized.
-- `docs/`: scope, architecture, specifications and acceptance evidence.
+## Development commands
 
-Future authorized modules may import `DatabaseModule` and inject `DatabaseService`; its `db` exposes Drizzle over the same PostgreSQL pool and is technical infrastructure, not a cross-module repository. Each business module will own its persistence and public interfaces. The approved initial topology is one business per LAN installation with its own database and local client assets; deployment is not implemented.
+Run commands from the repository root.
 
-Business and administrator bootstrap were verified on staging; synthetic records were removed, leaving the migrated tables empty. No frontend, HTTP authentication/sessions, provider SDK, generic repositories or synchronization is included. See the [operator instructions](apps/api/src/operator/README.md), [Business capability index](apps/api/src/modules/business/docs/README.md), [Authentication capability index](apps/api/src/modules/authentication/docs/README.md) and [BA-01 evidence](docs/planning/business-access/phase-tracker.md). See [contribution rules](CONTRIBUTING.md).
+| Command | Description |
+| --- | --- |
+| `pnpm dev` | Watch source files and restart the API after successful compilation |
+| `pnpm build` | Compile the API |
+| `pnpm start` | Run the compiled API |
+| `pnpm test:access` | Run focused database-free authentication and access checks |
+| `pnpm test:menu` | Run focused database-free menu checks |
+| `pnpm db:generate` | Generate migration files for review |
+| `pnpm db:migrate` | Apply migrations to the configured database |
 
-## BA-02 access source
+Provisioning and administrator recovery commands are documented in the [operator guide](apps/api/src/operator/README.md).
 
-New authentication, staff and context routes use `/api/v1`; `/health` retains its technical contract. Set `CLIENT_ORIGIN` to the intended canonical HTTPS origin, without a trailing slash. `TRUSTED_PROXY_ADDRESSES` optionally lists exact reverse-proxy IPs; default is no forwarded-header trust. The API enforces HTTPS protocol/origin/Host and always emits Secure cookies. TLS trust, proxy/asset hosting and browser acceptance require separately authorized deployment work; no login-over-plain-LAN-HTTP mode exists.
+## API overview
 
-`pnpm test:access` runs focused database-free checks. Source-only authorization does not permit `pnpm start`, migration application, provisioning or `pnpm recover-administrator` against staging. See the [Authentication specification](apps/api/src/modules/authentication/docs/features/access/spec.md) for contracts and [operator guide](apps/api/src/operator/README.md) for controlled recovery after separate authorization.
+Business endpoints use the `/api/v1` prefix. The technical health endpoint is available at `/health`.
+
+Authenticated routes require HTTPS and use Secure cookies. The local HTTP listener is intended to sit behind a correctly configured HTTPS reverse proxy; see [HTTPS configuration](docs/development-setup.md#https-and-reverse-proxies).
+
+API contracts are maintained with their owning modules:
+
+- [Business and branch setup](apps/api/src/modules/business/docs/README.md)
+- [Authentication and access](apps/api/src/modules/authentication/docs/README.md)
+- [Menu catalogue](apps/api/src/modules/menu/docs/README.md)
+
+## Repository structure
+
+```text
+apps/api/
+├── src/
+│   ├── infrastructure/   # Configuration, database connectivity, and health
+│   ├── modules/          # Business modules and their documentation
+│   └── operator/         # Provisioning and recovery commands
+└── migrations/           # Database migrations
+
+docs/                     # Scope, architecture, planning, and acceptance
+```
+
+Modules own their business rules, persistence, and public interfaces. Shared infrastructure provides technical capabilities such as configuration and database connectivity.
+
+See the [architecture guide](docs/architecture/README.md) for dependency rules and module boundaries.
+
+## Contributing
+
+Read [CONTRIBUTING.md](CONTRIBUTING.md) before making changes.
+
+The [project scope](docs/project-scope.md) defines delivery boundaries, and the [project tracker](docs/planning/TRACKER.md) identifies active work. Feature specifications and acceptance criteria live alongside their owning modules.
+
+## Further documentation
+
+- [Development configuration](docs/development-setup.md)
+- [Project scope and working policy](docs/project-scope.md)
+- [Roadmap and delivery status](docs/planning/TRACKER.md)
+- [Architecture](docs/architecture/README.md)
+- [Operational procedures](apps/api/src/operator/README.md)
+- [Compliance guidance](docs/compliance/README.md)

@@ -1,0 +1,164 @@
+{
+  "tag": "mn01.50780479-e373-4388-ba18-3ec6da8e4f20",
+  "startedAt": "2026-10-18T09:31:01.394Z",
+  "authorization": "manual opt-in; operator must retain separate execution approval",
+  "runtime": "v24.21.0",
+  "gate": "passed",
+  "results": [
+    {
+      "id": "M01",
+      "result": "passed"
+    },
+    {
+      "id": "P01",
+      "result": "passed"
+    },
+    {
+      "id": "R01",
+      "result": "passed"
+    },
+    {
+      "id": "C01",
+      "result": "passed"
+    },
+    {
+      "id": "C02",
+      "result": "passed"
+    },
+    {
+      "id": "C03",
+      "result": "passed"
+    },
+    {
+      "id": "C04",
+      "result": "passed"
+    },
+    {
+      "id": "P02",
+      "result": "passed"
+    }
+  ],
+  "cleanup": "passed",
+  "maximumConnections": 2,
+  "tlsVerified": false,
+  "source": [
+    {
+      "path": "apps/api/tests/mn01-acceptance.mjs",
+      "sha256": "9550fb9d09a93a21aa337c6eafc407bad2adc0a17265e389ac3a80b6999f6d25"
+    },
+    {
+      "path": "apps/api/tests/mn01-restart.mjs",
+      "sha256": "292d73a69246aa6a23531f0c63b9e1a1b748b57463c4283ec7d1180189ae0e18"
+    },
+    {
+      "path": "apps/api/migrations/meta/_journal.json",
+      "sha256": "b80dd721bc2007cd143435bafcf6d708aced2f0e2df4286d42974c3c1a4844a3"
+    },
+    {
+      "path": "apps/api/migrations/0000_business_bootstrap.sql",
+      "sha256": "0a8a058d3a4038eb4d9ffb3ceda3037f0fabcbe6c39b62f95b9b7004b2659f97"
+    },
+    {
+      "path": "apps/api/migrations/0001_staff_access.sql",
+      "sha256": "f70af5681eca5b98fb0eb080f779127f45c26314ed309a9fe495c908b0c304da"
+    },
+    {
+      "path": "apps/api/migrations/0002_login_reservations.sql",
+      "sha256": "abafdd843017daa4962559f8e53734d4a0ded51803a75991640864a2feec5c28"
+    },
+    {
+      "path": "apps/api/migrations/0003_menu_catalogue.sql",
+      "sha256": "34532984e10d5286dcf0c4104eadca1efdf738ff30e48afb2ccdab48f6900017"
+    },
+    {
+      "path": "apps/api/src/modules/menu/application/menu.service.ts",
+      "sha256": "8653a6e5cb33c4e79c8a3ff9ddb989a82823ad93c7bec963fc75ab2e1ec94be4"
+    },
+    {
+      "path": "apps/api/dist/menu-check/modules/menu/application/menu.service.js",
+      "sha256": "e60b31963c7fe73e2e526ed9d06cb76051553a33d7fccb71017671fffae87ba7"
+    },
+    {
+      "path": "apps/api/src/modules/menu/infrastructure/menu-store.ts",
+      "sha256": "661660b3329751e08c4e3f5709c70802c73540d2adc77173b8e4116ac0a5cb40"
+    },
+    {
+      "path": "apps/api/dist/menu-check/modules/menu/infrastructure/menu-store.js",
+      "sha256": "74455f1f7ac82068abb1a52ff401f1c903137ce169fe0c37e5bf721fc3e74eb8"
+    },
+    {
+      "path": "apps/api/src/modules/menu/domain/catalogue.ts",
+      "sha256": "c12a6b50c15a5d01bfd22862aa6001ea5582f5c52aae3928c69054f68310f904"
+    },
+    {
+      "path": "apps/api/dist/menu-check/modules/menu/domain/catalogue.js",
+      "sha256": "05bac48c5772b9e82eb5e1529c537fe6570fa17666edc3bfa18029bf100be81f"
+    },
+    {
+      "path": "apps/api/src/modules/authentication/application/access.service.ts",
+      "sha256": "28a8d7d02bf620ce642fe9a325c1bc2753c4605a2f95607600cf10c336953e2f"
+    },
+    {
+      "path": "apps/api/dist/menu-check/modules/authentication/application/access.service.js",
+      "sha256": "0b0e76db85ae71717d8a0ade46c46cb3e4a64f52a3ddd711dd43da078952fbb0"
+    },
+    {
+      "path": "apps/api/src/modules/authentication/infrastructure/access-store.ts",
+      "sha256": "32582733f9c0080b24bbd3fe0f43eb94288b7073fb45e9952d48b35b4ada78e1"
+    },
+    {
+      "path": "apps/api/dist/menu-check/modules/authentication/infrastructure/access-store.js",
+      "sha256": "968f753ea7856deaeff7a7869353fd32161e95680285d40466f63183d6b58ac5"
+    },
+    {
+      "path": "apps/api/src/modules/business/infrastructure/business.service.ts",
+      "sha256": "07d5ef82c9de0bd68536cd30f52f566509efa6f679af83156dedee296816888d"
+    },
+    {
+      "path": "apps/api/dist/menu-check/modules/business/infrastructure/business.service.js",
+      "sha256": "74599e1baf6fa5e0292dde6a85eada23b40529cf925df2865907c98ee2999e6d"
+    },
+    {
+      "path": "apps/api/src/infrastructure/database/transaction.ts",
+      "sha256": "1bafa848bce0a0d34870a25ec4ccd5768fa0bebc93e8046962565366fa4feb3a"
+    },
+    {
+      "path": "apps/api/dist/menu-check/infrastructure/database/transaction.js",
+      "sha256": "a26c94f6e8a77a975fb793ec0ee1fbb0ebc48bdfb9c856600e651619381a0f3e"
+    }
+  ],
+  "targetFingerprint": "1b55f59a1b8c467c8b070c0eebe59012c54e7393fb54a2b5e0b438a2be492437",
+  "serverVersion": "17.11",
+  "baseline": {
+    "access_limits": 0,
+    "access_prelogins": 0,
+    "access_security_events": 0,
+    "access_sessions": 0,
+    "branches": 0,
+    "businesses": 0,
+    "installation_binding": 0,
+    "staff_accounts": 0,
+    "staff_branch_grants": 0,
+    "staff_credentials": 0
+  },
+  "migrationCount": 3,
+  "secondBackendPid": 673627,
+  "migration": "passed",
+  "restartProcesses": 2,
+  "afterCleanup": {
+    "access_limits": 0,
+    "access_prelogins": 0,
+    "access_security_events": 0,
+    "access_sessions": 0,
+    "branches": 0,
+    "businesses": 0,
+    "installation_binding": 0,
+    "staff_accounts": 0,
+    "staff_branch_grants": 0,
+    "staff_credentials": 0,
+    "menu_offerings": 0,
+    "menu_references": 0,
+    "menu_variants": 0
+  },
+  "finishedAt": "2026-10-18T09:32:57.708Z"
+}

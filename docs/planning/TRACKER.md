@@ -4,15 +4,15 @@
 
 - Stage: Foundation F-01 remains complete; [acceptance and evidence limits](project-foundation/phase-tracker.md#closeout--2026-10-12).
 - Approved topology: one business per LAN installation, dedicated local PostgreSQL, locally served client assets and one maintained codebase; explicit user approval on 2026-10-12. [Decision and rationale](../architecture/vendor-isolation-proposal.md).
-- Current activity: BA-01 closed after authorized staging acceptance on 2026-10-12; BA-02 is complete and user-accepted on 2026-10-17 under revised development scope. [Owning tracker](business-access/phase-tracker.md), [Business/Branch spec](../../apps/api/src/modules/business/docs/features/foundation/spec.md), [Authentication/Access spec](../../apps/api/src/modules/authentication/docs/features/access/spec.md).
+- Current activity: MN-01 backend development scope explicitly user-accepted and locally complete on 2026-10-19. [Closeout/integration review](../../apps/api/src/modules/menu/docs/features/catalogue/phase-tracker.md#mn-01-acceptance-and-integration-review--2026-10-19). [PR #9](https://github.com/Hijazi313/servicelane-pos/pull/9) is open after normal topic push; merge requires separate explicit permission. Orders remains on hold; no database access/rerun or deployment.
 - Current phase: BA-01 complete; BA-02 complete under [user acceptance](business-access/phase-tracker.md#ba-02-acceptance--2026-10-17); BA-D01–06 approved; BA-03-T01 complete and [user-accepted](business-access/phase-tracker.md#ba-03-acceptance-and-closeout--2026-10-17) under its revised development scope; two-database execution deferred, unrun.
 - Deferred validation remains in the [canonical foundation handoff](project-foundation/phase-tracker.md#current-handoff--2026-10-12) and [acceptance record](../acceptance/project-foundation.md).
 
-## Current planning handoff — 2026-10-12
+## Current planning handoff — 2026-10-18
 
-User approved the topology and subsequently authorized BA-01-T01/T02 implementation with BA-D01/BA-D02/BA-D05. Authorization, task IDs, evidence and checkout cautions are owned by the [joint phase tracker](business-access/phase-tracker.md#ba-01-authorization--2026-10-12). Historical BA-01 installation permission was not needed; BA-02 installation is prohibited. Subsequent user-authorized staging writes/migration acceptance completed successfully; [BA-01 closeout](business-access/phase-tracker.md#closeout--2026-10-12) records evidence. BA-02 source is authorized under its own record; database execution is limited to the separately recorded 2026-10-17 staging verification authorization; infrastructure provisioning/deployment and BA-03 remain unauthorized.
+BA-01/02/03 accepted development scope and historical execution permissions are owned by the [joint BA tracker](business-access/phase-tracker.md). They do not authorize new Menu or database work.
 
-Current handoff: [BA-03 accepted and closed](business-access/phase-tracker.md#ba-03-acceptance-and-closeout--2026-10-17) by explicit user instruction on 2026-10-17. Accepted development evidence and its limits are retained; actual two-database execution is deferred, unrun, to separately authorized installation/provisioning validation. BA-02's separate release checks remain unchanged. Current authorization: complete BA-03 Git flow only. Next module planning will happen in a new chat; no Menu plan or implementation is included. No new test execution, database access, infrastructure or deployment. Preserve historical evidence.
+Current handoff: BA-03, MN-00 and MN-01 remain accepted under their recorded development limits. MN-01 local closeout/integration review is complete; [PR #9](https://github.com/Hijazi313/servicelane-pos/pull/9) is open against verified `main`. Stop for PR review and explicit merge authorization. Orders is on hold until integration completes. [Owning closeout](../../apps/api/src/modules/menu/docs/features/catalogue/phase-tracker.md#mn-01-acceptance-and-integration-review--2026-10-19) preserves evidence, release limits, incident reviews and the excluded local ledger.
 
 ## Proposed foundation follow-ups — 2026-10-12
 
@@ -33,7 +33,7 @@ Project foundation precedes Business/Branch and Authentication/Access, which pre
 | 0 | Project foundation | complete | [Specification](project-foundation/spec.md) / [phase tracker](project-foundation/phase-tracker.md); development foundation accepted; limits recorded |
 | 1 | Business/Branch foundation | complete; development scope | [Specification; BA-01 slice approved](../../apps/api/src/modules/business/docs/features/foundation/spec.md) / [joint tracker](business-access/phase-tracker.md); BA-01 accepted on staging; BA-02/BA-03 accepted under revised development scope; release verification deferred |
 | 2 | Authentication and Access | complete; development scope | [Specification; BA-01 slice approved](../../apps/api/src/modules/authentication/docs/features/access/spec.md) / [joint tracker](business-access/phase-tracker.md); BA-01 accepted on staging; BA-02/BA-03 accepted under revised development scope; release verification deferred |
-| 3 | Menu | proposed | Follows accepted foundation; plan pending |
+| 3 | Menu | complete development scope; integration pending | [MN-00 → MN-01 plan](../../apps/api/src/modules/menu/docs/README.md); MN-00/MN-01 accepted; PR review/merge pending |
 | 4 | Orders | proposed | Not activated |
 | 5 | Kitchen | proposed | Not activated |
 | 6 | Billing and payments | proposed | Not activated |
