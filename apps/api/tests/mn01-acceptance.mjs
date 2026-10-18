@@ -32,11 +32,12 @@ const ledger = { tag, accountId: randomUUID(), sessionDigests: [], setupAttempte
 const saveLedger = () => writeFile(ledgerPath, JSON.stringify(ledger, null, 2)+'\n', { mode: 0o600 });
 const sourcePaths = [
   'apps/api/tests/mn01-acceptance.mjs', 'apps/api/tests/mn01-restart.mjs',
+  'apps/api/tests/mn01-restart-operation.mjs',
   'apps/api/migrations/meta/_journal.json',
   ...['0000_business_bootstrap','0001_staff_access','0002_login_reservations','0003_menu_catalogue'].map(x=>`apps/api/migrations/${x}.sql`),
   ...['modules/menu/application/menu.service','modules/menu/infrastructure/menu-store','modules/menu/domain/catalogue',
       'modules/authentication/application/access.service','modules/authentication/infrastructure/access-store',
-      'modules/business/infrastructure/business.service','infrastructure/database/transaction'].flatMap(x=>[
+      'modules/business/infrastructure/business.service','infrastructure/database/transaction','infrastructure/request-limits'].flatMap(x=>[
         `apps/api/src/${x}.ts`, `apps/api/dist/menu-check/${x}.js`]),
 ];
 for (const path of sourcePaths) report.source.push({ path, sha256: hash(await readFile(resolve(root,path))) });
