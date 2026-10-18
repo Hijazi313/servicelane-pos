@@ -4,7 +4,7 @@
 
 - Stage: Foundation F-01 remains complete; [acceptance and evidence limits](project-foundation/phase-tracker.md#closeout--2026-10-12).
 - Approved topology: one business per LAN installation, dedicated local PostgreSQL, locally served client assets and one maintained codebase; explicit user approval on 2026-10-12. [Decision and rationale](../architecture/vendor-isolation-proposal.md).
-- Current activity: MN-01 backend development scope explicitly user-accepted and locally complete on 2026-10-19. [Closeout/integration review](../../apps/api/src/modules/menu/docs/features/catalogue/phase-tracker.md#mn-01-acceptance-and-integration-review--2026-10-19). Topic push/PR authorized; merge requires separate explicit permission. Orders remains on hold; no database access/rerun or deployment.
+- Current activity: MN-01 backend development scope explicitly user-accepted and locally complete on 2026-10-19. [Closeout/integration review](../../apps/api/src/modules/menu/docs/features/catalogue/phase-tracker.md#mn-01-acceptance-and-integration-review--2026-10-19). [PR #9](https://github.com/Hijazi313/servicelane-pos/pull/9) is open after normal topic push; merge requires separate explicit permission. Orders remains on hold; no database access/rerun or deployment.
 - Current phase: BA-01 complete; BA-02 complete under [user acceptance](business-access/phase-tracker.md#ba-02-acceptance--2026-10-17); BA-D01–06 approved; BA-03-T01 complete and [user-accepted](business-access/phase-tracker.md#ba-03-acceptance-and-closeout--2026-10-17) under its revised development scope; two-database execution deferred, unrun.
 - Deferred validation remains in the [canonical foundation handoff](project-foundation/phase-tracker.md#current-handoff--2026-10-12) and [acceptance record](../acceptance/project-foundation.md).
 
@@ -12,7 +12,7 @@
 
 BA-01/02/03 accepted development scope and historical execution permissions are owned by the [joint BA tracker](business-access/phase-tracker.md). They do not authorize new Menu or database work.
 
-Current handoff: BA-03, MN-00 and MN-01 remain accepted under their recorded development limits. MN-01 local closeout/integration review is complete; create/reuse the Menu PR against verified `main`, then stop for review and explicit merge authorization. Orders is on hold until integration completes. [Owning closeout](../../apps/api/src/modules/menu/docs/features/catalogue/phase-tracker.md#mn-01-acceptance-and-integration-review--2026-10-19) preserves evidence, release limits, incident reviews and the excluded local ledger.
+Current handoff: BA-03, MN-00 and MN-01 remain accepted under their recorded development limits. MN-01 local closeout/integration review is complete; [PR #9](https://github.com/Hijazi313/servicelane-pos/pull/9) is open against verified `main`. Stop for PR review and explicit merge authorization. Orders is on hold until integration completes. [Owning closeout](../../apps/api/src/modules/menu/docs/features/catalogue/phase-tracker.md#mn-01-acceptance-and-integration-review--2026-10-19) preserves evidence, release limits, incident reviews and the excluded local ledger.
 
 ## Proposed foundation follow-ups — 2026-10-12
 
