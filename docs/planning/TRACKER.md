@@ -4,7 +4,7 @@
 
 - Stage: Foundation F-01 remains complete; [acceptance and evidence limits](project-foundation/phase-tracker.md#closeout--2026-10-12).
 - Approved topology: one business per LAN installation, dedicated local PostgreSQL, locally served client assets and one maintained codebase; explicit user approval on 2026-10-12. [Decision and rationale](../architecture/vendor-isolation-proposal.md).
-- Current activity: MN-00 accepted; MN-01 source/offline and bounded PostgreSQL evidence delivered. Narrow harness repair committed; the single authorized run and owned cleanup passed. [Latest results and next decision](../../apps/api/src/modules/menu/docs/features/catalogue/phase-tracker.md#database-execution-result--2026-10-18). Migration 0003 retained; all thirteen application tables verified empty. MN-01 active/unaccepted. Execution permission consumed; no installation, provisioning, deployment, push/PR/merge.
+- Current activity: MN-01 active/unaccepted. Prior bounded database cases/cleanup passed, but subsequent [critical review](../../apps/api/src/modules/menu/docs/features/catalogue/phase-tracker.md#critical-review--2026-10-18) found a create/edit payload-size defect and a restart-probe failure-signal gap. Acceptance readiness is on hold pending narrow fixes; historical evidence preserved. No further database execution, installation, provisioning, deployment, push/PR/merge.
 - Current phase: BA-01 complete; BA-02 complete under [user acceptance](business-access/phase-tracker.md#ba-02-acceptance--2026-10-17); BA-D01–06 approved; BA-03-T01 complete and [user-accepted](business-access/phase-tracker.md#ba-03-acceptance-and-closeout--2026-10-17) under its revised development scope; two-database execution deferred, unrun.
 - Deferred validation remains in the [canonical foundation handoff](project-foundation/phase-tracker.md#current-handoff--2026-10-12) and [acceptance record](../acceptance/project-foundation.md).
 
@@ -12,7 +12,7 @@
 
 BA-01/02/03 accepted development scope and historical execution permissions are owned by the [joint BA tracker](business-access/phase-tracker.md). They do not authorize new Menu or database work.
 
-Current handoff: BA-03 and MN-00 remain accepted. MN-01 remains active/unaccepted after its repaired harness passed the one authorized bounded database run and cleanup. [Owning results/assessment](../../apps/api/src/modules/menu/docs/features/catalogue/phase-tracker.md#database-execution-result--2026-10-18) finds sufficient combined offline/database evidence for MN-AC01–05 under the reviewed development limits; explicit user acceptance (AC06) is next. Only migration 0003 was added and retained; all thirteen tables were empty afterward. Sanitized report retained, ledger local/untracked. No further database run or adjacent module work inferred; no push/PR/merge.
+Current handoff: BA-03 and MN-00 remain accepted. MN-01 remains active/unaccepted. [Latest critical review](../../apps/api/src/modules/menu/docs/features/catalogue/phase-tracker.md#critical-review--2026-10-18) supersedes the earlier recommendation to accept MN-01: authorize narrow create/edit payload-size and restart-probe error-signal fixes with focused offline regressions next. Production public Business/Authentication reuse was reviewed against the capability indexes; no duplicate production authorization or wrong public API was established. Prior passing database observations/cleanup remain preserved; ledger local/untracked. Review made no production edits or database calls.
 
 ## Proposed foundation follow-ups — 2026-10-12
 
