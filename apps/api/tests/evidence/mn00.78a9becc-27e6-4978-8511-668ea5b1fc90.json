@@ -1,0 +1,88 @@
+{
+  "tag": "mn00.78a9becc-27e6-4978-8511-668ea5b1fc90",
+  "startedAt": "2026-10-18T07:22:17.788Z",
+  "authorizationDate": "2026-10-18",
+  "runtime": "v24.21.0",
+  "gate": "passed",
+  "results": [
+    {
+      "id": "V01",
+      "result": "passed"
+    }
+  ],
+  "cleanup": "passed",
+  "maximumConnections": 2,
+  "tlsVerified": false,
+  "source": [
+    {
+      "path": "apps/api/src/modules/authentication/application/access.service.ts",
+      "sha256": "28a8d7d02bf620ce642fe9a325c1bc2753c4605a2f95607600cf10c336953e2f"
+    },
+    {
+      "path": "apps/api/src/modules/authentication/application/authorized-operation.ts",
+      "sha256": "b761331b59605e4b6c39d43047fbf84ace0c2f476e6833b4be3111af08a3a4ad"
+    },
+    {
+      "path": "apps/api/src/modules/authentication/application/access-policy.ts",
+      "sha256": "96b664a8c7a9a25a22ac5c8351c0a14bfa0092f38df7040a3e09354b813f5e1b"
+    },
+    {
+      "path": "apps/api/src/modules/authentication/infrastructure/access-store.ts",
+      "sha256": "32582733f9c0080b24bbd3fe0f43eb94288b7073fb45e9952d48b35b4ada78e1"
+    },
+    {
+      "path": "apps/api/src/modules/authentication/infrastructure/schema.ts",
+      "sha256": "7386ad05a8857f01acb8a3b04c3533dafcd1959196f8351d42fa24f930207870"
+    },
+    {
+      "path": "apps/api/src/modules/authentication/infrastructure/access-schema.ts",
+      "sha256": "2d1c3ba77d0b1668130ad7f88defcf3d932287da6a0b32bad2955f3d7117bbda"
+    },
+    {
+      "path": "apps/api/src/modules/business/infrastructure/business.service.ts",
+      "sha256": "07d5ef82c9de0bd68536cd30f52f566509efa6f679af83156dedee296816888d"
+    },
+    {
+      "path": "apps/api/src/infrastructure/database/transaction.ts",
+      "sha256": "1bafa848bce0a0d34870a25ec4ccd5768fa0bebc93e8046962565366fa4feb3a"
+    },
+    {
+      "path": "apps/api/tests/mn00-acceptance.mjs",
+      "sha256": "c0b059d863445269d0262a8a90a2575af64579f65f75207571d6bf824c08d090"
+    }
+  ],
+  "targetFingerprint": "1b55f59a1b8c467c8b070c0eebe59012c54e7393fb54a2b5e0b438a2be492437",
+  "serverVersion": "17.11",
+  "baseline": {
+    "access_limits": 0,
+    "access_prelogins": 0,
+    "access_security_events": 0,
+    "access_sessions": 0,
+    "branches": 0,
+    "businesses": 0,
+    "installation_binding": 0,
+    "staff_accounts": 0,
+    "staff_branch_grants": 0,
+    "staff_credentials": 0
+  },
+  "migrationCount": 3,
+  "secondBackendPid": 664461,
+  "lockContentionObserved": true,
+  "failure": {
+    "stage": "V02-write-probe",
+    "category": "sanitized-operation-failure"
+  },
+  "afterCleanup": {
+    "access_limits": 0,
+    "access_prelogins": 0,
+    "access_security_events": 0,
+    "access_sessions": 0,
+    "branches": 0,
+    "businesses": 0,
+    "installation_binding": 0,
+    "staff_accounts": 0,
+    "staff_branch_grants": 0,
+    "staff_credentials": 0
+  },
+  "finishedAt": "2026-10-18T07:22:37.176Z"
+}

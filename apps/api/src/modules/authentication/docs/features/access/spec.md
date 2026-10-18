@@ -142,3 +142,40 @@ All authentication persistence operations share one fixed installation-local adv
 The offline `0001_staff_access.sql` migration adds Authentication-owned session, pre-login, throttle and event tables only. It is not applied under source authorization. Shared-worker/restart guarantees depend on actual PostgreSQL acceptance, not serialized test doubles. Existing BA-01 migration/application evidence is preserved and does not establish BA-02 runtime behavior.
 
 The forward offline `0002_login_reservations.sql` migration adds the bounded `pending_ids` UUID array to account throttle rows; source counters cannot retain pending IDs. Login success settles its own reservation atomically with session creation and preserves other in-flight attempts. Failure settlement is idempotent, including a repeated cleanup after an uncertain commit response; absent/expired/replaced reservations cannot modify a new window. No automatic migration or runtime acceptance is implied.
+
+## MN-00 — Transactional module authorization
+
+MN-00 source extension, user-accepted on 2026-10-18 under its recorded development scope. Existing BA acceptance and deferred release evidence remain unchanged. [Executed acceptance procedure](mn00-acceptance.md) and its scoped report establish the bounded evidence; this capability adds no Menu runtime by itself.
+
+### Outcome and reuse
+
+Provide a supported application operation for authorized module writes without duplicating identity/access rules. Existing authorization is fixed-role RBAC (`administrator`, `staff`) combined with installation/business scope, explicit current-branch grants, account/session state and forced-password-change restrictions. Menu action permissions must be explicit in its own specification; an administrator role does not implicitly authorize every future module.
+
+Source inspection on 2026-10-18:
+
+| Existing capability | Suitability / gap |
+| --- | --- |
+| [AccessService](../../../application/access.service.ts) via [public interface](../../../public.ts) | `authorize()` and `me(proof, true)` keep their existing separate-transaction semantics. New `runAuthorized()` reuses the private principal and session-CSRF checks inside the consumer-write transaction. |
+| [HTTP guard](../../../http/access-boundary.guard.ts) / [exception filter](../../../http/access-exception.filter.ts) / [composition](../../../http/access-http.module.ts) | Global guard/filter already enforce route policy, origin/host/protocol and sanitized responses. Policy/proof helpers are now supported through [http/public.ts](../../../http/public.ts); the guard alone does not validate mutation CSRF. |
+| [AccessStore](../../../infrastructure/access-store.ts) / [opaque transactions](../../../../../infrastructure/database/transaction.ts) | Existing fixed installation-local advisory lock serializes access transactions. Retain it throughout the callback; opaque scope is invalidated afterward. |
+| [Business public interface](../../../../business/public.ts) | Resolves validated installation context and current branch ownership within the opaque transaction; does not authenticate staff. |
+
+### Source contract and boundaries
+
+- `AccessService.runAuthorized<T>(proof: Proof, policy: AuthorizedPolicy, work: AuthorizedOperation<T>): Promise<T>` is exported through Authentication `public.ts`, with `AuthorizedPolicy = staff | administrator` and `AuthorizedOperation<T> = (scope: AuthorizedScope) => Promise<T>`. Scope is `{ installation: InstallationContext, transaction: TransactionContext }`; unknown runtime policies fail closed. Authentication validates proof, current role/grant/status/password restrictions and session-bound CSRF, touches session activity in the same transaction, then invokes a bounded consumer callback with trusted business/branch configuration and the active opaque transaction context. It returns the callback's safe application result. No session secrets, account credentials, AccessUnit or query builders cross the boundary.
+- Reuse existing access policy and lock. Order: access lock → authority/context/CSRF checks → consumer validation/writes → commit. A revocation committed first denies the callback; a callback admitted first may finish before the waiting revocation. Requests starting after revocation cannot regain authority.
+- A private callback-failure marker traverses transaction rollback; afterward the original consumer error is rethrown unchanged so its owning HTTP boundary can map domain failures to standard Nest exceptions. Existing filtering sanitizes `BadRequestException` to 400/Invalid input, `ConflictException` to 409/Conflict, and arbitrary errors to 503/Service unavailable. Access failures retain existing status/message; other transaction/commit/rollback failures normalize to AccessError 503. If rollback replaces the callback error, the infrastructure failure takes precedence. Scoped rollback evidence is recorded in the acceptance procedure; the callback must not catch-and-return a failure after performing writes.
+- Callbacks perform bounded database work only: no network, hashing, nested transactions, re-entry into Authentication operations that acquire the lock, or additional connections. Authentication owns account/session access; the consumer owns its data. Business is accessed through its public interface. This does not authorize a generic permission framework or shared repository.
+- The supported [http/public.ts](../../../http/public.ts) exports `AccessEntry`, `proof` and `AccessRequest`. Existing `AccessService` Nest provider export is unchanged; types are declared in [authorized-operation.ts](../../../application/authorized-operation.ts). Reuse the existing global guard/filter; no second guard stack, cookie parser, login route or permission designer. No production probe route or Menu implementation belongs to MN-00.
+
+### MN-00 acceptance
+
+| ID | Observable pass condition | Required evidence |
+| --- | --- | --- |
+| MN00-AC01 | Invalid/missing/expired/revoked/disabled/forced-change authority, wrong role/grant, bad CSRF and invalid binding never invoke the callback | Focused seam checks with controlled access fixtures; preserve existing generic failures |
+| MN00-AC02 | An authorized call receives correct trusted business/branch scope and one active opaque transaction, with no secrets or persistence internals exposed | Contract/source checks and focused callback harness |
+| MN00-AC03 | Controlled revocation-before-call denies work; call-before-revocation finishes in the specified order | Focused real-transaction observation on one separately authorized disposable target; doubles alone cannot establish database ordering |
+| MN00-AC04 | Callback failure leaves its transactional writes uncommitted; retained opaque context cannot be used after success or failure | Focused rollback/lifetime checks; actual rollback requires separately authorized database execution |
+| MN00-AC05 | Shared HTTP policy/proof/error behavior remains usable through supported exports; selected existing login/staff regression checks pass | Source composition and focused existing-tooling checks; no full BA rerun or new public probe route |
+
+Exit requires these results within the agreed evidence scope and explicit user development acceptance. Source permission, database-backed execution and development acceptance are separate gates recorded by the acceptance procedure. MN-00 adds no usable Menu catalogue by itself.

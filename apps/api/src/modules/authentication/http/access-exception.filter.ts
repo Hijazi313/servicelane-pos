@@ -19,7 +19,7 @@ export class AccessExceptionFilter implements ExceptionFilter {
       }
     }
     const status = error instanceof HttpException ? error.getStatus() : 503;
-    const message = status === 404 ? 'Resource not found' : status === 400 ? 'Invalid input' : status === 413 ? 'Request too large' : 'Service unavailable';
+    const message = status === 404 ? 'Resource not found' : status === 400 ? 'Invalid input' : status === 409 ? 'Conflict' : status === 413 ? 'Request too large' : 'Service unavailable';
     reply.header('Cache-Control', 'no-store').status(status).send({ statusCode: status, message });
   }
 }
