@@ -4,7 +4,7 @@
 
 - Stage: Foundation F-01 remains complete; [acceptance and evidence limits](project-foundation/phase-tracker.md#closeout--2026-10-12).
 - Approved topology: one business per LAN installation, dedicated local PostgreSQL, locally served client assets and one maintained codebase; explicit user approval on 2026-10-12. [Decision and rationale](../architecture/vendor-isolation-proposal.md).
-- Current activity: MN-00 accepted; MN-01 source/offline evidence and bounded acceptance preparation delivered. The session-loop blocker is narrowly repaired/offline-validated under renewed one-run execution authorization; [current work and gates](../../apps/api/src/modules/menu/docs/features/catalogue/phase-tracker.md#harness-repair-and-renewed-execution--2026-10-18). Database acceptance remains unrun pending the repair checkpoint and fresh compilation. Local checkpoints authorized; no installation, provisioning, deployment, push/PR/merge.
+- Current activity: MN-00 accepted; MN-01 source/offline and bounded PostgreSQL evidence delivered. Narrow harness repair committed; the single authorized run and owned cleanup passed. [Latest results and next decision](../../apps/api/src/modules/menu/docs/features/catalogue/phase-tracker.md#database-execution-result--2026-10-18). Migration 0003 retained; all thirteen application tables verified empty. MN-01 active/unaccepted. Execution permission consumed; no installation, provisioning, deployment, push/PR/merge.
 - Current phase: BA-01 complete; BA-02 complete under [user acceptance](business-access/phase-tracker.md#ba-02-acceptance--2026-10-17); BA-D01–06 approved; BA-03-T01 complete and [user-accepted](business-access/phase-tracker.md#ba-03-acceptance-and-closeout--2026-10-17) under its revised development scope; two-database execution deferred, unrun.
 - Deferred validation remains in the [canonical foundation handoff](project-foundation/phase-tracker.md#current-handoff--2026-10-12) and [acceptance record](../acceptance/project-foundation.md).
 
@@ -12,7 +12,7 @@
 
 BA-01/02/03 accepted development scope and historical execution permissions are owned by the [joint BA tracker](business-access/phase-tracker.md). They do not authorize new Menu or database work.
 
-Current handoff: BA-03 and MN-00 remain accepted. MN-01 remains active/unaccepted. User authorized the narrow fixture-session correction, focused offline validation, local repair checkpoint and renewed execution of the existing bounded procedure once. [Owning tracker](../../apps/api/src/modules/menu/docs/features/catalogue/phase-tracker.md#harness-repair-and-renewed-execution--2026-10-18) records the repair and unchanged stop gates. Next: freshly compile and execute after the repair checkpoint. No database contact during repair; historical reports remain preserved. Reused clean `codex/menu-catalogue` at `8f3a288`; no unrelated work.
+Current handoff: BA-03 and MN-00 remain accepted. MN-01 remains active/unaccepted after its repaired harness passed the one authorized bounded database run and cleanup. [Owning results/assessment](../../apps/api/src/modules/menu/docs/features/catalogue/phase-tracker.md#database-execution-result--2026-10-18) finds sufficient combined offline/database evidence for MN-AC01–05 under the reviewed development limits; explicit user acceptance (AC06) is next. Only migration 0003 was added and retained; all thirteen tables were empty afterward. Sanitized report retained, ledger local/untracked. No further database run or adjacent module work inferred; no push/PR/merge.
 
 ## Proposed foundation follow-ups — 2026-10-12
 
@@ -33,7 +33,7 @@ Project foundation precedes Business/Branch and Authentication/Access, which pre
 | 0 | Project foundation | complete | [Specification](project-foundation/spec.md) / [phase tracker](project-foundation/phase-tracker.md); development foundation accepted; limits recorded |
 | 1 | Business/Branch foundation | complete; development scope | [Specification; BA-01 slice approved](../../apps/api/src/modules/business/docs/features/foundation/spec.md) / [joint tracker](business-access/phase-tracker.md); BA-01 accepted on staging; BA-02/BA-03 accepted under revised development scope; release verification deferred |
 | 2 | Authentication and Access | complete; development scope | [Specification; BA-01 slice approved](../../apps/api/src/modules/authentication/docs/features/access/spec.md) / [joint tracker](business-access/phase-tracker.md); BA-01 accepted on staging; BA-02/BA-03 accepted under revised development scope; release verification deferred |
-| 3 | Menu | active; source delivered | [MN-00 → MN-01 plan](../../apps/api/src/modules/menu/docs/README.md); MN-00 accepted; MN-01 focused offline checks pass; database/user acceptance pending |
+| 3 | Menu | active; evidence delivered | [MN-00 → MN-01 plan](../../apps/api/src/modules/menu/docs/README.md); MN-00 accepted; MN-01 offline/bounded database checks pass; user acceptance pending |
 | 4 | Orders | proposed | Not activated |
 | 5 | Kitchen | proposed | Not activated |
 | 6 | Billing and payments | proposed | Not activated |

@@ -8,11 +8,11 @@ Maintain business-owned items, sizes, optional extras and fixed/selectable combo
 
 ## Public capabilities
 
-Source capabilities are implemented; HTTP injection/offline rule evidence does not establish PostgreSQL availability. See the tracker for unapplied migration and acceptance limits.
+Source capabilities have focused offline and bounded PostgreSQL evidence; migration 0003 is applied on the authorized disposable test target. See the tracker for passing cleanup, remaining evidence limits and pending user acceptance.
 
 | Capability | Public entry point | Purpose | Important constraints |
 | --- | --- | --- | --- |
-| Catalogue maintenance | [MenuController](../http/menu.controller.ts) (`POST/PUT /api/v1/menu/offerings`, deactivate) | Maintain item/size/extra/combo definitions | Administrator + MN-00 session/CSRF; business scoped, per-offering revision; complete definition writes; unapplied schema |
+| Catalogue maintenance | [MenuController](../http/menu.controller.ts) (`POST/PUT /api/v1/menu/offerings`, deactivate) | Maintain item/size/extra/combo definitions | Administrator + MN-00 session/CSRF; business scoped, per-offering revision; complete definition writes; schema verified on disposable test target only |
 | Active catalogue read | [MenuController](../http/menu.controller.ts) (`GET /offerings`) | List saleable offerings and choices | Authorized current-branch staff/admin; inactive variants/options filtered; one business snapshot |
 | Definition inspection | [MenuController](../http/menu.controller.ts) (`GET /definitions`) | Inspect inactive definitions for maintenance | Administrator only |
 | Selection pricing | [MenuController](../http/menu.controller.ts) (`POST /resolve`) | Validate selections and calculate exact configured-currency price/composition | Session/CSRF; nonbinding preview, no order or stock writes; no supported cross-module service contract until Orders discovery |
@@ -24,7 +24,7 @@ Source capabilities are implemented; HTTP injection/offline rule evidence does n
 | Phase | Outcome | Dependency / exit |
 | --- | --- | --- |
 | MN-00 (accepted) | Existing Authentication authorization reused for transactional module writes | [Authentication contract/acceptance](../../authentication/docs/features/access/spec.md#mn-00--transactional-module-authorization); accepted before MN-01 writes |
-| MN-01 (source delivered) | Protected catalogue maintenance/read and current selection/pricing APIs | Accepted MN-00, separate source authorization and MN-AC01–06 evidence |
+| MN-01 (evidence delivered; unaccepted) | Protected catalogue maintenance/read and current selection/pricing APIs | Accepted MN-00, separate source authorization and MN-AC01–06 evidence |
 | Later Orders integration | Consume selections and preserve sale-time details | Separate discovery/authorization; no detailed tasks activated |
 
 ## Project after accepted MN-01

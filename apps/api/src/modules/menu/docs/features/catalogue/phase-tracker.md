@@ -2,7 +2,7 @@
 
 Parent: [Menu](../../README.md) / [global tracker](../../../../../../../../docs/planning/TRACKER.md). Solo owner: primary agent.
 Catalogue: [spec](spec.md) / [decisions](decisions.md). MN-00 contract: [Authentication specification](../../../../authentication/docs/features/access/spec.md#mn-00--transactional-module-authorization).
-Status: active. Current phase: MN-01 (source delivered; database acceptance pending). Sequence: MN-00 → MN-01.
+Status: active. Current phase: MN-01 (source and bounded database evidence delivered; user acceptance pending). Sequence: MN-00 → MN-01.
 
 ## Authorization — 2026-10-18
 
@@ -24,7 +24,7 @@ Assignment: solo primary agent owns MN-00 Authentication application/public HTTP
 | MN-00-T01 — transactional authorization reuse | complete | [MN00-AC01–05](../../../../authentication/docs/features/access/spec.md#mn-00-acceptance); focused seam evidence and explicit user development acceptance | Contract recorded above; current user authorizes MN-00 source/offline checks only |
 | MN-01-T01 — protected catalogue and selection resolution | active | [MN-AC01–06 families](spec.md#acceptance-steps), focused evidence and explicit user development acceptance | Accepted MN-00; scope/decision review and separate MN-01 source authorization |
 
-MN-00 was explicitly user-accepted on 2026-10-18; its recorded development evidence/limits remain unchanged. MN-01 source/offline evidence is delivered. The latest authorization permits the narrow session-loop repair and renewed one-run execution below. The earlier pre-execution stop is historical; user MN-01 acceptance remains pending.
+MN-00 was explicitly user-accepted on 2026-10-18; its recorded development evidence/limits remain unchanged. MN-01 source/offline evidence is delivered. The latest authorization permitted the narrow session-loop repair and one bounded run; that run passed. The earlier pre-execution stop is historical; user MN-01 acceptance remains pending. No further database execution is authorized by that consumed one-run permission.
 
 Before database-backed acceptance, prepare the concrete procedure/fixtures and obtain authorization for one named disposable target, migration/write scope and cleanup. No inherited BA execution permission, database contact or provisioning. Focused offline checks do not prove actual transaction rollback, revocation ordering or persistence. Record unrun criteria rather than closing either phase on source inspection alone.
 
@@ -38,7 +38,7 @@ Before database-backed acceptance, prepare the concrete procedure/fixtures and o
 | MN00-AC03 | Implemented; scoped database evidence | V01/V02 pass on PostgreSQL 17.11: revocation-first denial and callback-first ordering with observed advisory-lock contention; latest report below |
 | MN00-AC04 | Implemented; scoped database evidence | V03 passes: original consumer error preserved, callback transaction aborted, session activity rolled back and retained opaque scope invalid; latest report below |
 | MN00-AC05 | Implemented; focused offline evidence | Public HTTP policy/proof/filter checks plus six existing HTTP regressions pass; no new production probe route |
-| Menu / MN-AC01–06 | Source implemented; database unverified | Current MN-01 criterion evidence is below; no runtime Menu deployment or database contact |
+| Menu / MN-AC01–06 | Source/offline and bounded PostgreSQL evidence delivered; user acceptance pending | See latest database results below; no deployment or operational-readiness claim |
 
 ### Checks and environment
 
@@ -50,10 +50,11 @@ Before database-backed acceptance, prepare the concrete procedure/fixtures and o
 
 ## Handoff — 2026-10-18
 
-- Current work: [session-loop repair and renewed one-run authorization](#harness-repair-and-renewed-execution--2026-10-18). Narrow repair and focused offline validation completed; database execution pending the repair checkpoint and fresh compilation.
-- Next action: execute the already-authorized bounded procedure once; stop on its recorded gates, without automatic retry. No additional approval needed for this authorized run.
-- Limits: no database contact during repair; migration/application baseline remains last-recorded, not newly observed. MN-01 active/unaccepted. Reused clean `codex/menu-catalogue` at `8f3a288`; no unrelated work.
-- Incidents: [INC-20261018-01](../../../../../../../../docs/quality/agent-incidents.md#inc-20261018-01--delivered-mn-01-harness-retained-an-undefined-fixture-proof); corrected session loop, user review pending.
+- Delivered: `8772f6d` fixes the session loop; fresh Node 24.21.0 compilation and the single authorized bounded PostgreSQL run passed. [Latest results and acceptance assessment](#database-execution-result--2026-10-18).
+- Database state at run completion: only migration 0003 added; its schema/history retained. Run-owned fixtures removed; all thirteen application tables verified empty, pools closed. Ledger retained locally/untracked; reviewed sanitized report is checkpointed. No automatic retry or further database work.
+- Next decision: user reviews the combined offline/database evidence and explicitly accepts or requests a specific change to MN-01 development scope. MN-01 remains active/unaccepted; do not activate Orders or infer push/PR/merge permission.
+- Limits: scoped development evidence with TLS server identity unverified; no packaged startup, deployment, browser/client HTTPS, database-server restart/crash recovery or installation validation. No wider suite repeated.
+- Incidents: [INC-20261018-01](../../../../../../../../docs/quality/agent-incidents.md#inc-20261018-01--delivered-mn-01-harness-retained-an-undefined-fixture-proof), corrected, user review pending; no new incident in this execution.
 
 ## Verification preparation follow-up — 2026-10-18
 
@@ -146,3 +147,25 @@ User explicitly authorized correcting the stale fixture loop to the two declared
 Repair changes only the session-setup array. Focused offline check executed the actual declarations, ledger assignment and setup loop with an in-memory `saveSession` recorder: exactly two distinct sessions, correct account/business scope and digests matching the two ledger entries; no remaining `proofA`. Syntax and whitespace checks pass on existing Node 24.21.0. No `.env` loading or database contact in this repair check. Prior passing rule/HTTP/refusal checks reused. Procedure review retains unchanged target/fingerprint, schema/history/empty gates, migration 0003, concurrency barriers, restart boundary and owned cleanup.
 
 Repair checkpoint precedes fresh compilation and the one authorized run. Database criteria remain unrun until actual results below. [Incident correction evidence](../../../../../../../../docs/quality/agent-incidents.md#inc-20261018-01--delivered-mn-01-harness-retained-an-undefined-fixture-proof) records the narrow repair; no incident closure or prevention-policy approval inferred. Next action: compile and execute once; preserve all stop gates and retain sanitized results.
+
+## Database execution result — 2026-10-18
+
+Repair checkpoint: `8772f6d` (`fix(menu): align acceptance fixture sessions with ledger`). Fresh compilation with existing isolated Node 24.21.0 passed. Exactly one opt-in database invocation then exited 0; no retry, installation or wider suite. [Sanitized report](../../../../../../tests/evidence/mn01.50780479-e373-4388-ba18-3ec6da8e4f20.json) records PostgreSQL 17.11, the same reviewed target fingerprint, TLS `rejectUnauthorized=false`, at most two connections and two successful fresh API probe processes. All 21 reported source/compiled-artifact hashes match the reviewed files after execution.
+
+| Case / criteria | Observed evidence |
+| --- | --- |
+| Gate / M01 | Read-only matching-target, empty prior ten tables, history 0000–0002 and structural baseline passed; only migration 0003 added. Post-migration history/hash/timestamp, thirteen-table shape and emptiness assertions passed |
+| P01 / AC01 database portion | Real definitions saved/read with IDs/revision/currency; variant/reference rows asserted; all three ownership-FK rejection assertions passed (23503) |
+| R01 / AC05e | Both after-write failure injections preserved exact prior Menu rows and initiating session activity; original injected error preserved |
+| C01 / AC05a | Observed lock-wait barrier; one same-revision edit committed and one conflicted, winner persisted |
+| C02 / AC05b | Observed overlap/serialization; unrelated edits both committed their next revisions |
+| C03 / AC05c, AC03d | Both dependency/save orderings passed with observed lock contention; save-first became unavailable after deactivation, deactivate-first rejected save without changing combo |
+| C04 / AC05d | Read during uncommitted edit returned complete old definition; post-commit snapshot total 745 and queued authorized resolution total 855 assertions passed, with observed writer contention |
+| P02 / AC01b | Two successive fresh API processes served protected definition GET and resolution POST with real adapters; identical definitions/IDs/revisions and total 855 persisted |
+| Cleanup | Ownership-checked transactional cleanup passed; all thirteen application tables zero, four history rows and structural shape retained, pools closed |
+
+The report records case pass/fail summaries rather than raw lock traces or response payloads; observations above are the assertions in the hashed harness, not additional independent probes. Prior eight Menu offline tests and accepted MN-00 evidence supply remaining domain/HTTP coverage; they were not repeated. Source/schema checks are bounded rather than exhaustive drift auditing. API restart evidence uses explicit Nest test composition and HTTP injection, not packaged AppModule/listener startup, production HTTPS, database-server restart or crash/installation recovery. Those release limits remain deferred; TLS server identity was not verified on this approved test target.
+
+Assessment: combined existing offline evidence and this bounded run sufficiently cover MN-AC01–05 for the reviewed backend development scope. No further test expansion is justified by these results. MN-AC06 remains unmet until explicit user acceptance. MN-01 stays active, not complete/accepted. The one-run authorization is consumed; migration is applied on this target and the original pre-migration harness must not be rerun there without a separately reviewed resume scope. Keep the run ledger local/untracked; only the sanitized report is committed.
+
+Next user decision: explicitly accept MN-01 under these recorded development limits, or identify the specific remaining requirement/change. Incident assessment: existing [INC-20261018-01](../../../../../../../../docs/quality/agent-incidents.md#inc-20261018-01--delivered-mn-01-harness-retained-an-undefined-fixture-proof) has correction evidence and remains pending user review, not closed; no new qualifying incident observed in this execution.

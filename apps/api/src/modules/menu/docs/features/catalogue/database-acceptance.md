@@ -1,6 +1,8 @@
-# MN-01 bounded database acceptance — repaired, execution authorized
+# MN-01 bounded database acceptance — one run passed, unaccepted
 
 Owner: primary agent. [Tracker](phase-tracker.md#database-acceptance-preparation--2026-10-18) owns authorization/status; [acceptance criteria](spec.md#acceptance-steps) own behavior. Harness: [mn01-acceptance.mjs](../../../../../../tests/mn01-acceptance.mjs); fresh API probe: [mn01-restart.mjs](../../../../../../tests/mn01-restart.mjs). Preparation does not authorize execution or accept MN-01. The initial one-run authorization stopped at [pre-execution review](phase-tracker.md#database-execution-review--2026-10-18). The user subsequently authorized the narrow repair and renewed one-run execution; [current repair/evidence](phase-tracker.md#harness-repair-and-renewed-execution--2026-10-18). The procedure below retains its reviewed scope; results/status belong in the tracker.
+
+Execution completed once with all eight cases and cleanup passing; [result/limits](phase-tracker.md#database-execution-result--2026-10-18). Migration 0003 is now applied on that target, all thirteen application tables were verified empty afterward, and user acceptance remains pending. The one-run permission is consumed. Commands below document the original pre-migration procedure and must not be rerun on the migrated target without a separately reviewed resume authorization.
 
 ## Target and stop gates
 
@@ -63,4 +65,4 @@ MN01_ACCEPT_STAGING=YES MN01_TARGET=existing-env-disposable /private/tmp/mn00-ve
 
 Inspect the new report and cleanup result before any follow-up. Do not run the normal migration CLI separately: migration belongs after this harness's gate. No commands in this section have been executed during preparation.
 
-Exact next authorization: **approve one execution of this reviewed procedure on the existing `.env` disposable MN-00 test target, exclusively reserved and unchanged, including its initial read-only gates, only pending migration 0003/history update, synthetic Business/Access/Menu fixture writes, two-connection controlled cases, two fresh API probe processes, run-owned cleanup and sanitized evidence retention.** No installation, infrastructure, deployment, push, PR, merge or automatic retries. MN-01 acceptance remains a separate user decision after evidence review.
+The executed authorization covered one run on the unchanged, exclusively reserved `.env` disposable MN-00 test target: initial read-only gates, only pending migration 0003/history update, synthetic Business/Access/Menu fixtures, bounded cases/probe processes, owned cleanup and sanitized evidence. That permission is now consumed. Next is explicit user acceptance of MN-01 under the recorded development limits, or a specific change request; further database work requires separately reviewed authorization. No installation, infrastructure, deployment, push, PR, merge or automatic retries.
