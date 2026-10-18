@@ -41,10 +41,10 @@ Entries below assess already-observed events in this active thread following the
 
 ## INC-20261017-04 — Root README retained contradictory BA-02 availability and acceptance claims
 
-- Severity / status: S3 / open. Observed impact: repository entry documentation gives conflicting capability and acceptance information; user requested review on 2026-10-17.
+- Severity / status: S3 / corrected on 2026-10-18; user review pending. Observed impact: repository entry documentation gives conflicting capability and acceptance information; user requested review on 2026-10-17.
 - Violation and evidence: [README](../../README.md) as committed in `771f6b0` says BA-02 provides authentication/sessions, but its “Structure and next boundary” paragraph says no HTTP authentication/sessions are included. Its introduction also says database/browser acceptance remains pending, whereas the [BA-02 acceptance record](../planning/business-access/phase-tracker.md#ba-02-acceptance--2026-10-17) records user acceptance with deferred backend checks and browser checks inapplicable to the API-only increment. These delivered contradictions violate accurate handoff/evidence reporting and documentation-upkeep guidance. Root-level setup documentation itself is appropriate; no unauthorized implementation or deployment follows from its presence.
 - Impact: Misleading repository overview and acceptance status; no runtime change, data loss or unauthorized execution established.
-- Correction: Not yet applied; current user request is assessment. Owner: current agent on a subsequent authorized documentation correction. Replace stale capability/acceptance statements, use a stable capability-oriented heading, and retain the tracker as the owner of detailed phase evidence. Preserve accurate setup requirements and side-effect descriptions.
+- Correction: Applied on 2026-10-18 while updating affected MN-01 capability documentation. [README](../../README.md) introduction now distinguishes accepted foundation/access/MN-00 development scopes from MN-01 source and pending database acceptance; the stable “Structure and capabilities” section lists HTTP authentication/sessions as present and links owning capability indexes/trackers. Setup requirements and operational side effects are preserved. Documentation diff is correction evidence, not new runtime verification. This supersedes the prior assessment-only handoff; incident remains pending user review, not closed.
 - Prevention / user review: No policy change proposed / pending.
 
 

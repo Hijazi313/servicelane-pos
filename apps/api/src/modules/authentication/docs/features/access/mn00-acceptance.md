@@ -1,6 +1,6 @@
 # MN-00 — Bounded database acceptance procedure
 
-Status: executed on 2026-10-18; all three checks and application cleanup passed. User development acceptance was recorded on 2026-10-18; the accepted result is [the passing MN-00 report](../../../../../../../../apps/api/tests/evidence/mn00.062f6e66-871f-4d22-b040-376c2ac0659d.json). Criteria: [MN00-AC03/04](spec.md#mn-00-acceptance). The user explicitly approved the bounded installation/connection/fixture/temporary-table/cleanup scope; approval was explicitly granted on 2026-10-18. No wider execution is authorized.
+Status: executed on 2026-10-18; all three checks and application cleanup passed. User development acceptance was recorded on 2026-10-18; results owned by the tracker. Authorization/evidence owner: [delivery tracker](../../../../menu/docs/features/catalogue/phase-tracker.md). Criteria: [MN00-AC03/04](spec.md#mn-00-acceptance). The user explicitly approved the bounded installation/connection/fixture/temporary-table/cleanup scope; see the tracker execution-authorization record. No wider execution is authorized.
 
 ## Target and entry gates
 

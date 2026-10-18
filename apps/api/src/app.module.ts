@@ -1,3 +1,4 @@
+import { MenuModule } from './modules/menu/public.js';
 import { AccessHttpModule } from './modules/authentication/http/access-http.module.js';
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
@@ -10,6 +11,7 @@ import { HealthController } from './infrastructure/health.controller.js';
     ConfigModule.forRoot({ isGlobal: true, ignoreEnvFile: true, load: [() => readConfiguration(process.env)] }),
     DatabaseModule,
     AccessHttpModule,
+    MenuModule,
   ],
   controllers: [HealthController],
 })

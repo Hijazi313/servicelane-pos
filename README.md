@@ -1,6 +1,6 @@
 # ServiceLane POS
 
-Backend foundation for a reusable restaurant POS. Development foundation accepted; BA-01 adds schema and operator bootstrap source, accepted on staging. BA-02 source now supplies staff lifecycle, login/sessions, access enforcement and local recovery; database/browser acceptance remains pending. See the [joint tracker](docs/planning/business-access/phase-tracker.md). See the [foundation tracker](docs/planning/project-foundation/phase-tracker.md).
+Backend for a reusable restaurant POS. Foundation and BA-01/02/03 are accepted under their recorded development scopes; staff login/sessions, access enforcement and local recovery are implemented. MN-00 transactional authorization reuse is accepted. MN-01 Menu catalogue source now supports sizes, optional extras, configurable combos and selection pricing, with its database migration/acceptance still pending. [Global tracker](docs/planning/TRACKER.md) owns current authorization and evidence limits.
 
 ## Requirements
 
@@ -8,7 +8,7 @@ Backend foundation for a reusable restaurant POS. Development foundation accepte
 - pnpm 12.11.2 (recorded in `package.json`).
 - A user-managed, dedicated hosted PostgreSQL development database. No local database or Docker setup is provided.
 
-Direct package versions were selected from official registry metadata. Runtime compatibility still needs user-run acceptance. Install the pinned Node/pnpm versions using your normal tooling; this repository does not install global tools.
+Direct package versions were selected from official registry metadata. Focused development evidence and remaining operational limits are recorded in the trackers; source delivery does not establish deployment readiness. Install the pinned Node/pnpm versions using your normal tooling; this repository does not install global tools.
 
 ## Setup
 
@@ -51,19 +51,23 @@ curl -i http://127.0.0.1:3000/health
 
 See the [acceptance record](docs/acceptance/project-foundation.md) for verified development behavior and deferred migration, TLS and operational checks. Hosted development requires internet and does not establish offline restaurant-LAN operation.
 
-## Structure and next boundary
+## Structure and capabilities
 
 - `apps/api/src/app.module.ts`: Nest composition point.
 - `apps/api/src/infrastructure/`: configuration, injected `DatabaseService` and technical health route.
 - `apps/api/migrations/`: reviewed offline SQL migrations; application remains separately authorized.
 - `docs/`: scope, architecture, specifications and acceptance evidence.
 
-Future authorized modules may import `DatabaseModule` and inject `DatabaseService`; its `db` exposes Drizzle over the same PostgreSQL pool and is technical infrastructure, not a cross-module repository. Each business module will own its persistence and public interfaces. The approved initial topology is one business per LAN installation with its own database and local client assets; deployment is not implemented.
+Modules import `DatabaseModule` and inject `DatabaseService`; its `db` exposes Drizzle over the same PostgreSQL pool and is technical infrastructure, not a cross-module repository. Each business module owns its persistence and public interfaces. The approved initial topology is one business per LAN installation with its own database and local client assets; deployment is not implemented.
 
-Business and administrator bootstrap were verified on staging; synthetic records were removed, leaving the migrated tables empty. No frontend, HTTP authentication/sessions, provider SDK, generic repositories or synchronization is included. See the [operator instructions](apps/api/src/operator/README.md), [Business capability index](apps/api/src/modules/business/docs/README.md), [Authentication capability index](apps/api/src/modules/authentication/docs/README.md) and [BA-01 evidence](docs/planning/business-access/phase-tracker.md). See [contribution rules](CONTRIBUTING.md).
+Business/bootstrap and access development evidence are owned by the [BA tracker](docs/planning/business-access/phase-tracker.md); later scoped MN-00 evidence is owned by the [Menu delivery tracker](apps/api/src/modules/menu/docs/features/catalogue/phase-tracker.md). HTTP authentication/sessions and protected Menu source are present. No frontend, provider SDK, generic repository framework or synchronization is supplied. See the [operator instructions](apps/api/src/operator/README.md), [Business](apps/api/src/modules/business/docs/README.md), [Authentication](apps/api/src/modules/authentication/docs/README.md) and [Menu](apps/api/src/modules/menu/docs/README.md) capability indexes. See [contribution rules](CONTRIBUTING.md).
 
 ## BA-02 access source
 
 New authentication, staff and context routes use `/api/v1`; `/health` retains its technical contract. Set `CLIENT_ORIGIN` to the intended canonical HTTPS origin, without a trailing slash. `TRUSTED_PROXY_ADDRESSES` optionally lists exact reverse-proxy IPs; default is no forwarded-header trust. The API enforces HTTPS protocol/origin/Host and always emits Secure cookies. TLS trust, proxy/asset hosting and browser acceptance require separately authorized deployment work; no login-over-plain-LAN-HTTP mode exists.
 
 `pnpm test:access` runs focused database-free checks. Source-only authorization does not permit `pnpm start`, migration application, provisioning or `pnpm recover-administrator` against staging. See the [Authentication specification](apps/api/src/modules/authentication/docs/features/access/spec.md) for contracts and [operator guide](apps/api/src/operator/README.md) for controlled recovery after separate authorization.
+
+## Menu catalogue source
+
+[Menu contracts](apps/api/src/modules/menu/docs/features/catalogue/spec.md#source-contracts--mn-01) define protected `/api/v1/menu` routes, complete definition editing and non-persisting selection resolution. `pnpm test:menu` runs focused database-free checks on the supported runtime. Migration `0003_menu_catalogue.sql` is unapplied; persistence, restart, rollback and concurrency acceptance need separate execution authorization. No Menu UI or order/payment workflow is included.
