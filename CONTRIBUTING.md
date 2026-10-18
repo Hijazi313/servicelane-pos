@@ -16,6 +16,14 @@ fix(access): reject disabled staff sessions
 
 Use `feat`, `fix`, `docs`, `refactor`, `test`, `chore`, `build`, `ci`, `perf` or `revert` as appropriate. Mark incompatible public-contract changes with `!`, such as `feat(api)!: change pagination`, and explain the impact and migration in the commit body. See [Conventional Commits 1.0.0](https://www.conventionalcommits.org/en/v1.0.0/).
 
+### Checkout choice
+
+- Before feature work, inspect current changes and decide whether to reuse the checkout or use a separate worktree. Reuse it for non-conflicting work; prefer a worktree when unrelated staged changes, concurrent agents or independent branches would interfere. Do not create one per task by default.
+- Create worktrees only within authorized Git scope. Record path, branch and integration owner in the existing assignment/handoff. Do not change another agent's branch or index.
+- Worktrees do not copy uncommitted changes or isolate databases, ports, credentials and external services. Transfer required changes deliberately and coordinate shared resources.
+- Before integration, review the intended diff and run proportionate checks. Explain local copies left behind after copying changes into another worktree; clean them up only after verifying preservation and cleanup authorization.
+- Remove an owned worktree when no longer needed and its work is preserved. Never force-remove a dirty worktree or delete another agent's checkout.
+
 ## Review and merge
 
 - Once a remote is established, submit changes through pull requests. Describe the problem, resulting behavior, verification evidence and material limitations. Use a conventional PR title.
