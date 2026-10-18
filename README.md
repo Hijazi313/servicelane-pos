@@ -18,7 +18,7 @@ The backend currently includes:
 | Authentication and access | Staff login, sessions, server-enforced permissions, and administrator recovery |
 | Menu catalogue | Catalogue maintenance, selectable sizes, optional extras, configurable combos, and selection pricing |
 
-Business setup, authentication/access, and menu catalogue are accepted under their recorded backend development scopes. Menu integration through PR review and merge remains pending.
+Business setup, authentication/access, and menu catalogue are accepted under their recorded backend development scopes. Menu was integrated through [PR #9](https://github.com/Hijazi313/servicelane-pos/pull/9); Orders is in discovery/planning only.
 
 The frontend, ordering, kitchen, billing, payments, shifts, inventory, and reporting are planned. Deployment, backup, and recovery validation remain incomplete.
 

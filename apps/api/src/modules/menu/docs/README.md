@@ -8,7 +8,7 @@ Maintain business-owned items, sizes, optional extras and fixed/selectable combo
 
 ## Public capabilities
 
-Source capabilities have focused offline and bounded PostgreSQL evidence; migration 0003 is applied on the authorized disposable test target. MN-01 was explicitly user-accepted on 2026-10-19 under the recorded backend development limits; Git integration is pending.
+Source capabilities have focused offline and bounded PostgreSQL evidence; migration 0003 is applied on the authorized disposable test target. MN-01 was explicitly user-accepted on 2026-10-19 under the recorded backend development limits; [PR #9](https://github.com/Hijazi313/servicelane-pos/pull/9) is merged as `b09770e`.
 
 | Capability | Public entry point | Purpose | Important constraints |
 | --- | --- | --- | --- |

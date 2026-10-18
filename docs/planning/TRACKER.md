@@ -4,7 +4,7 @@
 
 - Stage: Foundation F-01 remains complete; [acceptance and evidence limits](project-foundation/phase-tracker.md#closeout--2026-10-12).
 - Approved topology: one business per LAN installation, dedicated local PostgreSQL, locally served client assets and one maintained codebase; explicit user approval on 2026-10-12. [Decision and rationale](../architecture/vendor-isolation-proposal.md).
-- Current activity: MN-01 backend development scope explicitly user-accepted and locally complete on 2026-10-19. [Closeout/integration review](../../apps/api/src/modules/menu/docs/features/catalogue/phase-tracker.md#mn-01-acceptance-and-integration-review--2026-10-19). [PR #9](https://github.com/Hijazi313/servicelane-pos/pull/9) is open after normal topic push; merge requires separate explicit permission. Orders remains on hold; no database access/rerun or deployment.
+- Current activity: Menu/MN-00/MN-01 accepted and integrated through [PR #9](https://github.com/Hijazi313/servicelane-pos/pull/9), squash `b09770e`. User authorized review/merge and continuation; [Orders initial discovery](orders/discovery.md) is prepared on `codex/orders-discovery`. Planning only; workflow/price-confirmation/tax-boundary decisions precede implementation. No database access/rerun or deployment.
 - Current phase: BA-01 complete; BA-02 complete under [user acceptance](business-access/phase-tracker.md#ba-02-acceptance--2026-10-17); BA-D01–06 approved; BA-03-T01 complete and [user-accepted](business-access/phase-tracker.md#ba-03-acceptance-and-closeout--2026-10-17) under its revised development scope; two-database execution deferred, unrun.
 - Deferred validation remains in the [canonical foundation handoff](project-foundation/phase-tracker.md#current-handoff--2026-10-12) and [acceptance record](../acceptance/project-foundation.md).
 
@@ -12,7 +12,7 @@
 
 BA-01/02/03 accepted development scope and historical execution permissions are owned by the [joint BA tracker](business-access/phase-tracker.md). They do not authorize new Menu or database work.
 
-Current handoff: BA-03, MN-00 and MN-01 remain accepted under their recorded development limits. MN-01 local closeout/integration review is complete; [PR #9](https://github.com/Hijazi313/servicelane-pos/pull/9) is open against verified `main`. Stop for PR review and explicit merge authorization. Orders is on hold until integration completes. [Owning closeout](../../apps/api/src/modules/menu/docs/features/catalogue/phase-tracker.md#mn-01-acceptance-and-integration-review--2026-10-19) preserves evidence, release limits, incident reviews and the excluded local ledger.
+Current handoff: PR #9 was reviewed at exact head `dcb686a`; configured PR-title CI passed, no review threads/submissions existed, and no new material defect was found. User-authorized squash merge completed as `b09770e`; local main fast-forwarded and remote Menu branch was removed by GitHub. Existing code/database evidence reused; no database rerun. Next: decide the first Orders journey, price-change confirmation and tax/sale boundary in the [single discovery proposal](orders/discovery.md). Orders implementation is not authorized. Preserve the local Menu ledger and pending incident reviews.
 
 ## Proposed foundation follow-ups — 2026-10-12
 
@@ -33,8 +33,8 @@ Project foundation precedes Business/Branch and Authentication/Access, which pre
 | 0 | Project foundation | complete | [Specification](project-foundation/spec.md) / [phase tracker](project-foundation/phase-tracker.md); development foundation accepted; limits recorded |
 | 1 | Business/Branch foundation | complete; development scope | [Specification; BA-01 slice approved](../../apps/api/src/modules/business/docs/features/foundation/spec.md) / [joint tracker](business-access/phase-tracker.md); BA-01 accepted on staging; BA-02/BA-03 accepted under revised development scope; release verification deferred |
 | 2 | Authentication and Access | complete; development scope | [Specification; BA-01 slice approved](../../apps/api/src/modules/authentication/docs/features/access/spec.md) / [joint tracker](business-access/phase-tracker.md); BA-01 accepted on staging; BA-02/BA-03 accepted under revised development scope; release verification deferred |
-| 3 | Menu | complete development scope; integration pending | [MN-00 → MN-01 plan](../../apps/api/src/modules/menu/docs/README.md); MN-00/MN-01 accepted; PR review/merge pending |
-| 4 | Orders | proposed | Not activated |
+| 3 | Menu | complete development scope; merged | [MN-00 → MN-01 plan](../../apps/api/src/modules/menu/docs/README.md); accepted, PR #9 squash `b09770e`; release limits retained |
+| 4 | Orders | discovery/planning only | [Initial proposal](orders/discovery.md); decisions/source approval pending |
 | 5 | Kitchen | proposed | Not activated |
 | 6 | Billing and payments | proposed | Not activated |
 | 7 | Cashier shifts | proposed | Not activated |

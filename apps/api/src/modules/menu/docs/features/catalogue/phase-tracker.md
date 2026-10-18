@@ -2,7 +2,7 @@
 
 Parent: [Menu](../../README.md) / [global tracker](../../../../../../../../docs/planning/TRACKER.md). Solo owner: primary agent.
 Catalogue: [spec](spec.md) / [decisions](decisions.md). MN-00 contract: [Authentication specification](../../../../authentication/docs/features/access/spec.md#mn-00--transactional-module-authorization).
-Status: complete under accepted backend development scope. MN-01 accepted 2026-10-19; Git integration pending PR review/explicit merge decision. Sequence: MN-00 → MN-01.
+Status: complete under accepted backend development scope. MN-01 accepted 2026-10-19; Git integration complete through PR #9, squash `b09770e`, 2026-10-19. Sequence: MN-00 → MN-01.
 
 ## Authorization — 2026-10-18
 
@@ -50,7 +50,7 @@ Before database-backed acceptance, prepare the concrete procedure/fixtures and o
 
 ## Handoff — 2026-10-18
 
-Current update — 2026-10-19: MN-01 explicitly accepted and locally closed; [acceptance and integration review](#mn-01-acceptance-and-integration-review--2026-10-19). [PR #9](https://github.com/Hijazi313/servicelane-pos/pull/9) is open against verified `main` after normal topic-branch push; next is PR review and a separate explicit merge decision. Orders stays on hold until Menu integration is complete. No database execution or installation; preserve the untracked local run ledger. Incident closure/prevention decisions remain pending in the owning log; no new incident identified in closeout.
+Current update — 2026-10-19: MN-01 explicitly accepted and locally closed; [acceptance and integration review](#mn-01-acceptance-and-integration-review--2026-10-19). [PR #9](https://github.com/Hijazi313/servicelane-pos/pull/9) was reviewed and squash-merged with explicit user permission as `b09770e`; [Orders discovery](../../../../../../../../docs/planning/orders/discovery.md) is now prepared, with implementation unapproved. No database execution or installation; preserve the untracked local run ledger. Incident closure/prevention decisions remain pending in the owning log; no new incident identified in closeout.
 
 ## Verification preparation follow-up — 2026-10-18
 
@@ -227,3 +227,7 @@ User explicitly accepted MN-01 under the recorded backend development scope/evid
 Integration review found no new material defect in the complete branch scope: MN-00 is the accepted prerequisite for Menu's authorized transactions; production cross-module calls use supported exports; composition/provider/schema wiring and both repaired paths were reviewed. Offline schema comparison confirms prior tables unchanged, exactly three added Menu tables/three ownership FKs and only journal entry 0003 added. Branch whitespace checks passed; tracked-content review found no environment/private-key/credential-URL inclusion and excludes the local MN-01 ledger. This is a scoped review, not exhaustive security certification. No executable changes since the recorded repair checks, so passing compile/tests/database observations are reused without rerun.
 
 MN-00 and MN-01 are locally complete under accepted development scope; PR review/integration remains separate. Limits persist: no deployment/packaged-startup/browser HTTPS/crash/installation recovery evidence, approved test TLS server identity unverified, historical PostgreSQL results describe pre-repair hashes/fixtures, and the corrected child lifecycle is verified offline. Incident correction evidence is not closure/prevention approval. Integration status: normal push completed; [PR #9](https://github.com/Hijazi313/servicelane-pos/pull/9) is open and attached to this chat, targeting `main` at verified base `9c7b565`. Closeout checkpoint `b64714f`. Stop for PR review and explicit merge decision; Orders remains on hold.
+
+### Integration completed — 2026-10-19
+
+User explicitly authorized reviewing/merging PR #9 and continuing next-step work. Reviewed exact head `dcb686a`, including the subsequent README/setup-guide-only commit; no executable delta since prior review/evidence, no new material finding. Configured PR-title CI passed; no submitted reviews or unresolved threads. No independent human approval is claimed. Squash merge succeeded as `b09770ed0f593c30fbf1bb07a14a20bc2c4555c1`; GitHub removed the remote topic branch and local main was fast-forwarded. Accepted development and deferred release evidence remain unchanged; no database access or test rerun. Continuation is limited to [Orders discovery/planning](../../../../../../../../docs/planning/orders/discovery.md), not unapproved implementation. No new qualifying incident; existing user incident/prevention reviews remain pending.
