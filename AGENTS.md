@@ -2,7 +2,9 @@
 
 ## Communication
 
-Communicate concisely. Lead with the outcome, decision or blocker. Include only reasoning, evidence and next steps that affect the user's understanding or action. Avoid repeating documentation, routine tool activity or settled context. Expand when complexity or the user's request requires it; never omit material risks or uncertainty for brevity. Startup prompts should state the task, tracker path and authorization rather than repeat reading lists already defined here or in the skill.
+- **Be concise.** Lead with the outcome, decision, or blocker. Include only reasoning, evidence, and next steps that affect understanding or action. Skip repeated docs, routine tool activity, and settled context.
+- **Expand when needed.** Add detail when complexity or the user's request calls for it. Never omit material risks or uncertainty for brevity.
+- **Startup prompts:** state the task, tracker path, and authorization. Don't repeat reading lists already defined here or in the skill.
 
 ## Working rules
 
@@ -25,3 +27,8 @@ Communicate concisely. Lead with the outcome, decision or blocker. Include only 
 - Reuse available context, including supplied instructions, when sufficient and current. Before rereading, identify missing or potentially changed information; inspect relevant diffs, symbols or sections, expanding when needed. Before dependent actions or after handoffs/concurrent work, confirm relevant policy, scope, contracts and assignments are current. After compaction, use summaries for orientation and verify exact source where correctness depends on it. Never infer freshness merely because you have not edited the file; do not bulk-load unrelated files or guess missing constraints.
 - Read applicable ancestor/nested `AGENTS.md` instructions before editing their subtree, following the context-reuse rule above. Keep module instructions limited to stable local guidance and documentation links.
 - Read relevant `docs/capabilities.md` indexes before candidate code and maintain them with public capability changes; follow [discovery and upkeep](docs/architecture/README.md#capability-discovery-and-documentation-upkeep).
+
+## Code quality & handoff
+
+- Avoid `any` and forced type assertions to bypass compiler errors. Keep code flat and explicit; no speculative abstractions or single-use wrappers.
+- Before concluding, run typecheck/build, remove debug statements and stray files, and report what was and wasn't verified.
