@@ -12,7 +12,7 @@ No server-persisted cart, UI, kitchen dispatch or payment is needed to demonstra
 
 ## Existing capabilities and gaps
 
-Indexes/contracts reviewed: [Menu](../../../apps/api/src/modules/menu/docs/README.md), [Authentication](../../../apps/api/src/modules/authentication/docs/README.md), [Business](../../../apps/api/src/modules/business/docs/README.md). Existing source searches found no Orders module, public order operations or prior Orders plan.
+Indexes/contracts reviewed: [Menu](../../../apps/api/src/modules/menu/docs/capabilities.md), [Authentication](../../../apps/api/src/modules/authentication/docs/capabilities.md), [Business](../../../apps/api/src/modules/business/docs/capabilities.md). Existing source searches found no Orders module, public order operations or prior Orders plan.
 
 | Owner / existing capability | Reuse / missing boundary |
 | --- | --- |

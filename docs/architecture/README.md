@@ -69,15 +69,15 @@ Before handoff, review affected imports and calls for transport leakage, duplica
 
 ## Capability discovery and documentation upkeep
 
-The module `docs/README.md` indexes implemented public capabilities using the module template's four columns: capability, linked public entry point, purpose and important constraints. Use one row per useful capability, not per function. Keep descriptions brief and constraints limited to those affecting correct reuse. If none exist, say so; planned capabilities belong in scope/phases, not this index.
+Each module's `docs/capabilities.md`, linked from its README, indexes implemented public capabilities: capability, linked public entry point, purpose and essential reuse constraints. Use one row per useful capability; state “None implemented” when appropriate. Keep planned behavior in specs/phases.
 
-Before adding behavior, consult relevant indexes and search exports, symbols and callers. Missing documentation does not prove functionality is absent. Before reuse, inspect the candidate's contract and relevant implementation for purpose, access/scope, side effects, transactions and errors as applicable. Read enough code to establish suitability; do not rely on descriptions alone.
+Before adding or reusing behavior, read relevant indexes, then inspect candidate contracts, implementation and callers for scope, authorization, side effects, transactions and errors. Follow entry-point links and load other documents only as needed; apply the root context-reuse rule. If an index is missing or incomplete, search exports and callers before concluding behavior is absent.
 
-Reuse across modules goes through supported public interfaces. Similar-looking code does not justify shared abstractions unless semantics and reasons to change align. Review affected changes for duplicate business rules, circular dependencies and misplaced responsibilities.
+Reuse across modules through supported public interfaces. Share abstractions only when semantics and reasons to change align; check for duplicate rules, circular dependencies and misplaced responsibilities.
 
-Update the index and affected references in the same change when documented capabilities, constraints or links change. Internal-only edits require no unrelated README updates. When deleting a module, remove or migrate its docs and repair incoming references, including tracker links.
+Add, change or remove index entries and affected references with the corresponding public capability change, including previously unindexed capabilities. Before handoff, check entries against final code. Internal-only edits need no unrelated documentation updates. Module deletion must remove or migrate its docs and repair incoming links.
 
-Code establishes implemented behavior; specifications define intended behavior. Resolve discrepancies explicitly. Source inspection does not prove runtime correctness.
+Code establishes implementation; specs define intent. Resolve discrepancies explicitly and never list unfinished behavior as available. Source inspection does not prove runtime correctness.
 
 ## Multiple restaurant rollout
 

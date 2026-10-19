@@ -10,11 +10,9 @@ Active phase: <ID or none>
 
 ## Public capabilities
 
-| Capability | Public entry point | Purpose | Important constraints |
-| --- | --- | --- | --- |
-| <Supported capability> | <Link to actual public symbol/interface> | <Behavior> | <Access, scope, side effects or other relevant limits> |
+See the [capability index](capabilities.md) for implemented public entry points and reuse constraints.
 
-Index implemented capabilities only; otherwise state “None implemented.” See repository `docs/architecture/README.md#capability-discovery-and-documentation-upkeep` for discovery and maintenance rules.
+Maintain the table in sibling `capabilities.md` with four columns: Capability, Public entry point, Purpose and Important constraints. Use one row per useful implemented capability; otherwise state “None implemented.” Follow repository `docs/architecture/README.md#capability-discovery-and-documentation-upkeep`.
 
 ## MVP scope
 
