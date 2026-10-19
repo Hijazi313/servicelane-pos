@@ -1,6 +1,6 @@
 # Order capture — Phase tracker
 
-Specification: [spec.md](spec.md). Owner: primary agent. Active phase: OR-01. Status: active.
+Specification: [spec.md](spec.md). Owner: primary agent. Active phase: OR-01. Status: awaiting acceptance (source/offline increment; persistence execution not authorized).
 
 ## Authorization — 2026-10-20
 
@@ -10,14 +10,29 @@ User explicitly authorized OR-01 source implementation, narrow supported transac
 
 | Task | Status | Exit evidence |
 | --- | --- | --- |
-| Menu consumer and exact snapshot contract | active | OR-A02/A03/A05; focused offline tests |
-| Capture/read/settings and persistence source | active | OR-A01–08; compile and focused application/HTTP tests |
-| Migration source and documentation | active | offline artifact review; no database execution |
+| Menu consumer and exact snapshot contract | implemented | OR-A02/A03/A05; focused offline tests below |
+| Capture/read/settings and persistence source | implemented, PostgreSQL unverified | OR-A01–08; compile and focused application/HTTP tests below |
+| Migration source and documentation | implemented | 0004 generated and parsed offline; no database execution |
 
 ## Completion shape
 
 Capture/read and business-scoped limit settings, no dispatch/payment/fiscal totals. Offline evidence cannot establish PostgreSQL persistence/concurrency/restart behavior or user acceptance. These remain pending under OR-A04/A06 and require separate target-specific execution authorization. Operational personal-data policies and full trading flow remain deferred in the specification.
 
-## Evidence and handoff
+## Evidence — 2026-10-20
 
-Implementation in progress. No new verification or acceptance claim. Git handoff verified at local 0bb45c6 and remote draft PR #10 at 0083da0; unrelated README commit remains local. Incidents: none newly identified; existing reviews unchanged.
+- Full TypeScript project compilation to the existing ignored check-output pattern passed with the pre-existing supported Node 24.21.0 runtime; no installation or configuration loading.
+- [Orders application tests](../../../../../../tests/orders.test.mjs) and [actual HTTP tests](../../../../../../tests/orders-http.test.mjs): 13 passed in the final combined run after the injectable-file naming and type-dependency cleanup. Actual Authentication/Menu services run against substituted transactional persistence. Covered current role/session/grant/CSRF enforcement, scoped reads, exact configured/combo amounts, immutable optional customer/instruction snapshots, price-conflict resubmission, JSONB-key-order-insensitive replay after Menu/policy changes, concurrent attempts, injected rollback, safe errors and body/expanded-response limits. Boundary helper checks include inclusive/one-byte-over and multibyte JSON. These are offline observations, not PostgreSQL concurrency/recovery evidence.
+- Existing Drizzle generator produced [0004_order_capture.sql](../../../../../../migrations/0004_order_capture.sql), journal and snapshot offline. `readMigrationFiles` parsed all five migrations; snapshot comparison established all 13 prior table definitions unchanged, with only captured_orders/order_capture_policies added. Source constraints include scoped retry uniqueness, retry-key format, basic JSON identity and policy bounds. No migration execution or database access.
+- Existing Menu database acceptance/report and ledger remain historical and unchanged. No old harness run, broad suite or production build performed. Source-import/export review found no foreign persistence imports, new RBAC, decimal/precision duplication, nested authorization or query-builder exposure.
+
+## Availability and remaining acceptance
+
+OR-A01/02/03/05/07/08 have focused offline behavioral evidence; storage behavior uses a substitute. OR-A04 has offline serialized duplicate/rollback evidence but PostgreSQL uniqueness/commit ambiguity/rollback/concurrency remains unverified. OR-A06 fresh-process durable readback is not executed. All user acceptance is pending; no complete trading or release claim. The aggregate stores lines in one JSON snapshot, avoiding independently mutable line records.
+
+## Handoff
+
+- Source: Orders application/domain/controller/filter, owned schema/adapter/module, narrow Menu consumer, composition and generated migration. Docs: canonical specification/capabilities; discovery is a transition reference only.
+- No push or PR mutation performed. Draft PR #10 remains at verified 0083da0; unrelated README commit 42825d1 is preserved locally. Ledger remains untracked and excluded.
+- Next: review the local source/offline increment. To obtain persistence acceptance, separately authorize a reviewed target-specific OR-01 procedure, fresh compilation, migration application, synthetic fixtures, bounded concurrency/restart/failure cases and owned cleanup. Do not infer permission to use the migrated Menu target or rerun its harness. Backend development acceptance/rescoping, if desired, needs an explicit user decision.
+- Operational customer retention/erasure, full kitchen/payment/fiscal workflow and release validation remain separate from this development increment.
+- Incidents: none newly identified. In-progress test fixture/compiler corrections were resolved before handoff and do not establish a qualifying delivered violation. Existing incident reviews remain unchanged; no skill/template/guardrail edits.

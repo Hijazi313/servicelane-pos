@@ -3,7 +3,18 @@ import { REQUEST_BODY_LIMIT_BYTES } from '../../../infrastructure/request-limits
 import type { InstallationContext } from '../../business/public.js';
 import type { AuthorizedScope } from '../../authentication/public.js';
 import { MenuStore } from './menu-store.js';
-import { MenuError, activeView, definition, id, integer, object, precision, resolveSelection, validateReferences, type Offering } from '../domain/catalogue.js';
+import { MenuError, activeView, definition, id, integer, object, precision, resolveSelection, validateReferences, type Offering, minor } from '../domain/catalogue.js';
+
+export interface OrderSelection {
+  offeringId: string; variantId?: string; addOnIds: string[];
+  choices: { groupId: string; optionIds: string[] }[];
+}
+export interface ResolvedOrderUnit {
+  offeringId: string; name: string; revision: number; currencyCode: string; scale: number; unitMinor: string;
+  components: { itemId: string; itemName: string; variantId: string; variantName: string; quantity: number }[];
+  addOns: { id: string; name: string; surcharge: string }[];
+  choices: { groupId: string; optionId: string; name: string; surcharge: string }[];
+}
 
 const MAX_EDIT_REVISION = 2147483646;
 
@@ -59,6 +70,21 @@ export class MenuService {
     const offering = { ...previous, active: false, revision: revision + 1 };
     await this.store.save(scope.installation.businessId, offering, revision, scope.transaction);
     return offering;
+  }
+  async resolveOrderUnits(scope: AuthorizedScope, selections: readonly OrderSelection[]): Promise<ResolvedOrderUnit[]> {
+    const catalogue = await this.snapshot(scope.installation, scope.transaction);
+    return selections.map(selection => {
+      const resolved = resolveSelection({ offeringId: selection.offeringId,
+        ...(selection.variantId === undefined ? {} : { variantId: selection.variantId }),
+        addOnIds: selection.addOnIds, ...(selection.choices.length ? { choices: selection.choices } : {}),
+      }, catalogue);
+      return { offeringId: resolved.offeringId, name: resolved.name, revision: resolved.revision,
+        currencyCode: resolved.currencyCode, scale: resolved.scale, unitMinor: minor(resolved.total, resolved.scale).toString(),
+        components: resolved.components.map(row => ({ ...row })),
+        addOns: resolved.addOns.map(row => ({ id: row.id, name: row.name, surcharge: row.surcharge })),
+        choices: resolved.choices.map(row => ({ ...row })),
+      };
+    });
   }
   async resolve(scope: AuthorizedScope, value: unknown) {
     return resolveSelection(value, await this.snapshot(scope.installation, scope.transaction));

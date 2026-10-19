@@ -15,6 +15,7 @@
     "test:bootstrap": "pnpm --filter @servicelane/api test:bootstrap",
     "recover-administrator": "pnpm --filter @servicelane/api recover-administrator",
     "test:access": "pnpm --filter @servicelane/api test:access",
-    "test:menu": "pnpm --filter @servicelane/api test:menu"
+    "test:menu": "pnpm --filter @servicelane/api test:menu",
+    "test:orders": "pnpm --filter @servicelane/api test:orders"
   }
 }

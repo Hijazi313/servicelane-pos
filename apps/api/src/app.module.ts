@@ -1,3 +1,4 @@
+import { OrdersModule } from './modules/orders/public.js';
 import { MenuModule } from './modules/menu/public.js';
 import { AccessHttpModule } from './modules/authentication/http/access-http.module.js';
 import { Module } from '@nestjs/common';
@@ -12,6 +13,7 @@ import { HealthController } from './infrastructure/health.controller.js';
     DatabaseModule,
     AccessHttpModule,
     MenuModule,
+    OrdersModule,
   ],
   controllers: [HealthController],
 })
