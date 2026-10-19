@@ -4,7 +4,7 @@
 
 - Stage: Foundation F-01 remains complete; [acceptance and evidence limits](project-foundation/phase-tracker.md#closeout--2026-10-12).
 - Approved topology: one business per LAN installation, dedicated local PostgreSQL, locally served client assets and one maintained codebase; explicit user approval on 2026-10-12. [Decision and rationale](../architecture/vendor-isolation-proposal.md).
-- Current activity: Menu/MN-00/MN-01 accepted and integrated through [PR #9](https://github.com/Hijazi313/servicelane-pos/pull/9), squash `b09770e`. User authorized review/merge and continuation; [Orders initial discovery](orders/discovery.md) is prepared on `codex/orders-discovery`. Orders business scope and limits approved for the specification on 2026-10-20; bounded OR-01 specification ready for implementation authorization. Implementation remains unauthorized. No database access/rerun or deployment.
+- Current activity: Menu/MN-00/MN-01 accepted and integrated through [PR #9](https://github.com/Hijazi313/servicelane-pos/pull/9), squash `b09770e`. User authorized review/merge and continuation; [Orders initial discovery](orders/discovery.md) is prepared on `codex/orders-discovery`. OR-01 source implementation authorized on 2026-10-20; [Orders phase tracker](../../apps/api/src/modules/orders/docs/features/capture/phase-tracker.md) owns scope, progress and verification limits. No source acceptance claimed. No database access/rerun or deployment.
 - Current phase: BA-01 complete; BA-02 complete under [user acceptance](business-access/phase-tracker.md#ba-02-acceptance--2026-10-17); BA-D01–06 approved; BA-03-T01 complete and [user-accepted](business-access/phase-tracker.md#ba-03-acceptance-and-closeout--2026-10-17) under its revised development scope; two-database execution deferred, unrun.
 - Deferred validation remains in the [canonical foundation handoff](project-foundation/phase-tracker.md#current-handoff--2026-10-12) and [acceptance record](../acceptance/project-foundation.md).
 
@@ -12,7 +12,7 @@
 
 BA-01/02/03 accepted development scope and historical execution permissions are owned by the [joint BA tracker](business-access/phase-tracker.md). They do not authorize new Menu or database work.
 
-Current handoff: PR #9 was reviewed at exact head `dcb686a`; configured PR-title CI passed, no review threads/submissions existed, and no new material defect was found. User-authorized squash merge completed as `b09770e`; local main fast-forwarded and remote Menu branch was removed by GitHub. Existing code/database evidence reused; no database rerun. Orders business choices/limits were approved for the specification on 2026-10-20; next obtain implementation authorization for the bounded specification in the [single discovery proposal](orders/discovery.md). Orders implementation is not authorized. Preserve the local Menu ledger and pending incident reviews.
+Current handoff: PR #9 was reviewed at exact head `dcb686a`; configured PR-title CI passed, no review threads/submissions existed, and no new material defect was found. User-authorized squash merge completed as `b09770e`; local main fast-forwarded and remote Menu branch was removed by GitHub. Existing code/database evidence reused; no database rerun. Orders source work is active under the 2026-10-20 authorization; [owning phase tracker](../../apps/api/src/modules/orders/docs/features/capture/phase-tracker.md). Preserve the local Menu ledger and pending incident reviews.
 
 ## Proposed foundation follow-ups — 2026-10-12
 
@@ -34,7 +34,7 @@ Project foundation precedes Business/Branch and Authentication/Access, which pre
 | 1 | Business/Branch foundation | complete; development scope | [Specification; BA-01 slice approved](../../apps/api/src/modules/business/docs/features/foundation/spec.md) / [joint tracker](business-access/phase-tracker.md); BA-01 accepted on staging; BA-02/BA-03 accepted under revised development scope; release verification deferred |
 | 2 | Authentication and Access | complete; development scope | [Specification; BA-01 slice approved](../../apps/api/src/modules/authentication/docs/features/access/spec.md) / [joint tracker](business-access/phase-tracker.md); BA-01 accepted on staging; BA-02/BA-03 accepted under revised development scope; release verification deferred |
 | 3 | Menu | complete development scope; merged | [MN-00 → MN-01 plan](../../apps/api/src/modules/menu/docs/README.md); accepted, PR #9 squash `b09770e`; release limits retained |
-| 4 | Orders | discovery/planning only | [Initial proposal](orders/discovery.md); business scope/limits approved for specification; source authorization pending |
+| 4 | Orders | OR-01 source active | [Specification](../../apps/api/src/modules/orders/docs/features/capture/spec.md) / [phase tracker](../../apps/api/src/modules/orders/docs/features/capture/phase-tracker.md); persistence/user acceptance pending |
 | 5 | Kitchen | proposed | Not activated |
 | 6 | Billing and payments | proposed | Not activated |
 | 7 | Cashier shifts | proposed | Not activated |
