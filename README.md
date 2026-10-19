@@ -6,6 +6,10 @@ The product is intended to support restaurant operations from menu configuration
 
 Restaurant identity, branding, currency, timezone, and fiscal settings belong to business configuration.
 
+## Why this project?
+
+ServiceLane POS aims to bring everyday restaurant workflows into one system designed to run on the restaurant's local network. The goal is to support independent businesses through configurable menus and business settings, while keeping improvements shared across one maintained codebase.
+
 ## Project status
 
 **Active development · Backend API only · Not production-ready**
