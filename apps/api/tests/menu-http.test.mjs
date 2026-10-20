@@ -173,3 +173,17 @@ test('editable size: inclusive UTF-8 boundary reserves revision digits and count
     assert.deepEqual(h.state(), afterExact);
   } finally { await h.app.close(); }
 });
+
+test('Menu domain reasons map only at HTTP boundary and preserve sanitized responses', async () => {
+  const { MenuError } = await import('../dist/menu-check/modules/menu/public.js');
+  const h = await harness();
+  try {
+    const service = h.app.get(MenuService);
+    for (const [reason, status] of [ ['INVALID_INPUT', 400], ['DEFINITION_TOO_LARGE', 400], ['NOT_FOUND', 404], ['SELECTION_UNAVAILABLE', 409], ['CURRENCY_CHANGED', 409], ['STALE_REVISION', 409], ['CATALOGUE_CAPACITY', 409], ['UNSUPPORTED_CURRENCY', 503], ['CATALOGUE_UNAVAILABLE', 503] ]) {
+      service.list = async () => { throw new MenuError(reason, 'SyntheticPrivateFailure'); };
+      const response = await h.request('GET', '/offerings');
+      assert.equal(response.statusCode, status); assert.equal(response.json().statusCode, status);
+      assert.equal(response.headers['cache-control'], 'no-store'); assert.doesNotMatch(response.body, /SyntheticPrivateFailure|reason/);
+    }
+  } finally { await h.app.close(); }
+});

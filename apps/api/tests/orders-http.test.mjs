@@ -65,3 +65,22 @@ test('HTTP denies revoked/disabled/grantless callers; Menu errors and actual inp
     assert.equal(h.state().orders.length, 0);
   } finally { await h.app.close(); }
 });
+
+test('Orders filter preserves Menu and Orders error contracts without domain HTTP statuses', async () => {
+  const { MenuError } = await import('../dist/orders-check/modules/menu/public.js');
+  const { OrdersError } = await import('../dist/orders-check/modules/orders/domain/capture.js');
+  const h = await harness();
+  try {
+    for (const [reason, status, code] of [ ['INVALID_INPUT', 400, 'INVALID_MENU_SELECTION'], ['NOT_FOUND', 404, 'MENU_OFFERING_NOT_FOUND'], ['SELECTION_UNAVAILABLE', 409, 'MENU_SELECTION_CONFLICT'], ['UNSUPPORTED_CURRENCY', 503, 'MENU_UNAVAILABLE'] ]) {
+      h.menu.resolve = async () => { throw new MenuError(reason, 'SyntheticPrivateFailure'); };
+      const response = await h.request('POST', '', h.body());
+      assert.deepEqual(response.json(), { statusCode: status, code }); assert.equal(response.statusCode, status);
+    }
+    for (const [code, status] of [ ['INVALID_ORDER_INPUT', 400], ['INVALID_RETRY_KEY', 400], ['INVALID_CURRENCY', 400], ['INVALID_LINES', 400], ['ORDER_LIMIT_EXCEEDED', 400], ['ORDER_NOT_FOUND', 404], ['ORDER_AMOUNT_CAPACITY', 409], ['RETRY_CONTENT_CONFLICT', 409], ['PRICE_CONFIRMATION_REQUIRED', 409], ['ORDER_RESPONSE_CAPACITY', 409], ['STALE_ORDER_POLICY', 409], ['MENU_RESULT_UNAVAILABLE', 503], ['INSTALLATION_UNAVAILABLE', 503] ]) {
+      h.menu.resolve = async () => { throw new OrdersError(code); };
+      const response = await h.request('POST', '', h.body());
+      assert.deepEqual(response.json(), { statusCode: status, code }); assert.equal(response.statusCode, status);
+    }
+    assert.equal(h.state().orders.length, 0);
+  } finally { await h.app.close(); }
+});

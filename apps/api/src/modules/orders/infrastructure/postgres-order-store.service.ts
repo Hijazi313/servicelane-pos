@@ -18,10 +18,10 @@ export class PostgresOrderStore extends OrderStore {
     const db = transactionDatabase(transaction);
     if (expectedRevision === 0) {
       const rows = await db.insert(orderCapturePolicies).values({ businessId, ...policy }).onConflictDoNothing().returning({ id: orderCapturePolicies.businessId });
-      if (!rows.length) throw new OrdersError(409, 'STALE_ORDER_POLICY');
+      if (!rows.length) throw new OrdersError('STALE_ORDER_POLICY');
     } else {
       const rows = await db.update(orderCapturePolicies).set(policy).where(and(eq(orderCapturePolicies.businessId, businessId), eq(orderCapturePolicies.revision, expectedRevision))).returning({ id: orderCapturePolicies.businessId });
-      if (!rows.length) throw new OrdersError(409, 'STALE_ORDER_POLICY');
+      if (!rows.length) throw new OrdersError('STALE_ORDER_POLICY');
     }
   }
   async replay(businessId: string, branchId: string, key: string, transaction: TransactionContext): Promise<StoredOrder | undefined> {

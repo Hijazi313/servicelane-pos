@@ -2,9 +2,9 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { randomUUID } from 'node:crypto';
 import { fixture } from './orders-fixture.mjs';
-import { RESPONSE_BYTES, canonical, checkedAmount } from '../dist/orders-check/modules/orders/domain/capture.js';
+import { OrdersError, RESPONSE_BYTES, canonical, checkedAmount } from '../dist/orders-check/modules/orders/domain/capture.js';
 import { snapshotFits } from '../dist/orders-check/modules/orders/application/orders.service.js';
-const rejects = (work, code) => assert.rejects(work, error => error.code === code || error.status === code);
+const rejects = (work, code) => assert.rejects(work, error => { if (error instanceof OrdersError) { assert.equal('status' in error, false); return code === 400 ? error.code.startsWith('INVALID_') : error.code === code; } return error.status === code; });
 
 test('capture exact snapshots and customer instructions; replay survives Menu/policy and JSONB key-order changes', async () => {
   const h = fixture(), body = h.body({ customer: { name: ' Synthetic guest ', phone: '+1 (555) 010-0000' }, instructions: ' Pack separately ' });

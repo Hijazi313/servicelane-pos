@@ -1,10 +1,11 @@
+export type OrdersErrorCode = 'INVALID_ORDER_INPUT' | 'ORDER_AMOUNT_CAPACITY' | 'INVALID_RETRY_KEY' | 'INVALID_CURRENCY' | 'INVALID_LINES' | 'RETRY_CONTENT_CONFLICT' | 'ORDER_LIMIT_EXCEEDED' | 'MENU_RESULT_UNAVAILABLE' | 'PRICE_CONFIRMATION_REQUIRED' | 'ORDER_RESPONSE_CAPACITY' | 'INSTALLATION_UNAVAILABLE' | 'ORDER_NOT_FOUND' | 'STALE_ORDER_POLICY';
 export class OrdersError extends Error {
-  constructor(readonly status: 400 | 404 | 409 | 503, readonly code: string, readonly details?: unknown) { super(code); }
+  constructor(readonly code: OrdersErrorCode, readonly details?: unknown) { super(code); }
 }
 export const MAX_LINES = 500, MAX_QUANTITY = 1000, RESPONSE_BYTES = 1_048_576;
 export interface LimitPolicy { maxLines: number; maxQuantity: number; revision: number }
 export const DEFAULT_POLICY: Readonly<LimitPolicy> = Object.freeze({ maxLines: 50, maxQuantity: 100, revision: 0 });
-export function invalid(): never { throw new OrdersError(400, 'INVALID_ORDER_INPUT'); }
+export function invalid(): never { throw new OrdersError('INVALID_ORDER_INPUT'); }
 function isRecord(value: unknown): value is Record<string, unknown> {
   return typeof value === 'object' && value !== null && !Array.isArray(value);
 }
@@ -47,6 +48,6 @@ export function minorAmount(value: unknown): string {
   return value;
 }
 export function checkedAmount(value: bigint): string {
-  if (value < 0n || value >= 10n ** 24n) throw new OrdersError(409, 'ORDER_AMOUNT_CAPACITY');
+  if (value < 0n || value >= 10n ** 24n) throw new OrdersError('ORDER_AMOUNT_CAPACITY');
   return value.toString();
 }

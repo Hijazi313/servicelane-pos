@@ -29,7 +29,7 @@ export function fixture() {
   const menu = new MenuOrderResolver(new MenuService(menuStore));
   const store = {
     policy: async (business, tx) => { if (tx) assert.equal(tx, active); return structuredClone(state.policies[business] ?? { maxLines: 50, maxQuantity: 100, revision: 0 }); },
-    updatePolicy: async (business, value, expected, tx) => { assert.equal(tx, active); if ((state.policies[business]?.revision ?? 0) !== expected) throw new OrdersError(409, 'STALE_ORDER_POLICY'); state.policies[business] = structuredClone(value); },
+    updatePolicy: async (business, value, expected, tx) => { assert.equal(tx, active); if ((state.policies[business]?.revision ?? 0) !== expected) throw new OrdersError('STALE_ORDER_POLICY'); state.policies[business] = structuredClone(value); },
     replay: async (business, branch, key, tx) => { assert.equal(tx, active); return structuredClone(state.orders.find(row => row.business === business && row.branch === branch && row.key === key)?.order); },
     get: async (business, branch, id) => structuredClone(state.orders.find(row => row.business === business && row.branch === branch && row.order.snapshot.id === id)?.order.snapshot),
     save: async (business, branch, key, order, tx) => { assert.equal(tx, active); state.orders.push({ business, branch, key, order: structuredClone(order) }); if (failSave) throw new Error('synthetic private driver detail'); },
