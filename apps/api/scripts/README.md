@@ -44,4 +44,16 @@ On 2026-10-20 the full scan inspected 15 source files and reported one existing 
 
 This is a syntax guard, not a complete architecture proof. It does not perform cross-file type/data-flow analysis, follow arbitrary barrel aliases, resolve computed import/member names or discover every free-form numeric status mapping. Arbitrary property mutation through helper calls can escape detection. Recognized errors are Error-derived/local subclasses, error-like names and known exception aliases; a status-named property with another meaning can require human review. No rule is waived automatically. Authorization, ownership, transactions and other architectural constraints still require their existing review.
 
-The GitHub Actions workflow is source-only until published; it has not been run remotely. Its dependency installation step is declarative CI setup, not local installation authorization.
+## GitHub Actions verification — 2026-10-21
+
+User authorized committing/pushing the checker and verifying GitHub integration, without merge. [Run 39484691271](https://github.com/Hijazi313/servicelane-pos/actions/runs/39484691271) at exact source head `c7098f1ca7ad6a33a942b88fef76825459e804b3` established:
+
+- Node/pnpm setup, exact pnpm@12.11.2 assertion and frozen dependency installation with lifecycle scripts disabled passed.
+- All seven checker tests passed on GitHub's Ubuntu runner.
+- The strict full scan inspected 15 files and failed with exactly the existing Authentication AccessError status finding, exit code 1. The workflow conclusion is **failure**, not a green repository check. The integration successfully reaches and enforces the checker.
+
+Earlier retained runs: [39484253754](https://github.com/Hijazi313/servicelane-pos/actions/runs/39484253754) at `44d62aa` stopped before checker execution because pnpm manager metadata was missing from the lockfile; [39484553459](https://github.com/Hijazi313/servicelane-pos/actions/runs/39484553459) at `eb260ee` verified the manager pin but stopped on the old peer-policy config location. These are setup failures, not checker results.
+
+CI now uses action-managed pnpm with `pnpm_config_pm_on_fail: ignore` and an explicit version assertion, following the [external manager setting](https://github.com/pnpm/pnpm.io/blob/main/docs/settings/cli.md). The existing `autoInstallPeers: false` policy is also declared in workspace configuration. Frozen application dependencies and disabled lifecycle scripts remain enforced; the lockfile/application dependency graph is unchanged. No local installation or database work occurred.
+
+The workflow is triggered by PR creation/reopening/new commits and pushes to main. Required-check branch protection has not been configured or verified by this task; CI execution alone does not make it a mandatory merge gate. Resolve the Authentication finding under separate source authorization before expecting the full gate to pass. No exception/baseline, incident closure, merge or production-readiness claim follows from this verification.

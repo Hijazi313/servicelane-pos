@@ -50,3 +50,7 @@ Process review: [INC-20261020-02](../../../../../../../../docs/quality/agent-inc
 ## Local correction commit authorization — 2026-10-20
 
 User explicitly requested committing the existing correction and incident documentation before later architecture-check work. This supersedes the earlier no-commit restriction only for this checkpoint. Existing compilation/25-test evidence is reused; subsequent inspected source changes are formatting-only. Incident closure, new checks/guardrails, database work, push and PR mutation remain unauthorized.
+
+## Authorized publication — 2026-10-21
+
+The user authorized committing/pushing the existing architecture guard and checking GitHub integration, without merge. The existing Orders source/error-correction commits were already on the topic remote at preflight. PR #10 remains draft and its description now reflects implemented source and pending persistence/user acceptance rather than planning only. [Checker remote evidence](../../../../../../scripts/README.md#github-actions-verification--2026-10-21) owns CI outcomes; it does not establish Orders database acceptance. Historical no-push statements above describe their original phase authorization.
