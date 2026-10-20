@@ -37,6 +37,7 @@ Use `feat`, `fix`, `docs`, `refactor`, `test`, `chore`, `build`, `ci`, `perf` or
 ## Review and merge
 
 - Once a remote is established, submit changes through pull requests. Describe the problem, resulting behavior, verification evidence and material limitations. Use a conventional PR title.
+- After an authorized push, check applicable GitHub Actions results for the exact PR head before claiming integration complete or merging. Report pending, failed or missing expected checks; CI success does not replace acceptance or grant merge permission.
 - Keep each PR focused on one logical outcome. A phase boundary may suit a PR, but neither a whole module nor a single phase is a mandatory PR size.
 - Prefer squash merging a focused PR, using its title as the final commit subject. Delete the branch after merging.
 - Configure host-side protection for `main`: require PRs and block force pushes and deletion. Require independent approval when another reviewer is available; require status checks only after they exist and are authorized. These settings are not enforced by this file.
