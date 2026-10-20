@@ -53,4 +53,6 @@ Use `feat`, `fix`, `docs`, `refactor`, `test`, `chore`, `build`, `ci`, `perf` or
 
 Follow the canonical [verification policy](docs/project-scope.md#verification-policy). Run the smallest relevant checks using existing tooling; broader checks require justification. Report results, unverified behavior and pending user acceptance. Hooks and installation scripts must respect the same authorization boundaries. Source inspection is not proof of successful runtime behavior.
 
+For domain/application boundary changes or changes to the guard itself, use the [focused architecture checks](apps/api/scripts/README.md); passing checker fixtures and passing the repository scan are distinct results. Do not suppress existing findings to make CI green.
+
 Find common commands in [Development commands](README.md#development-commands) and available scripts in the root and owning package `package.json` files; use only existing checks appropriate to the change.

@@ -14,7 +14,9 @@
     "recover-administrator": "node --env-file-if-exists=../../.env dist/operator/recover-administrator.js",
     "test:access": "tsc -p tsconfig.json --outDir dist/ba02-check --sourceMap false && node --test tests/credentials.test.mjs tests/access.test.mjs tests/access-http.test.mjs tests/authorized-operation.test.mjs tests/recovery.test.mjs",
     "test:menu": "tsc -p tsconfig.json --outDir dist/menu-check --sourceMap false && node --test tests/menu.test.mjs tests/menu-http.test.mjs tests/mn01-restart.test.mjs",
-    "test:orders": "tsc -p tsconfig.json --outDir dist/orders-check --sourceMap false && node --test tests/orders.test.mjs tests/orders-http.test.mjs"
+    "test:orders": "tsc -p tsconfig.json --outDir dist/orders-check --sourceMap false && node --test tests/orders.test.mjs tests/orders-http.test.mjs",
+    "check:architecture": "node scripts/check-http-boundaries.mjs",
+    "test:architecture": "node --test tests/http-boundaries.test.mjs"
   },
   "dependencies": {
     "@nestjs/common": "12.1.2",

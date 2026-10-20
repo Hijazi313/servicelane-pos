@@ -116,6 +116,8 @@ Run commands from the repository root.
 | `pnpm start` | Run the compiled API |
 | `pnpm test:access` | Run focused database-free authentication and access checks |
 | `pnpm test:menu` | Run focused database-free menu checks |
+| `pnpm test:architecture` | Test the HTTP boundary checker with passing/failing fixtures |
+| `pnpm check:architecture` | Scan domain/application HTTP boundaries; exits nonzero on violations |
 | `pnpm db:generate` | Generate migration files for review |
 | `pnpm db:migrate` | Apply migrations to the configured database |
 

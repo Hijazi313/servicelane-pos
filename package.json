@@ -16,6 +16,8 @@
     "recover-administrator": "pnpm --filter @servicelane/api recover-administrator",
     "test:access": "pnpm --filter @servicelane/api test:access",
     "test:menu": "pnpm --filter @servicelane/api test:menu",
-    "test:orders": "pnpm --filter @servicelane/api test:orders"
+    "test:orders": "pnpm --filter @servicelane/api test:orders",
+    "check:architecture": "pnpm --filter @servicelane/api check:architecture",
+    "test:architecture": "pnpm --filter @servicelane/api test:architecture"
   }
 }

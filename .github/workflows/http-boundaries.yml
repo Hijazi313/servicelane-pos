@@ -1,0 +1,27 @@
+name: HTTP boundaries
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  http-boundaries:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24.21.0
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 12.11.2
+      - name: Install locked dependencies without lifecycle scripts
+        run: pnpm install --frozen-lockfile --ignore-scripts
+      - name: Test the checker
+        run: pnpm test:architecture
+      - name: Check all domain and application source
+        run: pnpm check:architecture
