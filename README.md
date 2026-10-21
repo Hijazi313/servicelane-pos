@@ -23,7 +23,7 @@ The backend currently includes:
 | Menu catalogue | Catalogue maintenance, selectable sizes, optional extras, configurable combos, and selection pricing |
 | Order capture | Scoped takeaway capture/readback, immutable merchandise snapshots, configurable limits and duplicate-safe retries |
 
-Business setup, authentication/access, and menu catalogue are accepted under their recorded backend development scopes. Menu was integrated through [PR #9](https://github.com/Hijazi313/servicelane-pos/pull/9); Orders capture/readback is implemented with focused offline and bounded staging persistence verification; its [acceptance status and limits](apps/api/src/modules/orders/docs/features/capture/phase-tracker.md) remain separate.
+Business setup, authentication/access, and menu catalogue are accepted under their recorded backend development scopes. Menu was integrated through [PR #9](https://github.com/Hijazi313/servicelane-pos/pull/9); Orders capture/readback was explicitly accepted on 2026-10-21 under its recorded backend development scope, with focused offline and bounded staging persistence evidence; [closeout and limits](apps/api/src/modules/orders/docs/features/capture/phase-tracker.md#acceptance-and-closeout--2026-10-21).
 
 The frontend, further order workflows, kitchen, billing, payments, shifts, inventory, and reporting remain planned. Deployment, backup, and recovery validation remain incomplete.
 
