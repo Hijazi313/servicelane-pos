@@ -2,6 +2,7 @@ import { Body, Controller, Get, HttpCode, HttpException, Param, Post, Put, Req, 
 import { AccessService } from '../../authentication/public.js';
 import { AccessEntry, proof, type AccessRequest } from '../../authentication/http/public.js';
 import { MenuService } from '../application/menu.service.js';
+import { menuErrorStatus } from './menu-error-mapping.js';
 import { MenuError } from '../domain/catalogue.js';
 
 @Controller('api/v1/menu')
@@ -9,7 +10,7 @@ export class MenuController {
   constructor(private readonly menu: MenuService, private readonly access: AccessService) {}
   private async boundary<T>(work: () => Promise<T>): Promise<T> {
     try { return await work(); }
-    catch (error) { if (error instanceof MenuError) throw new HttpException({ statusCode: error.status }, error.status); throw error; }
+    catch (error) { if (error instanceof MenuError) throw new HttpException({ statusCode: menuErrorStatus(error.reason) }, menuErrorStatus(error.reason)); throw error; }
   }
   private async context(request: AccessRequest) {
     const context = await this.access.me(proof(request), true);

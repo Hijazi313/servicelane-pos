@@ -202,7 +202,7 @@ try {
   const [winner,loser]=await ordered(
     scope=>menu.save(scope,{definition:{...edit(first),name:tag+'.winner'},expectedRevision:1},first.id),
     scope=>otherMenu.save(scope,{definition:{...edit(first),name:tag+'.loser'},expectedRevision:1},first.id));
-  assert.equal(winner.revision,2); assert.equal(loser.error?.status,409);
+  assert.equal(winner.revision,2); assert.equal(loser.error?.reason,'STALE_REVISION');
   assert.equal((await menu.get(context,first.id,true)).name,tag+'.winner'); record('C01');
   const [a,b]=await ordered(
     scope=>menu.save(scope,{definition:edit(winner),expectedRevision:2},first.id),
@@ -214,14 +214,14 @@ try {
     scope=>otherMenu.deactivate(scope,first.id,{expectedRevision:3}));
   assert.equal(saved.revision,2); assert.equal(deactivated.value?.active,false);
   assert.ok(!(await menu.list(context)).some(row=>row.id===meal.id));
-  await assert.rejects(run(scope=>menu.resolve(scope,{offeringId:meal.id,choices:[{groupId:meal.choiceGroups[0].id,optionIds:[meal.choiceGroups[0].options[0].id]}]})),error=>error.status===409);
+  await assert.rejects(run(scope=>menu.resolve(scope,{offeringId:meal.id,choices:[{groupId:meal.choiceGroups[0].id,optionIds:[meal.choiceGroups[0].options[0].id]}]})),error=>error.reason==='SELECTION_UNAVAILABLE');
   // Reactivate only this synthetic dependency to exercise the reverse ordering.
   const inactive=await menu.get(context,first.id,true);
   const active=await run(scope=>menu.save(scope,{definition:{...edit(inactive),active:true},expectedRevision:inactive.revision},first.id));
   const [off,denied]=await ordered(
     scope=>menu.deactivate(scope,first.id,{expectedRevision:active.revision}),
     scope=>otherMenu.save(scope,{definition:edit(saved),expectedRevision:2},meal.id));
-  assert.equal(off.active,false); assert.equal(denied.error?.status,409);
+  assert.equal(off.active,false); assert.equal(denied.error?.reason,'SELECTION_UNAVAILABLE');
   assert.deepEqual(await menu.get(context,meal.id,true),saved); record('C03');
   await run(scope=>menu.save(scope,{definition:{...edit(off),active:true},expectedRevision:off.revision},first.id));
   stage='coherent-reads';

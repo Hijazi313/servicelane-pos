@@ -19,6 +19,7 @@ Follow the entry/resume and closeout gates in [workflow guidance](references/wor
 
 - Global `docs/`: product scope, architecture, compliance and global tracking.
 - `apps/api/src/modules/<module>/docs/README.md`: module boundaries and feature/phase index.
+- `apps/api/src/modules/<module>/docs/capabilities.md`: implemented capability index; read directly for capability discovery.
 - `<module>/docs/features/<feature>/spec.md`: intended behavior and acceptance criteria.
 - `<module>/docs/features/<feature>/phase-tracker.md`: active phase, progress, evidence and current handoff.
 

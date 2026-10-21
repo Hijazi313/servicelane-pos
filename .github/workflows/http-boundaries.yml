@@ -1,0 +1,41 @@
+name: HTTP boundaries
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  http-boundaries:
+    runs-on: ubuntu-latest
+    env:
+      # action-setup owns pnpm installation; do not resolve a second manager from the lockfile.
+      pnpm_config_pm_on_fail: ignore
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24.21.0
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 12.11.2
+      - name: Verify pinned package manager
+        run: |
+          node --input-type=module <<'JS'
+          import { readFileSync } from 'node:fs';
+          import { execFileSync } from 'node:child_process';
+          import assert from 'node:assert/strict';
+          const expected = JSON.parse(readFileSync('package.json', 'utf8')).packageManager;
+          const actual = `pnpm@${execFileSync('pnpm', ['--version'], { encoding: 'utf8' }).trim()}`;
+          assert.equal(actual, expected);
+          console.log(`Verified ${actual}`);
+          JS
+      - name: Install locked dependencies without lifecycle scripts
+        run: pnpm install --frozen-lockfile --ignore-scripts
+      - name: Test the checker
+        run: pnpm test:architecture
+      - name: Check all domain and application source
+        run: pnpm check:architecture

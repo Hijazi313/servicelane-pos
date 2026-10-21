@@ -91,7 +91,7 @@ test('login/password cookie transport hides session tokens and logout clears hos
     assert.equal(logout.statusCode, 204);
     assert.equal(logout.body, '');
     assert.ok(logout.headers['set-cookie'].every((cookie) => cookie.includes('Max-Age=0')));
-    h.stub.logout = async () => { throw new AccessError(403, 'Invalid CSRF proof'); };
+    h.stub.logout = async () => { throw new AccessError('FORBIDDEN', 'Invalid CSRF proof'); };
     const deniedLogout = await h.request({ method: 'POST', url: '/api/v1/auth/logout' });
     assert.equal(deniedLogout.statusCode, 403);
     assert.equal(deniedLogout.headers['set-cookie'], undefined);
@@ -106,7 +106,7 @@ test('real guard selects staff/admin restrictions and defaults undeclared routes
     const denied = await h.request({ method: 'GET', url: '/undeclared' });
     assert.equal(denied.statusCode, 401);
     assert.ok(!denied.body.includes('must not execute'));
-    h.stub.authorize = async () => { throw new AccessError(401, 'Authentication required'); };
+    h.stub.authorize = async () => { throw new AccessError('UNAUTHENTICATED', 'Authentication required'); };
     assert.equal((await h.request({ method: 'GET', url: '/api/v1/staff' })).statusCode, 401);
   } finally { await h.app.close(); }
 });
@@ -118,7 +118,7 @@ test('real exception wiring sanitizes internal errors, returns Retry-After and r
     const failed = await h.request({ method: 'POST', url: '/api/v1/auth/login', payload: {} });
     assert.equal(failed.statusCode, 503);
     assert.deepEqual(failed.json(), { statusCode: 503, message: 'Service unavailable' });
-    h.stub.login = async () => { throw new AccessError(429, 'Too many attempts', 42); };
+    h.stub.login = async () => { throw new AccessError('RATE_LIMITED', 'Too many attempts', 42); };
     const limited = await h.request({ method: 'POST', url: '/api/v1/auth/login', payload: {} });
     assert.equal(limited.statusCode, 429);
     assert.equal(limited.headers['retry-after'], '42');
@@ -149,5 +149,20 @@ test('unprefixed technical health preserves accepted success and unavailable con
     assert.equal(response.statusCode, 503); assert.deepEqual(response.json(), { status: 'unavailable' });
     const duplicate = await h.request({ method: 'GET', url: '/api/v1/auth/csrf', headers: { cookie: '__Host-session=one; __Host-session=two' } });
     assert.equal(duplicate.statusCode, 400);
+  } finally { await h.app.close(); }
+});
+
+test('semantic Access errors retain every HTTP mapping, safe body and retry header without status ownership', async () => {
+  const h = await harness();
+  try {
+    for (const [reason, status] of [['INVALID_INPUT', 400], ['UNAUTHENTICATED', 401], ['FORBIDDEN', 403], ['NOT_FOUND', 404], ['CONFLICT', 409], ['RATE_LIMITED', 429], ['UNAVAILABLE', 503]]) {
+      const error = new AccessError(reason, 'Safe access failure', reason === 'RATE_LIMITED' ? 17 : undefined);
+      assert.equal('status' in error, false); assert.equal('retryAfter' in error, false);
+      h.stub.login = async () => { throw error; };
+      const response = await h.request({ method: 'POST', url: '/api/v1/auth/login', payload: {} });
+      assert.equal(response.statusCode, status); assert.deepEqual(response.json(), { statusCode: status, message: 'Safe access failure' });
+      assert.equal(response.headers['cache-control'], 'no-store');
+      assert.equal(response.headers['retry-after'], reason === 'RATE_LIMITED' ? '17' : undefined);
+    }
   } finally { await h.app.close(); }
 });

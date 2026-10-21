@@ -13,7 +13,7 @@ export class PostgresMenuStore extends MenuStore {
     // One SELECT = one coherent Menu snapshot, including referenced item definitions.
     const rows = await db.select({ definition: menuOfferings.definition }).from(menuOfferings)
       .where(eq(menuOfferings.businessId, businessId)).orderBy(menuOfferings.id).limit(501);
-    if (rows.length > 500) throw new MenuError(503, 'Catalogue capacity exceeded');
+    if (rows.length > 500) throw new MenuError('CATALOGUE_UNAVAILABLE', 'Catalogue capacity exceeded');
     return rows.map(row => row.definition);
   }
   async save(businessId: string, offering: Offering, expectedRevision: number | undefined, transaction: TransactionContext) {
@@ -23,7 +23,7 @@ export class PostgresMenuStore extends MenuStore {
     else {
       const updated = await db.update(menuOfferings).set({ revision: row.revision, definition: row.definition })
         .where(and(eq(menuOfferings.businessId, businessId), eq(menuOfferings.id, offering.id), eq(menuOfferings.revision, expectedRevision))).returning({ id: menuOfferings.id });
-      if (!updated.length) throw new MenuError(409, 'Stale offering revision');
+      if (!updated.length) throw new MenuError('STALE_REVISION', 'Stale offering revision');
     }
     if (offering.kind === 'item') {
       const existing = await db.select({ id: menuVariants.id }).from(menuVariants)

@@ -1,0 +1,345 @@
+{
+  "tag": "or01.2b001f56-d609-434b-a3a3-dd7a372b5eca",
+  "startedAt": "2026-10-21T18:06:12.984Z",
+  "source": [
+    {
+      "path": "apps/api/tests/or01-acceptance.mjs",
+      "sha256": "962006650f5d9e9dca9d42b817bb46c85f0bfbccdd7d501a772507db976a2cc5"
+    },
+    {
+      "path": "apps/api/tests/or01-controls.mjs",
+      "sha256": "34c0224e66d924e056b682d51e131734af4c9b6761b621d8d919f13f75ded2bd"
+    },
+    {
+      "path": "apps/api/tests/or01-cases.mjs",
+      "sha256": "c0b58b16e4a81f04affa06865973f9755cb6d9e8f92f7ce56c00a89a535ac43f"
+    },
+    {
+      "path": "apps/api/tests/or01-runtime.mjs",
+      "sha256": "35a8c6303a1e4bc61a928b3fdd4f5312d1e639efe05b0e951e0451642c6243d4"
+    },
+    {
+      "path": "apps/api/tests/or01-restart.mjs",
+      "sha256": "58512cedbf84bc66e6675c2d18d1cd4b9b6bf8c8c85f8e8c7840da660d785d5f"
+    },
+    {
+      "path": "apps/api/tests/mn01-restart-operation.mjs",
+      "sha256": "0b4099ee9d23d30fd4329e803754f9e09fd505d609bf4e99bc8de89f0c738658"
+    },
+    {
+      "path": "apps/api/migrations/meta/_journal.json",
+      "sha256": "9122ca688247c523e8117d99137c7981f5e8a5f01641351854c361f8766a432d"
+    },
+    {
+      "path": "apps/api/migrations/0000_business_bootstrap.sql",
+      "sha256": "0a8a058d3a4038eb4d9ffb3ceda3037f0fabcbe6c39b62f95b9b7004b2659f97"
+    },
+    {
+      "path": "apps/api/migrations/0001_staff_access.sql",
+      "sha256": "f70af5681eca5b98fb0eb080f779127f45c26314ed309a9fe495c908b0c304da"
+    },
+    {
+      "path": "apps/api/migrations/0002_login_reservations.sql",
+      "sha256": "abafdd843017daa4962559f8e53734d4a0ded51803a75991640864a2feec5c28"
+    },
+    {
+      "path": "apps/api/migrations/0003_menu_catalogue.sql",
+      "sha256": "34532984e10d5286dcf0c4104eadca1efdf738ff30e48afb2ccdab48f6900017"
+    },
+    {
+      "path": "apps/api/migrations/0004_order_capture.sql",
+      "sha256": "f2fa8b0b951d6bff6ec5c3137e68b157a7a9e4234758c2d48fb4cb89f5eb0c36"
+    },
+    {
+      "path": "apps/api/src/infrastructure/configuration.ts",
+      "sha256": "8bca9e41409001fe1e72048da74f9468b82d3e61b353dd410ffc7d5a27db3882"
+    },
+    {
+      "path": "apps/api/dist/orders-check/infrastructure/configuration.js",
+      "sha256": "6614a24c79c6998721bf40ba57b9b3cee26c5294fb1ef272aa1bbfc0b3fce457"
+    },
+    {
+      "path": "apps/api/src/infrastructure/database/transaction.ts",
+      "sha256": "1bafa848bce0a0d34870a25ec4ccd5768fa0bebc93e8046962565366fa4feb3a"
+    },
+    {
+      "path": "apps/api/dist/orders-check/infrastructure/database/transaction.js",
+      "sha256": "a26c94f6e8a77a975fb793ec0ee1fbb0ebc48bdfb9c856600e651619381a0f3e"
+    },
+    {
+      "path": "apps/api/src/modules/orders/application/orders.service.ts",
+      "sha256": "46ac5af4ea402083f4860050ac5da5ca837f0f63367dd18e8ef6c0096b6e6011"
+    },
+    {
+      "path": "apps/api/dist/orders-check/modules/orders/application/orders.service.js",
+      "sha256": "8aa0b32dfb395c1b056e7f4836d9dd33afd81c838c805cb04b1aca3e508ffcfa"
+    },
+    {
+      "path": "apps/api/src/modules/orders/infrastructure/postgres-order-store.service.ts",
+      "sha256": "34f9b05e85bf3240e3911bfcc21c0a38aaca129716eb98cdb128ae405b8cb359"
+    },
+    {
+      "path": "apps/api/dist/orders-check/modules/orders/infrastructure/postgres-order-store.service.js",
+      "sha256": "90191d6322c38581799d65d53ffc2b8279e4adcb6ad29e1d5660f2d4f9fecbb2"
+    },
+    {
+      "path": "apps/api/src/modules/orders/domain/capture.ts",
+      "sha256": "3e8990210600b027418ec7bfd17dd59e986a0d2bacc62947bea911b619c6e10d"
+    },
+    {
+      "path": "apps/api/dist/orders-check/modules/orders/domain/capture.js",
+      "sha256": "d7bab7c831535c8e49337f332a7712cf71012b31a11d0feb0096fdc1d47b040b"
+    },
+    {
+      "path": "apps/api/src/modules/orders/http/orders.controller.ts",
+      "sha256": "40a49e3fa6380cb0d7936af410839c943e34d23c87ec46cb31113745e99516f6"
+    },
+    {
+      "path": "apps/api/dist/orders-check/modules/orders/http/orders.controller.js",
+      "sha256": "fde5e791a75731eb2bdb4641ec29b06d14463bd69ea1f9ec99a5d54a5f1002db"
+    },
+    {
+      "path": "apps/api/src/modules/orders/http/orders-exception.filter.ts",
+      "sha256": "31f34fb4ca529e97b7df62d1f97508bc936382bd8621e304dcd555d15acd76ae"
+    },
+    {
+      "path": "apps/api/dist/orders-check/modules/orders/http/orders-exception.filter.js",
+      "sha256": "392605b32031f52f420da18c365797a7ec9f6e98d4eb337f044506bde548abb4"
+    },
+    {
+      "path": "apps/api/src/modules/menu/application/menu.service.ts",
+      "sha256": "04c57165080b334eaea98615a764eb31f7424693de37ae33b989bb1b59997a75"
+    },
+    {
+      "path": "apps/api/dist/orders-check/modules/menu/application/menu.service.js",
+      "sha256": "ece85499a7429a382ecf43b4fbefe7fdd50cadc70d0a066f29371adff0e392e4"
+    },
+    {
+      "path": "apps/api/src/modules/menu/application/menu-order-resolver.service.ts",
+      "sha256": "7c625671c98ebf376de8fc147c7fa0394e0d225517c1c0c6f7a08d5ad5d7b2a6"
+    },
+    {
+      "path": "apps/api/dist/orders-check/modules/menu/application/menu-order-resolver.service.js",
+      "sha256": "c4dd2a43f6adbe527121a8f5a3c3f93e5419f281dc341ea34f41e0218a62d3d9"
+    },
+    {
+      "path": "apps/api/src/modules/menu/infrastructure/menu-store.ts",
+      "sha256": "e6fc70e72f59785fa2b928ea8c2bce2d76f8cd84cee337b51060a0d8091a86bc"
+    },
+    {
+      "path": "apps/api/dist/orders-check/modules/menu/infrastructure/menu-store.js",
+      "sha256": "712c8d561a33f97d209e3e27d561f850d688386874df4af11550ee013c745ef3"
+    },
+    {
+      "path": "apps/api/src/modules/menu/domain/catalogue.ts",
+      "sha256": "f0b4acb7bd52ebde1dd83a6606b88ceac5e76d27b22ffdd94795564b9a367f32"
+    },
+    {
+      "path": "apps/api/dist/orders-check/modules/menu/domain/catalogue.js",
+      "sha256": "a14b2a797729425cd119249c5e905dd107b9622ad66333de405c348d4657e085"
+    },
+    {
+      "path": "apps/api/src/modules/authentication/application/access.service.ts",
+      "sha256": "f83bbdd9d39a1a48294bd9d719a00f88f7d509b59ef7e4ad05bf286f9ff2dfb0"
+    },
+    {
+      "path": "apps/api/dist/orders-check/modules/authentication/application/access.service.js",
+      "sha256": "8ec8130308b7a52287565bdd2890b5f2d7c44e5146b83cf8ca4f08f4d08f96de"
+    },
+    {
+      "path": "apps/api/src/modules/authentication/infrastructure/access-store.ts",
+      "sha256": "32582733f9c0080b24bbd3fe0f43eb94288b7073fb45e9952d48b35b4ada78e1"
+    },
+    {
+      "path": "apps/api/dist/orders-check/modules/authentication/infrastructure/access-store.js",
+      "sha256": "968f753ea7856deaeff7a7869353fd32161e95680285d40466f63183d6b58ac5"
+    },
+    {
+      "path": "apps/api/src/modules/business/infrastructure/business.service.ts",
+      "sha256": "07d5ef82c9de0bd68536cd30f52f566509efa6f679af83156dedee296816888d"
+    },
+    {
+      "path": "apps/api/dist/orders-check/modules/business/infrastructure/business.service.js",
+      "sha256": "74599e1baf6fa5e0292dde6a85eada23b40529cf925df2865907c98ee2999e6d"
+    }
+  ],
+  "gate": "passed",
+  "migration": "passed",
+  "results": [
+    {
+      "id": "P01",
+      "status": "passed",
+      "oracleTotalMinor": "8768",
+      "highTotalMinor": "399999999600",
+      "committedReadback": true
+    },
+    {
+      "id": "R01",
+      "status": "passed",
+      "rejectedAndReusedKeys": 8,
+      "realExpandedCapacity": true
+    },
+    {
+      "id": "R02",
+      "status": "passed",
+      "realInsertThenRollback": true,
+      "sessionAndConfigurationUnchanged": true
+    },
+    {
+      "id": "I01",
+      "status": "passed",
+      "foreignRows": 2,
+      "apiIndistinguishable404": true,
+      "uniqueSqlstate": "23505",
+      "currentAuthorityChecked": true
+    },
+    {
+      "id": "C01",
+      "status": "passed",
+      "observation": {
+        "observedAdvisoryWait": true
+      },
+      "oneCommittedRow": true,
+      "lostAcknowledgementReplay": true
+    },
+    {
+      "id": "C02",
+      "status": "passed",
+      "observation": {
+        "observedAdvisoryWait": true
+      },
+      "sequentialConflictingFields": 5,
+      "canonicalReplay": true
+    },
+    {
+      "id": "H01",
+      "status": "passed",
+      "historicalReplayWithoutResolution": true,
+      "policyRevision": 3,
+      "currentCaptureMinor": "9934",
+      "historicalUnchanged": true
+    },
+    {
+      "id": "D01",
+      "status": "passed",
+      "freshApiProcesses": 2,
+      "parentReconnected": true
+    }
+  ],
+  "cleanup": "passed",
+  "runtime": "v24.21.0",
+  "tlsVerified": false,
+  "targetFingerprint": "1b55f59a1b8c467c8b070c0eebe59012c54e7393fb54a2b5e0b438a2be492437",
+  "serverVersion": "17.11",
+  "baseline": {
+    "access_limits": 0,
+    "access_prelogins": 0,
+    "access_security_events": 0,
+    "access_sessions": 0,
+    "branches": 0,
+    "businesses": 0,
+    "installation_binding": 0,
+    "menu_offerings": 0,
+    "menu_references": 0,
+    "menu_variants": 0,
+    "staff_accounts": 0,
+    "staff_branch_grants": 0,
+    "staff_credentials": 0
+  },
+  "historyBefore": [
+    {
+      "tag": "0000_business_bootstrap",
+      "hash": "0a8a058d3a4038eb4d9ffb3ceda3037f0fabcbe6c39b62f95b9b7004b2659f97",
+      "timestamp": "1791748603502"
+    },
+    {
+      "tag": "0001_staff_access",
+      "hash": "f70af5681eca5b98fb0eb080f779127f45c26314ed309a9fe495c908b0c304da",
+      "timestamp": "1791826161070"
+    },
+    {
+      "tag": "0002_login_reservations",
+      "hash": "abafdd843017daa4962559f8e53734d4a0ded51803a75991640864a2feec5c28",
+      "timestamp": "1792223553789"
+    },
+    {
+      "tag": "0003_menu_catalogue",
+      "hash": "34532984e10d5286dcf0c4104eadca1efdf738ff30e48afb2ccdab48f6900017",
+      "timestamp": "1792308633277"
+    }
+  ],
+  "historyAfter": [
+    {
+      "tag": "0000_business_bootstrap",
+      "hash": "0a8a058d3a4038eb4d9ffb3ceda3037f0fabcbe6c39b62f95b9b7004b2659f97",
+      "timestamp": "1791748603502"
+    },
+    {
+      "tag": "0001_staff_access",
+      "hash": "f70af5681eca5b98fb0eb080f779127f45c26314ed309a9fe495c908b0c304da",
+      "timestamp": "1791826161070"
+    },
+    {
+      "tag": "0002_login_reservations",
+      "hash": "abafdd843017daa4962559f8e53734d4a0ded51803a75991640864a2feec5c28",
+      "timestamp": "1792223553789"
+    },
+    {
+      "tag": "0003_menu_catalogue",
+      "hash": "34532984e10d5286dcf0c4104eadca1efdf738ff30e48afb2ccdab48f6900017",
+      "timestamp": "1792308633277"
+    },
+    {
+      "tag": "0004_order_capture",
+      "hash": "f2fa8b0b951d6bff6ec5c3137e68b157a7a9e4234758c2d48fb4cb89f5eb0c36",
+      "timestamp": "1792440992358"
+    }
+  ],
+  "restartProcesses": 2,
+  "afterCleanup": {
+    "access_limits": 0,
+    "access_prelogins": 0,
+    "access_security_events": 0,
+    "access_sessions": 0,
+    "branches": 0,
+    "businesses": 0,
+    "captured_orders": 0,
+    "installation_binding": 0,
+    "menu_offerings": 0,
+    "menu_references": 0,
+    "menu_variants": 0,
+    "order_capture_policies": 0,
+    "staff_accounts": 0,
+    "staff_branch_grants": 0,
+    "staff_credentials": 0
+  },
+  "finalHistory": [
+    {
+      "tag": "0000_business_bootstrap",
+      "hash": "0a8a058d3a4038eb4d9ffb3ceda3037f0fabcbe6c39b62f95b9b7004b2659f97",
+      "timestamp": "1791748603502"
+    },
+    {
+      "tag": "0001_staff_access",
+      "hash": "f70af5681eca5b98fb0eb080f779127f45c26314ed309a9fe495c908b0c304da",
+      "timestamp": "1791826161070"
+    },
+    {
+      "tag": "0002_login_reservations",
+      "hash": "abafdd843017daa4962559f8e53734d4a0ded51803a75991640864a2feec5c28",
+      "timestamp": "1792223553789"
+    },
+    {
+      "tag": "0003_menu_catalogue",
+      "hash": "34532984e10d5286dcf0c4104eadca1efdf738ff30e48afb2ccdab48f6900017",
+      "timestamp": "1792308633277"
+    },
+    {
+      "tag": "0004_order_capture",
+      "hash": "f2fa8b0b951d6bff6ec5c3137e68b157a7a9e4234758c2d48fb4cb89f5eb0c36",
+      "timestamp": "1792440992358"
+    }
+  ],
+  "result": "passed",
+  "finishedAt": "2026-10-21T18:10:04.591Z"
+}

@@ -4,7 +4,7 @@ import { hashInitialPassword, verifyPassword, verifyDummyPassword, HashCapacityE
 @Injectable()
 export class NodePasswordHasher extends PasswordHasher {
   private async bounded<T>(work: () => Promise<T>): Promise<T> {
-    try { return await work(); } catch (error) { if (error instanceof HashCapacityError) throw new AccessError(429, 'Try again later', 1); throw error; }
+    try { return await work(); } catch (error) { if (error instanceof HashCapacityError) throw new AccessError('RATE_LIMITED', 'Try again later', 1); throw error; }
   }
   hash(password: string) { return this.bounded(() => hashInitialPassword(password)); }
   verify(password: string, phc: string) { return this.bounded(() => verifyPassword(password, phc)); }

@@ -1,8 +1,9 @@
 import { randomUUID } from 'node:crypto';
 import { CURRENCY_PRECISION } from './currency-precision.js';
 
+export type MenuErrorReason = 'INVALID_INPUT' | 'DEFINITION_TOO_LARGE' | 'NOT_FOUND' | 'SELECTION_UNAVAILABLE' | 'CURRENCY_CHANGED' | 'STALE_REVISION' | 'CATALOGUE_CAPACITY' | 'UNSUPPORTED_CURRENCY' | 'CATALOGUE_UNAVAILABLE';
 export class MenuError extends Error {
-  constructor(readonly status: 400 | 404 | 409 | 503, message: string) { super(message); }
+  constructor(readonly reason: MenuErrorReason, message: string) { super(message); }
 }
 export interface Variant { id: string; name: string; price: string; active: boolean }
 export interface Extra { id: string; name: string; surcharge: string; active: boolean }
@@ -14,8 +15,8 @@ interface Base { id: string; name: string; active: boolean; revision: number; cu
 export interface Item extends Base { kind: 'item'; sized: boolean; variants: Variant[]; addOnGroups: ExtraGroup[] }
 export interface Combo extends Base { kind: 'combo'; basePrice: string; components: Component[]; choiceGroups: ChoiceGroup[] }
 export type Offering = Item | Combo;
-export function invalid(): never { throw new MenuError(400, 'Invalid menu input'); }
-export function unavailable(): never { throw new MenuError(409, 'Selection unavailable'); }
+export function invalid(): never { throw new MenuError('INVALID_INPUT', 'Invalid menu input'); }
+export function unavailable(): never { throw new MenuError('SELECTION_UNAVAILABLE', 'Selection unavailable'); }
 export function object(value: unknown, keys: readonly string[]): Record<string, unknown> {
   if (!value || typeof value !== 'object' || Array.isArray(value) || Object.keys(value).some(key => !keys.includes(key))) invalid();
   return value as Record<string, unknown>;
@@ -40,9 +41,9 @@ function list(value: unknown, max: number, min = 0): unknown[] {
 function unique(values: string[]) { if (new Set(values).size !== values.length) invalid(); }
 const labels = (values: { name: string }[]) => unique(values.map(value => value.name.toLowerCase()));
 export function precision(currency: string): number {
-  if (!Intl.supportedValuesOf('currency').includes(currency)) throw new MenuError(503, 'Unsupported catalogue currency');
+  if (!Intl.supportedValuesOf('currency').includes(currency)) throw new MenuError('UNSUPPORTED_CURRENCY', 'Unsupported catalogue currency');
   const scale = CURRENCY_PRECISION[currency];
-  if (scale === undefined || scale < 0 || scale > 4) throw new MenuError(503, 'Unsupported catalogue currency');
+  if (scale === undefined || scale < 0 || scale > 4) throw new MenuError('UNSUPPORTED_CURRENCY', 'Unsupported catalogue currency');
   return scale;
 }
 export function minor(value: string, scale: number): bigint {
@@ -83,7 +84,7 @@ function extras(value: unknown, scale: number, previous: ExtraGroup[]): ExtraGro
 export function definition(value: unknown, currencyCode: string, previous?: Offering): Offering {
   const input = object(value, ['kind', 'name', 'active', 'sized', 'variants', 'addOnGroups', 'basePrice', 'components', 'choiceGroups']);
   const scale = precision(currencyCode);
-  if (previous && (previous.currencyCode !== currencyCode || previous.scale !== scale)) throw new MenuError(409, 'Catalogue currency changed');
+  if (previous && (previous.currencyCode !== currencyCode || previous.scale !== scale)) throw new MenuError('CURRENCY_CHANGED', 'Catalogue currency changed');
   if (previous && previous.kind !== input.kind) invalid();
   const base = { id: previous?.id ?? randomUUID(), name: name(input.name), active: flag(input.active), revision: (previous?.revision ?? 0) + 1, currencyCode, scale };
   if (input.kind === 'item') {
@@ -135,7 +136,7 @@ export function saleable(offering: Offering, catalogue: Offering[]): boolean {
 export function validateReferences(offering: Offering, catalogue: Offering[]) {
   if (offering.kind !== 'combo') return;
   const index = variantIndex(catalogue);
-  for (const ref of references(offering)) if (!index.has(ref)) throw new MenuError(404, 'Resource not found');
+  for (const ref of references(offering)) if (!index.has(ref)) throw new MenuError('NOT_FOUND', 'Resource not found');
   // Even inactive definitions cannot newly save unsatisfiable required dependencies.
   if (!saleable({ ...offering, active: true }, catalogue)) unavailable();
 }
@@ -150,7 +151,7 @@ export function resolveSelection(value: unknown, catalogue: Offering[]) {
   const input = object(value, ['offeringId', 'variantId', 'addOnIds', 'choices']);
   const offeringId = id(input.offeringId);
   const offering = catalogue.find(row => row.id === offeringId);
-  if (!offering) throw new MenuError(404, 'Resource not found');
+  if (!offering) throw new MenuError('NOT_FOUND', 'Resource not found');
   if (!saleable(offering, catalogue)) unavailable();
   const selectedIds = list(input.addOnIds ?? [], 256).map(id); unique(selectedIds);
   const selectedExtras: Extra[] = [], selectedChoices: { groupId: string; optionId: string; name: string; surcharge: string }[] = [];

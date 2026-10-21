@@ -3,3 +3,6 @@ packages:
 
 # Dependency installation must not execute lifecycle scripts.
 ignoreScripts: true
+
+# Match the existing frozen lockfile; pnpm 12 reads this policy from workspace config.
+autoInstallPeers: false

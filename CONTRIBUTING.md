@@ -37,6 +37,7 @@ Use `feat`, `fix`, `docs`, `refactor`, `test`, `chore`, `build`, `ci`, `perf` or
 ## Review and merge
 
 - Once a remote is established, submit changes through pull requests. Describe the problem, resulting behavior, verification evidence and material limitations. Use a conventional PR title.
+- After an authorized push, check applicable GitHub Actions results for the exact PR head before claiming integration complete or merging. Report pending, failed or missing expected checks; CI success does not replace acceptance or grant merge permission.
 - Keep each PR focused on one logical outcome. A phase boundary may suit a PR, but neither a whole module nor a single phase is a mandatory PR size.
 - Prefer squash merging a focused PR, using its title as the final commit subject. Delete the branch after merging.
 - Configure host-side protection for `main`: require PRs and block force pushes and deletion. Require independent approval when another reviewer is available; require status checks only after they exist and are authorized. These settings are not enforced by this file.
@@ -52,3 +53,7 @@ Use `feat`, `fix`, `docs`, `refactor`, `test`, `chore`, `build`, `ci`, `perf` or
 ## Verification
 
 Follow the canonical [verification policy](docs/project-scope.md#verification-policy). Run the smallest relevant checks using existing tooling; broader checks require justification. Report results, unverified behavior and pending user acceptance. Hooks and installation scripts must respect the same authorization boundaries. Source inspection is not proof of successful runtime behavior.
+
+For domain/application boundary changes or changes to the guard itself, use the [focused architecture checks](apps/api/scripts/README.md); passing checker fixtures and passing the repository scan are distinct results. Do not suppress existing findings to make CI green.
+
+Find common commands in [Development commands](README.md#development-commands) and available scripts in the root and owning package `package.json` files; use only existing checks appropriate to the change.

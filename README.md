@@ -6,6 +6,10 @@ The product is intended to support restaurant operations from menu configuration
 
 Restaurant identity, branding, currency, timezone, and fiscal settings belong to business configuration.
 
+## Why this project?
+
+ServiceLane POS aims to bring everyday restaurant workflows into one system designed to run on the restaurant's local network. The goal is to support independent businesses through configurable menus and business settings, while keeping improvements shared across one maintained codebase.
+
 ## Project status
 
 **Active development · Backend API only · Not production-ready**
@@ -17,10 +21,11 @@ The backend currently includes:
 | Business setup | Business and branch foundation, installation provisioning, and initial administrator setup |
 | Authentication and access | Staff login, sessions, server-enforced permissions, and administrator recovery |
 | Menu catalogue | Catalogue maintenance, selectable sizes, optional extras, configurable combos, and selection pricing |
+| Order capture | Scoped takeaway capture/readback, immutable merchandise snapshots, configurable limits and duplicate-safe retries |
 
-Business setup, authentication/access, and menu catalogue are accepted under their recorded backend development scopes. Menu integration through PR review and merge remains pending.
+Business setup, authentication/access, and menu catalogue are accepted under their recorded backend development scopes. Menu was integrated through [PR #9](https://github.com/Hijazi313/servicelane-pos/pull/9); Orders capture/readback is implemented with focused offline and bounded staging persistence verification; its [acceptance status and limits](apps/api/src/modules/orders/docs/features/capture/phase-tracker.md) remain separate.
 
-The frontend, ordering, kitchen, billing, payments, shifts, inventory, and reporting are planned. Deployment, backup, and recovery validation remain incomplete.
+The frontend, further order workflows, kitchen, billing, payments, shifts, inventory, and reporting remain planned. Deployment, backup, and recovery validation remain incomplete.
 
 See the [project tracker](docs/planning/TRACKER.md) for the roadmap, current acceptance status, and verification limits.
 
@@ -112,6 +117,8 @@ Run commands from the repository root.
 | `pnpm start` | Run the compiled API |
 | `pnpm test:access` | Run focused database-free authentication and access checks |
 | `pnpm test:menu` | Run focused database-free menu checks |
+| `pnpm test:architecture` | Test the HTTP boundary checker with passing/failing fixtures |
+| `pnpm check:architecture` | Scan domain/application HTTP boundaries; exits nonzero on violations |
 | `pnpm db:generate` | Generate migration files for review |
 | `pnpm db:migrate` | Apply migrations to the configured database |
 
