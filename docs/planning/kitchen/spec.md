@@ -1,6 +1,6 @@
 # Kitchen handoff — proposed specification
 
-Date: 2026-10-22. Status: proposed, business decisions pending. [Tracker](phase-tracker.md); [decisions](decisions.md); [global tracker](../TRACKER.md).
+Date: 2026-10-22. Status: proposed; KT-D02–04 approved for development, KT-D01 pending. [Tracker](phase-tracker.md); [decisions](decisions.md); [global tracker](../TRACKER.md).
 
 ## Outcome and smallest justified scope
 
@@ -34,7 +34,7 @@ These are semantic contracts, unavailable and unapproved; final schemas/routes b
 
 ## Acceptance criteria
 
-All criteria are proposed and conditional on KT-D01–04. Future evidence must use synthetic data and separately authorized verification; no checks are run by planning.
+Criteria remain proposed pending full scope approval and KT-D01; KT-D02–04 business boundaries are approved. Future evidence must use synthetic data and separately authorized verification; no checks are run by planning.
 
 | ID | Scenario and required observable result | Expected future evidence |
 | --- | --- | --- |

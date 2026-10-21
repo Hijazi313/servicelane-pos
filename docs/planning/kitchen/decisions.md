@@ -2,7 +2,7 @@
 
 Date: 2026-10-22. Owner: project owner for business decisions; primary agent for planning. [Scope](spec.md); [authorization and handoff](phase-tracker.md).
 
-All recommendations below are unapproved. Accepted OR-01 capture is not approval to prepare food, expose customer details, change an order or claim payment. Answers must be recorded here before dependent implementation; specification approval and source authorization are separate.
+KT-D02–04 were approved for this development boundary in the user’s 2026-10-22 replies; KT-D01 remains unresolved. Accepted OR-01 capture is not approval to prepare food, expose customer details, change an order or claim payment. Answers must be recorded here before dependent implementation; specification approval and source authorization are separate.
 
 | ID | Options and consequence | Recommendation / decision needed |
 | --- | --- | --- |
@@ -13,4 +13,12 @@ All recommendations below are unapproved. Accepted OR-01 capture is not approval
 
 ## Approval record
 
-Pending. Planning request on 2026-10-22 authorizes recommendations only. No answer is implied by elapsed time, publication, roadmap status or a documentation merge.
+On 2026-10-22 the user approved preparation-only data (KT-D02), and approved the development boundary comprising Kitchen-owned queued→preparing→ready, existing staff/admin access, immutable dispatched tickets and no amendment/cancellation API (KT-D03–04). This does not authorize implementation or restaurant operation. Free-text instructions may contain personal data; this approval permits preparation instructions, not a new customer-data policy.
+
+KT-D01 remains pending: the user asked about industry practice and business/branch-admin control rather than choosing dispatch eligibility. User direction supports differing business flows; the mechanism and first supported mode are still proposals. Follow-up asks whether explicit dispatch allowing preparation before payment is acceptable for this development slice, whether Billing must precede it, or whether to rescope for multiple modes. No answer is implied by elapsed time, publication, roadmap status or a documentation merge.
+
+## Dispatch configuration recommendation and reference evidence
+
+Reviewed official [Toast UI settings](https://doc.toasttab.com/doc/platformguide/adminUiOptionsReference.html) on 2026-10-22: Send can release preparation without payment, Hold saves without sending, and a payment-first setting exists with documented takeout/delivery exceptions. Authorized setup users can apply settings to selected locations. [Toast online-ordering guidance](https://support.toasttab.com/en/article/Getting-Started-Online-Ordering) also documents manual approval and automatic kitchen release for that separate channel. These examples support multiple valid workflows; they establish neither a universal industry standard nor a requirement to copy Toast’s exceptions.
+
+Recommendation, not yet approved: ultimately use branch-scoped dispatch policy managed by the existing business administrator with current branch authorization. A dedicated/delegated branch-admin role does not exist and needs a separate permission decision. Implement only explicitly supported modes; keep automatic capture dispatch and payment-gated dispatch deferred for this smallest slice. Do not build a one-option settings API, generic rule engine, business-default/branch-override hierarchy or per-channel exceptions without a concrete approved requirement. The first real second mode justifies a revision-checked policy API, supported-mode validation, prospective-only changes, auditable actor/time and transactional policy enforcement; it must specify the treatment of already captured undispatched orders. No policy change may silently send an old backlog or withdraw existing tickets. Payment-first must rely on trusted Billing state, never a cashier assertion. Automatic capture dispatch needs explicit reconsideration of Orders transaction/retry behavior. These later objectives are not activated.
