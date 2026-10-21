@@ -15,11 +15,11 @@ export function header(request: AccessRequest, name: string): string | undefined
 }
 export function proof(request: AccessRequest): Proof {
   const cookies = header(request, 'cookie') ?? '';
-  if (cookies.length > 4096) throw new AccessError(400, 'Invalid cookies');
+  if (cookies.length > 4096) throw new AccessError('INVALID_INPUT', 'Invalid cookies');
   const result: Proof = { csrf: header(request, 'x-csrf-token') };
   for (const [name, key] of [['__Host-session', 'session'], ['__Host-prelogin', 'prelogin']] as const) {
     const values = cookies.split(';').map((item) => item.trim()).filter((item) => item.startsWith(`${name}=`));
-    if (values.length > 1) throw new AccessError(400, 'Invalid cookies');
+    if (values.length > 1) throw new AccessError('INVALID_INPUT', 'Invalid cookies');
     if (values[0]) result[key] = values[0].slice(name.length + 1);
   }
   return result;

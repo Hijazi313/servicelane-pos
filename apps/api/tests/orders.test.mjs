@@ -4,7 +4,7 @@ import { randomUUID } from 'node:crypto';
 import { fixture } from './orders-fixture.mjs';
 import { OrdersError, RESPONSE_BYTES, canonical, checkedAmount } from '../dist/orders-check/modules/orders/domain/capture.js';
 import { snapshotFits } from '../dist/orders-check/modules/orders/application/orders.service.js';
-const rejects = (work, code) => assert.rejects(work, error => { if (error instanceof OrdersError) { assert.equal('status' in error, false); return code === 400 ? error.code.startsWith('INVALID_') : error.code === code; } return error.status === code; });
+const rejects = (work, code) => assert.rejects(work, error => { if (error instanceof OrdersError) { assert.equal('status' in error, false); return code === 400 ? error.code.startsWith('INVALID_') : error.code === code; } return error.reason === code; });
 
 test('capture exact snapshots and customer instructions; replay survives Menu/policy and JSONB key-order changes', async () => {
   const h = fixture(), body = h.body({ customer: { name: ' Synthetic guest ', phone: '+1 (555) 010-0000' }, instructions: ' Pack separately ' });
@@ -18,7 +18,7 @@ test('capture exact snapshots and customer instructions; replay survives Menu/po
   h.state().orders[0].order.request = Object.fromEntries(Object.entries(original).reverse());
   assert.deepEqual(await h.service.create(h.proof, body), saved); assert.equal(h.reads(), 1); assert.deepEqual(await h.service.get(h.proof, saved.id), saved);
   await rejects(() => h.service.create(h.proof, { ...body, instructions: 'Different' }), 'RETRY_CONTENT_CONFLICT');
-  h.state().session.revokedAt = new Date(); await rejects(() => h.service.create(h.proof, body), 401);
+  h.state().session.revokedAt = new Date(); await rejects(() => h.service.create(h.proof, body), 'UNAUTHENTICATED');
 });
 
 test('price conflict returns only changed exact amounts and reserves no key', async () => {
@@ -45,8 +45,8 @@ test('defaults/configurable limits, stale revisions and current admin/CSRF; fore
   await h.service.updatePolicy(h.proof, { maxLines: 500, maxQuantity: 1000, expectedRevision: 0 });
   await rejects(() => h.service.updatePolicy(h.proof, { maxLines: 1, maxQuantity: 1, expectedRevision: 0 }), 'STALE_ORDER_POLICY');
   const saved = await h.service.create(h.proof, body); assert.equal(saved.totalMinor, String(1234 * 101));
-  h.state().account.role = 'staff'; await rejects(() => h.service.updatePolicy(h.proof, { maxLines: 1, maxQuantity: 1, expectedRevision: 1 }), 403);
-  await rejects(() => h.service.create({ ...h.proof, csrf: 'wrong' }, h.body()), 403);
+  h.state().account.role = 'staff'; await rejects(() => h.service.updatePolicy(h.proof, { maxLines: 1, maxQuantity: 1, expectedRevision: 1 }), 'FORBIDDEN');
+  await rejects(() => h.service.create({ ...h.proof, csrf: 'wrong' }, h.body()), 'FORBIDDEN');
   h.installation.branchId = randomUUID(); h.state().account.branchIds = [h.installation.branchId];
   await rejects(() => h.service.get(h.proof, saved.id), 'ORDER_NOT_FOUND');
 });

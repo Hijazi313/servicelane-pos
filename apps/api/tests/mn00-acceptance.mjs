@@ -59,7 +59,7 @@ const counts = async connection => {
   for (const table of tables) result[table] = Number((await connection.query(`select count(*) as n from public.${table}`)).rows[0].n);
   return result;
 };
-const failure401 = promise => assert.rejects(promise, error => error.status === 401);
+const failure401 = promise => assert.rejects(promise, error => error.reason === 'UNAUTHENTICATED');
 const proofA = { session: token(), csrf: token() }, proofB = { session: token(), csrf: token() }, proofC = { session: token(), csrf: token() };
 ledger.sessionDigests = [proofA, proofB, proofC].map(p => digest(p.session));
 const record = id => report.results.push({ id, result: 'passed' });

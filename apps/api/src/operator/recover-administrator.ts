@@ -9,7 +9,7 @@ import { AccessError, uuid, password } from '../modules/authentication/applicati
 import { readHiddenPassword } from './hidden-password.js';
 
 async function run(): Promise<void> {
-  if (process.argv.length !== 4) throw new AccessError(400, 'Usage: recover-administrator <business-uuid> <account-uuid>');
+  if (process.argv.length !== 4) throw new AccessError('INVALID_INPUT', 'Usage: recover-administrator <business-uuid> <account-uuid>');
   const businessId = uuid(process.argv[2]); const accountId = uuid(process.argv[3]);
   const configuration = readConfiguration(process.env);
   // OS process identity is attributable evidence, not proof of authorized host custody.
@@ -18,7 +18,7 @@ async function run(): Promise<void> {
   let confirmation = '';
   try {
     confirmation = await readHiddenPassword(process.stdin, process.stderr, 'Confirm password: ');
-    if (replacement !== confirmation) throw new AccessError(400, 'Passwords do not match');
+    if (replacement !== confirmation) throw new AccessError('INVALID_INPUT', 'Passwords do not match');
     password(replacement);
     @Module({ imports: [ConfigModule.forRoot({ isGlobal: true, ignoreEnvFile: true, load: [() => configuration] }), AuthenticationModule] })
     class RecoveryOperatorModule {}

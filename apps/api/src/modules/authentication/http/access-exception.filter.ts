@@ -1,14 +1,18 @@
 import { Catch, HttpException, type ArgumentsHost, type ExceptionFilter } from '@nestjs/common';
-import { AccessError } from '../application/access-policy.js';
+import { AccessError, type AccessErrorReason } from '../application/access-policy.js';
 import { type AccessReply } from './access-http.helpers.js';
 
+const accessStatuses: Record<AccessErrorReason, 400 | 401 | 403 | 404 | 409 | 429 | 503> = {
+  INVALID_INPUT: 400, UNAUTHENTICATED: 401, FORBIDDEN: 403, NOT_FOUND: 404, CONFLICT: 409, RATE_LIMITED: 429, UNAVAILABLE: 503,
+};
 @Catch()
 export class AccessExceptionFilter implements ExceptionFilter {
   catch(error: unknown, host: ArgumentsHost) {
     const reply = host.switchToHttp().getResponse<AccessReply>();
     if (error instanceof AccessError) {
-      if (error.retryAfter) reply.header('Retry-After', String(error.retryAfter));
-      reply.header('Cache-Control', 'no-store').status(error.status).send({ statusCode: error.status, message: error.message });
+      const status = accessStatuses[error.reason] ?? 503;
+      if (error.retryDelaySeconds) reply.header('Retry-After', String(error.retryDelaySeconds));
+      reply.header('Cache-Control', 'no-store').status(status).send({ statusCode: status, message: error.message });
       return;
     }
     // Preserve the accepted technical health failure contract without forwarding arbitrary errors.
