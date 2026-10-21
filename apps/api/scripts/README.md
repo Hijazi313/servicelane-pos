@@ -40,7 +40,7 @@ Use a semantic reason/code instead and translate it in `http/`. That code can st
 
 ## Current real-source result and limits
 
-On 2026-10-20 the full scan inspected 15 source files and reported one existing `ERROR_HTTP_STATUS` violation in `authentication/application/access-policy.ts` (`AccessError` constructor). Menu and Orders passed the explicit scoped scan. Authentication was not changed or exempted. The strict CI draft will fail until that source issue is resolved under separate authorization; checker tests passing does not mean the repository passes.
+On 2026-10-20 the full scan inspected 15 source files and reported one existing `ERROR_HTTP_STATUS` violation in `authentication/application/access-policy.ts` (`AccessError` constructor). Menu and Orders passed the explicit scoped scan. Authentication was not changed or exempted. At that checkpoint the strict scan failed on that source issue; checker tests passing does not mean the repository passes.
 
 This is a syntax guard, not a complete architecture proof. It does not perform cross-file type/data-flow analysis, follow arbitrary barrel aliases, resolve computed import/member names or discover every free-form numeric status mapping. Arbitrary property mutation through helper calls can escape detection. Recognized errors are Error-derived/local subclasses, error-like names and known exception aliases; a status-named property with another meaning can require human review. No rule is waived automatically. Authorization, ownership, transactions and other architectural constraints still require their existing review.
 
@@ -60,4 +60,10 @@ The workflow is triggered by PR creation/reopening/new commits and pushes to mai
 
 ## Local Authentication correction — 2026-10-21
 
-The user subsequently authorized implementing the Authentication error-boundary correction without a commit. The current local scan passes (15 files, zero findings); the existing seven checker tests also pass against it. [Authentication maintenance evidence](../../../docs/planning/business-access/phase-tracker.md#authentication-error-boundary-correction--2026-10-21) owns the source/behavior checks. This patch is uncommitted and has not run on GitHub. The failed remote runs above remain accurate historical evidence; they must not be relabeled green.
+The user subsequently authorized implementing the Authentication error-boundary correction without a commit. The current local scan passes (15 files, zero findings); the existing seven checker tests also pass against it. [Authentication maintenance evidence](../../../docs/planning/business-access/phase-tracker.md#authentication-error-boundary-correction--2026-10-21) owns the source/behavior checks. At the local handoff this patch was uncommitted and had not run on GitHub. The subsequent authorized publication/result is recorded below. Earlier failed remote runs remain accurate historical evidence; they are not relabeled green.
+
+## Authentication correction verified on GitHub — 2026-10-21
+
+User approved commit/push and exact-head CI verification. At source commit `ba723463c140f0c34a7d7bfb185933522c86ba8b`, [HTTP boundaries run 39563398375](https://github.com/Hijazi313/servicelane-pos/actions/runs/39563398375) concluded **success**: pinned runtime/version assertion, frozen installation, all seven checker tests, and the full 15-file scan (zero violations) passed. [PR title run 39563398336](https://github.com/Hijazi313/servicelane-pos/actions/runs/39563398336) also passed. No baseline, suppression or rule weakening was used.
+
+This supersedes the earlier known-red source result for the corrected head only. The workflow exercises the architecture guard; the 75 Authentication/consumer/recovery tests are local offline evidence, not an additional GitHub test suite. Syntax-analysis limits above, feature/database acceptance, incident review and required-check branch protection remain separate. No merge or database work.

@@ -11,4 +11,4 @@
 
 See the [module overview](README.md) for boundaries and links to specifications and delivery evidence.
 
-[Uncommitted Authentication boundary correction and offline evidence](../../../../../../docs/planning/business-access/phase-tracker.md#authentication-error-boundary-correction--2026-10-21). Existing accepted BA behavior and historical database evidence remain unchanged; remote CI has not verified this local patch.
+[Authentication boundary correction and verification evidence](../../../../../../docs/planning/business-access/phase-tracker.md#authentication-error-boundary-correction--2026-10-21). Existing accepted BA behavior and historical database evidence remain unchanged; the architecture guard passed on GitHub at ba72346; behavioral evidence is local offline only.
