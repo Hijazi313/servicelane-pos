@@ -1,12 +1,12 @@
 # Order capture — Phase tracker
 
-Specification: [spec.md](spec.md). Owner: primary agent. Active phase: OR-01. Status: awaiting acceptance (source/offline and bounded PostgreSQL verification complete; explicit user acceptance remains separate).
+Specification: [spec.md](spec.md). Owner: primary agent. Phase: OR-01. Status: complete under explicit user acceptance on 2026-10-21; recorded backend development scope and evidence limits retained.
 
 ## Authorization — 2026-10-20
 
 User explicitly authorized OR-01 source implementation, narrow supported transactional Menu consumer, necessary migration source files without execution, affected docs, focused existing offline checks and local Conventional Commit checkpoints. No installation, database access/migration execution, provisioning, deployment, push, PR mutation or merge. Preserve local README commit 42825d1 and untracked MN-01 ledger. Solo assignment covers Orders and its necessary Menu/composition/migration consumers.
 
-## Active tasks
+## Completed tasks
 
 | Task | Status | Exit evidence |
 | --- | --- | --- |
@@ -16,7 +16,7 @@ User explicitly authorized OR-01 source implementation, narrow supported transac
 
 ## Completion shape
 
-Capture/read and business-scoped limit settings, no dispatch/payment/fiscal totals. Focused offline checks plus the [single bounded PostgreSQL run](#persistence-integration-result--2026-10-21) establish atomic capture/rejection, scoped retries/isolation and fresh-API-process readback on the testing target. Explicit user acceptance, operational personal-data policies, full trading flow and release recovery validation remain separate.
+Capture/read and business-scoped limit settings, no dispatch/payment/fiscal totals. Focused offline checks plus the [single bounded PostgreSQL run](#persistence-integration-result--2026-10-21) establish atomic capture/rejection, scoped retries/isolation and fresh-API-process readback on the testing target. User accepted this bounded backend increment on 2026-10-21. Operational personal-data policies, full trading flow and release recovery validation remain separate.
 
 ## Evidence — 2026-10-20
 
@@ -25,9 +25,9 @@ Capture/read and business-scoped limit settings, no dispatch/payment/fiscal tota
 - Existing Drizzle generator produced [0004_order_capture.sql](../../../../../../migrations/0004_order_capture.sql), journal and snapshot offline. `readMigrationFiles` parsed all five migrations; snapshot comparison established all 13 prior table definitions unchanged, with only captured_orders/order_capture_policies added. Source constraints include scoped retry uniqueness, retry-key format, basic JSON identity and policy bounds. No migration execution or database access.
 - Existing Menu database acceptance/report and ledger remain historical and unchanged. No old harness run, broad suite or production build performed. Source-import/export review found no foreign persistence imports, new RBAC, decimal/precision duplication, nested authorization or query-builder exposure. The broader transport-boundary assurance is retracted; see [INC-20261020-01](../../../../../../../../docs/quality/agent-incidents.md#inc-20261020-01--domain-http-status-coupling-carried-into-orders-and-missed-at-handoff).
 
-## Availability and remaining acceptance
+## Availability and acceptance
 
-OR-A01–08 have focused offline and bounded PostgreSQL evidence as mapped in the [integration result](#persistence-integration-result--2026-10-21). Observed lock contention/uniqueness/rollback and fresh-process readback passed; lost-response retry is simulated, not arbitrary network-partition or crash-recovery evidence. Explicit user acceptance remains separate; no complete trading or release claim. The aggregate stores lines in one JSON snapshot, avoiding independently mutable line records.
+OR-A01–08 have focused offline and bounded PostgreSQL evidence as mapped in the [integration result](#persistence-integration-result--2026-10-21). Observed lock contention/uniqueness/rollback and fresh-process readback passed; lost-response retry is simulated, not arbitrary network-partition or crash-recovery evidence. Explicit user acceptance is [recorded below](#acceptance-and-closeout--2026-10-21); no complete trading or release claim. The aggregate stores lines in one JSON snapshot, avoiding independently mutable line records.
 
 ## Historical source handoff — 2026-10-20
 
@@ -102,6 +102,21 @@ Fresh compilation and the single authorized run completed at 23:10 Asia/Karachi.
 
 This establishes bounded PostgreSQL behavior for OR-A01–08 together with reused offline evidence, not a full trading flow, reciprocal two-installation execution, database-server restart/crash recovery, backup recovery, production TLS or user acceptance. Current TLS certificate verification was disabled and unchanged. The one-run permission is consumed; a repeat requires a separately reviewed post-0004 baseline, not rerunning the historical command. Raw ownership ledger remains local/untracked with the existing MN-01 ledger; only sanitized report is publishable.
 
-### Current handoff
+### Integration handoff before acceptance
 
 User-requested GitHub workflow is complete for the implementation/evidence: [PR #10](https://github.com/Hijazi313/servicelane-pos/pull/10) squash-merged as `2daeb6c8b899dfda740c50fd8c1f525198fde1b4` after exact-head `2168329` HTTP-boundary and PR-title checks passed, with no reviews or unresolved review threads. The [main-branch HTTP check](https://github.com/Hijazi313/servicelane-pos/actions/runs/39650850869) also passed at the merge commit. Local main was fast-forwarded and GitHub removed the remote topic branch. This technical integration is separate from explicit feature acceptance; no later module/phase is activated. Both local acceptance ledgers remain untracked/excluded. No skill/template/guardrail changes or incident closure. [README status correction](../../../../../../../../docs/quality/agent-incidents.md#inc-20261021-01--published-orders-source-retained-planning-only-readme-status) records the documentation omission discovered at closeout; prior pending reviews remain unchanged.
+
+
+## Acceptance and closeout — 2026-10-21
+
+User explicitly stated: “I accept OR-01 under its recorded backend development scope and evidence limits,” and authorized documentation closeout only. OR-01 is complete. Specification approval, source implementation, bounded persistence verification and technical integration retain their separate historical records; this instruction supplies the previously pending user acceptance.
+
+Accepted outcome: authorized branch-scoped takeaway capture/readback, server-resolved immutable merchandise/customer/instruction snapshots, exact amounts, business-configurable limits and duplicate-safe retries. OR-A01–08 are supported by the recorded offline evidence and [single passing PostgreSQL run](#persistence-integration-result--2026-10-21). Evidence reused without checks or database execution. Migration 0004 remains applied on the testing target; the run verified fifteen application tables empty after owned cleanup. PR #10 and documentation closeout PR #11 are merged; this acceptance closeout changes documentation only; the earlier authorization to complete the GitHub workflow remains applicable.
+
+Acceptance does not establish a full trading flow, production readiness, verified production TLS, reciprocal two-installation execution, database crash/backup recovery, kitchen dispatch, payments/tax totals, amendments or operational personal-data policy. Previous one-run execution authorization remains consumed; acceptance grants no further database run or new phase. Existing incident reviews remain pending; no incident closure or policy/skill/template change.
+
+### Current handoff
+
+Next action: obtain planning-only authorization for the smallest justified Kitchen increment and its Orders handoff, using the global roadmap and existing capability indexes. Resolve dispatch timing, kitchen-visible data and lifecycle ownership before dependent implementation; do not choose those business rules implicitly. Kitchen remains proposed, not activated by this acceptance.
+
+Closeout authored from main at `5ecae6c`; acceptance changes are documentation only and follow the normal topic-branch/PR workflow under standing publication authorization. Preserve both untracked MN-01/OR-01 ownership ledgers and historical evidence; exclude ledgers from Git changes. No local test/database checks rerun, database access or implementation in this closeout. Git publication follows standing authorization; no later phase is activated. Incidents: [INC-20261021-02](../../../../../../../../docs/quality/agent-incidents.md#inc-20261021-02--documentation-closeout-left-uncommitted-despite-standing-workflow-authorization) records the corrected publication omission; prior pending reviews remain unchanged, including [INC-20261021-01](../../../../../../../../docs/quality/agent-incidents.md#inc-20261021-01--published-orders-source-retained-planning-only-readme-status).

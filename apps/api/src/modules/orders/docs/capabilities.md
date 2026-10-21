@@ -1,6 +1,6 @@
 # Orders capability index
 
-OR-01 source is implemented with focused offline and bounded PostgreSQL integration evidence. Migration 0004 is applied on the authorized testing target; atomicity, scoped isolation, retries and fresh-API-process readback passed. Explicit user acceptance remains separate; no production/recovery claim. [Evidence and limits](features/capture/phase-tracker.md).
+OR-01 source is implemented with focused offline and bounded PostgreSQL integration evidence. Migration 0004 is applied on the authorized testing target; atomicity, scoped isolation, retries and fresh-API-process readback passed. Explicit user acceptance was recorded on 2026-10-21 for the bounded backend development scope; no production/recovery claim. [Evidence and limits](features/capture/phase-tracker.md).
 
 | Capability | Public entry point | Purpose | Important constraints |
 | --- | --- | --- | --- |
