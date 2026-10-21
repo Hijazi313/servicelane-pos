@@ -21,10 +21,11 @@ The backend currently includes:
 | Business setup | Business and branch foundation, installation provisioning, and initial administrator setup |
 | Authentication and access | Staff login, sessions, server-enforced permissions, and administrator recovery |
 | Menu catalogue | Catalogue maintenance, selectable sizes, optional extras, configurable combos, and selection pricing |
+| Order capture | Scoped takeaway capture/readback, immutable merchandise snapshots, configurable limits and duplicate-safe retries |
 
-Business setup, authentication/access, and menu catalogue are accepted under their recorded backend development scopes. Menu was integrated through [PR #9](https://github.com/Hijazi313/servicelane-pos/pull/9); Orders is in discovery/planning only.
+Business setup, authentication/access, and menu catalogue are accepted under their recorded backend development scopes. Menu was integrated through [PR #9](https://github.com/Hijazi313/servicelane-pos/pull/9); Orders capture/readback is implemented with focused offline and bounded staging persistence verification; its [acceptance status and limits](apps/api/src/modules/orders/docs/features/capture/phase-tracker.md) remain separate.
 
-The frontend, ordering, kitchen, billing, payments, shifts, inventory, and reporting are planned. Deployment, backup, and recovery validation remain incomplete.
+The frontend, further order workflows, kitchen, billing, payments, shifts, inventory, and reporting remain planned. Deployment, backup, and recovery validation remain incomplete.
 
 See the [project tracker](docs/planning/TRACKER.md) for the roadmap, current acceptance status, and verification limits.
 

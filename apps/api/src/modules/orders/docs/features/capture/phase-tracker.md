@@ -1,6 +1,6 @@
 # Order capture — Phase tracker
 
-Specification: [spec.md](spec.md). Owner: primary agent. Active phase: OR-01. Status: awaiting acceptance (source/offline increment; persistence execution not authorized).
+Specification: [spec.md](spec.md). Owner: primary agent. Active phase: OR-01. Status: awaiting acceptance (source/offline and bounded PostgreSQL verification complete; explicit user acceptance remains separate).
 
 ## Authorization — 2026-10-20
 
@@ -11,12 +11,12 @@ User explicitly authorized OR-01 source implementation, narrow supported transac
 | Task | Status | Exit evidence |
 | --- | --- | --- |
 | Menu consumer and exact snapshot contract | implemented | OR-A02/A03/A05; focused offline tests below |
-| Capture/read/settings and persistence source | implemented, PostgreSQL unverified | OR-A01–08; compile and focused application/HTTP tests below |
-| Migration source and documentation | implemented | 0004 generated and parsed offline; no database execution |
+| Capture/read/settings and persistence source | implemented; bounded PostgreSQL cases passed | OR-A01–08; compile and focused application/HTTP tests below |
+| Migration source and documentation | implemented; 0004 applied on testing target | Five history entries verified; [result](#persistence-integration-result--2026-10-21) |
 
 ## Completion shape
 
-Capture/read and business-scoped limit settings, no dispatch/payment/fiscal totals. Offline evidence cannot establish PostgreSQL persistence/concurrency/restart behavior or user acceptance. These remain pending under OR-A04/A06 and require separate target-specific execution authorization. Operational personal-data policies and full trading flow remain deferred in the specification.
+Capture/read and business-scoped limit settings, no dispatch/payment/fiscal totals. Focused offline checks plus the [single bounded PostgreSQL run](#persistence-integration-result--2026-10-21) establish atomic capture/rejection, scoped retries/isolation and fresh-API-process readback on the testing target. Explicit user acceptance, operational personal-data policies, full trading flow and release recovery validation remain separate.
 
 ## Evidence — 2026-10-20
 
@@ -27,9 +27,9 @@ Capture/read and business-scoped limit settings, no dispatch/payment/fiscal tota
 
 ## Availability and remaining acceptance
 
-OR-A01/02/03/05/07/08 have focused offline behavioral evidence; storage behavior uses a substitute. OR-A04 has offline serialized duplicate/rollback evidence but PostgreSQL uniqueness/commit ambiguity/rollback/concurrency remains unverified. OR-A06 fresh-process durable readback is not executed. All user acceptance is pending; no complete trading or release claim. The aggregate stores lines in one JSON snapshot, avoiding independently mutable line records.
+OR-A01–08 have focused offline and bounded PostgreSQL evidence as mapped in the [integration result](#persistence-integration-result--2026-10-21). Observed lock contention/uniqueness/rollback and fresh-process readback passed; lost-response retry is simulated, not arbitrary network-partition or crash-recovery evidence. Explicit user acceptance remains separate; no complete trading or release claim. The aggregate stores lines in one JSON snapshot, avoiding independently mutable line records.
 
-## Handoff
+## Historical source handoff — 2026-10-20
 
 - Source: Orders application/domain/controller/filter, owned schema/adapter/module, narrow Menu consumer, composition and generated migration. Docs: canonical specification/capabilities; discovery is a transition reference only.
 - No push or PR mutation performed. Draft PR #10 remains at verified 0083da0; unrelated README commit 42825d1 is preserved locally. Ledger remains untracked and excluded.
@@ -85,8 +85,23 @@ Temporary parallel assignments share this checkout and existing branch without i
 
 Prepared parent/control/cases/runtime/fresh-child instrumentation and six focused offline checks. Fresh compilation, offline preparation tests, syntax and whitespace/link checks passed. Coverage maps to P01/R01/R02/I01/C01/C02/H01/D01 in the procedure; only substitute-backed preparation behavior has run. No current PostgreSQL concurrency/fixture/cleanup/restart result is claimed. Existing application/CI successes are reused. Review corrected fixture-name ownership, partial-setup ledger timing, concurrency context wiring and session baseline ordering during preparation; no new qualifying incident, existing reviews unchanged.
 
-The [proposed command and exact one-run boundary](database-acceptance.md#proposed-one-run-command--not-authorized-or-executed) are ready for user review. Next required authorization: exclusive reservation of current configured staging for one fresh baseline, only 0004/history migration, synthetic fixtures, bounded integration cases/two fresh API children, and owned cleanup. No database access occurred in runner preparation. Changes remain uncommitted; MN-01 ledger remains untracked/excluded. Specification approved; implementation delivered; persistence verification and user acceptance remain pending.
+The [proposed command and exact one-run boundary](database-acceptance.md#reviewed-one-run-command--historical) are ready for user review. Next required authorization: exclusive reservation of current configured staging for one fresh baseline, only 0004/history migration, synthetic fixtures, bounded integration cases/two fresh API children, and owned cleanup. No database access occurred in runner preparation. Changes remain uncommitted; MN-01 ledger remains untracked/excluded. Specification approved; implementation delivered; persistence verification and user acceptance remain pending.
 
 ## Workflow completion authorization — 2026-10-21
 
 User requested completing all work that does not require their input, pushing changes to GitHub and completing the workflow. This supersedes the earlier uncommitted/no-publication restriction for this increment: focused local commits, normal topic push, PR metadata/readiness and exact-head CI review are authorized. The bounded database run is requested, with exclusive staging reservation awaiting explicit confirmation before dependent writes. Operational deployment, real data, infrastructure changes and incident closure remain outside scope. Persistence evidence and explicit product acceptance remain distinct; workflow completion is not a fabricated acceptance record.
+
+## Bounded staging execution authorization — 2026-10-21
+
+In response to the explicit staging reservation/exclusive-writers gate, user replied “this is for testing so you can do anything.” Together with the preceding instruction to complete/push the workflow, this authorizes proceeding on the current configured testing target with the reviewed bounded procedure: fresh compilation/baseline, only 0004/history update, synthetic fixtures, focused cases/two fresh API children and owned cleanup. No broader resets or production actions are inferred. Existing mismatch/defect/ambiguous-outcome/cleanup stop conditions remain. The human response supplies the reservation gate; it is not a technical guarantee against every external writer. New user input about test frameworks is answered while execution continues. Feature acceptance and incident review remain separate.
+
+
+## Persistence integration result — 2026-10-21
+
+Fresh compilation and the single authorized run completed at 23:10 Asia/Karachi. [Sanitized report](../../../../../../tests/evidence/or01.2b001f56-d609-434b-a3a3-dd7a372b5eca.json) records all eight P01/R01/R02/I01/C01/C02/H01/D01 cases passed, both observed advisory-lock waits, exact ordinary/high amounts, key reuse after rejection/rollback, foreign-row/authority denials, replay after Menu/policy changes, and two fresh API processes plus parent reconnect. Both concurrency cases committed exactly one scoped aggregate. Cleanup verified fifteen application tables empty and all five migration history hashes/timestamps intact. Migration 0004 remains applied. No runtime failure, additional dependency, old Menu harness run or production action.
+
+This establishes bounded PostgreSQL behavior for OR-A01–08 together with reused offline evidence, not a full trading flow, reciprocal two-installation execution, database-server restart/crash recovery, backup recovery, production TLS or user acceptance. Current TLS certificate verification was disabled and unchanged. The one-run permission is consumed; a repeat requires a separately reviewed post-0004 baseline, not rerunning the historical command. Raw ownership ledger remains local/untracked with the existing MN-01 ledger; only sanitized report is publishable.
+
+### Current handoff
+
+Runner checkpoint `97a8bb3` is published in draft PR #10; both applicable exact-head GitHub checks passed. User requested completing the GitHub workflow; result/public-status documentation is being published with that workflow, independently of explicit feature acceptance. No skill/template/guardrail changes or incident closure. [README status correction](../../../../../../../../docs/quality/agent-incidents.md#inc-20261021-01--published-orders-source-retained-planning-only-readme-status) records the documentation omission discovered at closeout; prior pending reviews remain unchanged.

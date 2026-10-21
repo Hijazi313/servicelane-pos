@@ -136,3 +136,12 @@ The user subsequently authorized implementing the suggested focused architecture
 ### INC-20261020-02 — GitHub execution evidence, 2026-10-21
 
 User explicitly authorized committing/pushing the existing checker and verifying Actions, superseding its draft-only restriction for this task. [Canonical remote evidence](../../apps/api/scripts/README.md#github-actions-verification--2026-10-21) records two resolved CI setup failures and run 39484691271 at c7098f1: setup/frozen installation passed, all seven checker tests passed, strict source scan failed on the existing Authentication finding. The guard is exercised remotely but the repository gate is not green. No exemptions, Authentication repair, local installation, database access, branch-protection mutation or merge. Process incident remains open and prevention/user review remains pending; remote execution does not demonstrate general agent instruction adherence.
+
+
+## INC-20261021-01 — Published Orders source retained planning-only README status
+
+- Severity / status: S3 / corrected on 2026-10-21; user review pending. Observed impact: the public entry documentation understated implemented Orders behavior and required closeout correction.
+- Violation and evidence: Root README lines 25–27 in published runner checkpoint `97a8bb3` still described Orders as discovery/planning only and ordering as future, while its owning tracker and source already delivered capture/readback. Blame identifies `acc38af3` as the earlier planning-era text; its original statement was appropriate then. Publishing the later implementation without reconciling this capability summary missed AGENTS.md documentation-upkeep and accurate-handoff requirements. This is a documentation omission, not evidence of failed database behavior or unauthorized execution.
+- Impact: Contradictory public capability/phase information persisted into the published branch. No runtime or customer-data harm established.
+- Correction: Current README adds the implemented capture/readback row and links acceptance/evidence limits; future order workflows remain distinct. Owning Orders/Menu capability indexes and global tracker now reflect the successful bounded PostgreSQL result. Source and database behavior unchanged by the documentation correction.
+- Prevention / user review: Apply existing documentation-upkeep guidance; no new policy, skill, template or guardrail change proposed or made / pending. Only the user may close this entry.

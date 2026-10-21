@@ -1,6 +1,6 @@
 # OR-01 persistence acceptance preparation
 
-Prepared 2026-10-21; owner: primary agent. [Specification](spec.md#phase-p0-and-observable-acceptance) owns intended behavior; [tracker](phase-tracker.md#persistence-preparation--2026-10-21) owns authorization and evidence. This procedure is implemented by the manual [parent runner](../../../../../../tests/or01-acceptance.mjs), [case operations](../../../../../../tests/or01-cases.mjs), [controls](../../../../../../tests/or01-controls.mjs), [real adapter/API composition](../../../../../../tests/or01-runtime.mjs) and [fresh API child](../../../../../../tests/or01-restart.mjs). The integration run remains unexecuted. Subsequent separately authorized read-only inspection is recorded below; no migration or fixture write has occurred.
+Prepared 2026-10-21; owner: primary agent. [Specification](spec.md#phase-p0-and-observable-acceptance) owns intended behavior; [tracker](phase-tracker.md#persistence-preparation--2026-10-21) owns authorization and evidence. This procedure is implemented by the manual [parent runner](../../../../../../tests/or01-acceptance.mjs), [case operations](../../../../../../tests/or01-cases.mjs), [controls](../../../../../../tests/or01-controls.mjs), [real adapter/API composition](../../../../../../tests/or01-runtime.mjs) and [fresh API child](../../../../../../tests/or01-restart.mjs). The single authorized integration run passed on 2026-10-21; [result and limits](phase-tracker.md#persistence-integration-result--2026-10-21). Preparation sections below preserve the reviewed procedure; they are not renewed execution permission.
 
 ## Target identity and authorization gates
 
@@ -63,9 +63,9 @@ Fresh TypeScript compilation to existing `dist/orders-check` passed. Six focused
 
 Review corrected fixture ownership names, per-offering ledger timing, transaction argument wiring and session-baseline ordering before delivery. Parent/child close/error handling and owned cleanup were reviewed. Cleanup checks business/account/branch identity and offering name ownership, leaves global Access tables untouched and requires them empty, removes only owned Orders/Menu/Access/Business fixtures, then verifies all fifteen tables empty and all five history rows/hash/timestamps intact. No new incident was established during this in-progress preparation; pending incident reviews remain unchanged.
 
-## Proposed one-run command — not authorized or executed
+## Reviewed one-run command — historical
 
-Before this command, the user must explicitly authorize the bounded migration/fixture run and confirm exclusive use of the current `.env` staging target for the entire window. The runner repeats the full reviewed baseline. A baseline mismatch or material runner defect stops execution; do not loosen gates or retry automatically. Migration 0004/history remain applied after the run, even if later cases fail. Cleanup deletes only owned synthetic data.
+The user subsequently authorized this command once for the current testing target; it completed successfully and migration 0004 now remains applied. **Do not rerun:** the pre-0004 baseline is obsolete and the one-run grant is consumed. The reviewed prerequisite was explicit authorization and exclusive use of current `.env` staging for the entire window. The runner repeats the full reviewed baseline. A baseline mismatch or material runner defect stops execution; do not loosen gates or retry automatically. Migration 0004/history remain applied after the run, even if later cases fail. Cleanup deletes only owned synthetic data.
 
 From repository root, using the already installed runtime/tooling with no install fallback:
 
@@ -75,3 +75,7 @@ OR01_ACCEPT_STAGING=YES OR01_TARGET=current-staging OR01_EXCLUSIVE=YES /private/
 ```
 
 This authorizes no production access, external listener, infrastructure, dependency installation, database-server restart, deployment, Git changes or PR mutation. Proposed execution ends with inspection of the unique report/ledger and cleanup result; acceptance remains an explicit subsequent user decision.
+
+## Execution result and remaining limits
+
+[Report](../../../../../../tests/evidence/or01.2b001f56-d609-434b-a3a3-dd7a372b5eca.json): all eight integration cases passed, two fresh API processes completed, and cleanup verified all fifteen application tables empty with five migration entries retained. No database-server restart, production transport, real customer data or deployment was involved. Existing offline checks plus these observations support the bounded backend increment; user acceptance remains separate. Further execution needs a post-0004 procedure and new authorization. The command above is historical evidence, not a supported repeat-run command.
