@@ -2,7 +2,7 @@
 
 Date: 2026-10-22. Owner: primary agent, solo. [Specification](spec.md); [business decisions](decisions.md); [global tracker](../TRACKER.md).
 
-Status: proposed. Active implementation phase: none. Planning deliverable is prepared; KT-D02–04 are approved for the development boundary; KT-D01 and acceptance of the full plan remain pending.
+Status: proposed. Active implementation phase: none. KT-00 planning deliverable is complete and KT-D01–04 business boundaries are approved; the technical specification remains proposed for review, and source authorization is pending.
 
 ## Authorization and verified entry
 
@@ -14,7 +14,7 @@ Local main and remote main both verified at `6125da43245f50f52730d122792f7d01418
 
 | Phase | Outcome / status | Entry and exit |
 | --- | --- | --- |
-| KT-00 — planning | Documentation prepared; decision gate pending | Entry: current request. Exit: owner explicitly resolves remaining KT-D01 and confirms KT-D02–04 scope, accepts conditional scope/criteria or requests rescope; no implementation implied. |
+| KT-00 — planning | Complete: documentation prepared and KT-D01–04 resolved | Entry: current request. Exit: owner explicitly resolves remaining KT-D01 and confirms KT-D02–04 scope, accepts conditional scope/criteria or requests rescope; no implementation implied. |
 | KT-01 — backend handoff | Proposed, not activated | Entry: approved decisions/spec plus explicit source/check authorization. Intended outcome: KT-A01–06, one Orders projection and Kitchen ticket/queue/status boundary. Before coding, confirm contracts, bounds, revision/retry semantics and capability upkeep; no standalone Orders reopening or unrelated fixes. Exit: authorized source/offline evidence recorded, unavailable persistence behavior explicit. |
 | KT-02 — bounded integration acceptance | Proposed, not activated | Entry: reviewed procedure for current post-0004 baseline, explicit target/run/fixture/cleanup permission and acceptable source evidence. Objective: persisted atomicity/concurrency and fresh-process KT-A01–05 evidence; explicit user development acceptance remains separate from technical checks/integration. No old Menu/Orders harness rerun or inherited target permission. |
 
@@ -26,7 +26,7 @@ No later phase is detailed or activated. If payment-first or amendments/cancella
 | --- | --- |
 | Verify accepted Orders entry, checkout and preservation | Complete by Git/source/document inspection; no behavioral rerun |
 | Challenge phase P0 and specify acceptance | Prepared in [specification](spec.md#outcome-and-smallest-justified-scope) and [criteria](spec.md#acceptance-criteria); proposed, not approved |
-| Present material business alternatives | Prepared in [KT-D01–04](decisions.md); KT-D02–04 approved; KT-D01 pending |
+| Present material business alternatives | Prepared in [KT-D01–04](decisions.md); KT-D01–04 approved for development; future configuration mechanism remains proposed |
 | Publish coherent documentation | [PR #13](https://github.com/Hijazi313/servicelane-pos/pull/13) open against main; no merge or additional business approval inferred |
 
 ## Completion shape and evidence limits
@@ -35,6 +35,6 @@ This planning increment provides a reviewable conditional backend scope and a na
 
 ## Current handoff
 
-Next action: owner resolves [KT-D01](decisions.md#approval-record), choosing first-slice dispatch/payment eligibility and configuration scope. KT-D02–04 are approved as a development boundary; retain their operational limits. Record answers without inferring source permission; adjust scope if needed. No implementation begins until material decisions and explicit authorization are present.
+Next action: review the proposed technical specification and explicitly authorize KT-01 source scope/checks if desired. [KT-D01–04](decisions.md#approval-record) are resolved for development; retain operational limits and defer configurable modes. Record answers without inferring source permission; adjust scope if needed. No implementation begins until material decisions and explicit authorization are present.
 
 Changed files: this planning trio, global tracker, short Orders transition, project-scope authorization link and affected module summary. Preserve `apps/api/tests/evidence/mn01.50780479-e373-4388-ba18-3ec6da8e4f20.ledger.json` and `apps/api/tests/evidence/or01.2b001f56-d609-434b-a3a3-dd7a372b5eca.ledger.json` unchanged/untracked. Pending incident review remains with the user; [incident log](../../quality/agent-incidents.md) is unchanged. Incidents: none in this planning work; 15 existing entries remain pending user review (including linked process/technical entries; no new independent-occurrence count implied).

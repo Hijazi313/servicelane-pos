@@ -1,16 +1,16 @@
 # Kitchen handoff — proposed specification
 
-Date: 2026-10-22. Status: proposed; KT-D02–04 approved for development, KT-D01 pending. [Tracker](phase-tracker.md); [decisions](decisions.md); [global tracker](../TRACKER.md).
+Date: 2026-10-22. Status: technical specification proposed; KT-D01–04 business boundaries approved for development. [Tracker](phase-tracker.md); [decisions](decisions.md); [global tracker](../TRACKER.md).
 
 ## Outcome and smallest justified scope
 
-Propose **KT-01: explicitly dispatch one captured takeaway order into a durable branch kitchen queue and advance the whole ticket through preparation to ready**, exposed through the backend only. This is phase P0 for demonstrating a durable Orders → Kitchen handoff, not product MVP completion or permission for restaurant use. The dispatch policy is conditional on KT-D01; payment-first selection blocks this proposal's current entry.
+Propose **KT-01: explicitly dispatch one captured takeaway order into a durable branch kitchen queue and advance the whole ticket through preparation to ready**, exposed through the backend only. This is phase P0 for demonstrating a durable Orders → Kitchen handoff, not product MVP completion or permission for restaurant use. KT-D01 approves explicit dispatch without a payment prerequisite for this development slice.
 
 A queue alone would expose work with no reliable completion boundary. Conversely, printers, a screen UI, station routing and line-level scheduling are not needed to prove this backend handoff. Do not add a general event bus, workflow engine or background delivery worker for an in-process transaction.
 
 | Requirement | Phase P0 justification / simpler alternative |
 | --- | --- |
-| KT-R01: Explicit authorized, duplicate-safe dispatch | An operator decides when a saved order becomes preparation work; automatic capture dispatch is a material alternative awaiting KT-D01. Repeated/lost-response dispatch must not prepare twice. |
+| KT-R01: Explicit authorized, duplicate-safe dispatch | An operator decides when a saved order becomes preparation work; automatic capture dispatch is a material alternative considered in KT-D01. Repeated/lost-response dispatch must not prepare twice. |
 | KT-R02: Complete immutable preparation snapshot | A cook needs quantities, variants, extras, combo composition and instructions; names from current Menu could change an accepted order. Full Orders payload unnecessarily discloses customer/financial data. |
 | KT-R03: Durable scoped pending queue and single-ticket read | A missed response or reconnect must rediscover committed work. Memory-only state cannot establish the handoff. A bounded pull interface is sufficient; no push transport required. |
 | KT-R04: Whole-ticket state with deliberate conflicts | Kitchen must distinguish waiting, started and ready. A single ready boolean loses whether preparation began; richer line/station lifecycles have no current requirement. |
@@ -34,7 +34,7 @@ These are semantic contracts, unavailable and unapproved; final schemas/routes b
 
 ## Acceptance criteria
 
-Criteria remain proposed pending full scope approval and KT-D01; KT-D02–04 business boundaries are approved. Future evidence must use synthetic data and separately authorized verification; no checks are run by planning.
+Criteria remain proposed pending technical specification review; KT-D01–04 business boundaries are approved. Future evidence must use synthetic data and separately authorized verification; no checks are run by planning.
 
 | ID | Scenario and required observable result | Expected future evidence |
 | --- | --- | --- |
