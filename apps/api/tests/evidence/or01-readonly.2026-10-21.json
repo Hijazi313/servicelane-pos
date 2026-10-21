@@ -1,0 +1,51 @@
+{
+  "date": "2026-10-21T17:53:14.108Z",
+  "mode": "read-only inspection",
+  "migrationExecution": false,
+  "fixtureWrites": false,
+  "checks": [
+    "read-only endpoint identities match historical fingerprint",
+    "thirteen expected tables empty",
+    "0000\u20130003 history hashes/timestamps match",
+    "0003 columns/types/nullability/constraint names match"
+  ],
+  "tlsVerified": false,
+  "targetFingerprint": "1b55f59a1b8c467c8b070c0eebe59012c54e7393fb54a2b5e0b438a2be492437",
+  "serverVersion": "17.11",
+  "tableCount": 13,
+  "counts": {
+    "access_limits": 0,
+    "access_prelogins": 0,
+    "access_security_events": 0,
+    "access_sessions": 0,
+    "branches": 0,
+    "businesses": 0,
+    "installation_binding": 0,
+    "menu_offerings": 0,
+    "menu_references": 0,
+    "menu_variants": 0,
+    "staff_accounts": 0,
+    "staff_branch_grants": 0,
+    "staff_credentials": 0
+  },
+  "appliedMigrations": 4,
+  "pendingMigration": "0004_order_capture",
+  "publicObjectKinds": [
+    {
+      "relkind": "i",
+      "count": 23
+    },
+    {
+      "relkind": "r",
+      "count": 13
+    }
+  ],
+  "userTriggers": 0,
+  "publicFunctions": 0,
+  "result": "passed",
+  "limits": "No writes; shape comparison does not audit constraint expressions, privileges, policies, or every provider-managed schema. Read-only snapshot does not reserve target or prove lock-observation capability.",
+  "probeSha256": "18fefbd7ebeb9a7deb971279156da58428e386dee030d553be0b926c79279646",
+  "sourceHead": "eab89868e720d66c5e7601602747516a90f0c88f",
+  "authorization": "User yes on 2026-10-21 to read-only staging identity, migration-history, schema and row-count inspection; no write permission.",
+  "connectionNote": "Initial sandboxed connection failed before any check; identical read-only probe completed with authorized network access."
+}
