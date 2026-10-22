@@ -36,6 +36,13 @@
       "when": 1792440992358,
       "tag": "0004_order_capture",
       "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1792699951521,
+      "tag": "0005_kitchen_handoff",
+      "breakpoints": true
     }
   ]
 }

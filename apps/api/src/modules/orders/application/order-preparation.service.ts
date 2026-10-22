@@ -8,7 +8,7 @@ export interface OrderPreparation {
   fulfillment: 'takeaway';
   instructions?: string;
   lines: {
-    position: number; quantity: number; name: string; instructions?: string;
+    position: number; quantity: number; offeringId: string; name: string; instructions?: string;
     components: { itemId: string; itemName: string; variantId: string; variantName: string; quantity: number }[];
     addOns: { id: string; name: string }[];
     choices: { groupId: string; optionId: string; name: string }[];
@@ -35,7 +35,7 @@ export class OrderPreparationService {
           throw new Error('Order preparation unavailable');
         }
         return {
-          position, quantity: line.quantity, name: line.unit.name,
+          position, quantity: line.quantity, offeringId: line.unit.offeringId, name: line.unit.name,
           ...(line.instructions ? { instructions: line.instructions } : {}),
           components: line.unit.components.map(component => {
             if (!Number.isSafeInteger(component.quantity) || component.quantity < 1) throw new Error('Order preparation unavailable');

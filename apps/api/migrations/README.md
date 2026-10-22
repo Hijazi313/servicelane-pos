@@ -24,3 +24,7 @@ See the [acceptance record](../../../docs/acceptance/project-foundation.md). No-
 `0001_staff_access.sql` adds four Authentication-owned tables: sessions, pre-login CSRF state, throttle counters and security events, plus their checks/indexes and account-ownership FK. Existing six BA-01 tables are unchanged. Generated offline with metadata; source review does not prove application, locking, cleanup or recovery. Do not run `db:migrate` under BA-02 source-only authorization. Accepted BA-01 history is preserved; its staging harness expects the earlier six-table state and is not a BA-02 acceptance runner.
 
 `0002_login_reservations.sql` is the forward source correction for pending login attempts. It adds a default-empty UUID array bounded to five entries (and no more than charged attempts), restricted to account counters. It preserves prior tables/columns and attempts; no applied migration is rewritten. Review/apply this and pending `0001` only after separate BA-02 database authorization. No migration was applied during the source correction.
+
+## KT-01 source-only migration
+
+`0005_kitchen_handoff.sql` adds Kitchen-owned preparation tickets, scoped order identity/dispatch positions and state/revision/provenance constraints. Generated offline with metadata; not applied. Source/offline checks cannot prove real uniqueness/locking/rollback/sequence visibility or restart readback. No change to earlier applied migrations. [Owning authorization/evidence](../src/modules/kitchen/docs/features/preparation/phase-tracker.md).

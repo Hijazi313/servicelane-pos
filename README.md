@@ -25,7 +25,7 @@ The backend currently includes:
 
 Business setup, authentication/access, and menu catalogue are accepted under their recorded backend development scopes. Menu was integrated through [PR #9](https://github.com/Hijazi313/servicelane-pos/pull/9); Orders capture/readback was explicitly accepted on 2026-10-21 under its recorded backend development scope, with focused offline and bounded staging persistence evidence; [closeout and limits](apps/api/src/modules/orders/docs/features/capture/phase-tracker.md#acceptance-and-closeout--2026-10-21).
 
-The frontend, further order workflows, kitchen, billing, payments, shifts, inventory, and reporting remain planned. Deployment, backup, and recovery validation remain incomplete.
+Kitchen [KT-01 source](apps/api/src/modules/kitchen/docs/README.md) now provides explicit dispatch, preparation-only queue/readback and preparation states with offline evidence only; migration 0005 is unapplied and acceptance is pending. The frontend, further order workflows, kitchen operational completion/correction, billing, payments, shifts, inventory, and reporting remain planned. Deployment, backup, and recovery validation remain incomplete.
 
 See the [project tracker](docs/planning/TRACKER.md) for the roadmap, current acceptance status, and verification limits.
 

@@ -1,0 +1,20 @@
+CREATE TABLE "kitchen_tickets" (
+	"id" uuid PRIMARY KEY NOT NULL,
+	"business_id" uuid NOT NULL,
+	"branch_id" uuid NOT NULL,
+	"order_id" uuid NOT NULL,
+	"position" bigserial NOT NULL,
+	"preparation" jsonb NOT NULL,
+	"state" varchar(16) NOT NULL,
+	"revision" integer NOT NULL,
+	"dispatched_at" varchar(24) NOT NULL,
+	"dispatched_by" uuid NOT NULL,
+	"preparing_at" varchar(24),
+	"preparing_by" uuid,
+	"ready_at" varchar(24),
+	"ready_by" uuid,
+	CONSTRAINT "kitchen_order_scope" UNIQUE("business_id","branch_id","order_id"),
+	CONSTRAINT "kitchen_position_scope" UNIQUE("business_id","branch_id","position"),
+	CONSTRAINT "kitchen_state_revision" CHECK (("kitchen_tickets"."state" = 'queued' and "kitchen_tickets"."revision" = 0 and "kitchen_tickets"."preparing_at" is null and "kitchen_tickets"."preparing_by" is null and "kitchen_tickets"."ready_at" is null and "kitchen_tickets"."ready_by" is null) or ("kitchen_tickets"."state" = 'preparing' and "kitchen_tickets"."revision" = 1 and "kitchen_tickets"."preparing_at" is not null and "kitchen_tickets"."preparing_by" is not null and "kitchen_tickets"."ready_at" is null and "kitchen_tickets"."ready_by" is null) or ("kitchen_tickets"."state" = 'ready' and "kitchen_tickets"."revision" = 2 and "kitchen_tickets"."preparing_at" is not null and "kitchen_tickets"."preparing_by" is not null and "kitchen_tickets"."ready_at" is not null and "kitchen_tickets"."ready_by" is not null)),
+	CONSTRAINT "kitchen_preparation_identity" CHECK (jsonb_typeof("kitchen_tickets"."preparation") = 'object' and "kitchen_tickets"."preparation"->>'orderId' is not null and "kitchen_tickets"."preparation"->>'orderId' = "kitchen_tickets"."order_id"::text)
+);
