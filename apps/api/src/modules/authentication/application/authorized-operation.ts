@@ -4,6 +4,7 @@ import type { TransactionContext } from '../../../infrastructure/database/transa
 export type AuthorizedPolicy = 'staff' | 'administrator';
 
 export interface AuthorizedScope {
+  readonly actorId: string;
   readonly installation: InstallationContext;
   readonly transaction: TransactionContext;
 }

@@ -49,3 +49,20 @@ Review corrections in the [specification](spec.md#source-baseline-and-ownership)
 Assessment: ready for owner approval of the revised technical plan; no unresolved material business change identified within this development scope. Queue backlog/collection and correction/cancellation gates still prohibit restaurant operation. Capability indexes remain unchanged because no capability is implemented. No test or runtime/persistence success is claimed; documentation link/diff review and source inspection are the evidence. Both ledger hashes remain unchanged. Incidents: none from this review; proposed technical gaps found before source activation are addressed through normal specification review. Prior pending incident reviews remain unchanged.
 
 Bounded next authorization proposal (not active): approve the revised KT-01 specification and authorize Kitchen backend source/schema/migration-source work, the Orders transaction-aware preparation projection, the additive trusted Authentication actor ID, affected capability/module/handoff documentation and meaningful focused offline checks with existing tooling. Permit local topic-branch commits; retain explicit boundaries for source publication/merge. No database access or migration execution, acceptance-harness execution, installation, provisioning, deployment, KT-02 or later workflows. Review/merge planning PR #13 only under explicit merge permission before integrating source work.
+
+
+## KT-01 source activation — 2026-10-23
+
+User explicitly approved the revised specification and authorized merging planning PR #13, Kitchen backend implementation/schema/migration source without execution, the narrow Orders and Authentication extensions, affected docs, focused offline checks and local commits. PR #13 was squash-merged with expected head f1044a0 as `6eeb92b7ec72103ae7e8669b774ab3aa64e5b44e`; historical documentation CI remained intentionally skipped. Local main was fast-forwarded and topic `codex/kitchen-handoff` created from that merge. No source push/PR/merge, database access, installation, provisioning, deployment or KT-02 is authorized.
+
+Active phase: KT-01. Solo assignment: primary agent owns Kitchen source/docs/tests, the approved Orders projection and Authentication scope extensions, migration source composition and local Git integration.
+
+| Task | Status | Acceptance / expected evidence |
+| --- | --- | --- |
+| Trusted actor + transactional preparation projection | complete; offline only | KT-A01/03/05; focused existing authorization regression + new projection cases |
+| Kitchen dispatch/queue/transitions/schema and HTTP | proposed | KT-A01–06; offline transactional double and actual HTTP checks; no PostgreSQL claim |
+| Migration source, capability/docs upkeep and closeout | proposed | Generated offline migration only; scoped compilation/boundary checks and recorded limits |
+
+Completion shape: source/offline-verified backend API with persistence implementation unverified on PostgreSQL; no operational readiness or development acceptance inferred.
+
+Prerequisite checkpoint: fresh compilation, 16 Orders/projection/actual-HTTP checks and six focused authorization checks passed on existing Node 24.21.0. Projection retains captured composition and instructions while stripping nested surcharges/customer data; supplied transaction and verified actor are covered. No database access; PostgreSQL behavior remains unverified.
