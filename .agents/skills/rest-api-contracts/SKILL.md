@@ -2,6 +2,13 @@
 name: rest-api-contracts
 description: "Design, implement and review REST API contracts in this repository, including validation, query parameters, responses, errors, headers, retries and concurrency. Use for new or changed HTTP endpoints and contract reviews; exclude unrelated internal changes."
 metadata:
+  author: "Codex"
+  version: "0.1.0"
+  project: "ServiceLane POS"
+  scope: "REST API contract design, implementation guidance and review; existing API migrations and CI enforcement require separate authorization"
+  created: "2026-10-24"
+  updated: "2026-10-24"
+  compatibility: "NestJS 12 with Fastify, TypeScript 6 and Node.js 24; repository source and owning specifications required; guidance only, no runtime enforcement"
   short-description: "Design and review consistent REST API contracts"
 ---
 
