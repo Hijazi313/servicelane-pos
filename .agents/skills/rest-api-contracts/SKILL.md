@@ -37,6 +37,6 @@ Use explicit public contracts and supported module interfaces. Do not expose dat
 
 ## Verification and handoff
 
-Read [enforcement guidance](references/enforcement.md) when implementing or reviewing checks. Run the smallest relevant existing checks; exercise meaningful negative behavior, not only happy paths. Static checks do not prove authorization, runtime field selection or transaction safety.
+Before completing API design, implementation or review, apply the relevant [verification checklist](references/enforcement.md#verification-checklist). Distinguish source review from executed checks and report material gaps; invoking this skill does not prove compliance. Run the smallest relevant existing checks and meaningful negative cases. Static checks do not prove authorization, runtime field selection or transaction safety.
 
 Report contract changes, compatibility impact, verification results/limits and unresolved decisions. Follow the repository incident-learning requirements. CI enforcement and migrations remain separately scoped.

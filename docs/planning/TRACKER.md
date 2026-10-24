@@ -23,6 +23,10 @@ User authorized a new topic branch and the type-safety reference discussed in th
 
 User authorized a concise reference on the existing `codex/api-type-safety` branch. Added [query examples](../../.agents/skills/rest-api-contracts/references/query-parameters.md), skill routing and version 0.3.0. Existing canonical rules remain authoritative; no endpoint, dependency, CI or database changes. Local validation passed: parser example accepted four valid cases and rejected eleven malformed/duplicate-like values; example JSON, local links, YAML and whitespace checks passed. These checks do not exercise Fastify, SQL or API behavior. No push/PR/merge inferred. Incidents: none in this increment.
 
+## Skill invocation verification — 2026-10-24
+
+User authorized the concise API verification checklist, mandatory skill routing and a concrete example-based red-flags section (revised after owner feedback), staged for review only. Changed the skill entry point and enforcement reference on `codex/api-type-safety`; no application/CI changes. Local link/whitespace checks passed. These are documentation checks, not runtime verification. User subsequently approved the staged changes and authorized a local commit; push and merge remain outside this increment. Next: the read-only implementation proposal discussed in chat. Incident review: [INC-20261024-01](../quality/agent-incidents.md#inc-20261024-01--api-skill-guidance-required-repeated-user-led-specificity-and-correction).
+
 ## Current focus
 
 - Stage: Foundation F-01 remains complete; [acceptance and evidence limits](project-foundation/phase-tracker.md#closeout--2026-10-12).
