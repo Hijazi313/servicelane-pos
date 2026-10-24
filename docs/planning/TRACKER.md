@@ -19,6 +19,10 @@ User authorized a new topic branch and the type-safety reference discussed in th
 - Local checkpoint prepared; incidents: none in this increment. Bundled skill validator remains unavailable due to missing PyYAML; YAML parsed with existing Ruby Psych instead.
 - Next: review the reference; future CI enforcement stays separate.
 
+## Query-parameter examples — 2026-10-24
+
+User authorized a concise reference on the existing `codex/api-type-safety` branch. Added [query examples](../../.agents/skills/rest-api-contracts/references/query-parameters.md), skill routing and version 0.3.0. Existing canonical rules remain authoritative; no endpoint, dependency, CI or database changes. Local validation passed: parser example accepted four valid cases and rejected eleven malformed/duplicate-like values; example JSON, local links, YAML and whitespace checks passed. These checks do not exercise Fastify, SQL or API behavior. No push/PR/merge inferred. Incidents: none in this increment.
+
 ## Current focus
 
 - Stage: Foundation F-01 remains complete; [acceptance and evidence limits](project-foundation/phase-tracker.md#closeout--2026-10-12).
