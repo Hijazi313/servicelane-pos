@@ -1,6 +1,7 @@
 export type OrdersErrorCode = 'INVALID_ORDER_INPUT' | 'ORDER_AMOUNT_CAPACITY' | 'INVALID_RETRY_KEY' | 'INVALID_CURRENCY' | 'INVALID_LINES' | 'RETRY_CONTENT_CONFLICT' | 'ORDER_LIMIT_EXCEEDED' | 'MENU_RESULT_UNAVAILABLE' | 'PRICE_CONFIRMATION_REQUIRED' | 'ORDER_RESPONSE_CAPACITY' | 'INSTALLATION_UNAVAILABLE' | 'ORDER_NOT_FOUND' | 'STALE_ORDER_POLICY';
+export interface PriceConfirmationDetails { currencyCode: string; scale: number; lines: { line: number; unitMinor: string }[] }
 export class OrdersError extends Error {
-  constructor(readonly code: OrdersErrorCode, readonly details?: unknown) { super(code); }
+  constructor(readonly code: OrdersErrorCode, readonly details?: PriceConfirmationDetails) { super(code); }
 }
 export const MAX_LINES = 500, MAX_QUANTITY = 1000, RESPONSE_BYTES = 1_048_576;
 export interface LimitPolicy { maxLines: number; maxQuantity: number; revision: number }

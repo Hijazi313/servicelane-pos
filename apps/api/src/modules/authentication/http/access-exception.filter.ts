@@ -1,5 +1,8 @@
 import { Catch, HttpException, type ArgumentsHost, type ExceptionFilter } from '@nestjs/common';
 import { AccessError, type AccessErrorReason } from '../application/access-policy.js';
+import { HttpContractFilter } from '../../../infrastructure/http/http-contract.filter.js';
+import { usesHttpContract } from '../../../infrastructure/http/http-contract.decorator.js';
+import { errorPolicy, httpProblem } from '../../../infrastructure/http/http-error-policy.js';
 import { type AccessReply } from './access-http.helpers.js';
 
 const accessStatuses: Record<AccessErrorReason, 400 | 401 | 403 | 404 | 409 | 429 | 503> = {
@@ -8,6 +11,12 @@ const accessStatuses: Record<AccessErrorReason, 400 | 401 | 403 | 404 | 409 | 42
 @Catch()
 export class AccessExceptionFilter implements ExceptionFilter {
   catch(error: unknown, host: ArgumentsHost) {
+    if (usesHttpContract(host)) {
+      new HttpContractFilter(this, errorPolicy(error => error instanceof AccessError
+        ? { ...httpProblem(accessStatuses[error.reason], `ACCESS_${error.reason}`), ...(error.retryDelaySeconds ? { retryAfter: error.retryDelaySeconds } : {}) }
+        : undefined)).catch(error, host);
+      return;
+    }
     const reply = host.switchToHttp().getResponse<AccessReply>();
     if (error instanceof AccessError) {
       const status = accessStatuses[error.reason] ?? 503;
