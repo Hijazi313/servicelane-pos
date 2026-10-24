@@ -6,12 +6,12 @@ From repository root, using a supported Node 24 runtime (>=24.21.0):
 
 ```sh
 node apps/api/node_modules/typescript/bin/tsc -p apps/api/tsconfig.json --outDir apps/api/dist/orders-check --sourceMap false
-node --test apps/api/tests/http-prototype/pattern.test.mjs
+node --test apps/api/tests/http-prototype/pattern.test.mjs apps/api/tests/http-prototype/logging.test.mjs
 ```
 
-Stop if compilation fails; do not test stale output. Generated files stay in ignored dist directories. The parser experiment in pattern.test.mjs reuses existing primitives but duplicates OrdersService structural composition temporarily: it is not an approved production parser architecture. Compilation covers the shared TypeScript infrastructure; the standalone parser remains a JavaScript experiment.
+Stop if compilation fails; do not test stale output. Generated files stay in ignored dist directories. The harness now calls the extracted TypeScript parseOrderCapture function; no duplicated JavaScript parser remains. Compilation covers shared and module TypeScript source.
 
-## Observed 2026-10-24
+## Historical prototype observations — 2026-10-24
 
 Strict compilation and all five test groups passed on the existing bundled Node v24.22.1. An initial development run on v24.18.1 is not the final supported-runtime evidence.
 
@@ -38,3 +38,13 @@ The fixture serializes access in memory; its concurrency result does not prove P
 After user continuation authorization, the proven boundary moved into src/infrastructure/http with role-specific filenames; this harness now imports those production-source components. Removed the duplicated test boundary.ts. Extracted correlation hooks into createHttpAdapter; moved example problem URLs and diagnostic collection into test-owned policy, so shared source contains neither example identifiers nor an in-memory log collector.
 
 Fresh strict project compilation and the same five groups passed on Node v24.22.1 after promotion. No AppModule/bootstrap/controller registration changed. Application parser extraction and production logger wiring remain pending; these are reusable source components exercised offline, not endpoint adoption.
+
+## First endpoint integration — 2026-10-25
+
+Production source now registers the shared components for GET /api/v1/menu/offerings and POST /api/v1/orders. This is source integration, not deployment. Actual controller tests verify the approved contract; unmarked probe routes retain legacy comparisons. Root-relative /problems/... types are user-approved. Application parsing is extracted for shared application/domain normalization; the subsequent DTO adoption below defines the current HTTP validation path. Production completion logging includes safe problem codes; unexpected diagnostics omit raw secret-bearing messages/stacks. logging.test.mjs verifies the production reporter's redaction policy.
+
+Earlier statements above about unregistered source and absent parser extraction describe the historical prototype checkpoint. Current limits remain synthetic persistence, no PostgreSQL rerun, no post-header streaming recovery and no broad client/release acceptance.
+
+## Nest DTO validation — 2026-10-25
+
+The user subsequently selected Nest ValidationPipe with class-validator 0.15.1 and class-transformer 0.5.1. The harness now exercises that integration; the generic parser-adapter pipe is removed. Nested DTO/unknown-field/coercion/null/replay checks are in orders-http.test.mjs. Application normalization still protects all callers. Libraries were pinned with pnpm 12.11.2; its in-place add hit the existing pnpm9 modules-layout mismatch, so only manifest/lockfile resolution was performed there. New libraries were verified through isolated dependencies linked into apps/api/node_modules. Five isolated dependency versions/integrities match the pnpm lock and frozen lockfile-only verification passed. Lifecycle scripts never ran. Existing unrelated node_modules was not rebuilt; a normal future pnpm install can recreate dependencies from the checked-in lockfile.

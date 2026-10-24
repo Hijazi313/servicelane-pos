@@ -1,6 +1,6 @@
 # Shared HTTP pattern proposal
 
-Status: proposed architecture with a user-authorized offline prototype completed on 2026-10-24; [observed results and limits](../../apps/api/tests/http-prototype/README.md). Production migration and dependency selection remain unapproved. The [canonical convention](rest-api-convention.md) owns wire rules. This document proposes their implementation, not another contract standard.
+Status: proposed architecture with a user-authorized offline prototype completed on 2026-10-24; [observed results and limits](../../apps/api/tests/http-prototype/README.md). User subsequently approved the two-endpoint source migration and root-relative identifiers on 2026-10-25; deployment remains unapproved. The [canonical convention](rest-api-convention.md) owns wire rules. This document proposes their implementation, not another contract standard.
 
 ## Mental model and ownership
 
@@ -36,10 +36,10 @@ Response mapping explicitly preserves the approved snapshot fields; error mappin
 
 ## Proposed Nest integration
 
-1. **Validation:** retain existing pure validators initially and use supported PipeTransform integration. No class-validator, class-transformer or schema package is currently declared. First extract one existing parser without changing semantics; do not hand-write a new universal validation framework. Compare a library only if concrete nested-contract maintenance justifies dependency authorization. DTOs describe validated input; annotations alone prove nothing.
+1. **Validation:** the initial parser-adapter experiment was superseded by explicit user approval on 2026-10-25: migrated HTTP inputs now use Nest ValidationPipe with class-validator/class-transformer and concrete DTOs. Shared application/domain normalization remains for canonical IDs, exact money, replay and non-HTTP callers. Do not add a competing generic parser pipe.
 2. **Queries:** share only demonstrated scalar/array/date parsing mechanics and defaults. Module contracts compose supported keys and allowlists. Check duplicate scalars before parser normalization loses them. No generic BaseQueryDto with every module's filters. No speculative cursor codec until needed.
 3. **Success:** module mapping owns fields; a shared interceptor owns the envelope for explicitly opted-in normal JSON routes. Use one small metadata decorator to distinguish migrated routes, not property-name heuristics. Handler-owned typed page metadata, when needed, uses one explicit internal result contract; the interceptor never computes counts/cursors. Preserve 204/header-only results and health/files/streams. Direct reply.send routes need deliberate migration.
-4. **Errors:** module-scoped filters map semantic errors and delegate to the same shared Problem Details writer. A shared fallback handles framework/Access/unknown errors. Register module mappers through normal DI, not a plugin registry. Nest filters do not chain: a local filter must invoke shared formatting itself. Production Access catch-all remains unchanged during the isolated prototype. For eventual adoption, replace its registration atomically with a compatibility-aware fallback that preserves legacy branches and adds migrated behavior; do not add competing catch-all filters. Preserve Retry-After, cookies and applicable protocol headers. Resolve the controlled problem URL base before publishing identifiers.
+4. **Errors:** module-scoped filters map semantic errors and delegate to the same shared Problem Details writer. A shared fallback handles framework/Access/unknown errors. Register module mappers through normal DI, not a plugin registry. Nest filters do not chain: a local filter must invoke shared formatting itself. Production Access catch-all remains unchanged during the isolated prototype. For eventual adoption, replace its registration atomically with a compatibility-aware fallback that preserves legacy branches and adds migrated behavior; do not add competing catch-all filters. Preserve Retry-After, cookies and applicable protocol headers. Use the user-approved root-relative problem identifier rule for migrated methods.
 5. **Correlation/logging:** configure supported Fastify request-ID generation and early header setup; response completion logs use route templates and safe context. Always generate the identifier server-side with genReqId and explicitly disable incoming request-ID adoption (requestIdHeader: false). Keep exception diagnostics single-owned and distinguish pre-controller/parser failures from interceptor coverage. Verify installed adapter behavior before promising malformed-request coverage.
 6. **Access:** reuse AccessEntry/guard/proof. Guards precede pipes; keep that admission order. Application runAuthorized remains authoritative for transactional mutations. No new authentication scheme or client-selected tenant context.
 
@@ -60,7 +60,7 @@ For unchanged routes retain current success/error shapes and statuses. For marke
 
 Prototype these branches in a separate offline Nest test module, not production AppModule/bootstrap registration. Use unmarked and marked harness routes to compare behavior. Any metadata absent because routing has not matched (including 404/malformed requests before route selection) uses the legacy safe fallback initially; request correlation is included only where the adapter has established request context. Matched marked-route failures must not silently fall back to legacy formatting.
 
-No current global filter changes until explicit runtime migration authorization. The later replacement must preserve technical health and legacy behavior before any endpoint is opted in. Public problem identifier base and consumer impact remain approval gates.
+No current global filter changes until explicit runtime migration authorization. The later replacement must preserve technical health and legacy behavior before any endpoint is opted in. The user approved root-relative identifiers for the two methods on 2026-10-25. Additional consumer migrations remain separate.
 
 ## Lifecycle and diagnostic boundary
 
@@ -105,3 +105,30 @@ Use current Nest/Fastify inject harnesses and synthetic stores for offline HTTP 
 Approve a bounded offline prototype of shared validation integration, envelope/problem writer and correlation, exercised against the two traces with explicit migration contracts. Do not enable globally or migrate accepted endpoints without that approval. Pagination stays deferred. Only after observed results update the skill with the proven Nest pattern and scope CI separately.
 
 Sources: [Nest pipes](https://docs.nestjs.com/pipes), [request lifecycle](https://docs.nestjs.com/faq/request-lifecycle), [interceptors](https://docs.nestjs.com/interceptors), [exception filters](https://docs.nestjs.com/exception-filters), [Fastify request ID generation](https://fastify.dev/docs/latest/Reference/Server/#genreqid). Framework docs describe mechanisms, not proof of this project's runtime behavior.
+
+## First application integration — prepared 2026-10-25
+
+Shared components/offline proof are locally committed at `bd207e4`. The owner approved migrating these two endpoints and root-relative /problems/... identifiers on 2026-10-25. Source wiring is implemented and undergoing final review; no deployment or external publication implied.
+
+Proposed scope:
+
+| Endpoint | Before | Approved new contract |
+| --- | --- | --- |
+| GET /api/v1/menu/offerings | 200 raw active array; no declared query contract | 200 data array + request metadata; empty strict query contract; active public fields unchanged |
+| POST /api/v1/orders | 201 raw saved snapshot; module-specific errors | 201 data snapshot + request metadata; Location points to existing scoped GET /api/v1/orders/:id; Problem Details errors |
+
+All other routes retain legacy bodies/statuses, including order readback. Same-key order replay retains 201, same snapshot and normalized request identity; request metadata changes per HTTP attempt. Preserve 1 MiB snapshot safeguard; do not impose an arbitrary new total response cap. No tax/payment/dispatch or new Menu filters/pagination.
+
+Application wiring will use the correlated adapter, metadata capture before Access admission, one response interceptor and one compatibility-aware global fallback. Module filters explicitly delegate shared formatting for opted-in routes. Production reporters must emit safe structured completion/exception diagnostics without raw customer payloads or exception messages by default. Unknown exceptions use 500 only under the migrated contract. Matched opted-in guard failures must use Problem Details; unmatched/parser failures retain the observed legacy fallback initially.
+
+Before completing integration, test both routes through actual application components with synthetic stores: no unknown-query acceptance, correct 201/Location, normalized/identical/changed/in-flight replay, price-confirmation details, origin/CSRF/account/grant rejection, unmarked route preservation, identifier agreement, serializer safety and unchanged snapshot boundary. Extract the Orders parser with typed input and migrate all existing callers deliberately; do not retain the prototype's duplicate parser. Update owning contracts/capability indexes with migration evidence. No database runs, dependency changes or CI expansion needed merely for this integration.
+
+
+### Source migration evidence — 2026-10-25
+
+Implemented marker/pipe/controller and compatible filter wiring for the two methods. Orders structural parsing now has one reusable TypeScript implementation; all callers use OrdersService.create; the HTTP controller first receives CreateOrderDto through the shared ValidationPipe, then the service performs normalization. Price-confirmation details are typed. main uses the correlated adapter; AccessHttpModule captures contract metadata before access admission and registers the response interceptor. Marked errors use root-relative types and safe module details; other route bodies/statuses remain legacy. Health, cookies, origin/CSRF, Access mappings and Retry-After have focused regression coverage. No database, runtime deployment, dependency installation or CI changes.
+
+
+### Nest DTO integration — 2026-10-25
+
+User approved class-validator/class-transformer after the first shared boundary migration. Route-bound DtoValidationPipe replaces ValidatedInputPipe, validates concrete nested DTOs, rejects unknown fields, disables implicit conversion and returns safe field-level Problem Details. The specialized capture pipe was removed; the controller receives CreateOrderDto and the application service performs shared normalization; EmptyQueryDto rejects undeclared list keys. Generic parser-adapter source removed. Libraries are pinned and lifecycle scripts disabled. This does not authorize changing other endpoints or using class-transformer as automatic response sanitization.

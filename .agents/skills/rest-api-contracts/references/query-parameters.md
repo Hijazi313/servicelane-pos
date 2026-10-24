@@ -25,23 +25,28 @@ Different filters combine with AND. Only support repeated `state` when the appro
 const limit = parseInt('50oops', 10);
 const active = Boolean('false');
 
-// Good: example scalar parsing inside the selected validation boundary.
-function parseLimit(raw: unknown): number {
-  if (raw === undefined) return 50;
-  if (typeof raw !== 'string' || !/^[1-9][0-9]*$/.test(raw)) {
-    throw new Error('INVALID_LIMIT'); // illustrative; use the HTTP validation problem
-  }
-  const value = Number(raw);
-  if (!Number.isSafeInteger(value) || value > 100) {
-    throw new Error('INVALID_LIMIT');
-  }
-  return value;
+```
+
+```ts
+// Good: explicit conversion plus validation; no truthiness or partial parsing.
+import { Transform } from 'class-transformer';
+import { IsInt, Min, Max } from 'class-validator';
+
+class PageQueryDto {
+  @Transform(({ value }: { value: unknown }) =>
+    typeof value === 'string' && /^[1-9][0-9]*$/.test(value)
+      ? Number(value)
+      : value)
+  @IsInt()
+  @Min(1)
+  @Max(100)
+  limit = 50;
 }
 ```
 
-Use supported DTO/schema/pipe validation; this function illustrates strict parsing, not a new parsing framework. For boolean filters accept exactly documented strings such as `true` and `false`. Validate real calendar dates and range ordering, not just a timestamp-shaped regex.
+Bind through the shared DtoValidationPipe with location `query`. Omission keeps the initializer; malformed text, empty strings and duplicate arrays fail validation. Keep implicit conversion disabled. This is an example for a future approved paginated endpoint, not an Orders listing implementation.
 
-Reject unknown keys and repeated scalar parameters **before information is lost by normalization**. Verify how the configured Fastify query parser represents duplicates; never silently select the first/last value.
+For booleans, explicitly map only documented strings `true`/`false` and validate the result. Validate real calendar dates/range ordering, not just timestamp-shaped regex. Verify the adapter preserves repeated values before DTO transformation; never silently select a first/last duplicate scalar.
 
 ## Keep queries scoped and bounded
 

@@ -13,3 +13,11 @@ Source capabilities have focused offline and bounded PostgreSQL evidence; migrat
 | HTTP error translation | [http/public.ts](../http/public.ts) | Translate semantic Menu error reasons to the existing HTTP statuses | HTTP consumers only; MenuController and Orders filter reuse this mapping; domain/application layers do not import it |
 
 See the [module overview](README.md) for boundaries and links to specifications and delivery evidence.
+
+## HTTP contract adoption — 2026-10-25
+
+GET `/api/v1/menu/offerings` now returns `{data: Offering[], meta: {requestId}}`, rejects undeclared query keys and uses root-relative RFC 9457 problems for matched-route failures. Other Menu methods keep legacy bodies/statuses. Active-field visibility and authorization are unchanged.
+
+[Migration contract and evidence](../../../../../../docs/architecture/shared-http-pattern-proposal.md#first-application-integration--prepared-2026-10-25). Source/offline integration only; no database rerun or deployment.
+
+The migrated active listing binds EmptyQueryDto through the shared Nest DTO validation pipe; all query keys remain forbidden. Other Menu endpoints retain their existing input validation.

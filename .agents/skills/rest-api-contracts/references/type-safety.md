@@ -1,6 +1,6 @@
 # Type-safe API contracts
 
-Apply the [canonical requirements](../../../../docs/architecture/rest-api-convention.md#type-safety). These examples illustrate the pattern; they are not existing endpoints or authorization to add dependencies. Use the repository's selected validation integration. DTO classes with validation decorators and schema-based pipes are alternatives, not layers to stack together.
+Apply the [canonical requirements](../../../../docs/architecture/rest-api-convention.md#type-safety). These examples illustrate the pattern; they are not existing endpoints or authorization to add dependencies. Use the repository's selected validation integration. This repository selects Nest ValidationPipe with class-validator/class-transformer for migrated HTTP inputs.
 
 ## Validate the value, not just the annotation
 
@@ -16,33 +16,20 @@ function receive(body: unknown): QuantityDto {
 ```
 
 ```ts
-// Good: a Nest pipe narrows unknown input and returns a validated DTO.
-import { BadRequestException, Injectable, type PipeTransform } from '@nestjs/common';
+// Good: concrete DTO rules are enforced by the shared Nest ValidationPipe.
+import { IsInt, Min, Max } from 'class-validator';
 
 class QuantityDto {
-  constructor(readonly quantity: number) {}
-}
-
-@Injectable()
-class QuantityPipe implements PipeTransform<unknown, QuantityDto> {
-  transform(value: unknown): QuantityDto {
-    if (typeof value !== 'object' || value === null || Array.isArray(value)
-      || Object.keys(value).length !== 1 || !('quantity' in value)) {
-      throw new BadRequestException();
-    }
-    const quantity = value.quantity;
-    if (typeof quantity !== 'number' || !Number.isSafeInteger(quantity)
-      || quantity < 1 || quantity > 100) {
-      throw new BadRequestException();
-    }
-    return new QuantityDto(quantity);
-  }
+  @IsInt()
+  @Min(1)
+  @Max(100)
+  declare quantity: number;
 }
 ```
 
-The 1–100 range is illustrative, not a POS business limit. A controller binds the pipe with `@Body(QuantityPipe) input: QuantityDto`. Its application operation receives the validated DTO or an intentionally mapped application input. A response annotation such as `Promise<QuantityResponseDto>` provides a compile-time contract, not runtime field removal.
+Bind `@Body(new DtoValidationPipe()) input: QuantityDto`, importing the DTO as a runtime class, not with `import type`. The shared pipe uses class-validator/class-transformer, rejects unknown fields and disables implicit conversion. The 1–100 range is illustrative, not a POS limit. For nested DTOs use `@ValidateNested` and explicit `@Type(() => ChildDto)`.
 
-This small hand-written pipe demonstrates narrowing without installing a library. For real nested payloads, reuse a supported configured DTO/schema integration instead of copying manual parsers across endpoints. Validate query/path/header inputs too; query strings require deliberate parsing. Keep business invariants in the application/domain even when transport structure was checked.
+HTTP validation owns structure; application/domain normalization owns exact money, UUID/set canonicalization and business invariants. Non-HTTP callers retain their boundary/invariant checks. Do not replace these with DTO decorators or create another generic parser pipe. Response annotations do not remove private fields at runtime.
 
 ## Check response fields deliberately
 

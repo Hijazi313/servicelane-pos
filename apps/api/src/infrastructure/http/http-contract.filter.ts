@@ -1,4 +1,5 @@
 import { HttpException, type ArgumentsHost, type ExceptionFilter } from '@nestjs/common';
+import { InputValidationError } from './dto-validation.pipe.js';
 import { usesHttpContract } from './http-contract.decorator.js';
 import { writeProblemDetails, type ProblemDefinition, type ProblemReply } from './problem-details.js';
 
@@ -17,7 +18,9 @@ export class HttpContractFilter implements ExceptionFilter {
   catch(error: unknown, host: ArgumentsHost): void {
     if (!usesHttpContract(host)) { this.legacy.catch(error, host); return; }
     const requestId = host.switchToHttp().getRequest<Request>().id;
-    let problem = this.policy.map(error);
+    let problem = error instanceof InputValidationError
+      ? { ...this.policy.framework(400), type: '/problems/validation-failed', code: 'VALIDATION_FAILED', errors: error.issues }
+      : this.policy.map(error);
     if (!problem && error instanceof HttpException) problem = this.policy.framework(error.getStatus());
     if (!problem) {
       this.policy.reportUnexpected(error, requestId);

@@ -1,3 +1,4 @@
+import { responseProblemCode } from './problem-details.js';
 import { randomUUID } from 'node:crypto';
 import { FastifyAdapter } from '@nestjs/platform-fastify';
 
@@ -7,6 +8,7 @@ export interface HttpCompletion {
   route: string | null;
   status: number;
   duration: number;
+  code?: string;
 }
 export interface HttpAdapterOptions { bodyLimit: number; trustedProxies: readonly string[] }
 
@@ -21,7 +23,8 @@ export function createHttpAdapter(options: HttpAdapterOptions, report: (event: H
   });
   server.addHook('onResponse', async (request, reply) => {
     const start = starts.get(request);
-    report({ requestId: request.id, method: request.method, route: request.routeOptions.url ?? null,
+    const code = responseProblemCode(reply);
+    report({ ...(code === undefined ? {} : { code }), requestId: request.id, method: request.method, route: request.routeOptions.url ?? null,
       status: reply.statusCode, duration: start === undefined ? 0 : performance.now() - start });
   });
   return adapter;

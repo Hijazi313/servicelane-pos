@@ -43,6 +43,22 @@ User authorized continuing from the bounded prototype. Implemented reusable [HTT
 
 User authorized the concise mandatory reading/reuse update. AGENTS.md now requires the REST skill for relevant HTTP work; skill version 0.4.0 links the code-owned guide, requires wiring inspection and applicable reuse, and preserves module ownership and migration limits. Detailed wiring remains in the shared README. Local link/YAML/whitespace validation only; no runtime changes or new CI enforcement. User approved a local commit on 2026-10-25; no push/merge. Incident INC-20261024-01 remains open.
 
+## First HTTP endpoint adoption — 2026-10-25
+
+Approved staged shared components/guidance committed locally as `bd207e4`; no push/merge. Prepared the [two-endpoint migration contract](../architecture/shared-http-pattern-proposal.md#first-application-integration--prepared-2026-10-25). Owner approved GET Menu offerings and POST Orders capture migration plus root-relative problem types on 2026-10-25. Source wiring, reusable typed Orders parsing and matched-route Problem Details are implemented; other route bodies/statuses remain legacy. Completion/error diagnostics use safe context. Focused checks and limits recorded below; no deployment implied. Incident INC-20261024-01 remains open.
+
+## First HTTP adoption verification — 2026-10-25
+
+Strict compilation on existing Node v24.22.1 passed. Orders/application + actual Orders HTTP + shared harness + logging: 20 tests passed; actual Menu HTTP: 6 passed; legacy Access/health HTTP: 7 passed. Final architecture source scan: 16 files, zero findings. Affected links and whitespace checks passed. Assertions adapted only for approved contract changes; currency-change retains its established 409 mapping. No database, installation, listener, deployment or CI changes. Source/docs staged for review; commit/push/merge not performed. In-memory serialized fixtures do not prove PostgreSQL concurrency; malformed/oversized/unmatched requests retain the observed legacy fallback. Historical ledgers remain untouched. Incident INC-20261024-01 remains open.
+
+## Nest DTO validation adoption — 2026-10-25
+
+User explicitly authorized Nest ValidationPipe with class-validator/class-transformer. Pinned 0.15.1/0.5.1 using pnpm 12.11.2 with lifecycle scripts disabled; package manifest and generated lockfile updated. Existing pnpm9 node_modules layout prevented an in-place add; isolated temporary installation was linked only for these two new packages. All five isolated package versions/integrities match the generated pnpm lock. Existing dependencies were not replaced. Frozen lockfile-only verification passed. Strict compilation and Orders/application/shared-harness/logging tests: 21 passed; actual Menu HTTP: 6 passed. DTO-specific cases cover nested unknown keys, null rejection, no numeric coercion, safe JSON-pointer field errors, blank normalization and replay. Legacy Access/health HTTP: 7 passed; total 34 focused tests. Architecture scan: 16 files, zero findings. Query DTO example accepted three valid and rejected eleven malformed cases. Final typecheck, local links and whitespace checks passed; no database, deployment, commit/push/merge. Replaced generic and specialized parser pipes with shared DTO validation and concrete controller DTOs on the two migrated endpoints; application/domain normalization is retained. Skill/examples now route to the selected approach. Incident INC-20261024-01 remains open.
+
+## HTTP adoption PR publication — 2026-10-25
+
+User authorized committing the reviewed staged changes and creating a PR from `codex/api-type-safety` to `main`. This publishes the preceding skill guidance, shared HTTP components and approved two-endpoint migration with Nest DTO validation. Existing 34-test, typecheck, boundary and lockfile-only evidence applies; no runtime changes since verification. Final documentation review reconciled stale descriptions of DTO field errors and parsing. Preserve both untracked Menu/Orders ledgers. Next: owner reviews the PR; merge remains unauthorized. Incident [INC-20261024-01](../quality/agent-incidents.md#inc-20261024-01--api-skill-guidance-required-repeated-user-led-specificity-and-correction) remains open; no new qualifying incident in publication work.
+
 ## Current focus
 
 - Stage: Foundation F-01 remains complete; [acceptance and evidence limits](project-foundation/phase-tracker.md#closeout--2026-10-12).

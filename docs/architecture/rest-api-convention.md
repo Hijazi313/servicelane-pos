@@ -21,6 +21,8 @@ Validate structure at the HTTP boundary; retain business invariants in applicati
 
 JSON bodies use documented JSON media types. Malformed JSON returns 400, unsupported media types 415 and excessive content 413. Document body support per operation rather than building custom body detection for every body-less route.
 
+HTTP input validation for migrated routes uses Nest ValidationPipe with class-validator/class-transformer and concrete DTO classes. Share its strict configuration, reject unknown fields, disable implicit conversion and explicitly transform query scalars. Preserve domain normalization/invariants and non-HTTP boundary checks. Legacy routes are not globally migrated by adding the libraries.
+
 ## Type safety
 
 - Keep TypeScript strict mode and unchecked-index protection. Do not bypass errors with explicit/implicit any, double assertions, unjustified non-null assertions or suppression comments. Narrow unknown input and caught errors before use.
@@ -67,20 +69,20 @@ Application-generated failures use RFC 9457 `application/problem+json`, with the
 
 ```json
 {
-  "type": "https://api.example.com/problems/invalid-query",
+  "type": "/problems/invalid-query",
   "title": "Invalid query parameters",
   "status": 400,
   "detail": "One or more query parameters are invalid.",
-  "errors": [{ "location": "query", "field": "limit", "code": "OUT_OF_RANGE" }],
+  "errors": [{ "location": "query", "field": "/limit", "code": "OUT_OF_RANGE" }],
   "meta": { "requestId": "request-id" }
 }
 ```
 
-The domain above is illustrative, not a deployed endpoint or approved production domain. Choose a stable controlled HTTPS base before publishing new problem identifiers. Do not invent unregistered URN namespaces. Clients do not need to fetch problem URLs during offline operation.
+User approved root-relative problem identifiers on 2026-10-25 because no product domain is owned. Use `/problems/<stable-kebab-case-code>`; RFC 9457 resolves these against each installation's API origin. These identify problem categories, not a promise that a documentation route is implemented. Clients compare the documented reference or its correctly resolved URI and never fetch it automatically. Do not invent unregistered URN namespaces or silently switch to absolute identifiers later.
 
-Maintain one typed problem-definition list in the shared HTTP boundary when runtime adoption is authorized: type, title, status and allowed extensions. Module HTTP mappings reference it. Until then, approved owning contracts list their proposed identifiers; do not create a speculative runtime registry.
+Shared HTTP code owns Problem Details shape, standard status titles, stable code-to-reference construction and safe fallback behavior. Module HTTP code owns exhaustive semantic status/code mappings and explicitly selected details. No central registry imports business modules.
 
-`type` is the stable category; title is its human summary (localization may vary); status matches HTTP; detail is safe occurrence-specific guidance. Optional instance identifies the occurrence. Clients branch on type and documented extension codes, never human text. `errors`/`meta` are project extensions. Validation locations are body/query/path/header; nested body paths use JSON Pointer. Never echo secrets or include SQL, stacks or raw internal exceptions.
+`type` is the stable category; title is its human summary (localization may vary); status matches HTTP; detail is safe occurrence-specific guidance. Optional instance identifies the occurrence. Clients branch on type and documented extension codes, never human text. `code`, `details`, `errors` and `meta` are project extensions. Migrated Menu/Orders responses use code, optional safe details, and field-level errors for DTO validation failures. Validation locations are body/query/path/header; DTO field paths use JSON Pointer within that location (empty string identifies the whole input). Never echo secrets or include SQL, stacks or raw internal exceptions.
 
 Module HTTP code maps semantic errors; shared transport code provides safe formatting, protocol-header preservation and fallback diagnostics. Domain errors have no HTTP statuses. Connection/proxy failures outside application control cannot be promised a Problem Details body.
 
