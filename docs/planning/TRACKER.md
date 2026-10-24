@@ -8,7 +8,8 @@ User authorized a separate main-based worktree/topic branch for the API conventi
 - [x] YAML frontmatter/UI metadata parsed and checked with Ruby Psych; local links and whitespace checks passed. Bundled quick_validate.py could not run because PyYAML is absent in both existing Python runtimes; no installation performed.
 - [x] Independent read-only scenario evaluation: unsafe tenant/filter/cursor/unbounded-list proposals rejected; unrelated helper change preserved existing envelope/retry behavior; justified bounded offset admin list allowed without recommendations. These are agent behavior observations, not API/runtime proof. Offset response metadata remains endpoint-defined.
 - Incidents: none in this increment. Existing incident reviews remain separate.
-- User subsequently authorized PR publication only; merge and current feature-branch sorting await explicit confirmation. Next: owner reviews the PR; CI enforcement remains a separate focused increment.
+- User authorized merge and feature-branch update on 2026-10-24. PR #14 squash-merged as `d77d653` after both HTTP boundaries and PR title checks passed on exact head `4493f50`. Local main matches the merged commit; Kitchen branch incorporates main via `0a30a23`, preserving its two local source commits and both untracked evidence ledgers. GitHub deleted the skill topic branch. No Kitchen source publication or API migration performed.
+- Complete: documentation/skill integration. Next: apply the skill during authorized endpoint work; retry-recovery examples, further comparative behavior testing and CI enforcement remain separately scoped follow-ups.
 
 ## Current focus
 
