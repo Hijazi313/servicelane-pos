@@ -1,0 +1,6 @@
+interface:
+  display_name: "REST API Contracts"
+  short_description: "Design and review consistent REST API contracts"
+  default_prompt: "Use $rest-api-contracts to design or review this endpoint against the repository API convention and report compatibility and verification gaps."
+policy:
+  allow_implicit_invocation: true
