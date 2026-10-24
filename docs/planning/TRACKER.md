@@ -10,6 +10,15 @@ User authorized a separate main-based worktree/topic branch for the API conventi
 - Incidents: none in this increment. Existing incident reviews remain separate.
 - User subsequently authorized PR publication only; merge and current feature-branch sorting await explicit confirmation. Next: owner reviews the PR; CI enforcement remains a separate focused increment.
 
+## API type-safety reference — 2026-10-24
+
+User authorized a new topic branch and the type-safety reference discussed in this chat. Solo owner, current checkout, branch `codex/api-type-safety` from main `d77d653`; Kitchen source commits remain on `codex/kitchen-handoff`, and both untracked evidence ledgers are preserved. Scope: canonical requirements, example reference, skill routing/metadata version and enforcement limitations. No runtime code, dependencies, CI implementation, database work, push/PR/merge or deployment authorized by this increment.
+
+- [x] Prepared [examples](../../.agents/skills/rest-api-contracts/references/type-safety.md), canonical requirements and skill routing; skill version 0.2.0.
+- [x] Local reference links, YAML metadata and whitespace checks passed. All five TypeScript example blocks compiled in memory using existing TypeScript with strict/unchecked-index/decorator options; adding a union outcome produced expected TS2345. No application source emitted, full suite or database run. These are example/type evidence, not runtime API verification.
+- Local checkpoint prepared; incidents: none in this increment. Bundled skill validator remains unavailable due to missing PyYAML; YAML parsed with existing Ruby Psych instead.
+- Next: review the reference; future CI enforcement stays separate.
+
 ## Current focus
 
 - Stage: Foundation F-01 remains complete; [acceptance and evidence limits](project-foundation/phase-tracker.md#closeout--2026-10-12).

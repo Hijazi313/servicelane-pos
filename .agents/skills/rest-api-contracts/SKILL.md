@@ -3,7 +3,7 @@ name: rest-api-contracts
 description: "Design, implement and review REST API contracts in this repository, including validation, query parameters, responses, errors, headers, retries and concurrency. Use for new or changed HTTP endpoints and contract reviews; exclude unrelated internal changes."
 metadata:
   author: "Codex"
-  version: "0.1.0"
+  version: "0.2.0"
   project: "ServiceLane POS"
   scope: "REST API contract design, implementation guidance and review; existing API migrations and CI enforcement require separate authorization"
   created: "2026-10-24"
@@ -24,6 +24,8 @@ Follow the [canonical API convention](../../../docs/architecture/rest-api-conven
 - Resolve material ambiguity about access, exposure, money/time, mutations, retries and compatibility before dependent implementation.
 
 ## Contract and implementation
+
+For TypeScript HTTP contract work, read the [type-safety examples](references/type-safety.md). Follow the canonical requirements; examples do not authorize new dependencies.
 
 Use [the endpoint template](templates/endpoint-contract.md) for a new endpoint or material contract change in its owning feature documentation. Adapt it; link existing canonical schemas instead of duplicating them. Small changes do not need new documents.
 

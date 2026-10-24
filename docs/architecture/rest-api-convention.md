@@ -21,6 +21,17 @@ Validate structure at the HTTP boundary; retain business invariants in applicati
 
 JSON bodies use documented JSON media types. Malformed JSON returns 400, unsupported media types 415 and excessive content 413. Document body support per operation rather than building custom body detection for every body-less route.
 
+## Type safety
+
+- Keep TypeScript strict mode and unchecked-index protection. Do not bypass errors with explicit/implicit any, double assertions, unjustified non-null assertions or suppression comments. Narrow unknown input and caught errors before use.
+- Define validated request DTOs or schemas for body/query/path and relevant headers. Use supported Nest pipes/integrations; DTO classes and TypeScript annotations alone do not validate runtime data. Application operations receive validated typed input; domain invariants remain enforced for every caller.
+- Define explicit public response and application result contracts. Structural typing does not strip extra fields; select exposed fields deliberately.
+- Use discriminated unions and exhaustive handling for finite business outcomes, error mappings and client recommendations. Avoid broad string/unknown payloads where the supported variants are known.
+- Await asynchronous operations or provide an explicitly owned completion/failure path. Do not silently swallow failures or convert failed mutations into success. Catch only for deliberate recovery/translation/context; preserve unexpected errors for safe boundary handling and correlated diagnostics.
+- Typechecking and focused runtime checks complement each other. Neither guarantees the absence of unexpected failures. HTTP filters do not cover detached work or process-level failures.
+
+See [practical examples](../../.agents/skills/rest-api-contracts/references/type-safety.md). No validation dependency or existing API migration is selected by this requirement.
+
 ## Query parameters and pagination
 
 | Concern | Convention |

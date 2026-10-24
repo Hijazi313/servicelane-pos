@@ -6,6 +6,10 @@ The skill guides decisions; CI rejects specific patterns. Neither proves API cor
 
 Reuse the existing [TypeScript-parser checker](../../../../apps/api/scripts/README.md). Candidate additions: business route prefixes, explicit route access declarations and public response annotations. Preserve existing transport-import/status rules. For every added rule define prohibited/valid examples, current findings and detection limits. An annotation cannot prove JSON validation or field exclusion; a decorator cannot prove authorization. Do not suppress violations to get green CI.
 
+## Type safety checks
+
+Use the existing project typecheck for strict contracts and exhaustive unions. TypeScript alone does not reject every floating promise or unsafe assertion; suitable typed lint rules can provide additional coverage only when separately authorized. Runtime validation and response-field tests remain necessary. Do not claim compiler success proves sanitized responses or handled background failures.
+
 ## Behavioral checks
 
 Use focused existing HTTP tests for relevant cases:
