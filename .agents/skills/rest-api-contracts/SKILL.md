@@ -3,7 +3,7 @@ name: rest-api-contracts
 description: "Design, implement and review REST API contracts in this repository, including validation, query parameters, responses, errors, headers, retries and concurrency. Use for new or changed HTTP endpoints and contract reviews; exclude unrelated internal changes."
 metadata:
   author: "Codex"
-  version: "0.3.0"
+  version: "0.4.0"
   project: "ServiceLane POS"
   scope: "REST API contract design, implementation guidance and review; existing API migrations and CI enforcement require separate authorization"
   created: "2026-10-24"
@@ -25,6 +25,12 @@ Follow the [canonical API convention](../../../docs/architecture/rest-api-conven
 
 ## Contract and implementation
 
+Before implementing or changing HTTP handling, read the [shared HTTP guide](../../../apps/api/src/infrastructure/http/README.md) for supported components, integration order and limits. Inspect actual bootstrap/module/controller wiring; source availability or a route decorator does not prove activation.
+
+- Reuse applicable shared validation integration, response formatting, error formatting and correlation components; do not create parallel implementations in modules. If a documented limitation prevents reuse, explain the gap and smallest alternative before adding another mechanism.
+- Keep endpoint parsing rules, filter/sort allowlists, public field selection and semantic-error mappings module-owned. Application/domain code must not depend on HTTP pipes or formatters.
+- Preserve existing contracts until migration is authorized. Shared components are currently exercised offline and not registered in AppModule/bootstrap; do not enable them globally as incidental cleanup.
+
 For TypeScript HTTP contract work, read the [type-safety examples](references/type-safety.md). Follow the canonical requirements; examples do not authorize new dependencies.
 
 For listing/filter/pagination work, read the [query parameter examples](references/query-parameters.md).
@@ -36,6 +42,8 @@ HTTP code owns structural validation, public field selection and status/header t
 Use explicit public contracts and supported module interfaces. Do not expose database rows or add generic controller/filtering frameworks. A matching application result may be reused deliberately without ceremonial mapping classes.
 
 ## Verification and handoff
+
+For implementation/integration, verify applicable shared-component reuse and actual registration against the shared guide; report unsupported cases or wiring gaps.
 
 Before completing API design, implementation or review, apply the relevant [verification checklist](references/enforcement.md#verification-checklist). Distinguish source review from executed checks and report material gaps; invoking this skill does not prove compliance. Run the smallest relevant existing checks and meaningful negative cases. Static checks do not prove authorization, runtime field selection or transaction safety.
 

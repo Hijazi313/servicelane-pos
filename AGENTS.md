@@ -33,7 +33,7 @@
 Read only task-relevant guidance.
 
 - [Architecture](docs/architecture/README.md): structure, dependencies and module boundaries; follow its [file naming and responsibility rules](docs/architecture/README.md#file-naming-and-responsibility-boundaries) when adding or moving code.
-- [REST API contracts](.agents/skills/rest-api-contracts/SKILL.md): use for new or materially changed HTTP contracts and contract reviews; the [canonical convention](docs/architecture/rest-api-convention.md) preserves existing APIs until a scoped migration is authorized.
+- [REST API contracts](.agents/skills/rest-api-contracts/SKILL.md): must read and apply for HTTP endpoint, controller, validation, response/error handling and shared HTTP integration work. Before implementation, read the linked shared HTTP guide and inspect actual wiring. Existing accepted contracts require an authorized migration; unrelated internal changes do not activate this skill.
 - [Module behavior](docs/modules/README.md): business rules and module specifications.
 - [Compliance](docs/compliance/README.md): tax, payments, privacy, licensing and evidence.
 

@@ -27,6 +27,22 @@ User authorized a concise reference on the existing `codex/api-type-safety` bran
 
 User authorized the concise API verification checklist, mandatory skill routing and a concrete example-based red-flags section (revised after owner feedback), staged for review only. Changed the skill entry point and enforcement reference on `codex/api-type-safety`; no application/CI changes. Local link/whitespace checks passed. These are documentation checks, not runtime verification. User subsequently approved the staged changes and authorized a local commit; push and merge remain outside this increment. Next: the read-only implementation proposal discussed in chat. Incident review: [INC-20261024-01](../quality/agent-incidents.md#inc-20261024-01--api-skill-guidance-required-repeated-user-led-specificity-and-correction).
 
+## Shared HTTP pattern assessment — 2026-10-24
+
+User activated step two; preceding agreed next task was a read-only implementation proposal. [Proposal](../architecture/shared-http-pattern-proposal.md) traces the bounded Menu listing and Orders capture on `codex/api-type-safety`, proposes Nest ownership/integration and future offline proof criteria. Source/docs inspected only; no runtime checks, API changes, dependencies, database work or Kitchen branch import. Query pagination cannot be proven by the existing bounded listing. User subsequently authorized proposal refinements: compatibility matrix, shared route-marker error transition, lifecycle sketch, independent parser requirement, always-generated correlation and serialization criteria. Documentation only; no prototype executed. Implementation/migration remain proposed; no commit/push/merge inferred. Next: owner reviews the bounded prototype and contract-migration scope. Incident [INC-20261024-01](../quality/agent-incidents.md#inc-20261024-01--api-skill-guidance-required-repeated-user-led-specificity-and-correction) remains open; this assessment does not close it.
+
+## Shared HTTP offline prototype — 2026-10-24
+
+User explicitly approved the bounded offline prototype in this chat. Test-only [harness, commands and evidence](../../apps/api/tests/http-prototype/README.md) added on `codex/api-type-safety`; production routes/bootstrap/filter and dependencies unchanged. Strict production/prototype compilation plus five focused test groups passed with existing bundled Node v24.22.1. Initial metadata lookup failed; corrected test-only metadata capture guard must precede Access admission. Parser equivalence is sampled and extraction remains unperformed; fixtures serialize in memory, not PostgreSQL. Adapter parsing/unmatched failures remain legacy, marked serialization failure returned safe 500. No database, installation, listener, pagination, CI, migration, commit/push/merge. Review prototype before authorizing extraction/rollout. Incident INC-20261024-01 remains open; ordinary prototype debugging is not a new incident.
+
+## Shared HTTP source components — 2026-10-24
+
+User authorized continuing from the bounded prototype. Implemented reusable [HTTP components](../../apps/api/src/infrastructure/http/README.md), removed the duplicate prototype boundary and switched its harness to the shared source. Existing application routes/bootstrap/contracts remain unchanged. Fresh strict project compilation and all five focused groups passed with Node v24.22.1. No new dependencies, database, pagination or CI changes. User approved a local commit on 2026-10-25; push/merge remain separately authorized. Next: explicitly select endpoint contracts and resolve the production problem-identifier base before migration; do not represent source availability as production adoption. Incident INC-20261024-01 remains open.
+
+## API skill discovery and reuse — 2026-10-24
+
+User authorized the concise mandatory reading/reuse update. AGENTS.md now requires the REST skill for relevant HTTP work; skill version 0.4.0 links the code-owned guide, requires wiring inspection and applicable reuse, and preserves module ownership and migration limits. Detailed wiring remains in the shared README. Local link/YAML/whitespace validation only; no runtime changes or new CI enforcement. User approved a local commit on 2026-10-25; no push/merge. Incident INC-20261024-01 remains open.
+
 ## Current focus
 
 - Stage: Foundation F-01 remains complete; [acceptance and evidence limits](project-foundation/phase-tracker.md#closeout--2026-10-12).
