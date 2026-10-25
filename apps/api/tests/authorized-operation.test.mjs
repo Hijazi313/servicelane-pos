@@ -103,8 +103,9 @@ test('MN00-AC02/04: policies, safe scope, shared transaction and post-success li
     let captured;
     const result = await f.service.runAuthorized(f.proof, policy, async scope => {
       captured = scope;
-      assert.deepEqual(Object.keys(scope).sort(), ['installation', 'transaction']);
+      assert.deepEqual(Object.keys(scope).sort(), ['actorId', 'installation', 'transaction']);
       assert.deepEqual(scope.installation, f.installation);
+      assert.equal(scope.actorId, f.state().account.id);
       assert.deepEqual(Object.keys(scope.transaction), ['id']);
       transactionDatabase(scope.transaction).write('consumer write');
       return { saved: true };

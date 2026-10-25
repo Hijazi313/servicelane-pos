@@ -7,3 +7,5 @@ export { accessSessions, accessPrelogins, accessLimits, accessSecurityEvents } f
 export { menuOfferings, menuVariants, menuReferences } from '../../modules/menu/infrastructure/schema.js';
 
 export { capturedOrders, orderCapturePolicies } from '../../modules/orders/infrastructure/schema.js';
+
+export { kitchenTickets } from '../../modules/kitchen/infrastructure/schema.js';

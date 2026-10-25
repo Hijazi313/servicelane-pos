@@ -10,7 +10,7 @@ export interface ProblemDefinition {
   /** Only explicitly selected, safe module data; never raw exception data. */
   details?: unknown;
   retryAfter?: number;
-  errors?: readonly { location: 'body' | 'query'; field: string; code: string }[];
+  errors?: readonly { location: 'body' | 'query' | 'path'; field: string; code: string }[];
 }
 export interface ProblemReply {
   [PROBLEM_CODE]?: string;

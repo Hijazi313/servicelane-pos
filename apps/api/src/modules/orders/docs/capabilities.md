@@ -8,8 +8,9 @@ OR-01 source is implemented with focused offline and bounded PostgreSQL integrat
 | Read captured order | [OrdersController](../http/orders.controller.ts) `GET /api/v1/orders/:id` | Read immutable saved history | Staff, scoped business/branch lookup; no listing/search or live Menu re-resolution |
 | Capture limits | [OrdersController](../http/orders.controller.ts) `GET/PUT /api/v1/orders/capture-policy` | Business-scoped defaults and revision-checked configuration | Staff read; administrator + CSRF update; configurable within 500 lines/1,000 units; does not alter history or byte safeguards |
 
-Only OrdersModule is supported for cross-module composition; no foreign persistence or order mutation service is exported.
+| Preparation projection | [OrderPreparationService via public.ts](../public.ts) | Read captured preparation-only history in the caller’s authorized transaction | KT-01 source extension; no nested authorization/current Menu resolution, customer data, money or persistence export; offline projection checks only; Kitchen/PostgreSQL integration unverified |
 
+OrdersModule exports OrderPreparationService for cross-module composition; no foreign persistence or order mutation service is exported.
 ## HTTP contract adoption — 2026-10-25
 
 POST `/api/v1/orders` now returns `{data: OrderSnapshot, meta: {requestId}}` with 201 and Location for both initial creation and replay. Matched-route failures use root-relative RFC 9457 problems and selected price-confirmation details; unexpected failures use safe 500. Existing GET/policy routes remain legacy. Retry identity, transaction and saved snapshot limits are unchanged.

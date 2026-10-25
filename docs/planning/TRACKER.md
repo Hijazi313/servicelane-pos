@@ -8,7 +8,8 @@ User authorized a separate main-based worktree/topic branch for the API conventi
 - [x] YAML frontmatter/UI metadata parsed and checked with Ruby Psych; local links and whitespace checks passed. Bundled quick_validate.py could not run because PyYAML is absent in both existing Python runtimes; no installation performed.
 - [x] Independent read-only scenario evaluation: unsafe tenant/filter/cursor/unbounded-list proposals rejected; unrelated helper change preserved existing envelope/retry behavior; justified bounded offset admin list allowed without recommendations. These are agent behavior observations, not API/runtime proof. Offset response metadata remains endpoint-defined.
 - Incidents: none in this increment. Existing incident reviews remain separate.
-- User subsequently authorized PR publication only; merge and current feature-branch sorting await explicit confirmation. Next: owner reviews the PR; CI enforcement remains a separate focused increment.
+- User authorized merge and feature-branch update on 2026-10-24. PR #14 squash-merged as `d77d653` after both HTTP boundaries and PR title checks passed on exact head `4493f50`. Local main matches the merged commit; Kitchen branch incorporates main via `0a30a23`, preserving its two local source commits and both untracked evidence ledgers. GitHub deleted the skill topic branch. No Kitchen source publication or API migration performed.
+- Complete: documentation/skill integration. Next: apply the skill during authorized endpoint work; retry-recovery examples, further comparative behavior testing and CI enforcement remain separately scoped follow-ups.
 
 ## API type-safety reference — 2026-10-24
 
@@ -59,20 +60,33 @@ User explicitly authorized Nest ValidationPipe with class-validator/class-transf
 
 User authorized committing the reviewed staged changes and creating a PR from `codex/api-type-safety` to `main`. This publishes the preceding skill guidance, shared HTTP components and approved two-endpoint migration with Nest DTO validation. Existing 34-test, typecheck, boundary and lockfile-only evidence applies; no runtime changes since verification. Final documentation review reconciled stale descriptions of DTO field errors and parsing. Preserve both untracked Menu/Orders ledgers. Next: owner reviews the PR; merge remains unauthorized. Incident [INC-20261024-01](../quality/agent-incidents.md#inc-20261024-01--api-skill-guidance-required-repeated-user-led-specificity-and-correction) remains open; no new qualifying incident in publication work.
 
+## Kitchen persistence preparation — 2026-10-25
+
+[Bounded KT-01 procedure and harness](../../apps/api/src/modules/kitchen/docs/features/preparation/database-acceptance.md) prepared under documentation/test-instrumentation/local-commit authorization. Seven focused offline preparation checks passed; no database access, environment loading, migration execution, installation, publication or KT-02 activation. [Owning handoff](../../apps/api/src/modules/kitchen/docs/features/preparation/phase-tracker.md#persistence-verification-preparation--2026-10-25) records current limits and the next decision: authorize a read-only baseline on an explicitly designated reserved testing target before considering one execution.
+
 ## Current focus
 
 - Stage: Foundation F-01 remains complete; [acceptance and evidence limits](project-foundation/phase-tracker.md#closeout--2026-10-12).
 - Approved topology: one business per LAN installation, dedicated local PostgreSQL, locally served client assets and one maintained codebase; explicit user approval on 2026-10-12. [Decision and rationale](../architecture/vendor-isolation-proposal.md).
 - Current activity: Menu/MN-00/MN-01 accepted and integrated through [PR #9](https://github.com/Hijazi313/servicelane-pos/pull/9), squash `b09770e`. Orders OR-01 implementation/evidence is integrated through [PR #10](https://github.com/Hijazi313/servicelane-pos/pull/10), squash `2daeb6c`, under the user-requested workflow completion; [Orders phase tracker](../../apps/api/src/modules/orders/docs/features/capture/phase-tracker.md) owns scope, progress and verification limits. Authorized OR-01 integration run passed all eight cases, including concurrency and two fresh API processes; cleanup verified fifteen empty application tables and migration 0004 remains applied. User explicitly accepted OR-01 on 2026-10-21 under the recorded backend development scope/evidence limits; [closeout](../../apps/api/src/modules/orders/docs/features/capture/phase-tracker.md#acceptance-and-closeout--2026-10-21). No next phase, deployment or database rerun activated.
 - Tooling review: user-authorized [HTTP boundary check](../../apps/api/scripts/README.md#github-actions-verification--2026-10-21) is published and exercised on GitHub; the separately authorized [Authentication repair](business-access/phase-tracker.md#remote-verification--2026-10-21) is pushed at ba72346 and both GitHub workflows pass (seven checker tests; 15 files, zero findings). Integrated through PR #10; exact-head PR checks and the merged main-branch check passed. OR-01 backend development acceptance is recorded in its owning tracker; release acceptance remains separate.
-- Current phase: OR-01 complete and user-accepted under its recorded development scope; Kitchen planning is authorized; [KT-00 proposal](kitchen/phase-tracker.md) records resolved business boundaries and completed planning, with no implementation activated. BA-01 complete; BA-02 complete under [user acceptance](business-access/phase-tracker.md#ba-02-acceptance--2026-10-17); BA-D01–06 approved; BA-03-T01 complete and [user-accepted](business-access/phase-tracker.md#ba-03-acceptance-and-closeout--2026-10-17) under its revised development scope; two-database execution deferred, unrun.
+- Current phase: OR-01 complete and user-accepted under its recorded development scope; KT-01 source implementation is authorized; [Kitchen tracker](../../apps/api/src/modules/kitchen/docs/features/preparation/phase-tracker.md) owns source/offline delivery and the current branch handoff; KT-02 technical verification is complete: K01–K04 evidence and final frozen-build D01 passed, cleanup passed; Kitchen backend development scope is user-accepted; publication and squash merge are user-authorized; PR #16 owns integration state. BA-01 complete; BA-02 complete under [user acceptance](business-access/phase-tracker.md#ba-02-acceptance--2026-10-17); BA-D01–06 approved; BA-03-T01 complete and [user-accepted](business-access/phase-tracker.md#ba-03-acceptance-and-closeout--2026-10-17) under its revised development scope; two-database execution deferred, unrun.
 - Deferred validation remains in the [canonical foundation handoff](project-foundation/phase-tracker.md#current-handoff--2026-10-12) and [acceptance record](../acceptance/project-foundation.md).
 
-## Current planning handoff — 2026-10-23
+## Active work branches
+
+Current designations follow [CONTRIBUTING](../../CONTRIBUTING.md#active-work-and-remote-checkpoints); Git is authoritative for heads and synchronization.
+
+| Phase / task | Branch | Checkout | Owner | Integration base | Publication / blocker | Owning tracker |
+| --- | --- | --- | --- | --- | --- | --- |
+
+No next feature workstream is active; accepted Kitchen integration is recorded in [PR #16](https://github.com/Hijazi313/servicelane-pos/pull/16).
+
+## Current planning handoff — 2026-10-25
 
 BA-01/02/03 accepted development scope and historical execution permissions are owned by the [joint BA tracker](business-access/phase-tracker.md). They do not authorize new Menu or database work.
 
-Current handoff: Menu remains accepted/integrated through PR #9 (`b09770e`). Orders PR #10 is merged (`2daeb6c`) after the authorized PostgreSQL run and exact-head CI passed; local main was updated and remote Orders branch removed by GitHub. Orders source/offline and bounded persistence verification are delivered and explicitly user-accepted under the recorded development limits; [owning phase tracker](../../apps/api/src/modules/orders/docs/features/capture/phase-tracker.md). Preserve both local Menu/Orders ledgers and pending incident reviews. Kitchen planning-only authorization is now recorded in [KT-00](kitchen/phase-tracker.md), based on verified local/remote main `6125da4` (accepted closeout PR #12). The [proposed scope and acceptance criteria](kitchen/spec.md) have completed [technical review/corrections](kitchen/phase-tracker.md#technical-review--2026-10-23) and are ready for owner approval; [business decisions](kitchen/decisions.md) approve explicit dispatch before payment, preparation-only data and the status/access/immutable-ticket development boundary. No further database run or next-module implementation is activated. Acceptance closeout changes documentation only and follows standing GitHub workflow authorization.
+Current handoff: Kitchen backend development scope is accepted and closed. [PR #16](https://github.com/Hijazi313/servicelane-pos/pull/16) owns actual merge/check state and SHA; user authorized squash merge after exact-head checks. Synchronize local main after integration. No next module/phase is activated; the next material decision is separately scoped planning. No database rerun, installation or deployment. Preserve seven ownership ledgers, reports and pending incident reviews; operational/release limits remain unchanged.
 
 ## Proposed foundation follow-ups — 2026-10-12
 
@@ -95,7 +109,7 @@ Project foundation precedes Business/Branch and Authentication/Access, which pre
 | 2 | Authentication and Access | complete; development scope | [Specification; BA-01 slice approved](../../apps/api/src/modules/authentication/docs/features/access/spec.md) / [joint tracker](business-access/phase-tracker.md); BA-01 accepted on staging; BA-02/BA-03 accepted under revised development scope; release verification deferred |
 | 3 | Menu | complete development scope; merged | [MN-00 → MN-01 plan](../../apps/api/src/modules/menu/docs/README.md); accepted, PR #9 squash `b09770e`; release limits retained |
 | 4 | Orders | OR-01 complete; accepted backend development scope | [Specification](../../apps/api/src/modules/orders/docs/features/capture/spec.md) / [phase tracker](../../apps/api/src/modules/orders/docs/features/capture/phase-tracker.md); bounded persistence verified; [acceptance/closeout](../../apps/api/src/modules/orders/docs/features/capture/phase-tracker.md#acceptance-and-closeout--2026-10-21) |
-| 5 | Kitchen | planning complete; business boundaries approved | [KT-00 / proposed KT-01–02](kitchen/phase-tracker.md); no implementation activated |
+| 5 | Kitchen | Backend development scope complete; user-accepted | [KT-01 handoff / completed KT-02](../../apps/api/src/modules/kitchen/docs/features/preparation/phase-tracker.md); migration 0005 applied; accepted bounded technical evidence; integration record PR #16 |
 | 6 | Billing and payments | proposed | Not activated |
 | 7 | Cashier shifts | proposed | Not activated |
 | 8 | Inventory | proposed | Stock model unresolved |
@@ -107,3 +121,53 @@ Project foundation precedes Business/Branch and Authentication/Access, which pre
 - After minimum Orders, Kitchen and Billing capabilities exist: accept one complete trading flow, including amendments, reconnect and receipt output.
 - Before MVP release: reconcile approved menu behavior, payments, shifts, stock and reports; verify recovery and repeatable isolated business provisioning.
 - Detailed checklists remain deferred until the relevant modules enter discovery.
+
+
+## KT-02 bounded activation — 2026-10-25
+
+User activated one bounded Kitchen PostgreSQL run; [owning authorization and task](../../apps/api/src/modules/kitchen/docs/features/preparation/phase-tracker.md#kt-02-bounded-activation--2026-10-25). Checkout verified at `6ba87ff` on `codex/kitchen-handoff`, prepared harness/main ancestry and both historical ledger hashes verified. Database access awaits explicit confirmation that the configured target is the intended disposable testing database and exclusively reserved. After confirmation, fresh compilation and baseline may proceed, followed conditionally by one execution using the freshly verified fingerprint without another approval. Strict prepared gates, stop conditions and owned cleanup apply. No database access yet; Kitchen acceptance and source publication remain separate; OR-01 stays accepted/closed and pending incident reviews are preserved.
+
+
+## KT-02 baseline stop — 2026-10-25
+
+Target/exclusive reservation explicitly confirmed by user. Fresh compilation passed; one read-only baseline failed with sanitized `operation-failed`, no SQLSTATE or completed fingerprint. [Owning result and next decision](../../apps/api/src/modules/kitchen/docs/features/preparation/phase-tracker.md#kt-02-baseline-stop--2026-10-25). No migration, fixtures, cases or retry; cleanup not required. Target history/schema/emptiness remain unverified. Next: authorize bounded secret-safe diagnosis before a new baseline decision. Kitchen acceptance remains pending; historical ledgers and incident reviews preserved.
+
+
+## KT-02 execution result — 2026-10-25
+
+Supervised diagnosis identified restricted-sandbox DNS failure; read-only network-enabled diagnosis and exact baseline passed without configuration changes. The single authorized execution applied 0005, then K01 failed with sanitized operation failure; no contention proof, later cases or fresh process verified. Owned cleanup passed: sixteen empty application tables, expected schema and all six exact history entries intact. [Owning result/next decision](../../apps/api/src/modules/kitchen/docs/features/preparation/phase-tracker.md#kt-02-execution-result--2026-10-25). No rerun. Next: bounded offline K01 diagnosis; repair/new execution needs separate scope and a post-0005 procedure. OR-01 remains accepted/closed; Kitchen acceptance remains pending. Historical ledgers and incident reviews preserved.
+
+
+## KT-02 offline diagnosis — 2026-10-25
+
+[Owning assessment/proposed repair](../../apps/api/src/modules/kitchen/docs/features/preparation/phase-tracker.md#kt-02-offline-diagnosis--proposed-repair--2026-10-25): seven existing preparation checks passed without database access. Connection-startup versus transaction-local contender labeling is a plausible observer weakness; exact K01 failure remains unknown. Proposed scoped harness instrumentation/diagnostics and post-0005 procedure require implementation authorization; no database run is inferred. Capability/module summaries reconciled with applied 0005 and verified cleanup. Historical ledgers and incident reviews preserved.
+
+
+## KT-02 harness repair — 2026-10-25
+
+User-authorized connection-tracking/failure-reporting repair delivered in Kitchen test instrumentation; [owning scope/evidence](../../apps/api/src/modules/kitchen/docs/features/preparation/phase-tracker.md#kt-02-harness-repair--2026-10-25). Nine focused offline checks passed. Contender identity is transaction-local before Access lock admission; reports retain safe case/step/codes and per-case contention state. No database access or application changes; historical K01 cause remains unconfirmed. Next: reviewed post-0005 procedure and separate new execution authorization. KT-02/Kitchen acceptance remain incomplete; all historical evidence/ledgers and incident reviews preserved.
+
+
+## KT-02 post-0005 preparation — 2026-10-25
+
+User-authorized procedure/harness preparation complete; [owning result and next decision](../../apps/api/src/modules/kitchen/docs/features/preparation/phase-tracker.md#post-0005-preparation-result--2026-10-25). Exact six-entry history/0005 schema/sixteen-empty-table baseline, explicit schema acknowledgement and no migration execution path. Eleven focused offline checks passed; no database/environment access, installation or publication. Next: user approves the prepared bounded run and renews disposable-target/exclusive-reservation confirmation, including conditional fresh-fingerprint continuation. Kitchen acceptance remains pending; existing evidence/ledgers and incident reviews preserved.
+
+
+## KT-02 post-0005 execution — 2026-10-25
+
+Fresh compilation, exact post-0005 baseline and K01–K04 passed, including real dispatch/status contention, rollback, attribution and queue/scope. Fresh-process stage failed; D01 remains unverified and its precise failure is unknown. No migrations applied. Owned cleanup passed: sixteen empty tables, expected schema and all six exact history entries intact. [Owning report/evidence limits](../../apps/api/src/modules/kitchen/docs/features/preparation/phase-tracker.md#post-0005-execution-result--2026-10-25). Permission consumed; no retry/publication. Next: bounded offline D01 diagnosis under new authorization. Kitchen acceptance and later modules remain separate; all reports/ledgers and incident reviews preserved.
+
+
+## KT-02 D01 autonomous preparation — 2026-10-25
+
+[Owning result](../../apps/api/src/modules/kitchen/docs/features/preparation/phase-tracker.md#d01-autonomous-result--2026-10-25): actual child HTTP checks pass offline; original D01 cause remains unknown. Prepared safe child outcome/stage reporting and D01-only fixture/child/readback/cleanup path, preserving prior K01–K04 evidence. Fourteen focused offline checks pass. No database/environment access, timeout relaxation or publication. Next single decision: approve the concrete D01-only run and renewed target reservation in the procedure. Kitchen acceptance and incident review remain separate.
+
+
+## Kitchen REST API adoption — 2026-10-25
+
+User authorized completing Kitchen-only adoption now, using sub-agents. All four ticket routes migrated; [dated capability baseline](../../apps/api/src/modules/kitchen/docs/capabilities.md#rest-api-adoption) records skill v0.4.0, exact convention/skill hashes, compatibility and evidence limits. [Owning result](../../apps/api/src/modules/kitchen/docs/features/preparation/phase-tracker.md#rest-api-adoption-result--2026-10-25): strict compile, 35 focused offline tests and architecture scan (21 files, zero findings) passed. Existing business/retry/revision rules retained. No other-module migration, database execution, dependency/skill change, publication or user acceptance by this increment. D01 continuation/evidence remains separately owned; preserve concurrent reports/ledgers. Incidents: none in this migration.
+
+
+## Kitchen acceptance and PR authorization — 2026-10-25
+
+User accepted the recorded backend development scope/evidence limits and authorized closeout commits, branch push, one PR against verified main and exact-head CI checks. [Owning acceptance](../../apps/api/src/modules/kitchen/docs/features/preparation/phase-tracker.md#user-acceptance-and-closeout--2026-10-25). No merge, database rerun, installation, deployment or next-module work. Deferred operational scope and incident reviews preserved.

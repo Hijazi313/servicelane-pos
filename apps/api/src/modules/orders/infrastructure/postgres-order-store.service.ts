@@ -29,8 +29,9 @@ export class PostgresOrderStore extends OrderStore {
       .where(and(eq(capturedOrders.businessId, businessId), eq(capturedOrders.branchId, branchId), eq(capturedOrders.retryKey, key)));
     return row;
   }
-  async get(businessId: string, branchId: string, orderId: string) {
-    const [row] = await this.database.db.select({ snapshot: capturedOrders.snapshot }).from(capturedOrders)
+  async get(businessId: string, branchId: string, orderId: string, transaction?: TransactionContext) {
+    const db = transaction ? transactionDatabase(transaction) : this.database.db;
+    const [row] = await db.select({ snapshot: capturedOrders.snapshot }).from(capturedOrders)
       .where(and(eq(capturedOrders.businessId, businessId), eq(capturedOrders.branchId, branchId), eq(capturedOrders.id, orderId)));
     return row?.snapshot;
   }

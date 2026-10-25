@@ -1,0 +1,1151 @@
+{
+  "id": "9c216d6f-c73e-4c9d-96d9-4830b4d3cdba",
+  "prevId": "fef5eceb-3f4d-454a-b85b-8d876910b657",
+  "version": "7",
+  "dialect": "postgresql",
+  "tables": {
+    "public.access_limits": {
+      "name": "access_limits",
+      "schema": "",
+      "columns": {
+        "kind": {
+          "name": "kind",
+          "type": "varchar(16)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "key": {
+          "name": "key",
+          "type": "varchar(64)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "attempts": {
+          "name": "attempts",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "pending_ids": {
+          "name": "pending_ids",
+          "type": "uuid[]",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'{}'::uuid[]"
+        },
+        "expires_at": {
+          "name": "expires_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {
+        "limit_expiry": {
+          "name": "limit_expiry",
+          "columns": [
+            {
+              "expression": "expires_at",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {
+        "access_limits_kind_key_pk": {
+          "name": "access_limits_kind_key_pk",
+          "columns": [
+            "kind",
+            "key"
+          ]
+        }
+      },
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {
+        "limit_kind_values": {
+          "name": "limit_kind_values",
+          "value": "\"access_limits\".\"kind\" in ('account', 'source')"
+        },
+        "limit_positive_attempts": {
+          "name": "limit_positive_attempts",
+          "value": "\"access_limits\".\"attempts\" > 0"
+        },
+        "limit_pending_bound": {
+          "name": "limit_pending_bound",
+          "value": "cardinality(\"access_limits\".\"pending_ids\") <= 5 and cardinality(\"access_limits\".\"pending_ids\") <= \"access_limits\".\"attempts\""
+        },
+        "limit_source_no_pending": {
+          "name": "limit_source_no_pending",
+          "value": "\"access_limits\".\"kind\" = 'account' or cardinality(\"access_limits\".\"pending_ids\") = 0"
+        }
+      },
+      "isRLSEnabled": false
+    },
+    "public.access_prelogins": {
+      "name": "access_prelogins",
+      "schema": "",
+      "columns": {
+        "digest": {
+          "name": "digest",
+          "type": "varchar(64)",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "csrf_token": {
+          "name": "csrf_token",
+          "type": "varchar(64)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "expires_at": {
+          "name": "expires_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {
+        "prelogin_expiry": {
+          "name": "prelogin_expiry",
+          "columns": [
+            {
+              "expression": "expires_at",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {
+        "prelogin_digest_format": {
+          "name": "prelogin_digest_format",
+          "value": "\"access_prelogins\".\"digest\" ~ '^[a-f0-9]{64}$'"
+        }
+      },
+      "isRLSEnabled": false
+    },
+    "public.access_security_events": {
+      "name": "access_security_events",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "action": {
+          "name": "action",
+          "type": "varchar(64)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "success": {
+          "name": "success",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "actor_id": {
+          "name": "actor_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "target_id": {
+          "name": "target_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "operator": {
+          "name": "operator",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "occurred_at": {
+          "name": "occurred_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {
+        "security_event_time": {
+          "name": "security_event_time",
+          "columns": [
+            {
+              "expression": "occurred_at",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.access_sessions": {
+      "name": "access_sessions",
+      "schema": "",
+      "columns": {
+        "digest": {
+          "name": "digest",
+          "type": "varchar(64)",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "business_id": {
+          "name": "business_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "account_id": {
+          "name": "account_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "csrf_token": {
+          "name": "csrf_token",
+          "type": "varchar(64)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "last_activity_at": {
+          "name": "last_activity_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "revoked_at": {
+          "name": "revoked_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {
+        "session_account": {
+          "name": "session_account",
+          "columns": [
+            {
+              "expression": "account_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "session_last_activity": {
+          "name": "session_last_activity",
+          "columns": [
+            {
+              "expression": "last_activity_at",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "session_created": {
+          "name": "session_created",
+          "columns": [
+            {
+              "expression": "created_at",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "session_staff_ownership": {
+          "name": "session_staff_ownership",
+          "tableFrom": "access_sessions",
+          "tableTo": "staff_accounts",
+          "columnsFrom": [
+            "business_id",
+            "account_id"
+          ],
+          "columnsTo": [
+            "business_id",
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {
+        "session_digest_format": {
+          "name": "session_digest_format",
+          "value": "\"access_sessions\".\"digest\" ~ '^[a-f0-9]{64}$'"
+        },
+        "session_activity_order": {
+          "name": "session_activity_order",
+          "value": "\"access_sessions\".\"last_activity_at\" >= \"access_sessions\".\"created_at\""
+        }
+      },
+      "isRLSEnabled": false
+    },
+    "public.branches": {
+      "name": "branches",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "business_id": {
+          "name": "business_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "name": {
+          "name": "name",
+          "type": "varchar(120)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "address": {
+          "name": "address",
+          "type": "varchar(500)",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "branches_business_id_businesses_id_fk": {
+          "name": "branches_business_id_businesses_id_fk",
+          "tableFrom": "branches",
+          "tableTo": "businesses",
+          "columnsFrom": [
+            "business_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "branch_business_identity": {
+          "name": "branch_business_identity",
+          "nullsNotDistinct": false,
+          "columns": [
+            "business_id",
+            "id"
+          ]
+        }
+      },
+      "policies": {},
+      "checkConstraints": {
+        "branch_name_nonempty": {
+          "name": "branch_name_nonempty",
+          "value": "length(trim(\"branches\".\"name\")) > 0"
+        }
+      },
+      "isRLSEnabled": false
+    },
+    "public.businesses": {
+      "name": "businesses",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "name": {
+          "name": "name",
+          "type": "varchar(120)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "currency_code": {
+          "name": "currency_code",
+          "type": "varchar(3)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "timezone": {
+          "name": "timezone",
+          "type": "varchar(100)",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {
+        "business_name_nonempty": {
+          "name": "business_name_nonempty",
+          "value": "length(trim(\"businesses\".\"name\")) > 0"
+        },
+        "business_currency_format": {
+          "name": "business_currency_format",
+          "value": "\"businesses\".\"currency_code\" ~ '^[A-Z]{3}$'"
+        }
+      },
+      "isRLSEnabled": false
+    },
+    "public.captured_orders": {
+      "name": "captured_orders",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "business_id": {
+          "name": "business_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "branch_id": {
+          "name": "branch_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "retry_key": {
+          "name": "retry_key",
+          "type": "varchar(128)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "request": {
+          "name": "request",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "snapshot": {
+          "name": "snapshot",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "captured_order_retry_scope": {
+          "name": "captured_order_retry_scope",
+          "nullsNotDistinct": false,
+          "columns": [
+            "business_id",
+            "branch_id",
+            "retry_key"
+          ]
+        }
+      },
+      "policies": {},
+      "checkConstraints": {
+        "captured_order_retry_key": {
+          "name": "captured_order_retry_key",
+          "value": "\"captured_orders\".\"retry_key\" ~ '^[A-Za-z0-9_-]{16,128}$'"
+        },
+        "captured_order_snapshot_identity": {
+          "name": "captured_order_snapshot_identity",
+          "value": "jsonb_typeof(\"captured_orders\".\"request\") = 'object' and jsonb_typeof(\"captured_orders\".\"snapshot\") = 'object' and \"captured_orders\".\"snapshot\"->>'id' is not null and \"captured_orders\".\"snapshot\"->>'state' is not null and \"captured_orders\".\"snapshot\"->>'id' = \"captured_orders\".\"id\"::text and \"captured_orders\".\"snapshot\"->>'state' = 'captured'"
+        }
+      },
+      "isRLSEnabled": false
+    },
+    "public.installation_binding": {
+      "name": "installation_binding",
+      "schema": "",
+      "columns": {
+        "singleton": {
+          "name": "singleton",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "business_id": {
+          "name": "business_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "branch_id": {
+          "name": "branch_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "installation_binding_business_id_businesses_id_fk": {
+          "name": "installation_binding_business_id_businesses_id_fk",
+          "tableFrom": "installation_binding",
+          "tableTo": "businesses",
+          "columnsFrom": [
+            "business_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "installation_branch_ownership": {
+          "name": "installation_branch_ownership",
+          "tableFrom": "installation_binding",
+          "tableTo": "branches",
+          "columnsFrom": [
+            "business_id",
+            "branch_id"
+          ],
+          "columnsTo": [
+            "business_id",
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {
+        "installation_singleton": {
+          "name": "installation_singleton",
+          "value": "\"installation_binding\".\"singleton\" = 1"
+        }
+      },
+      "isRLSEnabled": false
+    },
+    "public.kitchen_tickets": {
+      "name": "kitchen_tickets",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "business_id": {
+          "name": "business_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "branch_id": {
+          "name": "branch_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "order_id": {
+          "name": "order_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "position": {
+          "name": "position",
+          "type": "bigserial",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "preparation": {
+          "name": "preparation",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "state": {
+          "name": "state",
+          "type": "varchar(16)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "revision": {
+          "name": "revision",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "dispatched_at": {
+          "name": "dispatched_at",
+          "type": "varchar(24)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "dispatched_by": {
+          "name": "dispatched_by",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "preparing_at": {
+          "name": "preparing_at",
+          "type": "varchar(24)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "preparing_by": {
+          "name": "preparing_by",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "ready_at": {
+          "name": "ready_at",
+          "type": "varchar(24)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "ready_by": {
+          "name": "ready_by",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "kitchen_order_scope": {
+          "name": "kitchen_order_scope",
+          "nullsNotDistinct": false,
+          "columns": [
+            "business_id",
+            "branch_id",
+            "order_id"
+          ]
+        },
+        "kitchen_position_scope": {
+          "name": "kitchen_position_scope",
+          "nullsNotDistinct": false,
+          "columns": [
+            "business_id",
+            "branch_id",
+            "position"
+          ]
+        }
+      },
+      "policies": {},
+      "checkConstraints": {
+        "kitchen_state_revision": {
+          "name": "kitchen_state_revision",
+          "value": "(\"kitchen_tickets\".\"state\" = 'queued' and \"kitchen_tickets\".\"revision\" = 0 and \"kitchen_tickets\".\"preparing_at\" is null and \"kitchen_tickets\".\"preparing_by\" is null and \"kitchen_tickets\".\"ready_at\" is null and \"kitchen_tickets\".\"ready_by\" is null) or (\"kitchen_tickets\".\"state\" = 'preparing' and \"kitchen_tickets\".\"revision\" = 1 and \"kitchen_tickets\".\"preparing_at\" is not null and \"kitchen_tickets\".\"preparing_by\" is not null and \"kitchen_tickets\".\"ready_at\" is null and \"kitchen_tickets\".\"ready_by\" is null) or (\"kitchen_tickets\".\"state\" = 'ready' and \"kitchen_tickets\".\"revision\" = 2 and \"kitchen_tickets\".\"preparing_at\" is not null and \"kitchen_tickets\".\"preparing_by\" is not null and \"kitchen_tickets\".\"ready_at\" is not null and \"kitchen_tickets\".\"ready_by\" is not null)"
+        },
+        "kitchen_preparation_identity": {
+          "name": "kitchen_preparation_identity",
+          "value": "jsonb_typeof(\"kitchen_tickets\".\"preparation\") = 'object' and \"kitchen_tickets\".\"preparation\"->>'orderId' is not null and \"kitchen_tickets\".\"preparation\"->>'orderId' = \"kitchen_tickets\".\"order_id\"::text"
+        }
+      },
+      "isRLSEnabled": false
+    },
+    "public.menu_offerings": {
+      "name": "menu_offerings",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "business_id": {
+          "name": "business_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "revision": {
+          "name": "revision",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "definition": {
+          "name": "definition",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "currency_code": {
+          "name": "currency_code",
+          "type": "varchar(3)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "scale": {
+          "name": "scale",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "menu_offering_ownership": {
+          "name": "menu_offering_ownership",
+          "nullsNotDistinct": false,
+          "columns": [
+            "business_id",
+            "id"
+          ]
+        }
+      },
+      "policies": {},
+      "checkConstraints": {
+        "menu_positive_revision": {
+          "name": "menu_positive_revision",
+          "value": "\"menu_offerings\".\"revision\" > 0"
+        },
+        "menu_currency_scale": {
+          "name": "menu_currency_scale",
+          "value": "\"menu_offerings\".\"scale\" between 0 and 4 and \"menu_offerings\".\"currency_code\" ~ '^[A-Z]{3}$'"
+        },
+        "menu_definition_identity": {
+          "name": "menu_definition_identity",
+          "value": "jsonb_typeof(\"menu_offerings\".\"definition\") = 'object' and (\"menu_offerings\".\"definition\"->>'id') = \"menu_offerings\".\"id\"::text and (\"menu_offerings\".\"definition\"->>'revision')::integer = \"menu_offerings\".\"revision\" and (\"menu_offerings\".\"definition\"->>'currencyCode') = \"menu_offerings\".\"currency_code\" and (\"menu_offerings\".\"definition\"->>'scale')::integer = \"menu_offerings\".\"scale\""
+        }
+      },
+      "isRLSEnabled": false
+    },
+    "public.menu_references": {
+      "name": "menu_references",
+      "schema": "",
+      "columns": {
+        "business_id": {
+          "name": "business_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "offering_id": {
+          "name": "offering_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "variant_id": {
+          "name": "variant_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "menu_reference_owner": {
+          "name": "menu_reference_owner",
+          "tableFrom": "menu_references",
+          "tableTo": "menu_offerings",
+          "columnsFrom": [
+            "business_id",
+            "offering_id"
+          ],
+          "columnsTo": [
+            "business_id",
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "menu_reference_variant": {
+          "name": "menu_reference_variant",
+          "tableFrom": "menu_references",
+          "tableTo": "menu_variants",
+          "columnsFrom": [
+            "business_id",
+            "variant_id"
+          ],
+          "columnsTo": [
+            "business_id",
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "menu_references_business_id_offering_id_variant_id_pk": {
+          "name": "menu_references_business_id_offering_id_variant_id_pk",
+          "columns": [
+            "business_id",
+            "offering_id",
+            "variant_id"
+          ]
+        }
+      },
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.menu_variants": {
+      "name": "menu_variants",
+      "schema": "",
+      "columns": {
+        "business_id": {
+          "name": "business_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "offering_id": {
+          "name": "offering_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "menu_variant_owner": {
+          "name": "menu_variant_owner",
+          "tableFrom": "menu_variants",
+          "tableTo": "menu_offerings",
+          "columnsFrom": [
+            "business_id",
+            "offering_id"
+          ],
+          "columnsTo": [
+            "business_id",
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "menu_variants_business_id_id_pk": {
+          "name": "menu_variants_business_id_id_pk",
+          "columns": [
+            "business_id",
+            "id"
+          ]
+        }
+      },
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.order_capture_policies": {
+      "name": "order_capture_policies",
+      "schema": "",
+      "columns": {
+        "business_id": {
+          "name": "business_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "revision": {
+          "name": "revision",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "max_lines": {
+          "name": "max_lines",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "max_quantity": {
+          "name": "max_quantity",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {
+        "order_capture_policies_business_id_pk": {
+          "name": "order_capture_policies_business_id_pk",
+          "columns": [
+            "business_id"
+          ]
+        }
+      },
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {
+        "order_policy_bounds": {
+          "name": "order_policy_bounds",
+          "value": "\"order_capture_policies\".\"revision\" > 0 and \"order_capture_policies\".\"max_lines\" between 1 and 500 and \"order_capture_policies\".\"max_quantity\" between 1 and 1000"
+        }
+      },
+      "isRLSEnabled": false
+    },
+    "public.staff_accounts": {
+      "name": "staff_accounts",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "business_id": {
+          "name": "business_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "username": {
+          "name": "username",
+          "type": "varchar(64)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "display_name": {
+          "name": "display_name",
+          "type": "varchar(120)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "status": {
+          "name": "status",
+          "type": "varchar(16)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "role": {
+          "name": "role",
+          "type": "varchar(16)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "password_change_required": {
+          "name": "password_change_required",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "staff_business_identity": {
+          "name": "staff_business_identity",
+          "nullsNotDistinct": false,
+          "columns": [
+            "business_id",
+            "id"
+          ]
+        },
+        "staff_business_username": {
+          "name": "staff_business_username",
+          "nullsNotDistinct": false,
+          "columns": [
+            "business_id",
+            "username"
+          ]
+        }
+      },
+      "policies": {},
+      "checkConstraints": {
+        "staff_username_format": {
+          "name": "staff_username_format",
+          "value": "\"staff_accounts\".\"username\" ~ '^[a-z0-9._-]{3,64}$'"
+        },
+        "staff_display_name_nonempty": {
+          "name": "staff_display_name_nonempty",
+          "value": "length(trim(\"staff_accounts\".\"display_name\")) > 0"
+        },
+        "staff_status_values": {
+          "name": "staff_status_values",
+          "value": "\"staff_accounts\".\"status\" in ('active', 'disabled')"
+        },
+        "staff_role_values": {
+          "name": "staff_role_values",
+          "value": "\"staff_accounts\".\"role\" in ('administrator', 'staff')"
+        }
+      },
+      "isRLSEnabled": false
+    },
+    "public.staff_branch_grants": {
+      "name": "staff_branch_grants",
+      "schema": "",
+      "columns": {
+        "business_id": {
+          "name": "business_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "account_id": {
+          "name": "account_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "branch_id": {
+          "name": "branch_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "grant_staff_ownership": {
+          "name": "grant_staff_ownership",
+          "tableFrom": "staff_branch_grants",
+          "tableTo": "staff_accounts",
+          "columnsFrom": [
+            "business_id",
+            "account_id"
+          ],
+          "columnsTo": [
+            "business_id",
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "staff_branch_grants_account_id_branch_id_pk": {
+          "name": "staff_branch_grants_account_id_branch_id_pk",
+          "columns": [
+            "account_id",
+            "branch_id"
+          ]
+        }
+      },
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.staff_credentials": {
+      "name": "staff_credentials",
+      "schema": "",
+      "columns": {
+        "account_id": {
+          "name": "account_id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "password_hash": {
+          "name": "password_hash",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "staff_credentials_account_id_staff_accounts_id_fk": {
+          "name": "staff_credentials_account_id_staff_accounts_id_fk",
+          "tableFrom": "staff_credentials",
+          "tableTo": "staff_accounts",
+          "columnsFrom": [
+            "account_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    }
+  },
+  "enums": {},
+  "schemas": {},
+  "sequences": {},
+  "roles": {},
+  "policies": {},
+  "views": {},
+  "_meta": {
+    "columns": {},
+    "schemas": {},
+    "tables": {}
+  }
+}

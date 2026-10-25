@@ -13,6 +13,6 @@ export abstract class OrderStore {
   abstract policy(businessId: string, transaction?: TransactionContext): Promise<LimitPolicy>;
   abstract updatePolicy(businessId: string, policy: LimitPolicy, expectedRevision: number, transaction: TransactionContext): Promise<void>;
   abstract replay(businessId: string, branchId: string, key: string, transaction: TransactionContext): Promise<StoredOrder | undefined>;
-  abstract get(businessId: string, branchId: string, orderId: string): Promise<OrderSnapshot | undefined>;
+  abstract get(businessId: string, branchId: string, orderId: string, transaction?: TransactionContext): Promise<OrderSnapshot | undefined>;
   abstract save(businessId: string, branchId: string, key: string, order: StoredOrder, transaction: TransactionContext): Promise<void>;
 }

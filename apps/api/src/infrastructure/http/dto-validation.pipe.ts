@@ -3,7 +3,7 @@ import * as validator from 'class-validator';
 import * as transformer from 'class-transformer';
 import type { ValidationError } from 'class-validator';
 
-export interface InputIssue { location: 'body' | 'query'; field: string; code: string }
+export interface InputIssue { location: 'body' | 'query' | 'path'; field: string; code: string }
 export class InputValidationError extends BadRequestException {
   constructor(readonly issues: readonly InputIssue[]) { super('Invalid input'); }
 }

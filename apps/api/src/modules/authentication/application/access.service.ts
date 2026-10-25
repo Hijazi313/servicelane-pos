@@ -82,10 +82,10 @@ export class AccessService {
       // Fail closed for untyped callers too; an unknown policy must not become staff access.
       if (policy !== 'staff' && policy !== 'administrator') throw new AccessError('FORBIDDEN', 'Access denied');
       return await this.store.run(async (unit) => {
-        const { session, context } = await this.principal(unit, proof, policy === 'administrator');
+        const { session, account, context } = await this.principal(unit, proof, policy === 'administrator');
         this.csrf(proof, session.csrfToken);
         await this.touch(unit, session);
-        try { return await work({ installation: context, transaction: unit.context }); }
+        try { return await work({ actorId: account.id, installation: context, transaction: unit.context }); }
         catch (error) { throw new CallbackFailure(error); }
       });
     } catch (error) {
