@@ -2,8 +2,9 @@ import { Injectable } from '@nestjs/common';
 import { randomUUID } from 'node:crypto';
 import { AccessService, type Proof } from '../../authentication/public.js';
 import { MenuOrderResolver } from '../../menu/public.js';
-import { OrderStore, type CaptureRequest, type OrderSnapshot } from './order-store.js';
-import { canonical, OrdersError, MAX_LINES, MAX_QUANTITY, RESPONSE_BYTES, object, integer, identifier, optionalText, customer, minorAmount, checkedAmount } from '../domain/capture.js';
+import { OrderStore, type OrderSnapshot } from './order-store.js';
+import { parseOrderCapture } from './parse-order-capture.js';
+import { canonical, OrdersError, MAX_LINES, MAX_QUANTITY, RESPONSE_BYTES, object, integer, identifier, checkedAmount } from '../domain/capture.js';
 
 export function snapshotFits(snapshot: OrderSnapshot): boolean {
   return Buffer.byteLength(JSON.stringify(snapshot), 'utf8') <= RESPONSE_BYTES;
@@ -11,24 +12,8 @@ export function snapshotFits(snapshot: OrderSnapshot): boolean {
 @Injectable()
 export class OrdersService {
   constructor(private readonly access: AccessService, private readonly menu: MenuOrderResolver, private readonly store: OrderStore) {}
-  private parse(value: unknown): { key: string; request: CaptureRequest } {
-    const input = object(value, ['retryKey', 'currencyCode', 'scale', 'lines', 'customer', 'instructions']);
-    if (typeof input.retryKey !== 'string' || !/^[A-Za-z0-9_-]{16,128}$/.test(input.retryKey)) throw new OrdersError('INVALID_RETRY_KEY');
-    if (typeof input.currencyCode !== 'string' || !/^[A-Z]{3}$/.test(input.currencyCode)) throw new OrdersError('INVALID_CURRENCY');
-    const scale = integer(input.scale, 0, 4), rawLines = input.lines;
-    if (!Array.isArray(rawLines) || !rawLines.length || rawLines.length > MAX_LINES) throw new OrdersError('INVALID_LINES');
-    const lines = rawLines.map(value => {
-      const row = object(value, ['selection', 'quantity', 'expectedUnitMinor', 'instructions']);
-      const instructions = optionalText(row.instructions, 250);
-      return { selection: this.menu.normalize(row.selection), quantity: integer(row.quantity, 1, MAX_QUANTITY),
-        expectedUnitMinor: minorAmount(row.expectedUnitMinor), ...(instructions ? { instructions } : {}) };
-    });
-    const details = customer(input.customer), instructions = optionalText(input.instructions, 500);
-    return { key: input.retryKey, request: { currencyCode: input.currencyCode, scale, lines,
-      ...(details ? { customer: details } : {}), ...(instructions ? { instructions } : {}) } };
-  }
   async create(proof: Proof, value: unknown): Promise<OrderSnapshot> {
-    const { key, request } = this.parse(value);
+    const { key, request } = parseOrderCapture(value, selection => this.menu.normalize(selection));
     return this.access.runAuthorized(proof, 'staff', async scope => {
       const { businessId, branchId } = scope.installation;
       const existing = await this.store.replay(businessId, branchId, key, scope.transaction);

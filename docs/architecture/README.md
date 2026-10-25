@@ -4,6 +4,8 @@ Read this document when designing or changing backend structure, dependencies or
 
 See the [REST API convention](rest-api-convention.md) for transport contracts, queries, responses, errors and headers. Existing accepted APIs require an authorized migration; CI enforcement is separately scoped.
 
+Shared [HTTP boundary components](../../apps/api/src/infrastructure/http/README.md) are registered for the explicitly approved Menu active listing and Orders capture; additional endpoint migrations require their own contract review.
+
 ## Stack and composition
 
 - Node.js, TypeScript, NestJS with the Fastify adapter, PostgreSQL through Drizzle ORM and the `pg` driver. Drizzle Kit generates reviewed SQL migrations; the explicit runner applies them.
