@@ -26,6 +26,13 @@ Use `feat`, `fix`, `docs`, `refactor`, `test`, `chore`, `build`, `ci`, `perf` or
 - Use the existing Conventional Commit format. Explain non-obvious rationale and compatibility impacts in the commit body.
 - Local commit permission does not automatically authorize pushing or merging. Explicit task-specific Git restrictions take precedence.
 
+### Active work and remote checkpoints
+
+- At authorized work start/resume, maintain one current row per independent workstream in the global tracker's **Active work branches** table: phase/task, branch, checkout path, owner, integration base, upstream/publication state and owning tracker. Update the row when ownership, checkout, phase or publication changes; retain historical decisions in the owning tracker rather than adding duplicate current rows.
+- Verify the actual checkout and Git state before updating the designation. An active designation identifies responsibility; it grants no implementation, push, merge or database permission. Paused work stays listed with its blocker; remove the row when closed or superseded, leaving the closeout link in the owning tracker.
+- With publication authorization, push the first coherent committed checkpoint and subsequent completed handoff checkpoints to the same-named remote branch; set upstream on the first push. Otherwise record **local only — publication unauthorized**. Do not push unreviewed changes or include untracked evidence by default.
+- Before push, review the committed scope and applicable verification evidence. After push, verify the remote head matches the intended commit and update publication state. Use Git for commit/upstream/ahead-behind status rather than maintaining a second commit log in the tracker. PR creation, merge and feature acceptance remain separately governed.
+
 ### Checkout choice
 
 - Before feature work, inspect current changes and decide whether to reuse the checkout or use a separate worktree. Reuse it for non-conflicting work; prefer a worktree when unrelated staged changes, concurrent agents or independent branches would interfere. Do not create one per task by default.

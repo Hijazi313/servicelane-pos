@@ -73,11 +73,19 @@ User authorized committing the reviewed staged changes and creating a PR from `c
 - Current phase: OR-01 complete and user-accepted under its recorded development scope; KT-01 source implementation is authorized; [Kitchen tracker](../../apps/api/src/modules/kitchen/docs/features/preparation/phase-tracker.md) owns source/offline delivery and the current branch handoff; KT-02 is active awaiting explicit target/reservation confirmation. BA-01 complete; BA-02 complete under [user acceptance](business-access/phase-tracker.md#ba-02-acceptance--2026-10-17); BA-D01–06 approved; BA-03-T01 complete and [user-accepted](business-access/phase-tracker.md#ba-03-acceptance-and-closeout--2026-10-17) under its revised development scope; two-database execution deferred, unrun.
 - Deferred validation remains in the [canonical foundation handoff](project-foundation/phase-tracker.md#current-handoff--2026-10-12) and [acceptance record](../acceptance/project-foundation.md).
 
+## Active work branches
+
+Current designations follow [CONTRIBUTING](../../CONTRIBUTING.md#active-work-and-remote-checkpoints); Git is authoritative for heads and synchronization.
+
+| Phase / task | Branch | Checkout | Owner | Integration base | Publication / blocker | Owning tracker |
+| --- | --- | --- | --- | --- | --- | --- |
+| Kitchen KT-02 | `codex/kitchen-handoff` | `/Users/macbookpro/Documents/personal/restaurant-pos-custom` | Primary agent, solo | `main` (`ac9ce07` integrated) | Published; upstream `origin/codex/kitchen-handoff`. Database work paused pending target/reservation confirmation. | [Kitchen](../../apps/api/src/modules/kitchen/docs/features/preparation/phase-tracker.md#kt-02-bounded-activation--2026-10-25) |
+
 ## Current planning handoff — 2026-10-25
 
 BA-01/02/03 accepted development scope and historical execution permissions are owned by the [joint BA tracker](business-access/phase-tracker.md). They do not authorize new Menu or database work.
 
-Current handoff: active work branch is `codex/kitchen-handoff`, with upstream `origin/codex/kitchen-handoff` designated by the user on 2026-10-25. Kitchen KT-02 is active under [the bounded authorization](../../apps/api/src/modules/kitchen/docs/features/preparation/phase-tracker.md#kt-02-bounded-activation--2026-10-25); database access awaits explicit disposable-target/exclusive-reservation confirmation. The user authorized publishing this branch before continuing; PR/merge remain outside scope. Main `ac9ce07` and prepared harness `dc4b21c` are integrated. OR-01 remains accepted/closed; Kitchen acceptance is pending. Preserve both historical untracked ledgers and pending incident reviews.
+Current handoff: the active branch designation is maintained in the table above. Kitchen KT-02 is active under [the bounded authorization](../../apps/api/src/modules/kitchen/docs/features/preparation/phase-tracker.md#kt-02-bounded-activation--2026-10-25); database access awaits explicit disposable-target/exclusive-reservation confirmation. The user authorized publishing this branch before continuing; PR/merge remain outside scope. Main `ac9ce07` and prepared harness `dc4b21c` are integrated. OR-01 remains accepted/closed; Kitchen acceptance is pending. Preserve both historical untracked ledgers and pending incident reviews.
 
 ## Proposed foundation follow-ups — 2026-10-12
 
