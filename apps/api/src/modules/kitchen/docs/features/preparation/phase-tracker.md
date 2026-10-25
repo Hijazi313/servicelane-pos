@@ -2,7 +2,7 @@
 
 Date: 2026-10-22. Owner: primary agent, solo. [Specification](spec.md); [business decisions](decisions.md); [global tracker](../../../../../../../../docs/planning/TRACKER.md).
 
-Status: KT-02 blocked after the authorized read-only baseline failed; no execution or retry performed. KT-01 acceptance remains pending.
+Status: KT-02 blocked after K01 failed in the single authorized execution; owned cleanup passed and migration 0005 remains. Kitchen acceptance remains pending.
 
 ## Authorization and verified entry
 
@@ -16,7 +16,7 @@ Local main and remote main both verified at `6125da43245f50f52730d122792f7d01418
 | --- | --- | --- |
 | KT-00 — planning | Complete: documentation prepared and KT-D01–04 resolved | Entry: current request. Exit met for business planning: owner resolved KT-D01–04. Technical review is now delivered below; owner approval of the revised specification remains separate from implementation authorization. |
 | KT-01 — backend handoff | Source/offline checks delivered; acceptance pending | Entry: approved decisions/spec plus explicit source/check authorization. Intended outcome: KT-A01–06, one transaction-aware Orders projection, trusted Authentication actor-scope extension and Kitchen ticket/queue/status boundary. Before coding, confirm contracts, bounds, revision/retry semantics and capability upkeep; no standalone Orders reopening or unrelated fixes. Exit: authorized source/offline evidence recorded, unavailable persistence behavior explicit. |
-| KT-02 — bounded integration acceptance | Blocked; baseline operation failed | Entry: reviewed procedure for current post-0004 baseline, explicit target/run/fixture/cleanup permission and acceptable source evidence. Objective: persisted atomicity/concurrency and fresh-process KT-A01–05 evidence; explicit user development acceptance remains separate from technical checks/integration. No old Menu/Orders harness rerun or inherited target permission. |
+| KT-02 — bounded integration acceptance | Blocked; K01 failed, cleanup passed | Entry: reviewed procedure for current post-0004 baseline, explicit target/run/fixture/cleanup permission and acceptable source evidence. Objective: persisted atomicity/concurrency and fresh-process KT-A01–05 evidence; explicit user development acceptance remains separate from technical checks/integration. No old Menu/Orders harness rerun or inherited target permission. |
 
 No later phase is detailed or activated. If payment-first or amendments/cancellation are required in the first slice, revise KT-01 prerequisites and criteria before source authorization; do not silently expand this plan.
 
@@ -145,3 +145,19 @@ Fresh project compilation passed with existing Node v24.21.0. One authorized rea
 Migration: not run. K01/K02/K03/K04/D01: all not run. Fixtures were not attempted; cleanup not required. Pool shutdown reported no idle/close failure. No database execution, automatic retry or diagnostic database connection followed. Current target schema/history/counts remain unverified, including whether 0005 is absent. This attempt cannot establish PostgreSQL behavior or Kitchen acceptance.
 
 Next material decision: authorize a bounded secret-safe diagnosis of the baseline operation failure before considering any new baseline attempt. Preserve this report and both historical ledgers. Incidents: none established in this run; an environmental/check failure alone is not a qualifying incident. Existing incident reviews remain pending and unchanged.
+
+
+## KT-02 diagnosis and conditional continuation — 2026-10-25
+
+User authorized diagnosis and continuation after the baseline stop. Secret-safe connection diagnosis in the restricted sandbox reported `ENOTFOUND` / `getaddrinfo`; the same read-only connection check with network escalation passed (`transaction_read_only=on`). No configuration/harness/source changes were needed. A new explicitly supervised read-only baseline with network access passed: PostgreSQL 17.11, exact post-0004 schema/history, fifteen empty tables, matching two-connection identity. Report: `apps/api/tests/evidence/kt01.4618920b-d43c-48bd-9d49-3b0578b3ac35.json`. Fresh fingerprint `1b55f59a1b8c467c8b070c0eebe59012c54e7393fb54a2b5e0b438a2be492437` is authorized for conditional continuation under the original explicit permission. Compiled/source tree unchanged since the successful fresh compile. Now permit only the single prepared execute invocation, with repeated baseline, 0005, cases and owned cleanup; stop conditions remain unchanged. This is a supervised environmental diagnosis/continuation, not an automatic harness retry or relaxed gate.
+
+
+## KT-02 execution result — 2026-10-25
+
+One execute invocation repeated/passed the exact baseline using the verified fingerprint. Migration 0005 applied and passed schema/history checks. K01 failed with sanitized `operation-failed` at stage `cases`, without SQLSTATE or recorded contention observation; K02/K03/K04/D01 remain not-run. Do not infer the precise failing operation or contention cause from this report. No source/harness correction, second execution or later database probe followed.
+
+Owned cleanup **passed**: sixteen application tables independently counted zero, expected post-0005 schema validated and six exact migration history entries retained. Migration 0005 remains applied. Pool shutdown reported no idle/close errors. Run report: `apps/api/tests/evidence/kt01.921ef3b8-8d8f-4f7f-8983-fba864fcd778.json`; successful baseline report above. Restricted run ownership ledger remains local/untracked. Both original Menu/Orders ledger hashes still match closeout.
+
+KT-02 is blocked, not passed or accepted: duplicate-safe dispatch/rollback/contention/queue/fresh-process acceptance remains unestablished. Existing offline evidence remains valid within its limits. TLS certificate verification was disabled by existing configuration throughout; no TLS/transport assurance is claimed. No installation, deployment, old harness execution or operational workflow occurred.
+
+Next material decision: authorize bounded offline diagnosis of K01 and improved safe failure localization if needed; any harness/source repair and another database execution require a reviewed post-0005 procedure and explicit authorization. The original post-0004 runner cannot simply be rerun. Incidents: none confirmed; K01 failure alone does not establish a delivered harness defect or application defect. Existing incident reviews remain pending.
