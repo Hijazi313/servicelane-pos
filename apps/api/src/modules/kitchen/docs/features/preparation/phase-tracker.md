@@ -275,3 +275,8 @@ Verification on existing supported Node v24.21.0: fresh strict TypeScript compil
 Migration handoff: source/docs and offline checks complete locally; next action is review/accept the changed API contract and integrate it under the repository contribution workflow. D01 continuation remains separately owned and must reconcile its own exact source/hash evidence before any Kitchen acceptance claim. No task-owned debug artifacts; ignored compilation output only. Incidents: none confirmed in this migration; prior incident reviews remain open and unchanged.
 
 Local contribution authorization — 2026-10-25: user requested committing this migration, documentation cleanup and incident records. Reuse the existing topic branch; no push/PR/merge or database action inferred. Concurrent D01 tracker edits and evidence remain outside these commits.
+
+
+## REST adoption incident review — 2026-10-25
+
+User-requested review recorded [documentation rework](../../../../../../../../docs/quality/agent-incidents.md#inc-20261025-03--kitchen-adoption-documentation-required-user-led-simplification) and [concurrent build interference](../../../../../../../../docs/quality/agent-incidents.md#inc-20261025-04--concurrent-kitchen-migration-invalidated-a-d01-build-snapshot). These qualify the earlier “Incidents: none” handoffs; the incident log owns findings, corrections and pending review. No new execution or policy changes.
