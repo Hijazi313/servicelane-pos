@@ -2,7 +2,7 @@
 
 Parent: [global tracker](../TRACKER.md). Plan: [README](README.md). Specification: [spec](spec.md). Decisions: [decisions](decisions.md).
 
-Status: proposed; planning task complete. Active implementation phase: none. Solo owner: primary agent.
+Status: BP-00 contract design complete for review; blocked on fiscal development-mode decision/acceptance before source entry. Active implementation phase: none. Coordinator: primary agent; [read-only reviews](agent-collaboration.md).
 
 ## Planning authorization — 2026-10-25
 
@@ -21,20 +21,20 @@ Assignment: this checkout `/Users/macbookpro/Documents/personal/restaurant-pos-c
 
 | Task / phase | Status | Exit / expected evidence |
 | --- | --- | --- |
-| Planning: verify entry and define smallest candidate | Complete | Entry inspection above; [BP-R01–06 and BP-A01–10](spec.md#acceptance-criteria), boundaries and decision recommendations documented |
-| BP-00: resolve scope/business decisions and concrete contracts | Proposed | BP-D01–06 recommendations approved; fiscal development mode unresolved; concrete contracts and explicit source authorization still required |
-| BP-01: approved source/offline delivery | Proposed; inactive | Criteria BP-A01–10 mapped to focused offline evidence with persistence gaps explicit; no database run or user acceptance inferred |
+| Planning: verify entry and define smallest candidate | Complete | Entry inspection above; [BP-R01–06 and BP-A01–14](spec.md#acceptance-criteria), boundaries and decision recommendations documented |
+| BP-00: resolve scope/business decisions and concrete contracts | Blocked on owner fiscal-mode decision/acceptance; contract design complete | BP-D01–06 recommendations approved; seven exact contracts/review reconciled; mode unresolved, no BP-01 activation |
+| BP-01: approved source/offline delivery | Proposed; inactive | Criteria BP-A01–14 mapped to focused offline evidence with persistence gaps explicit; no database run or user acceptance inferred |
 | BP-02: bounded persistence verification | Proposed objective; inactive | Later reviewed target-specific procedure and renewed disposable/exclusive reservation; concurrency/rollback/fresh-process/owned cleanup evidence; separate user acceptance |
 
 ## Current handoff
 
-Planning documents complete; BP-D01–06 recommendations approved for the bounded development scope by the user in this chat on 2026-10-25. Settings/defaults are now defined in the specification; concrete contracts, fiscal rules/synthetic-only mode and implementation authorization remain unresolved. Local-only topic checkpoint; publication unauthorized. Documentation review covers changed scope, relative links and whitespace only; no tests/builds, installation or database access. No accepted Orders/Kitchen work reopened or rerun. Module docs are intentionally not scaffolded before source entry; global module index links this proposal without claiming a capability.
+BP-00 settings and seven HTTP contract designs complete for review. Three independent read-only reviews reconciled; [canonical contracts](spec.md#bp-00-http-contracts--2026-10-26) define typed inputs/outputs, validation, access/CSRF, limits, semantic errors, shared wiring, revisions/replay, money and acceptance BP-A01–14. BP-D01–06 development recommendations remain approved; no tax rule/mode/source approval inferred. Local-only branch; publication unauthorized. Upstream accepted evidence, seven ledgers and pending incident reviews unchanged.
 
-Next action: choose actual fiscal policy versus explicitly synthetic-only development with operational settlement disabled, then authorize the bounded source scope below. Do not request repeat approval of BP-D01–06’s settled development recommendations. BP-00 contract completion must precede source edits; material unresolved choices stop dependent work.
+One decision request: choose confirmed actual fiscal policy versus explicitly synthetic-only source/offline development with operational settlement disabled (recommended while actual rules are unresolved). Then approve the completed contract design and bounded source scope below; do not repeat settled BP-D01–06 approvals. No independent technical-contract blocker remains after review. BP-00 is not marked accepted/complete while its material fiscal-mode gate is unresolved.
 
 Exact requested implementation authorization, **not granted by this plan**:
 
-> Approve the proposed BP-01 full-cash development scope and record my answers to BP-D01–06, including approved fiscal policy or explicitly synthetic-only development with operational settlement disabled. Authorize completion of BP-00 concrete contracts, then BP-01 source implementation for assessment, atomic full cash settlement and known-order readback; the narrow Orders-owned financial projection/public provider; approved Billing settings/revision history and narrow Business display edit/projection; migration source generation/review without execution; affected documentation relocation/upkeep; focused existing offline checks and meaningful new focused cases; and local Conventional Commits on the suitable topic branch. Preserve accepted upstream behavior/evidence and all seven ledgers. No installation, database/environment access, migration execution, accepted Orders/Kitchen reruns, push/PR/merge, deployment, operational use or BP-02 activation. Stop for any material unresolved policy or changed cross-module contract.
+> Accept the BP-00 settings/HTTP contract design and record the selected fiscal development mode: [confirmed actual policy and applicability, or explicitly synthetic-only source/offline development with operational settlement disabled]. Authorize BP-01 source implementation for the seven specified routes: nonpersistent assessment, atomic full cash settlement, known-order readback, Billing policy administration and narrow Business display administration; the narrow Orders financial and Business display public interfaces with matching Nest exports; owned configuration/history/settlement storage and migration source generation/review without execution; affected documentation relocation/upkeep; focused existing offline checks and meaningful new BP-A01–14 cases; local Conventional Commits on the suitable topic branch. For synthetic-only mode, isolate synthetic values to offline fixtures and do not activate live settlement; make that source/wiring boundary explicit before edits. Preserve accepted Orders/Kitchen contracts/evidence and all seven ledgers. No installation, environment/database access, migration execution, accepted Orders/Kitchen reruns, push/PR/merge, deployment, operational use or BP-02 activation. Stop for a material unresolved policy or changed cross-module contract.
 
 Separate future permissions: BP-02 preparation/execution, development acceptance, publication/integration and operational/release validation. Existing upstream execution permissions do not transfer.
 
@@ -42,6 +42,21 @@ Incidents: none in this planning task. [Existing incident reviews](../../quality
 
 ## Settings definition — 2026-10-26
 
+Historical settings checkpoint; the subsequent contract-planning result below supersedes its next-action wording.
+
 User authorized defining the exact recommended settings/defaults. Completed documentation: typed tax policy, no assumed fiscal values, explicit calculation/rounding rules, existing Business display settings, administrator authorization, revision/history, settlement snapshots and BP-A08–10. Actual tax rules and synthetic-only runtime mode remain undecided; implementation inactive. Source-scope additions and ownership refinement are recorded in BP-D07.
 
 Completion shape: reviewable settings specification, not runnable configuration. Next: complete BP-00 concrete contracts and confirm fiscal development mode before source entry. Only documentation links/diff/whitespace reviewed; no tests, build, environment/database access, installation or publication. Accepted Orders/Kitchen evidence, seven ledgers and incident reviews preserved. Incidents: none this task; existing 21 pending reviews unchanged.
+
+## BP-00 contract-planning authorization and result — 2026-10-26
+
+User explicitly authorized completion of Billing contract documentation with three independent read-only sub-agents, primary-only writes/Git, and local focused commits. Verified checkout `codex/billing-planning` at `e936bdc`, tracked clean, only the seven preserved untracked ledgers; existing integration base remains `d75ac92`. No rebase/merge/fetch/source action required or inferred. [Assignments](agent-collaboration.md) record shared-checkout ownership and restrictions.
+
+| Review / evidence | Result and reconciliation |
+| --- | --- |
+| Settings/Business independent source review | No blocking contradiction after note-as-audit and tuple-wide display revision clarified; new Business operations/history/provider exports remain prerequisites |
+| HTTP/shared wiring independent source review | No blocking contradiction after POST assessment selected using actual runAuthorized CSRF/session semantics; seven strict methods, views, error/size/recovery contracts defined |
+| Money/retry/concurrency independent source review | No blocking contradiction; replay ordering, reset-policy precedence, coherent assessment ordering and singular cash aggregate/uniqueness clarified |
+| Primary REST design checklist/diff/local-link/whitespace review | Design covers applicable checklist; no collection/pagination. Static document checks only; executed DTO/HTTP/type/serialization/DB evidence absent |
+
+All required independent contract planning is delivered; remaining material gate is the one owner fiscal-mode decision above plus acceptance/source authorization. BP-01/BP-02 remain inactive. No test/build, dependency/runtime installation, environment/database access, migration, publication or deployment. No upstream scope reopened. Temporary runtime artifacts: none. Incidents: none in this work; 21 existing pending reviews preserved, no closure/prevention-policy change.
