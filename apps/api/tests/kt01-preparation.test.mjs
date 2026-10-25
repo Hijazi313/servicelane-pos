@@ -45,7 +45,7 @@ test('overlap releases and settles both operations even when contention observat
 });
 test('real Kitchen API composition initializes without opening a connection', async () => {
   const { createRuntime, createHttp } = await import('./kt01-runtime.mjs'); let calls = 0;
-  const runtime = await createRuntime({ query() { calls++; throw new Error(); }, connect() { calls++; throw new Error(); } });
+  const runtime = await createRuntime({ query() { calls++; throw new Error(); }, connect() { calls++; throw new Error(); } }, 'kt01.synthetic.contender');
   const http = await createHttp(runtime); await http.app.close(); assert.equal(calls, 0);
 });
 test('real fixture and K01/K02 orchestration execute with existing rollback-capable offline doubles', async () => {
@@ -73,4 +73,39 @@ test('cleanup refuses mismatched ownership before deleting anything', async () =
   const db = drizzle({ client: { query: async config => { const text = typeof config === 'string' ? config : config.text; statements.push(text); return { rows: text.startsWith('select name') ? [{ name: 'unrelated' }] : [] }; } } });
   await assert.rejects(cleanup(db, { businessId: randomUUID(), setupCommitted: true }, 'kt01.synthetic'));
   assert.ok(statements.includes('rollback')); assert.ok(statements.every(text => !text.startsWith('delete')));
+});
+
+test('transaction-local contender marker precedes the real Access lock and failed marking prevents work', async () => {
+  const { namedTransactions } = await import('./kt01-runtime.mjs');
+  const { PostgresAccessStore } = await import('../dist/orders-check/modules/authentication/infrastructure/access-store.js');
+  const { PgDialect } = await import('drizzle-orm/pg-core');
+  const dialect = new PgDialect(), statements = [];
+  let rejectMarker = false, transactions = 0;
+  const tx = { execute: async query => {
+    const compiled = dialect.sqlToQuery(query); statements.push(compiled);
+    if (rejectMarker) throw new Error('private-marker-error');
+    return { rows: [] };
+  } };
+  const db = await namedTransactions({ transaction: async work => { transactions++; return work(tx); } }, 'kt01.synthetic.contender');
+  const access = new PostgresAccessStore({ db });
+  await access.run(async () => { statements.push({ sql: 'work' }); });
+  assert.match(statements[0].sql, /set_config\('application_name',\$1,true\)/);
+  assert.deepEqual(statements[0].params, ['kt01.synthetic.contender']);
+  assert.match(statements[1].sql, /pg_advisory_xact_lock/); assert.equal(statements[2].sql, 'work');
+  rejectMarker = true; statements.length = 0;
+  await assert.rejects(access.run(async () => { throw new Error('work must not run'); }), /private-marker-error/);
+  assert.equal(statements.length, 1); assert.equal(transactions, 2);
+});
+
+test('failed contention reports its exact safe step and releases both operations', async () => {
+  const steps = [], store = { insert: async () => 'stored' }; let settled = 0;
+  const original = store.insert;
+  const error = Object.assign(new Error('private SQL and proofs'), { code: 'ECONNRESET' });
+  await assert.rejects(overlap({ store, method: 'insert', first: async () => { await store.insert('tx'); settled++; },
+    second: async () => { settled++; }, observe: async () => { throw error; }, progress: step => steps.push(step) }), value => value === error);
+  assert.deepEqual(steps, ['holder-write', 'contender-start', 'contention-observation']);
+  assert.equal(store.insert, original); assert.equal(settled, 2);
+  assert.deepEqual(failure(error, 'K01'), { stage: 'K01', category: 'operation-failed', code: 'ECONNRESET' });
+  assert.equal(failure({ code: 'KT_CONTENTION_NOT_OBSERVED' }, 'K01').code, 'KT_CONTENTION_NOT_OBSERVED');
+  assert.doesNotMatch(JSON.stringify(failure(Object.assign(new Error('private proof'), { code: 'private-proof' }), 'K01')), /private/);
 });

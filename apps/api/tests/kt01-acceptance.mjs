@@ -71,7 +71,7 @@ try {
       }
     });
     ledger.setupCommitted = true; await saveLedger();
-    const other = await createRuntime(two);
+    const other = await createRuntime(two, tag + '.contender');
     const observe = async context => {
       const tx = transactionDatabase(context), pid = (await tx.execute(sql`select pg_backend_pid() as pid`)).rows[0].pid, deadline = Date.now() + 10000;
       while (Date.now() < deadline) {
@@ -80,10 +80,11 @@ try {
         if (seen.rows[0].blocked) return { observedAdvisoryWait: true };
         await new Promise(done => setImmediate(done));
       }
-      throw new Error('Required contention not observed');
+      throw Object.assign(new Error('Required contention not observed'), { code: 'KT_CONTENTION_NOT_OBSERVED' });
     };
     stage = 'cases';
     const restart = await runCases({ runtime, other, one, proof, otherProof, ledger, tag, sql, transactionDatabase, saveLedger, observe,
+      progress: (id, step) => { report.lastCaseStep = { id, step }; },
       record: (id, details) => { assert.equal(idleError, false); report.results[report.results.findIndex(row => row.id === id)] = { id, ...details }; } });
     stage = 'fresh-process'; await close(two); await close(one);
     await runChild(spawn, process.execPath, `${root}/apps/api/tests/kt01-restart.mjs`, process.env, { proof, ...restart });

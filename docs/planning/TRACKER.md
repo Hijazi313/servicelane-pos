@@ -140,3 +140,8 @@ Supervised diagnosis identified restricted-sandbox DNS failure; read-only networ
 ## KT-02 offline diagnosis — 2026-10-25
 
 [Owning assessment/proposed repair](../../apps/api/src/modules/kitchen/docs/features/preparation/phase-tracker.md#kt-02-offline-diagnosis--proposed-repair--2026-10-25): seven existing preparation checks passed without database access. Connection-startup versus transaction-local contender labeling is a plausible observer weakness; exact K01 failure remains unknown. Proposed scoped harness instrumentation/diagnostics and post-0005 procedure require implementation authorization; no database run is inferred. Capability/module summaries reconciled with applied 0005 and verified cleanup. Historical ledgers and incident reviews preserved.
+
+
+## KT-02 harness repair — 2026-10-25
+
+User-authorized connection-tracking/failure-reporting repair delivered in Kitchen test instrumentation; [owning scope/evidence](../../apps/api/src/modules/kitchen/docs/features/preparation/phase-tracker.md#kt-02-harness-repair--2026-10-25). Nine focused offline checks passed. Contender identity is transaction-local before Access lock admission; reports retain safe case/step/codes and per-case contention state. No database access or application changes; historical K01 cause remains unconfirmed. Next: reviewed post-0005 procedure and separate new execution authorization. KT-02/Kitchen acceptance remain incomplete; all historical evidence/ledgers and incident reviews preserved.

@@ -1,8 +1,16 @@
 // Offline-importable refusal, inspection and child controls; no config or driver imports.
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
-import { sha256, counts, failure } from './or01-controls.mjs';
-export { sha256, counts, failure };
+import { sha256, counts, failure as sharedFailure } from './or01-controls.mjs';
+export { sha256, counts };
+export function failure(error, stage) {
+  const result = sharedFailure(error, stage);
+  const allowed = ['ENOTFOUND', 'EAI_AGAIN', 'ECONNREFUSED', 'ECONNRESET', 'ETIMEDOUT', 'KITCHEN_UNAVAILABLE', 'ACCESS_UNAVAILABLE', 'STALE_TICKET', 'ORDER_NOT_FOUND', 'KT_CONTENTION_NOT_OBSERVED', 'KT_WRITE_BARRIER_MISSING'];
+  for (const candidate of [error, error?.cause, error?.cause?.cause]) {
+    if (allowed.includes(candidate?.code)) { result.code = candidate.code; break; }
+  }
+  return result;
+}
 export const tags = ['0000_business_bootstrap', '0001_staff_access', '0002_login_reservations', '0003_menu_catalogue', '0004_order_capture', '0005_kitchen_handoff'];
 export function authorize(env, version) {
   if (!['baseline', 'execute'].includes(env.KT01_MODE) || env.KT01_TEST_TARGET !== 'YES' || env.KT01_EXCLUSIVE !== 'YES'

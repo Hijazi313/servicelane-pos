@@ -1,6 +1,8 @@
-# KT-01 PostgreSQL verification — prepared, unrun
+# KT-01 PostgreSQL verification — original post-0004 procedure
 
-Authorization: preparation/offline harness checks/local commits only (2026-10-25). **No database access or execution is authorized.** [Tracker](phase-tracker.md) owns status; [specification](spec.md#acceptance-criteria) owns KT-A01–06. OR-01 remains accepted/closed. Historical Orders/Menu runners and ledgers are not reused as execution permission.
+**Current state (2026-10-25):** the authorized run applied 0005, failed K01 and verified owned cleanup with sixteen empty tables and six intact history entries. The commands below describe the historical post-0004 run and must not be rerun against this target. Connection-tracking/failure-reporting repair is offline-verified only; a reviewed post-0005 procedure and fresh execution authorization are still required. See [current result and repair](phase-tracker.md#kt-02-harness-repair--2026-10-25).
+
+Historical preparation authorization: preparation/offline harness checks/local commits only (2026-10-25). **No database access or execution is authorized.** [Tracker](phase-tracker.md) owns status; [specification](spec.md#acceptance-criteria) owns KT-A01–06. OR-01 remains accepted/closed. Historical Orders/Menu runners and ledgers are not reused as execution permission.
 
 ## Proposed target and baseline gates
 
@@ -59,3 +61,8 @@ Flags are refusal controls, not authorization. If the runtime is absent, compile
 ## Preparation evidence and limits
 
 Seven focused offline preparation checks pass: parent/child refusal before config loading; read-only identity mismatch release; child marker/exit/timeout/overflow; barrier restoration/settlement on observation failure; real Kitchen controller/adapters composition with zero connection calls; K01/K02 fixture/orchestration using existing rollback-capable doubles; ownership rejection before cleanup deletes. Test-only duplicate-insert behavior was aligned with the real adapter's ON CONFLICT semantics. Syntax/link/whitespace checks are preparation evidence only. K03/K04/D01 orchestration and full baseline/migration/cleanup success remain unexecuted on PostgreSQL. No application implementation, migration or dependency changed. Feature acceptance, KT-02 activation, database execution and publication remain separate decisions.
+
+
+## Offline harness repair — 2026-10-25
+
+The contender's Access transactions now set `application_name` transaction-locally before acquiring the existing advisory lock, avoiding reliance on a startup label surviving hosted transaction pooling. No application source, timeout, lock or acceptance gate changed. Reports add case/step identifiers, per-failed-case contention observation and allowlisted network/domain/harness codes while suppressing raw messages/proofs. Missing write barriers and unobserved contention have distinct safe codes. This improves identification and diagnosis; it does not establish the cause of the historical K01 failure or prove successful PostgreSQL concurrency. Nine focused offline checks pass, including real Access lock ordering, refusal on marker failure, safe diagnostics and barrier settlement. No database run performed for this repair.

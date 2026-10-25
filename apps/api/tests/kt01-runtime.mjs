@@ -1,7 +1,20 @@
 // Composition only; no configuration reads, driver construction or connections at import.
 import { createRuntime as ordersRuntime } from './or01-runtime.mjs';
-export async function createRuntime(pool) {
+export async function namedTransactions(database, name) {
+  const { sql } = await import('drizzle-orm');
+  return { transaction: work => database.transaction(async tx => {
+    await tx.execute(sql`select set_config('application_name',${name},true)`);
+    return work(tx);
+  }) };
+}
+export async function createRuntime(pool, transactionName) {
   const runtime = await ordersRuntime(pool);
+  if (transactionName) {
+    const { AccessService } = await import('../dist/orders-check/modules/authentication/public.js');
+    const { PostgresAccessStore } = await import('../dist/orders-check/modules/authentication/infrastructure/access-store.js');
+    const { NodePasswordHasher } = await import('../dist/orders-check/modules/authentication/infrastructure/password-hasher.js');
+    runtime.access = new AccessService(new PostgresAccessStore({ db: await namedTransactions(runtime.database.db, transactionName) }), runtime.business, new NodePasswordHasher());
+  }
   const { OrderPreparationService } = await import('../dist/orders-check/modules/orders/public.js');
   const { PostgresKitchenStore } = await import('../dist/orders-check/modules/kitchen/infrastructure/postgres-kitchen-store.service.js');
   const { KitchenService } = await import('../dist/orders-check/modules/kitchen/application/kitchen.service.js');

@@ -1,18 +1,21 @@
 // Manual acceptance case orchestration; importing never accesses configuration/DB.
 import assert from 'node:assert/strict';
 import { randomUUID } from 'node:crypto';
+import { failure } from './kt01-controls.mjs';
 const deferred = () => { let resolve; const promise = new Promise(done => { resolve = done; }); return { promise, resolve }; };
-export async function overlap({ store, method, first, second, observe }) {
+export async function overlap({ store, method, first, second, observe, progress = () => {} }) {
   const written = deferred(), release = deferred(), original = store[method];
   let context, firstPromise, secondPromise;
   store[method] = async (...args) => { const result = await original.apply(store, args); context = args.at(-1); written.resolve(); await release.promise; return result; };
   try {
-    firstPromise = first(); firstPromise.catch(() => {});
-    await Promise.race([written.promise, firstPromise.then(() => { throw new Error('Missing write barrier'); })]);
-    secondPromise = second(); secondPromise.catch(() => {});
-    const observation = await observe(context);
+    progress('holder-write'); firstPromise = first(); firstPromise.catch(() => {});
+    await Promise.race([written.promise, firstPromise.then(() => { throw Object.assign(new Error('Missing write barrier'), { code: 'KT_WRITE_BARRIER_MISSING' }); })]);
+    progress('contender-start'); secondPromise = second(); secondPromise.catch(() => {});
+    progress('contention-observation'); const observation = await observe(context);
+    progress('contention-observed');
     release.resolve();
-    return { results: await Promise.all([firstPromise, secondPromise]), ...observation };
+    progress('operations-settle'); const results = await Promise.all([firstPromise, secondPromise]);
+    return { results, ...observation };
   } finally {
     release.resolve(); store[method] = original;
     await Promise.allSettled([firstPromise, secondPromise].filter(Boolean));
@@ -37,15 +40,25 @@ export async function runCases(ctx) {
       { selection: { offeringId: combo.id, choices: [{ groupId: combo.choiceGroups[0].id, optionIds: [combo.choiceGroups[0].options[0].id] }] }, quantity: 3, expectedUnitMinor: '2100' }],
     customer: { name: 'SyntheticPrivateGuest' }, instructions: ' Pack separately ' });
   const capture = async () => { const order = await r.orders.create(proof, body()); ledger.orderIds.push(order.id); await ctx.saveLedger(); return order; };
-  const test = async (id, work) => { try { const details = await work(); ctx.record(id, { status: 'passed', ...details }); } catch (error) { ctx.record(id, { status: 'failed' }); throw error; } };
+  let currentStep, currentCase, contentionObserved;
+  const step = value => {
+    currentStep = value;
+    if (value === 'contention-observed') contentionObserved = true;
+    ctx.progress?.(currentCase, value);
+  };
+  const test = async (id, work) => {
+    currentCase = id; contentionObserved = false; step('case-start');
+    try { const details = await work(); ctx.record(id, { status: 'passed', ...details }); }
+    catch (error) { ctx.record(id, { status: 'failed', step: currentStep, contentionObserved, failure: failure(error, id) }); throw error; }
+  };
   const order = await capture(); let ticket;
   await test('K01', async () => {
     const result = await overlap({ store: r.kitchenStore, method: 'insert', first: () => r.kitchen.dispatch(proof, { orderId: order.id }),
-      second: () => other.kitchen.dispatch(otherProof, { orderId: order.id }), observe: ctx.observe });
-    const [a, b] = result.results; assert.deepEqual(a, b); ticket = a;
+      second: () => other.kitchen.dispatch(otherProof, { orderId: order.id }), observe: ctx.observe, progress: step });
+    step('dispatch-readback'); const [a, b] = result.results; assert.deepEqual(a, b); ticket = a;
     assert.equal((await rowsFor(order.id)).length, 1);
     assert.deepEqual(await other.kitchen.dispatch(otherProof, { orderId: order.id }), ticket); // discard/retry acknowledgement model
-    assert.equal(ticket.preparation.lines[1].quantity * ticket.preparation.lines[1].components[0].quantity, 6);
+    step('preparation-oracle'); assert.equal(ticket.preparation.lines[1].quantity * ticket.preparation.lines[1].components[0].quantity, 6);
     assert.equal(ticket.preparation.lines[0].name, tag + '.meal');
     assert.equal(ticket.preparation.lines[0].components[0].variantName, 'Regular');
     assert.deepEqual(ticket.preparation.lines[0].addOns, [{ id: meal.addOnGroups[0].options[0].id, name: 'Sauce' }]);
@@ -54,9 +67,9 @@ export async function runCases(ctx) {
     assert.equal(ticket.preparation.instructions, 'Pack separately'); assert.equal(ticket.preparation.lines[0].instructions, 'No salt');
     assert.doesNotMatch(JSON.stringify(ticket.preparation), /SyntheticPrivateGuest|surcharge|unitMinor|totalMinor|currencyCode|policy|retryKey/);
     const stored = (await rowsFor(order.id))[0]; assert.deepEqual(stored.preparation, ticket.preparation); assert.equal(stored.dispatched_by, ledger.accountIds[0]);
-    const duplicate = await run(authorized => r.kitchenStore.insert(scope, { ...ticket, id: randomUUID(), dispatchedBy: authorized.actorId }, authorized.transaction));
+    step('duplicate-adapter-insert'); const duplicate = await run(authorized => r.kitchenStore.insert(scope, { ...ticket, id: randomUUID(), dispatchedBy: authorized.actorId }, authorized.transaction));
     assert.equal(duplicate.id, ticket.id); assert.equal((await rowsFor(order.id)).length, 1);
-    assert.deepEqual(await r.orders.get(proof, order.id), order);
+    step('orders-history'); assert.deepEqual(await r.orders.get(proof, order.id), order);
     return { observedAdvisoryWait: result.observedAdvisoryWait, committedTickets: 1, sameScopeDuplicateReturnsOriginal: true };
   });
   await test('K02', async () => {
@@ -73,8 +86,8 @@ export async function runCases(ctx) {
   });
   await test('K03', async () => {
     const result = await overlap({ store: r.kitchenStore, method: 'advance', first: () => r.kitchen.advance(proof, ticket.id, { state: 'preparing', expectedRevision: 0 }),
-      second: () => other.kitchen.advance(otherProof, ticket.id, { state: 'preparing', expectedRevision: 0 }), observe: ctx.observe });
-    assert.deepEqual(result.results[0], result.results[1]);
+      second: () => other.kitchen.advance(otherProof, ticket.id, { state: 'preparing', expectedRevision: 0 }), observe: ctx.observe, progress: step });
+    step('transition-readback'); assert.deepEqual(result.results[0], result.results[1]);
     const ready = await other.kitchen.advance(otherProof, ticket.id, { state: 'ready', expectedRevision: 1 }); assert.equal(ready.revision, 2);
     assert.deepEqual(await r.kitchen.advance(proof, ticket.id, { state: 'ready', expectedRevision: 1 }), ready);
     await assert.rejects(r.kitchen.advance(proof, ticket.id, { state: 'preparing', expectedRevision: 0 }), error => error.code === 'STALE_TICKET');
