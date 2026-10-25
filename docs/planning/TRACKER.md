@@ -70,7 +70,7 @@ User authorized committing the reviewed staged changes and creating a PR from `c
 - Approved topology: one business per LAN installation, dedicated local PostgreSQL, locally served client assets and one maintained codebase; explicit user approval on 2026-10-12. [Decision and rationale](../architecture/vendor-isolation-proposal.md).
 - Current activity: Menu/MN-00/MN-01 accepted and integrated through [PR #9](https://github.com/Hijazi313/servicelane-pos/pull/9), squash `b09770e`. Orders OR-01 implementation/evidence is integrated through [PR #10](https://github.com/Hijazi313/servicelane-pos/pull/10), squash `2daeb6c`, under the user-requested workflow completion; [Orders phase tracker](../../apps/api/src/modules/orders/docs/features/capture/phase-tracker.md) owns scope, progress and verification limits. Authorized OR-01 integration run passed all eight cases, including concurrency and two fresh API processes; cleanup verified fifteen empty application tables and migration 0004 remains applied. User explicitly accepted OR-01 on 2026-10-21 under the recorded backend development scope/evidence limits; [closeout](../../apps/api/src/modules/orders/docs/features/capture/phase-tracker.md#acceptance-and-closeout--2026-10-21). No next phase, deployment or database rerun activated.
 - Tooling review: user-authorized [HTTP boundary check](../../apps/api/scripts/README.md#github-actions-verification--2026-10-21) is published and exercised on GitHub; the separately authorized [Authentication repair](business-access/phase-tracker.md#remote-verification--2026-10-21) is pushed at ba72346 and both GitHub workflows pass (seven checker tests; 15 files, zero findings). Integrated through PR #10; exact-head PR checks and the merged main-branch check passed. OR-01 backend development acceptance is recorded in its owning tracker; release acceptance remains separate.
-- Current phase: OR-01 complete and user-accepted under its recorded development scope; KT-01 source implementation is authorized; [Kitchen tracker](../../apps/api/src/modules/kitchen/docs/features/preparation/phase-tracker.md) owns source/offline delivery and the current branch handoff; KT-02 technical verification is complete: K01–K04 evidence and final frozen-build D01 passed, cleanup passed; Kitchen backend development scope is user-accepted; publication and squash merge are user-authorized; PR #16 owns integration state. BA-01 complete; BA-02 complete under [user acceptance](business-access/phase-tracker.md#ba-02-acceptance--2026-10-17); BA-D01–06 approved; BA-03-T01 complete and [user-accepted](business-access/phase-tracker.md#ba-03-acceptance-and-closeout--2026-10-17) under its revised development scope; two-database execution deferred, unrun.
+- Current phase: Orders OR-01 and Kitchen backend development scopes remain accepted and closed. Kitchen PR #16 is merged as `d75ac92`, verified locally and through GitHub metadata. Current work is [Billing/Payments planning](billing/phase-tracker.md) only; BP-00/BP-01 remain proposed, with no implementation or database authorization. BA-01/02/03 acceptance and deferred two-database validation remain unchanged.
 - Deferred validation remains in the [canonical foundation handoff](project-foundation/phase-tracker.md#current-handoff--2026-10-12) and [acceptance record](../acceptance/project-foundation.md).
 
 ## Active work branches
@@ -79,14 +79,13 @@ Current designations follow [CONTRIBUTING](../../CONTRIBUTING.md#active-work-and
 
 | Phase / task | Branch | Checkout | Owner | Integration base | Publication / blocker | Owning tracker |
 | --- | --- | --- | --- | --- | --- | --- |
-
-No next feature workstream is active; accepted Kitchen integration is recorded in [PR #16](https://github.com/Hijazi313/servicelane-pos/pull/16).
+| Billing/Payments planning only | `codex/billing-planning` | `/Users/macbookpro/Documents/personal/restaurant-pos-custom` | Primary agent | `main` `d75ac92` | Local only — publication unauthorized; BP-D01–06 unresolved | [Billing tracker](billing/phase-tracker.md) |
 
 ## Current planning handoff — 2026-10-25
 
 BA-01/02/03 accepted development scope and historical execution permissions are owned by the [joint BA tracker](business-access/phase-tracker.md). They do not authorize new Menu or database work.
 
-Current handoff: Kitchen backend development scope is accepted and closed. [PR #16](https://github.com/Hijazi313/servicelane-pos/pull/16) owns actual merge/check state and SHA; user authorized squash merge after exact-head checks. Synchronize local main after integration. No next module/phase is activated; the next material decision is separately scoped planning. No database rerun, installation or deployment. Preserve seven ownership ledgers, reports and pending incident reviews; operational/release limits remain unchanged.
+Current handoff: [Billing/Payments proposal](billing/README.md) recommends one immutable bill and one full cash settlement per captured takeaway order, conditional on [owner decisions](billing/decisions.md). [Owning tracker](billing/phase-tracker.md) records planning authorization, exact implementation permission needed and evidence limits. No implementation phase activated. Orders/Kitchen stay accepted/closed; seven untracked ledgers, historical reports, operational deferrals and pending incident reviews preserved. No accepted work rerun.
 
 ## Proposed foundation follow-ups — 2026-10-12
 
@@ -110,7 +109,7 @@ Project foundation precedes Business/Branch and Authentication/Access, which pre
 | 3 | Menu | complete development scope; merged | [MN-00 → MN-01 plan](../../apps/api/src/modules/menu/docs/README.md); accepted, PR #9 squash `b09770e`; release limits retained |
 | 4 | Orders | OR-01 complete; accepted backend development scope | [Specification](../../apps/api/src/modules/orders/docs/features/capture/spec.md) / [phase tracker](../../apps/api/src/modules/orders/docs/features/capture/phase-tracker.md); bounded persistence verified; [acceptance/closeout](../../apps/api/src/modules/orders/docs/features/capture/phase-tracker.md#acceptance-and-closeout--2026-10-21) |
 | 5 | Kitchen | Backend development scope complete; user-accepted | [KT-01 handoff / completed KT-02](../../apps/api/src/modules/kitchen/docs/features/preparation/phase-tracker.md); migration 0005 applied; accepted bounded technical evidence; integration record PR #16 |
-| 6 | Billing and payments | proposed | Not activated |
+| 6 | Billing and payments | proposed; planning delivered | [Plan](billing/README.md) / [tracker](billing/phase-tracker.md); BP-00 decisions pending, implementation inactive |
 | 7 | Cashier shifts | proposed | Not activated |
 | 8 | Inventory | proposed | Stock model unresolved |
 | 9 | Reports | proposed | Not activated |
