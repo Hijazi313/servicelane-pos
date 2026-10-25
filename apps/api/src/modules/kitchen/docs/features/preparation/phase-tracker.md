@@ -35,7 +35,7 @@ This planning increment provides a reviewable conditional backend scope and a na
 
 ## Current handoff
 
-The [post-0005 execution result](#post-0005-execution-result--2026-10-25) owns current evidence: K01–K04 passed, fresh-process stage failed and D01 is unverified; owned cleanup passed. The one-run permission is consumed. Next action: authorize bounded offline D01 diagnosis; no retry, source repair, database access or later workflow is inferred. Preserve the four local ownership ledgers and all reports, including prior evidence and pending incident reviews. Active branch `codex/kitchen-handoff`; local evidence/repair/preparation remains unpublished. OR-01 remains accepted/closed; Kitchen acceptance is pending. Historical handoffs below retain their original limits.
+The [post-0005 execution result](#post-0005-execution-result--2026-10-25) owns current evidence: K01–K04 passed, fresh-process stage failed and D01 is unverified; owned cleanup passed. The one-run permission is consumed. Next action: authorize bounded offline D01 diagnosis; no retry, source repair, database access or later workflow is inferred. Preserve the four local ownership ledgers and all reports, including prior evidence and pending incident reviews. Active branch `codex/kitchen-handoff`; local evidence/repair/preparation remains unpublished. OR-01 remains accepted/closed; Kitchen acceptance is pending. Historical handoffs below retain their original limits. Process incident: [INC-20261025-02](../../../../../../../../docs/quality/agent-incidents.md#inc-20261025-02--kt-02-follow-ups-fragmented-progress-and-required-repeated-user-coordination); recording does not authorize D01 work or change execution gates.
 
 
 ## Technical review — 2026-10-23
