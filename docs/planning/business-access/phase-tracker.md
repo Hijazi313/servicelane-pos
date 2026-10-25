@@ -1,6 +1,6 @@
 # Business/Branch and Authentication/Access — Joint phase tracker
 
-Parent: [global tracker](../TRACKER.md). Owner: primary agent; BA-02 assignments in [collaboration record](../../../apps/api/src/modules/authentication/docs/features/access/agent-collaboration.md).
+Parent: [global tracker](../TRACKER.md). Owner: primary agent; BA-02 assignments in [historical coordination](#ba-02-source-coordination--historical).
 Specifications: [Business/Branch](../../../apps/api/src/modules/business/docs/features/foundation/spec.md), [Authentication/Access](../../../apps/api/src/modules/authentication/docs/features/access/spec.md).
 Status: BA-01 complete, accepted on 2026-10-12. BA-02 complete, accepted by user on 2026-10-17 under the revised development acceptance scope below. BA-03-T01 complete and user-accepted on 2026-10-17 under the revised development scope; actual two-installation execution deferred, unrun.
 
@@ -37,7 +37,11 @@ Deliver lifecycle, versioned authentication/staff/context HTTP interfaces, sessi
 | BA-02-T02 | complete; user accepted 2026-10-17 | AA-AC02/03; injection/clock/CSRF/throttle/session checks; database/browser evidence deferred |
 | BA-02-T03 | complete; user accepted 2026-10-17 | AA-AC01/03/04; action/branch denial, transactional recheck and local recovery boundary |
 
-Completion shape: accepted backend development increment with scoped staging evidence; deferred verification and release limits are owned by [BA-02 acceptance and deferred verification](#ba-02-acceptance--2026-10-17). Assignment and shared-file ownership: [collaboration record](../../../apps/api/src/modules/authentication/docs/features/access/agent-collaboration.md). Preserve the three pre-existing planning-document edits; no Git index/branch/commit/push changes.
+Completion shape: accepted backend development increment with scoped staging evidence; deferred verification and release limits are owned by [BA-02 acceptance and deferred verification](#ba-02-acceptance--2026-10-17). Assignment and shared-file ownership: [historical coordination](#ba-02-source-coordination--historical). Preserve the three pre-existing planning-document edits; no Git index/branch/commit/push changes.
+
+## BA-02 source coordination — historical
+
+During source delivery on 2026-10-12, the primary agent owned application/HTTP contracts, composition, configuration, recovery, docs, migrations and combined verification. Sub-agents owned credential/hash/bootstrap separation and tests, and Authentication persistence/schema/HTTP tests. Shared files and final integration remained primary-owned; agents made no database calls or dependency changes. Source checks passed: 23 BA-02 tests and 12 BA-01 regressions. All assignments are complete; the accepted scope and deferred verification below govern current status. Future work needs fresh assignments and authorization.
 
 ## Phase and task IDs
 
@@ -107,7 +111,7 @@ Observed PostgreSQL version: 17.11. Runtime/migration connection settings were i
 
 - BA-01 remains accepted/closed. BA-02-T01/T02/T03 source is complete, awaiting acceptance; BA-02 is not closed. BA-03 remains inactive. All BA-D01–06 decisions and the dated review design were approved; runtime execution was not.
 - Source delivers `/api/v1` staff lifecycle, local login/session/CSRF/throttling, branch/action denial, revocation and operator recovery. HTTP origin/proxy configuration is explicit; no TLS/assets/frontend/Swagger or rollout packaging is delivered. [Current contracts](../../../apps/api/src/modules/authentication/docs/features/access/spec.md#source-contract-details--ba-02).
-- Existing three planning-document edits were preserved and extended. New source, focused tests, offline second migration/metadata and owning docs are uncommitted. No index/branch/commit/push operations. [Assignments](../../../apps/api/src/modules/authentication/docs/features/access/agent-collaboration.md) own agent file boundaries; primary reconciled source and final checks.
+- Existing three planning-document edits were preserved and extended. New source, focused tests, offline second migration/metadata and owning docs are uncommitted. No index/branch/commit/push operations. [Historical assignments](#ba-02-source-coordination--historical) own agent file boundaries; primary reconciled source and final checks.
 - No installation, database connection/write, migration application, provisioning, deployment, TLS trust change or real-browser test occurred. Staging is unchanged: first migration and six empty application tables. Existing BA-01 evidence remains historical and intact; its six-table acceptance harness must not be reused for BA-02.
 - Next action: review the [proposed staging acceptance plan and prompt](#ba-02-staging-acceptance-plan--2026-10-17); execution remains unauthorized. All three reported review findings have source corrections with focused evidence: [logout](#logout-review-correction--2026-10-15) and [remaining findings](#remaining-review-corrections--2026-10-17). Database execution still requires separate authorization. Include second migration, lifecycle/recovery, real races, worker/restart counters, cleanup and outage behavior; trusted-HTTPS browser acceptance and target-host hashing require their own operational prerequisites. Do not activate BA-03 or close BA-02 on source-only evidence.
 
