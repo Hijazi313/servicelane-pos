@@ -60,6 +60,10 @@ User explicitly authorized Nest ValidationPipe with class-validator/class-transf
 
 User authorized committing the reviewed staged changes and creating a PR from `codex/api-type-safety` to `main`. This publishes the preceding skill guidance, shared HTTP components and approved two-endpoint migration with Nest DTO validation. Existing 34-test, typecheck, boundary and lockfile-only evidence applies; no runtime changes since verification. Final documentation review reconciled stale descriptions of DTO field errors and parsing. Preserve both untracked Menu/Orders ledgers. Next: owner reviews the PR; merge remains unauthorized. Incident [INC-20261024-01](../quality/agent-incidents.md#inc-20261024-01--api-skill-guidance-required-repeated-user-led-specificity-and-correction) remains open; no new qualifying incident in publication work.
 
+## Kitchen persistence preparation — 2026-10-25
+
+[Bounded KT-01 procedure and harness](../../apps/api/src/modules/kitchen/docs/features/preparation/database-acceptance.md) prepared under documentation/test-instrumentation/local-commit authorization. Seven focused offline preparation checks passed; no database access, environment loading, migration execution, installation, publication or KT-02 activation. [Owning handoff](../../apps/api/src/modules/kitchen/docs/features/preparation/phase-tracker.md#persistence-verification-preparation--2026-10-25) records current limits and the next decision: authorize a read-only baseline on an explicitly designated reserved testing target before considering one execution.
+
 ## Current focus
 
 - Stage: Foundation F-01 remains complete; [acceptance and evidence limits](project-foundation/phase-tracker.md#closeout--2026-10-12).

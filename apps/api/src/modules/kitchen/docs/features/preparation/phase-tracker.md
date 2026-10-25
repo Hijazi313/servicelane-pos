@@ -35,7 +35,7 @@ This planning increment provides a reviewable conditional backend scope and a na
 
 ## Current handoff
 
-KT-01 source/offline increment is delivered in local commits; source push/PR/merge remains unauthorized. Next action: review the local diff and evidence, then separately authorize any source publication or KT-02 preparation desired. No database access/run or development acceptance is inferred. OR-01 remains accepted/closed. Both untracked ownership ledgers retain their entry hashes; pending incident reviews remain unchanged. Incidents: none in this implementation work; ordinary in-progress test setup corrections are not delivered defects or runtime evidence.
+KT-01 source/offline increment is delivered in local commits; source push/PR/merge remains unauthorized. Next action: review the prepared persistence procedure below and separately authorize the read-only baseline gate if desired. No database access/run or development acceptance is inferred. OR-01 remains accepted/closed. Both untracked ownership ledgers retain their entry hashes; pending incident reviews remain unchanged. Incidents: none in this implementation work; ordinary in-progress test setup corrections are not delivered defects or runtime evidence.
 
 
 ## Technical review — 2026-10-23
@@ -89,3 +89,14 @@ User authorized bringing the subsequently merged main changes into this feature 
 Main contributes PR #14 API guidance and PR #15 shared HTTP/DTO infrastructure plus the approved Menu-list/Orders-capture migration. Those contracts and dependencies are retained; dependencies were already locally present, with no installation. Kitchen endpoints remain unmarked, preserving their current contracts; adopting the new HTTP convention needs its own scoped review/authorization.
 
 Verification: fresh compilation and all 25 focused Orders/projection/Kitchen application/actual-HTTP/synthetic-SQL tests passed on existing Node 24.21.0; architecture scan passed (20 files, zero violations). No database access, migration execution, deployment, KT-02 or source push/PR/merge into main. Existing incident reviews are retained from main; Incidents: none from synchronization. Next action remains review of KT-01 on the combined branch before further authorization.
+
+
+## Persistence verification preparation — 2026-10-25
+
+User authorized the smallest bounded procedure/harness, necessary focused offline checks and local commits only. Verified checkout `codex/kitchen-handoff` at `2728713`; both expected untracked ledgers preserved. The [prepared procedure](database-acceptance.md) owns baseline gates, five bounded observations, single 0005 migration proposal, synthetic fixture ownership, cleanup, stop conditions, evidence limits and exact future commands. Current database state is unknown; no target connection or `.env` read occurred.
+
+Delivered manual-only kt01 parent/controls/runtime/cases/cleanup/restart instrumentation and seven focused preparation checks. Reused Orders runtime composition and safe count/hash/failure helpers plus the corrected restart idle-error lifecycle; old Orders/Menu runners remain unchanged and unrun. The post-0004 gate requires a fresh reviewed target fingerprint before any execution; it does not assume historical cleanup is still current. Fresh-process proof uses Kitchen controllers and their unchanged contracts, not the obsolete Orders child payload expectations.
+
+Seven preparation checks passed using existing Node 24.21.0; syntax and documentation checks passed. These establish refusal/orchestration controls, not PostgreSQL correctness. No production source, migration, package/dependency, skills/templates or old report/ledger changed. Incidents: none in preparation; prior reviews remain pending.
+
+Next action: authorize only the read-only baseline inspection on an explicitly designated exclusively reserved testing target, review its sanitized report, then separately decide the one-run 0005/fixture/cleanup execution authorization. This preparation does not activate KT-02 or authorize database access, installation, provisioning, deployment or source publication.
