@@ -5,9 +5,9 @@ import { randomUUID } from 'node:crypto';
 import { spawnSync } from 'node:child_process';
 import { EventEmitter } from 'node:events';
 import { resolve } from 'node:path';
-import { authorize, baseline, runChild, failure } from './kt01-controls.mjs';
+import { authorize, baseline, runChild, failure, sha256 } from './kt01-controls.mjs';
 import { overlap } from './kt01-cases.mjs';
-const allowed = { KT01_MODE: 'execute', KT01_TEST_TARGET: 'YES', KT01_EXCLUSIVE: 'YES', KT01_EXPECTED_TARGET: 'a'.repeat(64) };
+const allowed = { KT01_SCHEMA: 'post-0005', KT01_MODE: 'execute', KT01_TEST_TARGET: 'YES', KT01_EXCLUSIVE: 'YES', KT01_EXPECTED_TARGET: 'a'.repeat(64) };
 test('parent and child refuse before config loading unless every explicit acknowledgement is present', () => {
   for (const key of Object.keys(allowed)) {
     const env = { ...allowed, [key]: '' }; assert.throws(() => authorize(env, 'v24.21.0'));
@@ -108,4 +108,70 @@ test('failed contention reports its exact safe step and releases both operations
   assert.deepEqual(failure(error, 'K01'), { stage: 'K01', category: 'operation-failed', code: 'ECONNRESET' });
   assert.equal(failure({ code: 'KT_CONTENTION_NOT_OBSERVED' }, 'K01').code, 'KT_CONTENTION_NOT_OBSERVED');
   assert.doesNotMatch(JSON.stringify(failure(Object.assign(new Error('private proof'), { code: 'private-proof' }), 'K01')), /private/);
+});
+
+test('post-0005 baseline requires exact history, schema, empty tables and releases read-only clients on refusal', async () => {
+  const { readFile } = await import('node:fs/promises');
+  const root = resolve(import.meta.dirname, '../../..');
+  const snapshot = JSON.parse(await readFile(`${root}/apps/api/migrations/meta/0005_snapshot.json`, 'utf8'));
+  const journal = JSON.parse(await readFile(`${root}/apps/api/migrations/meta/_journal.json`, 'utf8'));
+  const history = await Promise.all(journal.entries.map(async entry => ({ hash: sha256(await readFile(`${root}/apps/api/migrations/${entry.tag}.sql`)), created_at: String(entry.when) })));
+  const tables = Object.values(snapshot.tables);
+  async function attempt(defect) {
+    const statements = [], released = [];
+    const pool = pid => ({ connect: async () => ({ query: async (text, args) => {
+      statements.push(text);
+      if (text.startsWith('begin ') || text === 'rollback') return { rows: [] };
+      if (text.startsWith('select current_database')) return { rows: [{ database: 'synthetic', role: 'test', address: '127.0.0.1', port: 5432, pid, readonly: 'on', version: '17' }] };
+      if (text.includes('from drizzle.__drizzle_migrations')) {
+        const rows = structuredClone(history);
+        if (defect === 'missing-migration') rows.pop();
+        if (defect === 'extra-migration') rows.push(rows[0]);
+        if (defect === 'hash') rows[5].hash = '0'.repeat(64);
+        if (defect === 'timestamp') rows[5].created_at = '0';
+        return { rows };
+      }
+      if (text.includes('from pg_tables')) return { rows: [...tables.map(table => table.name), ...(defect === 'extra-table' ? ['unexpected'] : [])].sort().map(tablename => ({ tablename })) };
+      if (text.includes('from pg_attribute')) {
+        const table = tables.find(table => table.name === args[0]);
+        const rows = Object.values(table.columns).map(column => ({ name: column.name, type: column.type.replace(/^varchar/, 'character varying').replace(/^bigserial$/, 'bigint'), not_null: column.notNull })).sort((a,b) => a.name.localeCompare(b.name));
+        if (defect === 'column' && table.name === 'kitchen_tickets') rows[0].type = 'text';
+        return { rows };
+      }
+      if (text.includes('from pg_constraint')) {
+        const table = tables.find(table => 'public.' + table.name === args[0]);
+        const names = [...Object.keys(table.foreignKeys), ...Object.keys(table.compositePrimaryKeys), ...Object.keys(table.uniqueConstraints), ...Object.keys(table.checkConstraints)];
+        if (Object.values(table.columns).some(column => column.primaryKey)) names.push(table.name + '_pkey');
+        if (defect === 'constraint' && table.name === 'kitchen_tickets') names.pop();
+        return { rows: names.sort().map(conname => ({ conname })) };
+      }
+      if (text.includes('from pg_trigger')) return { rows: [{ triggers: defect === 'trigger' ? 1 : 0, functions: 0 }] };
+      if (text.includes('from pg_class c join pg_namespace')) return { rows: defect === 'sequence' ? [] : [{ relname: 'kitchen_tickets_position_seq', relkind: 'S' }] };
+      if (text.includes('from pg_attrdef')) return { rows: [{ value: defect === 'default' ? '0' : "nextval('kitchen_tickets_position_seq'::regclass)" }] };
+      if (text.startsWith('select count(*)')) return { rows: [{ n: defect === 'nonempty' && text.includes('kitchen_tickets') ? '1' : '0' }] };
+      throw new Error('Unmodeled SQL');
+    }, release: () => released.push(pid) }) });
+    let result;
+    try {
+      const work = baseline(pool(1), pool(2), root);
+      if (defect) await assert.rejects(work); else result = await work;
+    } finally {
+      assert.deepEqual(released, [1,2]);
+      assert.equal(statements.filter(text => text === 'rollback').length, 2);
+      assert.ok(statements.every(text => /^(select |begin isolation level repeatable read read only|rollback)/.test(text)));
+    }
+    return result;
+  }
+  const passed = await attempt();
+  assert.equal(passed.tables.length, 16); assert.equal(passed.history.length, 6);
+  assert.equal(passed.history[5].tag, '0005_kitchen_handoff');
+  assert.ok(Object.values(passed.before).every(count => count === 0));
+  for (const defect of ['missing-migration', 'extra-migration', 'hash', 'timestamp', 'extra-table', 'column', 'constraint', 'trigger', 'sequence', 'default', 'nonempty']) await attempt(defect);
+});
+
+test('prepared parent cannot import or invoke a migrator and old acknowledgements refuse', async () => {
+  const { readFile } = await import('node:fs/promises');
+  const source = await readFile(resolve(import.meta.dirname, 'kt01-acceptance.mjs'), 'utf8');
+  assert.doesNotMatch(source, /node-postgres\/migrator|\bmigrate\s*\(/);
+  for (const schema of [undefined, 'post-0004', '0005']) assert.throws(() => authorize({ ...allowed, KT01_SCHEMA: schema }, 'v24.21.0'));
 });

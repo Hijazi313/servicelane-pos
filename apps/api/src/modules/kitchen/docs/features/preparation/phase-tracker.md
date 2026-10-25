@@ -2,7 +2,7 @@
 
 Date: 2026-10-22. Owner: primary agent, solo. [Specification](spec.md); [business decisions](decisions.md); [global tracker](../../../../../../../../docs/planning/TRACKER.md).
 
-Status: KT-02 blocked after K01 failed in the single authorized execution; owned cleanup passed and migration 0005 remains. Kitchen acceptance remains pending.
+Status: KT-02 post-0005 procedure/harness prepared and offline-verified; awaiting explicit new run authorization. Prior K01 failure remains unresolved; 0005 retained and owned cleanup last verified. Kitchen acceptance remains pending.
 
 ## Authorization and verified entry
 
@@ -16,7 +16,7 @@ Local main and remote main both verified at `6125da43245f50f52730d122792f7d01418
 | --- | --- | --- |
 | KT-00 — planning | Complete: documentation prepared and KT-D01–04 resolved | Entry: current request. Exit met for business planning: owner resolved KT-D01–04. Technical review is now delivered below; owner approval of the revised specification remains separate from implementation authorization. |
 | KT-01 — backend handoff | Source/offline checks delivered; acceptance pending | Entry: approved decisions/spec plus explicit source/check authorization. Intended outcome: KT-A01–06, one transaction-aware Orders projection, trusted Authentication actor-scope extension and Kitchen ticket/queue/status boundary. Before coding, confirm contracts, bounds, revision/retry semantics and capability upkeep; no standalone Orders reopening or unrelated fixes. Exit: authorized source/offline evidence recorded, unavailable persistence behavior explicit. |
-| KT-02 — bounded integration acceptance | Blocked; K01 failed, cleanup passed | Entry: reviewed procedure for current post-0004 baseline, explicit target/run/fixture/cleanup permission and acceptable source evidence. Objective: persisted atomicity/concurrency and fresh-process KT-A01–05 evidence; explicit user development acceptance remains separate from technical checks/integration. No old Menu/Orders harness rerun or inherited target permission. |
+| KT-02 — bounded integration acceptance | Awaiting new run authorization; post-0005 preparation ready | Entry: reviewed procedure for current post-0005 baseline, explicit target/run/fixture/cleanup permission and acceptable source evidence. Objective: persisted atomicity/concurrency and fresh-process KT-A01–05 evidence; explicit user development acceptance remains separate from technical checks/integration. No old Menu/Orders harness rerun or inherited target permission. |
 
 No later phase is detailed or activated. If payment-first or amendments/cancellation are required in the first slice, revise KT-01 prerequisites and criteria before source authorization; do not silently expand this plan.
 
@@ -35,7 +35,7 @@ This planning increment provides a reviewable conditional backend scope and a na
 
 ## Current handoff
 
-KT-01 source/offline increment is delivered in local commits; source push/PR/merge remains unauthorized. Next action: review the prepared persistence procedure below and separately authorize the read-only baseline gate if desired. No database access/run or development acceptance is inferred. OR-01 remains accepted/closed. Both untracked ownership ledgers retain their entry hashes; pending incident reviews remain unchanged. Incidents: none in this implementation work; ordinary in-progress test setup corrections are not delivered defects or runtime evidence.
+Post-0005 preparation is ready under [the latest authorization/evidence](#post-0005-preparation-result--2026-10-25). Active branch `codex/kitchen-handoff`; preparation and preceding local evidence/repair commits are unpublished. Next action: approve [the procedure and exact one-run authorization](database-acceptance.md#required-authorization-for-one-run), including renewed disposable-target/exclusive reservation confirmation. No database access or execution permission is inferred. Preserve all three existing ownership ledgers, all reports and pending incident reviews. OR-01 remains accepted/closed; Kitchen acceptance remains pending. Historical handoffs below retain their original authorization limits.
 
 
 ## Technical review — 2026-10-23
@@ -183,3 +183,19 @@ Implemented in Kitchen-only test instrumentation: contender composition uses a t
 Verification: all nine focused preparation checks passed on existing Node v24.21.0. New evidence covers label-before-real-Access-lock ordering, marker failure preventing work, exact safe contention-failure step and settled operations, code allowlisting and connection-free named-runtime HTTP composition. Existing refusal/cleanup/fixture-orchestration checks still pass. Syntax/whitespace checks apply; no production recompile needed for test-only JavaScript changes. These checks prove local wiring/diagnostics, not hosted pooling behavior or the historical failure's root cause. Database state remains last verified sixteen empty tables with 0005/history retained; no new database observation.
 
 Next: prepare/review a bounded post-0005 verification procedure before requesting a new database run. KT-02 remains blocked pending that verification; Kitchen acceptance remains separate. Incidents: none confirmed in this repair; pending reviews unchanged. No task-owned temporary/debug files introduced; preserve all three local ownership ledgers.
+
+
+## Post-0005 preparation activation — 2026-10-25
+
+User explicitly authorized bounded post-0005 procedure/harness preparation, focused offline checks and local commits only. Verified entry: `codex/kitchen-handoff` at `31d2696`, solo primary owner, no tracked modifications; three existing ownership ledgers preserved. Intended behavior: refuse before config loading without explicit post-0005 acknowledgement, inspect exact six migration entries and expected sixteen empty tables with two matching read-only connection identities, then permit fixtures only under future execution authorization. No migrator import/call or schema/history writes in the prepared runner. Retain K01–K04/D01 and strict contention/cleanup/stop gates. No database access, environment loading, installation, publication or later phase is authorized. P0 task: prepare no-migration runner/procedure and prove offline acceptance/refusal paths; PostgreSQL verification and Kitchen acceptance remain pending.
+
+
+## Post-0005 preparation result — 2026-10-25
+
+Prepared the existing [procedure](database-acceptance.md), parent and controls for only the installed post-0005 state. Parent/child require `KT01_SCHEMA=post-0005` before configuration/driver loading. Baseline checks two matching read-only connection identities, exact six-entry history, 0005 schema/sequence/default and sixteen empty tables. Execute repeats that gate, marks the installed migration `retained-verified`, and contains no migrator import/call. Fixture setup rechecks emptiness under the existing lock; owned cleanup still verifies sixteen empty tables, expected schema and all six history entries. K01–K04/D01, timeouts and stop conditions are unchanged; no post-0004 fallback or sequence reset.
+
+Verification: eleven focused offline preparation checks passed on existing Node v24.21.0. The new synthetic baseline passes the expected state and refuses eleven mutations across missing/extra migration, hash/timestamp, table/column/constraint, trigger, sequence/default and unexpected data; both read-only clients roll back/release. Existing parent/child refusal, identity mismatch, runtime composition, fixtures, contender-label ordering, failure reporting, child/barrier lifecycle and ownership rejection checks pass. Syntax/whitespace and affected local-link checks passed. No fresh production compile was necessary for test-only JavaScript preparation; a fresh compile remains required before future execution.
+
+Readiness: prepared for an explicit one-run decision, not PostgreSQL verified or Kitchen accepted. Historical K01 cause/pooling behavior remains unconfirmed. No `.env` read, database access, fixtures/migrations/cases/cleanup execution, installation or publication occurred. Database state remains historical evidence only. All three ownership ledgers and existing reports preserved unchanged; no temporary/debug artifacts introduced. Incidents: none in this preparation; prior reviews remain pending.
+
+Next material decision: the user approves the prepared procedure and expressly confirms the configured target's disposable testing identity/exclusive reservation for the new run; authorizes fresh compilation, one read-only baseline and conditionally one K01–K04/D01/owned-cleanup execution using its fresh fingerprint without another approval. No migration application is permitted. The exact proposed authorization is in the procedure; it is not active permission.

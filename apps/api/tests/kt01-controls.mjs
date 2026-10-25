@@ -13,7 +13,7 @@ export function failure(error, stage) {
 }
 export const tags = ['0000_business_bootstrap', '0001_staff_access', '0002_login_reservations', '0003_menu_catalogue', '0004_order_capture', '0005_kitchen_handoff'];
 export function authorize(env, version) {
-  if (!['baseline', 'execute'].includes(env.KT01_MODE) || env.KT01_TEST_TARGET !== 'YES' || env.KT01_EXCLUSIVE !== 'YES'
+  if (env.KT01_SCHEMA !== 'post-0005' || !['baseline', 'execute'].includes(env.KT01_MODE) || env.KT01_TEST_TARGET !== 'YES' || env.KT01_EXCLUSIVE !== 'YES'
     || !/^v24\./.test(version) || Number(version.split('.')[1]) < 21
     || (env.KT01_MODE === 'execute' && !/^[a-f0-9]{64}$/.test(env.KT01_EXPECTED_TARGET ?? ''))) throw new Error('Explicit KT-01 target and execution permission required');
 }
@@ -64,10 +64,12 @@ export async function baseline(one, two, root, expectedTarget) {
     assert.notEqual(a.pid, b.pid); assert.equal(a.readonly, 'on'); assert.equal(b.readonly, 'on');
     const targetFingerprint = sha256(JSON.stringify([a.database, a.role, a.address, a.port]));
     if (expectedTarget) assert.equal(targetFingerprint, expectedTarget);
-    const tables = await shape(clients[0], root, '0004');
+    const installedHistory = await history(clients[0], root, 6);
+    const tables = await shape(clients[0], root, '0005');
+    assert.equal(tables.length, 16);
     const before = await counts(clients[0], tables);
     assert.ok(Object.values(before).every(count => count === 0));
-    return { targetFingerprint, serverVersion: a.version, tables, before, history: await history(clients[0], root, 5) };
+    return { targetFingerprint, serverVersion: a.version, tables, before, history: installedHistory };
   } finally {
     const errors = [];
     for (const client of clients) { try { await client.query('rollback'); } catch (error) { errors.push(error); } finally { client.release(); } }

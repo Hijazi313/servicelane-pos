@@ -8,7 +8,7 @@ import { authorize, baseline, shape, history, counts, failure, sha256, runChild 
 try { authorize(process.env, process.version); } catch { console.error('KT-01 requires separate target/reservation authorization'); process.exit(1); }
 const root = resolve(import.meta.dirname, '../../..'), tag = `kt01.${randomUUID()}`;
 const reportPath = `${root}/apps/api/tests/evidence/${tag}.json`, ledgerPath = `${root}/apps/api/tests/evidence/${tag}.ledger.json`;
-const report = { tag, mode: process.env.KT01_MODE, runtime: process.version, startedAt: new Date().toISOString(), source: [], results: ['K01', 'K02', 'K03', 'K04', 'D01'].map(id => ({ id, status: 'not-run' })), migration: 'not-run', cleanup: 'not-required' };
+const report = { tag, mode: process.env.KT01_MODE, schema: 'post-0005', runtime: process.version, startedAt: new Date().toISOString(), source: [], results: ['K01', 'K02', 'K03', 'K04', 'D01'].map(id => ({ id, status: 'not-run' })), migration: 'not-run', cleanup: 'not-required' };
 const ledger = { tag, accountIds: [randomUUID(), randomUUID()], extraBranchId: randomUUID(), offeringIds: [], orderIds: [], setupAttempted: false, setupCommitted: false };
 let ledgerCreated = false;
 const saveLedger = async () => { await writeFile(ledgerPath, JSON.stringify(ledger, null, 2) + '\n', { mode: 0o600, flag: ledgerCreated ? 'w' : 'wx' }); ledgerCreated = true; };
@@ -42,16 +42,15 @@ try {
   if (process.env.KT01_MODE === 'execute') {
     const { createRuntime } = await import('./kt01-runtime.mjs');
     const { runCases } = await import('./kt01-cases.mjs');
-    const { migrate } = await import('drizzle-orm/node-postgres/migrator');
     const { sql } = await import('drizzle-orm');
-    const { inTransaction, transactionDatabase } = await import('../dist/orders-check/infrastructure/database/transaction.js');
+    const { transactionDatabase } = await import('../dist/orders-check/infrastructure/database/transaction.js');
     const { PostgresAccessStore } = await import('../dist/orders-check/modules/authentication/infrastructure/access-store.js');
     const { token, digest } = await import('../dist/orders-check/modules/authentication/application/access-policy.js');
     const { hashInitialPassword } = await import('../dist/orders-check/modules/authentication/infrastructure/password-hash.js');
     runtime = await createRuntime(one);
-    stage = 'migration'; await migrate(runtime.database.db, { migrationsFolder: `${root}/apps/api/migrations` });
-    report.historyAfter = await history(one, root, 6); const tables = await shape(one, root, '0005');
-    assert.ok(Object.values(await counts(one, tables)).every(count => count === 0)); report.migration = 'passed'; assert.equal(idleError, false);
+    // Post-0005 only: baseline verified the installed schema/history; never run migrations.
+    const tables = report.baseline.tables;
+    report.migration = 'retained-verified'; assert.equal(idleError, false);
     const proof = { session: token(), csrf: token() }, otherProof = { session: token(), csrf: token() };
     ledger.sessionDigests = [proof, otherProof].map(value => digest(value.session));
     stage = 'fixtures'; await saveLedger();
@@ -95,7 +94,7 @@ try {
 } catch (error) { report.failure = failure(error, stage); process.exitCode = 1; }
 finally {
   // Barriers/contenders and any child are settled by their helpers before cleanup.
-  if (ledger.setupAttempted && report.migration === 'passed') {
+  if (ledger.setupAttempted && report.migration === 'retained-verified') {
     try {
       if (!one || closed.has(one)) {
         const { Pool } = await import('pg'); const { createRuntime } = await import('./kt01-runtime.mjs');
