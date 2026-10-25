@@ -1,6 +1,6 @@
 # Billing/Payments — decisions
 
-Date: 2026-10-25. BP-D01–06 recommendations are **owner-approved for the bounded development scope**, following the user’s agreement and subsequent confirmation in this chat. This approves the missing-policy block, not actual fiscal rules or synthetic-only mode. Implementation permission remains separate. Owner: project owner; accountant/business and payment-provider input where applicable. No legal applicability/rate/mandate is determined by this plan. Existing [compliance guidance](../../compliance/README.md) owns source/applicability policy; its historical links are not newly verified authorities.
+Date: 2026-10-25. BP-D01–06 recommendations are **owner-approved for the bounded development scope**, following the user’s agreement and subsequent confirmation in this chat. This approves the missing-policy block, not actual fiscal rules. Sample development values were subsequently approved; BP-D09 supersedes the singleton-policy and unresolved-mode portions below. Implementation permission remains separate. Owner: project owner; accountant/business and payment-provider input where applicable. No legal applicability/rate/mandate is determined by this plan. Existing [compliance guidance](../../compliance/README.md) owns source/applicability policy; its historical links are not newly verified authorities.
 
 | ID / question | Recommended smallest sound option | Alternatives / consequence | Blocking gate and required decision |
 | --- | --- | --- | --- |
@@ -17,9 +17,13 @@ Current-source references: [Orders merchandise-only boundary](../../../apps/api/
 
 ## Approval boundary — 2026-10-25
 
+Historical checkpoint; BP-D09 records the subsequent sample-development approval and revised scope.
+
 The owner agreed to BP-D01–06 and confirmed approval after clarification that correction/refund operations are excluded from BP-01 but remain operational prerequisites. The table retains the recommendations and affected future gates; its requests for development-scope approval are satisfied. Actual fiscal applicability/configuration, or an explicit choice of synthetic-only development with operational settlement disabled, remains unresolved under BP-D02. No source implementation, tests, database work or later phase is activated.
 
-## BP-D07 — Configurable settings definition — 2026-10-26
+## BP-D07 — Initial configurable settings definition — 2026-10-26
+
+Historical singleton-policy design; superseded by BP-D09.
 
 - Authorization: user requested exact settings/defaults after agreeing to administrator-configurable policies; documentation and existing local Git scope only. Legal-entity management was explicitly excluded in this chat.
 - Design: [canonical settings/defaults](spec.md#bp-00-settings-and-defaults--2026-10-26). Billing owns business-scoped tax policy; Business owns existing restaurant/branch display fields. This supersedes the initial Business-owned fiscal-configuration proposal in BP-D02. No new owner role or generic settings engine.
@@ -28,7 +32,9 @@ The owner agreed to BP-D01–06 and confirmed approval after clarification that 
 - Source-scope additions proposed: administrator Billing policy read/update with revision/history; narrow Business name/address edit and transactional display projection; bill snapshot of both configuration revisions. No current capability or implementation approval claimed. General Business administration, currency/timezone mutation, legal entities and receipt customization remain outside this increment.
 - Remaining gates: accept the now-defined transport/schema/capacity contracts, choose actual fiscal policy or explicitly approved synthetic-only mode, and authorize source work. Technical rounding/bounds are design recommendations, not newly verified obligations.
 
-## BP-D08 — Bounded HTTP/integrity design — 2026-10-26
+## BP-D08 — Initial bounded HTTP/integrity design — 2026-10-26
+
+Historical contract checkpoint; multiple-rule shapes and the previously unresolved development-mode request are superseded by BP-D09. Unchanged authorization/HTTP/retry boundaries remain applicable.
 
 Status: design reconciled from three independent read-only reviews; owner contract acceptance/source permission pending. Canonical definitions are in [specification HTTP contracts](spec.md#bp-00-http-contracts--2026-10-26), not a parallel API document.
 
@@ -38,3 +44,14 @@ Status: design reconciled from three independent read-only reviews; owner contra
 - No additional legal, tax or payment-method policy is approved. Complete contracts do not resolve BP-D02's fiscal development mode or activate BP-01.
 
 Single material decision request: **approve synthetic-only source/offline development with operational settlement disabled, or supply confirmed actual fiscal policy/applicability compatible with this single-rate slice**. Recommendation remains synthetic-only until actual rules are confirmed. Synthetic-only means fixture values in separately authorized offline checks, no production default and no live settlement activation; its isolation/wiring must be explicit in the approved source assignment. No user-facing fiscal-approval flag or generic settings engine is introduced by contract planning. The actual mode and source authorization must be recorded before implementation.
+
+## BP-D09 — Bounded multiple taxes and charges — 2026-10-26
+
+- User authorization: the owner approved sample development values, identified multiple government taxes plus service/seating charges, then authorized the bounded BP-00 revision. This authorizes documentation/local checkpoints, not BP-01 source or tests. Development calculations may use deliberate repeatable fixtures; no real tax rate or operating permission is approved. Do not ask again whether sample development values are allowed.
+- Supersedes: BP-D02's singleton-policy interpretation, BP-D07's one-rate model, BP-D08's singleton payloads/unresolved sample-mode gate, and the earlier phase-P1 classification of service charges. Cash-only settlement, immutable history, no corrections/receipts/legal entities, and accepted upstream boundaries remain intact.
+- Phase P0 additions justified by the owner's concrete service/seating/multiple-tax examples: finite separately named taxes/charges, explicit tax targets, automatic/optional per-order charges, exact included/exclusive breakdowns and selection-sensitive retries. Eight taxes/eight charges are proposed technical capacity bounds, not a claim of market/legal completeness.
+- Canonical design: [multiple-rule settings and calculation](spec.md#billing-policy--bounded-multiple-rule-revision) and the updated seven HTTP contracts. Rates/labels/charge amounts come from validated admin policy; no country-specific defaults. Empty configured taxes explicitly selects none; absent policy still blocks calculation. Billing owns rules; Business owns identity/currency/timezone; Orders remains immutable takeaway and Kitchen payment-independent.
+- Simpler sound limits: percentage taxes, fixed/percentage per-order charges, inclusive merchandise taxes only, explicit exclusive taxes on named charges; parallel shared bases, no tax-on-tax/charge compounding/formulas. Optional seating label is not per-seat billing or dine-in support. Item categories/exemptions, fixed statutory levies, thresholds/method-dependent taxes and fiscal integration require separate scope before affected real use.
+- Review: three read-only reviewer continuations supplied settings/selection, HTTP/replay/capacity and exact allocation recommendations; primary alone edits/commits. Whole included-tax total is rounded then allocated from exact fractions by remainder, avoiding negative net or double rounding; every final bill stores all components/rules.
+- Research context: [official Odoo tax-computation documentation](https://www.odoo.com/documentation/19.0/applications/finance/accounting/taxes/tax_computation.html), consulted 2026-10-26, illustrates price-inclusion and subsequent-base choices as separate concepts. We adopt explicit bases/inclusion, and deliberately exclude sequence-based compounding. This is a workflow reference, not Pakistani fiscal authority or implementation proof. No government rate/requirement is claimed verified; current PRA/FBR/other applicable authority evidence and business/accountant confirmation remain operational gates under the existing compliance policy.
+- Remaining development gate: accept the revised bounded design and explicitly authorize BP-01 source/offline work. Sample-data permission is settled; no repeat mode choice is required. Before restaurant use, confirm that actual tax/charge rules and rounding/allocation fit supported cases and complete the retained receipt/correction/release gates.

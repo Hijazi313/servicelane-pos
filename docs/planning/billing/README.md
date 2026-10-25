@@ -12,22 +12,22 @@ Public capabilities: none implemented. No Billing module exists; keep discovery 
 
 ## Scope and phases
 
-The [specification](spec.md) defines phase P0 and observable acceptance. The [decisions](decisions.md) record owner-approved development recommendations and the remaining fiscal-policy/mode decision. The [phase tracker](phase-tracker.md) owns authorization, evidence and handoff.
+The [specification](spec.md) defines phase P0 and observable acceptance. The [decisions](decisions.md) record owner-approved development recommendations and the approved sample-development choice and revised multiple-rule design. The [phase tracker](phase-tracker.md) owns authorization, evidence and handoff.
 
 | Phase | Outcome | Status / exit |
 | --- | --- | --- |
-| BP-00 | Agree smallest scope, money/fiscal/receipt/correction decisions and complete concrete contracts | Contract design complete for review; fiscal mode and acceptance pending before source entry |
-| BP-01 | Implement approved full-cash settlement/readback, narrow Orders/Business projections, admin settings and migration source | Proposed; focused offline evidence against BP-A01–14, reviewed source; no database permission inherited |
+| BP-00 | Agree smallest scope, money/fiscal/receipt/correction decisions and complete concrete contracts | Contract design complete for review; multiple-rule design acceptance/source permission pending; sample development approved |
+| BP-01 | Implement approved full-cash settlement/readback, narrow Orders/Business projections, admin settings and migration source | Proposed; focused offline evidence against BP-A01–18, reviewed source; no database permission inherited |
 | BP-02 | Prove atomic persistence, duplicate handling and fresh-process readback on a reserved disposable target | Proposed objective only; separately approved prepared procedure, one bounded run and owned cleanup; user development acceptance separate |
 
 No phase is activated by this table. Operational corrections/refunds, fiscal output, collection/completion and complete trading-flow/recovery acceptance remain release prerequisites needing their own scope, not automatic BP-02 work.
 
-Settings/defaults, seven exact HTTP contracts and limits are defined in the [specification](spec.md#bp-00-settings-and-defaults--2026-10-26). Administrator policy configuration and narrow Business display edits are proposed additions; no source permission is inferred.
+Settings/defaults, up to eight taxes/eight fixed-or-percentage per-order charges, explicit optional selection, seven HTTP contracts and limits are defined in the [specification](spec.md#bp-00-settings-and-defaults--2026-10-26). Administrator policy configuration and narrow Business display edits are proposed additions; no source permission is inferred.
 
 ## P1 for this increment
 
 - Card/provider integration, external-terminal recording, mobile wallets, split/partial/mixed tenders and credit: cash alone can demonstrate one settlement; external outcomes add uncertainty/reconciliation contracts.
-- Discounts, tips, service charges, bill splitting/merging and promotions: no accepted requirement for this slice; each changes payable semantics.
+- Discounts, tips, bill splitting/merging and promotions: no accepted requirement for this slice; each changes payable semantics.
 - Bill/payment search, reports, shift reconciliation, cash drawer control, accounting export and generic ledgers: known order ID and one detail read suffice for development proof. Shifts remain a later module.
 - Browser checkout, receipt layout/printing/bridge, reprints and live updates: backend readback is sufficient here; actual physical output requires its own acceptance.
 
