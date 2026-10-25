@@ -5,15 +5,17 @@ import { sha256, counts, failure as sharedFailure } from './or01-controls.mjs';
 export { sha256, counts };
 export function failure(error, stage) {
   const result = sharedFailure(error, stage);
-  const allowed = ['ENOTFOUND', 'EAI_AGAIN', 'ECONNREFUSED', 'ECONNRESET', 'ETIMEDOUT', 'KITCHEN_UNAVAILABLE', 'ACCESS_UNAVAILABLE', 'STALE_TICKET', 'ORDER_NOT_FOUND', 'KT_CONTENTION_NOT_OBSERVED', 'KT_WRITE_BARRIER_MISSING'];
+  const allowed = ['ENOTFOUND', 'EAI_AGAIN', 'ECONNREFUSED', 'ECONNRESET', 'ETIMEDOUT', 'KITCHEN_UNAVAILABLE', 'ACCESS_UNAVAILABLE', 'STALE_TICKET', 'ORDER_NOT_FOUND', 'KT_CONTENTION_NOT_OBSERVED', 'KT_WRITE_BARRIER_MISSING', 'KT_CHILD_TIMEOUT', 'KT_CHILD_EXIT', 'KT_CHILD_MARKER', 'KT_CHILD_OUTPUT_LIMIT', 'KT_CHILD_START'];
   for (const candidate of [error, error?.cause, error?.cause?.cause]) {
     if (allowed.includes(candidate?.code)) { result.code = candidate.code; break; }
   }
+  if (restartSteps.includes(error?.childStep)) result.childStep = error.childStep;
+  if (Number.isInteger(error?.childExit)) result.childExit = error.childExit;
   return result;
 }
 export const tags = ['0000_business_bootstrap', '0001_staff_access', '0002_login_reservations', '0003_menu_catalogue', '0004_order_capture', '0005_kitchen_handoff'];
 export function authorize(env, version) {
-  if (env.KT01_SCHEMA !== 'post-0005' || !['baseline', 'execute'].includes(env.KT01_MODE) || env.KT01_TEST_TARGET !== 'YES' || env.KT01_EXCLUSIVE !== 'YES'
+  if (!['all', 'D01'].includes(env.KT01_SCOPE ?? 'all') || env.KT01_SCHEMA !== 'post-0005' || !['baseline', 'execute'].includes(env.KT01_MODE) || env.KT01_TEST_TARGET !== 'YES' || env.KT01_EXCLUSIVE !== 'YES'
     || !/^v24\./.test(version) || Number(version.split('.')[1]) < 21
     || (env.KT01_MODE === 'execute' && !/^[a-f0-9]{64}$/.test(env.KT01_EXPECTED_TARGET ?? ''))) throw new Error('Explicit KT-01 target and execution permission required');
 }
@@ -76,14 +78,31 @@ export async function baseline(one, two, root, expectedTarget) {
     if (errors.length) throw errors[0];
   }
 }
+export const restartSteps = ['input', 'configuration', 'runtime', 'http-init', 'ticket-read-1', 'ticket-read-2', 'ticket-read-3', 'ticket-read-4', 'ticket-read-5', 'ready-redispatch', 'queue-readback', 'foreign-denial', 'http-close', 'pool-close', 'complete'];
 export async function runChild(spawn, executable, path, env, input, timeoutMs = 30000) {
   const child = spawn(executable, [path], { env, stdio: ['pipe', 'pipe', 'pipe'] });
-  let output = '', overflow = false, timedOut = false;
+  let output = '', stderr = '', stderrBytes = 0, childStep, childExit, overflow = false, timedOut = false, startFailed = false;
   child.stdout.on('data', chunk => { if (output.length + chunk.length <= 256) output += chunk; else { overflow = true; child.kill('SIGKILL'); } });
-  child.stderr.resume();
-  const done = new Promise((resolve, reject) => { child.once('error', reject); child.once('close', code => code === 0 ? resolve() : reject(new Error('Fresh process failed'))); });
+  child.stderr.on('data', chunk => {
+    stderrBytes += chunk.length;
+    if (stderrBytes > 4096) { overflow = true; child.kill('SIGKILL'); return; }
+    stderr += chunk.toString();
+    let newline;
+    while ((newline = stderr.indexOf('\n')) >= 0) {
+      const line = stderr.slice(0, newline); stderr = stderr.slice(newline + 1);
+      if (line.startsWith('KT01_STEP:') && restartSteps.includes(line.slice(10))) childStep = line.slice(10);
+    }
+  });
+  const done = new Promise((resolve, reject) => {
+    child.once('error', () => { startFailed = true; reject(new Error()); });
+    child.once('close', code => { childExit = code; code === 0 ? resolve() : reject(new Error()); });
+  });
   const timer = setTimeout(() => { timedOut = true; child.kill('SIGKILL'); }, timeoutMs);
   child.stdin.on('error', () => {}); child.stdin.end(JSON.stringify(input));
-  try { await done; assert.equal(timedOut, false); assert.equal(overflow, false); assert.equal(output.trim(), 'KT01 restart passed'); }
-  finally { clearTimeout(timer); }
+  try {
+    let failed = false; try { await done; } catch { failed = true; }
+    const code = timedOut ? 'KT_CHILD_TIMEOUT' : overflow ? 'KT_CHILD_OUTPUT_LIMIT' : startFailed ? 'KT_CHILD_START' : failed ? 'KT_CHILD_EXIT' : output.trim() !== 'KT01 restart passed' ? 'KT_CHILD_MARKER' : undefined;
+    if (code) throw Object.assign(new Error('Fresh-process verification failed'), { code, childStep, childExit });
+    return { childStep, childExit };
+  } finally { clearTimeout(timer); }
 }

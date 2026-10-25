@@ -27,9 +27,9 @@ test('baseline identity mismatch releases both read-only clients without any wri
   assert.deepEqual(releases, [1, 2]); assert.equal(statements.filter(text => text === 'rollback').length, 2);
   assert.ok(statements.every(text => /^(select |begin isolation level repeatable read read only|rollback)/.test(text)));
 });
-function child({ marker = 'KT01 restart passed\n', code = 0, hang = false } = {}) {
-  const process = new EventEmitter(); process.stdout = new EventEmitter(); process.stderr = { resume() {} }; process.stdin = new EventEmitter();
-  process.stdin.end = () => { if (!hang) queueMicrotask(() => { process.stdout.emit('data', Buffer.from(marker)); process.emit('close', code); }); };
+function child({ marker = 'KT01 restart passed\n', code = 0, hang = false, diagnostics = '' } = {}) {
+  const process = new EventEmitter(); process.stdout = new EventEmitter(); process.stderr = new EventEmitter(); process.stdin = new EventEmitter();
+  process.stdin.end = () => { if (!hang) queueMicrotask(() => { process.stderr.emit('data', Buffer.from(diagnostics)); process.stdout.emit('data', Buffer.from(marker)); process.emit('close', code); }); };
   process.kill = signal => { process.signal = signal; queueMicrotask(() => process.emit('close', null)); }; return process;
 }
 test('restart proof needs exact marker and zero exit; failure/timeout/overflow cannot pass', async () => {
@@ -174,4 +174,69 @@ test('prepared parent cannot import or invoke a migrator and old acknowledgement
   const source = await readFile(resolve(import.meta.dirname, 'kt01-acceptance.mjs'), 'utf8');
   assert.doesNotMatch(source, /node-postgres\/migrator|\bmigrate\s*\(/);
   for (const schema of [undefined, 'post-0004', '0005']) assert.throws(() => authorize({ ...allowed, KT01_SCHEMA: schema }, 'v24.21.0'));
+});
+
+test('D01 child HTTP checks run against actual Kitchen controllers with stored offline fixtures', async () => {
+  const { fixture } = await import('./kitchen-fixture.mjs');
+  const { createHttp } = await import('./kt01-runtime.mjs');
+  const { verifyRestartHttp } = await import('./kt01-restart-checks.mjs');
+  const h = fixture(), expected = [];
+  for (let i = 0; i < 5; i++) {
+    const order = await h.capture(); const ticket = await h.kitchen.dispatch(h.proof, { orderId: order.id });
+    if (i === 0) { await h.kitchen.advance(h.proof, ticket.id, { state: 'preparing', expectedRevision: 0 }); await h.kitchen.advance(h.proof, ticket.id, { state: 'ready', expectedRevision: 1 }); }
+    expected.push(await h.kitchen.get(h.proof, ticket.id));
+  }
+  const foreignTicketId = randomUUID();
+  h.records().push({ scope: { businessId: h.installation.businessId, branchId: randomUUID() }, ticket: { ...structuredClone(expected[0]), id: foreignTicketId }, position: '6' });
+  const http = await createHttp(h), steps = [];
+  try { await verifyRestartHttp(http, { proof: h.proof, expected, orderId: expected[0].orderId, foreignTicketId }, step => steps.push(step)); }
+  finally { await http.app.close(); }
+  assert.deepEqual(steps, ['ticket-read-1','ticket-read-2','ticket-read-3','ticket-read-4','ticket-read-5','ready-redispatch','queue-readback','foreign-denial']);
+});
+
+
+test('child failure diagnostics distinguish timeout/exit and retain only fixed safe stages', async () => {
+  const invoke = process => runChild(() => process, 'node', 'probe', {}, {}, 10);
+  const timed = child({ hang: true });
+  const timeout = invoke(timed);
+  timed.stderr.emit('data', Buffer.from('private SQL\nKT01_STEP:ticket-read-3\n'));
+  await assert.rejects(timeout, error => {
+    assert.deepEqual(failure(error, 'fresh-process'), { stage: 'fresh-process', category: 'operation-failed', code: 'KT_CHILD_TIMEOUT', childStep: 'ticket-read-3' });
+    return true;
+  });
+  await assert.rejects(invoke(child({ code: 1, diagnostics: 'KT01_STEP:ready-redispatch\nKT01_STEP:private-session\n' })), error => {
+    const report = failure(error, 'fresh-process');
+    assert.equal(report.code, 'KT_CHILD_EXIT'); assert.equal(report.childStep, 'ready-redispatch'); assert.equal(report.childExit, 1);
+    assert.doesNotMatch(JSON.stringify(report), /private/); return true;
+  });
+  await assert.rejects(invoke(child({ diagnostics: 'x'.repeat(4097) })), error => error.code === 'KT_CHILD_OUTPUT_LIMIT');
+});
+
+test('D01-only preparation seeds five tickets and foreign control without rerunning K01–K04', async () => {
+  const { fixture } = await import('./kitchen-fixture.mjs');
+  const { MenuService } = await import('../dist/orders-check/modules/menu/application/menu.service.js');
+  const { MenuOrderResolver } = await import('../dist/orders-check/modules/menu/public.js');
+  const { runCases } = await import('./kt01-cases.mjs');
+  const { sql } = await import('drizzle-orm'); const { PgDialect } = await import('drizzle-orm/pg-core');
+  const h = fixture(), dialect = new PgDialect(), statements = [];
+  const menu = new MenuService({ read: async () => structuredClone(h.state().catalogue), save: async (_business, offering) => { h.state().catalogue.push(structuredClone(offering)); } });
+  h.service.menu = new MenuOrderResolver(menu);
+  const ledger = { ...h.installation, accountIds: [h.state().account.id, randomUUID()], extraBranchId: randomUUID(), offeringIds: [], orderIds: [] };
+  const tx = { execute: async query => {
+    const compiled = dialect.sqlToQuery(query); statements.push(compiled.sql);
+    if (compiled.sql.startsWith('select request,snapshot')) return { rows: [{ request: {}, snapshot: h.state().orders[0].order.snapshot }] };
+    assert.match(compiled.sql, /^insert into captured_orders/); return { rows: [] };
+  } };
+  const result = await runCases({ onlyFreshProcess: true, runtime: { access: h.access, menu, orders: h.service, kitchen: h.kitchen, kitchenStore: h.kitchenStore },
+    other: { kitchen: h.kitchen }, proof: h.proof, otherProof: h.proof, ledger, tag: 'kt01.offline.d01', sql, transactionDatabase: () => tx, saveLedger: async () => {},
+    one: { query: async text => { assert.match(text, /^select id from kitchen_tickets/); return { rows: h.records().filter(row => row.scope.branchId === h.installation.branchId).map(row => ({ id: row.ticket.id })) }; } },
+    record: () => { throw new Error('K01–K04 must not execute'); }, observe: () => { throw new Error('No contention case in D01-only preparation'); } });
+  assert.equal(result.expected.length, 5); assert.equal(result.expected[0].state, 'ready'); assert.equal(result.expected[0].revision, 2);
+  assert.ok(result.expected.slice(1).every(ticket => ticket.state === 'queued'));
+  assert.equal(ledger.orderIds.length, 5); assert.equal(ledger.offeringIds.length, 3);
+  assert.equal(h.records().length, 6); assert.equal(h.records().at(-1).scope.branchId, ledger.extraBranchId);
+  assert.equal(h.records().at(-1).ticket.state, 'queued'); assert.equal(h.records().at(-1).ticket.revision, 0);
+  assert.equal(h.records().at(-1).ticket.id, ledger.foreignTicketId); assert.equal(result.foreignTicketId, ledger.foreignTicketId);
+  assert.equal(statements.length, 2);
+  assert.throws(() => authorize({ ...allowed, KT01_SCOPE: 'unknown' }, 'v24.21.0'));
 });

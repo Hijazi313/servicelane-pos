@@ -52,6 +52,32 @@ export async function runCases(ctx) {
     catch (error) { ctx.record(id, { status: 'failed', step: currentStep, contentionObserved, failure: failure(error, id) }); throw error; }
   };
   const order = await capture(); let ticket;
+  const seedForeign = async () => {
+    // Real foreign-branch rows: test-only fixture writes, never a production bypass.
+    const foreignOrderId = randomUUID(), foreignTicketId = randomUUID(); ledger.foreignOrderId = foreignOrderId; ledger.foreignTicketId = foreignTicketId; await ctx.saveLedger();
+    await run(async authorized => {
+      const tx = transactionDatabase(authorized.transaction);
+      const source = (await tx.execute(sql`select request,snapshot from captured_orders where id=${order.id}::uuid and business_id=${scope.businessId}::uuid`)).rows[0];
+      await tx.execute(sql`insert into captured_orders(id,business_id,branch_id,retry_key,request,snapshot) values(${foreignOrderId}::uuid,${scope.businessId}::uuid,${ledger.extraBranchId}::uuid,${randomUUID()},${JSON.stringify(source.request)}::jsonb,${JSON.stringify({ ...source.snapshot, id: foreignOrderId })}::jsonb)`);
+      await r.kitchenStore.insert({ businessId: scope.businessId, branchId: ledger.extraBranchId }, { ...ticket, id: foreignTicketId, orderId: foreignOrderId, preparation: { ...ticket.preparation, orderId: foreignOrderId }, dispatchedBy: authorized.actorId }, authorized.transaction);
+    });
+    return { foreignTicketId, foreignOrderId };
+  };
+  const readExpected = async () => {
+    const ownRows = (await one.query('select id from kitchen_tickets where business_id=$1 and branch_id=$2 order by position', [scope.businessId, scope.branchId])).rows;
+    const expected = await Promise.all(ownRows.map(row => r.kitchen.get(proof, row.id)));
+    assert.equal(expected.length, 5);
+    return expected;
+  };
+  if (ctx.onlyFreshProcess) {
+    // Fixture setup only: do not rerun the previously passed K01–K04 observations.
+    ticket = await r.kitchen.dispatch(proof, { orderId: order.id });
+    await r.kitchen.advance(proof, ticket.id, { state: 'preparing', expectedRevision: 0 });
+    await other.kitchen.advance(otherProof, ticket.id, { state: 'ready', expectedRevision: 1 });
+    for (let i = 0; i < 4; i++) { const next = await capture(); await r.kitchen.dispatch(proof, { orderId: next.id }); }
+    const { foreignTicketId } = await seedForeign();
+    return { expected: await readExpected(), orderId: order.id, foreignTicketId };
+  }
   await test('K01', async () => {
     const result = await overlap({ store: r.kitchenStore, method: 'insert', first: () => r.kitchen.dispatch(proof, { orderId: order.id }),
       second: () => other.kitchen.dispatch(otherProof, { orderId: order.id }), observe: ctx.observe, progress: step });
@@ -103,20 +129,11 @@ export async function runCases(ctx) {
     const second = await r.kitchen.list(proof, { limit: '2', cursor: first.nextCursor }); assert.equal(second.nextCursor, undefined);
     assert.equal(new Set([...first.tickets, ...second.tickets].map(row => row.id)).size, 4);
     assert.ok(!second.tickets.some(row => row.orderId === late.id));
-    // Real foreign-branch rows: test-only fixture writes, never a production bypass.
-    const foreignOrderId = randomUUID(), foreignTicketId = randomUUID(); ledger.foreignOrderId = foreignOrderId; ledger.foreignTicketId = foreignTicketId; await ctx.saveLedger();
-    await run(async authorized => {
-      const tx = transactionDatabase(authorized.transaction);
-      const source = (await tx.execute(sql`select request,snapshot from captured_orders where id=${order.id}::uuid and business_id=${scope.businessId}::uuid`)).rows[0];
-      await tx.execute(sql`insert into captured_orders(id,business_id,branch_id,retry_key,request,snapshot) values(${foreignOrderId}::uuid,${scope.businessId}::uuid,${ledger.extraBranchId}::uuid,${randomUUID()},${JSON.stringify(source.request)}::jsonb,${JSON.stringify({ ...source.snapshot, id: foreignOrderId })}::jsonb)`);
-      await r.kitchenStore.insert({ businessId: scope.businessId, branchId: ledger.extraBranchId }, { ...ticket, id: foreignTicketId, orderId: foreignOrderId, preparation: { ...ticket.preparation, orderId: foreignOrderId }, dispatchedBy: authorized.actorId }, authorized.transaction);
-    });
+    const { foreignTicketId } = await seedForeign();
     await assert.rejects(r.kitchen.get(proof, foreignTicketId), error => error.code === 'TICKET_NOT_FOUND');
     assert.equal(await r.kitchenStore.get({ businessId: randomUUID(), branchId: scope.branchId }, ticket.id), undefined);
     assert.equal((await r.kitchen.list(proof, {})).tickets.length, 5);
-    const ownRows = (await one.query('select id from kitchen_tickets where business_id=$1 and branch_id=$2 order by position', [scope.businessId, scope.branchId])).rows;
-    expected = await Promise.all(ownRows.map(row => r.kitchen.get(proof, row.id)));
-    assert.equal(expected.length, 5);
+    expected = await readExpected();
     return { preFenceCount: 4, nextScanCount: 5, foreignTicketHidden: true, freshProcess: 'pending' };
   });
   return { expected, orderId: order.id, foreignTicketId: ledger.foreignTicketId };

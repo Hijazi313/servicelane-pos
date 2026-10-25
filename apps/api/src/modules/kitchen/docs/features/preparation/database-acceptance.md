@@ -1,4 +1,45 @@
-# KT-02 PostgreSQL verification — consumed post-0005 procedure
+# KT-02 PostgreSQL verification — D01-only preparation
+
+## D01-only continuation — prepared, unrun
+
+User authorized autonomous offline D01 diagnosis, necessary harness repair, focused local checks and preparation of the smallest remaining database verification. No new database execution is authorized. The original fresh-process failure remains unlocalized; shared child HTTP assertions pass with offline stored fixtures and actual Kitchen controllers. Parent diagnostics now distinguish start/exit/timeout/invalid-marker/output-bound failures, retain only fixed safe child stages, and identify parent-pool-close versus child versus parent-readback. Failure marks D01 failed rather than leaving its status misleadingly not-run. The 30-second child deadline and SQL/lock timeouts are unchanged.
+
+The prepared `KT01_SCOPE=D01` path reuses exact post-0005 identity/history/schema/sixteen-empty-table gates and owned cleanup. It seeds the same three offerings, five active-branch orders/tickets (first advanced to ready), and one foreign-branch order/ticket using the existing bounded ownership ledger. K01–K04 contention/rollback/pagination case orchestration is skipped; their prior passing [report](../../../../../../tests/evidence/kt01.6afed4c6-77aa-433c-83c4-6261b92560e3.json) remains evidence, not a new pass in this report. Close parent pools, run one fresh API process for five exact reads, ready redispatch, queue enumeration and foreign denial, then reconnect/read back independently and perform owned cleanup. Retain 0005 and all six history entries, and verify sixteen empty tables; apply no migrations or sequence resets.
+
+Fourteen focused offline checks pass, including the shared child HTTP assertions through real controllers, safe timeout/exit-stage diagnostics and D01-only fixture orchestration without K01–K04 execution. No environment loading, database access, timeout relaxation or publication occurred in this work. This preparation does not prove hosted process/readback success or explain the previous failure. New helper `kt01-restart-checks.mjs` is hashed in reports. Raw stderr is bounded and never published; only fixed stage names and safe generated outcome codes survive sanitization.
+
+Future commands require the new authorization below; compile fresh once using the existing command in the historical section, then run the read-only baseline:
+
+```sh
+KT01_SCHEMA=post-0005 KT01_SCOPE=D01 KT01_MODE=baseline KT01_TEST_TARGET=YES KT01_EXCLUSIVE=YES /private/tmp/mn00-verified-runtime/node-v24.21.0-darwin-x64/bin/node --env-file=.env apps/api/tests/kt01-acceptance.mjs
+```
+
+Only if every gate passes, use its freshly verified fingerprint for the single execution:
+
+```sh
+KT01_SCHEMA=post-0005 KT01_SCOPE=D01 KT01_MODE=execute KT01_TEST_TARGET=YES KT01_EXCLUSIVE=YES KT01_EXPECTED_TARGET='REPLACE_WITH_FRESH_VERIFIED_64_HEX_FINGERPRINT' /private/tmp/mn00-verified-runtime/node-v24.21.0-darwin-x64/bin/node --env-file=.env apps/api/tests/kt01-acceptance.mjs
+```
+
+## Required authorization for D01-only run
+
+```text
+Resume D01 from docs/planning/TRACKER.md and the Kitchen current handoff.
+Follow AGENTS.md and spec-driven-delivery. I approve the prepared D01-only
+post-0005 procedure and confirm the configured disposable testing database
+is still intended and exclusively reserved for this entire new run.
+
+Authorize fresh compilation, one read-only baseline and conditionally one
+D01-only fixture/fresh-process/readback/owned-cleanup execution using the
+fresh verified fingerprint without another approval. Apply no migrations;
+retain exact 0000–0005 history/schema and verify sixteen empty tables afterward.
+Reuse the recorded K01–K04 evidence. Keep all existing stop/scope limits:
+no automatic retry, relaxed gates/timeouts, broad deletion, installation,
+publication or later workflow. Preserve reports/ledgers and incident reviews;
+local evidence/documentation commits only. Kitchen acceptance remains separate.
+```
+
+## Historical full-run procedure — consumed
+
 
 **Execution update (2026-10-25):** the separately authorized post-0005 run passed K01–K04, failed at fresh-process verification and verified owned cleanup. D01 remains unverified. The one-run permission is consumed; commands and authorization text below are historical and must not be reused without a new reviewed decision. See [current result](phase-tracker.md#post-0005-execution-result--2026-10-25).
 

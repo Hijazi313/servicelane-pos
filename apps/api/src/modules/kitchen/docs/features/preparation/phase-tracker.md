@@ -2,7 +2,7 @@
 
 Date: 2026-10-22. Owner: primary agent, solo. [Specification](spec.md); [business decisions](decisions.md); [global tracker](../../../../../../../../docs/planning/TRACKER.md).
 
-Status: KT-02 blocked at fresh-process verification. Post-0005 K01–K04 passed; D01 remains unverified. Owned cleanup passed with sixteen empty tables and all six history entries retained. Kitchen acceptance remains pending.
+Status: K01–K04 passed; D01 PostgreSQL evidence remains pending. D01-only diagnostics/harness are prepared and offline-verified; awaiting explicit new execution authorization. Kitchen acceptance remains pending.
 
 ## Authorization and verified entry
 
@@ -35,7 +35,7 @@ This planning increment provides a reviewable conditional backend scope and a na
 
 ## Current handoff
 
-The [post-0005 execution result](#post-0005-execution-result--2026-10-25) owns current evidence: K01–K04 passed, fresh-process stage failed and D01 is unverified; owned cleanup passed. The one-run permission is consumed. Next action: authorize bounded offline D01 diagnosis; no retry, source repair, database access or later workflow is inferred. Preserve the four local ownership ledgers and all reports, including prior evidence and pending incident reviews. Active branch `codex/kitchen-handoff`; local evidence/repair/preparation remains unpublished. OR-01 remains accepted/closed; Kitchen acceptance is pending. Historical handoffs below retain their original limits. Process incident: [INC-20261025-02](../../../../../../../../docs/quality/agent-incidents.md#inc-20261025-02--kt-02-follow-ups-fragmented-progress-and-required-repeated-user-coordination); recording does not authorize D01 work or change execution gates.
+[D01 diagnosis/repair preparation](#d01-autonomous-result--2026-10-25) is complete locally. Its shared HTTP checks pass offline; original fresh-process failure is still unlocalized. Next single decision: authorize [one D01-only database verification](database-acceptance.md#required-authorization-for-d01-only-run), including renewed target/reservation confirmation. No new database execution, timeout relaxation or module closure is inferred. Preserve the prior K01–K04 passing evidence, all four local ownership ledgers, reports and pending incident reviews. Active branch `codex/kitchen-handoff`; current work remains unpublished. OR-01 accepted/closed; Kitchen acceptance pending. Process incident: [INC-20261025-02](../../../../../../../../docs/quality/agent-incidents.md#inc-20261025-02--kt-02-follow-ups-fragmented-progress-and-required-repeated-user-coordination) remains open.
 
 
 ## Technical review — 2026-10-23
@@ -225,3 +225,21 @@ Execution report: `apps/api/tests/evidence/kt01.6afed4c6-77aa-433c-83c4-6261b925
 Owned cleanup **passed**: sixteen application tables counted zero, expected post-0005 schema validated, final six-entry history exactly equals the baseline. No idle/pool-close/cleanup error was reported. Existing TLS certificate verification remains false; no transport/TLS, database-server restart or crash/backup recovery assurance. New restricted ownership ledger retained locally/untracked; all three pre-existing ledgers match their entry hashes. Reports contain hashes/sanitized evidence only. No installation, provisioning, deployment, historical runner execution, publication, automatic retry or later workflow occurred.
 
 Readiness: KT-02 remains blocked on D01, not complete or accepted. This one-run permission is consumed. Next decision: authorize bounded offline diagnosis of fresh-process failure and a minimal repair proposal, preserving the passed K01–K04 evidence. Any repair or new database verification requires its own explicit scope; do not automatically repeat the full run. Incidents: none confirmed in this execution; the failure alone does not establish a qualifying defect. Prior reviews remain pending and unchanged.
+
+
+## D01 autonomous diagnosis/repair authorization — 2026-10-25
+
+User instructed the agent to work on D01 independently after the proposed coherent offline diagnosis, necessary harness repair, focused local verification and smallest remaining database-check preparation. Solo primary owner, `codex/kitchen-handoff` at `eeb43c9`; four untracked ownership ledgers preserved. No new database execution, gate relaxation, publication or later phase is inferred from this instruction; the previous one-run permission is consumed. Reuse K01–K04 passing evidence. Intended work: exercise the actual child HTTP verification locally, retain bounded safe child-stage/outcome diagnostics, repair any demonstrated harness defect and prepare a focused D01 verification decision. Keep the existing timeout until evidence justifies a separate change.
+
+
+## D01 autonomous result — 2026-10-25
+
+Completed the authorized offline diagnosis/repair/preparation as one coherent increment. Extracted the exact child assertions into `kt01-restart-checks.mjs` shared with the real child; actual Kitchen controllers with five stored offline fixtures, ready redispatch, paginated queue and foreign ticket denial all pass. No application defect or historical failure cause is established. The old report cannot distinguish child timeout/exit/HTTP assertion or parent readback failure; do not infer timeout merely from hosted latency.
+
+Repaired test diagnostics: bounded stderr accepts only fixed step names; generated codes distinguish timeout/start/exit/marker/output-limit and safe exit status. Parent records close/child/readback phases, successful child outcome, and an explicit failed D01 result on failure. Raw driver messages/proofs remain suppressed. Existing 30-second child deadline and all baseline/cleanup/stop gates remain unchanged. The child checks helper is included in report hashes.
+
+Prepared `KT01_SCOPE=D01`: only bounded fixture setup for five owned tickets (one ready) and a real foreign control, then one child and parent readback/owned cleanup; no K01–K04 case rerun or migration. Shared foreign-control/readback setup is reused by the full path. Baseline still requires exact post-0005 history/schema and sixteen empty tables. Prior K01–K04 results remain in their immutable report; a D01-only report leaves those cases not-run rather than reasserting them.
+
+Verification: fourteen focused offline checks pass on existing Node v24.21.0, including real-controller child assertion execution, timeout/exit diagnostics with private-output suppression, and actual D01-only fixture orchestration producing five owned plus one foreign ticket without executing other cases. Existing eleven checks still pass. Syntax/links/whitespace checked; no production source/contract/dependency change or need for recompile during this JavaScript-only work. No `.env` loading, database access, migration, deployment, publication or automatic retry. All four ownership ledgers and earlier reports unchanged; no debug artifacts. Incidents: no new qualifying incident confirmed; INC-20261025-02 remains open, with this bounded follow-up as limited correction evidence only.
+
+Next material decision: the procedure contains one concrete D01-only execution authorization and renewed disposable-target/exclusive-reservation confirmation. This is required because the prior database permission explicitly covered one run and prohibited automatic retries. No further diagnosis/preparation prompt is needed. Kitchen acceptance and later module activation remain separate.

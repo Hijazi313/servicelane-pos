@@ -8,7 +8,7 @@ import { authorize, baseline, shape, history, counts, failure, sha256, runChild 
 try { authorize(process.env, process.version); } catch { console.error('KT-01 requires separate target/reservation authorization'); process.exit(1); }
 const root = resolve(import.meta.dirname, '../../..'), tag = `kt01.${randomUUID()}`;
 const reportPath = `${root}/apps/api/tests/evidence/${tag}.json`, ledgerPath = `${root}/apps/api/tests/evidence/${tag}.ledger.json`;
-const report = { tag, mode: process.env.KT01_MODE, schema: 'post-0005', runtime: process.version, startedAt: new Date().toISOString(), source: [], results: ['K01', 'K02', 'K03', 'K04', 'D01'].map(id => ({ id, status: 'not-run' })), migration: 'not-run', cleanup: 'not-required' };
+const report = { tag, mode: process.env.KT01_MODE, schema: 'post-0005', scope: process.env.KT01_SCOPE ?? 'all', runtime: process.version, startedAt: new Date().toISOString(), source: [], results: ['K01', 'K02', 'K03', 'K04', 'D01'].map(id => ({ id, status: 'not-run' })), migration: 'not-run', cleanup: 'not-required' };
 const ledger = { tag, accountIds: [randomUUID(), randomUUID()], extraBranchId: randomUUID(), offeringIds: [], orderIds: [], setupAttempted: false, setupCommitted: false };
 let ledgerCreated = false;
 const saveLedger = async () => { await writeFile(ledgerPath, JSON.stringify(ledger, null, 2) + '\n', { mode: 0o600, flag: ledgerCreated ? 'w' : 'wx' }); ledgerCreated = true; };
@@ -25,7 +25,7 @@ async function hashFiles(directory) {
 try {
   // Includes the complete freshly compiled source dependency tree; no env files or proofs.
   await hashFiles('apps/api/src'); await hashFiles('apps/api/dist/orders-check'); await hashFiles('apps/api/migrations');
-  for (const name of ['kt01-acceptance', 'kt01-controls', 'kt01-cleanup', 'kt01-runtime', 'kt01-cases', 'kt01-restart', 'or01-runtime', 'or01-controls', 'mn01-restart-operation']) {
+  for (const name of ['kt01-acceptance', 'kt01-controls', 'kt01-cleanup', 'kt01-runtime', 'kt01-cases', 'kt01-restart', 'kt01-restart-checks', 'or01-runtime', 'or01-controls', 'mn01-restart-operation']) {
     const path = `apps/api/tests/${name}.mjs`; report.source.push({ path, sha256: sha256(await readFile(`${root}/${path}`)) });
   }
   const { Pool } = await import('pg');
@@ -82,16 +82,18 @@ try {
       throw Object.assign(new Error('Required contention not observed'), { code: 'KT_CONTENTION_NOT_OBSERVED' });
     };
     stage = 'cases';
-    const restart = await runCases({ runtime, other, one, proof, otherProof, ledger, tag, sql, transactionDatabase, saveLedger, observe,
+    const restart = await runCases({ onlyFreshProcess: report.scope === 'D01', runtime, other, one, proof, otherProof, ledger, tag, sql, transactionDatabase, saveLedger, observe,
       progress: (id, step) => { report.lastCaseStep = { id, step }; },
       record: (id, details) => { assert.equal(idleError, false); report.results[report.results.findIndex(row => row.id === id)] = { id, ...details }; } });
-    stage = 'fresh-process'; await close(two); await close(one);
-    await runChild(spawn, process.execPath, `${root}/apps/api/tests/kt01-restart.mjs`, process.env, { proof, ...restart });
+    stage = 'fresh-process'; report.freshProcessStep = 'parent-pool-close'; await close(two); await close(one);
+    report.freshProcessStep = 'child';
+    report.freshProcess = await runChild(spawn, process.execPath, `${root}/apps/api/tests/kt01-restart.mjs`, process.env, { proof, ...restart });
+    report.freshProcessStep = 'parent-readback';
     one = new Pool({ ...options, application_name: tag + '.readback' }); one.on('error', () => { idleError = true; }); runtime = await createRuntime(one);
     for (const expected of restart.expected) assert.deepEqual(await runtime.kitchen.get(proof, expected.id), expected);
     report.results[4] = { id: 'D01', status: 'passed', freshApiProcesses: 1, parentPoolsClosed: true, parentReconnected: true };
   }
-} catch (error) { report.failure = failure(error, stage); process.exitCode = 1; }
+} catch (error) { report.failure = failure(error, stage); if (stage === 'fresh-process') report.results[4] = { id: 'D01', status: 'failed', step: report.freshProcessStep, failure: report.failure }; process.exitCode = 1; }
 finally {
   // Barriers/contenders and any child are settled by their helpers before cleanup.
   if (ledger.setupAttempted && report.migration === 'retained-verified') {

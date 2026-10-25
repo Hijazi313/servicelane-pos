@@ -79,13 +79,13 @@ Current designations follow [CONTRIBUTING](../../CONTRIBUTING.md#active-work-and
 
 | Phase / task | Branch | Checkout | Owner | Integration base | Publication / blocker | Owning tracker |
 | --- | --- | --- | --- | --- | --- | --- |
-| Kitchen KT-02 | `codex/kitchen-handoff` | `/Users/macbookpro/Documents/personal/restaurant-pos-custom` | Primary agent, solo | `main` (`ac9ce07` integrated) | Upstream `origin/codex/kitchen-handoff`; local preparation/evidence commits unpublished (no publication authorized). Post-0005 K01–K04 passed; blocked on D01. One-run permission consumed. | [Kitchen](../../apps/api/src/modules/kitchen/docs/features/preparation/phase-tracker.md#kt-02-bounded-activation--2026-10-25) |
+| Kitchen KT-02 | `codex/kitchen-handoff` | `/Users/macbookpro/Documents/personal/restaurant-pos-custom` | Primary agent, solo | `main` (`ac9ce07` integrated) | Upstream `origin/codex/kitchen-handoff`; local preparation/evidence commits unpublished (no publication authorized). Post-0005 K01–K04 passed; D01-only preparation ready, awaiting new execution authorization. Prior one-run permission consumed. | [Kitchen](../../apps/api/src/modules/kitchen/docs/features/preparation/phase-tracker.md#kt-02-bounded-activation--2026-10-25) |
 
 ## Current planning handoff — 2026-10-25
 
 BA-01/02/03 accepted development scope and historical execution permissions are owned by the [joint BA tracker](business-access/phase-tracker.md). They do not authorize new Menu or database work.
 
-Current handoff: the active branch designation is maintained in the table above. [Kitchen's current handoff](../../apps/api/src/modules/kitchen/docs/features/preparation/phase-tracker.md#current-handoff) owns the post-0005 result: K01–K04 passed, D01 remains unverified after fresh-process failure, cleanup verified sixteen empty tables and intact six-entry history. No migrations applied. The one-run authorization is consumed; next decision is bounded offline D01 diagnosis, not another run or module closure. No publication authorized. OR-01 remains accepted/closed; Kitchen acceptance remains pending. Preserve all four ownership ledgers, reports and pending incident reviews.
+Current handoff: the active branch designation is maintained in the table above. [Kitchen's current handoff](../../apps/api/src/modules/kitchen/docs/features/preparation/phase-tracker.md#current-handoff) owns the post-0005 result: K01–K04 passed, D01 remains unverified after fresh-process failure, cleanup verified sixteen empty tables and intact six-entry history. No migrations applied. The one-run authorization is consumed; next single decision is the prepared D01-only database verification; diagnosis/repair/local preparation is complete, and module closure remains pending. No publication authorized. OR-01 remains accepted/closed; Kitchen acceptance remains pending. Preserve all four ownership ledgers, reports and pending incident reviews.
 
 ## Proposed foundation follow-ups — 2026-10-12
 
@@ -155,3 +155,8 @@ User-authorized procedure/harness preparation complete; [owning result and next 
 ## KT-02 post-0005 execution — 2026-10-25
 
 Fresh compilation, exact post-0005 baseline and K01–K04 passed, including real dispatch/status contention, rollback, attribution and queue/scope. Fresh-process stage failed; D01 remains unverified and its precise failure is unknown. No migrations applied. Owned cleanup passed: sixteen empty tables, expected schema and all six exact history entries intact. [Owning report/evidence limits](../../apps/api/src/modules/kitchen/docs/features/preparation/phase-tracker.md#post-0005-execution-result--2026-10-25). Permission consumed; no retry/publication. Next: bounded offline D01 diagnosis under new authorization. Kitchen acceptance and later modules remain separate; all reports/ledgers and incident reviews preserved.
+
+
+## KT-02 D01 autonomous preparation — 2026-10-25
+
+[Owning result](../../apps/api/src/modules/kitchen/docs/features/preparation/phase-tracker.md#d01-autonomous-result--2026-10-25): actual child HTTP checks pass offline; original D01 cause remains unknown. Prepared safe child outcome/stage reporting and D01-only fixture/child/readback/cleanup path, preserving prior K01–K04 evidence. Fourteen focused offline checks pass. No database/environment access, timeout relaxation or publication. Next single decision: approve the concrete D01-only run and renewed target reservation in the procedure. Kitchen acceptance and incident review remain separate.
