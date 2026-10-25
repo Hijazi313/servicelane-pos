@@ -2,7 +2,7 @@
 
 Date: 2026-10-22. Owner: primary agent, solo. [Specification](spec.md); [business decisions](decisions.md); [global tracker](../../../../../../../../docs/planning/TRACKER.md).
 
-Status: awaiting acceptance of KT-01 source/offline handoff. KT-00 is complete and the revised specification is approved; KT-02 remains proposed and unauthorized.
+Status: KT-02 active under the bounded authorization below; database access awaits explicit target/exclusive-reservation confirmation. KT-01 acceptance remains pending.
 
 ## Authorization and verified entry
 
@@ -16,7 +16,7 @@ Local main and remote main both verified at `6125da43245f50f52730d122792f7d01418
 | --- | --- | --- |
 | KT-00 — planning | Complete: documentation prepared and KT-D01–04 resolved | Entry: current request. Exit met for business planning: owner resolved KT-D01–04. Technical review is now delivered below; owner approval of the revised specification remains separate from implementation authorization. |
 | KT-01 — backend handoff | Source/offline checks delivered; acceptance pending | Entry: approved decisions/spec plus explicit source/check authorization. Intended outcome: KT-A01–06, one transaction-aware Orders projection, trusted Authentication actor-scope extension and Kitchen ticket/queue/status boundary. Before coding, confirm contracts, bounds, revision/retry semantics and capability upkeep; no standalone Orders reopening or unrelated fixes. Exit: authorized source/offline evidence recorded, unavailable persistence behavior explicit. |
-| KT-02 — bounded integration acceptance | Proposed, not activated | Entry: reviewed procedure for current post-0004 baseline, explicit target/run/fixture/cleanup permission and acceptable source evidence. Objective: persisted atomicity/concurrency and fresh-process KT-A01–05 evidence; explicit user development acceptance remains separate from technical checks/integration. No old Menu/Orders harness rerun or inherited target permission. |
+| KT-02 — bounded integration acceptance | Active; awaiting target confirmation | Entry: reviewed procedure for current post-0004 baseline, explicit target/run/fixture/cleanup permission and acceptable source evidence. Objective: persisted atomicity/concurrency and fresh-process KT-A01–05 evidence; explicit user development acceptance remains separate from technical checks/integration. No old Menu/Orders harness rerun or inherited target permission. |
 
 No later phase is detailed or activated. If payment-first or amendments/cancellation are required in the first slice, revise KT-01 prerequisites and criteria before source authorization; do not silently expand this plan.
 
@@ -111,3 +111,23 @@ Tracked checkout was clean at closeout entry; only the original MN-01/OR-01 owne
 Next action: in the new chat, obtain bounded KT-02 execution authorization and confirmation of the designated testing target/exclusive reservation. Baseline inspection is the first gate within KT-02, not a separate phase or a reason to create another chat. The prepared procedure currently requires review of the fingerprint before execute mode; any authorization to continue conditionally in the same run must be explicit. Never infer target confirmation, data emptiness or migration permission from this closeout. Stop on mismatch, material harness defect, ambiguous result or failed cleanup; no automatic retries. Keep publication, explicit acceptance, operational release and further workflows separate.
 
 Incidents: [INC-20261025-01](../../../../../../../../docs/quality/agent-incidents.md#inc-20261025-01--kitchen-verification-preparation-repeated-excessive-context-retrieval-and-required-user-redirection) is recorded/committed, still open pending user review; commit permission did not close it or approve prevention changes. Prior incident reviews remain unchanged. Future PR bodies use the repository template; no PR is authorized by closeout.
+
+
+## KT-02 bounded activation — 2026-10-25
+
+User explicitly activated one bounded PostgreSQL verification run using [the prepared procedure](database-acceptance.md). Solo owner: primary agent, existing checkout `/Users/macbookpro/Documents/personal/restaurant-pos-custom`, branch `codex/kitchen-handoff` at verified `6ba87ff`; `dc4b21c` and main `ac9ce07` are ancestors. Both historical untracked ledger hashes match thread closeout; preserve them and pending incident reviews. OR-01 remains accepted/closed; Kitchen acceptance is separate.
+
+**Conditional authorization recorded before database access:** first obtain explicit human confirmation that the configured target is the intended disposable testing database and exclusively reserved for this run. After confirmation, permission covers necessary fresh compilation, read-only baseline and, only if every gate passes, one execution of only migration 0005, synthetic cases, one fresh API process and owned cleanup. The user explicitly permits using the freshly verified target fingerprint to continue from baseline to execution without another approval. This supersedes the prepared procedure's separate fingerprint-approval step for this run only; target identity and emptiness remain unassumed.
+
+| Active P0 task | Status / required evidence |
+| --- | --- |
+| One gated PostgreSQL run, KT-A01–05 | Awaiting explicit target/reservation confirmation; then exact post-0004 history/schema and fifteen empty tables, K01–K04/D01 observations including real contention, retained 0005 and intact history with sixteen empty tables after owned cleanup |
+
+Stop on mismatch, material harness defect, ambiguous migration/commit, missing contention evidence or failed cleanup. No automatic retry, gate relaxation, broad deletion, old Menu/Orders harness execution, installation, provisioning, deployment, unrelated implementation, source publication/PR/merge or later workflow. Local evidence/documentation commits are authorized. Reuse existing offline evidence; no general review or suite rerun. Completion means observed bounded evidence and cleanup recorded, not feature acceptance or operational readiness.
+
+Current handoff: no database access or environment loading performed. Next action: obtain explicit target/exclusive-reservation confirmation. Incidents: none in activation; existing reviews remain pending and unchanged.
+
+
+## Active branch publication — 2026-10-25
+
+User authorized pushing `codex/kitchen-handoff` before continuing KT-02 and designating it the current active work branch, tracking `origin/codex/kitchen-handoff`. This supersedes the earlier source-push prohibition for this branch publication only. PR/merge and database access remain separately gated; target/reservation confirmation is still outstanding. Publish existing source/harness and this documentation checkpoint; preserve both untracked historical ledgers and pending incident reviews. No new runtime verification or acceptance is claimed.
