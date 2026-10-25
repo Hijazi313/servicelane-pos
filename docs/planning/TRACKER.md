@@ -79,7 +79,7 @@ Current designations follow [CONTRIBUTING](../../CONTRIBUTING.md#active-work-and
 
 | Phase / task | Branch | Checkout | Owner | Integration base | Publication / blocker | Owning tracker |
 | --- | --- | --- | --- | --- | --- | --- |
-| Billing/Payments BP-00 contract planning | `codex/billing-planning` | `/Users/macbookpro/Documents/personal/restaurant-pos-custom` | Primary agent | `main` `d75ac92` | Local only — publication unauthorized; Revised design acceptance/source authorization pending | [Billing tracker](billing/phase-tracker.md) |
+| Billing/Payments BP-00 contract planning | `codex/billing-planning` | `/Users/macbookpro/Documents/personal/restaurant-pos-custom` | Primary agent | `main` `d75ac92` | Published to same-named origin branch; revised design acceptance/source authorization pending | [Billing tracker](billing/phase-tracker.md) |
 
 ## Current planning handoff — 2026-10-26
 
