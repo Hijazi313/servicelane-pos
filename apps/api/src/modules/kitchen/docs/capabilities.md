@@ -1,6 +1,6 @@
 # Kitchen capability index
 
-KT-01 source has focused offline application/actual-HTTP and synthetic SQL evidence only; migration 0005 is applied. The bounded PostgreSQL run stopped at K01; cleanup verified sixteen empty tables and intact history. PostgreSQL acceptance cases, restart/concurrency, operational and user acceptance remain unestablished. [Tracker](features/preparation/phase-tracker.md) owns authorization/evidence.
+KT-01 source has focused offline application/actual-HTTP and SQL evidence. Migration 0005 is applied; the authorized post-0005 PostgreSQL run passed K01–K04 (dispatch/retry, rollback, status contention/attribution and queue/scope). Fresh-process verification failed, so D01/readback remains unverified. Owned cleanup verified sixteen empty tables and intact history. Operational and user acceptance remain pending. [Tracker](features/preparation/phase-tracker.md) owns authorization/evidence limits.
 
 | Capability | Public entry point | Purpose | Important constraints |
 | --- | --- | --- | --- |

@@ -2,7 +2,7 @@
 
 Date: 2026-10-22. Owner: primary agent, solo. [Specification](spec.md); [business decisions](decisions.md); [global tracker](../../../../../../../../docs/planning/TRACKER.md).
 
-Status: KT-02 post-0005 procedure/harness prepared and offline-verified; awaiting explicit new run authorization. Prior K01 failure remains unresolved; 0005 retained and owned cleanup last verified. Kitchen acceptance remains pending.
+Status: KT-02 blocked at fresh-process verification. Post-0005 K01–K04 passed; D01 remains unverified. Owned cleanup passed with sixteen empty tables and all six history entries retained. Kitchen acceptance remains pending.
 
 ## Authorization and verified entry
 
@@ -16,7 +16,7 @@ Local main and remote main both verified at `6125da43245f50f52730d122792f7d01418
 | --- | --- | --- |
 | KT-00 — planning | Complete: documentation prepared and KT-D01–04 resolved | Entry: current request. Exit met for business planning: owner resolved KT-D01–04. Technical review is now delivered below; owner approval of the revised specification remains separate from implementation authorization. |
 | KT-01 — backend handoff | Source/offline checks delivered; acceptance pending | Entry: approved decisions/spec plus explicit source/check authorization. Intended outcome: KT-A01–06, one transaction-aware Orders projection, trusted Authentication actor-scope extension and Kitchen ticket/queue/status boundary. Before coding, confirm contracts, bounds, revision/retry semantics and capability upkeep; no standalone Orders reopening or unrelated fixes. Exit: authorized source/offline evidence recorded, unavailable persistence behavior explicit. |
-| KT-02 — bounded integration acceptance | Awaiting new run authorization; post-0005 preparation ready | Entry: reviewed procedure for current post-0005 baseline, explicit target/run/fixture/cleanup permission and acceptable source evidence. Objective: persisted atomicity/concurrency and fresh-process KT-A01–05 evidence; explicit user development acceptance remains separate from technical checks/integration. No old Menu/Orders harness rerun or inherited target permission. |
+| KT-02 — bounded integration acceptance | Blocked: K01–K04 passed, D01 unverified | Entry: reviewed procedure for current post-0005 baseline, explicit target/run/fixture/cleanup permission and acceptable source evidence. Objective: persisted atomicity/concurrency and fresh-process KT-A01–05 evidence; explicit user development acceptance remains separate from technical checks/integration. No old Menu/Orders harness rerun or inherited target permission. |
 
 No later phase is detailed or activated. If payment-first or amendments/cancellation are required in the first slice, revise KT-01 prerequisites and criteria before source authorization; do not silently expand this plan.
 
@@ -35,7 +35,7 @@ This planning increment provides a reviewable conditional backend scope and a na
 
 ## Current handoff
 
-Post-0005 preparation is ready under [the latest authorization/evidence](#post-0005-preparation-result--2026-10-25). Active branch `codex/kitchen-handoff`; preparation and preceding local evidence/repair commits are unpublished. Next action: approve [the procedure and exact one-run authorization](database-acceptance.md#required-authorization-for-one-run), including renewed disposable-target/exclusive reservation confirmation. No database access or execution permission is inferred. Preserve all three existing ownership ledgers, all reports and pending incident reviews. OR-01 remains accepted/closed; Kitchen acceptance remains pending. Historical handoffs below retain their original authorization limits.
+The [post-0005 execution result](#post-0005-execution-result--2026-10-25) owns current evidence: K01–K04 passed, fresh-process stage failed and D01 is unverified; owned cleanup passed. The one-run permission is consumed. Next action: authorize bounded offline D01 diagnosis; no retry, source repair, database access or later workflow is inferred. Preserve the four local ownership ledgers and all reports, including prior evidence and pending incident reviews. Active branch `codex/kitchen-handoff`; local evidence/repair/preparation remains unpublished. OR-01 remains accepted/closed; Kitchen acceptance is pending. Historical handoffs below retain their original limits.
 
 
 ## Technical review — 2026-10-23
@@ -199,3 +199,29 @@ Verification: eleven focused offline preparation checks passed on existing Node 
 Readiness: prepared for an explicit one-run decision, not PostgreSQL verified or Kitchen accepted. Historical K01 cause/pooling behavior remains unconfirmed. No `.env` read, database access, fixtures/migrations/cases/cleanup execution, installation or publication occurred. Database state remains historical evidence only. All three ownership ledgers and existing reports preserved unchanged; no temporary/debug artifacts introduced. Incidents: none in this preparation; prior reviews remain pending.
 
 Next material decision: the user approves the prepared procedure and expressly confirms the configured target's disposable testing identity/exclusive reservation for the new run; authorizes fresh compilation, one read-only baseline and conditionally one K01–K04/D01/owned-cleanup execution using its fresh fingerprint without another approval. No migration application is permitted. The exact proposed authorization is in the procedure; it is not active permission.
+
+
+## Post-0005 one-run authorization — 2026-10-25
+
+User approved the prepared post-0005 procedure and expressly confirmed the configured database is the intended disposable testing target, exclusively reserved for this entire new run. Permission: fresh compilation, one read-only baseline and only after every gate passes one synthetic K01–K04/D01 execution, one fresh API process and owned cleanup; use the fresh verified fingerprint without another approval. No migrations, automatic retry, gate relaxation, publication or later workflow. Existing stop conditions apply; Kitchen acceptance remains separate. Recorded before environment loading/database access.
+
+Entry verified: solo primary owner, existing `codex/kitchen-handoff` at `9f8b7e4`, no tracked changes; all three preserved ownership ledgers match prior hashes. Existing offline evidence reused. Active P0 task: exact post-0005 baseline, one conditional run and observed cleanup/evidence; next action depends on those results, never automatic module closure.
+
+
+## Post-0005 execution result — 2026-10-25
+
+Fresh compilation passed using existing Node v24.21.0. The single read-only baseline passed on PostgreSQL 17.11: two matching read-only connection identities, exact migration 0000–0005 hashes/timestamps, expected 0005 schema/sequence/default and sixteen empty tables. Sanitized report: `apps/api/tests/evidence/kt01.244186db-522d-4955-8960-02e9f5604713.json`. The conditional execute invocation repeated/passed the full baseline with the fresh fingerprint; source/compiled/harness/migration hashes match across both reports. No migration was applied; 0005 was retained/verified.
+
+| Case | Observed result |
+| --- | --- |
+| K01 | Passed: actual advisory wait observed; one committed ticket, retry/direct duplicate returns original, preparation/history oracle passed |
+| K02 | Passed: injected failure left no partial ticket, session activity rolled back, Orders preserved and successful retry committed once |
+| K03 | Passed: actual advisory wait observed, one logical transition, retained distinct stage actors and stale retry rejected |
+| K04 | Passed: four pre-fence tickets, fifth only on new scan, foreign scope exclusion |
+| D01 | Unverified: fresh-process stage failed with sanitized `operation-failed`, no SQLSTATE; successful child marker/readback not established |
+
+Execution report: `apps/api/tests/evidence/kt01.6afed4c6-77aa-433c-83c4-6261b92560e3.json`. The report retains D01 as `not-run` because its result is assigned only after fresh-process verification and parent readback both succeed; the overall `fresh-process` failure stage means this verification stage was entered. It does not localize pool close, child start/exit/timeout, HTTP assertion or parent readback. Do not infer the precise failure, child process outcome or a product defect. Passing K01 under repaired instrumentation does not retrospectively prove the original K01 failure's cause.
+
+Owned cleanup **passed**: sixteen application tables counted zero, expected post-0005 schema validated, final six-entry history exactly equals the baseline. No idle/pool-close/cleanup error was reported. Existing TLS certificate verification remains false; no transport/TLS, database-server restart or crash/backup recovery assurance. New restricted ownership ledger retained locally/untracked; all three pre-existing ledgers match their entry hashes. Reports contain hashes/sanitized evidence only. No installation, provisioning, deployment, historical runner execution, publication, automatic retry or later workflow occurred.
+
+Readiness: KT-02 remains blocked on D01, not complete or accepted. This one-run permission is consumed. Next decision: authorize bounded offline diagnosis of fresh-process failure and a minimal repair proposal, preserving the passed K01–K04 evidence. Any repair or new database verification requires its own explicit scope; do not automatically repeat the full run. Incidents: none confirmed in this execution; the failure alone does not establish a qualifying defect. Prior reviews remain pending and unchanged.

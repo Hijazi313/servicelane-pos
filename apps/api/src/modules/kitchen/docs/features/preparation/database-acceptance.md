@@ -1,6 +1,8 @@
-# KT-02 PostgreSQL verification — prepared post-0005 procedure
+# KT-02 PostgreSQL verification — consumed post-0005 procedure
 
-Authorization: procedure/harness preparation, focused offline checks and local commits only (2026-10-25). **No new database access or execution is authorized.** [Tracker](phase-tracker.md#post-0005-preparation-activation--2026-10-25) owns scope; [specification](spec.md#acceptance-criteria) owns KT-A01–06. OR-01 remains accepted/closed; Kitchen acceptance is separate.
+**Execution update (2026-10-25):** the separately authorized post-0005 run passed K01–K04, failed at fresh-process verification and verified owned cleanup. D01 remains unverified. The one-run permission is consumed; commands and authorization text below are historical and must not be reused without a new reviewed decision. See [current result](phase-tracker.md#post-0005-execution-result--2026-10-25).
+
+Preparation authorization: procedure/harness preparation, focused offline checks and local commits only (2026-10-25). **No new database access or execution is authorized.** [Tracker](phase-tracker.md#post-0005-preparation-activation--2026-10-25) owns scope; [specification](spec.md#acceptance-criteria) owns KT-A01–06. OR-01 remains accepted/closed; Kitchen acceptance is separate.
 
 The earlier run applied 0005, failed K01 and verified owned cleanup with sixteen empty tables and all six history entries. Its reports and ownership ledger are preserved. Current state is not inferred from that historical observation. This procedure supersedes the consumed post-0004 procedure for the existing target; there is no migration path in the prepared runner.
 
@@ -67,7 +69,7 @@ Contender Access transactions set `application_name` transaction-locally before 
 
 ## Required authorization for one run
 
-Use the repository continuation-prompt format; the following is a proposed authorization, not active permission:
+The following records the authorization shape used for the consumed run. It grants no further execution; the next decision is offline D01 diagnosis.
 
 ```text
 Resume KT-02 from docs/planning/TRACKER.md and the Kitchen tracker's current
