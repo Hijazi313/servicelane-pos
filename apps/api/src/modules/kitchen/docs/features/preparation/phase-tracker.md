@@ -2,7 +2,7 @@
 
 Date: 2026-10-22. Owner: primary agent, solo. [Specification](spec.md); [business decisions](decisions.md); [global tracker](../../../../../../../../docs/planning/TRACKER.md).
 
-Status: K01–K04 passed; D01 PostgreSQL evidence remains pending. D01-only diagnostics/harness are prepared and offline-verified; awaiting explicit new execution authorization. Kitchen acceptance remains pending.
+Status: D01 stable-build verification reached queue readback but exceeded the fixed 30-second child deadline. K01–K04 remain passed; cleanup passed. KT-02/Kitchen acceptance is not complete; the remaining decision is the measured timeout-budget change.
 
 ## Authorization and verified entry
 
@@ -37,7 +37,7 @@ This planning increment provides a reviewable conditional backend scope and a na
 
 Kitchen HTTP adoption is complete locally under [the dated result](#rest-api-adoption-result--2026-10-25); its compatibility/evidence limits are separate from D01 continuation below.
 
-[D01 diagnosis/repair preparation](#d01-autonomous-result--2026-10-25) is complete locally. Its shared HTTP checks pass offline; original fresh-process failure is still unlocalized. Next single decision: authorize [one D01-only database verification](database-acceptance.md#required-authorization-for-d01-only-run), including renewed target/reservation confirmation. No new database execution, timeout relaxation or module closure is inferred. Preserve the prior K01–K04 passing evidence, all four local ownership ledgers, reports and pending incident reviews. Active branch `codex/kitchen-handoff`; current work remains unpublished. OR-01 accepted/closed; Kitchen acceptance pending. Process incident: [INC-20261025-02](../../../../../../../../docs/quality/agent-incidents.md#inc-20261025-02--kt-02-follow-ups-fragmented-progress-and-required-repeated-user-coordination) remains open.
+[Latest stable-build result](#final-d01-stable-build-result--2026-10-25): frozen source/compiled hashes stayed unchanged; five HTTP ticket reads and ready redispatch passed, then D01 hit its 30-second deadline during queue readback. Cleanup passed: sixteen empty tables and all six history entries retained. Next single decision: approve only a 30→60-second child deadline and one supervised D01-only run under the existing target/baseline/assertion/cleanup gates. No automatic retry or silent timeout relaxation. Preserve all six ownership ledgers and reports. Active branch `codex/kitchen-handoff`; source remains locally modified/unpublished after REST adoption. OR-01 accepted/closed; KT-02/Kitchen acceptance not complete. Process incident INC-20261025-02 remains open; no new qualifying incident confirmed.
 
 
 ## Technical review — 2026-10-23
@@ -247,6 +247,10 @@ Verification: fourteen focused offline checks pass on existing Node v24.21.0, in
 Next material decision: the procedure contains one concrete D01-only execution authorization and renewed disposable-target/exclusive-reservation confirmation. This is required because the prior database permission explicitly covered one run and prohibited automatic retries. No further diagnosis/preparation prompt is needed. Kitchen acceptance and later module activation remain separate.
 
 
+## D01 supervised continuation — 2026-10-25
+
+User instructed independent D01 work (“nothing is required from my side”), then explicitly directed finishing/closing the phase rather than further back-and-forth. Apply that continuation instruction with the standing explicit disposable-target/exclusive-reservation confirmation: one supervised prepared D01-only baseline and conditional execution, not an automatic retry of the full run. The earlier demand to repeat the same target confirmation was agent-added coordination overhead; no new target identity is inferred. Record before database access: fresh compile, exact sixteen-empty-table/six-history-entry gate, fresh fingerprint, D01-only synthetic fixtures/one child/readback/owned cleanup, no migrations or timeout relaxation. Preserve K01–K04 evidence and all ledgers. Stop on any prepared failure condition; no publication/later module activation or false closure. Checkout `35fd2e0`, `codex/kitchen-handoff`, solo primary owner, four pre-existing untracked ledgers, no tracked source changes.
+
 ## REST API adoption — 2026-10-25
 
 User explicitly authorized completing Kitchen's full REST API adoption now, following the Kitchen-only timing recommendation, with sub-agents and dated module documentation. This scope covers all four Kitchen routes and necessary shared HTTP integration, contracts and focused offline checks. It does not activate migration of other modules, new database execution, installation, deployment, publication or user acceptance. Existing checkout/branch reused without Git mutations; preserve unrelated D01 continuation edits/report and all ledgers. Historical assignment: primary agent owned HTTP/shared integration, documentation and combined verification; sub-agents owned application/cursor work and Kitchen HTTP/restart checks. Assignments are complete and grant no future authorization.
@@ -260,6 +264,17 @@ Intended contract: [specification](spec.md#rest-api-adoption--2026-10-25). Phase
 | Dated capability/adoption baseline and compatibility documentation | complete | Final code/docs review |
 
 Adoption completion and focused verification will be recorded below; this activation is not a completion claim. D01 acceptance remains separately owned by its current continuation/evidence. No incidents established in this increment at activation.
+
+
+## D01 supervised run / concurrent-change stop — 2026-10-25
+
+Fresh compilation and the read-only D01 baseline passed on the standing confirmed target: exact post-0005 schema/history, sixteen empty tables. Baseline report `apps/api/tests/evidence/kt01.382f7186-49c3-4dcc-b9e6-8d3f4ee3e2e6.json`. One supervised D01-only execution repeated/passed baseline and seeded the bounded fixtures without migrations or K01–K04 case reruns. Execution report `apps/api/tests/evidence/kt01.69e6ca2e-22c5-4fd9-89ff-4e1d69d908d5.json`: failed at `fresh-process` / `child`, `KT_CHILD_EXIT`, exit 1, last safe step `ticket-read-1`. This was not the 30-second timeout. Exact HTTP failure remains unlocalized; do not claim an application defect or successful D01.
+
+Owned cleanup passed: sixteen tables empty, expected schema intact and final six-entry history equals execute baseline; 0005 retained. New ownership ledger is retained locally, alongside all four earlier ledgers. No retry, timeout relaxation or publication. Existing TLS verification false; no transport assurance.
+
+During this run, the separate authorized REST-adoption work changed source, `kt01-runtime.mjs`, `kt01-restart-checks.mjs` and compiled artifacts in this shared checkout. Run-start controller source/compiled hashes were `cbbdd388f80fcd67bdab8d50b6859bcf437b82f55399ff5c7091786beb901d4f` / `d7fa97be41ab4e474855474ce887ea6428b1cdc4dfd2a873edefa0de5ed5cac0`; after failure they were `1ac7d1a833f92f085d4c1d15febec07e9b7f23e395cdbf08341c75e763667f72` / `42a4305e03ba688060402ca94211974829938f8c6d3e0263620bb97959a82165`. The restart-checks hash changed from `94f9e700c2d06777f9f6504873aaab977567c1b8b8392c37348302916fadd4cc` to `6be8cb6650f80f205a0c1333743c2267e86b4d4b8039905424a850322fc4f749`. These comparisons establish loss of a frozen build, not which version the child imported or the cause of its assertion. The documented REST adoption assignment explicitly owns those changing files and fresh compilation; do not overwrite/revert its work or treat the run-start hashes as proof of child code identity.
+
+D01/KT-02 remains blocked; no module closure or acceptance claimed. Next action: let REST adoption finish, reconcile its changed contracts/affected acceptance scope, then perform final verification from one stable checkout and exclusive compiled-output ownership. Do not add another generic review/preparation cycle or run concurrently. This chat stops source/compiled/Git mutations to preserve the other task's ownership; its evidence and tracker append remain local/uncommitted for coordinated integration. Incidents: no new confirmed technical incident from this result; existing process incident INC-20261025-02 remains open. Concurrent external changes are not attributed as an agent defect without further evidence.
 
 
 ## REST API adoption result — 2026-10-25
@@ -276,7 +291,22 @@ Migration handoff: source/docs and offline checks complete locally; next action 
 
 Local contribution authorization — 2026-10-25: user requested committing this migration, documentation cleanup and incident records. Reuse the existing topic branch; no push/PR/merge or database action inferred. Concurrent D01 tracker edits and evidence remain outside these commits.
 
-
 ## REST adoption incident review — 2026-10-25
 
 User-requested review recorded [documentation rework](../../../../../../../../docs/quality/agent-incidents.md#inc-20261025-03--kitchen-adoption-documentation-required-user-led-simplification) and [concurrent build interference](../../../../../../../../docs/quality/agent-incidents.md#inc-20261025-04--concurrent-kitchen-migration-invalidated-a-d01-build-snapshot). These qualify the earlier “Incidents: none” handoffs; the incident log owns findings, corrections and pending review. No new execution or policy changes.
+
+
+## Final D01 stable-build continuation — 2026-10-25
+
+User requested checking the other agent's completed work and finishing KT-02. REST adoption now records source/offline completion (35 focused checks); ownership assignments are complete. Continue the supervised D01-only verification under the standing confirmed reserved testing-target and user-directed independent closure scope. Preserve all source/docs and the unrelated Authentication collaboration-document cleanup. Freeze current application/migration/test sources into an owned temporary directory with existing dependencies symlinked, compile there and run both parent/child against that fixed copy. Do not copy the environment file, install, migrate, relax timeouts or publish. One fresh baseline and conditional D01-only execution/readback/owned cleanup; stop on failure. Historical K01–K04 evidence retains its original hashes; REST offline evidence owns changed contracts. No source/compiled writes to the shared checkout during execution.
+
+
+## Final D01 stable-build result — 2026-10-25
+
+REST adoption was complete before this attempt. Fresh compilation and all parent/child execution used an owned frozen temporary copy, with existing dependencies linked and the original environment loaded by absolute path (not copied). Baseline report `apps/api/tests/evidence/kt01.7d5100ae-3ee6-4c0d-929b-3bf9a69c8dae.json` passed exact identity/post-0005 history/schema/sixteen-empty-table gates. Execute report `apps/api/tests/evidence/kt01.cc1a5b99-152b-41f8-8646-16c27dd1664c.json` repeated the gate, applied no migrations and ran only D01 fixtures/child/readback path. Source/compiled/harness hashes match baseline and execution and remain unchanged through shutdown. Previous K01–K04 evidence is preserved; it is not rerun or relabeled for the new API contract.
+
+D01 failed specifically with `KT_CHILD_TIMEOUT`, last safe child step `queue-readback`. Under the exact frozen child checks, reaching this step establishes that five exact HTTP ticket reads (including envelope/request correlation) and ready-ticket redispatch/Location assertions completed; queue completion, foreign denial and parent readback were not established. This stable attempt did not fail on the first ticket read. It does not prove the exact cause of either earlier failed run. No timeout increase or automatic retry performed.
+
+Owned cleanup passed: sixteen empty application tables, expected post-0005 schema and unchanged six-entry history. No idle/pool-close/cleanup error reported; 0005 retained. Sanitized reports and the new restricted ledger were copied unchanged into the repository evidence directory; all prior reports/ledgers preserved. Temporary isolated source/compiled copy removed after integrity/report checks. Shared source and compiled outputs were not modified. TLS verification remains configured false; no transport assurance or user acceptance inferred.
+
+Concrete remaining decision: permit extending only the fresh-child deadline from 30 to 60 seconds and one supervised D01-only verification with the same baseline, assertions and cleanup. This is a proposed timeout-budget change, not an authorized relaxation. It is justified by observed successful reads/redispatch followed by the explicit deadline at queue readback; it does not need another general review or preparation cycle. The previous explicit 30-second/no-relaxation boundary prevents silently making this change. Stop on any other failure; no broad rerun or further module activation. KT-02 remains blocked until D01 completes, not falsely closed. Incidents: no new qualifying incident confirmed; existing reviews remain open.
