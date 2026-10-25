@@ -135,3 +135,8 @@ Target/exclusive reservation explicitly confirmed by user. Fresh compilation pas
 ## KT-02 execution result — 2026-10-25
 
 Supervised diagnosis identified restricted-sandbox DNS failure; read-only network-enabled diagnosis and exact baseline passed without configuration changes. The single authorized execution applied 0005, then K01 failed with sanitized operation failure; no contention proof, later cases or fresh process verified. Owned cleanup passed: sixteen empty application tables, expected schema and all six exact history entries intact. [Owning result/next decision](../../apps/api/src/modules/kitchen/docs/features/preparation/phase-tracker.md#kt-02-execution-result--2026-10-25). No rerun. Next: bounded offline K01 diagnosis; repair/new execution needs separate scope and a post-0005 procedure. OR-01 remains accepted/closed; Kitchen acceptance remains pending. Historical ledgers and incident reviews preserved.
+
+
+## KT-02 offline diagnosis — 2026-10-25
+
+[Owning assessment/proposed repair](../../apps/api/src/modules/kitchen/docs/features/preparation/phase-tracker.md#kt-02-offline-diagnosis--proposed-repair--2026-10-25): seven existing preparation checks passed without database access. Connection-startup versus transaction-local contender labeling is a plausible observer weakness; exact K01 failure remains unknown. Proposed scoped harness instrumentation/diagnostics and post-0005 procedure require implementation authorization; no database run is inferred. Capability/module summaries reconciled with applied 0005 and verified cleanup. Historical ledgers and incident reviews preserved.

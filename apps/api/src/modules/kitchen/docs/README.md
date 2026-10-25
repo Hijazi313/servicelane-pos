@@ -7,4 +7,4 @@ Owns preparation tickets, dispatch identity, branch queue ordering and whole-tic
 - [Phase tracker, authorization and evidence limits](features/preparation/phase-tracker.md)
 - [Capabilities](capabilities.md)
 
-KT-01 is source/offline delivered, pending review/acceptance. Migration 0005 is unapplied. No KDS UI, printing, billing/payment gate, amendments/cancellation, collection/completion, branch configuration or operational release is provided. Those remain separate scope.
+KT-01 is source/offline delivered, pending review/acceptance. Migration 0005 is applied; the KT-02 run stopped at K01 and owned cleanup passed. No KDS UI, printing, billing/payment gate, amendments/cancellation, collection/completion, branch configuration or operational release is provided. Those remain separate scope.

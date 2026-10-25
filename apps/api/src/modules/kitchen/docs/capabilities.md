@@ -1,6 +1,6 @@
 # Kitchen capability index
 
-KT-01 source has focused offline application/actual-HTTP and synthetic SQL evidence only; migration 0005 is generated and **unapplied**. No PostgreSQL persistence/restart/concurrency, operational or user acceptance is claimed. [Tracker](features/preparation/phase-tracker.md) owns authorization/evidence.
+KT-01 source has focused offline application/actual-HTTP and synthetic SQL evidence only; migration 0005 is applied. The bounded PostgreSQL run stopped at K01; cleanup verified sixteen empty tables and intact history. PostgreSQL acceptance cases, restart/concurrency, operational and user acceptance remain unestablished. [Tracker](features/preparation/phase-tracker.md) owns authorization/evidence.
 
 | Capability | Public entry point | Purpose | Important constraints |
 | --- | --- | --- | --- |
