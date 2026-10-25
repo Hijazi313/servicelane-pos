@@ -35,7 +35,7 @@ This planning increment provides a reviewable conditional backend scope and a na
 
 ## Current handoff
 
-[User acceptance and closeout](#user-acceptance-and-closeout--2026-10-25) close the current Kitchen backend increment under its recorded evidence/operational limits. Active branch `codex/kitchen-handoff`; owner primary agent. Publish the accepted branch and one focused PR against verified `main`; GitHub owns exact-head CI state. Merge requires the remaining explicit user decision. No database rerun, installation, deployment or next module is authorized. Preserve all seven ownership ledgers, historical reports and pending incident reviews. OR-01 remains accepted/closed.
+[User acceptance and closeout](#user-acceptance-and-closeout--2026-10-25) close the current Kitchen backend increment under its recorded evidence/operational limits. Active branch `codex/kitchen-handoff`; owner primary agent. Published [PR #16](https://github.com/Hijazi313/servicelane-pos/pull/16) against verified `main`; GitHub owns current exact-head CI state. Merge requires the remaining explicit user decision. No database rerun, installation, deployment or next module is authorized. Preserve all seven ownership ledgers, historical reports and pending incident reviews. OR-01 remains accepted/closed.
 
 
 ## Technical review — 2026-10-23
@@ -347,3 +347,8 @@ Focused integration-diff review found no blocking scope/contract mismatch: Kitch
 Closed scope is backend development, not restaurant operation or release readiness. KDS/browser UI, printers/stations, payment/tax behavior, amendments/cancellation, collection/completion, provisioning, production TLS/privacy and crash/backup recovery remain deferred/separately scoped. Configured TLS verification was false in the bounded testing evidence; no transport assurance is accepted by implication. Existing incident reviews remain pending, including corrected occurrences; acceptance does not close incidents or approve prevention/guardrail changes.
 
 Next material decision: review the focused Kitchen PR and its exact-head checks, then explicitly decide merge. No Billing or later-module work is activated. GitHub PR/check links will own publication evidence; the acceptance itself is effective independently of merge.
+
+
+### PR publication — 2026-10-25
+
+[PR #16](https://github.com/Hijazi313/servicelane-pos/pull/16) is open against main `ac9ce07`; normal topic push succeeded. Both existing workflows (HTTP boundaries and PR title) started for the published head. Their live state is authoritative on GitHub; exact final-head results are checked at handoff, not inferred from the initial run. No merge or source change after accepted runtime evidence; only acceptance/publication documentation. All seven ownership ledgers remain untracked/excluded. Remaining decision is user review/merge authorization; operational limits and incident reviews remain unchanged.

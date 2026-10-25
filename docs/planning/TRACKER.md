@@ -79,13 +79,13 @@ Current designations follow [CONTRIBUTING](../../CONTRIBUTING.md#active-work-and
 
 | Phase / task | Branch | Checkout | Owner | Integration base | Publication / blocker | Owning tracker |
 | --- | --- | --- | --- | --- | --- | --- |
-| Kitchen PR integration | `codex/kitchen-handoff` | `/Users/macbookpro/Documents/personal/restaurant-pos-custom` | Primary agent | `main` (`ac9ce07` verified/integrated) | Backend development accepted/closed; publication and exact-head CI verification authorized. Awaiting separate merge decision. | [Kitchen acceptance](../../apps/api/src/modules/kitchen/docs/features/preparation/phase-tracker.md#user-acceptance-and-closeout--2026-10-25) |
+| Kitchen PR integration | `codex/kitchen-handoff` | `/Users/macbookpro/Documents/personal/restaurant-pos-custom` | Primary agent | `main` (`ac9ce07` verified/integrated) | Backend development accepted/closed; [PR #16](https://github.com/Hijazi313/servicelane-pos/pull/16) open. GitHub owns current exact-head CI; awaiting separate merge decision. | [Kitchen acceptance](../../apps/api/src/modules/kitchen/docs/features/preparation/phase-tracker.md#user-acceptance-and-closeout--2026-10-25) |
 
 ## Current planning handoff — 2026-10-25
 
 BA-01/02/03 accepted development scope and historical execution permissions are owned by the [joint BA tracker](business-access/phase-tracker.md). They do not authorize new Menu or database work.
 
-Current handoff: [Kitchen user acceptance/closeout](../../apps/api/src/modules/kitchen/docs/features/preparation/phase-tracker.md#user-acceptance-and-closeout--2026-10-25) closes the backend development increment under its recorded evidence limits. Publish the branch/one focused PR and verify exact-head CI; remaining decision is merge. No database rerun, installation, deployment or later-module implementation. OR-01 stays accepted/closed. Preserve seven ownership ledgers, reports and pending incident reviews; operational/release deferrals remain unchanged.
+Current handoff: [Kitchen user acceptance/closeout](../../apps/api/src/modules/kitchen/docs/features/preparation/phase-tracker.md#user-acceptance-and-closeout--2026-10-25) closes the backend development increment under its recorded evidence limits. [PR #16](https://github.com/Hijazi313/servicelane-pos/pull/16) is open; verify exact-head CI before the remaining merge decision. No database rerun, installation, deployment or later-module implementation. OR-01 stays accepted/closed. Preserve seven ownership ledgers, reports and pending incident reviews; operational/release deferrals remain unchanged.
 
 ## Proposed foundation follow-ups — 2026-10-12
 
