@@ -2,7 +2,7 @@
 
 Date: 2026-10-22. Owner: primary agent, solo. [Specification](spec.md); [business decisions](decisions.md); [global tracker](../../../../../../../../docs/planning/TRACKER.md).
 
-Status: KT-02 technical verification complete. K01–K04 evidence retained; final frozen-build D01 and owned cleanup passed. Kitchen backend development acceptance, publication and operational release remain separate.
+Status: Kitchen backend development scope explicitly accepted and current increment closed on 2026-10-25. KT-01/KT-02 evidence and limits accepted; branch publication/PR authorized, merge and later-module work not authorized.
 
 ## Authorization and verified entry
 
@@ -15,8 +15,8 @@ Local main and remote main both verified at `6125da43245f50f52730d122792f7d01418
 | Phase | Outcome / status | Entry and exit |
 | --- | --- | --- |
 | KT-00 — planning | Complete: documentation prepared and KT-D01–04 resolved | Entry: current request. Exit met for business planning: owner resolved KT-D01–04. Technical review is now delivered below; owner approval of the revised specification remains separate from implementation authorization. |
-| KT-01 — backend handoff | Source/offline checks delivered; acceptance pending | Entry: approved decisions/spec plus explicit source/check authorization. Intended outcome: KT-A01–06, one transaction-aware Orders projection, trusted Authentication actor-scope extension and Kitchen ticket/queue/status boundary. Before coding, confirm contracts, bounds, revision/retry semantics and capability upkeep; no standalone Orders reopening or unrelated fixes. Exit: authorized source/offline evidence recorded, unavailable persistence behavior explicit. |
-| KT-02 — bounded integration acceptance | Complete within recorded technical evidence; user acceptance separate | Entry: reviewed procedure for current post-0005 baseline, explicit target/run/fixture/cleanup permission and acceptable source evidence. Objective: persisted atomicity/concurrency and fresh-process KT-A01–05 evidence; explicit user development acceptance remains separate from technical checks/integration. No old Menu/Orders harness rerun or inherited target permission. |
+| KT-01 — backend handoff | Complete; backend development scope user-accepted | Entry: approved decisions/spec plus explicit source/check authorization. Intended outcome: KT-A01–06, one transaction-aware Orders projection, trusted Authentication actor-scope extension and Kitchen ticket/queue/status boundary. Before coding, confirm contracts, bounds, revision/retry semantics and capability upkeep; no standalone Orders reopening or unrelated fixes. Exit: authorized source/offline evidence recorded, unavailable persistence behavior explicit. |
+| KT-02 — bounded integration acceptance | Complete; recorded backend development evidence user-accepted | Entry: reviewed procedure for current post-0005 baseline, explicit target/run/fixture/cleanup permission and acceptable source evidence. Objective: persisted atomicity/concurrency and fresh-process KT-A01–05 evidence; explicit user development acceptance remains separate from technical checks/integration. No old Menu/Orders harness rerun or inherited target permission. |
 
 No later phase is detailed or activated. If payment-first or amendments/cancellation are required in the first slice, revise KT-01 prerequisites and criteria before source authorization; do not silently expand this plan.
 
@@ -35,7 +35,7 @@ This planning increment provides a reviewable conditional backend scope and a na
 
 ## Current handoff
 
-[KT-02 technical closeout](#kt-02-technical-closeout--2026-10-25): final D01 passed on a frozen build with the approved 60-second budget; owned cleanup verified sixteen empty tables and all six history entries intact. No verification blocker remains in this bounded scope. Next material decision is explicit Kitchen backend development acceptance and any separately authorized contribution/next-module workflow—not another D01 preparation cycle. OR-01 remains accepted/closed. Active branch `codex/kitchen-handoff`; no publication authorized. Preserve all seven local ownership ledgers, historical reports and pending incident reviews. Operational/UI/payment/correction/collection/recovery limits remain deferred. Process incidents remain subject to user review.
+[User acceptance and closeout](#user-acceptance-and-closeout--2026-10-25) close the current Kitchen backend increment under its recorded evidence/operational limits. Active branch `codex/kitchen-handoff`; owner primary agent. Publish the accepted branch and one focused PR against verified `main`; GitHub owns exact-head CI state. Merge requires the remaining explicit user decision. No database rerun, installation, deployment or next module is authorized. Preserve all seven ownership ledgers, historical reports and pending incident reviews. OR-01 remains accepted/closed.
 
 
 ## Technical review — 2026-10-23
@@ -334,3 +334,16 @@ Owned cleanup **passed**: all sixteen application tables empty, expected post-00
 KT-02 is **complete as bounded technical verification**, using historical K01–K04 at their recorded hashes, REST adoption's 35 offline checks and final D01 on the adopted code. This is composed evidence, not one full end-to-end run of every case against the new contract. No browser/KDS, TLS/transport, crash/backup recovery, full trading flow or restaurant-readiness claim; configured TLS certificate verification remains false. Kitchen user development acceptance remains separate, as explicitly requested; no next module is activated.
 
 Incidents: concurrent-build incident INC-20261025-04 has correction evidence from frozen-build hash stability and completed D01; user closure/prevention review remains pending. Current closeout also corrects/records stale root README status as INC-20261025-05. Existing process reviews remain open; no instruction/skill/guardrail changes.
+
+
+## User acceptance and closeout — 2026-10-25
+
+User explicitly accepted the recorded Kitchen backend development scope and evidence limits and authorized local closeout commits, normal branch push, one focused PR against `main` and verification of existing CI at the exact PR head. No merge, database rerun, installation, deployment or next-module implementation. Checkout verified at `475cf11` on `codex/kitchen-handoff`, tracked clean with only the seven preserved ownership ledgers untracked. Fetched origin main is `ac9ce07`, already integrated; no rebase/merge needed. Primary agent owns closeout/integration.
+
+Acceptance covers implemented preparation-only dispatch, branch-scoped queue/readback and queued→preparing→ready transitions, the trusted actor/Orders projection prerequisites, migration 0005 and the adopted shared Kitchen HTTP contracts. Evidence is composed exactly as recorded in [KT-02 closeout](#kt-02-technical-closeout--2026-10-25): historical K01–K04 at their original hashes, REST adoption's 35 focused offline checks and passing final frozen-build D01 with approved 60-second budget. Cleanup verified sixteen empty tables and six exact history entries; 0005 retained. No new runtime tests, database access, installation or schema action performed for acceptance/publication.
+
+Focused integration-diff review found no blocking scope/contract mismatch: Kitchen module/bootstrap and migration wiring present, Orders read honors the supplied transaction, actor scope is server-derived, strict DTO/shared HTTP composition is explicit, persistence uniqueness/revisions and scope-bound pagination remain documented. Main's existing Menu/Orders contracts remain intact. Branch includes previously authorized workflow guidance, completed collaboration-record consolidation and incident/evidence documentation; no unrelated runtime feature or dependency change. Sanitized report structures/paths reviewed for publication; no credentials, environment files, ledgers or raw proofs included. Local diff/affected links/whitespace checks apply; current CI is to be verified remotely after publication, not inferred from historical local results.
+
+Closed scope is backend development, not restaurant operation or release readiness. KDS/browser UI, printers/stations, payment/tax behavior, amendments/cancellation, collection/completion, provisioning, production TLS/privacy and crash/backup recovery remain deferred/separately scoped. Configured TLS verification was false in the bounded testing evidence; no transport assurance is accepted by implication. Existing incident reviews remain pending, including corrected occurrences; acceptance does not close incidents or approve prevention/guardrail changes.
+
+Next material decision: review the focused Kitchen PR and its exact-head checks, then explicitly decide merge. No Billing or later-module work is activated. GitHub PR/check links will own publication evidence; the acceptance itself is effective independently of merge.
