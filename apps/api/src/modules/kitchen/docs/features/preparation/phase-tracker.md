@@ -2,7 +2,7 @@
 
 Date: 2026-10-22. Owner: primary agent, solo. [Specification](spec.md); [business decisions](decisions.md); [global tracker](../../../../../../../../docs/planning/TRACKER.md).
 
-Status: KT-02 active under the bounded authorization below; database access awaits explicit target/exclusive-reservation confirmation. KT-01 acceptance remains pending.
+Status: KT-02 blocked after the authorized read-only baseline failed; no execution or retry performed. KT-01 acceptance remains pending.
 
 ## Authorization and verified entry
 
@@ -16,7 +16,7 @@ Local main and remote main both verified at `6125da43245f50f52730d122792f7d01418
 | --- | --- | --- |
 | KT-00 — planning | Complete: documentation prepared and KT-D01–04 resolved | Entry: current request. Exit met for business planning: owner resolved KT-D01–04. Technical review is now delivered below; owner approval of the revised specification remains separate from implementation authorization. |
 | KT-01 — backend handoff | Source/offline checks delivered; acceptance pending | Entry: approved decisions/spec plus explicit source/check authorization. Intended outcome: KT-A01–06, one transaction-aware Orders projection, trusted Authentication actor-scope extension and Kitchen ticket/queue/status boundary. Before coding, confirm contracts, bounds, revision/retry semantics and capability upkeep; no standalone Orders reopening or unrelated fixes. Exit: authorized source/offline evidence recorded, unavailable persistence behavior explicit. |
-| KT-02 — bounded integration acceptance | Active; awaiting target confirmation | Entry: reviewed procedure for current post-0004 baseline, explicit target/run/fixture/cleanup permission and acceptable source evidence. Objective: persisted atomicity/concurrency and fresh-process KT-A01–05 evidence; explicit user development acceptance remains separate from technical checks/integration. No old Menu/Orders harness rerun or inherited target permission. |
+| KT-02 — bounded integration acceptance | Blocked; baseline operation failed | Entry: reviewed procedure for current post-0004 baseline, explicit target/run/fixture/cleanup permission and acceptable source evidence. Objective: persisted atomicity/concurrency and fresh-process KT-A01–05 evidence; explicit user development acceptance remains separate from technical checks/integration. No old Menu/Orders harness rerun or inherited target permission. |
 
 No later phase is detailed or activated. If payment-first or amendments/cancellation are required in the first slice, revise KT-01 prerequisites and criteria before source authorization; do not silently expand this plan.
 
@@ -131,3 +131,17 @@ Current handoff: no database access or environment loading performed. Next actio
 ## Active branch publication — 2026-10-25
 
 User authorized pushing `codex/kitchen-handoff` before continuing KT-02 and designating it the current active work branch, tracking `origin/codex/kitchen-handoff`. This supersedes the earlier source-push prohibition for this branch publication only. PR/merge and database access remain separately gated; target/reservation confirmation is still outstanding. Publish existing source/harness and this documentation checkpoint; preserve both untracked historical ledgers and pending incident reviews. No new runtime verification or acceptance is claimed.
+
+
+## KT-02 target confirmation — 2026-10-25
+
+User expressly confirmed the configured database is the intended disposable testing/staging database and exclusively reserved for this run, and instructed continuation. This satisfies the human target/reservation gate; emptiness remains subject to the exact baseline. Conditional authorization above now permits fresh compilation, baseline and, only on every passing gate, one execution with the fresh fingerprint without another approval. Checkout verified at `83bbe8c` on `codex/kitchen-handoff`; no tracked source changes. Primary agent remains sole execution owner. Stop conditions and all exclusions remain unchanged.
+
+
+## KT-02 baseline stop — 2026-10-25
+
+Fresh project compilation passed with existing Node v24.21.0. One authorized read-only baseline invocation exited 1; restricted sanitized [report](../../../../../../tests/evidence/kt01.73e81325-8849-434a-b824-7e5fc2f4698c.json) records `stage: baseline`, `category: operation-failed`, no SQLSTATE and no completed baseline/fingerprint. The report contains source/compiled/harness/migration hashes. Cause is undetermined; do not infer a schema mismatch, environmental cause or successful database connection from this result. Configured TLS certificate verification was reported false; no configuration was changed.
+
+Migration: not run. K01/K02/K03/K04/D01: all not run. Fixtures were not attempted; cleanup not required. Pool shutdown reported no idle/close failure. No database execution, automatic retry or diagnostic database connection followed. Current target schema/history/counts remain unverified, including whether 0005 is absent. This attempt cannot establish PostgreSQL behavior or Kitchen acceptance.
+
+Next material decision: authorize a bounded secret-safe diagnosis of the baseline operation failure before considering any new baseline attempt. Preserve this report and both historical ledgers. Incidents: none established in this run; an environmental/check failure alone is not a qualifying incident. Existing incident reviews remain pending and unchanged.
