@@ -17,10 +17,12 @@ The [specification](spec.md) defines phase P0 and observable acceptance. The [de
 | Phase | Outcome | Status / exit |
 | --- | --- | --- |
 | BP-00 | Agree smallest scope, money/fiscal/receipt/correction decisions and complete concrete contracts | Proposed; fiscal mode and contract review resolved before source entry |
-| BP-01 | Implement approved full-cash settlement/readback, narrow Orders projection and migration source | Proposed; focused offline evidence against BP-A01–07, reviewed source; no database permission inherited |
+| BP-01 | Implement approved full-cash settlement/readback, narrow Orders/Business projections, admin settings and migration source | Proposed; focused offline evidence against BP-A01–10, reviewed source; no database permission inherited |
 | BP-02 | Prove atomic persistence, duplicate handling and fresh-process readback on a reserved disposable target | Proposed objective only; separately approved prepared procedure, one bounded run and owned cleanup; user development acceptance separate |
 
 No phase is activated by this table. Operational corrections/refunds, fiscal output, collection/completion and complete trading-flow/recovery acceptance remain release prerequisites needing their own scope, not automatic BP-02 work.
+
+Settings/defaults and limits are defined in the [specification](spec.md#bp-00-settings-and-defaults--2026-10-26). Administrator policy configuration and narrow Business display edits are proposed additions; no source permission is inferred.
 
 ## P1 for this increment
 

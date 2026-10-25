@@ -81,11 +81,11 @@ Current designations follow [CONTRIBUTING](../../CONTRIBUTING.md#active-work-and
 | --- | --- | --- | --- | --- | --- | --- |
 | Billing/Payments planning only | `codex/billing-planning` | `/Users/macbookpro/Documents/personal/restaurant-pos-custom` | Primary agent | `main` `d75ac92` | Local only — publication unauthorized; Fiscal mode/source authorization unresolved | [Billing tracker](billing/phase-tracker.md) |
 
-## Current planning handoff — 2026-10-25
+## Current planning handoff — 2026-10-26
 
 BA-01/02/03 accepted development scope and historical execution permissions are owned by the [joint BA tracker](business-access/phase-tracker.md). They do not authorize new Menu or database work.
 
-Current handoff: [Billing/Payments proposal](billing/README.md) recommends one immutable bill and one full cash settlement per captured takeaway order, with [development recommendations approved and fiscal mode unresolved](billing/decisions.md). [Owning tracker](billing/phase-tracker.md) records planning authorization, exact implementation permission needed and evidence limits. No implementation phase activated. Orders/Kitchen stay accepted/closed; seven untracked ledgers, historical reports, operational deferrals and pending incident reviews preserved. No accepted work rerun.
+Current handoff: [Billing/Payments proposal](billing/README.md) recommends one immutable bill and one full cash settlement per captured takeaway order, with [development recommendations approved and fiscal mode unresolved](billing/decisions.md). [Owning tracker](billing/phase-tracker.md) records planning authorization, exact implementation permission needed and evidence limits. [Exact settings/defaults](billing/spec.md#bp-00-settings-and-defaults--2026-10-26) are defined; remaining BP-00 contracts and fiscal mode precede implementation authorization. No implementation phase activated. Orders/Kitchen stay accepted/closed; seven untracked ledgers, historical reports, operational deferrals and pending incident reviews preserved. No accepted work rerun.
 
 ## Proposed foundation follow-ups — 2026-10-12
 
