@@ -1,0 +1,960 @@
+{
+  "tag": "kt01.f3a30b76-06f9-4c6e-86c9-60503a7487d3",
+  "mode": "execute",
+  "schema": "post-0005",
+  "scope": "D01",
+  "childDeadlineMs": 60000,
+  "runtime": "v24.21.0",
+  "startedAt": "2026-10-25T15:18:00.966Z",
+  "source": [
+    {
+      "path": "apps/api/src/app.module.ts",
+      "sha256": "70c447bcd07e635bc02383528c0bb4bdd79a5b2fd5b8e6853bfdd63075548651"
+    },
+    {
+      "path": "apps/api/src/application/provision-installation.ts",
+      "sha256": "1f621b89fcc5eb04211eb283b16fef1373ed01c69a95b78b78bb918a6fe2d4e6"
+    },
+    {
+      "path": "apps/api/src/infrastructure/configuration.ts",
+      "sha256": "8bca9e41409001fe1e72048da74f9468b82d3e61b353dd410ffc7d5a27db3882"
+    },
+    {
+      "path": "apps/api/src/infrastructure/database/database.module.ts",
+      "sha256": "ab3420090971dd593be74608c37d3e6057cf55f25da99de6236b6a79843178be"
+    },
+    {
+      "path": "apps/api/src/infrastructure/database/database.service.ts",
+      "sha256": "36514f861866b986fb6e9c30efce0fbc58c8d4a5b0bf8d7ee2c6158cd8c7eba6"
+    },
+    {
+      "path": "apps/api/src/infrastructure/database/migrate.ts",
+      "sha256": "b5444fb1f07c6603e2b6f4f1a81184054761c0469e6f9e3c8d8cb850cd56aaa0"
+    },
+    {
+      "path": "apps/api/src/infrastructure/database/schema.ts",
+      "sha256": "1ca982b4b71532609689c45e660a17b29db8006d2ee7e9847015619bbf7b0e0a"
+    },
+    {
+      "path": "apps/api/src/infrastructure/database/transaction.ts",
+      "sha256": "1bafa848bce0a0d34870a25ec4ccd5768fa0bebc93e8046962565366fa4feb3a"
+    },
+    {
+      "path": "apps/api/src/infrastructure/health.controller.ts",
+      "sha256": "cd63557bf808dda1465e03737454f17d8f58664b35bf22a47a1e423156796920"
+    },
+    {
+      "path": "apps/api/src/infrastructure/http/dto-validation.pipe.ts",
+      "sha256": "49711a7a9444be3baa0a8c984c3d45668ee092661d5be83b3d61b0ccee801f68"
+    },
+    {
+      "path": "apps/api/src/infrastructure/http/empty-query.dto.ts",
+      "sha256": "3dbff9cdf7c0c82d13b0ce505ffad19cfdd60d08a64196bf7f16d0b32856fae6"
+    },
+    {
+      "path": "apps/api/src/infrastructure/http/http-adapter.ts",
+      "sha256": "c3a550d3a0a7657feaff14bcabdfdc7a7f64a6d9b75db2ae3062078ded95bd26"
+    },
+    {
+      "path": "apps/api/src/infrastructure/http/http-contract.decorator.ts",
+      "sha256": "27bd8325d76f820e7861441b212f0a362d52ea062b34a4fa3ee9a24a35c2768f"
+    },
+    {
+      "path": "apps/api/src/infrastructure/http/http-contract.filter.ts",
+      "sha256": "f3c226b73220b83a3d901eedba061b1bc2166d0c147b1de445bf4fcaba969d73"
+    },
+    {
+      "path": "apps/api/src/infrastructure/http/http-contract.guard.ts",
+      "sha256": "9fb388a003154261a61ce597dda3eafe34de7cc92e4d41cbb6322b3cf573bdac"
+    },
+    {
+      "path": "apps/api/src/infrastructure/http/http-error-policy.ts",
+      "sha256": "4488c8036ff2e708d10e98781cfe42d0261ef03193b31e4e125ee3ec252ad433"
+    },
+    {
+      "path": "apps/api/src/infrastructure/http/http-response.interceptor.ts",
+      "sha256": "78d419a99477e345a66db35010ff4423af8160196186823474a1319b51d681a7"
+    },
+    {
+      "path": "apps/api/src/infrastructure/http/problem-details.ts",
+      "sha256": "e1b416fbf17c700d9178d2c85763b9b42e7690a98498902252b2456f620668a4"
+    },
+    {
+      "path": "apps/api/src/infrastructure/request-limits.ts",
+      "sha256": "25fc3210ff0b30e7ede596f8f60f3f5c50e370f2b8d57502782809af59d3fc5e"
+    },
+    {
+      "path": "apps/api/src/main.ts",
+      "sha256": "05f6d20f6c8471671892224d6e891d5f78a1fc48a73933aefbc217065f5c8a13"
+    },
+    {
+      "path": "apps/api/src/modules/authentication/application/access-policy.ts",
+      "sha256": "c1e0e727a01073ea8907b6026422325d34d71b052c074ecd50843fa3de5ecc57"
+    },
+    {
+      "path": "apps/api/src/modules/authentication/application/access-store.ts",
+      "sha256": "c355bc304a29a7cac43dd757d2d15c874b3b9ecdd313437e5c665e2c410d41ce"
+    },
+    {
+      "path": "apps/api/src/modules/authentication/application/access.service.ts",
+      "sha256": "5769025c16473630bdec74e0ce2e4210e88cda4f865f03a89f73bebbdb5553bf"
+    },
+    {
+      "path": "apps/api/src/modules/authentication/application/administrator-provisioner.ts",
+      "sha256": "ecd26603576fea75ff69024c3cec7d08310d83564a8379bb695b2a9df4bf7cb8"
+    },
+    {
+      "path": "apps/api/src/modules/authentication/application/authorized-operation.ts",
+      "sha256": "4923fa03f114f5169f98ef739bc5f2ef4c2f128d31ba773e89b7fd35ec2d34db"
+    },
+    {
+      "path": "apps/api/src/modules/authentication/application/initial-administrator.ts",
+      "sha256": "febece9534996eb032c1811ea69845d1007cd2ae5c2de586d1025cc466817b0d"
+    },
+    {
+      "path": "apps/api/src/modules/authentication/authentication.module.ts",
+      "sha256": "8a54be718f8138c26d802d9a174015f552171fc4f8cc288b72126ee4a59ec172"
+    },
+    {
+      "path": "apps/api/src/modules/authentication/http/access-boundary.guard.ts",
+      "sha256": "b23779e4663eec2e5f085f51b39b6b16a11961a662bb730dc29212341621fb48"
+    },
+    {
+      "path": "apps/api/src/modules/authentication/http/access-entry.decorator.ts",
+      "sha256": "1220aa798f10bb56a477afdb6e86a59796f46d5b70104e4d2d65581c7d41c1e0"
+    },
+    {
+      "path": "apps/api/src/modules/authentication/http/access-exception.filter.ts",
+      "sha256": "9d2f818bef5c61f6ba253141da387a9e42757ae84a50e67d08c743352cb22403"
+    },
+    {
+      "path": "apps/api/src/modules/authentication/http/access-http.helpers.ts",
+      "sha256": "992ef657293e5fa9b15179ff73b1ef744cbf65e4c1d88a898986b5c9bb9429f8"
+    },
+    {
+      "path": "apps/api/src/modules/authentication/http/access-http.module.ts",
+      "sha256": "819fa69f35d876c8229b171d882989bd43d5b231167804b2ee470be90580cc69"
+    },
+    {
+      "path": "apps/api/src/modules/authentication/http/access.controller.ts",
+      "sha256": "dc0aafc99693112ff95ccf71e497cab1b04ab3da2b2610c44ed49c27d2d204b8"
+    },
+    {
+      "path": "apps/api/src/modules/authentication/http/configuration.ts",
+      "sha256": "7f9bc39c30aea4a3e3173477c8fbaef8dcbe1ba5fe706c378656291f77beae87"
+    },
+    {
+      "path": "apps/api/src/modules/authentication/http/public.ts",
+      "sha256": "c638732ea7c0d18b91ce9197f085d1c181a35b9ffdae9495676c1fcb101c2030"
+    },
+    {
+      "path": "apps/api/src/modules/authentication/infrastructure/access-schema.ts",
+      "sha256": "2d1c3ba77d0b1668130ad7f88defcf3d932287da6a0b32bad2955f3d7117bbda"
+    },
+    {
+      "path": "apps/api/src/modules/authentication/infrastructure/access-store.ts",
+      "sha256": "32582733f9c0080b24bbd3fe0f43eb94288b7073fb45e9952d48b35b4ada78e1"
+    },
+    {
+      "path": "apps/api/src/modules/authentication/infrastructure/administrator-provisioner.service.ts",
+      "sha256": "e2276d9530cefbc95381bbc55b528448170647f7012a2cab7f6454d7e558ea38"
+    },
+    {
+      "path": "apps/api/src/modules/authentication/infrastructure/password-hash.ts",
+      "sha256": "edc3808182adedcf14cb8dc949fcbd2f62590b95217cfd9e4253e4118aed3dbb"
+    },
+    {
+      "path": "apps/api/src/modules/authentication/infrastructure/password-hasher.ts",
+      "sha256": "510c3c8fd706c2e94aa62de6c72e85fae2784b6cfd93e28e75db61097b7a24cb"
+    },
+    {
+      "path": "apps/api/src/modules/authentication/infrastructure/schema.ts",
+      "sha256": "7386ad05a8857f01acb8a3b04c3533dafcd1959196f8351d42fa24f930207870"
+    },
+    {
+      "path": "apps/api/src/modules/authentication/public.ts",
+      "sha256": "00cc62957f811928478a41914adeb52c11e8396ef77ad66a70a079be567d7c0c"
+    },
+    {
+      "path": "apps/api/src/modules/business/application/business-configuration.ts",
+      "sha256": "bfe8f3d494a3d705ac9cf21ac4b1fc5411e0522072c5b6791e6e273d7170788a"
+    },
+    {
+      "path": "apps/api/src/modules/business/business.module.ts",
+      "sha256": "53c46c0408ca4e0061cbf7b4641874361c8e00d2a26b18560dd3dbd20b5a4ebe"
+    },
+    {
+      "path": "apps/api/src/modules/business/infrastructure/business.service.ts",
+      "sha256": "07d5ef82c9de0bd68536cd30f52f566509efa6f679af83156dedee296816888d"
+    },
+    {
+      "path": "apps/api/src/modules/business/infrastructure/schema.ts",
+      "sha256": "3e127228f7f8e15a9ff59a3492a7f488e2a365caecbb60355ac7add86b26bbdd"
+    },
+    {
+      "path": "apps/api/src/modules/business/public.ts",
+      "sha256": "2f23ced3959fde04c6bd04118a40e94309979e37140781a491741f1cfe8bb203"
+    },
+    {
+      "path": "apps/api/src/modules/kitchen/application/kitchen-queue-cursor.ts",
+      "sha256": "e249e03eb09735c80ed6aad217058ea759711cc04dc1c6bc317fc1bf2ccd7d42"
+    },
+    {
+      "path": "apps/api/src/modules/kitchen/application/kitchen-store.ts",
+      "sha256": "2f0558422056ffbdbce4b56273c33e70160f7e66ad6448b2ae4639ee07594680"
+    },
+    {
+      "path": "apps/api/src/modules/kitchen/application/kitchen.service.ts",
+      "sha256": "596f2f4db028b1c9bc471ab504c7668e915582f5f29757b2f13020942c851770"
+    },
+    {
+      "path": "apps/api/src/modules/kitchen/domain/preparation.ts",
+      "sha256": "f7911f5532ff2bb8160fd51c1fca6f1519e5aecd9aace5307ad2a7a2ffa63714"
+    },
+    {
+      "path": "apps/api/src/modules/kitchen/http/kitchen-exception.filter.ts",
+      "sha256": "08f015facfd50319e81d9a02f0f3bf552c93e00636dd8a4c061269bdfc627939"
+    },
+    {
+      "path": "apps/api/src/modules/kitchen/http/kitchen-input.dto.ts",
+      "sha256": "69f1167cc2d2a3426308e432468595a0193aa83b0d82b20a310bba0b9d2ae1fa"
+    },
+    {
+      "path": "apps/api/src/modules/kitchen/http/kitchen.controller.ts",
+      "sha256": "1ac7d1a833f92f085d4c1d15febec07e9b7f23e395cdbf08341c75e763667f72"
+    },
+    {
+      "path": "apps/api/src/modules/kitchen/infrastructure/postgres-kitchen-store.service.ts",
+      "sha256": "a23573f0fdfb012b8780aa4b4b6617c4ae37c73b51801efd7e34b68c0311ac18"
+    },
+    {
+      "path": "apps/api/src/modules/kitchen/infrastructure/schema.ts",
+      "sha256": "046bc5f003df9b20d652dbfe6cab1a1193c34126587ac7d2790af0ba6c7de13b"
+    },
+    {
+      "path": "apps/api/src/modules/kitchen/kitchen.module.ts",
+      "sha256": "3a4aaaea17101370957cd995f4044d7f532f2f7205522045040fdcf6488f6617"
+    },
+    {
+      "path": "apps/api/src/modules/kitchen/public.ts",
+      "sha256": "8fb9bd4f9cd64da26ced22c285e51c3c84b07bf11b7fda7a07653e0c56bbd3e3"
+    },
+    {
+      "path": "apps/api/src/modules/menu/application/menu-order-resolver.service.ts",
+      "sha256": "7c625671c98ebf376de8fc147c7fa0394e0d225517c1c0c6f7a08d5ad5d7b2a6"
+    },
+    {
+      "path": "apps/api/src/modules/menu/application/menu-store.ts",
+      "sha256": "b6e821601d6a12766a262e827fd16c6acd8c2bf6d3c583f1c5a8b996246482dd"
+    },
+    {
+      "path": "apps/api/src/modules/menu/application/menu.service.ts",
+      "sha256": "04c57165080b334eaea98615a764eb31f7424693de37ae33b989bb1b59997a75"
+    },
+    {
+      "path": "apps/api/src/modules/menu/domain/catalogue.ts",
+      "sha256": "f0b4acb7bd52ebde1dd83a6606b88ceac5e76d27b22ffdd94795564b9a367f32"
+    },
+    {
+      "path": "apps/api/src/modules/menu/domain/currency-precision.ts",
+      "sha256": "869284550f31c72dae9d728346adadc05c782b1474c6aff9ab58ca55a80eb2f3"
+    },
+    {
+      "path": "apps/api/src/modules/menu/http/menu-error-mapping.ts",
+      "sha256": "f1bb7c681b92942737f7bef768fabfe31cd73ccdc9a757292ebeb8979d8e24d1"
+    },
+    {
+      "path": "apps/api/src/modules/menu/http/menu-list-exception.filter.ts",
+      "sha256": "ff948da6f3f339e8139f28aa67bf0529b1a093b68c078777c6c7ca0fd3dd1047"
+    },
+    {
+      "path": "apps/api/src/modules/menu/http/menu.controller.ts",
+      "sha256": "1dd1c6c368896a9626ef2b753eab96b12e5d9c9ab0cb36bdcf20eb0166edea83"
+    },
+    {
+      "path": "apps/api/src/modules/menu/http/public.ts",
+      "sha256": "8fcdc48819eb4ce8f63d4a61fcc9435704e930507af97e9983f69c83e304789d"
+    },
+    {
+      "path": "apps/api/src/modules/menu/infrastructure/menu-store.ts",
+      "sha256": "e6fc70e72f59785fa2b928ea8c2bce2d76f8cd84cee337b51060a0d8091a86bc"
+    },
+    {
+      "path": "apps/api/src/modules/menu/infrastructure/schema.ts",
+      "sha256": "39aaa2e4831bd0138a49bf1bdf41c50d443513d50034dc5f63ac4bd03414ef05"
+    },
+    {
+      "path": "apps/api/src/modules/menu/menu.module.ts",
+      "sha256": "dfde8e61e1f7f7c8707846a5c7b7ec0ed91feee86ac07bd16429bc2cd66a25df"
+    },
+    {
+      "path": "apps/api/src/modules/menu/public.ts",
+      "sha256": "6667cc806bc94a16f5b5d89f55f46658c8be6ec52f7c91dc33114c795dd6765e"
+    },
+    {
+      "path": "apps/api/src/modules/orders/application/order-preparation.service.ts",
+      "sha256": "a271c89509762d8ce84e7db0340f95f797d36656490bf8ee512b01f9d2ccb79a"
+    },
+    {
+      "path": "apps/api/src/modules/orders/application/order-store.ts",
+      "sha256": "b7f06e81686dadd9632918ad62ce822e20cc4dada8ae4666b75b5029ad7ab518"
+    },
+    {
+      "path": "apps/api/src/modules/orders/application/orders.service.ts",
+      "sha256": "19f5311026d6aa811a483c534d68ca8aa8afc3204fd6a5495b77a7ab3c31e742"
+    },
+    {
+      "path": "apps/api/src/modules/orders/application/parse-order-capture.ts",
+      "sha256": "2a430f338a705e256b51eb155a5b44761e58522a77be5c9bc92c75ce86793169"
+    },
+    {
+      "path": "apps/api/src/modules/orders/domain/capture.ts",
+      "sha256": "32ccfcd77303ab9f84e685be85e7b077c732ae230a3580bc7e4b45057942bf40"
+    },
+    {
+      "path": "apps/api/src/modules/orders/http/create-order.dto.ts",
+      "sha256": "6aa37abbc01675c52b2d1dfec25cf4900bb78b7cd80d3765bfc62d7dc316251c"
+    },
+    {
+      "path": "apps/api/src/modules/orders/http/orders-exception.filter.ts",
+      "sha256": "bd1823f832c43f178018f557b03d9a85693fb80c27ba64f6e36aa82269288a2a"
+    },
+    {
+      "path": "apps/api/src/modules/orders/http/orders.controller.ts",
+      "sha256": "3991e5b8e64602aa6db2884f562e859bcb4b9b5ce930e0bd0d6d3abe83666472"
+    },
+    {
+      "path": "apps/api/src/modules/orders/infrastructure/postgres-order-store.service.ts",
+      "sha256": "7991c5f7bf8287ccaa46899acdeee99c4ca11361b72bb356e250d76237db8f80"
+    },
+    {
+      "path": "apps/api/src/modules/orders/infrastructure/schema.ts",
+      "sha256": "424daaad2a3d55b8035cb2a45e41a41a49a9c06f88f9e12311aebf231c1ea632"
+    },
+    {
+      "path": "apps/api/src/modules/orders/orders.module.ts",
+      "sha256": "8e641ad643d597b1a0118bf786d2f0287ba0904b62ebe574920420be115905c0"
+    },
+    {
+      "path": "apps/api/src/modules/orders/public.ts",
+      "sha256": "3db2ec7dfe9bc569a2a4e54c2900d77c98630e0826e6ad62687bd0e801d8dbf2"
+    },
+    {
+      "path": "apps/api/src/operator/hidden-password.ts",
+      "sha256": "e2659b29cdd976a098c0bd2320a63c064ae7b30d6ae90f987354b95ae183c579"
+    },
+    {
+      "path": "apps/api/src/operator/provision-installation.example.json",
+      "sha256": "9144abed562a03a6eadf1135378918f8a94e440a1c847347079c5fea20d31303"
+    },
+    {
+      "path": "apps/api/src/operator/provision-installation.ts",
+      "sha256": "7cbfbc597f4f42a1a480be2c8a3abdb7d671591dd8206c651eefc7d27a2c581d"
+    },
+    {
+      "path": "apps/api/src/operator/provisioning.module.ts",
+      "sha256": "2696f5a4997dff7db7d5f37c7483948129d3b3dcaec7fa0cc65edee2186574f0"
+    },
+    {
+      "path": "apps/api/src/operator/recover-administrator.ts",
+      "sha256": "e94b4c460e981580a6900912630adb2c4a5472c04d9ba24eed298ebcd85feb99"
+    },
+    {
+      "path": "apps/api/dist/orders-check/app.module.js",
+      "sha256": "be7d2b5e073257ea175f3a35d340238f00fea0251453894383a81421708faae7"
+    },
+    {
+      "path": "apps/api/dist/orders-check/application/provision-installation.js",
+      "sha256": "1e505cfd7af1590e4b1606e5a223815e06df86705c4f630faecb8ac9d3ed4f46"
+    },
+    {
+      "path": "apps/api/dist/orders-check/infrastructure/configuration.js",
+      "sha256": "6614a24c79c6998721bf40ba57b9b3cee26c5294fb1ef272aa1bbfc0b3fce457"
+    },
+    {
+      "path": "apps/api/dist/orders-check/infrastructure/database/database.module.js",
+      "sha256": "513d7e60757460761eb5d750a87c25f52add96a915e8d2eea7d8a923044fccfd"
+    },
+    {
+      "path": "apps/api/dist/orders-check/infrastructure/database/database.service.js",
+      "sha256": "f7dfc8c6974095d8d8e9ba6088ddab0a53455844a7062837f71fce80d50dec2e"
+    },
+    {
+      "path": "apps/api/dist/orders-check/infrastructure/database/migrate.js",
+      "sha256": "29186a1ea87c5b7fa88f63c00d12f86b744a4ab2a12fe5961227d2b78df101b3"
+    },
+    {
+      "path": "apps/api/dist/orders-check/infrastructure/database/schema.js",
+      "sha256": "6bd61adfcbb998188809f590f87b5903a7ab007a08fcb7dcf3ae21ce151885b5"
+    },
+    {
+      "path": "apps/api/dist/orders-check/infrastructure/database/transaction.js",
+      "sha256": "a26c94f6e8a77a975fb793ec0ee1fbb0ebc48bdfb9c856600e651619381a0f3e"
+    },
+    {
+      "path": "apps/api/dist/orders-check/infrastructure/health.controller.js",
+      "sha256": "d398148052d8398517b0c703a6baf75be914fa04cfed9d7f5721c5bfd130e408"
+    },
+    {
+      "path": "apps/api/dist/orders-check/infrastructure/http/dto-validation.pipe.js",
+      "sha256": "dc5c1c9f21d4b055f7eae2ad1cfda0e91be34bff6435f87fe08c243bc25e8e8f"
+    },
+    {
+      "path": "apps/api/dist/orders-check/infrastructure/http/empty-query.dto.js",
+      "sha256": "e1eed630a195d0e76ccc7b8e28df35095e8b13d938d5c822b8e7cad415715582"
+    },
+    {
+      "path": "apps/api/dist/orders-check/infrastructure/http/http-adapter.js",
+      "sha256": "ee14bbaaaa2f52cc9b4c48fd40a9bb46984f1ca1b1dfc104a0a35cc0f604013a"
+    },
+    {
+      "path": "apps/api/dist/orders-check/infrastructure/http/http-contract.decorator.js",
+      "sha256": "962aedc67568f21c5fbebf26a15b0fcc1ea0f7a4138902fb1292c2557be5a7af"
+    },
+    {
+      "path": "apps/api/dist/orders-check/infrastructure/http/http-contract.filter.js",
+      "sha256": "038b3e5f50bee9a2cf894b01bddf7d6d937f47abc0e9360e1dea9509026eb482"
+    },
+    {
+      "path": "apps/api/dist/orders-check/infrastructure/http/http-contract.guard.js",
+      "sha256": "5cf38e6cc684027c924d0b90fa0e7b6c91355cbc099cf5d89899537a47fd6813"
+    },
+    {
+      "path": "apps/api/dist/orders-check/infrastructure/http/http-error-policy.js",
+      "sha256": "7dda45e044ba5e34c718dfec771afe026384de54781e298278fc27ef29c39771"
+    },
+    {
+      "path": "apps/api/dist/orders-check/infrastructure/http/http-response.interceptor.js",
+      "sha256": "7d93bc864c88f319da210f74ace31ccafd552b0d552a78b1b95001dd8a87ec93"
+    },
+    {
+      "path": "apps/api/dist/orders-check/infrastructure/http/problem-details.js",
+      "sha256": "09ef64669a62c201ebbd40d4bc0a693ce76719b2e2fb5a29f7c1d5172e29c602"
+    },
+    {
+      "path": "apps/api/dist/orders-check/infrastructure/request-limits.js",
+      "sha256": "25fc3210ff0b30e7ede596f8f60f3f5c50e370f2b8d57502782809af59d3fc5e"
+    },
+    {
+      "path": "apps/api/dist/orders-check/main.js",
+      "sha256": "8aec71facd86bfa19f9c2e5ece3a7607a0452f97f215d78351e1d2893cf60ac6"
+    },
+    {
+      "path": "apps/api/dist/orders-check/modules/authentication/application/access-policy.js",
+      "sha256": "973d4461c6a4bb6d2914787b9d3949aacf5c3aaa7c55fc25e1b97c03e7f3989a"
+    },
+    {
+      "path": "apps/api/dist/orders-check/modules/authentication/application/access-store.js",
+      "sha256": "eafc710a29e9939887de8436db2ba61f011315b27384f76e6d8ff6eef7debcad"
+    },
+    {
+      "path": "apps/api/dist/orders-check/modules/authentication/application/access.service.js",
+      "sha256": "1e5b5b2be631ef35f21ec4f91d986f5ca63b3d3dc9f2105db8de2b5188d9abc7"
+    },
+    {
+      "path": "apps/api/dist/orders-check/modules/authentication/application/administrator-provisioner.js",
+      "sha256": "627e2e40b8499f4007dbc0f98d74bef64b4ff5c26e90fa967ad70cbc4348f6ba"
+    },
+    {
+      "path": "apps/api/dist/orders-check/modules/authentication/application/authorized-operation.js",
+      "sha256": "8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881"
+    },
+    {
+      "path": "apps/api/dist/orders-check/modules/authentication/application/initial-administrator.js",
+      "sha256": "f644af460d661b9006534d63568a4d6dacb77c7e15dccc0b2c02555bf2450f15"
+    },
+    {
+      "path": "apps/api/dist/orders-check/modules/authentication/authentication.module.js",
+      "sha256": "cb0f1b82c870866bfec109400a76063586ab5b30858993ab94dbd9ea2f2521fd"
+    },
+    {
+      "path": "apps/api/dist/orders-check/modules/authentication/http/access-boundary.guard.js",
+      "sha256": "a2264a7a422f5271f8627243ea31ec49dd9cf6d51d2e3bd9f68f01c52f5dcb41"
+    },
+    {
+      "path": "apps/api/dist/orders-check/modules/authentication/http/access-entry.decorator.js",
+      "sha256": "022f88163d561f851ef194b665ed84eff98ce5a5cb3174bcb5e07a85df58e706"
+    },
+    {
+      "path": "apps/api/dist/orders-check/modules/authentication/http/access-exception.filter.js",
+      "sha256": "d890d31de1977adcc22c68e577a4865cebf31059f755ebf034df9157900ed88d"
+    },
+    {
+      "path": "apps/api/dist/orders-check/modules/authentication/http/access-http.helpers.js",
+      "sha256": "0acd6559e3b1d1c590de60480c46eb0642b069ae47985d01486f53de6264ed14"
+    },
+    {
+      "path": "apps/api/dist/orders-check/modules/authentication/http/access-http.module.js",
+      "sha256": "b252ad5c9ecf36f4c924ea3f4dbbdf6fdf63d539fa06894294c1accd85da88f4"
+    },
+    {
+      "path": "apps/api/dist/orders-check/modules/authentication/http/access.controller.js",
+      "sha256": "9cd731990ed7c12a424c2d0158c7ea37a614bccdb186bfb2787aced82ced3832"
+    },
+    {
+      "path": "apps/api/dist/orders-check/modules/authentication/http/configuration.js",
+      "sha256": "7da6627f29d462ea03cdebefa38c2d915249149eacae3845f985a8e989541f51"
+    },
+    {
+      "path": "apps/api/dist/orders-check/modules/authentication/http/public.js",
+      "sha256": "0a613a210f62f0cf7cd6c3e69e53616c82f2ab88fe5a09a800c4edba17f9caf4"
+    },
+    {
+      "path": "apps/api/dist/orders-check/modules/authentication/infrastructure/access-schema.js",
+      "sha256": "d6cd137a7bcd7b0f7c8fcf04aaf90a2b5487f388f5c9d88982b1f1a95303ba9c"
+    },
+    {
+      "path": "apps/api/dist/orders-check/modules/authentication/infrastructure/access-store.js",
+      "sha256": "968f753ea7856deaeff7a7869353fd32161e95680285d40466f63183d6b58ac5"
+    },
+    {
+      "path": "apps/api/dist/orders-check/modules/authentication/infrastructure/administrator-provisioner.service.js",
+      "sha256": "82dd9f3d493db87295544b4dc1f13aa1bf0928a98ee807081ae51b73f76ace9c"
+    },
+    {
+      "path": "apps/api/dist/orders-check/modules/authentication/infrastructure/password-hash.js",
+      "sha256": "8b005e397b78abfe14d7a84b1df76485b7fccc5a47f9e0170aaa4760a315fcd3"
+    },
+    {
+      "path": "apps/api/dist/orders-check/modules/authentication/infrastructure/password-hasher.js",
+      "sha256": "f9f111cce5b7d433fb19a1d34b6541b2143ad3ea928da312e3e2a4734486544d"
+    },
+    {
+      "path": "apps/api/dist/orders-check/modules/authentication/infrastructure/schema.js",
+      "sha256": "ab4063a83aee4a612dd35303891bbd20d59504389651f2c0252ea943eda8bae7"
+    },
+    {
+      "path": "apps/api/dist/orders-check/modules/authentication/public.js",
+      "sha256": "25d3579d36c6ce0b9998bdad3f5e613d2a140c67b56d239bb02d7bf0e9947206"
+    },
+    {
+      "path": "apps/api/dist/orders-check/modules/business/application/business-configuration.js",
+      "sha256": "2af0bd9f0ce993fb2f94165651fc65de27473dfb6dfdd501a8977ff79f524fb4"
+    },
+    {
+      "path": "apps/api/dist/orders-check/modules/business/business.module.js",
+      "sha256": "bd1c4bbd482a4406f142e6ffc7e2d267b72a5c25b4d069de55451572fc9cd396"
+    },
+    {
+      "path": "apps/api/dist/orders-check/modules/business/infrastructure/business.service.js",
+      "sha256": "74599e1baf6fa5e0292dde6a85eada23b40529cf925df2865907c98ee2999e6d"
+    },
+    {
+      "path": "apps/api/dist/orders-check/modules/business/infrastructure/schema.js",
+      "sha256": "c653d0d7925ef906a090cc1f72b6d2b9502a1cce75bf3d6a262fc5a276915b30"
+    },
+    {
+      "path": "apps/api/dist/orders-check/modules/business/public.js",
+      "sha256": "2b726b766286ec6074bbf79746f0edc26f57ef8c144133c93c9b73fe4362253a"
+    },
+    {
+      "path": "apps/api/dist/orders-check/modules/kitchen/application/kitchen-queue-cursor.js",
+      "sha256": "6f20b095eed4e1672926ec666df0cf76764d7aa51c9df5b88e9be9ad26bce158"
+    },
+    {
+      "path": "apps/api/dist/orders-check/modules/kitchen/application/kitchen-store.js",
+      "sha256": "5ef5faa06daacc9c4c2053996e0a82068d4c1d38051b033f857f98570c65e107"
+    },
+    {
+      "path": "apps/api/dist/orders-check/modules/kitchen/application/kitchen.service.js",
+      "sha256": "1aeba9a355e30be560ee72e58726c4dda082244217aa552b95da8851929cb793"
+    },
+    {
+      "path": "apps/api/dist/orders-check/modules/kitchen/domain/preparation.js",
+      "sha256": "52eee82e9302c4638342816fbe4589fcb9ac133a5313a2d1a055af47c069cdbe"
+    },
+    {
+      "path": "apps/api/dist/orders-check/modules/kitchen/http/kitchen-exception.filter.js",
+      "sha256": "347a4ea26fe98558ccea73290a15244f14866b06e8aa6b48caa18992e3aa21f4"
+    },
+    {
+      "path": "apps/api/dist/orders-check/modules/kitchen/http/kitchen-input.dto.js",
+      "sha256": "33d394eb4722804f4294c5501e7d6ba88c6b1f398ab4c9c3024ca8b6dd253d50"
+    },
+    {
+      "path": "apps/api/dist/orders-check/modules/kitchen/http/kitchen.controller.js",
+      "sha256": "42a4305e03ba688060402ca94211974829938f8c6d3e0263620bb97959a82165"
+    },
+    {
+      "path": "apps/api/dist/orders-check/modules/kitchen/infrastructure/postgres-kitchen-store.service.js",
+      "sha256": "b16e3e6c83e524e7b65a1a76f32d695938590af637c176d8ea0994994d7a15a9"
+    },
+    {
+      "path": "apps/api/dist/orders-check/modules/kitchen/infrastructure/schema.js",
+      "sha256": "ef4e8f0df70f250bf2024178b2d5c7aa1ff3b8126ca65ec6fbbb12b2573bdc87"
+    },
+    {
+      "path": "apps/api/dist/orders-check/modules/kitchen/kitchen.module.js",
+      "sha256": "595065f607b4af13b362e78fafedbb9a63ca40868691a3f5dbd7336e4688ef9d"
+    },
+    {
+      "path": "apps/api/dist/orders-check/modules/kitchen/public.js",
+      "sha256": "8fb9bd4f9cd64da26ced22c285e51c3c84b07bf11b7fda7a07653e0c56bbd3e3"
+    },
+    {
+      "path": "apps/api/dist/orders-check/modules/menu/application/menu-order-resolver.service.js",
+      "sha256": "c4dd2a43f6adbe527121a8f5a3c3f93e5419f281dc341ea34f41e0218a62d3d9"
+    },
+    {
+      "path": "apps/api/dist/orders-check/modules/menu/application/menu-store.js",
+      "sha256": "245dcec1596ae5bd6d9bdcbf25a2f760afde5edd7ad498dd7059774b87603baa"
+    },
+    {
+      "path": "apps/api/dist/orders-check/modules/menu/application/menu.service.js",
+      "sha256": "ece85499a7429a382ecf43b4fbefe7fdd50cadc70d0a066f29371adff0e392e4"
+    },
+    {
+      "path": "apps/api/dist/orders-check/modules/menu/domain/catalogue.js",
+      "sha256": "a14b2a797729425cd119249c5e905dd107b9622ad66333de405c348d4657e085"
+    },
+    {
+      "path": "apps/api/dist/orders-check/modules/menu/domain/currency-precision.js",
+      "sha256": "1288572f1476c04fd81e4aa6504a5da2b0432fb35e37c800137976ed9ffe6f34"
+    },
+    {
+      "path": "apps/api/dist/orders-check/modules/menu/http/menu-error-mapping.js",
+      "sha256": "ef52f2380f4c54dc04aca9ca2edf3bdbe792339276bcb0325e801ecefefe1a12"
+    },
+    {
+      "path": "apps/api/dist/orders-check/modules/menu/http/menu-list-exception.filter.js",
+      "sha256": "0300f57f6d1823645c0bc0fcec745acf7411ebde08ad52dad888213c07bf20f7"
+    },
+    {
+      "path": "apps/api/dist/orders-check/modules/menu/http/menu.controller.js",
+      "sha256": "ec39edf7e270542952979c49fae9e540515e3a909b4e0a1b464db8b309ef9a89"
+    },
+    {
+      "path": "apps/api/dist/orders-check/modules/menu/http/public.js",
+      "sha256": "8fcdc48819eb4ce8f63d4a61fcc9435704e930507af97e9983f69c83e304789d"
+    },
+    {
+      "path": "apps/api/dist/orders-check/modules/menu/infrastructure/menu-store.js",
+      "sha256": "712c8d561a33f97d209e3e27d561f850d688386874df4af11550ee013c745ef3"
+    },
+    {
+      "path": "apps/api/dist/orders-check/modules/menu/infrastructure/schema.js",
+      "sha256": "f83c4e0d07c44a72248146f535cc6c9536260ef116d54693ea1b0f987041fa30"
+    },
+    {
+      "path": "apps/api/dist/orders-check/modules/menu/menu.module.js",
+      "sha256": "e3ba72892b74ef4a927f44c259a369b8db5968e4a259747cae35149281f85b37"
+    },
+    {
+      "path": "apps/api/dist/orders-check/modules/menu/public.js",
+      "sha256": "4b0b0c3a4a68dc82ee6f6229ebfc2334304f7e7a2aa9fd43c26c1681158edf14"
+    },
+    {
+      "path": "apps/api/dist/orders-check/modules/orders/application/order-preparation.service.js",
+      "sha256": "b7c788219304a444428e7c0ae3d0b8c821d812e2b34a2f39d707092914c5de40"
+    },
+    {
+      "path": "apps/api/dist/orders-check/modules/orders/application/order-store.js",
+      "sha256": "228239192aa377eb0218b23e4c729e83a8f90e4b5997ea1346d3155e790e2111"
+    },
+    {
+      "path": "apps/api/dist/orders-check/modules/orders/application/orders.service.js",
+      "sha256": "9c54e61f7052ff5fbd62d257bf127123bae951166d5daf13ded981f36c2d13c2"
+    },
+    {
+      "path": "apps/api/dist/orders-check/modules/orders/application/parse-order-capture.js",
+      "sha256": "a4fa17fd9812240342c6582750536e5013c0afa2b5bc42f4e179817ac6f8b9fe"
+    },
+    {
+      "path": "apps/api/dist/orders-check/modules/orders/domain/capture.js",
+      "sha256": "d7bab7c831535c8e49337f332a7712cf71012b31a11d0feb0096fdc1d47b040b"
+    },
+    {
+      "path": "apps/api/dist/orders-check/modules/orders/http/create-order.dto.js",
+      "sha256": "42aaac14448e841e1e2c279026a832025af7ca488ac792b7d696f39d6dd62b3d"
+    },
+    {
+      "path": "apps/api/dist/orders-check/modules/orders/http/orders-exception.filter.js",
+      "sha256": "0b8d0d06d47940f7096558b1e8bc5ad3da09b77e0ffb17583da972c3aa8bda4c"
+    },
+    {
+      "path": "apps/api/dist/orders-check/modules/orders/http/orders.controller.js",
+      "sha256": "63504d9a435ac9fd630037b2b4a6c882aa0f8e661dfcc77c353d1c6732489f82"
+    },
+    {
+      "path": "apps/api/dist/orders-check/modules/orders/infrastructure/postgres-order-store.service.js",
+      "sha256": "718a568d8743324ebc6d59e63c06e5c16a48dfbffa5173c19eb9a93348a8d3ba"
+    },
+    {
+      "path": "apps/api/dist/orders-check/modules/orders/infrastructure/schema.js",
+      "sha256": "e63dfe92a5d88be07baca27ea09d435bd807dffb9582b1c9b372e949a9a9afb6"
+    },
+    {
+      "path": "apps/api/dist/orders-check/modules/orders/orders.module.js",
+      "sha256": "d41da000896df082ee3bcd335bdf5708a9cc13a133254d265ca63e0310d50288"
+    },
+    {
+      "path": "apps/api/dist/orders-check/modules/orders/public.js",
+      "sha256": "f2fdba54c1a9de297edea91e6d4f98b645f3df155416f6a30a9d8e8ed9d1e27f"
+    },
+    {
+      "path": "apps/api/dist/orders-check/operator/hidden-password.js",
+      "sha256": "d46710cfa5018376fd7aa3311ca50f00a2f502871ba036fff689b212eaf513ba"
+    },
+    {
+      "path": "apps/api/dist/orders-check/operator/provision-installation.js",
+      "sha256": "959f83736953ff2b527f419ea9f46a88fcdaad6833904332b48a3dd1f366ba07"
+    },
+    {
+      "path": "apps/api/dist/orders-check/operator/provisioning.module.js",
+      "sha256": "f323e8cf988e6ad35402098215ab354bdcef6b5ee99e838262be16caa8441d15"
+    },
+    {
+      "path": "apps/api/dist/orders-check/operator/recover-administrator.js",
+      "sha256": "5eac81628b312035f4cee85c062060d3f9a06f252d2477dce66e999eea98028f"
+    },
+    {
+      "path": "apps/api/migrations/0000_business_bootstrap.sql",
+      "sha256": "0a8a058d3a4038eb4d9ffb3ceda3037f0fabcbe6c39b62f95b9b7004b2659f97"
+    },
+    {
+      "path": "apps/api/migrations/0001_staff_access.sql",
+      "sha256": "f70af5681eca5b98fb0eb080f779127f45c26314ed309a9fe495c908b0c304da"
+    },
+    {
+      "path": "apps/api/migrations/0002_login_reservations.sql",
+      "sha256": "abafdd843017daa4962559f8e53734d4a0ded51803a75991640864a2feec5c28"
+    },
+    {
+      "path": "apps/api/migrations/0003_menu_catalogue.sql",
+      "sha256": "34532984e10d5286dcf0c4104eadca1efdf738ff30e48afb2ccdab48f6900017"
+    },
+    {
+      "path": "apps/api/migrations/0004_order_capture.sql",
+      "sha256": "f2fa8b0b951d6bff6ec5c3137e68b157a7a9e4234758c2d48fb4cb89f5eb0c36"
+    },
+    {
+      "path": "apps/api/migrations/0005_kitchen_handoff.sql",
+      "sha256": "47717986f6b1749e1039a39de85ebe1487e27ce6c288407c2121ae0aece2b57f"
+    },
+    {
+      "path": "apps/api/migrations/meta/0000_snapshot.json",
+      "sha256": "62e010fbf3a1487600507dd26a1bf521af8069bc7d92bf0582b998c60f92fc79"
+    },
+    {
+      "path": "apps/api/migrations/meta/0001_snapshot.json",
+      "sha256": "58f580511bd8c4e865bdeb72c1d3ba978129d6b21adba08267f9d4e5181f4624"
+    },
+    {
+      "path": "apps/api/migrations/meta/0002_snapshot.json",
+      "sha256": "9a6326e26b962e596c6111a6411facf6ea7c08923e91b883cbfca4a15948f1b8"
+    },
+    {
+      "path": "apps/api/migrations/meta/0003_snapshot.json",
+      "sha256": "c068fde128daddd24ed1dfbe53c2089e2bb751a3bdc6c451b38f3e065b2b4e9d"
+    },
+    {
+      "path": "apps/api/migrations/meta/0004_snapshot.json",
+      "sha256": "18b1b71e2a9c9e295fa300324bc56712553743ebfc5a5789dbf03dc9a333605b"
+    },
+    {
+      "path": "apps/api/migrations/meta/0005_snapshot.json",
+      "sha256": "0ba17d3e6fff6d0500248e35b7aacbd36353f4e68329be99db4a6416cc142e7b"
+    },
+    {
+      "path": "apps/api/migrations/meta/_journal.json",
+      "sha256": "f793afc63219b44746d521013eefa0c52ebf992794090f0928689926f9031635"
+    },
+    {
+      "path": "apps/api/tests/kt01-acceptance.mjs",
+      "sha256": "d8d25da24d3a7b6dca5042594c5ec7128f4902a7faa934dde308669ca1adf3de"
+    },
+    {
+      "path": "apps/api/tests/kt01-controls.mjs",
+      "sha256": "bf9672a2a5a1a258b8910757be0ab6ce9b81f2ebfc8c2c5e7f775d4dc0a61927"
+    },
+    {
+      "path": "apps/api/tests/kt01-cleanup.mjs",
+      "sha256": "e5d0b4adb7a4eaf6987412d573b7a9e5ee0b2bc00e116960ad8cc07361b322ad"
+    },
+    {
+      "path": "apps/api/tests/kt01-runtime.mjs",
+      "sha256": "afb2c72584eb786d80cbe34ba060553f56f4e2c106ea773169e964342296b75d"
+    },
+    {
+      "path": "apps/api/tests/kt01-cases.mjs",
+      "sha256": "0e004603114256359dbdc7d154d6595da8df3886b8da595b3c17f2b1213e2c8c"
+    },
+    {
+      "path": "apps/api/tests/kt01-restart.mjs",
+      "sha256": "f707dee2390025c1c13acbf26bda65f68882a7e57602fe4cb7279dfb18d28c5a"
+    },
+    {
+      "path": "apps/api/tests/kt01-restart-checks.mjs",
+      "sha256": "6be8cb6650f80f205a0c1333743c2267e86b4d4b8039905424a850322fc4f749"
+    },
+    {
+      "path": "apps/api/tests/or01-runtime.mjs",
+      "sha256": "35a8c6303a1e4bc61a928b3fdd4f5312d1e639efe05b0e951e0451642c6243d4"
+    },
+    {
+      "path": "apps/api/tests/or01-controls.mjs",
+      "sha256": "34c0224e66d924e056b682d51e131734af4c9b6761b621d8d919f13f75ded2bd"
+    },
+    {
+      "path": "apps/api/tests/mn01-restart-operation.mjs",
+      "sha256": "0b4099ee9d23d30fd4329e803754f9e09fd505d609bf4e99bc8de89f0c738658"
+    }
+  ],
+  "results": [
+    {
+      "id": "K01",
+      "status": "not-run"
+    },
+    {
+      "id": "K02",
+      "status": "not-run"
+    },
+    {
+      "id": "K03",
+      "status": "not-run"
+    },
+    {
+      "id": "K04",
+      "status": "not-run"
+    },
+    {
+      "id": "D01",
+      "status": "passed",
+      "freshApiProcesses": 1,
+      "parentPoolsClosed": true,
+      "parentReconnected": true
+    }
+  ],
+  "migration": "retained-verified",
+  "cleanup": "passed",
+  "tlsVerified": false,
+  "baseline": {
+    "targetFingerprint": "1b55f59a1b8c467c8b070c0eebe59012c54e7393fb54a2b5e0b438a2be492437",
+    "serverVersion": "17.11",
+    "tables": [
+      "access_limits",
+      "access_prelogins",
+      "access_security_events",
+      "access_sessions",
+      "branches",
+      "businesses",
+      "captured_orders",
+      "installation_binding",
+      "kitchen_tickets",
+      "menu_offerings",
+      "menu_references",
+      "menu_variants",
+      "order_capture_policies",
+      "staff_accounts",
+      "staff_branch_grants",
+      "staff_credentials"
+    ],
+    "before": {
+      "access_limits": 0,
+      "access_prelogins": 0,
+      "access_security_events": 0,
+      "access_sessions": 0,
+      "branches": 0,
+      "businesses": 0,
+      "captured_orders": 0,
+      "installation_binding": 0,
+      "kitchen_tickets": 0,
+      "menu_offerings": 0,
+      "menu_references": 0,
+      "menu_variants": 0,
+      "order_capture_policies": 0,
+      "staff_accounts": 0,
+      "staff_branch_grants": 0,
+      "staff_credentials": 0
+    },
+    "history": [
+      {
+        "tag": "0000_business_bootstrap",
+        "hash": "0a8a058d3a4038eb4d9ffb3ceda3037f0fabcbe6c39b62f95b9b7004b2659f97",
+        "timestamp": "1791748603502"
+      },
+      {
+        "tag": "0001_staff_access",
+        "hash": "f70af5681eca5b98fb0eb080f779127f45c26314ed309a9fe495c908b0c304da",
+        "timestamp": "1791826161070"
+      },
+      {
+        "tag": "0002_login_reservations",
+        "hash": "abafdd843017daa4962559f8e53734d4a0ded51803a75991640864a2feec5c28",
+        "timestamp": "1792223553789"
+      },
+      {
+        "tag": "0003_menu_catalogue",
+        "hash": "34532984e10d5286dcf0c4104eadca1efdf738ff30e48afb2ccdab48f6900017",
+        "timestamp": "1792308633277"
+      },
+      {
+        "tag": "0004_order_capture",
+        "hash": "f2fa8b0b951d6bff6ec5c3137e68b157a7a9e4234758c2d48fb4cb89f5eb0c36",
+        "timestamp": "1792440992358"
+      },
+      {
+        "tag": "0005_kitchen_handoff",
+        "hash": "47717986f6b1749e1039a39de85ebe1487e27ce6c288407c2121ae0aece2b57f",
+        "timestamp": "1792699951521"
+      }
+    ]
+  },
+  "freshProcessStep": "parent-readback",
+  "freshProcess": {
+    "childStep": "complete",
+    "childExit": 0
+  },
+  "afterCleanup": {
+    "access_limits": 0,
+    "access_prelogins": 0,
+    "access_security_events": 0,
+    "access_sessions": 0,
+    "branches": 0,
+    "businesses": 0,
+    "captured_orders": 0,
+    "installation_binding": 0,
+    "kitchen_tickets": 0,
+    "menu_offerings": 0,
+    "menu_references": 0,
+    "menu_variants": 0,
+    "order_capture_policies": 0,
+    "staff_accounts": 0,
+    "staff_branch_grants": 0,
+    "staff_credentials": 0
+  },
+  "historyFinal": [
+    {
+      "tag": "0000_business_bootstrap",
+      "hash": "0a8a058d3a4038eb4d9ffb3ceda3037f0fabcbe6c39b62f95b9b7004b2659f97",
+      "timestamp": "1791748603502"
+    },
+    {
+      "tag": "0001_staff_access",
+      "hash": "f70af5681eca5b98fb0eb080f779127f45c26314ed309a9fe495c908b0c304da",
+      "timestamp": "1791826161070"
+    },
+    {
+      "tag": "0002_login_reservations",
+      "hash": "abafdd843017daa4962559f8e53734d4a0ded51803a75991640864a2feec5c28",
+      "timestamp": "1792223553789"
+    },
+    {
+      "tag": "0003_menu_catalogue",
+      "hash": "34532984e10d5286dcf0c4104eadca1efdf738ff30e48afb2ccdab48f6900017",
+      "timestamp": "1792308633277"
+    },
+    {
+      "tag": "0004_order_capture",
+      "hash": "f2fa8b0b951d6bff6ec5c3137e68b157a7a9e4234758c2d48fb4cb89f5eb0c36",
+      "timestamp": "1792440992358"
+    },
+    {
+      "tag": "0005_kitchen_handoff",
+      "hash": "47717986f6b1749e1039a39de85ebe1487e27ce6c288407c2121ae0aece2b57f",
+      "timestamp": "1792699951521"
+    }
+  ],
+  "result": "passed",
+  "finishedAt": "2026-10-25T15:20:11.429Z"
+}

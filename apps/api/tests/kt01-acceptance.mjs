@@ -8,7 +8,7 @@ import { authorize, baseline, shape, history, counts, failure, sha256, runChild 
 try { authorize(process.env, process.version); } catch { console.error('KT-01 requires separate target/reservation authorization'); process.exit(1); }
 const root = resolve(import.meta.dirname, '../../..'), tag = `kt01.${randomUUID()}`;
 const reportPath = `${root}/apps/api/tests/evidence/${tag}.json`, ledgerPath = `${root}/apps/api/tests/evidence/${tag}.ledger.json`;
-const report = { tag, mode: process.env.KT01_MODE, schema: 'post-0005', scope: process.env.KT01_SCOPE ?? 'all', runtime: process.version, startedAt: new Date().toISOString(), source: [], results: ['K01', 'K02', 'K03', 'K04', 'D01'].map(id => ({ id, status: 'not-run' })), migration: 'not-run', cleanup: 'not-required' };
+const report = { tag, mode: process.env.KT01_MODE, schema: 'post-0005', scope: process.env.KT01_SCOPE ?? 'all', childDeadlineMs: process.env.KT01_SCOPE === 'D01' ? 60000 : 30000, runtime: process.version, startedAt: new Date().toISOString(), source: [], results: ['K01', 'K02', 'K03', 'K04', 'D01'].map(id => ({ id, status: 'not-run' })), migration: 'not-run', cleanup: 'not-required' };
 const ledger = { tag, accountIds: [randomUUID(), randomUUID()], extraBranchId: randomUUID(), offeringIds: [], orderIds: [], setupAttempted: false, setupCommitted: false };
 let ledgerCreated = false;
 const saveLedger = async () => { await writeFile(ledgerPath, JSON.stringify(ledger, null, 2) + '\n', { mode: 0o600, flag: ledgerCreated ? 'w' : 'wx' }); ledgerCreated = true; };
@@ -87,7 +87,7 @@ try {
       record: (id, details) => { assert.equal(idleError, false); report.results[report.results.findIndex(row => row.id === id)] = { id, ...details }; } });
     stage = 'fresh-process'; report.freshProcessStep = 'parent-pool-close'; await close(two); await close(one);
     report.freshProcessStep = 'child';
-    report.freshProcess = await runChild(spawn, process.execPath, `${root}/apps/api/tests/kt01-restart.mjs`, process.env, { proof, ...restart });
+    report.freshProcess = await runChild(spawn, process.execPath, `${root}/apps/api/tests/kt01-restart.mjs`, process.env, { proof, ...restart }, report.childDeadlineMs);
     report.freshProcessStep = 'parent-readback';
     one = new Pool({ ...options, application_name: tag + '.readback' }); one.on('error', () => { idleError = true; }); runtime = await createRuntime(one);
     for (const expected of restart.expected) assert.deepEqual(await runtime.kitchen.get(proof, expected.id), expected);

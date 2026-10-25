@@ -2,7 +2,7 @@
 
 Date: 2026-10-22. Owner: primary agent, solo. [Specification](spec.md); [business decisions](decisions.md); [global tracker](../../../../../../../../docs/planning/TRACKER.md).
 
-Status: D01 stable-build verification reached queue readback but exceeded the fixed 30-second child deadline. K01–K04 remain passed; cleanup passed. KT-02/Kitchen acceptance is not complete; the remaining decision is the measured timeout-budget change.
+Status: KT-02 technical verification complete. K01–K04 evidence retained; final frozen-build D01 and owned cleanup passed. Kitchen backend development acceptance, publication and operational release remain separate.
 
 ## Authorization and verified entry
 
@@ -16,7 +16,7 @@ Local main and remote main both verified at `6125da43245f50f52730d122792f7d01418
 | --- | --- | --- |
 | KT-00 — planning | Complete: documentation prepared and KT-D01–04 resolved | Entry: current request. Exit met for business planning: owner resolved KT-D01–04. Technical review is now delivered below; owner approval of the revised specification remains separate from implementation authorization. |
 | KT-01 — backend handoff | Source/offline checks delivered; acceptance pending | Entry: approved decisions/spec plus explicit source/check authorization. Intended outcome: KT-A01–06, one transaction-aware Orders projection, trusted Authentication actor-scope extension and Kitchen ticket/queue/status boundary. Before coding, confirm contracts, bounds, revision/retry semantics and capability upkeep; no standalone Orders reopening or unrelated fixes. Exit: authorized source/offline evidence recorded, unavailable persistence behavior explicit. |
-| KT-02 — bounded integration acceptance | Blocked: K01–K04 passed, D01 unverified | Entry: reviewed procedure for current post-0005 baseline, explicit target/run/fixture/cleanup permission and acceptable source evidence. Objective: persisted atomicity/concurrency and fresh-process KT-A01–05 evidence; explicit user development acceptance remains separate from technical checks/integration. No old Menu/Orders harness rerun or inherited target permission. |
+| KT-02 — bounded integration acceptance | Complete within recorded technical evidence; user acceptance separate | Entry: reviewed procedure for current post-0005 baseline, explicit target/run/fixture/cleanup permission and acceptable source evidence. Objective: persisted atomicity/concurrency and fresh-process KT-A01–05 evidence; explicit user development acceptance remains separate from technical checks/integration. No old Menu/Orders harness rerun or inherited target permission. |
 
 No later phase is detailed or activated. If payment-first or amendments/cancellation are required in the first slice, revise KT-01 prerequisites and criteria before source authorization; do not silently expand this plan.
 
@@ -35,9 +35,7 @@ This planning increment provides a reviewable conditional backend scope and a na
 
 ## Current handoff
 
-Kitchen HTTP adoption is complete locally under [the dated result](#rest-api-adoption-result--2026-10-25); its compatibility/evidence limits are separate from D01 continuation below.
-
-[Latest stable-build result](#final-d01-stable-build-result--2026-10-25): frozen source/compiled hashes stayed unchanged; five HTTP ticket reads and ready redispatch passed, then D01 hit its 30-second deadline during queue readback. Cleanup passed: sixteen empty tables and all six history entries retained. Next single decision: approve only a 30→60-second child deadline and one supervised D01-only run under the existing target/baseline/assertion/cleanup gates. No automatic retry or silent timeout relaxation. Preserve all six ownership ledgers and reports. Active branch `codex/kitchen-handoff`; source remains locally modified/unpublished after REST adoption. OR-01 accepted/closed; KT-02/Kitchen acceptance not complete. Process incident INC-20261025-02 remains open; no new qualifying incident confirmed.
+[KT-02 technical closeout](#kt-02-technical-closeout--2026-10-25): final D01 passed on a frozen build with the approved 60-second budget; owned cleanup verified sixteen empty tables and all six history entries intact. No verification blocker remains in this bounded scope. Next material decision is explicit Kitchen backend development acceptance and any separately authorized contribution/next-module workflow—not another D01 preparation cycle. OR-01 remains accepted/closed. Active branch `codex/kitchen-handoff`; no publication authorized. Preserve all seven local ownership ledgers, historical reports and pending incident reviews. Operational/UI/payment/correction/collection/recovery limits remain deferred. Process incidents remain subject to user review.
 
 
 ## Technical review — 2026-10-23
@@ -310,3 +308,29 @@ D01 failed specifically with `KT_CHILD_TIMEOUT`, last safe child step `queue-rea
 Owned cleanup passed: sixteen empty application tables, expected post-0005 schema and unchanged six-entry history. No idle/pool-close/cleanup error reported; 0005 retained. Sanitized reports and the new restricted ledger were copied unchanged into the repository evidence directory; all prior reports/ledgers preserved. Temporary isolated source/compiled copy removed after integrity/report checks. Shared source and compiled outputs were not modified. TLS verification remains configured false; no transport assurance or user acceptance inferred.
 
 Concrete remaining decision: permit extending only the fresh-child deadline from 30 to 60 seconds and one supervised D01-only verification with the same baseline, assertions and cleanup. This is a proposed timeout-budget change, not an authorized relaxation. It is justified by observed successful reads/redispatch followed by the explicit deadline at queue readback; it does not need another general review or preparation cycle. The previous explicit 30-second/no-relaxation boundary prevents silently making this change. Stop on any other failure; no broad rerun or further module activation. KT-02 remains blocked until D01 completes, not falsely closed. Incidents: no new qualifying incident confirmed; existing reviews remain open.
+
+
+## D01 60-second execution authorization — 2026-10-25
+
+After reviewing the measured 30-second deadline failure and the proposed 60-second D01-only budget, user instructed proceeding and completing D01 independently. This authorizes the proposed deadline change and one supervised D01-only run under the standing confirmed intended disposable testing target/exclusive reservation, fresh exact baseline/fingerprint and owned cleanup. Record before database access. Parent now explicitly records/passes 60000ms for D01 only; full-run/control default remains 30000ms. Assertions, SQL/lock timeouts, no-migration/no-publication limits and stop conditions unchanged. Entry: tracked clean at `b2cbd6c` on `codex/kitchen-handoff`, six existing untracked ownership ledgers preserved. Other agent's source work is committed. Compile/run in an owned frozen temporary copy; preserve historical K01–K04 and REST offline evidence. No automatic retry or later module activation.
+
+
+## KT-02 technical closeout — 2026-10-25
+
+User-directed final D01-only execution **passed** after approving the measured child-budget change to 60 seconds. Fresh compilation and exact read-only baseline passed on the standing confirmed exclusive disposable target. Baseline: `apps/api/tests/evidence/kt01.86de0831-d2fb-4afe-8ef1-d8f2729512da.json`; execution: `apps/api/tests/evidence/kt01.f3a30b76-06f9-4c6e-86c9-60503a7487d3.json`. D01 read all five exact tickets through the adopted HTTP envelopes, preserved ready state on redispatch/Location, completed paginated queue enumeration and foreign-branch denial, exited with the exact success marker/code zero, then passed independent parent reconnection/readback. Parent pools were closed before one fresh API process. No idle/pool-close/cleanup failure was reported.
+
+The application/migration/harness/compiled files were frozen into an owned temporary copy; source hashes match baseline/execution and remained unchanged through shutdown. Existing installed dependencies were linked, no environment file copied, no shared compiled output mutated. Reports and the restricted ownership ledger were copied unchanged to local evidence; the owned temporary build was removed. No migration, installation, deployment, publication or automatic retry occurred. One approved budget change only; full-run/control default and SQL/lock limits remain unchanged.
+
+Owned cleanup **passed**: all sixteen application tables empty, expected post-0005 schema intact, and final six-entry history exactly equal to baseline; 0005 retained. All historical evidence and six older ledgers preserved; seven ownership ledgers now remain local/untracked.
+
+| Criteria | Composed evidence and limits |
+| --- | --- |
+| KT-A01/02 | Historical PostgreSQL K01/K02/K04 dispatch/duplicate/rollback/isolation evidence plus final D01 durable readback/retry; no full-case rerun claimed |
+| KT-A03 | Existing projection/application checks and K01's independent preparation oracle, then final five-ticket exact readback |
+| KT-A04 | Historical finite-fence persistence case, adopted signed-cursor offline checks and final fresh-process page/foreign-scope verification |
+| KT-A05 | Historical real contention/attribution/stale-retry case, retained application/HTTP checks and final ready-ticket durable readback |
+| KT-A06 | Existing HTTP unsupported-mutation/authorization checks and K01/K02 unchanged Orders history; no operational workflows introduced |
+
+KT-02 is **complete as bounded technical verification**, using historical K01–K04 at their recorded hashes, REST adoption's 35 offline checks and final D01 on the adopted code. This is composed evidence, not one full end-to-end run of every case against the new contract. No browser/KDS, TLS/transport, crash/backup recovery, full trading flow or restaurant-readiness claim; configured TLS certificate verification remains false. Kitchen user development acceptance remains separate, as explicitly requested; no next module is activated.
+
+Incidents: concurrent-build incident INC-20261025-04 has correction evidence from frozen-build hash stability and completed D01; user closure/prevention review remains pending. Current closeout also corrects/records stale root README status as INC-20261025-05. Existing process reviews remain open; no instruction/skill/guardrail changes.

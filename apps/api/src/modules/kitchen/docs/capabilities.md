@@ -1,6 +1,6 @@
 # Kitchen capability index
 
-Kitchen dispatch, queue/read and state transitions are implemented. PostgreSQL K01–K04 passed; D01 remains unverified. Operational and user acceptance are pending. See the [tracker](features/preparation/phase-tracker.md) for evidence and limits.
+Kitchen dispatch, queue/read and state transitions are implemented. PostgreSQL K01–K04 evidence and final frozen-build D01 passed; KT-02 technical verification is complete. Operational and user acceptance are pending. See the [tracker](features/preparation/phase-tracker.md) for evidence and limits.
 
 | Capability | Public entry point | Purpose | Important constraints |
 | --- | --- | --- | --- |
