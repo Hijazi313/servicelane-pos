@@ -35,6 +35,8 @@ This planning increment provides a reviewable conditional backend scope and a na
 
 ## Current handoff
 
+Kitchen HTTP adoption is complete locally under [the dated result](#rest-api-adoption-result--2026-10-25); its compatibility/evidence limits are separate from D01 continuation below.
+
 [D01 diagnosis/repair preparation](#d01-autonomous-result--2026-10-25) is complete locally. Its shared HTTP checks pass offline; original fresh-process failure is still unlocalized. Next single decision: authorize [one D01-only database verification](database-acceptance.md#required-authorization-for-d01-only-run), including renewed target/reservation confirmation. No new database execution, timeout relaxation or module closure is inferred. Preserve the prior K01–K04 passing evidence, all four local ownership ledgers, reports and pending incident reviews. Active branch `codex/kitchen-handoff`; current work remains unpublished. OR-01 accepted/closed; Kitchen acceptance pending. Process incident: [INC-20261025-02](../../../../../../../../docs/quality/agent-incidents.md#inc-20261025-02--kt-02-follow-ups-fragmented-progress-and-required-repeated-user-coordination) remains open.
 
 
@@ -243,3 +245,33 @@ Prepared `KT01_SCOPE=D01`: only bounded fixture setup for five owned tickets (on
 Verification: fourteen focused offline checks pass on existing Node v24.21.0, including real-controller child assertion execution, timeout/exit diagnostics with private-output suppression, and actual D01-only fixture orchestration producing five owned plus one foreign ticket without executing other cases. Existing eleven checks still pass. Syntax/links/whitespace checked; no production source/contract/dependency change or need for recompile during this JavaScript-only work. No `.env` loading, database access, migration, deployment, publication or automatic retry. All four ownership ledgers and earlier reports unchanged; no debug artifacts. Incidents: no new qualifying incident confirmed; INC-20261025-02 remains open, with this bounded follow-up as limited correction evidence only.
 
 Next material decision: the procedure contains one concrete D01-only execution authorization and renewed disposable-target/exclusive-reservation confirmation. This is required because the prior database permission explicitly covered one run and prohibited automatic retries. No further diagnosis/preparation prompt is needed. Kitchen acceptance and later module activation remain separate.
+
+
+## REST API adoption — 2026-10-25
+
+User explicitly authorized completing Kitchen's full REST API adoption now, following the Kitchen-only timing recommendation, with sub-agents and dated module documentation. This scope covers all four Kitchen routes and necessary shared HTTP integration, contracts and focused offline checks. It does not activate migration of other modules, new database execution, installation, deployment, publication or user acceptance. Existing checkout/branch reused without Git mutations; preserve unrelated D01 continuation edits/report and all ledgers. Historical assignment: primary agent owned HTTP/shared integration, documentation and combined verification; sub-agents owned application/cursor work and Kitchen HTTP/restart checks. Assignments are complete and grant no future authorization.
+
+Intended contract: [specification](spec.md#rest-api-adoption--2026-10-25). Phase P0 is consistent Kitchen transport behavior: strict shared DTO validation, standard envelopes and page metadata, Problem Details/correlation, Location, signed scope-bound cursors and preserved retry/revision/business semantics. These resolve observable API inconsistencies for future clients. No Swagger, generic query framework, new business features or other-module migration is needed; these remain P1/separate scope.
+
+| Task | State | Acceptance evidence |
+| --- | --- | --- |
+| All Kitchen endpoints adopt shared contract/DTO/error integration | complete within offline evidence | Actual-controller success/negative/access cases |
+| Signed scope/query-bound pagination and envelope capacity | complete within offline evidence | Focused cursor/application and HTTP checks |
+| Dated capability/adoption baseline and compatibility documentation | complete | Final code/docs review |
+
+Adoption completion and focused verification will be recorded below; this activation is not a completion claim. D01 acceptance remains separately owned by its current continuation/evidence. No incidents established in this increment at activation.
+
+
+## REST API adoption result — 2026-10-25
+
+Reviewed baseline SHA-256: REST API skill v0.4.0 `51eef0b693039806a2858ee5e604ad86ad76a5064fd3c33363b9aa4bd0c5c1f2`; canonical convention `1905f0b60874ef8f6297247bc2b6d59609b0af3f43ddb6f5f285b794402dc568`. The shared HTTP guide owns current adoption; the skill’s original two-endpoint reference predates Kitchen adoption.
+
+All four Kitchen routes now opt into shared DTO validation, envelopes/page metadata and Problem Details. POST retains 201 on redispatch and adds Location. Path/query/body rules are explicit; stale conflict selects only state/revision details. Signed cursors bind business/branch/order/limit; service restart requires a fresh scan. Original unexpected errors reach the shared safe 500 diagnostic owner instead of being silently relabeled 503. Known unavailable semantic errors retain 503. Full-ticket admission reserves the complete standard envelope and future timestamps. No new dependencies, database schema/configuration, skill/guardrail edits or business capabilities.
+
+Verification on existing supported Node v24.21.0: fresh strict TypeScript compilation passed; Kitchen HTTP (5) and preparation (14) passed; Kitchen application (7), SQL adapter (1), Orders preparation projection (2), shared HTTP harness/logging (6) passed: **35 tests** total. Full architecture scan inspected 21 files with zero violations. Independent read-only combined-source review found no blocking defects. Tests exercise actual controllers through shared production adapter/guard/interceptor with synthetic stores, original-error propagation, strict negative DTOs, data exclusion, page metadata, signed cursor tampering/scope/limit/restart rejection, inclusive UTF-8 envelope capacity and preserved retry/revision behavior. Shared legacy-route behavior still passes its harness checks. Local links/whitespace reviewed separately at closeout.
+
+[Capabilities](../../capabilities.md#rest-api-adoption) record adoption **2026-10-25**, REST API skill **0.4.0** and exact source hashes. Breaking wire changes and operational limits are in the [contract](spec.md#rest-api-adoption--2026-10-25). Shared pre-routing parsing/media/size failures and unmatched methods retain documented fallback; this is not universal adapter RFC/Problem Details compliance. No PostgreSQL behavior was rerun or established by this migration; historical K01–K04 reports keep their original hashes. Separate D01 work generated additional evidence concurrently; these reports/ledgers and its prior tracker edits are preserved without adoption verification claims. No publication, module acceptance or operational readiness inferred.
+
+Migration handoff: source/docs and offline checks complete locally; next action is review/accept the changed API contract and integrate it under the repository contribution workflow. D01 continuation remains separately owned and must reconcile its own exact source/hash evidence before any Kitchen acceptance claim. No task-owned debug artifacts; ignored compilation output only. Incidents: none confirmed in this migration; prior incident reviews remain open and unchanged.
+
+Local contribution authorization — 2026-10-25: user requested committing this migration, documentation cleanup and incident records. Reuse the existing topic branch; no push/PR/merge or database action inferred. Concurrent D01 tracker edits and evidence remain outside these commits.

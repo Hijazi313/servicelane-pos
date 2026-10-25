@@ -4,6 +4,7 @@ import assert from 'node:assert/strict';
 import { randomUUID } from 'node:crypto';
 import { fixture } from './kitchen-fixture.mjs';
 import { KitchenService, ticketFits } from '../dist/orders-check/modules/kitchen/application/kitchen.service.js';
+import { KitchenQueueCursor } from '../dist/orders-check/modules/kitchen/application/kitchen-queue-cursor.js';
 import { TICKET_RESPONSE_BYTES, queueRequest } from '../dist/orders-check/modules/kitchen/domain/preparation.js';
 const rejects = (work, code) => assert.rejects(work, error => error.code === code);
 
@@ -19,7 +20,7 @@ test('dispatch retry and concurrent model create one scoped ticket; immutable hi
   const missing = randomUUID(); await rejects(() => h.kitchen.dispatch(h.proof, { orderId: missing }), 'ORDER_NOT_FOUND');
   const other = { ...structuredClone(order), id: randomUUID() };
   h.state().orders.push({ business: h.installation.businessId, branch: h.installation.branchId, key: randomUUID(), order: { snapshot: other } });
-  h.failInsert(); await rejects(() => h.kitchen.dispatch(h.proof, { orderId: other.id }), 'KITCHEN_UNAVAILABLE');
+  h.failInsert(); await assert.rejects(h.kitchen.dispatch(h.proof, { orderId: other.id }), /SyntheticPrivateSQL/);
   assert.equal(h.records().length, 1);
   const retried = await h.kitchen.dispatch(h.proof, { orderId: other.id }); assert.equal(h.records().length, 2); assert.equal(retried.revision, 0);
 });
@@ -55,7 +56,8 @@ test('finite summary scan discovers pre-fence tickets exactly once and refreshes
   assert.equal(second.nextCursor, undefined); assert.equal(new Set([...first.tickets, ...second.tickets].map(row => row.id)).size, 4);
   const fresh = await h.kitchen.list(h.proof, {}); assert.equal(fresh.tickets.length, 5); assert.equal(fresh.tickets[0].state, 'preparing');
   assert.equal((await h.kitchen.get(h.proof, fresh.tickets[0].id)).preparation.lines.length, 1);
-  for (const value of [{ limit: '0' }, { limit: '101' }, { cursor: '3:2' }, { cursor: '0:999' }, { cursor: '0:9223372036854775808' }, { cursor: 'bad' }, { state: 'queued' }]) await rejects(() => h.kitchen.list(h.proof, value), 'INVALID_KITCHEN_INPUT');
+  for (const value of [{ limit: '0' }, { limit: '101' }, { state: 'queued' }]) await rejects(() => h.kitchen.list(h.proof, value), 'INVALID_KITCHEN_INPUT');
+  for (const cursor of ['3:2', '0:999', '0:9223372036854775808', 'bad']) await rejects(() => h.kitchen.list(h.proof, { cursor }), 'INVALID_KITCHEN_CURSOR');
   assert.throws(() => queueRequest({ cursor: ['0:1'] }));
 });
 
@@ -74,10 +76,35 @@ test('foreign records/orders and revoked authority fail without work', async () 
 test('reserve final response growth at inclusive UTF-8 boundary and reject oversize before persistence', async () => {
   const h = fixture(), order = await h.capture(), saved = await h.kitchen.dispatch(h.proof, { orderId: order.id }), record = h.records()[0].ticket;
   const base = structuredClone(record); base.preparation.instructions = '';
-  const reserved = { ...saved, preparation: base.preparation, state: 'ready', revision: 2, preparingAt: '9999-12-31T23:59:59.999Z', readyAt: '9999-12-31T23:59:59.999Z' };
+  const reserved = { data: { ...saved, preparation: base.preparation, state: 'ready', revision: 2, preparingAt: '9999-12-31T23:59:59.999Z', readyAt: '9999-12-31T23:59:59.999Z' }, meta: { requestId: '00000000-0000-0000-0000-000000000000' } };
   const remaining = TICKET_RESPONSE_BYTES - Buffer.byteLength(JSON.stringify(reserved));
   base.preparation.instructions = 'é'.repeat(Math.floor(remaining / 2)) + 'x'.repeat(remaining % 2);
   assert.equal(ticketFits(base), true); base.preparation.instructions += 'x'; assert.equal(ticketFits(base), false);
   const failing = new KitchenService(h.access, { get: async () => base.preparation }, h.kitchenStore);
   await rejects(() => failing.dispatch(h.proof, { orderId: randomUUID() }), 'TICKET_CAPACITY'); assert.equal(h.records().length, 1);
+});
+
+
+test('queue tokens reject tampering, different scope/limit and service restart', async () => {
+  const h = fixture();
+  for (let index = 0; index < 2; index++) { const order = await h.capture(); await h.kitchen.dispatch(h.proof, { orderId: order.id }); }
+  const page = await h.kitchen.list(h.proof, { limit: 1 });
+  const token = page.nextCursor; assert.equal(typeof token, 'string');
+  const [payload, signature] = token.split('.');
+  const changed = Buffer.from(JSON.stringify({ ...JSON.parse(Buffer.from(payload, 'base64url').toString()), a: '0' })).toString('base64url');
+  await rejects(() => h.kitchen.list(h.proof, { limit: 1, cursor: `${changed}.${signature}` }), 'INVALID_KITCHEN_CURSOR');
+  await rejects(() => h.kitchen.list(h.proof, { limit: 2, cursor: token }), 'INVALID_KITCHEN_CURSOR');
+  const codec = new KitchenQueueCursor();
+  const scoped = codec.issue({ after: '1', fence: '2' }, h.installation, 1);
+  assert.throws(() => codec.read(scoped, { ...h.installation, branchId: randomUUID() }, 1), error => error.code === 'INVALID_KITCHEN_CURSOR');
+  assert.throws(() => codec.read(scoped, { ...h.installation, businessId: randomUUID() }, 1), error => error.code === 'INVALID_KITCHEN_CURSOR');
+  const restarted = new KitchenService(h.access, h.preparation, h.kitchenStore);
+  await rejects(() => restarted.list(h.proof, { limit: 1, cursor: token }), 'INVALID_KITCHEN_CURSOR');
+  assert.equal((await restarted.list(h.proof, { limit: 1 })).tickets.length, 1);
+});
+
+test('unexpected persistence failures preserve the original error for the HTTP boundary', async () => {
+  const h = fixture(), failure = new Error('PrivateFailure');
+  const service = new KitchenService(h.access, h.preparation, { ...h.kitchenStore, maximum: async () => { throw failure; } });
+  await assert.rejects(service.list(h.proof, {}), error => error === failure);
 });

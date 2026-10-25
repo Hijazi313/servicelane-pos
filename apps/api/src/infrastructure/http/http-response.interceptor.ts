@@ -3,6 +3,10 @@ import { map, type Observable } from 'rxjs';
 import { usesHttpContract } from './http-contract.decorator.js';
 
 export interface ApiResponse<T> { data: T; meta: { requestId: string } }
+/** Explicit page result; never infer pagination from arbitrary object properties. */
+export class HttpPage<T> {
+  constructor(readonly items: readonly T[], readonly nextCursor: string | null) {}
+}
 interface Request { id: string }
 interface Reply { statusCode: number }
 
@@ -13,7 +17,9 @@ export class HttpResponseInterceptor implements NestInterceptor {
     return next.handle().pipe(map((data: unknown) => {
       const reply = context.switchToHttp().getResponse<Reply>();
       if (!usesHttpContract(context) || reply.statusCode === 204) return data;
-      return { data, meta: { requestId: context.switchToHttp().getRequest<Request>().id } };
+      const requestId = context.switchToHttp().getRequest<Request>().id;
+      if (data instanceof HttpPage) return { data: data.items, meta: { requestId, page: { nextCursor: data.nextCursor } } };
+      return { data, meta: { requestId } };
     }));
   }
 }

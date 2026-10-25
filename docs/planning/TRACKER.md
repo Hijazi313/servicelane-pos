@@ -79,7 +79,7 @@ Current designations follow [CONTRIBUTING](../../CONTRIBUTING.md#active-work-and
 
 | Phase / task | Branch | Checkout | Owner | Integration base | Publication / blocker | Owning tracker |
 | --- | --- | --- | --- | --- | --- | --- |
-| Kitchen KT-02 | `codex/kitchen-handoff` | `/Users/macbookpro/Documents/personal/restaurant-pos-custom` | Primary agent, solo | `main` (`ac9ce07` integrated) | Upstream `origin/codex/kitchen-handoff`; local preparation/evidence commits unpublished (no publication authorized). Post-0005 K01–K04 passed; D01-only preparation ready, awaiting new execution authorization. Prior one-run permission consumed. | [Kitchen](../../apps/api/src/modules/kitchen/docs/features/preparation/phase-tracker.md#kt-02-bounded-activation--2026-10-25) |
+| Kitchen KT-02 / REST API adoption | `codex/kitchen-handoff` | `/Users/macbookpro/Documents/personal/restaurant-pos-custom` | Primary agent; migration sub-agent assignments complete | `main` (`ac9ce07` integrated) | Upstream `origin/codex/kitchen-handoff`; local preparation/evidence commits unpublished (no publication authorized). Post-0005 K01–K04 passed; D01-only preparation ready, awaiting new execution authorization. Prior one-run permission consumed. | [Kitchen](../../apps/api/src/modules/kitchen/docs/features/preparation/phase-tracker.md#kt-02-bounded-activation--2026-10-25) |
 
 ## Current planning handoff — 2026-10-25
 
@@ -160,3 +160,8 @@ Fresh compilation, exact post-0005 baseline and K01–K04 passed, including real
 ## KT-02 D01 autonomous preparation — 2026-10-25
 
 [Owning result](../../apps/api/src/modules/kitchen/docs/features/preparation/phase-tracker.md#d01-autonomous-result--2026-10-25): actual child HTTP checks pass offline; original D01 cause remains unknown. Prepared safe child outcome/stage reporting and D01-only fixture/child/readback/cleanup path, preserving prior K01–K04 evidence. Fourteen focused offline checks pass. No database/environment access, timeout relaxation or publication. Next single decision: approve the concrete D01-only run and renewed target reservation in the procedure. Kitchen acceptance and incident review remain separate.
+
+
+## Kitchen REST API adoption — 2026-10-25
+
+User authorized completing Kitchen-only adoption now, using sub-agents. All four ticket routes migrated; [dated capability baseline](../../apps/api/src/modules/kitchen/docs/capabilities.md#rest-api-adoption) records skill v0.4.0, exact convention/skill hashes, compatibility and evidence limits. [Owning result](../../apps/api/src/modules/kitchen/docs/features/preparation/phase-tracker.md#rest-api-adoption-result--2026-10-25): strict compile, 35 focused offline tests and architecture scan (21 files, zero findings) passed. Existing business/retry/revision rules retained. No other-module migration, database execution, dependency/skill change, publication or user acceptance by this increment. D01 continuation/evidence remains separately owned; preserve concurrent reports/ledgers. Incidents: none in this migration.

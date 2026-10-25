@@ -24,22 +24,25 @@ export async function createRuntime(pool, transactionName) {
 export async function createHttp(runtime) {
   await import('reflect-metadata');
   const { Module } = await import('@nestjs/common');
-  const { NestFactory, Reflector, APP_GUARD, APP_FILTER } = await import('@nestjs/core');
+  const { NestFactory, Reflector, APP_GUARD, APP_FILTER, APP_INTERCEPTOR } = await import('@nestjs/core');
   const { KitchenController } = await import('../dist/orders-check/modules/kitchen/http/kitchen.controller.js');
   const { KitchenService } = await import('../dist/orders-check/modules/kitchen/application/kitchen.service.js');
   const { AccessService } = await import('../dist/orders-check/modules/authentication/public.js');
   const { AccessBoundaryGuard } = await import('../dist/orders-check/modules/authentication/http/access-boundary.guard.js');
   const { AccessExceptionFilter } = await import('../dist/orders-check/modules/authentication/http/access-exception.filter.js');
   const { AccessHttpConfiguration } = await import('../dist/orders-check/modules/authentication/http/configuration.js');
-  const { FastifyAdapter } = await import('@nestjs/platform-fastify');
+  const { createHttpAdapter } = await import('../dist/orders-check/infrastructure/http/http-adapter.js');
+  const { HttpContractGuard } = await import('../dist/orders-check/infrastructure/http/http-contract.guard.js');
+  const { HttpResponseInterceptor } = await import('../dist/orders-check/infrastructure/http/http-response.interceptor.js');
   class AcceptanceModule {}
   Module({ controllers: [KitchenController], providers: [
     { provide: KitchenService, useValue: runtime.kitchen }, { provide: AccessService, useValue: runtime.access },
     { provide: AccessHttpConfiguration, useValue: new AccessHttpConfiguration('https://pos.test', 'pos.test', ['127.0.0.1']) },
+    { provide: APP_GUARD, useClass: HttpContractGuard }, { provide: APP_INTERCEPTOR, useClass: HttpResponseInterceptor },
     { provide: APP_GUARD, useFactory: (reflector, config, access) => new AccessBoundaryGuard(reflector, config, access), inject: [Reflector, AccessHttpConfiguration, AccessService] },
     { provide: APP_FILTER, useClass: AccessExceptionFilter },
   ] })(AcceptanceModule);
-  const app = await NestFactory.create(AcceptanceModule, new FastifyAdapter({ trustProxy: ['127.0.0.1'], bodyLimit: 16_384 }), { logger: false, abortOnError: false });
+  const app = await NestFactory.create(AcceptanceModule, createHttpAdapter({ trustedProxies: ['127.0.0.1'], bodyLimit: 16_384 }, () => {}), { logger: false, abortOnError: false });
   try {
     await app.init(); await app.getHttpAdapter().getInstance().ready();
     return { app, request: (proof, method, path, payload) => app.inject({ method, url: '/api/v1/kitchen/tickets' + path,

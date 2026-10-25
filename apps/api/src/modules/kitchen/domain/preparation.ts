@@ -1,5 +1,5 @@
 export type TicketState = 'queued' | 'preparing' | 'ready';
-export type KitchenErrorCode = 'INVALID_KITCHEN_INPUT' | 'TICKET_NOT_FOUND' | 'ORDER_NOT_FOUND' | 'STALE_TICKET' | 'TICKET_CAPACITY' | 'KITCHEN_UNAVAILABLE';
+export type KitchenErrorCode = 'INVALID_KITCHEN_INPUT' | 'INVALID_KITCHEN_CURSOR' | 'TICKET_NOT_FOUND' | 'ORDER_NOT_FOUND' | 'STALE_TICKET' | 'TICKET_CAPACITY' | 'KITCHEN_UNAVAILABLE';
 export class KitchenError extends Error {
   constructor(readonly code: KitchenErrorCode, readonly current?: { state: TicketState; revision: number }) { super(code); }
 }
@@ -22,15 +22,11 @@ export function position(value: unknown): string {
   if (typeof value !== 'string' || !/^(0|[1-9][0-9]{0,18})$/.test(value) || BigInt(value) > MAX_POSITION) throw new KitchenError('INVALID_KITCHEN_INPUT');
   return value;
 }
-export function queueRequest(value: unknown): { limit: number; after: string; fence?: string } {
+export function queueRequest(value: unknown): { limit: number; cursor?: string } {
   const row = object(value, ['limit', 'cursor']);
-  const limit = row.limit === undefined ? 25 : typeof row.limit === 'string' && /^(?:[1-9]|[1-9][0-9]|100)$/.test(row.limit) ? Number(row.limit) : 0;
+  const limit = row.limit === undefined ? 25 : typeof row.limit === 'number' && Number.isInteger(row.limit) && row.limit >= 1 && row.limit <= 100 ? row.limit : typeof row.limit === 'string' && /^(?:[1-9]|[1-9][0-9]|100)$/.test(row.limit) ? Number(row.limit) : 0;
   if (!limit) throw new KitchenError('INVALID_KITCHEN_INPUT');
-  if (row.cursor === undefined) return { limit, after: '0' };
-  if (typeof row.cursor !== 'string' || row.cursor.length > 39) throw new KitchenError('INVALID_KITCHEN_INPUT');
-  const parts = row.cursor.split(':');
-  if (parts.length !== 2) throw new KitchenError('INVALID_KITCHEN_INPUT');
-  const after = position(parts[0]), fence = position(parts[1]);
-  if (BigInt(after) > BigInt(fence)) throw new KitchenError('INVALID_KITCHEN_INPUT');
-  return { limit, after, fence };
+  if (row.cursor === undefined) return { limit };
+  if (typeof row.cursor !== 'string' || row.cursor.length === 0 || row.cursor.length > 512) throw new KitchenError('INVALID_KITCHEN_CURSOR');
+  return { limit, cursor: row.cursor };
 }

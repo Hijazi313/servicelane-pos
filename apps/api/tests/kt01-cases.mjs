@@ -102,8 +102,9 @@ export async function runCases(ctx) {
     const rollbackOrder = await capture(), original = r.kitchenStore.insert;
     const sessions = async () => (await one.query('select digest,last_activity_at from access_sessions where business_id=$1 order by digest', [scope.businessId])).rows;
     const before = await sessions();
-    r.kitchenStore.insert = async (...args) => { await original.apply(r.kitchenStore, args); throw new Error('Synthetic rollback after insert'); };
-    try { await assert.rejects(r.kitchen.dispatch(proof, { orderId: rollbackOrder.id }), error => error.code === 'KITCHEN_UNAVAILABLE'); }
+    const rollbackFailure = new Error('Synthetic rollback after insert');
+    r.kitchenStore.insert = async (...args) => { await original.apply(r.kitchenStore, args); throw rollbackFailure; };
+    try { await assert.rejects(r.kitchen.dispatch(proof, { orderId: rollbackOrder.id }), error => error === rollbackFailure); }
     finally { r.kitchenStore.insert = original; }
     assert.equal((await rowsFor(rollbackOrder.id)).length, 0); assert.deepEqual(await sessions(), before);
     assert.deepEqual(await r.orders.get(proof, rollbackOrder.id), rollbackOrder);
