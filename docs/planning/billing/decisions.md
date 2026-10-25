@@ -1,6 +1,6 @@
-# Billing/Payments — decisions awaiting approval
+# Billing/Payments — decisions
 
-Date: 2026-10-25. All recommendations are **proposed**. Owner: project owner; accountant/business and payment-provider input where applicable. No legal applicability/rate/mandate is determined by this plan. Existing [compliance guidance](../../compliance/README.md) owns source/applicability policy; its historical links are not newly verified authorities.
+Date: 2026-10-25. BP-D01–06 recommendations are **owner-approved for the bounded development scope**, following the user’s agreement and subsequent confirmation in this chat. This approves the missing-policy block, not actual fiscal rules or synthetic-only mode. Implementation permission remains separate. Owner: project owner; accountant/business and payment-provider input where applicable. No legal applicability/rate/mandate is determined by this plan. Existing [compliance guidance](../../compliance/README.md) owns source/applicability policy; its historical links are not newly verified authorities.
 
 | ID / question | Recommended smallest sound option | Alternatives / consequence | Blocking gate and required decision |
 | --- | --- | --- | --- |
@@ -14,3 +14,7 @@ Date: 2026-10-25. All recommendations are **proposed**. Owner: project owner; ac
 BP-00 also finishes concrete application/HTTP/schema contracts after these choices: response capacity, exact retry comparison, error mappings, supported synthetic policy examples, calculation bounds and minimal configuration interface. Routine technical detail is not a second business approval ritual, but cannot silently fill an unresolved material policy choice.
 
 Current-source references: [Orders merchandise-only boundary](../../../apps/api/src/modules/orders/docs/features/capture/spec.md#product-decisions-approved-for-planning--2026-10-20), [Kitchen boundaries](../../../apps/api/src/modules/kitchen/docs/capabilities.md), [Business configuration](../../../apps/api/src/modules/business/docs/capabilities.md), [transactional authorization](../../../apps/api/src/modules/authentication/docs/capabilities.md). No external legal/payment recommendation is asserted as verified; obtain current official evidence when determining applicability rather than copying vendor behavior.
+
+## Approval boundary — 2026-10-25
+
+The owner agreed to BP-D01–06 and confirmed approval after clarification that correction/refund operations are excluded from BP-01 but remain operational prerequisites. The table retains the recommendations and affected future gates; its requests for development-scope approval are satisfied. Actual fiscal applicability/configuration, or an explicit choice of synthetic-only development with operational settlement disabled, remains unresolved under BP-D02. No source implementation, tests, database work or later phase is activated.

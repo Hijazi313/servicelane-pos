@@ -12,11 +12,11 @@ Public capabilities: none implemented. No Billing module exists; keep discovery 
 
 ## Scope and phases
 
-The [specification](spec.md) defines phase P0 and observable acceptance. The [decisions](decisions.md) are recommendations awaiting owner approval, not selected business policy. The [phase tracker](phase-tracker.md) owns authorization, evidence and handoff.
+The [specification](spec.md) defines phase P0 and observable acceptance. The [decisions](decisions.md) record owner-approved development recommendations and the remaining fiscal-policy/mode decision. The [phase tracker](phase-tracker.md) owns authorization, evidence and handoff.
 
 | Phase | Outcome | Status / exit |
 | --- | --- | --- |
-| BP-00 | Agree smallest scope, money/fiscal/receipt/correction decisions and complete concrete contracts | Proposed; blocking decisions and contract review resolved before source entry |
+| BP-00 | Agree smallest scope, money/fiscal/receipt/correction decisions and complete concrete contracts | Proposed; fiscal mode and contract review resolved before source entry |
 | BP-01 | Implement approved full-cash settlement/readback, narrow Orders projection and migration source | Proposed; focused offline evidence against BP-A01–07, reviewed source; no database permission inherited |
 | BP-02 | Prove atomic persistence, duplicate handling and fresh-process readback on a reserved disposable target | Proposed objective only; separately approved prepared procedure, one bounded run and owned cleanup; user development acceptance separate |
 

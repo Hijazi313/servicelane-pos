@@ -79,13 +79,13 @@ Current designations follow [CONTRIBUTING](../../CONTRIBUTING.md#active-work-and
 
 | Phase / task | Branch | Checkout | Owner | Integration base | Publication / blocker | Owning tracker |
 | --- | --- | --- | --- | --- | --- | --- |
-| Billing/Payments planning only | `codex/billing-planning` | `/Users/macbookpro/Documents/personal/restaurant-pos-custom` | Primary agent | `main` `d75ac92` | Local only — publication unauthorized; BP-D01–06 unresolved | [Billing tracker](billing/phase-tracker.md) |
+| Billing/Payments planning only | `codex/billing-planning` | `/Users/macbookpro/Documents/personal/restaurant-pos-custom` | Primary agent | `main` `d75ac92` | Local only — publication unauthorized; Fiscal mode/source authorization unresolved | [Billing tracker](billing/phase-tracker.md) |
 
 ## Current planning handoff — 2026-10-25
 
 BA-01/02/03 accepted development scope and historical execution permissions are owned by the [joint BA tracker](business-access/phase-tracker.md). They do not authorize new Menu or database work.
 
-Current handoff: [Billing/Payments proposal](billing/README.md) recommends one immutable bill and one full cash settlement per captured takeaway order, conditional on [owner decisions](billing/decisions.md). [Owning tracker](billing/phase-tracker.md) records planning authorization, exact implementation permission needed and evidence limits. No implementation phase activated. Orders/Kitchen stay accepted/closed; seven untracked ledgers, historical reports, operational deferrals and pending incident reviews preserved. No accepted work rerun.
+Current handoff: [Billing/Payments proposal](billing/README.md) recommends one immutable bill and one full cash settlement per captured takeaway order, with [development recommendations approved and fiscal mode unresolved](billing/decisions.md). [Owning tracker](billing/phase-tracker.md) records planning authorization, exact implementation permission needed and evidence limits. No implementation phase activated. Orders/Kitchen stay accepted/closed; seven untracked ledgers, historical reports, operational deferrals and pending incident reviews preserved. No accepted work rerun.
 
 ## Proposed foundation follow-ups — 2026-10-12
 
@@ -109,7 +109,7 @@ Project foundation precedes Business/Branch and Authentication/Access, which pre
 | 3 | Menu | complete development scope; merged | [MN-00 → MN-01 plan](../../apps/api/src/modules/menu/docs/README.md); accepted, PR #9 squash `b09770e`; release limits retained |
 | 4 | Orders | OR-01 complete; accepted backend development scope | [Specification](../../apps/api/src/modules/orders/docs/features/capture/spec.md) / [phase tracker](../../apps/api/src/modules/orders/docs/features/capture/phase-tracker.md); bounded persistence verified; [acceptance/closeout](../../apps/api/src/modules/orders/docs/features/capture/phase-tracker.md#acceptance-and-closeout--2026-10-21) |
 | 5 | Kitchen | Backend development scope complete; user-accepted | [KT-01 handoff / completed KT-02](../../apps/api/src/modules/kitchen/docs/features/preparation/phase-tracker.md); migration 0005 applied; accepted bounded technical evidence; integration record PR #16 |
-| 6 | Billing and payments | proposed; planning delivered | [Plan](billing/README.md) / [tracker](billing/phase-tracker.md); BP-00 decisions pending, implementation inactive |
+| 6 | Billing and payments | proposed; planning delivered | [Plan](billing/README.md) / [tracker](billing/phase-tracker.md); BP-00 fiscal mode/contracts pending; recommendations approved, implementation inactive |
 | 7 | Cashier shifts | proposed | Not activated |
 | 8 | Inventory | proposed | Stock model unresolved |
 | 9 | Reports | proposed | Not activated |

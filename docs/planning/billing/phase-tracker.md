@@ -22,15 +22,15 @@ Assignment: this checkout `/Users/macbookpro/Documents/personal/restaurant-pos-c
 | Task / phase | Status | Exit / expected evidence |
 | --- | --- | --- |
 | Planning: verify entry and define smallest candidate | Complete | Entry inspection above; [BP-R01–06 and BP-A01–07](spec.md#acceptance-criteria), boundaries and decision recommendations documented |
-| BP-00: resolve scope/business decisions and concrete contracts | Proposed | Owner decides BP-D01–06 and fiscal development mode; technical contract review complete; explicit source authorization |
+| BP-00: resolve scope/business decisions and concrete contracts | Proposed | BP-D01–06 recommendations approved; fiscal development mode unresolved; concrete contracts and explicit source authorization still required |
 | BP-01: approved source/offline delivery | Proposed; inactive | Criteria BP-A01–07 mapped to focused offline evidence with persistence gaps explicit; no database run or user acceptance inferred |
 | BP-02: bounded persistence verification | Proposed objective; inactive | Later reviewed target-specific procedure and renewed disposable/exclusive reservation; concurrency/rollback/fresh-process/owned cleanup evidence; separate user acceptance |
 
 ## Current handoff
 
-Planning documents complete; all business recommendations unapproved. Local-only topic checkpoint; publication unauthorized. Documentation review covers changed scope, relative links and whitespace only; no tests/builds, installation or database access. No accepted Orders/Kitchen work reopened or rerun. Module docs are intentionally not scaffolded before source entry; global module index links this proposal without claiming a capability.
+Planning documents complete; BP-D01–06 recommendations approved for the bounded development scope by the user in this chat on 2026-10-25. Fiscal rules/synthetic-only mode and implementation authorization remain unresolved. Local-only topic checkpoint; publication unauthorized. Documentation review covers changed scope, relative links and whitespace only; no tests/builds, installation or database access. No accepted Orders/Kitchen work reopened or rerun. Module docs are intentionally not scaffolded before source entry; global module index links this proposal without claiming a capability.
 
-Next action: owner reviews [BP-D01–06](decisions.md), especially actual fiscal policy versus synthetic-only development mode, then approves the bounded source scope below. BP-00 contract completion must precede source edits; material unresolved choices stop dependent work.
+Next action: choose actual fiscal policy versus explicitly synthetic-only development with operational settlement disabled, then authorize the bounded source scope below. Do not request repeat approval of BP-D01–06’s settled development recommendations. BP-00 contract completion must precede source edits; material unresolved choices stop dependent work.
 
 Exact requested implementation authorization, **not granted by this plan**:
 
