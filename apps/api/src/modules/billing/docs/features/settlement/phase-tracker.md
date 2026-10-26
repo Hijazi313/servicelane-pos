@@ -2,7 +2,7 @@
 
 Parent: [global tracker](../../../../../../../../docs/planning/TRACKER.md). Plan: [README](../../README.md). Specification: [spec](spec.md). Decisions: [decisions](decisions.md).
 
-Status: revised BP-00 design accepted; BP-01 source/offline delivery implemented; awaiting user review. BP-02 bounded database verification passed; awaiting user review. Coordinator: primary agent; [read-only reviews](agent-collaboration.md).
+Status: BP-00, BP-01 and BP-02 accepted/closed under the recorded backend development scope; BP-01/BP-02 acceptance dated 2026-10-27. Coordinator: primary agent; [read-only reviews](agent-collaboration.md).
 
 ## Planning authorization — 2026-10-25
 
@@ -23,16 +23,16 @@ Assignment: this checkout `/Users/macbookpro/Documents/personal/restaurant-pos-c
 | --- | --- | --- |
 | Planning: verify entry and define smallest candidate | Complete | Entry inspection above; [BP-R01–06 and BP-A01–18](spec.md#acceptance-criteria), boundaries and decision recommendations documented |
 | BP-00: resolve scope/business decisions and concrete contracts | Accepted by user 2026-10-26 | Revised multiple-rule/seven-route design accepted; source authorization recorded below |
-| BP-01: approved source/offline delivery | Implemented; awaiting user review | Offline evidence below; persistence criteria remain BP-02 gaps; no user acceptance inferred |
-| BP-02: bounded persistence verification | Technical verification complete; awaiting user review | B01–B07 and owned cleanup passed on the authorized disposable target; result below; separate user acceptance |
+| BP-01: approved source/offline delivery | Accepted/closed by user 2026-10-27 | Source/offline delivery accepted with recorded scope/evidence limits; BP-02 supplies bounded persistence evidence |
+| BP-02: bounded persistence verification | Accepted/closed by user 2026-10-27 | B01–B07 and owned cleanup passed; user accepted recorded scope/limitations |
 
 ## Current handoff
 
 BP-01 isolated source/offline delivery is implemented for the seven accepted routes and BP-A01–18 source scope. [Authorization and isolation](#bp-01-authorization-and-source-isolation--2026-10-26) precedes source edits. [Offline evidence and limits](#bp-01-delivery-evidence--2026-10-26) records what was executed and what remains unverified. BillingModule is absent from AppModule; no new route is live. Samples remain offline fixtures; no installed policy defaults. No upstream accepted suites/harnesses were rerun.
 
-Next action: user reviews BP-01 source/offline delivery together with the [BP-02 database result](#bp-02-single-target-execution-result--2026-10-26) for development acceptance. All B01–B07 cases and owned cleanup passed; migration 0006 remains applied, twenty tables empty and seven history entries intact. No further tests are justified by this result. Execution permission is consumed; no rerun, live activation or publication inferred. BP-01 acceptance remains a separate user decision.
+User accepted BP-01 and BP-02 on 2026-10-27 under the recorded scope and limitations; [acceptance/closeout](#bp-01bp-02-user-acceptance-and-closeout--2026-10-27). Both phases are closed for backend development. No further tests are justified. Migration 0006 remains applied, twenty tables were verified empty and seven history entries intact at execution closeout; no new database access occurred for acceptance.
 
-Seven untracked ledgers, accepted Orders/Kitchen contracts/reports and pending incident reviews are preserved. Incidents: none in BP-01; 21 existing incident entries remain pending user review, without closure or prevention-policy change.
+Any publication/integration, live activation, deployment or next-module work needs separate authorization. BP-01/BP-02 remain local on `codex/billing-planning` in this checkout, with integration base `d75ac92`; no push/PR/merge is inferred. Preserve recorded operational deferrals and evidence limits, eight untracked ownership ledgers (seven historical plus BP-02), accepted Orders/Kitchen evidence and 21 pending incident reviews. Incidents: none in this closeout.
 
 ## Settings definition — 2026-10-26
 
@@ -170,3 +170,11 @@ Fresh compilation on existing Node 24.21.0 passed. The authorized sole `.env` di
 Limits remain: single disposable target, synthetic data, API test composition without a listener; no upstream acceptance-suite rerun, live activation, physical cash/fiscal/receipt/transport or crash/backup assurance. Existing target TLS verification setting was false and was not changed; no TLS assurance claimed. Catalog checks retain the documented bounded name/type/object/selected-default coverage. Immutable history is an application guarantee, not protection from privileged SQL. BP-A06's queued/ready Kitchen integration variants remain outside this run; accepted Kitchen evidence and Billing's Kitchen-free dependency are reused, not re-proven.
 
 Technical BP-02 verification is complete; BP-01/source and combined backend development acceptance remain user decisions. No additional verification is warranted without a new change/failure. Run permission consumed; no automatic retry, publication, deployment or later module. Task-owned compilation output removed. Two sanitized reports retained for the local evidence commit; the new BP-02 ownership ledger stays untracked/private alongside seven unchanged historical ledgers. Incidents: none in this execution; 21 existing pending user reviews unchanged.
+
+## BP-01/BP-02 user acceptance and closeout — 2026-10-27
+
+User explicitly accepted BP-01 and BP-02 under the recorded scope and limitations. Acceptance covers the isolated seven-route backend source/offline delivery (BP-01 checkpoint `13f50bc`) and bounded synthetic PostgreSQL verification/owned cleanup (BP-02 evidence checkpoint `3f245e6`). Both phases are accepted/closed; this records the user's decision rather than inferring approval from passing tests.
+
+All limitations in the delivery and execution records remain: no AppModule/live route activation or installed sample fiscal policy; no restaurant/fiscal/receipt/physical-cash, transport/TLS or crash/backup readiness claim. Single-target evidence, bounded catalog checks, application-level immutability and reused upstream Kitchen evidence remain as recorded. The queued/ready Kitchen variants were not rerun or relabeled verified by acceptance. Operational corrections/refunds and other release prerequisites remain separately scoped.
+
+Documentation closeout only, using existing local-commit authorization. Checkout verified at `3f245e6` on `codex/billing-planning`; no source changes, tests, environment/database access, installation or publication. Reviewed documentation diff, links and whitespace only. Remove the completed workstream from active assignments; retain this branch/checkpoint record for a future separately authorized integration. No next module is activated. Incidents: none this closeout; 21 pending incident reviews and all eight untracked ownership ledgers preserved.

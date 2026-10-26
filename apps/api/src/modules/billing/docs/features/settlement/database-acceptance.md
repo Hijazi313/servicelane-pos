@@ -1,8 +1,8 @@
 # BP-02 persistence verification — completed bounded run
 
-**Execution result — 2026-10-26:** B01–B07 and owned cleanup passed on the user-authorized disposable `.env` target. Only 0006 was applied; twenty application tables are empty and seven exact history entries remain. [Result/evidence limits](phase-tracker.md#bp-02-single-target-execution-result--2026-10-26). Permission consumed; commands below are historical, not approval to rerun. BP-01/development acceptance remains separate.
+**Execution result — 2026-10-26:** B01–B07 and owned cleanup passed on the user-authorized disposable `.env` target. Only 0006 was applied; twenty application tables are empty and seven exact history entries remain. [Result/evidence limits](phase-tracker.md#bp-02-single-target-execution-result--2026-10-26). Permission consumed; commands below are historical, not approval to rerun. BP-01/BP-02 were subsequently user-accepted on 2026-10-27 under the [recorded limitations](phase-tracker.md#bp-01bp-02-user-acceptance-and-closeout--2026-10-27).
 
-[Authorization and current handoff](phase-tracker.md#bp-02-lean-harness-continuation--2026-10-26). [Acceptance criteria](spec.md#acceptance-criteria). Manual entry: `apps/api/tests/bp02-acceptance.mjs`. The procedure below records the reviewed preparation and execution boundaries; the dated result above supersedes its unrun status. BP-01 acceptance is separate.
+[Authorization and current handoff](phase-tracker.md#bp-02-lean-harness-continuation--2026-10-26). [Acceptance criteria](spec.md#acceptance-criteria). Manual entry: `apps/api/tests/bp02-acceptance.mjs`. The procedure below records the reviewed preparation and execution boundaries; the dated result and acceptance above supersede its unrun/awaiting-acceptance status.
 
 ## Smallest useful scope
 

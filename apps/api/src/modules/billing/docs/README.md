@@ -1,10 +1,10 @@
 # Billing and Payments
 
-Status: BP-00 accepted; BP-01 source/offline and BP-02 bounded persistence verification delivered; awaiting user development review. Owner: primary agent.
+Status: BP-00 accepted; BP-01 and BP-02 accepted/closed by the user on 2026-10-27 under the recorded backend development scope and limitations. Owner: primary agent.
 
 ## Outcome and boundaries
 
-Recommend **BP-01: settle one captured takeaway order in full with cash and read back its immutable bill/payment record**. This is a bounded backend development increment, not a complete trading flow or restaurant release. A payable bill is meaningful only after explicit approval of the fiscal policy; Orders' merchandise total is not silently promoted to payable.
+Accepted **BP-01: settle one captured takeaway order in full with cash and read back its immutable bill/payment record**. This is a bounded backend development increment, not a complete trading flow or restaurant release. A payable bill is meaningful only after explicit approval of the fiscal policy; Orders' merchandise total is not silently promoted to payable.
 
 Billing owns bill-time monetary/fiscal snapshots, settlement identity and cash-payment attribution. Orders retains captured merchandise history; Kitchen retains preparation only. Reuse existing Business configuration and Authentication authorization. No provider integration, new permission framework, accounting engine or cashier-shift dependency is justified for this technical slice.
 
@@ -17,8 +17,8 @@ The [specification](features/settlement/spec.md) defines phase P0 and observable
 | Phase | Outcome | Status / exit |
 | --- | --- | --- |
 | BP-00 | Agree smallest scope, money/fiscal/receipt/correction decisions and complete concrete contracts | Accepted by user on 2026-10-26; sample development approved |
-| BP-01 | Implement approved full-cash settlement/readback, narrow Orders/Business projections, admin settings and migration source | Implemented; focused offline evidence and explicit persistence gaps; awaiting user review |
-| BP-02 | Prove atomic persistence, duplicate handling and fresh-process readback on a reserved disposable target | B01–B07 and owned cleanup passed on one disposable target; 0006/seven history entries retained, twenty tables empty. User development acceptance separate; run permission consumed |
+| BP-01 | Implement approved full-cash settlement/readback, narrow Orders/Business projections, admin settings and migration source | Accepted/closed 2026-10-27; focused source/offline evidence with bounded persistence supplied by BP-02 |
+| BP-02 | Prove atomic persistence, duplicate handling and fresh-process readback on a reserved disposable target | B01–B07 and owned cleanup passed on one disposable target; 0006/seven history entries retained, twenty tables empty. Accepted/closed 2026-10-27 under recorded limitations; run permission consumed |
 
 No phase is activated by this table. Operational corrections/refunds, fiscal output, collection/completion and complete trading-flow/recovery acceptance remain release prerequisites needing their own scope, not automatic BP-02 work.
 

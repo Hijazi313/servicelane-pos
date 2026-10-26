@@ -1,6 +1,6 @@
 # Billing capability index
 
-BP-01 isolated implementation plus BP-02 bounded PostgreSQL verification; user development acceptance pending. `BillingModule` is deliberately absent from AppModule; no live settlement activation or installed sample policy. [Evidence and limits](features/settlement/phase-tracker.md#bp-01-delivery-evidence--2026-10-26).
+BP-01 isolated implementation plus BP-02 bounded PostgreSQL verification; user-accepted/closed on 2026-10-27 under the recorded scope and limitations. `BillingModule` is deliberately absent from AppModule; no live settlement activation or installed sample policy. [Evidence and limits](features/settlement/phase-tracker.md#bp-01-delivery-evidence--2026-10-26).
 
 | Capability | Public entry point | Purpose | Constraints |
 | --- | --- | --- | --- |
@@ -13,3 +13,5 @@ BP-01 isolated implementation plus BP-02 bounded PostgreSQL verification; user d
 No bill mutation/refund/delete/listing/fiscal output, payment provider, legal-entity model or operational readiness is implied.
 
 BP-02 migration 0006, all seven focused database cases and owned cleanup passed on the authorized disposable target; twenty tables empty and seven history entries retained. [Result and limits](features/settlement/phase-tracker.md#bp-02-single-target-execution-result--2026-10-26). No route activation, upstream rerun or restaurant-readiness claim.
+
+[BP-01/BP-02 acceptance](features/settlement/phase-tracker.md#bp-01bp-02-user-acceptance-and-closeout--2026-10-27) does not activate routes or authorize publication, deployment or restaurant use.
