@@ -32,6 +32,8 @@
 
 - Billing BP-01/BP-02 acceptance — 2026-10-27: user explicitly accepted both under the recorded scope and limitations. [Acceptance/closeout](../apps/api/src/modules/billing/docs/features/settlement/phase-tracker.md#bp-01bp-02-user-acceptance-and-closeout--2026-10-27) closes the backend development increment; no further tests, database run, publication/integration, live activation, deployment or next-module work is authorized by acceptance. Operational deferrals and pending incident reviews remain unchanged.
 
+- Billing integration authorization — 2026-10-27: user explicitly approved publication, necessary PR/CI review and merge of the accepted Billing branch. [Owning record](../apps/api/src/modules/billing/docs/features/settlement/phase-tracker.md#billing-publicationintegration-authorization--2026-10-27). Normal push, focused PR, exact-head checks, squash merge and branch cleanup only; no database rerun, local installation, live activation, deployment or next module.
+
 ## Verification policy
 
 Updated by user direction on 2026-10-11; replaces the earlier blanket ban.
