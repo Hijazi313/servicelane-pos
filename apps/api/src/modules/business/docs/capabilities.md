@@ -12,7 +12,7 @@ See the [module overview](README.md) for boundaries and links to specifications 
 
 | Capability | Public entry point | Purpose | Important constraints |
 | --- | --- | --- | --- |
-| Bound display read/replacement | [DisplaySettingsService via public.ts](../public.ts) | Return current display tuple and revision; replace name/address tuple with retained old/new history | Caller supplies trusted scope/active authorization transaction for replacement; currency/timezone read-only; no nested authorization; offline tests only, persistence unexecuted |
+| Bound display read/replacement | [DisplaySettingsService via public.ts](../public.ts) | Return current display tuple and revision; replace name/address tuple with retained old/new history | Caller supplies trusted scope/active authorization transaction for replacement; currency/timezone read-only; no nested authorization; offline tests and bounded BP-02 PostgreSQL revision-race/history/rollback evidence; no operational activation |
 | Display HTTP composition | [BusinessDisplayHttpModule](../http/business-display-http.module.ts) | Source for GET/PUT `/api/v1/business/display-settings` | Deliberately unmounted in AppModule; supported shared HTTP validation/envelope; staff read, administrator+CSRF update through existing Access |
 
-Display changes do not alter initial provisioning or accepted Access contracts. Source migration adds revision/history; no database execution or operational activation. [Billing handoff](../../billing/docs/features/settlement/phase-tracker.md) owns BP-01 evidence and limits.
+Display changes do not alter initial provisioning or accepted Access contracts. Source migration adds revision/history; migration 0006 and bounded BP-02 display persistence checks passed on one disposable target; no operational activation. [Billing handoff](../../billing/docs/features/settlement/phase-tracker.md) owns BP-01/BP-02 evidence and limits.

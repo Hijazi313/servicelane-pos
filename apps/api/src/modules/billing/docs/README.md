@@ -1,6 +1,6 @@
 # Billing and Payments
 
-Status: BP-00 accepted; BP-01 isolated source/offline delivery implemented; awaiting user review. Owner: primary agent.
+Status: BP-00 accepted; BP-01 source/offline and BP-02 bounded persistence verification delivered; awaiting user development review. Owner: primary agent.
 
 ## Outcome and boundaries
 
@@ -18,7 +18,7 @@ The [specification](features/settlement/spec.md) defines phase P0 and observable
 | --- | --- | --- |
 | BP-00 | Agree smallest scope, money/fiscal/receipt/correction decisions and complete concrete contracts | Accepted by user on 2026-10-26; sample development approved |
 | BP-01 | Implement approved full-cash settlement/readback, narrow Orders/Business projections, admin settings and migration source | Implemented; focused offline evidence and explicit persistence gaps; awaiting user review |
-| BP-02 | Prove atomic persistence, duplicate handling and fresh-process readback on a reserved disposable target | Manual persistence harness/procedure prepared; fourteen focused offline checks pass. Target/reservation and one baseline/migration/run/owned-cleanup authorization remain required; actual persistence unverified and user development acceptance separate |
+| BP-02 | Prove atomic persistence, duplicate handling and fresh-process readback on a reserved disposable target | B01–B07 and owned cleanup passed on one disposable target; 0006/seven history entries retained, twenty tables empty. User development acceptance separate; run permission consumed |
 
 No phase is activated by this table. Operational corrections/refunds, fiscal output, collection/completion and complete trading-flow/recovery acceptance remain release prerequisites needing their own scope, not automatic BP-02 work.
 

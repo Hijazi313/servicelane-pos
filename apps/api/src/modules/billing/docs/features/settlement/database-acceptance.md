@@ -1,6 +1,8 @@
-# BP-02 persistence verification — prepared, unrun
+# BP-02 persistence verification — completed bounded run
 
-[Authorization and current handoff](phase-tracker.md#bp-02-lean-harness-continuation--2026-10-26). [Acceptance criteria](spec.md#acceptance-criteria). Manual entry: `apps/api/tests/bp02-acceptance.mjs`. Preparation uses existing dependencies only; no environment or target has been inspected. BP-01 acceptance is separate.
+**Execution result — 2026-10-26:** B01–B07 and owned cleanup passed on the user-authorized disposable `.env` target. Only 0006 was applied; twenty application tables are empty and seven exact history entries remain. [Result/evidence limits](phase-tracker.md#bp-02-single-target-execution-result--2026-10-26). Permission consumed; commands below are historical, not approval to rerun. BP-01/development acceptance remains separate.
+
+[Authorization and current handoff](phase-tracker.md#bp-02-lean-harness-continuation--2026-10-26). [Acceptance criteria](spec.md#acceptance-criteria). Manual entry: `apps/api/tests/bp02-acceptance.mjs`. The procedure below records the reviewed preparation and execution boundaries; the dated result above supersedes its unrun status. BP-01 acceptance is separate.
 
 ## Smallest useful scope
 
@@ -56,14 +58,14 @@ Offline preparation commands (no environment file):
 /private/tmp/mn00-verified-runtime/node-v24.21.0-darwin-x64/bin/node --test apps/api/tests/bp02-plan.test.mjs apps/api/tests/bp02-preparation.test.mjs
 ```
 
-Future commands below are **not authorized now**. From repository root, fresh compile first, then use the approved existing configuration source (`.env` below is a placeholder until the user confirms it):
+Historical commands below are **not authorized for another run**. From repository root, fresh compile first, then use the approved existing configuration source (`.env` below is a placeholder until the user confirms it):
 
 ```sh
 BP02_MODE=baseline BP02_SCHEMA=pre-0006 BP02_TEST_TARGET=YES BP02_EXCLUSIVE=YES /private/tmp/mn00-verified-runtime/node-v24.21.0-darwin-x64/bin/node --env-file=.env apps/api/tests/bp02-acceptance.mjs
 BP02_MODE=execute BP02_SCHEMA=pre-0006 BP02_TEST_TARGET=YES BP02_EXCLUSIVE=YES BP02_APPLY_0006=YES BP02_EXPECTED_TARGET=REPLACE_WITH_APPROVED_64_HEX_FINGERPRINT /private/tmp/mn00-verified-runtime/node-v24.21.0-darwin-x64/bin/node --env-file=.env apps/api/tests/bp02-acceptance.mjs
 ```
 
-Required next authorization:
+Historical authorization shape (the one-run permission has been consumed):
 
 ```text
 I approve the BP-02 procedure and harness at [exact reviewed commit].

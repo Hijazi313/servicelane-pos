@@ -25,4 +25,4 @@ HTTP inputs now use CreateOrderDto through Nest ValidationPipe/class-validator/c
 | --- | --- | --- | --- |
 | Immutable captured financial projection | [OrderFinancialService via public.ts](../public.ts) | Return exact merchandise amounts and captured composition to Billing | Caller supplies trusted scoped active transaction; validates captured supported currency/scale, line multiplication and total; no customer/instructions/retry/policy/surcharges; no Menu re-resolution, Kitchen dependency or foreign persistence export |
 
-Focused BP-01 offline projection checks cover allowlisting and corrupt monetary history. Accepted Orders/Kitchen work was not rerun; real persistence extension evidence remains unexecuted.
+Focused BP-01 offline projection checks cover allowlisting and corrupt monetary history. Accepted Orders/Kitchen work was not rerun; BP-02 scoped financial reads and unchanged captured-row digests passed on one disposable target; accepted Orders capture suites were not rerun.
