@@ -1,0 +1,3 @@
+#!/bin/sh
+# Read-only and offline; no package manager or installation during commit.
+exec node scripts/check-documentation-links.mjs

@@ -20,6 +20,8 @@
     "test:orders": "pnpm --filter @servicelane/api test:orders",
     "check:architecture": "pnpm --filter @servicelane/api check:architecture",
     "test:architecture": "pnpm --filter @servicelane/api test:architecture",
-    "test:billing": "pnpm --filter @servicelane/api test:billing"
+    "test:billing": "pnpm --filter @servicelane/api test:billing",
+    "check:docs": "node scripts/check-documentation-links.mjs",
+    "test:docs": "node --test scripts/tests/documentation-links.test.mjs"
   }
 }

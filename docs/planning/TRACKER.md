@@ -73,7 +73,20 @@ User authorized committing the reviewed staged changes and creating a PR from `c
 - Current phase: Orders OR-01 and Kitchen backend development scopes remain accepted/closed. Billing BP-01/BP-02 were explicitly accepted/closed on 2026-10-27 under recorded scope and limitations; [owning acceptance](../../apps/api/src/modules/billing/docs/features/settlement/phase-tracker.md#bp-01bp-02-user-acceptance-and-closeout--2026-10-27). Database run permission is consumed. Subsequent publication/PR/merge authorization is active; live activation, deployment and next-module work remain unauthorized. BA acceptance and deferred two-database validation remain unchanged.
 - Deferred validation remains in the [canonical foundation handoff](project-foundation/phase-tracker.md#current-handoff--2026-10-12) and [acceptance record](../acceptance/project-foundation.md).
 
+## Documentation link checker — 2026-10-27
+
+User authorized implementation and a new main-based branch. Solo owner: current checkout, `codex/documentation-links`, base `3c4a16b`; local only — publication unauthorized. P0: dependency-free local Markdown path checking against the Git index; changed-document checks plus incoming references affected by deletion/rename; read-only hook, shared CI command and focused synthetic Git tests. External URLs, heading anchors, semantic capability completeness and duplication detection are deferred. No dependencies, database work or application changes.
+
+- [x] Implemented [checker and hook/CI guidance](../../scripts/README.md), with no new dependencies or automatic hook activation.
+- [x] Seven synthetic Git tests pass for staged bytes/targets, deletion/rename and directory removal, encoded/space paths, reference definitions, initial commits and linked worktrees. Full live-document baseline passes; four intentional template placeholders are excluded by documented template-directory scope. Heading anchors/full Markdown parsing remain deferred.
+- Verification runtime: existing Node v24.18.1, below the repository application pin; no installation or application checks. CI is configured for Node 24.21.0 but has not run remotely. Next: review local delivery; hook activation and publication remain unperformed.
+- Incidents: none in this increment.
+
 ## Active work branches
+
+| Task | Branch | Checkout | Owner | Integration base | Publication | Tracker |
+| --- | --- | --- | --- | --- | --- | --- |
+| Documentation links | `codex/documentation-links` | `/Users/macbookpro/Documents/personal/restaurant-pos-custom` | Solo agent | `main` / `3c4a16b` | Local only — publication unauthorized | This document |
 
 Current designations follow [CONTRIBUTING](../../CONTRIBUTING.md#active-work-and-remote-checkpoints); Git is authoritative for heads and synchronization.
 
