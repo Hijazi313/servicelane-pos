@@ -4,7 +4,7 @@ import { HttpContract } from '../../../infrastructure/http/http-contract.decorat
 import { DtoValidationPipe } from '../../../infrastructure/http/dto-validation.pipe.js';
 import { EmptyQueryDto } from '../../../infrastructure/http/empty-query.dto.js';
 import type { DisplayView } from '../application/display-settings.js';
-import { BusinessDisplayService } from './business-display.service.js';
+import { BusinessDisplayService } from '../application/business-display.service.js';
 import { DisplayReplacementDto } from './display-input.dto.js';
 import { DisplayExceptionFilter } from './display-exception.filter.js';
 @Controller('api/v1/business/display-settings')

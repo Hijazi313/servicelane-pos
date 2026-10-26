@@ -5,7 +5,7 @@ import { OrderFinancialService } from '../dist/billing-check/modules/orders/publ
 import { DisplaySettingsService, DisplaySettingsError } from '../dist/billing-check/modules/business/public.js';
 import { DisplayReplacementDto } from '../dist/billing-check/modules/business/http/display-input.dto.js';
 import { DtoValidationPipe } from '../dist/billing-check/infrastructure/http/dto-validation.pipe.js';
-import { BusinessDisplayService } from '../dist/billing-check/modules/business/http/business-display.service.js';
+import { BusinessDisplayService } from '../dist/billing-check/modules/business/application/business-display.service.js';
 const id = '00000000-0000-0000-0000-000000000001';
 const scope = { actorId: id, installation: { businessId: id, branchId: id }, transaction: { id: Symbol('offline') } };
 function snapshot() {

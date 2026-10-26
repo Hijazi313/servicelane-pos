@@ -17,7 +17,8 @@
     "test:kitchen": "tsc -p tsconfig.json --outDir dist/orders-check --sourceMap false && node --test tests/order-preparation.test.mjs tests/kitchen.test.mjs tests/kitchen-http.test.mjs tests/kitchen-persistence.test.mjs",
     "test:orders": "tsc -p tsconfig.json --outDir dist/orders-check --sourceMap false && node --test tests/orders.test.mjs tests/orders-http.test.mjs",
     "check:architecture": "node scripts/check-http-boundaries.mjs",
-    "test:architecture": "node --test tests/http-boundaries.test.mjs"
+    "test:architecture": "node --test tests/http-boundaries.test.mjs",
+    "test:billing": "tsc -p tsconfig.json --outDir dist/billing-check --sourceMap false && node --test tests/billing-money.test.mjs tests/billing-interfaces.test.mjs tests/billing.test.mjs tests/billing-http.test.mjs tests/billing-persistence.test.mjs"
   },
   "dependencies": {
     "@nestjs/common": "12.1.2",

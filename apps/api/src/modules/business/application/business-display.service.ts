@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { AccessService, type Proof } from '../../authentication/public.js';
-import { DisplaySettingsService } from '../application/display-settings.service.js';
-import { DisplaySettingsError, type DisplayView } from '../application/display-settings.js';
+import { DisplaySettingsService } from './display-settings.service.js';
+import { DisplaySettingsError, type DisplayView } from './display-settings.js';
 @Injectable()
 export class BusinessDisplayService {
   constructor(private readonly access: AccessService, private readonly display: DisplaySettingsService) {}
