@@ -2,7 +2,7 @@
 
 Parent: [global tracker](../../../../../../../../docs/planning/TRACKER.md). Plan: [README](../../README.md). Specification: [spec](spec.md). Decisions: [decisions](decisions.md).
 
-Status: revised BP-00 design accepted; BP-01 source/offline delivery implemented; awaiting user review. BP-02 procedure preparation complete; execution inactive. Coordinator: primary agent; [read-only reviews](agent-collaboration.md).
+Status: revised BP-00 design accepted; BP-01 source/offline delivery implemented; awaiting user review. BP-02 manual harness preparation complete; execution inactive. Coordinator: primary agent; [read-only reviews](agent-collaboration.md).
 
 ## Planning authorization — 2026-10-25
 
@@ -24,13 +24,13 @@ Assignment: this checkout `/Users/macbookpro/Documents/personal/restaurant-pos-c
 | Planning: verify entry and define smallest candidate | Complete | Entry inspection above; [BP-R01–06 and BP-A01–18](spec.md#acceptance-criteria), boundaries and decision recommendations documented |
 | BP-00: resolve scope/business decisions and concrete contracts | Accepted by user 2026-10-26 | Revised multiple-rule/seven-route design accepted; source authorization recorded below |
 | BP-01: approved source/offline delivery | Implemented; awaiting user review | Offline evidence below; persistence criteria remain BP-02 gaps; no user acceptance inferred |
-| BP-02: bounded persistence verification | Procedure preparation complete; execution inactive | Later reviewed target-specific procedure and renewed disposable/exclusive reservation; concurrency/rollback/fresh-process/owned cleanup evidence; separate user acceptance |
+| BP-02: bounded persistence verification | Manual harness prepared offline; execution inactive | Later reviewed target-specific procedure and renewed disposable/exclusive reservation; concurrency/rollback/fresh-process/owned cleanup evidence; separate user acceptance |
 
 ## Current handoff
 
 BP-01 isolated source/offline delivery is implemented for the seven accepted routes and BP-A01–18 source scope. [Authorization and isolation](#bp-01-authorization-and-source-isolation--2026-10-26) precedes source edits. [Offline evidence and limits](#bp-01-delivery-evidence--2026-10-26) records what was executed and what remains unverified. BillingModule is absent from AppModule; no new route is live. Samples remain offline fixtures; no installed policy defaults. No upstream accepted suites/harnesses were rerun.
 
-Next action: review the [BP-02 procedure](database-acceptance.md). Preparation-only authorization is recorded below; procedure and offline planning helper are delivered, not a runnable PostgreSQL harness. If automated execution is selected, concrete execution tooling must be prepared/reviewed within the existing preparation scope before requesting one-run authorization. The procedure defines exact target/reservation/migration/execution permission; no environment/database access is currently authorized. BP-01 user acceptance remains separate.
+Next action: review the [prepared manual harness/procedure](database-acceptance.md), identify the disposable target/configuration source and renew its exclusive reservation; authorize one gated baseline, only migration 0006, B01–B07 and owned cleanup. Fourteen focused offline preparation checks and fresh compilation passed; no database run occurred. Existing preparation authorization was reused for concrete tooling, without another permission ritual. BP-01 acceptance remains separate.
 
 Seven untracked ledgers, accepted Orders/Kitchen contracts/reports and pending incident reviews are preserved. Incidents: none in BP-01; 21 existing incident entries remain pending user review, without closure or prevention-policy change.
 
@@ -125,3 +125,24 @@ Delivered [bounded procedure](database-acceptance.md) and offline `tests/bp02-pl
 Existing Node 24.21.0: four focused offline preparation tests pass, including refusal mutations and duplicate/missing/changed ownership. They validate the source-derived plan/helper, not actual catalog, PostgreSQL behavior, migration execution, target suitability, concurrency, fresh process or cleanup. No TypeScript/application change; no environment/database access, upstream suite rerun, installation, route activation or publication. All runtime criteria remain unexecuted. Execution tooling review and fresh named-target/exclusive-reservation/run authorization remain gates; additional preparation permission is not needed within the already authorized scope.
 
 BP-01 is still awaiting user review/acceptance. Seven prior ledgers and accepted upstream contracts/evidence preserved. Incidents: none in this preparation; 21 existing pending user reviews unchanged.
+
+## BP-02 lean harness continuation — 2026-10-26
+
+User instructed completing the work without over-engineering or unnecessary testing. Existing preparation-only authorization continues: implement a manual Billing-only persistence harness, fixtures/owned cleanup, focused offline checks and local commits. Verified `b2b7237` on `codex/billing-planning`; tracked clean, seven historical untracked ledgers preserved. Primary agent owns this checkout and Git. No environment/database access, migration execution, live activation, installation or publication authorized; a disposable target and renewed exclusive reservation remain unknown. BP-01 acceptance remains separate.
+
+Intended verification: one core path per existing B01–B07 obligation; retain same/different-key contention, policy/display races in both commit orders, aggregate/settings rollback, immutable history/retired IDs and fresh-process bill readback. Reuse BP-01 DTO/money/HTTP edge evidence rather than repeat it. Implement conservative exact owned-state cleanup; retain evidence and stop if ownership cannot be proved. Baseline uses existing snapshot/column/constraint-name inspection and focused new constraint behavior rather than building a general SQL equivalence engine. Evidence limits will remain explicit. This supersedes unnecessary repetition in the initial procedure; financial outcomes and accepted upstream contracts remain unchanged.
+
+| Task | Status | Evidence |
+| --- | --- | --- |
+| Lean manual harness and fixture/cleanup integration | Complete | Source review; actual execution remains separately gated |
+| Focused offline harness checks and handoff | Complete | Refusal, orchestration/lifecycle, ownership and fresh-child HTTP checks; no upstream suites |
+
+## BP-02 lean harness preparation result — 2026-10-26
+
+Manual `tests/bp02-acceptance.mjs` and focused controls/runtime/fixtures/cases/child helpers implement the [revised lean procedure](database-acceptance.md). Covers all original core persistence obligations without repeating BP-01 DTO/money edge suites. Two case connections with required observation of the real Access lock `(20261012,2)`, exact scoped owned-state checkpoints, append-preserving bill/history checks and conservative transactional cleanup. Synthetic captured-order fixtures avoid unnecessary upstream catalogue/capture/lifecycle setup. No product/HTTP contract or AppModule change.
+
+Executed: fresh full TypeScript compilation with existing Node 24.21.0 and installed dependencies; fourteen focused offline preparation tests pass. They exercise catalog collection on modeled pre/post snapshots, real fixture transaction SQL/projection shape, entry refusal, failure/barrier/child lifecycle, owned cleanup success/refusal and actual-controller child HTTP assertions. Syntax/diff review passed. Task-owned Billing compilation output removed afterward. No environment/database access, migration execution, upstream suite rerun, installation, publication, live activation or real operation.
+
+Remaining evidence: every real PostgreSQL B01–B07 result, migration and actual cleanup are unexecuted. Catalog gate verifies names/types/nullability and expected objects/defaults, not full semantic equivalence of all constraint/index definitions; B03 checks new scoped uniqueness behavior directly. Failure after a checkpoint can intentionally leave fixtures when exact cleanup state cannot be certified; preserve ledger and obtain bounded reconciliation permission. No operational recovery/fiscal assurance inferred. Procedure supplies exact commands and one-run authorization; target identity/reservation are the remaining user inputs. BP-01 acceptance remains separate.
+
+Seven historical untracked ledgers and accepted Orders/Kitchen contracts/reports are preserved. Incidents: none in this continuation; 21 existing pending user reviews unchanged.
