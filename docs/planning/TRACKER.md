@@ -77,15 +77,13 @@ User authorized committing the reviewed staged changes and creating a PR from `c
 
 Current designations follow [CONTRIBUTING](../../CONTRIBUTING.md#active-work-and-remote-checkpoints); Git is authoritative for heads and synchronization.
 
-| Phase / task | Branch | Checkout | Owner | Integration base | Publication / blocker | Owning tracker |
-| --- | --- | --- | --- | --- | --- | --- |
-| Accepted Billing publication/integration | `codex/billing-planning` | `/Users/macbookpro/Documents/personal/restaurant-pos-custom` | Primary agent | `main` `d75ac92` | Push/PR/squash merge authorized; exact-head checks pending | [Integration authorization](../../apps/api/src/modules/billing/docs/features/settlement/phase-tracker.md#billing-publicationintegration-authorization--2026-10-27) |
+No active source implementation assignment. Accepted Billing integration is tracked through [PR #17](https://github.com/Hijazi313/servicelane-pos/pull/17), with push/squash merge authorized and final exact-head checks required; [owning integration handoff](../../apps/api/src/modules/billing/docs/features/settlement/phase-tracker.md#billing-integration-handoff--2026-10-27). GitHub owns the final merge outcome. No next module activated.
 
 ## Current planning handoff — 2026-10-27
 
 BA-01/02/03 accepted development scope and historical execution permissions are owned by the [joint BA tracker](business-access/phase-tracker.md). They do not authorize new Menu or database work.
 
-Current handoff: [Billing/Payments BP-01/BP-02](../../apps/api/src/modules/billing/docs/features/settlement/phase-tracker.md#current-handoff) are user-accepted/closed for the recorded backend development increment. Source/offline and bounded PostgreSQL evidence remain preserved; migration 0006/seven history entries retained, twenty tables verified empty at run closeout. No further tests, database access or next module are activated. Publication/integration including squash merge is now authorized; exact-head CI/review remains the integration gate. Live activation/deployment remain separately scoped. Accepted Orders/Kitchen evidence, eight untracked ownership ledgers and pending incident reviews remain preserved.
+Current handoff: [Billing/Payments BP-01/BP-02](../../apps/api/src/modules/billing/docs/features/settlement/phase-tracker.md#current-handoff) are user-accepted/closed for the recorded backend development increment. Source/offline and bounded PostgreSQL evidence remain preserved; migration 0006/seven history entries retained, twenty tables verified empty at run closeout. No further tests, database access or next module are activated. Publication verified; [PR #17](https://github.com/Hijazi313/servicelane-pos/pull/17) owns integration, with squash merge authorized after final exact-head checks. Live activation/deployment remain separately scoped. Accepted Orders/Kitchen evidence, eight untracked ownership ledgers and pending incident reviews remain preserved.
 
 ## Proposed foundation follow-ups — 2026-10-12
 
@@ -109,7 +107,7 @@ Project foundation precedes Business/Branch and Authentication/Access, which pre
 | 3 | Menu | complete development scope; merged | [MN-00 → MN-01 plan](../../apps/api/src/modules/menu/docs/README.md); accepted, PR #9 squash `b09770e`; release limits retained |
 | 4 | Orders | OR-01 complete; accepted backend development scope | [Specification](../../apps/api/src/modules/orders/docs/features/capture/spec.md) / [phase tracker](../../apps/api/src/modules/orders/docs/features/capture/phase-tracker.md); bounded persistence verified; [acceptance/closeout](../../apps/api/src/modules/orders/docs/features/capture/phase-tracker.md#acceptance-and-closeout--2026-10-21) |
 | 5 | Kitchen | Backend development scope complete; user-accepted | [KT-01 handoff / completed KT-02](../../apps/api/src/modules/kitchen/docs/features/preparation/phase-tracker.md); migration 0005 applied; accepted bounded technical evidence; integration record PR #16 |
-| 6 | Billing and payments | BP-01/BP-02 accepted/closed backend development scope | [Plan](../../apps/api/src/modules/billing/docs/README.md) / [tracker](../../apps/api/src/modules/billing/docs/features/settlement/phase-tracker.md); BP-00 multiple-rule contracts revised; design accepted; BP-01/BP-02 accepted 2026-10-27 with recorded evidence limits; not published/integrated |
+| 6 | Billing and payments | BP-01/BP-02 accepted/closed backend development scope | [Plan](../../apps/api/src/modules/billing/docs/README.md) / [tracker](../../apps/api/src/modules/billing/docs/features/settlement/phase-tracker.md); BP-00 multiple-rule contracts revised; design accepted; BP-01/BP-02 accepted 2026-10-27 with recorded evidence limits; published in [PR #17](https://github.com/Hijazi313/servicelane-pos/pull/17), merge authorized after exact-head checks |
 | 7 | Cashier shifts | proposed | Not activated |
 | 8 | Inventory | proposed | Stock model unresolved |
 | 9 | Reports | proposed | Not activated |
