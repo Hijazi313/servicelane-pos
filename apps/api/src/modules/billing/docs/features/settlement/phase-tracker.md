@@ -2,7 +2,7 @@
 
 Parent: [global tracker](../../../../../../../../docs/planning/TRACKER.md). Plan: [README](../../README.md). Specification: [spec](spec.md). Decisions: [decisions](decisions.md).
 
-Status: revised BP-00 design accepted; BP-01 source/offline delivery implemented; awaiting user review. BP-02 inactive. Coordinator: primary agent; [read-only reviews](agent-collaboration.md).
+Status: revised BP-00 design accepted; BP-01 source/offline delivery implemented; awaiting user review. BP-02 procedure preparation complete; execution inactive. Coordinator: primary agent; [read-only reviews](agent-collaboration.md).
 
 ## Planning authorization — 2026-10-25
 
@@ -24,13 +24,13 @@ Assignment: this checkout `/Users/macbookpro/Documents/personal/restaurant-pos-c
 | Planning: verify entry and define smallest candidate | Complete | Entry inspection above; [BP-R01–06 and BP-A01–18](spec.md#acceptance-criteria), boundaries and decision recommendations documented |
 | BP-00: resolve scope/business decisions and concrete contracts | Accepted by user 2026-10-26 | Revised multiple-rule/seven-route design accepted; source authorization recorded below |
 | BP-01: approved source/offline delivery | Implemented; awaiting user review | Offline evidence below; persistence criteria remain BP-02 gaps; no user acceptance inferred |
-| BP-02: bounded persistence verification | Proposed objective; inactive | Later reviewed target-specific procedure and renewed disposable/exclusive reservation; concurrency/rollback/fresh-process/owned cleanup evidence; separate user acceptance |
+| BP-02: bounded persistence verification | Procedure preparation complete; execution inactive | Later reviewed target-specific procedure and renewed disposable/exclusive reservation; concurrency/rollback/fresh-process/owned cleanup evidence; separate user acceptance |
 
 ## Current handoff
 
 BP-01 isolated source/offline delivery is implemented for the seven accepted routes and BP-A01–18 source scope. [Authorization and isolation](#bp-01-authorization-and-source-isolation--2026-10-26) precedes source edits. [Offline evidence and limits](#bp-01-delivery-evidence--2026-10-26) records what was executed and what remains unverified. BillingModule is absent from AppModule; no new route is live. Samples remain offline fixtures; no installed policy defaults. No upstream accepted suites/harnesses were rerun.
 
-Next action: user reviews this source/offline increment and authorizes **BP-02 preparation only**: a bounded target-specific persistence procedure/harness, synthetic fixture/cleanup design, focused offline validation and local checkpoints. No environment/database access, migration execution, run, operational route activation or publication is included. Execution requires later review of that procedure plus a named disposable/exclusive target and fresh reservation. Development acceptance, publication/integration and operational/release validation remain separate decisions.
+Next action: review the [BP-02 procedure](database-acceptance.md). Preparation-only authorization is recorded below; procedure and offline planning helper are delivered, not a runnable PostgreSQL harness. If automated execution is selected, concrete execution tooling must be prepared/reviewed within the existing preparation scope before requesting one-run authorization. The procedure defines exact target/reservation/migration/execution permission; no environment/database access is currently authorized. BP-01 user acceptance remains separate.
 
 Seven untracked ledgers, accepted Orders/Kitchen contracts/reports and pending incident reviews are preserved. Incidents: none in BP-01; 21 existing incident entries remain pending user review, without closure or prevention-policy change.
 
@@ -104,3 +104,24 @@ Executed with existing Node 24.21.0 runtime and existing dependencies: fresh ful
 Integration review corrected known-connection failure classification and fail-closed captured timestamp/numeric-money validation before delivery; focused regressions cover these. These were in-progress implementation findings, not delivered verification claims. No qualifying incident identified.
 
 Remaining persistence gaps: actual migration application and integrity constraints; trusted multi-scope isolation; Access serialization with competing same/different keys and policy/display edits; rollback of aggregate/history; uncertain commit recovery; durable retired IDs; fresh API-process immutable readback; bounded owned cleanup. BP-02 remains inactive and unprepared. Source/offline completion is not acceptance or restaurant readiness.
+
+## BP-02 preparation authorization — 2026-10-26
+
+User explicitly authorized preparation only: bounded persistence verification procedure/harness, synthetic fixtures and owned cleanup design, focused offline checks using existing dependencies, affected documentation and focused local Conventional Commits. Recorded before preparation edits. Verified HEAD `7d5a76a`, BP-01 checkpoint `13f50bc` is an ancestor; branch `codex/billing-planning`, integration base `d75ac92`. Reuse this checkout; primary agent owns preparation and Git. Subsequent instruction/incident commits and seven untracked ledgers preserved. No delegated work.
+
+No installation, environment/database access, migration execution, live route activation, real operation, push/PR/merge or deployment. No upstream accepted reruns or expanded Billing scope. BP-01 acceptance remains separate; pending incident reviews unchanged.
+
+| Preparation task | Status | Expected evidence |
+| --- | --- | --- |
+| BP-02 procedure and synthetic fixture/cleanup design | Complete | BP-A01/03/04/05/09/10/12/13/16/18: isolation, contention, revision races, rollback, immutable history, retired IDs, fresh-process readback; baseline/migration/stop/recovery/cleanup gates |
+| Offline validation and handoff | Complete | Existing-dependency checks of fixture/manifest/refusal design; explicit execution gaps and exact next authorization |
+
+Completion shape: reviewable procedure and offline preparation artifacts only; no persistence pass, phase acceptance or execution permission inferred.
+
+## BP-02 procedure preparation result — 2026-10-26
+
+Delivered [bounded procedure](database-acceptance.md) and offline `tests/bp02-plan.mjs`/`bp02-plan.test.mjs`: B01–B07 map isolation, same/different-key contention, both policy/display race orders, atomic rollback/history, durable retired IDs, immutable replay and fresh-process readback. Pre-0006 exact six-history/sixteen-empty-table gate; only pending 0006 scope; post-0006 seven-history/twenty-empty-table cleanup proof. Stop/uncertain-outcome recovery and owned ledger design are explicit. Procedure form selected; no executable database runner or execution-ready command is claimed.
+
+Existing Node 24.21.0: four focused offline preparation tests pass, including refusal mutations and duplicate/missing/changed ownership. They validate the source-derived plan/helper, not actual catalog, PostgreSQL behavior, migration execution, target suitability, concurrency, fresh process or cleanup. No TypeScript/application change; no environment/database access, upstream suite rerun, installation, route activation or publication. All runtime criteria remain unexecuted. Execution tooling review and fresh named-target/exclusive-reservation/run authorization remain gates; additional preparation permission is not needed within the already authorized scope.
+
+BP-01 is still awaiting user review/acceptance. Seven prior ledgers and accepted upstream contracts/evidence preserved. Incidents: none in this preparation; 21 existing pending user reviews unchanged.

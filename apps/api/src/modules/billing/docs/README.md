@@ -18,7 +18,7 @@ The [specification](features/settlement/spec.md) defines phase P0 and observable
 | --- | --- | --- |
 | BP-00 | Agree smallest scope, money/fiscal/receipt/correction decisions and complete concrete contracts | Accepted by user on 2026-10-26; sample development approved |
 | BP-01 | Implement approved full-cash settlement/readback, narrow Orders/Business projections, admin settings and migration source | Implemented; focused offline evidence and explicit persistence gaps; awaiting user review |
-| BP-02 | Prove atomic persistence, duplicate handling and fresh-process readback on a reserved disposable target | Proposed objective only; separately approved prepared procedure, one bounded run and owned cleanup; user development acceptance separate |
+| BP-02 | Prove atomic persistence, duplicate handling and fresh-process readback on a reserved disposable target | Procedure preparation delivered; offline planning helper only, no executable DB runner. Separately reviewed target/reservation/migration/run and owned cleanup remain required; user development acceptance separate |
 
 No phase is activated by this table. Operational corrections/refunds, fiscal output, collection/completion and complete trading-flow/recovery acceptance remain release prerequisites needing their own scope, not automatic BP-02 work.
 
