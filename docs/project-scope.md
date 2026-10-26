@@ -26,6 +26,8 @@
 - Follow the verification policy below; accurately label unverified behavior.
 - No production deployment, live transfers, purchases or vendor messages without authorization.
 
+- Billing BP-00 revised multiple-rule design was explicitly accepted on 2026-10-26, with BP-01 source/offline delivery and focused local commits authorized. [Owning tracker](../apps/api/src/modules/billing/docs/features/settlement/phase-tracker.md#bp-01-authorization-and-source-isolation--2026-10-26) records seven-route scope, source/wiring isolation, evidence and unexecuted persistence obligations. No installed sample policy, live activation, environment/database access, migration execution, upstream rerun, installation, publication or BP-02 activation is authorized.
+
 ## Verification policy
 
 Updated by user direction on 2026-10-11; replaces the earlier blanket ban.
