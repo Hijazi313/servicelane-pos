@@ -2,6 +2,7 @@ import { Module } from "@nestjs/common";
 import { DatabaseModule } from "../../infrastructure/database/database.module.js";
 import { AuthenticationModule } from "../authentication/public.js";
 import { MenuModule } from "../menu/public.js";
+import { OrderFinancialService } from "./application/order-financial.service.js";
 import { OrderPreparationService } from "./application/order-preparation.service.js";
 import { OrdersService } from "./application/orders.service.js";
 import { OrderStore } from "./application/order-store.js";
@@ -10,9 +11,10 @@ import { OrdersController } from "./http/orders.controller.js";
 @Module({
   imports: [DatabaseModule, AuthenticationModule, MenuModule],
   controllers: [OrdersController],
-  exports: [OrderPreparationService],
+  exports: [OrderPreparationService, OrderFinancialService],
   providers: [
     OrderPreparationService,
+    OrderFinancialService,
     OrdersService,
     { provide: OrderStore, useClass: PostgresOrderStore },
   ],

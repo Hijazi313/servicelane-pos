@@ -2,7 +2,7 @@
 
 Owner: primary agent. Delivery: BA-01 accepted on staging in the [joint tracker](../../../../../../docs/planning/business-access/phase-tracker.md).
 
-Owns Business, Branch and the explicit singleton installation binding. Initial operator provisioning creates one branch; there is no permanent one-branch schema constraint. No business HTTP controller or configuration editor is exposed. Intended rules and P0/P1 scope: [Business/Branch specification](features/foundation/spec.md).
+Owns Business, Branch and the explicit singleton installation binding. Initial operator provisioning creates one branch; there is no permanent one-branch schema constraint. BP-01 adds isolated display administration source; its HTTP module remains unmounted and exposes no live route. Intended rules and P0/P1 scope: [Business/Branch specification](features/foundation/spec.md).
 
 ## Public capabilities
 

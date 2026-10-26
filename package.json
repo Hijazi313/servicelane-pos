@@ -19,6 +19,7 @@
     "test:kitchen": "pnpm --filter @servicelane/api test:kitchen",
     "test:orders": "pnpm --filter @servicelane/api test:orders",
     "check:architecture": "pnpm --filter @servicelane/api check:architecture",
-    "test:architecture": "pnpm --filter @servicelane/api test:architecture"
+    "test:architecture": "pnpm --filter @servicelane/api test:architecture",
+    "test:billing": "pnpm --filter @servicelane/api test:billing"
   }
 }

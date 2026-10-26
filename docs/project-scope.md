@@ -26,6 +26,14 @@
 - Follow the verification policy below; accurately label unverified behavior.
 - No production deployment, live transfers, purchases or vendor messages without authorization.
 
+- Billing BP-00 revised multiple-rule design was explicitly accepted on 2026-10-26, with BP-01 source/offline delivery and focused local commits authorized. [Owning tracker](../apps/api/src/modules/billing/docs/features/settlement/phase-tracker.md#bp-01-authorization-and-source-isolation--2026-10-26) records seven-route scope, source/wiring isolation, evidence and unexecuted persistence obligations. At that checkpoint, no installed sample policy, live activation, environment/database access, migration execution, upstream rerun, installation, publication or BP-02 execution was authorized. Subsequent 2026-10-26 preparation-only authorization covers the [BP-02 manual harness and procedure](../apps/api/src/modules/billing/docs/features/settlement/database-acceptance.md), synthetic fixture/cleanup design, affected docs, focused offline checks and local commits; no environment/database access or execution is inherited.
+
+- BP-02 one-run execution authorization — 2026-10-26: user confirmed the sole `.env` database is disposable and authorized the prepared focused verification. [Owning scope/result](../apps/api/src/modules/billing/docs/features/settlement/phase-tracker.md#bp-02-single-target-execution-authorization--2026-10-26): read-only baseline, conditional only 0006/history, B01–B07 synthetic cases and owned cleanup; no installation, live activation, real operation, publication or deployment. Earlier preparation-only restrictions are superseded only for this bounded run; acceptance remains separate. The authorized run passed B01–B07 and owned cleanup; 0006/seven history entries retained, twenty tables empty. Permission consumed; subsequent user acceptance is recorded below.
+
+- Billing BP-01/BP-02 acceptance — 2026-10-27: user explicitly accepted both under the recorded scope and limitations. [Acceptance/closeout](../apps/api/src/modules/billing/docs/features/settlement/phase-tracker.md#bp-01bp-02-user-acceptance-and-closeout--2026-10-27) closes the backend development increment; no further tests, database run, publication/integration, live activation, deployment or next-module work is authorized by acceptance. Operational deferrals and pending incident reviews remain unchanged.
+
+- Billing integration authorization — 2026-10-27: user explicitly approved publication, necessary PR/CI review and merge of the accepted Billing branch. [Owning record](../apps/api/src/modules/billing/docs/features/settlement/phase-tracker.md#billing-publicationintegration-authorization--2026-10-27). Normal push, focused PR, exact-head checks, squash merge and branch cleanup only; no database rerun, local installation, live activation, deployment or next module.
+
 ## Verification policy
 
 Updated by user direction on 2026-10-11; replaces the earlier blanket ban.

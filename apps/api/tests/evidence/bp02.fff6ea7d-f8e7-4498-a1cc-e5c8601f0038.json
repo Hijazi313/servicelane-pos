@@ -1,0 +1,1245 @@
+{
+  "tag": "bp02.fff6ea7d-f8e7-4498-a1cc-e5c8601f0038",
+  "mode": "execute",
+  "runtime": "v24.21.0",
+  "startedAt": "2026-10-26T18:06:52.362Z",
+  "source": [
+    {
+      "path": "apps/api/src/app.module.ts",
+      "hash": "70c447bcd07e635bc02383528c0bb4bdd79a5b2fd5b8e6853bfdd63075548651"
+    },
+    {
+      "path": "apps/api/src/application/provision-installation.ts",
+      "hash": "1f621b89fcc5eb04211eb283b16fef1373ed01c69a95b78b78bb918a6fe2d4e6"
+    },
+    {
+      "path": "apps/api/src/common/currency-precision.ts",
+      "hash": "869284550f31c72dae9d728346adadc05c782b1474c6aff9ab58ca55a80eb2f3"
+    },
+    {
+      "path": "apps/api/src/infrastructure/configuration.ts",
+      "hash": "8bca9e41409001fe1e72048da74f9468b82d3e61b353dd410ffc7d5a27db3882"
+    },
+    {
+      "path": "apps/api/src/infrastructure/database/database.module.ts",
+      "hash": "ab3420090971dd593be74608c37d3e6057cf55f25da99de6236b6a79843178be"
+    },
+    {
+      "path": "apps/api/src/infrastructure/database/database.service.ts",
+      "hash": "36514f861866b986fb6e9c30efce0fbc58c8d4a5b0bf8d7ee2c6158cd8c7eba6"
+    },
+    {
+      "path": "apps/api/src/infrastructure/database/migrate.ts",
+      "hash": "b5444fb1f07c6603e2b6f4f1a81184054761c0469e6f9e3c8d8cb850cd56aaa0"
+    },
+    {
+      "path": "apps/api/src/infrastructure/database/schema.ts",
+      "hash": "6c72d967b2c782eebd1854ab316787c4bee2337e974485fb23716d77612ca254"
+    },
+    {
+      "path": "apps/api/src/infrastructure/database/transaction.ts",
+      "hash": "1bafa848bce0a0d34870a25ec4ccd5768fa0bebc93e8046962565366fa4feb3a"
+    },
+    {
+      "path": "apps/api/src/infrastructure/health.controller.ts",
+      "hash": "cd63557bf808dda1465e03737454f17d8f58664b35bf22a47a1e423156796920"
+    },
+    {
+      "path": "apps/api/src/infrastructure/http/dto-validation.pipe.ts",
+      "hash": "49711a7a9444be3baa0a8c984c3d45668ee092661d5be83b3d61b0ccee801f68"
+    },
+    {
+      "path": "apps/api/src/infrastructure/http/empty-query.dto.ts",
+      "hash": "3dbff9cdf7c0c82d13b0ce505ffad19cfdd60d08a64196bf7f16d0b32856fae6"
+    },
+    {
+      "path": "apps/api/src/infrastructure/http/http-adapter.ts",
+      "hash": "c3a550d3a0a7657feaff14bcabdfdc7a7f64a6d9b75db2ae3062078ded95bd26"
+    },
+    {
+      "path": "apps/api/src/infrastructure/http/http-contract.decorator.ts",
+      "hash": "27bd8325d76f820e7861441b212f0a362d52ea062b34a4fa3ee9a24a35c2768f"
+    },
+    {
+      "path": "apps/api/src/infrastructure/http/http-contract.filter.ts",
+      "hash": "f3c226b73220b83a3d901eedba061b1bc2166d0c147b1de445bf4fcaba969d73"
+    },
+    {
+      "path": "apps/api/src/infrastructure/http/http-contract.guard.ts",
+      "hash": "9fb388a003154261a61ce597dda3eafe34de7cc92e4d41cbb6322b3cf573bdac"
+    },
+    {
+      "path": "apps/api/src/infrastructure/http/http-error-policy.ts",
+      "hash": "4488c8036ff2e708d10e98781cfe42d0261ef03193b31e4e125ee3ec252ad433"
+    },
+    {
+      "path": "apps/api/src/infrastructure/http/http-response.interceptor.ts",
+      "hash": "78d419a99477e345a66db35010ff4423af8160196186823474a1319b51d681a7"
+    },
+    {
+      "path": "apps/api/src/infrastructure/http/problem-details.ts",
+      "hash": "e1b416fbf17c700d9178d2c85763b9b42e7690a98498902252b2456f620668a4"
+    },
+    {
+      "path": "apps/api/src/infrastructure/request-limits.ts",
+      "hash": "25fc3210ff0b30e7ede596f8f60f3f5c50e370f2b8d57502782809af59d3fc5e"
+    },
+    {
+      "path": "apps/api/src/main.ts",
+      "hash": "05f6d20f6c8471671892224d6e891d5f78a1fc48a73933aefbc217065f5c8a13"
+    },
+    {
+      "path": "apps/api/src/modules/authentication/application/access-policy.ts",
+      "hash": "c1e0e727a01073ea8907b6026422325d34d71b052c074ecd50843fa3de5ecc57"
+    },
+    {
+      "path": "apps/api/src/modules/authentication/application/access-store.ts",
+      "hash": "c355bc304a29a7cac43dd757d2d15c874b3b9ecdd313437e5c665e2c410d41ce"
+    },
+    {
+      "path": "apps/api/src/modules/authentication/application/access.service.ts",
+      "hash": "5769025c16473630bdec74e0ce2e4210e88cda4f865f03a89f73bebbdb5553bf"
+    },
+    {
+      "path": "apps/api/src/modules/authentication/application/administrator-provisioner.ts",
+      "hash": "ecd26603576fea75ff69024c3cec7d08310d83564a8379bb695b2a9df4bf7cb8"
+    },
+    {
+      "path": "apps/api/src/modules/authentication/application/authorized-operation.ts",
+      "hash": "4923fa03f114f5169f98ef739bc5f2ef4c2f128d31ba773e89b7fd35ec2d34db"
+    },
+    {
+      "path": "apps/api/src/modules/authentication/application/initial-administrator.ts",
+      "hash": "febece9534996eb032c1811ea69845d1007cd2ae5c2de586d1025cc466817b0d"
+    },
+    {
+      "path": "apps/api/src/modules/authentication/authentication.module.ts",
+      "hash": "8a54be718f8138c26d802d9a174015f552171fc4f8cc288b72126ee4a59ec172"
+    },
+    {
+      "path": "apps/api/src/modules/authentication/http/access-boundary.guard.ts",
+      "hash": "b23779e4663eec2e5f085f51b39b6b16a11961a662bb730dc29212341621fb48"
+    },
+    {
+      "path": "apps/api/src/modules/authentication/http/access-entry.decorator.ts",
+      "hash": "1220aa798f10bb56a477afdb6e86a59796f46d5b70104e4d2d65581c7d41c1e0"
+    },
+    {
+      "path": "apps/api/src/modules/authentication/http/access-exception.filter.ts",
+      "hash": "9d2f818bef5c61f6ba253141da387a9e42757ae84a50e67d08c743352cb22403"
+    },
+    {
+      "path": "apps/api/src/modules/authentication/http/access-http.helpers.ts",
+      "hash": "992ef657293e5fa9b15179ff73b1ef744cbf65e4c1d88a898986b5c9bb9429f8"
+    },
+    {
+      "path": "apps/api/src/modules/authentication/http/access-http.module.ts",
+      "hash": "819fa69f35d876c8229b171d882989bd43d5b231167804b2ee470be90580cc69"
+    },
+    {
+      "path": "apps/api/src/modules/authentication/http/access.controller.ts",
+      "hash": "dc0aafc99693112ff95ccf71e497cab1b04ab3da2b2610c44ed49c27d2d204b8"
+    },
+    {
+      "path": "apps/api/src/modules/authentication/http/configuration.ts",
+      "hash": "7f9bc39c30aea4a3e3173477c8fbaef8dcbe1ba5fe706c378656291f77beae87"
+    },
+    {
+      "path": "apps/api/src/modules/authentication/http/public.ts",
+      "hash": "c638732ea7c0d18b91ce9197f085d1c181a35b9ffdae9495676c1fcb101c2030"
+    },
+    {
+      "path": "apps/api/src/modules/authentication/infrastructure/access-schema.ts",
+      "hash": "2d1c3ba77d0b1668130ad7f88defcf3d932287da6a0b32bad2955f3d7117bbda"
+    },
+    {
+      "path": "apps/api/src/modules/authentication/infrastructure/access-store.ts",
+      "hash": "32582733f9c0080b24bbd3fe0f43eb94288b7073fb45e9952d48b35b4ada78e1"
+    },
+    {
+      "path": "apps/api/src/modules/authentication/infrastructure/administrator-provisioner.service.ts",
+      "hash": "e2276d9530cefbc95381bbc55b528448170647f7012a2cab7f6454d7e558ea38"
+    },
+    {
+      "path": "apps/api/src/modules/authentication/infrastructure/password-hash.ts",
+      "hash": "edc3808182adedcf14cb8dc949fcbd2f62590b95217cfd9e4253e4118aed3dbb"
+    },
+    {
+      "path": "apps/api/src/modules/authentication/infrastructure/password-hasher.ts",
+      "hash": "510c3c8fd706c2e94aa62de6c72e85fae2784b6cfd93e28e75db61097b7a24cb"
+    },
+    {
+      "path": "apps/api/src/modules/authentication/infrastructure/schema.ts",
+      "hash": "7386ad05a8857f01acb8a3b04c3533dafcd1959196f8351d42fa24f930207870"
+    },
+    {
+      "path": "apps/api/src/modules/authentication/public.ts",
+      "hash": "00cc62957f811928478a41914adeb52c11e8396ef77ad66a70a079be567d7c0c"
+    },
+    {
+      "path": "apps/api/src/modules/billing/application/billing-store.ts",
+      "hash": "28d69498c987b61f5b5f212e66efb97810e07e7dc7c350444930e9f9cad0600e"
+    },
+    {
+      "path": "apps/api/src/modules/billing/application/billing.service.ts",
+      "hash": "18f4dd4384f9b106be62f03817dc43363d842b133de3657cb262cdf17e5ffc70"
+    },
+    {
+      "path": "apps/api/src/modules/billing/billing.module.ts",
+      "hash": "abc89666b10a3c98b01ad80e7415b701932add8ed4c7eff0173ba4d9656f7c8c"
+    },
+    {
+      "path": "apps/api/src/modules/billing/domain/billing.ts",
+      "hash": "7df002ba75f94c68ea1c57532efab6182d211bd16687bdd3aab3d29433528dac"
+    },
+    {
+      "path": "apps/api/src/modules/billing/http/billing-exception.filter.ts",
+      "hash": "ab3c5189247b7747c25260ac1bb79bb8ac62b92723ce2f91223a86ed41107cfe"
+    },
+    {
+      "path": "apps/api/src/modules/billing/http/billing-input.dto.ts",
+      "hash": "650f7af33fd6f0eda322e59c0105d06daffb9a47ebd5f4b6b6df7fc5bd7336e4"
+    },
+    {
+      "path": "apps/api/src/modules/billing/http/billing.controller.ts",
+      "hash": "a7b1d6bf51e77e53567df03cc50e06b7149c395ff657cbf36addb85a3483c422"
+    },
+    {
+      "path": "apps/api/src/modules/billing/infrastructure/postgres-billing-store.service.ts",
+      "hash": "5c0668be13795ee635bd5bc76f34cf7007d6f38054f1adfa83011dfaaf9cbfd1"
+    },
+    {
+      "path": "apps/api/src/modules/billing/infrastructure/schema.ts",
+      "hash": "534bbbc1949a6139e8acd1b60d5797f9902baa4a1060b930ba8feb6d017ef880"
+    },
+    {
+      "path": "apps/api/src/modules/billing/public.ts",
+      "hash": "1123cdcd115f7112aff0c085e5f0a3bcabab52692fb4d9b48a1b58795a97eaf9"
+    },
+    {
+      "path": "apps/api/src/modules/business/application/business-configuration.ts",
+      "hash": "bfe8f3d494a3d705ac9cf21ac4b1fc5411e0522072c5b6791e6e273d7170788a"
+    },
+    {
+      "path": "apps/api/src/modules/business/application/business-display.service.ts",
+      "hash": "f670a3a17939015b1249ce74d42b80cb2b2285985c6b164ad271ad30e4530204"
+    },
+    {
+      "path": "apps/api/src/modules/business/application/display-settings.service.ts",
+      "hash": "7d54afb26dbfe210edc9dc3d131ada492c38dfa57a2334ef225f7da1bd9c76e6"
+    },
+    {
+      "path": "apps/api/src/modules/business/application/display-settings.ts",
+      "hash": "3d0a57628861ec7a1cca75f4dda81dab2c390bfec8759ffc63f3243b911d0f2e"
+    },
+    {
+      "path": "apps/api/src/modules/business/application/display-store.ts",
+      "hash": "2440230ff32bb3b2452011f5a5dd2464c491372e20f7ab6ad9dc73dab6a1f7da"
+    },
+    {
+      "path": "apps/api/src/modules/business/business.module.ts",
+      "hash": "f54fb26851f08abf65d1179f2f55ea1fff8e544a7e6e55b05b69693cd41e2bb0"
+    },
+    {
+      "path": "apps/api/src/modules/business/http/business-display-http.module.ts",
+      "hash": "8f5e64227a31b3099eedd2da2573f5a9d46474df89a5d527f7561bbf0d35b8a7"
+    },
+    {
+      "path": "apps/api/src/modules/business/http/business-display.controller.ts",
+      "hash": "f3b250a8270b802ac0a89bf0c54710b4ef8c8faa45f4d947fe717053c45fd1b9"
+    },
+    {
+      "path": "apps/api/src/modules/business/http/display-exception.filter.ts",
+      "hash": "96a6a2689b5ceeb32d3a47a7da1d9ecf40335196ec62d9e7219de8b10dc788a3"
+    },
+    {
+      "path": "apps/api/src/modules/business/http/display-input.dto.ts",
+      "hash": "6f06cefe64901ebe0941197aa1cc6c8c6a540593d4437e390ec95413e2755b40"
+    },
+    {
+      "path": "apps/api/src/modules/business/http/public.ts",
+      "hash": "a946be561b8ca6f55c7e6c55449d6cee5c870d194550231b526a87a179b98b35"
+    },
+    {
+      "path": "apps/api/src/modules/business/infrastructure/business.service.ts",
+      "hash": "07d5ef82c9de0bd68536cd30f52f566509efa6f679af83156dedee296816888d"
+    },
+    {
+      "path": "apps/api/src/modules/business/infrastructure/postgres-display-store.service.ts",
+      "hash": "41af7276eb42acf491d340bd90ba048348b8669e0bb8f0b7289356ecf51de50e"
+    },
+    {
+      "path": "apps/api/src/modules/business/infrastructure/schema.ts",
+      "hash": "aa8856c4721092733954d7b39916e09dfea2927b4f83a5b2a81593fa94df2391"
+    },
+    {
+      "path": "apps/api/src/modules/business/public.ts",
+      "hash": "15994987d3bbe6088021a472e24742bd5a52e5a604cf413bf3480aa89ec6c74a"
+    },
+    {
+      "path": "apps/api/src/modules/kitchen/application/kitchen-queue-cursor.ts",
+      "hash": "e249e03eb09735c80ed6aad217058ea759711cc04dc1c6bc317fc1bf2ccd7d42"
+    },
+    {
+      "path": "apps/api/src/modules/kitchen/application/kitchen-store.ts",
+      "hash": "2f0558422056ffbdbce4b56273c33e70160f7e66ad6448b2ae4639ee07594680"
+    },
+    {
+      "path": "apps/api/src/modules/kitchen/application/kitchen.service.ts",
+      "hash": "596f2f4db028b1c9bc471ab504c7668e915582f5f29757b2f13020942c851770"
+    },
+    {
+      "path": "apps/api/src/modules/kitchen/domain/preparation.ts",
+      "hash": "f7911f5532ff2bb8160fd51c1fca6f1519e5aecd9aace5307ad2a7a2ffa63714"
+    },
+    {
+      "path": "apps/api/src/modules/kitchen/http/kitchen-exception.filter.ts",
+      "hash": "08f015facfd50319e81d9a02f0f3bf552c93e00636dd8a4c061269bdfc627939"
+    },
+    {
+      "path": "apps/api/src/modules/kitchen/http/kitchen-input.dto.ts",
+      "hash": "69f1167cc2d2a3426308e432468595a0193aa83b0d82b20a310bba0b9d2ae1fa"
+    },
+    {
+      "path": "apps/api/src/modules/kitchen/http/kitchen.controller.ts",
+      "hash": "1ac7d1a833f92f085d4c1d15febec07e9b7f23e395cdbf08341c75e763667f72"
+    },
+    {
+      "path": "apps/api/src/modules/kitchen/infrastructure/postgres-kitchen-store.service.ts",
+      "hash": "a23573f0fdfb012b8780aa4b4b6617c4ae37c73b51801efd7e34b68c0311ac18"
+    },
+    {
+      "path": "apps/api/src/modules/kitchen/infrastructure/schema.ts",
+      "hash": "046bc5f003df9b20d652dbfe6cab1a1193c34126587ac7d2790af0ba6c7de13b"
+    },
+    {
+      "path": "apps/api/src/modules/kitchen/kitchen.module.ts",
+      "hash": "3a4aaaea17101370957cd995f4044d7f532f2f7205522045040fdcf6488f6617"
+    },
+    {
+      "path": "apps/api/src/modules/kitchen/public.ts",
+      "hash": "8fb9bd4f9cd64da26ced22c285e51c3c84b07bf11b7fda7a07653e0c56bbd3e3"
+    },
+    {
+      "path": "apps/api/src/modules/menu/application/menu-order-resolver.service.ts",
+      "hash": "7c625671c98ebf376de8fc147c7fa0394e0d225517c1c0c6f7a08d5ad5d7b2a6"
+    },
+    {
+      "path": "apps/api/src/modules/menu/application/menu-store.ts",
+      "hash": "b6e821601d6a12766a262e827fd16c6acd8c2bf6d3c583f1c5a8b996246482dd"
+    },
+    {
+      "path": "apps/api/src/modules/menu/application/menu.service.ts",
+      "hash": "04c57165080b334eaea98615a764eb31f7424693de37ae33b989bb1b59997a75"
+    },
+    {
+      "path": "apps/api/src/modules/menu/domain/catalogue.ts",
+      "hash": "f0b4acb7bd52ebde1dd83a6606b88ceac5e76d27b22ffdd94795564b9a367f32"
+    },
+    {
+      "path": "apps/api/src/modules/menu/domain/currency-precision.ts",
+      "hash": "0e5eb919cd274ed82f9091716a939594c38de258a8036ce0328cfccfb7359f4e"
+    },
+    {
+      "path": "apps/api/src/modules/menu/http/menu-error-mapping.ts",
+      "hash": "f1bb7c681b92942737f7bef768fabfe31cd73ccdc9a757292ebeb8979d8e24d1"
+    },
+    {
+      "path": "apps/api/src/modules/menu/http/menu-list-exception.filter.ts",
+      "hash": "ff948da6f3f339e8139f28aa67bf0529b1a093b68c078777c6c7ca0fd3dd1047"
+    },
+    {
+      "path": "apps/api/src/modules/menu/http/menu.controller.ts",
+      "hash": "1dd1c6c368896a9626ef2b753eab96b12e5d9c9ab0cb36bdcf20eb0166edea83"
+    },
+    {
+      "path": "apps/api/src/modules/menu/http/public.ts",
+      "hash": "8fcdc48819eb4ce8f63d4a61fcc9435704e930507af97e9983f69c83e304789d"
+    },
+    {
+      "path": "apps/api/src/modules/menu/infrastructure/menu-store.ts",
+      "hash": "e6fc70e72f59785fa2b928ea8c2bce2d76f8cd84cee337b51060a0d8091a86bc"
+    },
+    {
+      "path": "apps/api/src/modules/menu/infrastructure/schema.ts",
+      "hash": "39aaa2e4831bd0138a49bf1bdf41c50d443513d50034dc5f63ac4bd03414ef05"
+    },
+    {
+      "path": "apps/api/src/modules/menu/menu.module.ts",
+      "hash": "dfde8e61e1f7f7c8707846a5c7b7ec0ed91feee86ac07bd16429bc2cd66a25df"
+    },
+    {
+      "path": "apps/api/src/modules/menu/public.ts",
+      "hash": "6667cc806bc94a16f5b5d89f55f46658c8be6ec52f7c91dc33114c795dd6765e"
+    },
+    {
+      "path": "apps/api/src/modules/orders/application/order-financial.service.ts",
+      "hash": "6508c0f69a4e6554e33030112236533e1844de151fb60b157f05631dc8b01fb5"
+    },
+    {
+      "path": "apps/api/src/modules/orders/application/order-preparation.service.ts",
+      "hash": "a271c89509762d8ce84e7db0340f95f797d36656490bf8ee512b01f9d2ccb79a"
+    },
+    {
+      "path": "apps/api/src/modules/orders/application/order-store.ts",
+      "hash": "b7f06e81686dadd9632918ad62ce822e20cc4dada8ae4666b75b5029ad7ab518"
+    },
+    {
+      "path": "apps/api/src/modules/orders/application/orders.service.ts",
+      "hash": "19f5311026d6aa811a483c534d68ca8aa8afc3204fd6a5495b77a7ab3c31e742"
+    },
+    {
+      "path": "apps/api/src/modules/orders/application/parse-order-capture.ts",
+      "hash": "2a430f338a705e256b51eb155a5b44761e58522a77be5c9bc92c75ce86793169"
+    },
+    {
+      "path": "apps/api/src/modules/orders/domain/capture.ts",
+      "hash": "32ccfcd77303ab9f84e685be85e7b077c732ae230a3580bc7e4b45057942bf40"
+    },
+    {
+      "path": "apps/api/src/modules/orders/domain/order-currency.ts",
+      "hash": "f2de94f140358b21b006f51d860dc4eb3fae65695dcbdee7029e2a943676fca6"
+    },
+    {
+      "path": "apps/api/src/modules/orders/http/create-order.dto.ts",
+      "hash": "6aa37abbc01675c52b2d1dfec25cf4900bb78b7cd80d3765bfc62d7dc316251c"
+    },
+    {
+      "path": "apps/api/src/modules/orders/http/orders-exception.filter.ts",
+      "hash": "bd1823f832c43f178018f557b03d9a85693fb80c27ba64f6e36aa82269288a2a"
+    },
+    {
+      "path": "apps/api/src/modules/orders/http/orders.controller.ts",
+      "hash": "3991e5b8e64602aa6db2884f562e859bcb4b9b5ce930e0bd0d6d3abe83666472"
+    },
+    {
+      "path": "apps/api/src/modules/orders/infrastructure/postgres-order-store.service.ts",
+      "hash": "7991c5f7bf8287ccaa46899acdeee99c4ca11361b72bb356e250d76237db8f80"
+    },
+    {
+      "path": "apps/api/src/modules/orders/infrastructure/schema.ts",
+      "hash": "424daaad2a3d55b8035cb2a45e41a41a49a9c06f88f9e12311aebf231c1ea632"
+    },
+    {
+      "path": "apps/api/src/modules/orders/orders.module.ts",
+      "hash": "c8cb76474a7053a3d87a3ed3beb9a1ca96432cf0dd4786cc730e98d3c4dd1d71"
+    },
+    {
+      "path": "apps/api/src/modules/orders/public.ts",
+      "hash": "3a433cfe73ca0fd5b873f7d3eefe8d9da722d9621333b32c1a7a500d4ded3538"
+    },
+    {
+      "path": "apps/api/src/operator/hidden-password.ts",
+      "hash": "e2659b29cdd976a098c0bd2320a63c064ae7b30d6ae90f987354b95ae183c579"
+    },
+    {
+      "path": "apps/api/src/operator/provision-installation.example.json",
+      "hash": "9144abed562a03a6eadf1135378918f8a94e440a1c847347079c5fea20d31303"
+    },
+    {
+      "path": "apps/api/src/operator/provision-installation.ts",
+      "hash": "7cbfbc597f4f42a1a480be2c8a3abdb7d671591dd8206c651eefc7d27a2c581d"
+    },
+    {
+      "path": "apps/api/src/operator/provisioning.module.ts",
+      "hash": "2696f5a4997dff7db7d5f37c7483948129d3b3dcaec7fa0cc65edee2186574f0"
+    },
+    {
+      "path": "apps/api/src/operator/recover-administrator.ts",
+      "hash": "e94b4c460e981580a6900912630adb2c4a5472c04d9ba24eed298ebcd85feb99"
+    },
+    {
+      "path": "apps/api/dist/billing-check/app.module.js",
+      "hash": "be7d2b5e073257ea175f3a35d340238f00fea0251453894383a81421708faae7"
+    },
+    {
+      "path": "apps/api/dist/billing-check/application/provision-installation.js",
+      "hash": "1e505cfd7af1590e4b1606e5a223815e06df86705c4f630faecb8ac9d3ed4f46"
+    },
+    {
+      "path": "apps/api/dist/billing-check/common/currency-precision.js",
+      "hash": "1288572f1476c04fd81e4aa6504a5da2b0432fb35e37c800137976ed9ffe6f34"
+    },
+    {
+      "path": "apps/api/dist/billing-check/infrastructure/configuration.js",
+      "hash": "6614a24c79c6998721bf40ba57b9b3cee26c5294fb1ef272aa1bbfc0b3fce457"
+    },
+    {
+      "path": "apps/api/dist/billing-check/infrastructure/database/database.module.js",
+      "hash": "513d7e60757460761eb5d750a87c25f52add96a915e8d2eea7d8a923044fccfd"
+    },
+    {
+      "path": "apps/api/dist/billing-check/infrastructure/database/database.service.js",
+      "hash": "f7dfc8c6974095d8d8e9ba6088ddab0a53455844a7062837f71fce80d50dec2e"
+    },
+    {
+      "path": "apps/api/dist/billing-check/infrastructure/database/migrate.js",
+      "hash": "29186a1ea87c5b7fa88f63c00d12f86b744a4ab2a12fe5961227d2b78df101b3"
+    },
+    {
+      "path": "apps/api/dist/billing-check/infrastructure/database/schema.js",
+      "hash": "d73d4b881a4dd0a2a62cba23e8e27afdd8115794ef68e512dd26d63ac002c2a3"
+    },
+    {
+      "path": "apps/api/dist/billing-check/infrastructure/database/transaction.js",
+      "hash": "a26c94f6e8a77a975fb793ec0ee1fbb0ebc48bdfb9c856600e651619381a0f3e"
+    },
+    {
+      "path": "apps/api/dist/billing-check/infrastructure/health.controller.js",
+      "hash": "d398148052d8398517b0c703a6baf75be914fa04cfed9d7f5721c5bfd130e408"
+    },
+    {
+      "path": "apps/api/dist/billing-check/infrastructure/http/dto-validation.pipe.js",
+      "hash": "dc5c1c9f21d4b055f7eae2ad1cfda0e91be34bff6435f87fe08c243bc25e8e8f"
+    },
+    {
+      "path": "apps/api/dist/billing-check/infrastructure/http/empty-query.dto.js",
+      "hash": "e1eed630a195d0e76ccc7b8e28df35095e8b13d938d5c822b8e7cad415715582"
+    },
+    {
+      "path": "apps/api/dist/billing-check/infrastructure/http/http-adapter.js",
+      "hash": "ee14bbaaaa2f52cc9b4c48fd40a9bb46984f1ca1b1dfc104a0a35cc0f604013a"
+    },
+    {
+      "path": "apps/api/dist/billing-check/infrastructure/http/http-contract.decorator.js",
+      "hash": "962aedc67568f21c5fbebf26a15b0fcc1ea0f7a4138902fb1292c2557be5a7af"
+    },
+    {
+      "path": "apps/api/dist/billing-check/infrastructure/http/http-contract.filter.js",
+      "hash": "038b3e5f50bee9a2cf894b01bddf7d6d937f47abc0e9360e1dea9509026eb482"
+    },
+    {
+      "path": "apps/api/dist/billing-check/infrastructure/http/http-contract.guard.js",
+      "hash": "5cf38e6cc684027c924d0b90fa0e7b6c91355cbc099cf5d89899537a47fd6813"
+    },
+    {
+      "path": "apps/api/dist/billing-check/infrastructure/http/http-error-policy.js",
+      "hash": "7dda45e044ba5e34c718dfec771afe026384de54781e298278fc27ef29c39771"
+    },
+    {
+      "path": "apps/api/dist/billing-check/infrastructure/http/http-response.interceptor.js",
+      "hash": "7d93bc864c88f319da210f74ace31ccafd552b0d552a78b1b95001dd8a87ec93"
+    },
+    {
+      "path": "apps/api/dist/billing-check/infrastructure/http/problem-details.js",
+      "hash": "09ef64669a62c201ebbd40d4bc0a693ce76719b2e2fb5a29f7c1d5172e29c602"
+    },
+    {
+      "path": "apps/api/dist/billing-check/infrastructure/request-limits.js",
+      "hash": "25fc3210ff0b30e7ede596f8f60f3f5c50e370f2b8d57502782809af59d3fc5e"
+    },
+    {
+      "path": "apps/api/dist/billing-check/main.js",
+      "hash": "8aec71facd86bfa19f9c2e5ece3a7607a0452f97f215d78351e1d2893cf60ac6"
+    },
+    {
+      "path": "apps/api/dist/billing-check/modules/authentication/application/access-policy.js",
+      "hash": "973d4461c6a4bb6d2914787b9d3949aacf5c3aaa7c55fc25e1b97c03e7f3989a"
+    },
+    {
+      "path": "apps/api/dist/billing-check/modules/authentication/application/access-store.js",
+      "hash": "eafc710a29e9939887de8436db2ba61f011315b27384f76e6d8ff6eef7debcad"
+    },
+    {
+      "path": "apps/api/dist/billing-check/modules/authentication/application/access.service.js",
+      "hash": "1e5b5b2be631ef35f21ec4f91d986f5ca63b3d3dc9f2105db8de2b5188d9abc7"
+    },
+    {
+      "path": "apps/api/dist/billing-check/modules/authentication/application/administrator-provisioner.js",
+      "hash": "627e2e40b8499f4007dbc0f98d74bef64b4ff5c26e90fa967ad70cbc4348f6ba"
+    },
+    {
+      "path": "apps/api/dist/billing-check/modules/authentication/application/authorized-operation.js",
+      "hash": "8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881"
+    },
+    {
+      "path": "apps/api/dist/billing-check/modules/authentication/application/initial-administrator.js",
+      "hash": "f644af460d661b9006534d63568a4d6dacb77c7e15dccc0b2c02555bf2450f15"
+    },
+    {
+      "path": "apps/api/dist/billing-check/modules/authentication/authentication.module.js",
+      "hash": "cb0f1b82c870866bfec109400a76063586ab5b30858993ab94dbd9ea2f2521fd"
+    },
+    {
+      "path": "apps/api/dist/billing-check/modules/authentication/http/access-boundary.guard.js",
+      "hash": "a2264a7a422f5271f8627243ea31ec49dd9cf6d51d2e3bd9f68f01c52f5dcb41"
+    },
+    {
+      "path": "apps/api/dist/billing-check/modules/authentication/http/access-entry.decorator.js",
+      "hash": "022f88163d561f851ef194b665ed84eff98ce5a5cb3174bcb5e07a85df58e706"
+    },
+    {
+      "path": "apps/api/dist/billing-check/modules/authentication/http/access-exception.filter.js",
+      "hash": "d890d31de1977adcc22c68e577a4865cebf31059f755ebf034df9157900ed88d"
+    },
+    {
+      "path": "apps/api/dist/billing-check/modules/authentication/http/access-http.helpers.js",
+      "hash": "0acd6559e3b1d1c590de60480c46eb0642b069ae47985d01486f53de6264ed14"
+    },
+    {
+      "path": "apps/api/dist/billing-check/modules/authentication/http/access-http.module.js",
+      "hash": "b252ad5c9ecf36f4c924ea3f4dbbdf6fdf63d539fa06894294c1accd85da88f4"
+    },
+    {
+      "path": "apps/api/dist/billing-check/modules/authentication/http/access.controller.js",
+      "hash": "9cd731990ed7c12a424c2d0158c7ea37a614bccdb186bfb2787aced82ced3832"
+    },
+    {
+      "path": "apps/api/dist/billing-check/modules/authentication/http/configuration.js",
+      "hash": "7da6627f29d462ea03cdebefa38c2d915249149eacae3845f985a8e989541f51"
+    },
+    {
+      "path": "apps/api/dist/billing-check/modules/authentication/http/public.js",
+      "hash": "0a613a210f62f0cf7cd6c3e69e53616c82f2ab88fe5a09a800c4edba17f9caf4"
+    },
+    {
+      "path": "apps/api/dist/billing-check/modules/authentication/infrastructure/access-schema.js",
+      "hash": "d6cd137a7bcd7b0f7c8fcf04aaf90a2b5487f388f5c9d88982b1f1a95303ba9c"
+    },
+    {
+      "path": "apps/api/dist/billing-check/modules/authentication/infrastructure/access-store.js",
+      "hash": "968f753ea7856deaeff7a7869353fd32161e95680285d40466f63183d6b58ac5"
+    },
+    {
+      "path": "apps/api/dist/billing-check/modules/authentication/infrastructure/administrator-provisioner.service.js",
+      "hash": "82dd9f3d493db87295544b4dc1f13aa1bf0928a98ee807081ae51b73f76ace9c"
+    },
+    {
+      "path": "apps/api/dist/billing-check/modules/authentication/infrastructure/password-hash.js",
+      "hash": "8b005e397b78abfe14d7a84b1df76485b7fccc5a47f9e0170aaa4760a315fcd3"
+    },
+    {
+      "path": "apps/api/dist/billing-check/modules/authentication/infrastructure/password-hasher.js",
+      "hash": "f9f111cce5b7d433fb19a1d34b6541b2143ad3ea928da312e3e2a4734486544d"
+    },
+    {
+      "path": "apps/api/dist/billing-check/modules/authentication/infrastructure/schema.js",
+      "hash": "ab4063a83aee4a612dd35303891bbd20d59504389651f2c0252ea943eda8bae7"
+    },
+    {
+      "path": "apps/api/dist/billing-check/modules/authentication/public.js",
+      "hash": "25d3579d36c6ce0b9998bdad3f5e613d2a140c67b56d239bb02d7bf0e9947206"
+    },
+    {
+      "path": "apps/api/dist/billing-check/modules/billing/application/billing-store.js",
+      "hash": "6564428c05fb23e4ba915b74e9311c54d8687d25bc01c3707697e944fd0b25ba"
+    },
+    {
+      "path": "apps/api/dist/billing-check/modules/billing/application/billing.service.js",
+      "hash": "69e288443f85762814f2bdeeb0f75cdca861d300be0a998e65628c69001957fd"
+    },
+    {
+      "path": "apps/api/dist/billing-check/modules/billing/billing.module.js",
+      "hash": "6042f1b8e4cf3e1513dcaa36faa1a075a79e0659140b1af5aaad5245251d322c"
+    },
+    {
+      "path": "apps/api/dist/billing-check/modules/billing/domain/billing.js",
+      "hash": "48500f20b56a0e210ca6c400344b812e0f5ddada89bbbcd66c1dd2c81eb8abb6"
+    },
+    {
+      "path": "apps/api/dist/billing-check/modules/billing/http/billing-exception.filter.js",
+      "hash": "212505f3185bcfa502f0d5f2b04d472e8eeb93534bf9e6996d845695623fc96a"
+    },
+    {
+      "path": "apps/api/dist/billing-check/modules/billing/http/billing-input.dto.js",
+      "hash": "de78e6c382880cf41063e6cd457bea60a27727e4d20edb6069847ec504cf478a"
+    },
+    {
+      "path": "apps/api/dist/billing-check/modules/billing/http/billing.controller.js",
+      "hash": "77983761ca1690e2197229173fca7bf3935c7ac74598dd02f1a02e87aa4f089e"
+    },
+    {
+      "path": "apps/api/dist/billing-check/modules/billing/infrastructure/postgres-billing-store.service.js",
+      "hash": "af0b892f39f43c75096c0796f59b13c6d3de656d95e03f6b51f6c1b88407e39d"
+    },
+    {
+      "path": "apps/api/dist/billing-check/modules/billing/infrastructure/schema.js",
+      "hash": "50feec942487f6e2a71badc168fb37b6b012d214b7438efa560d165ae697ce98"
+    },
+    {
+      "path": "apps/api/dist/billing-check/modules/billing/public.js",
+      "hash": "1123cdcd115f7112aff0c085e5f0a3bcabab52692fb4d9b48a1b58795a97eaf9"
+    },
+    {
+      "path": "apps/api/dist/billing-check/modules/business/application/business-configuration.js",
+      "hash": "2af0bd9f0ce993fb2f94165651fc65de27473dfb6dfdd501a8977ff79f524fb4"
+    },
+    {
+      "path": "apps/api/dist/billing-check/modules/business/application/business-display.service.js",
+      "hash": "ff946abe10114edeff21f188f3c9400807ef4657d33edf28a6e78162335adcfb"
+    },
+    {
+      "path": "apps/api/dist/billing-check/modules/business/application/display-settings.js",
+      "hash": "48c77e80e184fe250a5e185bcf6bd52899530f8abb292d33eaa1b5d54aa61af7"
+    },
+    {
+      "path": "apps/api/dist/billing-check/modules/business/application/display-settings.service.js",
+      "hash": "6f8f91051e830a889c6e95e3e85067ad054b67a068a28f7aed9fbc70bfb71760"
+    },
+    {
+      "path": "apps/api/dist/billing-check/modules/business/application/display-store.js",
+      "hash": "0f2df4406852cc54643552e9d054e03666647651c31273dfcb937676ac9265f6"
+    },
+    {
+      "path": "apps/api/dist/billing-check/modules/business/business.module.js",
+      "hash": "674273b1e25b176a08ce9de63f680f37e770d1d7f0d78925b70b0325c9611a7f"
+    },
+    {
+      "path": "apps/api/dist/billing-check/modules/business/http/business-display-http.module.js",
+      "hash": "6bb4fcc1b0dae800a57c72c5212e2c64ea357eae4bff0d85cba67502a5dddf05"
+    },
+    {
+      "path": "apps/api/dist/billing-check/modules/business/http/business-display.controller.js",
+      "hash": "cacb7a37611d8236e5a5a6278d5a78791fd36fe6036ec41d164ec851f4377ee3"
+    },
+    {
+      "path": "apps/api/dist/billing-check/modules/business/http/display-exception.filter.js",
+      "hash": "2d6a9fc7b7a9f926923d4590a008da6c926d2cc0dd1c30440498d240991c7b03"
+    },
+    {
+      "path": "apps/api/dist/billing-check/modules/business/http/display-input.dto.js",
+      "hash": "10f32ebb66619b75a2e7bfc9950c2ecd786ef714228fb6552fd76015ea9fba4c"
+    },
+    {
+      "path": "apps/api/dist/billing-check/modules/business/http/public.js",
+      "hash": "a946be561b8ca6f55c7e6c55449d6cee5c870d194550231b526a87a179b98b35"
+    },
+    {
+      "path": "apps/api/dist/billing-check/modules/business/infrastructure/business.service.js",
+      "hash": "74599e1baf6fa5e0292dde6a85eada23b40529cf925df2865907c98ee2999e6d"
+    },
+    {
+      "path": "apps/api/dist/billing-check/modules/business/infrastructure/postgres-display-store.service.js",
+      "hash": "83349b162ea1263eccce1e0e717a63642c1124c9d10942abdbc0f26bac6df502"
+    },
+    {
+      "path": "apps/api/dist/billing-check/modules/business/infrastructure/schema.js",
+      "hash": "0c0ab00b90dc1639162791796ddcc8544bb8fc5cb1071b7f79938698c35558dd"
+    },
+    {
+      "path": "apps/api/dist/billing-check/modules/business/public.js",
+      "hash": "f0e9263ab58e3e399dc42fd22348e099465049d96755d73ae7409fc9841bdb0e"
+    },
+    {
+      "path": "apps/api/dist/billing-check/modules/kitchen/application/kitchen-queue-cursor.js",
+      "hash": "6f20b095eed4e1672926ec666df0cf76764d7aa51c9df5b88e9be9ad26bce158"
+    },
+    {
+      "path": "apps/api/dist/billing-check/modules/kitchen/application/kitchen-store.js",
+      "hash": "5ef5faa06daacc9c4c2053996e0a82068d4c1d38051b033f857f98570c65e107"
+    },
+    {
+      "path": "apps/api/dist/billing-check/modules/kitchen/application/kitchen.service.js",
+      "hash": "1aeba9a355e30be560ee72e58726c4dda082244217aa552b95da8851929cb793"
+    },
+    {
+      "path": "apps/api/dist/billing-check/modules/kitchen/domain/preparation.js",
+      "hash": "52eee82e9302c4638342816fbe4589fcb9ac133a5313a2d1a055af47c069cdbe"
+    },
+    {
+      "path": "apps/api/dist/billing-check/modules/kitchen/http/kitchen-exception.filter.js",
+      "hash": "347a4ea26fe98558ccea73290a15244f14866b06e8aa6b48caa18992e3aa21f4"
+    },
+    {
+      "path": "apps/api/dist/billing-check/modules/kitchen/http/kitchen-input.dto.js",
+      "hash": "33d394eb4722804f4294c5501e7d6ba88c6b1f398ab4c9c3024ca8b6dd253d50"
+    },
+    {
+      "path": "apps/api/dist/billing-check/modules/kitchen/http/kitchen.controller.js",
+      "hash": "42a4305e03ba688060402ca94211974829938f8c6d3e0263620bb97959a82165"
+    },
+    {
+      "path": "apps/api/dist/billing-check/modules/kitchen/infrastructure/postgres-kitchen-store.service.js",
+      "hash": "b16e3e6c83e524e7b65a1a76f32d695938590af637c176d8ea0994994d7a15a9"
+    },
+    {
+      "path": "apps/api/dist/billing-check/modules/kitchen/infrastructure/schema.js",
+      "hash": "ef4e8f0df70f250bf2024178b2d5c7aa1ff3b8126ca65ec6fbbb12b2573bdc87"
+    },
+    {
+      "path": "apps/api/dist/billing-check/modules/kitchen/kitchen.module.js",
+      "hash": "595065f607b4af13b362e78fafedbb9a63ca40868691a3f5dbd7336e4688ef9d"
+    },
+    {
+      "path": "apps/api/dist/billing-check/modules/kitchen/public.js",
+      "hash": "8fb9bd4f9cd64da26ced22c285e51c3c84b07bf11b7fda7a07653e0c56bbd3e3"
+    },
+    {
+      "path": "apps/api/dist/billing-check/modules/menu/application/menu-order-resolver.service.js",
+      "hash": "c4dd2a43f6adbe527121a8f5a3c3f93e5419f281dc341ea34f41e0218a62d3d9"
+    },
+    {
+      "path": "apps/api/dist/billing-check/modules/menu/application/menu-store.js",
+      "hash": "245dcec1596ae5bd6d9bdcbf25a2f760afde5edd7ad498dd7059774b87603baa"
+    },
+    {
+      "path": "apps/api/dist/billing-check/modules/menu/application/menu.service.js",
+      "hash": "ece85499a7429a382ecf43b4fbefe7fdd50cadc70d0a066f29371adff0e392e4"
+    },
+    {
+      "path": "apps/api/dist/billing-check/modules/menu/domain/catalogue.js",
+      "hash": "a14b2a797729425cd119249c5e905dd107b9622ad66333de405c348d4657e085"
+    },
+    {
+      "path": "apps/api/dist/billing-check/modules/menu/domain/currency-precision.js",
+      "hash": "0e5eb919cd274ed82f9091716a939594c38de258a8036ce0328cfccfb7359f4e"
+    },
+    {
+      "path": "apps/api/dist/billing-check/modules/menu/http/menu-error-mapping.js",
+      "hash": "ef52f2380f4c54dc04aca9ca2edf3bdbe792339276bcb0325e801ecefefe1a12"
+    },
+    {
+      "path": "apps/api/dist/billing-check/modules/menu/http/menu-list-exception.filter.js",
+      "hash": "0300f57f6d1823645c0bc0fcec745acf7411ebde08ad52dad888213c07bf20f7"
+    },
+    {
+      "path": "apps/api/dist/billing-check/modules/menu/http/menu.controller.js",
+      "hash": "ec39edf7e270542952979c49fae9e540515e3a909b4e0a1b464db8b309ef9a89"
+    },
+    {
+      "path": "apps/api/dist/billing-check/modules/menu/http/public.js",
+      "hash": "8fcdc48819eb4ce8f63d4a61fcc9435704e930507af97e9983f69c83e304789d"
+    },
+    {
+      "path": "apps/api/dist/billing-check/modules/menu/infrastructure/menu-store.js",
+      "hash": "712c8d561a33f97d209e3e27d561f850d688386874df4af11550ee013c745ef3"
+    },
+    {
+      "path": "apps/api/dist/billing-check/modules/menu/infrastructure/schema.js",
+      "hash": "f83c4e0d07c44a72248146f535cc6c9536260ef116d54693ea1b0f987041fa30"
+    },
+    {
+      "path": "apps/api/dist/billing-check/modules/menu/menu.module.js",
+      "hash": "e3ba72892b74ef4a927f44c259a369b8db5968e4a259747cae35149281f85b37"
+    },
+    {
+      "path": "apps/api/dist/billing-check/modules/menu/public.js",
+      "hash": "4b0b0c3a4a68dc82ee6f6229ebfc2334304f7e7a2aa9fd43c26c1681158edf14"
+    },
+    {
+      "path": "apps/api/dist/billing-check/modules/orders/application/order-financial.service.js",
+      "hash": "d73dfa98749670cd5fe01a1b567691b380da548ff62f55b2e07b164db8d70a20"
+    },
+    {
+      "path": "apps/api/dist/billing-check/modules/orders/application/order-preparation.service.js",
+      "hash": "b7c788219304a444428e7c0ae3d0b8c821d812e2b34a2f39d707092914c5de40"
+    },
+    {
+      "path": "apps/api/dist/billing-check/modules/orders/application/order-store.js",
+      "hash": "228239192aa377eb0218b23e4c729e83a8f90e4b5997ea1346d3155e790e2111"
+    },
+    {
+      "path": "apps/api/dist/billing-check/modules/orders/application/orders.service.js",
+      "hash": "9c54e61f7052ff5fbd62d257bf127123bae951166d5daf13ded981f36c2d13c2"
+    },
+    {
+      "path": "apps/api/dist/billing-check/modules/orders/application/parse-order-capture.js",
+      "hash": "a4fa17fd9812240342c6582750536e5013c0afa2b5bc42f4e179817ac6f8b9fe"
+    },
+    {
+      "path": "apps/api/dist/billing-check/modules/orders/domain/capture.js",
+      "hash": "d7bab7c831535c8e49337f332a7712cf71012b31a11d0feb0096fdc1d47b040b"
+    },
+    {
+      "path": "apps/api/dist/billing-check/modules/orders/domain/order-currency.js",
+      "hash": "11652040ddfb1e90dcc486475c5d1a3a10310b858041664835726f9a7ef961a3"
+    },
+    {
+      "path": "apps/api/dist/billing-check/modules/orders/http/create-order.dto.js",
+      "hash": "42aaac14448e841e1e2c279026a832025af7ca488ac792b7d696f39d6dd62b3d"
+    },
+    {
+      "path": "apps/api/dist/billing-check/modules/orders/http/orders-exception.filter.js",
+      "hash": "0b8d0d06d47940f7096558b1e8bc5ad3da09b77e0ffb17583da972c3aa8bda4c"
+    },
+    {
+      "path": "apps/api/dist/billing-check/modules/orders/http/orders.controller.js",
+      "hash": "63504d9a435ac9fd630037b2b4a6c882aa0f8e661dfcc77c353d1c6732489f82"
+    },
+    {
+      "path": "apps/api/dist/billing-check/modules/orders/infrastructure/postgres-order-store.service.js",
+      "hash": "718a568d8743324ebc6d59e63c06e5c16a48dfbffa5173c19eb9a93348a8d3ba"
+    },
+    {
+      "path": "apps/api/dist/billing-check/modules/orders/infrastructure/schema.js",
+      "hash": "e63dfe92a5d88be07baca27ea09d435bd807dffb9582b1c9b372e949a9a9afb6"
+    },
+    {
+      "path": "apps/api/dist/billing-check/modules/orders/orders.module.js",
+      "hash": "11b7d5105ab55f88403154e1b468b6434ee7c8f18b0c881d210cc362168ffb88"
+    },
+    {
+      "path": "apps/api/dist/billing-check/modules/orders/public.js",
+      "hash": "04e0bc899d2c6eb424ef7b4cd38fbeabeccd99601649eb9bcf93d764d87d148b"
+    },
+    {
+      "path": "apps/api/dist/billing-check/operator/hidden-password.js",
+      "hash": "d46710cfa5018376fd7aa3311ca50f00a2f502871ba036fff689b212eaf513ba"
+    },
+    {
+      "path": "apps/api/dist/billing-check/operator/provision-installation.js",
+      "hash": "959f83736953ff2b527f419ea9f46a88fcdaad6833904332b48a3dd1f366ba07"
+    },
+    {
+      "path": "apps/api/dist/billing-check/operator/provisioning.module.js",
+      "hash": "f323e8cf988e6ad35402098215ab354bdcef6b5ee99e838262be16caa8441d15"
+    },
+    {
+      "path": "apps/api/dist/billing-check/operator/recover-administrator.js",
+      "hash": "5eac81628b312035f4cee85c062060d3f9a06f252d2477dce66e999eea98028f"
+    },
+    {
+      "path": "apps/api/migrations/0000_business_bootstrap.sql",
+      "hash": "0a8a058d3a4038eb4d9ffb3ceda3037f0fabcbe6c39b62f95b9b7004b2659f97"
+    },
+    {
+      "path": "apps/api/migrations/0001_staff_access.sql",
+      "hash": "f70af5681eca5b98fb0eb080f779127f45c26314ed309a9fe495c908b0c304da"
+    },
+    {
+      "path": "apps/api/migrations/0002_login_reservations.sql",
+      "hash": "abafdd843017daa4962559f8e53734d4a0ded51803a75991640864a2feec5c28"
+    },
+    {
+      "path": "apps/api/migrations/0003_menu_catalogue.sql",
+      "hash": "34532984e10d5286dcf0c4104eadca1efdf738ff30e48afb2ccdab48f6900017"
+    },
+    {
+      "path": "apps/api/migrations/0004_order_capture.sql",
+      "hash": "f2fa8b0b951d6bff6ec5c3137e68b157a7a9e4234758c2d48fb4cb89f5eb0c36"
+    },
+    {
+      "path": "apps/api/migrations/0005_kitchen_handoff.sql",
+      "hash": "47717986f6b1749e1039a39de85ebe1487e27ce6c288407c2121ae0aece2b57f"
+    },
+    {
+      "path": "apps/api/migrations/0006_billing_cash.sql",
+      "hash": "ae7192015293d4e24ebaae9772e69695cf9e1098ef71b4788f8d6b7791421e42"
+    },
+    {
+      "path": "apps/api/migrations/meta/0000_snapshot.json",
+      "hash": "62e010fbf3a1487600507dd26a1bf521af8069bc7d92bf0582b998c60f92fc79"
+    },
+    {
+      "path": "apps/api/migrations/meta/0001_snapshot.json",
+      "hash": "58f580511bd8c4e865bdeb72c1d3ba978129d6b21adba08267f9d4e5181f4624"
+    },
+    {
+      "path": "apps/api/migrations/meta/0002_snapshot.json",
+      "hash": "9a6326e26b962e596c6111a6411facf6ea7c08923e91b883cbfca4a15948f1b8"
+    },
+    {
+      "path": "apps/api/migrations/meta/0003_snapshot.json",
+      "hash": "c068fde128daddd24ed1dfbe53c2089e2bb751a3bdc6c451b38f3e065b2b4e9d"
+    },
+    {
+      "path": "apps/api/migrations/meta/0004_snapshot.json",
+      "hash": "18b1b71e2a9c9e295fa300324bc56712553743ebfc5a5789dbf03dc9a333605b"
+    },
+    {
+      "path": "apps/api/migrations/meta/0005_snapshot.json",
+      "hash": "0ba17d3e6fff6d0500248e35b7aacbd36353f4e68329be99db4a6416cc142e7b"
+    },
+    {
+      "path": "apps/api/migrations/meta/0006_snapshot.json",
+      "hash": "4c7d79d87adbda9f9c14295c25873570f5c3785b7c814af95d852b3495d76d18"
+    },
+    {
+      "path": "apps/api/migrations/meta/_journal.json",
+      "hash": "d72af475390809cd1fb66fb9c6c080ab21f322559e84854fef1bd62b4b184798"
+    },
+    {
+      "path": "apps/api/tests/bp02-acceptance.mjs",
+      "hash": "b66e123e277338ddea141672462092137e0b0eea9e7d974570420992ac06b852"
+    },
+    {
+      "path": "apps/api/tests/bp02-controls.mjs",
+      "hash": "eb108627a595b734756e2a1764a1638c938604c96115d6d59c47ae2cad53b378"
+    },
+    {
+      "path": "apps/api/tests/bp02-plan.mjs",
+      "hash": "6b98a458ee025a9e0db1d8e1e7c5c2680474f500db182c9f8b74ce2ef88619d5"
+    },
+    {
+      "path": "apps/api/tests/bp02-runtime.mjs",
+      "hash": "3574721c30718983355f28b5a7f455c2b665fb41d9fc76a8ac9f4ec4150cddcf"
+    },
+    {
+      "path": "apps/api/tests/bp02-fixtures.mjs",
+      "hash": "c6b4e33aa6dc0b770722ee54b94b392c95435d7be9393c81d53a53a91bede058"
+    },
+    {
+      "path": "apps/api/tests/bp02-cases.mjs",
+      "hash": "f73e96ec6fee3b9d6e81938db34e54d3fbfab03c6ea4497724c2b426b88c348a"
+    },
+    {
+      "path": "apps/api/tests/bp02-restart.mjs",
+      "hash": "622f6158dd491736dc611e02d0d3e169b7657160b903370588afba0d3c645743"
+    },
+    {
+      "path": "apps/api/tests/bp02-child.mjs",
+      "hash": "5bb1f0d4c75d89deb7482f55f517313ea276df36bbc3c0ad439d8b1f893bcec5"
+    }
+  ],
+  "results": [
+    {
+      "id": "B01",
+      "status": "passed"
+    },
+    {
+      "id": "B02",
+      "status": "passed"
+    },
+    {
+      "id": "B03",
+      "status": "passed"
+    },
+    {
+      "id": "B04",
+      "status": "passed"
+    },
+    {
+      "id": "B05",
+      "status": "passed"
+    },
+    {
+      "id": "B06",
+      "status": "passed"
+    },
+    {
+      "id": "B07",
+      "status": "passed"
+    }
+  ],
+  "migration": "applied-0006",
+  "cleanup": "passed",
+  "tlsVerified": false,
+  "baseline": {
+    "target": "1b55f59a1b8c467c8b070c0eebe59012c54e7393fb54a2b5e0b438a2be492437",
+    "stage": "pre-0006",
+    "history": [
+      {
+        "createdAt": 1791748603502,
+        "hash": "0a8a058d3a4038eb4d9ffb3ceda3037f0fabcbe6c39b62f95b9b7004b2659f97"
+      },
+      {
+        "createdAt": 1791826161070,
+        "hash": "f70af5681eca5b98fb0eb080f779127f45c26314ed309a9fe495c908b0c304da"
+      },
+      {
+        "createdAt": 1792223553789,
+        "hash": "abafdd843017daa4962559f8e53734d4a0ded51803a75991640864a2feec5c28"
+      },
+      {
+        "createdAt": 1792308633277,
+        "hash": "34532984e10d5286dcf0c4104eadca1efdf738ff30e48afb2ccdab48f6900017"
+      },
+      {
+        "createdAt": 1792440992358,
+        "hash": "f2fa8b0b951d6bff6ec5c3137e68b157a7a9e4234758c2d48fb4cb89f5eb0c36"
+      },
+      {
+        "createdAt": 1792699951521,
+        "hash": "47717986f6b1749e1039a39de85ebe1487e27ce6c288407c2121ae0aece2b57f"
+      }
+    ],
+    "tables": [
+      "access_limits",
+      "access_prelogins",
+      "access_security_events",
+      "access_sessions",
+      "branches",
+      "businesses",
+      "captured_orders",
+      "installation_binding",
+      "kitchen_tickets",
+      "menu_offerings",
+      "menu_references",
+      "menu_variants",
+      "order_capture_policies",
+      "staff_accounts",
+      "staff_branch_grants",
+      "staff_credentials"
+    ],
+    "counts": {
+      "access_limits": 0,
+      "access_prelogins": 0,
+      "access_security_events": 0,
+      "access_sessions": 0,
+      "branches": 0,
+      "businesses": 0,
+      "captured_orders": 0,
+      "installation_binding": 0,
+      "kitchen_tickets": 0,
+      "menu_offerings": 0,
+      "menu_references": 0,
+      "menu_variants": 0,
+      "order_capture_policies": 0,
+      "staff_accounts": 0,
+      "staff_branch_grants": 0,
+      "staff_credentials": 0
+    }
+  },
+  "postMigration": {
+    "target": "1b55f59a1b8c467c8b070c0eebe59012c54e7393fb54a2b5e0b438a2be492437",
+    "stage": "post-0006",
+    "history": [
+      {
+        "createdAt": 1791748603502,
+        "hash": "0a8a058d3a4038eb4d9ffb3ceda3037f0fabcbe6c39b62f95b9b7004b2659f97"
+      },
+      {
+        "createdAt": 1791826161070,
+        "hash": "f70af5681eca5b98fb0eb080f779127f45c26314ed309a9fe495c908b0c304da"
+      },
+      {
+        "createdAt": 1792223553789,
+        "hash": "abafdd843017daa4962559f8e53734d4a0ded51803a75991640864a2feec5c28"
+      },
+      {
+        "createdAt": 1792308633277,
+        "hash": "34532984e10d5286dcf0c4104eadca1efdf738ff30e48afb2ccdab48f6900017"
+      },
+      {
+        "createdAt": 1792440992358,
+        "hash": "f2fa8b0b951d6bff6ec5c3137e68b157a7a9e4234758c2d48fb4cb89f5eb0c36"
+      },
+      {
+        "createdAt": 1792699951521,
+        "hash": "47717986f6b1749e1039a39de85ebe1487e27ce6c288407c2121ae0aece2b57f"
+      },
+      {
+        "createdAt": 1793034600052,
+        "hash": "ae7192015293d4e24ebaae9772e69695cf9e1098ef71b4788f8d6b7791421e42"
+      }
+    ],
+    "tables": [
+      "access_limits",
+      "access_prelogins",
+      "access_security_events",
+      "access_sessions",
+      "billing_policies",
+      "billing_policy_history",
+      "billing_settlements",
+      "branches",
+      "business_display_history",
+      "businesses",
+      "captured_orders",
+      "installation_binding",
+      "kitchen_tickets",
+      "menu_offerings",
+      "menu_references",
+      "menu_variants",
+      "order_capture_policies",
+      "staff_accounts",
+      "staff_branch_grants",
+      "staff_credentials"
+    ],
+    "counts": {
+      "access_limits": 0,
+      "access_prelogins": 0,
+      "access_security_events": 0,
+      "access_sessions": 0,
+      "billing_policies": 0,
+      "billing_policy_history": 0,
+      "billing_settlements": 0,
+      "branches": 0,
+      "business_display_history": 0,
+      "businesses": 0,
+      "captured_orders": 0,
+      "installation_binding": 0,
+      "kitchen_tickets": 0,
+      "menu_offerings": 0,
+      "menu_references": 0,
+      "menu_variants": 0,
+      "order_capture_policies": 0,
+      "staff_accounts": 0,
+      "staff_branch_grants": 0,
+      "staff_credentials": 0
+    }
+  },
+  "contention": [
+    {
+      "case": "B02",
+      "observed": true
+    },
+    {
+      "case": "B03",
+      "observed": true
+    },
+    {
+      "case": "B04",
+      "observed": true
+    },
+    {
+      "case": "B04",
+      "observed": true
+    },
+    {
+      "case": "B04",
+      "observed": true
+    },
+    {
+      "case": "B04",
+      "observed": true
+    }
+  ],
+  "child": {
+    "exit": 0,
+    "marker": "BP02 restart passed"
+  },
+  "finalHistory": [
+    {
+      "createdAt": 1791748603502,
+      "hash": "0a8a058d3a4038eb4d9ffb3ceda3037f0fabcbe6c39b62f95b9b7004b2659f97"
+    },
+    {
+      "createdAt": 1791826161070,
+      "hash": "f70af5681eca5b98fb0eb080f779127f45c26314ed309a9fe495c908b0c304da"
+    },
+    {
+      "createdAt": 1792223553789,
+      "hash": "abafdd843017daa4962559f8e53734d4a0ded51803a75991640864a2feec5c28"
+    },
+    {
+      "createdAt": 1792308633277,
+      "hash": "34532984e10d5286dcf0c4104eadca1efdf738ff30e48afb2ccdab48f6900017"
+    },
+    {
+      "createdAt": 1792440992358,
+      "hash": "f2fa8b0b951d6bff6ec5c3137e68b157a7a9e4234758c2d48fb4cb89f5eb0c36"
+    },
+    {
+      "createdAt": 1792699951521,
+      "hash": "47717986f6b1749e1039a39de85ebe1487e27ce6c288407c2121ae0aece2b57f"
+    },
+    {
+      "createdAt": 1793034600052,
+      "hash": "ae7192015293d4e24ebaae9772e69695cf9e1098ef71b4788f8d6b7791421e42"
+    }
+  ],
+  "finalCounts": {
+    "access_limits": 0,
+    "access_prelogins": 0,
+    "access_security_events": 0,
+    "access_sessions": 0,
+    "billing_policies": 0,
+    "billing_policy_history": 0,
+    "billing_settlements": 0,
+    "branches": 0,
+    "business_display_history": 0,
+    "businesses": 0,
+    "captured_orders": 0,
+    "installation_binding": 0,
+    "kitchen_tickets": 0,
+    "menu_offerings": 0,
+    "menu_references": 0,
+    "menu_variants": 0,
+    "order_capture_policies": 0,
+    "staff_accounts": 0,
+    "staff_branch_grants": 0,
+    "staff_credentials": 0
+  },
+  "result": "passed",
+  "finishedAt": "2026-10-26T18:11:32.642Z"
+}

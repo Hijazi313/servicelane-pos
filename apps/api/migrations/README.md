@@ -28,3 +28,7 @@ See the [acceptance record](../../../docs/acceptance/project-foundation.md). No-
 ## KT-01 source-only migration
 
 `0005_kitchen_handoff.sql` adds Kitchen-owned preparation tickets, scoped order identity/dispatch positions and state/revision/provenance constraints. Generated offline with metadata; not applied. Source/offline checks cannot prove real uniqueness/locking/rollback/sequence visibility or restart readback. No change to earlier applied migrations. [Owning authorization/evidence](../src/modules/kitchen/docs/features/preparation/phase-tracker.md).
+
+## BP-01 source-only migration
+
+`0006_billing_cash.sql` adds Billing policy/history and immutable full-cash settlement storage with scoped order/retry uniqueness, and Business display revision/history. Generated offline with snapshot/journal; includes no installed sample policy or sample business data. It is **unexecuted**. Startup does not apply it. SQL construction/source checks do not prove PostgreSQL locking, rollback, constraints, migration compatibility or durable restart readback. [Owning source/offline evidence](../src/modules/billing/docs/features/settlement/phase-tracker.md#bp-01-delivery-evidence--2026-10-26). BP-02 preparation/execution and target reservation require separate authorization; upstream permissions do not transfer.

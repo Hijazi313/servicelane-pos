@@ -1,5 +1,5 @@
 // Offline migration composition only; not a public interface for business callers.
-export { businesses, branches, installationBinding } from '../../modules/business/infrastructure/schema.js';
+export { businesses, branches, installationBinding, businessDisplayHistory } from '../../modules/business/infrastructure/schema.js';
 export { staffAccounts, staffCredentials, staffBranchGrants } from '../../modules/authentication/infrastructure/schema.js';
 
 export { accessSessions, accessPrelogins, accessLimits, accessSecurityEvents } from '../../modules/authentication/infrastructure/access-schema.js';
@@ -9,3 +9,5 @@ export { menuOfferings, menuVariants, menuReferences } from '../../modules/menu/
 export { capturedOrders, orderCapturePolicies } from '../../modules/orders/infrastructure/schema.js';
 
 export { kitchenTickets } from '../../modules/kitchen/infrastructure/schema.js';
+
+export { billingPolicies, billingPolicyHistory, billingSettlements } from '../../modules/billing/infrastructure/schema.js';
