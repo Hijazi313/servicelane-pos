@@ -10,7 +10,7 @@ OR-01 source is implemented with focused offline and bounded PostgreSQL integrat
 
 | Preparation projection | [OrderPreparationService via public.ts](../public.ts) | Read captured preparation-only history in the caller’s authorized transaction | KT-01 source extension; no nested authorization/current Menu resolution, customer data, money or persistence export; offline projection checks only; Kitchen/PostgreSQL integration unverified |
 
-OrdersModule exports OrderPreparationService for cross-module composition; no foreign persistence or order mutation service is exported.
+OrdersModule exports OrderPreparationService and OrderFinancialService for cross-module composition; no foreign persistence or order mutation service is exported.
 ## HTTP contract adoption — 2026-10-25
 
 POST `/api/v1/orders` now returns `{data: OrderSnapshot, meta: {requestId}}` with 201 and Location for both initial creation and replay. Matched-route failures use root-relative RFC 9457 problems and selected price-confirmation details; unexpected failures use safe 500. Existing GET/policy routes remain legacy. Retry identity, transaction and saved snapshot limits are unchanged.
@@ -18,3 +18,11 @@ POST `/api/v1/orders` now returns `{data: OrderSnapshot, meta: {requestId}}` wit
 [Migration contract and evidence](../../../../../../docs/architecture/shared-http-pattern-proposal.md#first-application-integration--prepared-2026-10-25). Source/offline integration only; no database rerun or deployment.
 
 HTTP inputs now use CreateOrderDto through Nest ValidationPipe/class-validator/class-transformer. Unknown nested fields and invalid types return `/problems/validation-failed` with safe `errors` entries; application/domain normalization and raw non-HTTP validation remain. Numeric strings are not implicitly converted.
+
+## Billing financial projection — BP-01
+
+| Capability | Public entry point | Purpose | Important constraints |
+| --- | --- | --- | --- |
+| Immutable captured financial projection | [OrderFinancialService via public.ts](../public.ts) | Return exact merchandise amounts and captured composition to Billing | Caller supplies trusted scoped active transaction; validates captured supported currency/scale, line multiplication and total; no customer/instructions/retry/policy/surcharges; no Menu re-resolution, Kitchen dependency or foreign persistence export |
+
+Focused BP-01 offline projection checks cover allowlisting and corrupt monetary history. Accepted Orders/Kitchen work was not rerun; real persistence extension evidence remains unexecuted.
