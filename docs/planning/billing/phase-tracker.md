@@ -2,7 +2,7 @@
 
 Parent: [global tracker](../TRACKER.md). Plan: [README](README.md). Specification: [spec](spec.md). Decisions: [decisions](decisions.md).
 
-Status: revised BP-00 multiple-rule design complete for review; sample development approved; design acceptance/source permission pending. Active implementation phase: none. Coordinator: primary agent; [read-only reviews](agent-collaboration.md).
+Status: revised BP-00 design accepted; BP-01 source/offline implementation active. BP-02 inactive. Coordinator: primary agent; [read-only reviews](agent-collaboration.md).
 
 ## Planning authorization — 2026-10-25
 
@@ -74,3 +74,20 @@ Verification: primary documentation/REST design checklist, stale-term/local-link
 ## Branch publication — 2026-10-26
 
 User explicitly requested pushing this branch to GitHub. Committed scope reviewed: Billing planning and affected indexes only, no source/runtime/evidence/credential files. Normal push to `origin/codex/billing-planning` succeeded with upstream set; live remote head matched the intended local planning checkpoint. This publication-state handoff is included in the same branch and its remote head reverified after push. Git remains authoritative for exact heads/synchronization. No PR creation/merge, feature acceptance, implementation, tests, database access, installation or deployment authorized/performed. Seven untracked ledgers and pending incident reviews preserved; incidents: none in this publication task.
+
+## BP-01 authorization and source isolation — 2026-10-26
+
+User explicitly accepted revised BP-00 and authorized BP-01 source implementation for seven routes and BP-A01–18, supported Orders/Business interfaces and Nest exports, owned persistence/history and migration source, affected module documentation, meaningful focused offline checks with existing dependencies, bounded agents and focused local Conventional Commits. Checkout verified at `248ddad` on `codex/billing-planning`; tracked clean; seven untracked ledgers preserved. Reuse this checkout; integration base remains `d75ac92`. Publication for this increment is unauthorized.
+
+Isolation agreed before source edits: implement an explicit BillingModule composition but do not import it into AppModule; Business display HTTP composition remains separately unmounted. Existing Orders provider additions may be exported without activating financial routes. No live settlement routes, sample policy defaults, environment/database access, migration execution, installation, upstream accepted reruns, push/PR/merge, deployment, real operation or BP-02 activation. Synthetic values exist only in offline tests. Schema/migrations are source only.
+
+Shared contracts are the accepted spec's exact PolicyView, AssessmentView, BillView, DisplayView, SettlementRequest and financial projection; existing opaque AuthorizedScope/TransactionContext must cross supported public interfaces only. Billing uses one runAuthorized callback for assessment/settlement/settings edits and scoped read context for GET. Business never imports Billing. Detailed non-overlapping assignments: [collaboration](agent-collaboration.md#bp-01-source-assignments).
+
+| Active task | Owner | Expected evidence |
+| --- | --- | --- |
+| Exact policy/selection/money domain | Money agent | BP-A02/14–18 deterministic offline cases |
+| Narrow Orders financial and Business display source | Interface agent | BP-A01/06/09/10/12 projection/admin cases |
+| Billing application/HTTP source | Application agent | BP-A01/03/04/07/08/11/13 offline cases |
+| Composition, owned persistence/migration, integration/docs | Primary | Build, architecture, focused Billing checks; BP-02 gaps explicit |
+
+Completion shape: reviewable isolated source for the seven contracts, no runtime activation or persistence execution. Development acceptance remains the user's decision.
