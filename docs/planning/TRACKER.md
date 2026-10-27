@@ -1,5 +1,11 @@
 # Global phase tracker
 
+## Skill metadata maintenance — 2026-10-27
+
+User approved maintenance metadata and applicable-reference/metadata-maintenance instructions for all three repository skills, with checkout choice delegated. Solo owner reused `codex/documentation-links` in `/Users/macbookpro/Documents/personal/restaurant-pos-custom`, integration base `main` / `3c4a16b`; unrelated evidence ledgers preserved. Skill documentation only; no publication/merge authorized.
+
+Complete locally: delivery/incident creation dates follow first repository additions (2026-10-11 and 2026-10-17), with versions initialized at 1.0.0. REST attribution/creation date preserved; version 0.4.1. YAML/frontmatter and whitespace checks passed using existing Ruby Psych; bundled validator unavailable because PyYAML is absent. No installation or application checks. Incidents: none in this increment. Next: owner review; publication remains unauthorized.
+
 ## API convention and skill — 2026-10-24
 
 User authorized a separate main-based worktree/topic branch for the API convention, repository skill with supported metadata and AGENTS.md discovery link, plus focused skill validation. Assignment: solo documentation owner, `/Users/macbookpro/.codex/worktrees/rest-api-contracts/restaurant-pos-custom`, branch `codex/rest-api-contracts`, base local main `6eeb92b`. No API migration, CI enforcement, database access, installation, push/PR/merge or deployment inferred.

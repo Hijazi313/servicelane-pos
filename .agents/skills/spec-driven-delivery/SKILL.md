@@ -1,9 +1,18 @@
 ---
 name: spec-driven-delivery
 description: Scope modules and substantial features, define specifications and phases, and coordinate evidence-based delivery and handoffs in this repository. Use for planning, phase transitions or agent assignments; do not create packs for small isolated fixes.
+metadata:
+  author: "Codex (AI-assisted; requested by project owner)"
+  version: "1.0.0"
+  created: "2026-10-11"
+  updated: "2026-10-27"
+  scope: "Repository module and feature scoping, specifications, delivery phases and handoffs"
+  portability: "Agent-neutral Markdown; repository-relative references"
 ---
 
 # Spec-driven delivery
+
+Load every reference that applies to the task. Do not load references solely because they exist.
 
 ## Routing
 
@@ -47,3 +56,7 @@ Challenge P0 scope using `docs/decision-making.md`. Resolve blocking choices ins
 Keep progress in trackers and lasting behavior in specifications. Link canonical schemas and decisions rather than copying them. Source review cannot establish runtime, hardware or recovery success. Pending required acceptance remains explicit; follow the verification policy in repository `docs/project-scope.md#verification-policy`.
 
 This skill defines project conventions, not an industry-mandated file layout. It does not authorize implementation, external actions or scope expansion.
+
+## Metadata maintenance
+
+On substantive changes, update `metadata.updated`; adjust `metadata.version` when the skill's documented contract changes. Preserve attribution and creation date.
