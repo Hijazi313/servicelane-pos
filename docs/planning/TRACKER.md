@@ -4,7 +4,7 @@
 
 User approved maintenance metadata and applicable-reference/metadata-maintenance instructions for all three repository skills, with checkout choice delegated. Solo owner reused `codex/documentation-links` in `/Users/macbookpro/Documents/personal/restaurant-pos-custom`, integration base `main` / `3c4a16b`; unrelated evidence ledgers preserved. Skill documentation only; no publication/merge authorized.
 
-Complete locally: delivery/incident creation dates follow first repository additions (2026-10-11 and 2026-10-17), with versions initialized at 1.0.0. REST attribution/creation date preserved; version 0.4.1. YAML/frontmatter and whitespace checks passed using existing Ruby Psych; bundled validator unavailable because PyYAML is absent. No installation or application checks. Incidents: none in this increment. User subsequently authorized push and PR creation. Isolated the skill increment on `codex/skill-metadata` from verified `origin/main` / `3c4a16b` for a focused PR; earlier documentation-link work remains on its original branch. Next: remote CI and PR review; merge unauthorized.
+Complete locally: delivery/incident creation dates follow first repository additions (2026-10-11 and 2026-10-17), with versions initialized at 1.0.0. REST attribution/creation date preserved; version 0.4.1. YAML/frontmatter and whitespace checks passed using existing Ruby Psych; bundled validator unavailable because PyYAML is absent. No installation or application checks. Incidents: none in this increment. User subsequently authorized push and PR creation. Isolated the skill increment on `codex/skill-metadata` from verified `origin/main` / `3c4a16b` for a focused PR; earlier documentation-link work remains on its original branch. User accepted the skill increment and authorized merge/integration. [PR #18](https://github.com/Hijazi313/servicelane-pos/pull/18) squash-merged as `b07cd49` after both checks passed on head `811f4b6`. Merged main into the original working branch `codex/documentation-links`; tracker status conflict reconciled while retaining its separate documentation-link work. Skill increment accepted/closed; no new scope activated.
 
 ## API convention and skill — 2026-10-24
 
@@ -64,7 +64,7 @@ User explicitly authorized Nest ValidationPipe with class-validator/class-transf
 
 ## HTTP adoption PR publication — 2026-10-25
 
-User authorized committing the reviewed staged changes and creating a PR from `codex/api-type-safety` to `main`. This publishes the preceding skill guidance, shared HTTP components and approved two-endpoint migration with Nest DTO validation. Existing 34-test, typecheck, boundary and lockfile-only evidence applies; no runtime changes since verification. Final documentation review reconciled stale descriptions of DTO field errors and parsing. Preserve both untracked Menu/Orders ledgers. Next: owner reviews the PR; merge remains unauthorized. Incident [INC-20261024-01](../quality/agent-incidents.md#inc-20261024-01--api-skill-guidance-required-repeated-user-led-specificity-and-correction) remains open; no new qualifying incident in publication work.
+User authorized committing the reviewed staged changes and creating a PR from `codex/api-type-safety` to `main`. This publishes the preceding skill guidance, shared HTTP components and approved two-endpoint migration with Nest DTO validation. Existing 34-test, typecheck, boundary and lockfile-only evidence applies; no runtime changes since verification. Final documentation review reconciled stale descriptions of DTO field errors and parsing. Preserve both untracked Menu/Orders ledgers. Next: owner reviews the PR; user approved acceptance and squash merge on 2026-10-27. Incident [INC-20261024-01](../quality/agent-incidents.md#inc-20261024-01--api-skill-guidance-required-repeated-user-led-specificity-and-correction) remains open; no new qualifying incident in publication work.
 
 ## Kitchen persistence preparation — 2026-10-25
 
@@ -79,11 +79,20 @@ User authorized committing the reviewed staged changes and creating a PR from `c
 - Current phase: Orders OR-01 and Kitchen backend development scopes remain accepted/closed. Billing BP-01/BP-02 were explicitly accepted/closed on 2026-10-27 under recorded scope and limitations; [owning acceptance](../../apps/api/src/modules/billing/docs/features/settlement/phase-tracker.md#bp-01bp-02-user-acceptance-and-closeout--2026-10-27). Database run permission is consumed. Subsequent publication/PR/merge authorization is active; live activation, deployment and next-module work remain unauthorized. BA acceptance and deferred two-database validation remain unchanged.
 - Deferred validation remains in the [canonical foundation handoff](project-foundation/phase-tracker.md#current-handoff--2026-10-12) and [acceptance record](../acceptance/project-foundation.md).
 
+## Documentation link checker — 2026-10-27
+
+User authorized implementation and a new main-based branch. Solo owner: current checkout, `codex/documentation-links`, base `3c4a16b`, incorporating current main `b07cd49`. User authorized push and focused PR creation on 2026-10-27; user approved acceptance and squash merge on 2026-10-27. P0: dependency-free local Markdown path checking against the Git index; changed-document checks plus incoming references affected by deletion/rename; read-only hook, shared CI command and focused synthetic Git tests. External URLs, heading anchors, semantic capability completeness and duplication detection are deferred. No dependencies, database work or application changes.
+
+- [x] Implemented [checker and hook/CI guidance](../../scripts/README.md), with no new dependencies or automatic hook activation.
+- [x] Seven synthetic Git tests pass for staged bytes/targets, deletion/rename and directory removal, encoded/space paths, reference definitions, initial commits and linked worktrees. Full live-document baseline passes; four intentional template placeholders are excluded by documented template-directory scope. Heading anchors/full Markdown parsing remain deferred.
+- Verification runtime: existing Node v24.18.1, below the repository application pin; no installation or application checks. CI is configured for Node 24.21.0 but has not run remotely. Local hook activation remains unperformed. Published as [PR #19](https://github.com/Hijazi313/servicelane-pos/pull/19). Remote head matched local `6c35b2f`; all three checks passed on `9bb1f7a`. Final tracker-checkpoint CI must be verified before integration; user approved acceptance and squash merge on 2026-10-27.
+- Closeout: user accepted this increment and authorized PR #19 merge/branch cleanup. No additional hooks, local hook activation or branch-protection changes. Check GitHub for final merge status.
+- Incidents: none in this increment.
+
 ## Active work branches
 
 | Task | Branch | Checkout | Owner | Integration base | Publication | Tracker |
 | --- | --- | --- | --- | --- | --- | --- |
-| Skill metadata | `codex/skill-metadata` | `/Users/macbookpro/Documents/personal/restaurant-pos-custom` | Solo agent | `main` / `3c4a16b` | Push/PR authorized; remote verification pending | This document |
 
 Current designations follow [CONTRIBUTING](../../CONTRIBUTING.md#active-work-and-remote-checkpoints); Git is authoritative for heads and synchronization.
 

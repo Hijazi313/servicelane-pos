@@ -64,3 +64,5 @@ Follow the canonical [verification policy](docs/project-scope.md#verification-po
 For domain/application boundary changes or changes to the guard itself, use the [focused architecture checks](apps/api/scripts/README.md); passing checker fixtures and passing the repository scan are distinct results. Do not suppress existing findings to make CI green.
 
 Find common commands in [Development commands](README.md#development-commands) and available scripts in the root and owning package `package.json` files; use only existing checks appropriate to the change.
+
+Documentation navigation: use the [local link checker and optional hook setup](scripts/README.md#documentation-links). CI validates all tracked live Markdown paths; the local hook checks staged changes and references affected by removals.
