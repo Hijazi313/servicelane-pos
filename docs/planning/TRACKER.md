@@ -91,13 +91,13 @@ User authorized implementation and a new main-based branch. Solo owner: current 
 
 ## Spec-driven delivery refinement — 2026-10-28
 
-User selected the reviewed and consolidated skill update: optional independent delivery when ready and authorized, human decisions, compact phase handoffs, valid evidence reuse and clear agent ownership. Existing [skill](../../.agents/skills/spec-driven-delivery/SKILL.md) and workflow are updated; no new skill or framework. Static frontmatter, local-link and whitespace review completed; independent behavioral evaluation and the standard validator remain unrun (PyYAML unavailable). Accepted wording is not proof of behavioral performance. Local-only topic; publication is not authorized. No application, database or deployment work. Review draft and eight existing ownership ledgers remain untracked/preserved. Incidents: none; existing incident reviews remain pending.
+User selected the reviewed and consolidated skill update: optional independent delivery when ready and authorized, human decisions, compact phase handoffs, valid evidence reuse and clear agent ownership. Existing [skill](../../.agents/skills/spec-driven-delivery/SKILL.md) and workflow are updated; no new skill or framework. Static frontmatter, local-link and whitespace review completed; independent behavioral evaluation and the standard validator remain unrun (PyYAML unavailable). Accepted wording is not proof of behavioral performance. The user subsequently authorized normal push, a focused PR and squash merge after exact-head checks. No application, database or deployment work. Review draft and eight existing ownership ledgers remain untracked/preserved. Incidents: none; existing incident reviews remain pending.
 
 ## Active work branches
 
 | Task | Branch | Checkout | Owner | Integration base | Publication | Tracker |
 | --- | --- | --- | --- | --- | --- | --- |
-| Spec-driven delivery skill refinement | `codex/spec-delivery-readiness` | `/Users/macbookpro/Documents/personal/restaurant-pos-custom` | Primary agent | `main` `6d430ed` | Local only — publication unauthorized | [Skill refinement](#spec-driven-delivery-refinement--2026-10-28) |
+| Spec-driven delivery skill refinement | `codex/spec-delivery-readiness` | `/Users/macbookpro/Documents/personal/restaurant-pos-custom` | Primary agent | `main` `6d430ed` | Push/PR/squash merge authorized; final checks pending | [Skill refinement](#spec-driven-delivery-refinement--2026-10-28) |
 
 Current designations follow [CONTRIBUTING](../../CONTRIBUTING.md#active-work-and-remote-checkpoints); Git is authoritative for heads and synchronization.
 
