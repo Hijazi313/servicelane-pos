@@ -1,8 +1,18 @@
 ---
 name: agent-incident-learning
 description: Record confirmed agent-process mistakes automatically, with evidence and user-controlled prevention review. Use on discoveries and handoffs; disagreement or a failed check alone is not an incident.
+metadata:
+  author: "Codex (AI-assisted; requested by project owner)"
+  version: "1.0.0"
+  created: "2026-10-17"
+  updated: "2026-10-27"
+  scope: "Repository agent-process incident recording and user-controlled prevention review"
+  portability: "Agent-neutral Markdown; repository-relative references"
 ---
 # Agent incident learning
+
+Load every reference that applies to the task. Do not load references solely because they exist.
+
 Adopted for this repository on 2026-10-17. Local log, writer and review setup are recorded in `docs/quality/agent-incidents.md`; other repositories must approve their own setup.
 
 ## Trigger and qualification
@@ -27,3 +37,7 @@ Adopted for this repository on 2026-10-17. Local log, writer and review setup ar
 
 ## Evaluation
 Read [scenarios](references/evaluations.md) only when evaluating the skill, not on ordinary triggers. Scenario results are evidence to investigate, not automatic proof of a skill defect.
+
+## Metadata maintenance
+
+On substantive changes, update `metadata.updated`; adjust `metadata.version` when the skill's documented contract changes. Preserve attribution and creation date.

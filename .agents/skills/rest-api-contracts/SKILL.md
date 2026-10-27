@@ -3,16 +3,18 @@ name: rest-api-contracts
 description: "Design, implement and review REST API contracts in this repository, including validation, query parameters, responses, errors, headers, retries and concurrency. Use for new or changed HTTP endpoints and contract reviews; exclude unrelated internal changes."
 metadata:
   author: "Codex"
-  version: "0.4.0"
+  version: "0.4.1"
   project: "ServiceLane POS"
   scope: "REST API contract design, implementation guidance and review; existing API migrations and CI enforcement require separate authorization"
   created: "2026-10-24"
-  updated: "2026-10-25"
+  updated: "2026-10-27"
   compatibility: "NestJS 12 with Fastify, TypeScript 6 and Node.js 24; repository source and owning specifications required; guidance only, no runtime enforcement"
   short-description: "Design and review consistent REST API contracts"
 ---
 
 # REST API contracts
+
+Load every reference that applies to the task. Do not load references solely because they exist.
 
 Follow the [canonical API convention](../../../docs/architecture/rest-api-convention.md) for new or materially changed HTTP contracts. This is a repository convention, not a claim that all its choices are industry standards.
 
@@ -50,3 +52,7 @@ For implementation/integration, verify applicable shared-component reuse and act
 Before completing API design, implementation or review, apply the relevant [verification checklist](references/enforcement.md#verification-checklist). Distinguish source review from executed checks and report material gaps; invoking this skill does not prove compliance. Run the smallest relevant existing checks and meaningful negative cases. Static checks do not prove authorization, runtime field selection or transaction safety.
 
 Report contract changes, compatibility impact, verification results/limits and unresolved decisions. Follow the repository incident-learning requirements. CI enforcement and migrations remain separately scoped.
+
+## Metadata maintenance
+
+On substantive changes, update `metadata.updated`; adjust `metadata.version` when the skill's documented contract changes. Preserve attribution and creation date.
