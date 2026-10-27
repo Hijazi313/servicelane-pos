@@ -1,11 +1,11 @@
 ---
 name: spec-driven-delivery
-description: Scope modules and substantial features, define specifications and phases, and coordinate evidence-based delivery and handoffs in this repository. Use for planning, phase transitions or agent assignments; do not create packs for small isolated fixes.
+description: Scope modules and substantial features, define specifications and phases, assess delivery readiness, and coordinate evidence-based execution and handoffs in this repository. Use for planning, phase transitions or agent assignments; do not create packs for small isolated fixes.
 metadata:
   author: "Codex (AI-assisted; requested by project owner)"
-  version: "1.0.0"
+  version: "1.1.0"
   created: "2026-10-11"
-  updated: "2026-10-27"
+  updated: "2026-10-28"
   scope: "Repository module and feature scoping, specifications, delivery phases and handoffs"
   portability: "Agent-neutral Markdown; repository-relative references"
 ---
@@ -18,7 +18,7 @@ Load every reference that applies to the task. Do not load references solely bec
 
 1. Read root and applicable scoped AGENTS.md instructions; locate current work in `docs/planning/TRACKER.md`.
 2. Find the owning module's existing documentation. Reuse it rather than creating parallel specifications or trackers.
-3. Read [workflow guidance](references/workflow.md) when planning, changing phases or coordinating agents. For ordinary work, load only the assigned phase and relevant specification sections and decisions.
+3. Read [workflow guidance](references/workflow.md) when planning, assessing delivery readiness, changing phases or coordinating agents. For ordinary work, load only the assigned phase and relevant specification sections and decisions.
 
 ## Phase entry, resume and closeout
 
