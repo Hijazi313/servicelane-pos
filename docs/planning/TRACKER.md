@@ -89,6 +89,10 @@ User authorized implementation and a new main-based branch. Solo owner: current 
 - Closeout: user accepted this increment and authorized PR #19 merge/branch cleanup. No additional hooks, local hook activation or branch-protection changes. Check GitHub for final merge status.
 - Incidents: none in this increment.
 
+## Spec-driven delivery refinement — 2026-10-28
+
+User selected the reviewed and consolidated skill update: optional independent delivery when ready and authorized, human decisions, compact phase handoffs, valid evidence reuse and clear agent ownership. Existing [skill](../../.agents/skills/spec-driven-delivery/SKILL.md) and workflow are updated; no new skill or framework. Static frontmatter, local-link and whitespace review completed; independent behavioral evaluation and the standard validator remain unrun (PyYAML unavailable). Accepted wording is not proof of behavioral performance. The user subsequently authorized normal push, a focused PR and squash merge after exact-head checks. [PR #20](https://github.com/Hijazi313/servicelane-pos/pull/20) is the authoritative record for final head, checks and merge outcome. No application, database or deployment work. Review draft and eight existing ownership ledgers remain untracked/preserved. Incidents: none; existing incident reviews remain pending.
+
 ## Active work branches
 
 | Task | Branch | Checkout | Owner | Integration base | Publication | Tracker |

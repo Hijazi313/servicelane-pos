@@ -23,10 +23,14 @@ When Git work is authorized, follow repository `CONTRIBUTING.md` for branch setu
 1. Confirm the active phase, assignment, authorization and applicable verification limits. If none is selected, propose the smallest eligible phase; do not infer implementation permission from a roadmap.
 2. Apply repository `docs/architecture/README.md#capability-discovery-and-documentation-upkeep` before adding or reusing behavior.
 3. Inspect relevant repository state and existing changes before edits (including Git status when the directory is a Git repository). Preserve unrelated work and reconcile a stale handoff with current files.
-4. Identify the affected entry points, persistence paths, consumers and existing acceptance evidence. Resolve discrepancies between intended specifications and actual implementation explicitly; neither silently replaces the other.
+4. Identify the affected entry points, persistence paths, consumers and existing acceptance evidence. Before proceeding, verify required phase inputs and evidence remain current, especially after handoffs, concurrent work or compaction; a link or an agent completion claim is not proof. If a prerequisite is missing, resolve it within authorization or pause the dependent work for a decision. Resolve discrepancies between intended specifications and actual implementation explicitly; neither silently replaces the other.
 5. Record a concise active P0 task table or checklist with status and links to acceptance criteria/expected evidence. One focused active task per assignment is preferred; independent assignments may proceed concurrently under agreed ownership.
 6. State the completion shape: intended capabilities after this phase, important behavior still absent and the usable interface/boundary for the next phase. Describe intent now and reconcile it with evidence at closeout.
 7. Proceed within clear authorization. Ask only about material blocking choices and pause their dependent work; continue independent authorized work.
+
+## Delivery readiness
+
+For a substantial feature with agreed scope, recommend independent delivery only when it would help and the behavior, material decisions, dependencies, acceptance evidence and needed resources are sufficiently clear. Explain the proposed outcome, allowed actions, verification and expected review points. If a material input is unresolved, recommend staged delivery or resolve that input first. Simple fixes do not need a readiness ceremony.
 
 ## Phase transitions and requirement provenance
 
@@ -39,7 +43,7 @@ When Git work is authorized, follow repository `CONTRIBUTING.md` for branch setu
 2. Reconcile each activated P0 criterion with suitable evidence. Use the smallest relevant checks under the repository verification policy; do not expand verification without justification. Record implemented-but-unverified behavior and pending user acceptance explicitly; rescoping requires a recorded decision, not unchecked work relabeled as done.
 3. Apply the architecture capability-upkeep rules to affected indexes and references.
 4. Update evidence, status and completion shape in the owning tracker. Update other documents only when their owned behavior, contracts, decisions or assignments changed.
-5. Leave one concrete next action and relevant changed-file cautions in the tracker's current handoff. Report the outcome and evidence limits concisely rather than copying the entire tracker into chat.
+5. Leave a compact handoff in the existing tracker (or a checklist or conversation for a small task): outcome and requirements; evidence and limits, including checks not run; relevant source/checkout or artifact identity, changed files and shared resources; blockers and the next authorized action and prerequisites. Keep the conversation focused on material decisions, progress, blockers and outcomes without hiding risks. Do not create a separate handoff file or a phase solely to populate a template.
 6. For incident assessment at closeout/handoff, follow [agent incident learning](../../agent-incident-learning/SKILL.md); that skill owns its recording and review requirements.
 
 ## Reading by assignment
@@ -74,9 +78,11 @@ When Git work is authorized, follow repository `CONTRIBUTING.md` for branch setu
 
 ## Authorization and routine decisions
 
-- At phase activation, record the approving instruction (link or concise dated reference), approved scope and verification limits in the owning tracker. A direct user request can authorize the work; do not require an extra approval ritual. Parent trackers link to this record rather than duplicating it.
-- An active status, proposed spec or agent assignment alone does not grant permission. If authorization is unclear, resolve the affected scope before implementation.
-- Make routine implementation choices autonomously within approved scope and established boundaries. Stop dependent work when a material unresolved choice affects business behavior, contracts, isolation, compliance or authorized scope; continue independent authorized work.
+- At phase activation, record the approving instruction, approved scope and verification limits in the owning tracker. A direct user request can authorize the work; do not require an extra approval ritual. Parent trackers link to this record rather than duplicating it.
+- Independent delivery is opt-in, not the default. Continue across phases only when the user's current or standing authorization covers the work; an explicit end-to-end instruction can provide it. A scope approval, readiness recommendation, active status or agent handoff alone does not authorize implementation, database writes, publication, deployment or acceptance.
+- Make routine technical choices and diagnose, repair and rerun affected checks within approved scope. Preserve explicit stop conditions, one-run limits and prohibited actions. Stop dependent work for material product/policy/financial decisions, required human or independent review, authorization gaps, conflicting evidence or unsafe ownership/cleanup; continue independent authorized work.
+- For an uncertain commit or migration outcome, pause dependent work and use authorized read-only checks to establish the state; ask for a human decision only if it remains uncertain. If established, proceed only as permitted by authorization and explicit stop conditions.
+- When a human decision is needed, present the issue, relevant evidence, options, recommendation, consequences and exact decision required. Passing checks do not imply user acceptance or release permission.
 - When a collaboration document exists, it alone owns detailed file assignments. The tracker links to it. For solo work, a short assignment in the tracker is sufficient.
 
 ## Contracts and evidence
@@ -85,6 +91,7 @@ When Git work is authorized, follow repository `CONTRIBUTING.md` for branch setu
 - Once machine-readable API schemas exist, reference them as the canonical payload definitions; prose explains semantics and failure behavior rather than duplicating schemas.
 - Use stable requirement/acceptance IDs within substantial features so phase tasks and evidence can link to criteria without copying them. Do not build a separate traceability system.
 - Record evidence type, source, date, result and limits. Distinguish source inspection, user-run behavioral verification and device/operational verification. Do not fabricate evidence or bypass the verification policy.
+- Carry forward still-applicable evidence and conclusions between phases after checking relevant source, scope and freshness. Repeat a check when a change, unmet requirement or unresolved risk justifies it; do not rerun a passed check merely because the phase changed. Never substitute earlier evidence for a required check it does not cover.
 - For cross-module work, propose a natural owner or a small integration plan. Escalate material responsibility/scope decisions; folder placement alone need not stop progress.
 
 Update the integration guide in the same change when consumer-visible behavior changes. Update the collaboration document when ownership changes and decisions when a choice is confirmed or superseded. Avoid repeated status summaries across these files.
@@ -96,14 +103,13 @@ Use `proposed`, `ready`, `active`, `blocked`, `awaiting acceptance`, `complete` 
 ## Multiple-agent coordination
 
 - One coordinating agent owns the global tracker and module-level status; each delegated feature has one named owner. These are work assignments, not new application architecture.
-- Before delegation, specify outcome, phase, file ownership, allowed scope, dependencies, acceptance expectations and verification restrictions. The user permits multiple-agent work for this workflow; do not create user-facing chats unless explicitly requested.
+- Before delegation, specify the bounded outcome, phase, relevant spec/contract links, file or resource ownership, allowed scope, dependencies, acceptance expectations and verification restrictions. Agents return changed files, decisions, completed/remaining work, blockers and actual checks/limits. The user permits multiple-agent work for this workflow; do not create user-facing chats unless explicitly requested.
 - Parallelize independent tasks inside the active module after shared contracts are agreed. Keep dependent work sequential. Cross-module changes require an explicit coordination assignment.
 - Before concurrent implementation, record checkout paths, integration branch/base, shared-file owners and integration method in the collaboration document. Do not assume separate chats have isolated files.
 - In a shared checkout, use non-overlapping file ownership and one owner for branch/index operations, dependency manifests/lockfiles, migrations and shared contracts. Serialize conflicting edits and commands affecting shared state; do not switch branches or stage another agent's work.
 - Use separate worktrees when independent branch work is needed and authorized. They share repository history, not uncommitted changes; pass required specifications/contracts explicitly and avoid shared database or port collisions. Worktrees are an option, not mandatory overhead.
 - The integrator reviews assigned diffs, reconciles shared changes and runs justified focused checks under the verification policy. With separate branches, agree the merge/cherry-pick order and integrate on the named branch. With a shared checkout, review the combined diff without an unnecessary merge. Do not discard unrelated changes or treat integration as acceptance.
 - If checkout/file ownership is unclear or overlaps, pause conflicting edits and resolve assignments; independent authorized work can continue.
-- Each handoff states changed files, decisions, completed/remaining work, blockers and evidence, including checks not run. The coordinator reconciles results and updates the module/global state.
 - Do not claim acceptance from another agent's confidence or source review. Distinguish agent checks from required user acceptance under the repository verification policy.
 
 ## Scoped instructions
