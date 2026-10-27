@@ -81,18 +81,18 @@ User authorized committing the reviewed staged changes and creating a PR from `c
 
 ## Documentation link checker — 2026-10-27
 
-User authorized implementation and a new main-based branch. Solo owner: current checkout, `codex/documentation-links`, base `3c4a16b`; local only — publication unauthorized. P0: dependency-free local Markdown path checking against the Git index; changed-document checks plus incoming references affected by deletion/rename; read-only hook, shared CI command and focused synthetic Git tests. External URLs, heading anchors, semantic capability completeness and duplication detection are deferred. No dependencies, database work or application changes.
+User authorized implementation and a new main-based branch. Solo owner: current checkout, `codex/documentation-links`, base `3c4a16b`, incorporating current main `b07cd49`. User authorized push and focused PR creation on 2026-10-27; merge remains unauthorized. P0: dependency-free local Markdown path checking against the Git index; changed-document checks plus incoming references affected by deletion/rename; read-only hook, shared CI command and focused synthetic Git tests. External URLs, heading anchors, semantic capability completeness and duplication detection are deferred. No dependencies, database work or application changes.
 
 - [x] Implemented [checker and hook/CI guidance](../../scripts/README.md), with no new dependencies or automatic hook activation.
 - [x] Seven synthetic Git tests pass for staged bytes/targets, deletion/rename and directory removal, encoded/space paths, reference definitions, initial commits and linked worktrees. Full live-document baseline passes; four intentional template placeholders are excluded by documented template-directory scope. Heading anchors/full Markdown parsing remain deferred.
-- Verification runtime: existing Node v24.18.1, below the repository application pin; no installation or application checks. CI is configured for Node 24.21.0 but has not run remotely. Next: review local delivery; hook activation and publication remain unperformed.
+- Verification runtime: existing Node v24.18.1, below the repository application pin; no installation or application checks. CI is configured for Node 24.21.0 but has not run remotely. Local hook activation remains unperformed. Publication/PR creation now authorized; exact-head remote checks pending.
 - Incidents: none in this increment.
 
 ## Active work branches
 
 | Task | Branch | Checkout | Owner | Integration base | Publication | Tracker |
 | --- | --- | --- | --- | --- | --- | --- |
-| Documentation links | `codex/documentation-links` | `/Users/macbookpro/Documents/personal/restaurant-pos-custom` | Solo agent | `main` / `3c4a16b` | Local only — publication unauthorized | This document |
+| Documentation links | `codex/documentation-links` | `/Users/macbookpro/Documents/personal/restaurant-pos-custom` | Solo agent | `main` / `b07cd49` | Push/PR authorized; remote checks pending | This document |
 
 Current designations follow [CONTRIBUTING](../../CONTRIBUTING.md#active-work-and-remote-checkpoints); Git is authoritative for heads and synchronization.
 
