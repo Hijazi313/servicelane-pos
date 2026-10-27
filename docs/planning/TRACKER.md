@@ -64,7 +64,7 @@ User explicitly authorized Nest ValidationPipe with class-validator/class-transf
 
 ## HTTP adoption PR publication — 2026-10-25
 
-User authorized committing the reviewed staged changes and creating a PR from `codex/api-type-safety` to `main`. This publishes the preceding skill guidance, shared HTTP components and approved two-endpoint migration with Nest DTO validation. Existing 34-test, typecheck, boundary and lockfile-only evidence applies; no runtime changes since verification. Final documentation review reconciled stale descriptions of DTO field errors and parsing. Preserve both untracked Menu/Orders ledgers. Next: owner reviews the PR; merge remains unauthorized. Incident [INC-20261024-01](../quality/agent-incidents.md#inc-20261024-01--api-skill-guidance-required-repeated-user-led-specificity-and-correction) remains open; no new qualifying incident in publication work.
+User authorized committing the reviewed staged changes and creating a PR from `codex/api-type-safety` to `main`. This publishes the preceding skill guidance, shared HTTP components and approved two-endpoint migration with Nest DTO validation. Existing 34-test, typecheck, boundary and lockfile-only evidence applies; no runtime changes since verification. Final documentation review reconciled stale descriptions of DTO field errors and parsing. Preserve both untracked Menu/Orders ledgers. Next: owner reviews the PR; user approved acceptance and squash merge on 2026-10-27. Incident [INC-20261024-01](../quality/agent-incidents.md#inc-20261024-01--api-skill-guidance-required-repeated-user-led-specificity-and-correction) remains open; no new qualifying incident in publication work.
 
 ## Kitchen persistence preparation — 2026-10-25
 
@@ -81,18 +81,18 @@ User authorized committing the reviewed staged changes and creating a PR from `c
 
 ## Documentation link checker — 2026-10-27
 
-User authorized implementation and a new main-based branch. Solo owner: current checkout, `codex/documentation-links`, base `3c4a16b`, incorporating current main `b07cd49`. User authorized push and focused PR creation on 2026-10-27; merge remains unauthorized. P0: dependency-free local Markdown path checking against the Git index; changed-document checks plus incoming references affected by deletion/rename; read-only hook, shared CI command and focused synthetic Git tests. External URLs, heading anchors, semantic capability completeness and duplication detection are deferred. No dependencies, database work or application changes.
+User authorized implementation and a new main-based branch. Solo owner: current checkout, `codex/documentation-links`, base `3c4a16b`, incorporating current main `b07cd49`. User authorized push and focused PR creation on 2026-10-27; user approved acceptance and squash merge on 2026-10-27. P0: dependency-free local Markdown path checking against the Git index; changed-document checks plus incoming references affected by deletion/rename; read-only hook, shared CI command and focused synthetic Git tests. External URLs, heading anchors, semantic capability completeness and duplication detection are deferred. No dependencies, database work or application changes.
 
 - [x] Implemented [checker and hook/CI guidance](../../scripts/README.md), with no new dependencies or automatic hook activation.
 - [x] Seven synthetic Git tests pass for staged bytes/targets, deletion/rename and directory removal, encoded/space paths, reference definitions, initial commits and linked worktrees. Full live-document baseline passes; four intentional template placeholders are excluded by documented template-directory scope. Heading anchors/full Markdown parsing remain deferred.
-- Verification runtime: existing Node v24.18.1, below the repository application pin; no installation or application checks. CI is configured for Node 24.21.0 but has not run remotely. Local hook activation remains unperformed. Published as [PR #19](https://github.com/Hijazi313/servicelane-pos/pull/19). Remote head matched local `6c35b2f`; its documentation-link and PR-title checks passed, HTTP-boundary check was running. Final tracker-checkpoint CI must be verified before integration; merge remains unauthorized.
+- Verification runtime: existing Node v24.18.1, below the repository application pin; no installation or application checks. CI is configured for Node 24.21.0 but has not run remotely. Local hook activation remains unperformed. Published as [PR #19](https://github.com/Hijazi313/servicelane-pos/pull/19). Remote head matched local `6c35b2f`; all three checks passed on `9bb1f7a`. Final tracker-checkpoint CI must be verified before integration; user approved acceptance and squash merge on 2026-10-27.
+- Closeout: user accepted this increment and authorized PR #19 merge/branch cleanup. No additional hooks, local hook activation or branch-protection changes. Check GitHub for final merge status.
 - Incidents: none in this increment.
 
 ## Active work branches
 
 | Task | Branch | Checkout | Owner | Integration base | Publication | Tracker |
 | --- | --- | --- | --- | --- | --- | --- |
-| Documentation links | `codex/documentation-links` | `/Users/macbookpro/Documents/personal/restaurant-pos-custom` | Solo agent | `main` / `b07cd49` | Published: PR #19; final CI pending | This document |
 
 Current designations follow [CONTRIBUTING](../../CONTRIBUTING.md#active-work-and-remote-checkpoints); Git is authoritative for heads and synchronization.
 
