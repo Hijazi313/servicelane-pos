@@ -85,14 +85,14 @@ User authorized implementation and a new main-based branch. Solo owner: current 
 
 - [x] Implemented [checker and hook/CI guidance](../../scripts/README.md), with no new dependencies or automatic hook activation.
 - [x] Seven synthetic Git tests pass for staged bytes/targets, deletion/rename and directory removal, encoded/space paths, reference definitions, initial commits and linked worktrees. Full live-document baseline passes; four intentional template placeholders are excluded by documented template-directory scope. Heading anchors/full Markdown parsing remain deferred.
-- Verification runtime: existing Node v24.18.1, below the repository application pin; no installation or application checks. CI is configured for Node 24.21.0 but has not run remotely. Local hook activation remains unperformed. Publication/PR creation now authorized; exact-head remote checks pending.
+- Verification runtime: existing Node v24.18.1, below the repository application pin; no installation or application checks. CI is configured for Node 24.21.0 but has not run remotely. Local hook activation remains unperformed. Published as [PR #19](https://github.com/Hijazi313/servicelane-pos/pull/19). Remote head matched local `6c35b2f`; its documentation-link and PR-title checks passed, HTTP-boundary check was running. Final tracker-checkpoint CI must be verified before integration; merge remains unauthorized.
 - Incidents: none in this increment.
 
 ## Active work branches
 
 | Task | Branch | Checkout | Owner | Integration base | Publication | Tracker |
 | --- | --- | --- | --- | --- | --- | --- |
-| Documentation links | `codex/documentation-links` | `/Users/macbookpro/Documents/personal/restaurant-pos-custom` | Solo agent | `main` / `b07cd49` | Push/PR authorized; remote checks pending | This document |
+| Documentation links | `codex/documentation-links` | `/Users/macbookpro/Documents/personal/restaurant-pos-custom` | Solo agent | `main` / `b07cd49` | Published: PR #19; final CI pending | This document |
 
 Current designations follow [CONTRIBUTING](../../CONTRIBUTING.md#active-work-and-remote-checkpoints); Git is authoritative for heads and synchronization.
 
