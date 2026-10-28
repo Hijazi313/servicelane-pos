@@ -13,6 +13,14 @@
 
 Entries below assess already-observed events in this active thread following the user’s instruction to apply the adopted skill. No repository-wide or unrelated historical audit was performed. Sandbox evaluation incidents are fictional fixtures and are not imported here. Severity and correction status remain provisional; only the user closes entries or decides prevention proposals.
 
+## INC-20261028-01 — Cashier planning omitted a concrete correction launch gate
+
+- Severity / status: S3 / corrected for the planning document. Observed impact: the owner had to identify the missing gate and request a clearer review framing; documentation required correction.
+- Violation and evidence: The 2026-10-28 delivered Cashier Shifts discovery deferred correction of a mistaken close as an unresolved operational requirement but did not explicitly make correction of mistaken counts and wrong-session payment attribution a launch blocker. The supplied root AGENTS.md requires material risks and uncertainty to be stated and essential financial integrity requirements not to be silently deferred; the [decision rules](../decision-making.md) require essential workflows not to be omitted and release readiness redefined. The user identified the missing gate in review. The original draft already labelled its business recommendations proposed and warned that missing cash movements would make the expected balance wrong; those proposals alone are not a separate violation.
+- Impact: Additional owner review and documentation work; no implementation, financial data change or operational harm is evidenced. A missing explicit gate could have made the intended release boundary less clear.
+- Correction: The [owner-review section](../planning/cashier-shifts/discovery.md#owner-review-first-walk-through-one-trading-day) now identifies history-preserving correction for mistaken counts and attribution as an operational launch blocker. It also asks for a real cash-flow walkthrough and absent-closer policy; technical integration remains a candidate pending feasibility and compatibility review. Documentation correction does not establish an implemented correction workflow or owner acceptance.
+- Prevention / user review: Apply existing scope and financial-integrity rules: when proposing a financial workflow, name credible correction scenarios and explicitly identify any launch gate before presenting the increment for review. This is a practice recommendation under existing guidance, not a skill or policy change / pending user review.
+
 
 ## INC-20261017-01 — Workflow recommendation omitted an existing incident-learning draft
 
