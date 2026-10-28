@@ -2,7 +2,7 @@
 
 ## Cashier Shifts CS-01 — 2026-10-28
 
-[CS-01](../../apps/api/src/modules/cashier-shifts/docs/features/drawer-sessions/phase-tracker.md) is active under source implementation authorization. Isolated source, Billing integration and offline verification are delivered; database verification and acceptance remain pending. Local commits are authorized; database execution, publication and deployment remain outside the current scope.
+[CS-01](../../apps/api/src/modules/cashier-shifts/docs/features/drawer-sessions/phase-tracker.md) is active under source implementation authorization. Isolated source, Billing integration and offline verification are delivered; CS-02 offline verification preparation is active; database execution and acceptance remain pending. Local commits are authorized; database execution, publication and deployment remain outside the current scope.
 
 ## Skill metadata maintenance — 2026-10-27
 
@@ -136,7 +136,7 @@ Project foundation precedes Business/Branch and Authentication/Access, which pre
 | 4 | Orders | OR-01 complete; accepted backend development scope | [Specification](../../apps/api/src/modules/orders/docs/features/capture/spec.md) / [phase tracker](../../apps/api/src/modules/orders/docs/features/capture/phase-tracker.md); bounded persistence verified; [acceptance/closeout](../../apps/api/src/modules/orders/docs/features/capture/phase-tracker.md#acceptance-and-closeout--2026-10-21) |
 | 5 | Kitchen | Backend development scope complete; user-accepted | [KT-01 handoff / completed KT-02](../../apps/api/src/modules/kitchen/docs/features/preparation/phase-tracker.md); migration 0005 applied; accepted bounded technical evidence; integration record PR #16 |
 | 6 | Billing and payments | BP-01/BP-02 accepted/closed backend development scope | [Plan](../../apps/api/src/modules/billing/docs/README.md) / [tracker](../../apps/api/src/modules/billing/docs/features/settlement/phase-tracker.md); BP-00 multiple-rule contracts revised; design accepted; BP-01/BP-02 accepted 2026-10-27 with recorded evidence limits; published in [PR #17](https://github.com/Hijazi313/servicelane-pos/pull/17), merge authorized after exact-head checks |
-| 7 | Cashier shifts | CS-01 source awaiting review; CS-02 proposed | [Phase tracker](../../apps/api/src/modules/cashier-shifts/docs/features/drawer-sessions/phase-tracker.md); source authorized, database verification separately scoped |
+| 7 | Cashier shifts | CS-01 source awaiting review; CS-02 preparation active | [Phase tracker](../../apps/api/src/modules/cashier-shifts/docs/features/drawer-sessions/phase-tracker.md); source authorized, database verification separately scoped |
 | 8 | Inventory | proposed | Stock model unresolved |
 | 9 | Reports | proposed | Not activated |
 

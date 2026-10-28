@@ -10,7 +10,7 @@ The user authorized CS-01 source implementation, affected docs, focused offline 
 | --- | --- | --- |
 | CS-00 | Business decisions confirmed | Drawer, handover, cash movement, closing and payment attribution scope defined. |
 | CS-01 | Source delivered; awaiting review | Isolated drawer API, Billing attribution and migration source; offline evidence below. Routes remain absent from AppModule. |
-| CS-02 | Proposed | Bounded PostgreSQL migration, atomicity, race and durable-readback verification; procedure and execution require separate scope and authorization. |
+| CS-02 | Preparation active, incomplete | [Verification design](database-acceptance.md) and offline manifest begun. Executable harness, review and disposable-target reservation remain outstanding; database execution is not authorized. |
 
 ## Current handoff
 
@@ -21,3 +21,5 @@ Source checks on 2026-10-28: strict API TypeScript compilation; cashier domain/s
 Synthetic stores and HTTP injection do not establish real PostgreSQL migration compatibility, constraints, contention, transaction rollback or restart durability. Read authorization and subsequent storage reads are separate, as in Billing; revocation ordering for reads is unverified. Source is not restaurant-ready: history-preserving correction of mistaken counts, movements or attribution, fiscal/receipt requirements, physical handling and operational recovery remain release blockers. User acceptance is not implied. [INC-20261028-02](../../../../../../../../docs/quality/agent-incidents.md#inc-20261028-02--repeated-review-gates-fragmented-cashier-planning) records earlier interrupted work; review remains pending.
 
 Final focused offline checks: cashier domain/service/HTTP and integrated HTTP-to-service suite, 11 passing cases; Billing suite, 28 passing cases; Access authorization suite, 23 passing cases including subtests; HTTP architecture scan, 34 files and zero findings. Tests use synthetic data and, where applicable, synthetic transaction/store doubles. The generated SQL and snapshot were inspected for six new tables, scoped references, retry keys, cash-sale uniqueness and partial open-session indexes; execution is unverified. Existing Node runtime v24.18.1 was used. No other-module database suite was rerun.
+
+CS-02 preparation, 2026-10-29: the user requested continuation to finish the module. The offline manifest and two refusal checks pass; the [verification design](database-acceptance.md) identifies required PostgreSQL cases and missing runner/cleanup work. No database, configuration or migration execution. The earlier stop is a recurrence of [INC-20261028-02](../../../../../../../../docs/quality/agent-incidents.md#inc-20261028-02--repeated-review-gates-fragmented-cashier-planning); review pending.

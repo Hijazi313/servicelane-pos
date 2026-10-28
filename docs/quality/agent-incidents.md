@@ -24,6 +24,8 @@ Entries below assess already-observed events in this active thread following the
 
 ## INC-20261028-02 — Repeated review gates fragmented Cashier planning
 
+Further recurrence on 2026-10-29: after the user requested completion, the agent stopped at CS-01 source delivery without independently preparing the next verification work that did not require database access. The user again asked why work stopped. Database execution still requires the previously stated target and authorization gates; the premature stop concerned preparation, not permission to run it. Correction remains open.
+
 Further recurrence: the user again asked why the authorized module work was left incomplete after the agent reported two partial commits. No technical blocker was established for the source tasks; the agent ended the turn despite the standing continuation instruction. The user had to intervene again. Correction remains open.
 
 Further recurrence on 2026-10-28: after two continuation requests, the agent ended two turns with only partial schema and persistence work, without continuing the authorized CS-01 implementation or making a coherent checkpoint. The user again had to request continuation and ask about commits. The delivery workflow and CONTRIBUTING.md require continued authorized work and coherent checkpoints; no new authorization gate justified stopping. Correction remains in progress; this recurrence does not change the database or publication limits.
