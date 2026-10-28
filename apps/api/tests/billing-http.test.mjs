@@ -78,7 +78,10 @@ test('BP-A01/07/11: strict DTOs, safe failures, stale details and response field
     problem(await h.request('POST', '/assessments', { orderId: h.order.orderId, optionalChargeIds: [] }, { 'x-csrf-token': 'wrong' }), 403, 'ACCESS_FORBIDDEN');
     await h.request('PUT', '/policy', h.policy());
     const a = (await h.request('POST', '/assessments', { orderId: h.order.orderId, optionalChargeIds: [] })).json().data;
-    const r = { orderId: a.orderId, optionalChargeIds: [], retryKey: randomUUID(), expectedCurrencyCode: a.currencyCode, expectedScale: a.scale, expectedPayableMinor: a.payableMinor, expectedPolicyRevision: a.billingPolicy.revision, expectedDisplayRevision: a.businessDisplay.revision };
+    const r = { orderId: a.orderId, optionalChargeIds: [], retryKey: randomUUID(), expectedCurrencyCode: a.currencyCode, expectedScale: a.scale, expectedPayableMinor: a.payableMinor, expectedPolicyRevision: a.billingPolicy.revision, expectedDisplayRevision: a.businessDisplay.revision, sessionId: h.sessionId };
+    const { sessionId: _sessionId, ...legacy } = r;
+    problem(await h.request('POST', '/bills', legacy), 409, 'CASH_DRAWER_REQUIRED');
+    problem(await h.request('POST', '/bills', { ...r, sessionId: null }), 400, 'VALIDATION_FAILED');
     h.setDisplay({ revision: 1 }); const stale = problem(await h.request('POST', '/bills', r), 409, 'STALE_ASSESSMENT'); assert.deepEqual(stale.details, { policyRevision: 1, displayRevision: 1 });
     h.setDisplay({ revision: 0 }); h.fail(true); const failed = await h.request('POST', '/bills', r); problem(failed, 500, 'INTERNAL_ERROR'); assert.doesNotMatch(failed.body, /SQL|secret/); assert.equal(h.state().records.length, 0);
     h.fail(false); const settled = await h.request('POST', '/bills', r); assert.equal(settled.statusCode, 201, settled.body);
@@ -86,6 +89,11 @@ test('BP-A01/07/11: strict DTOs, safe failures, stale details and response field
     assert.equal(settled.json().meta.requestId, settled.headers['x-request-id']);
     assert.doesNotMatch(settled.body, /actorId|configurationNote|retryKey|customer|instructions/);
     const replay = await h.request('POST', '/bills', r); assert.equal(replay.statusCode, 201); assert.deepEqual(replay.json().data, settled.json().data);
+    problem(await h.request('POST', '/bills', legacy), 409, 'SETTLEMENT_RETRY_CONFLICT');
+    h.state().records[0].request = legacy;
+    const legacyReplay = await h.request('POST', '/bills', legacy); assert.equal(legacyReplay.statusCode, 201, legacyReplay.body);
+    assert.deepEqual(legacyReplay.json().data, settled.json().data);
+    h.state().records[0].request = r;
     const read = await h.request('GET', `/orders/${a.orderId}/bill`); assert.deepEqual(read.json().data, settled.json().data);
     problem(await h.request('POST', '/bills', { ...r, expectedPayableMinor: '999' }), 409, 'SETTLEMENT_RETRY_CONFLICT');
     problem(await h.request('GET', `/orders/${randomUUID()}/bill`), 404, 'BILL_NOT_FOUND');

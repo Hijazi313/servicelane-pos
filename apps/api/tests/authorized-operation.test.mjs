@@ -215,3 +215,13 @@ test('cashier authorization supplies current role and transaction-bound staff el
   await denies(denied.service.runCashierAuthorized(denied.proof, 'staff', async () => { called = true; }), 'FORBIDDEN');
   assert.equal(called, false);
 });
+
+test('cashier read context checks current access without requiring CSRF or exposing a transaction', async () => {
+  const f = fixture(); delete f.proof.csrf;
+  const context = await f.service.cashierReadContext(f.proof);
+  assert.deepEqual(Object.keys(context).sort(), ['actorId', 'actorRole', 'installation']);
+  assert.equal(context.actorId, 'admin-a');
+  assert.equal(context.actorRole, 'administrator');
+  f.state().account.status = 'disabled';
+  await denies(f.service.cashierReadContext(f.proof), 'UNAUTHENTICATED');
+});

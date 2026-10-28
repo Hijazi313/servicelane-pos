@@ -1,0 +1,3 @@
+# Cashier Shifts
+
+Status: CS-01 isolated source and offline checks delivered; acceptance and CS-02 database verification remain pending. Cashier Shifts owns drawer sessions, cash movement and reconciliation behavior; Billing owns settlement and its financial history. The isolated backend is not activated in AppModule. [Specification](features/drawer-sessions/spec.md) defines intended behavior; [phase tracker](features/drawer-sessions/phase-tracker.md) owns status, authorization and handoff. [Capability index](capabilities.md) lists available public capabilities. Multiple restaurant businesses and branch isolation follow the existing project architecture.

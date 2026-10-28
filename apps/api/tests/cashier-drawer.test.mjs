@@ -19,13 +19,13 @@ test('handover count is observed without changing expected balance and close ret
   let session = openDrawer(input);
   session = recordCashSale(session, 'cashier', '5000', 0);
   session = recordCashMovement(session, 'cashier', 'out', '100', 'Safe drop', 1);
-  session = beginHandover(session, 'admin', true, 'recipient', 'handover', 2);
+  session = beginHandover(session, 'admin', true, 'recipient', 'handover', 2, input.openedAt);
   rejects(() => recordCashSale(session, 'cashier', '1', 3), 'HANDOVER_PENDING');
   rejects(() => acceptHandover(session, 'recipient', 'handover', '5800', null, 3), 'INVALID_REASON');
   const accepted = acceptHandover(session, 'recipient', 'handover', '5800', 'Count difference', 3);
   assert.equal(accepted.expectedMinor, '5900');
   assert.equal(accepted.varianceMinor, '-100');
-  session = closeDrawer(accepted.session, 'recipient', false, { selfClose: true, replacementClose: false, replacementIds: [] }, '5800', 'Count difference', 4);
+  session = closeDrawer(accepted.session, 'recipient', false, { selfClose: true, replacementClose: false, replacementIds: [] }, '5800', 'Count difference', 4, input.openedAt);
   assert.equal(session.closed.expectedMinor, '5900');
   assert.equal(session.closed.varianceMinor, '-100');
   rejects(() => recordCashSale(session, 'recipient', '1', 5), 'DRAWER_CLOSED');

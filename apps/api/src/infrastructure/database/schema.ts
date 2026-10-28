@@ -11,3 +11,5 @@ export { capturedOrders, orderCapturePolicies } from '../../modules/orders/infra
 export { kitchenTickets } from '../../modules/kitchen/infrastructure/schema.js';
 
 export { billingPolicies, billingPolicyHistory, billingSettlements } from '../../modules/billing/infrastructure/schema.js';
+
+export { cashDrawers, cashDrawerSessions, cashDrawerPolicies, cashDrawerPolicyHistory, cashDrawerEvents, cashDrawerRetries } from '../../modules/cashier-shifts/infrastructure/schema.js';

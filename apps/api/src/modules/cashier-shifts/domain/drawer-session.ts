@@ -8,6 +8,7 @@ export interface Handover {
   readonly initiatorId: string;
   readonly outgoingId: string;
   readonly recipientId: string;
+  readonly initiatedAt: string;
 }
 export interface DrawerSession {
   readonly id: string;
@@ -24,7 +25,7 @@ export interface DrawerSession {
   readonly revision: number;
   readonly handover: Handover | null;
   readonly closed: { readonly countedMinor: string; readonly expectedMinor: string;
-    readonly varianceMinor: string; readonly reason: string | null; readonly actorId: string } | null;
+    readonly varianceMinor: string; readonly reason: string | null; readonly actorId: string; readonly closedAt: string } | null;
 }
 export interface ClosePolicy {
   readonly selfClose: boolean;
@@ -97,13 +98,13 @@ export function recordCashMovement(session: DrawerSession, actorId: string, dire
   return updated;
 }
 export function beginHandover(session: DrawerSession, actorId: string, administrator: boolean,
-  recipientId: string, handoverId: string, revision: number): DrawerSession {
+  recipientId: string, handoverId: string, revision: number, initiatedAt: string): DrawerSession {
   const next = mutate(session, revision);
   if (session.handover) throw new DrawerError('HANDOVER_PENDING');
   if (!administrator && session.custodianId !== actorId) throw new DrawerError('FORBIDDEN');
   if (!recipientId || !handoverId || recipientId === session.custodianId) throw new DrawerError('INVALID_HANDOVER');
   return { ...session, revision: next, handover: { id: handoverId, initiatorId: actorId,
-    outgoingId: session.custodianId, recipientId } };
+    outgoingId: session.custodianId, recipientId, initiatedAt } };
 }
 export function cancelHandover(session: DrawerSession, actorId: string, administrator: boolean,
   handoverId: string, revision: number): DrawerSession {
@@ -125,7 +126,7 @@ export function acceptHandover(session: DrawerSession, actorId: string, handover
     expectedMinor, varianceMinor: variance.toString(), reason: explanation };
 }
 export function closeDrawer(session: DrawerSession, actorId: string, administrator: boolean,
-  policy: ClosePolicy, countedMinor: string, varianceReason: string | null, revision: number): DrawerSession {
+  policy: ClosePolicy, countedMinor: string, varianceReason: string | null, revision: number, closedAt: string): DrawerSession {
   const next = mutate(session, revision);
   if (session.handover) throw new DrawerError('HANDOVER_PENDING');
   if (!administrator && !(policy.selfClose && session.custodianId === actorId)
@@ -133,5 +134,5 @@ export function closeDrawer(session: DrawerSession, actorId: string, administrat
   const expectedMinor = expectedCash(session);
   const variance = minor(countedMinor) - minor(expectedMinor);
   return { ...session, revision: next, closed: { countedMinor, expectedMinor, varianceMinor: variance.toString(),
-    reason: reason(varianceReason, variance !== 0n), actorId } };
+    reason: reason(varianceReason, variance !== 0n), actorId, closedAt } };
 }

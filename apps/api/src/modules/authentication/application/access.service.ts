@@ -203,6 +203,13 @@ export class AccessService {
       return contextOnly ? context : safeAccount(account);
     }));
   }
+  async cashierReadContext(proof: Proof) {
+    return this.execute('read', () => this.store.run(async unit => {
+      const { session, account, context } = await this.principal(unit, proof);
+      await this.touch(unit, session);
+      return { actorId: account.id, actorRole: account.role, installation: context };
+    }));
+  }
   async list(proof: Proof) {
     return this.execute('read', () => this.store.run(async (unit) => {
       const { session, context } = await this.principal(unit, proof, true);

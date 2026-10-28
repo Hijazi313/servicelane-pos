@@ -1,8 +1,8 @@
 # Global phase tracker
 
-## Cashier Shifts planning — 2026-10-28
+## Cashier Shifts CS-01 — 2026-10-28
 
-Current focus: [Cashier Shifts discovery and CS-00](cashier-shifts/discovery.md). User authorized planning/documentation only; solo owner, current checkout on local `main` at `9cbbb9a`. User confirmed separate concurrent cashier drawers, handover, cash movements, restaurant-configurable closing authority and an open drawer requirement for new cash payments. Detailed handover, closing policy/replacement and Billing compatibility remain open; atomic payment attribution remains the integration invariant. No implementation, database/environment access, installation, publication or deployment; existing untracked work preserved. All shift behavior remains unavailable. No source assignment activated.
+[CS-01](../../apps/api/src/modules/cashier-shifts/docs/features/drawer-sessions/phase-tracker.md) is active under source implementation authorization. Isolated source, Billing integration and offline verification are delivered; database verification and acceptance remain pending. Local commits are authorized; database execution, publication and deployment remain outside the current scope.
 
 ## Skill metadata maintenance — 2026-10-27
 
@@ -101,16 +101,17 @@ User selected the reviewed and consolidated skill update: optional independent d
 
 | Task | Branch | Checkout | Owner | Integration base | Publication | Tracker |
 | --- | --- | --- | --- | --- | --- | --- |
+| Cashier Shifts CS-01 | `codex/cashier-shifts` | `/Users/macbookpro/Documents/personal/restaurant-pos-custom` | current agent | `main` / `9cbbb9a` | local only; publication unauthorized | [phase tracker](../../apps/api/src/modules/cashier-shifts/docs/features/drawer-sessions/phase-tracker.md) |
 
 Current designations follow [CONTRIBUTING](../../CONTRIBUTING.md#active-work-and-remote-checkpoints); Git is authoritative for heads and synchronization.
 
-No active source implementation assignment. Local main includes accepted Billing PR #17 as `3c4a16b`; remote synchronization was not checked in this planning task. Cashier Shifts is in documentation-only discovery; [current proposal](cashier-shifts/discovery.md) owns decisions and next-phase boundaries.
+Cashier Shifts CS-01 source is awaiting review; its [phase tracker](../../apps/api/src/modules/cashier-shifts/docs/features/drawer-sessions/phase-tracker.md) owns progress and boundaries.
 
 ## Current planning handoff — 2026-10-28
 
 BA-01/02/03 accepted development scope and historical execution permissions are owned by the [joint BA tracker](business-access/phase-tracker.md). They do not authorize new Menu or database work.
 
-Current handoff: [Cashier Shifts proposal](cashier-shifts/discovery.md) is prepared for owner review of CS-D01–D05. Planning only; CS-01 implementation and CS-02 verification remain proposed. Billing BP-01/BP-02 remain accepted/closed and locally integrated through PR #17 (`3c4a16b`); their bounded evidence is preserved, not rerun. Billing remains unmounted; live activation/deployment remain separately scoped. Accepted Orders/Kitchen evidence, eight untracked ownership ledgers, existing drafts and pending incident reviews remain preserved.
+Current handoff: [CS-01](../../apps/api/src/modules/cashier-shifts/docs/features/drawer-sessions/phase-tracker.md) has isolated source and offline evidence; database verification remains pending. CS-02 database verification remains separately scoped. Billing BP-01/BP-02 remain accepted/closed and locally integrated through PR #17 (`3c4a16b`); their bounded evidence is preserved, not rerun. Billing remains unmounted; live activation/deployment remain separately scoped. Accepted Orders/Kitchen evidence, eight untracked ownership ledgers, existing drafts and pending incident reviews remain preserved.
 
 ## Proposed foundation follow-ups — 2026-10-12
 
@@ -135,7 +136,7 @@ Project foundation precedes Business/Branch and Authentication/Access, which pre
 | 4 | Orders | OR-01 complete; accepted backend development scope | [Specification](../../apps/api/src/modules/orders/docs/features/capture/spec.md) / [phase tracker](../../apps/api/src/modules/orders/docs/features/capture/phase-tracker.md); bounded persistence verified; [acceptance/closeout](../../apps/api/src/modules/orders/docs/features/capture/phase-tracker.md#acceptance-and-closeout--2026-10-21) |
 | 5 | Kitchen | Backend development scope complete; user-accepted | [KT-01 handoff / completed KT-02](../../apps/api/src/modules/kitchen/docs/features/preparation/phase-tracker.md); migration 0005 applied; accepted bounded technical evidence; integration record PR #16 |
 | 6 | Billing and payments | BP-01/BP-02 accepted/closed backend development scope | [Plan](../../apps/api/src/modules/billing/docs/README.md) / [tracker](../../apps/api/src/modules/billing/docs/features/settlement/phase-tracker.md); BP-00 multiple-rule contracts revised; design accepted; BP-01/BP-02 accepted 2026-10-27 with recorded evidence limits; published in [PR #17](https://github.com/Hijazi313/servicelane-pos/pull/17), merge authorized after exact-head checks |
-| 7 | Cashier shifts | proposed; planning only authorized | [Discovery / proposed CS-00](cashier-shifts/discovery.md); owner decisions pending; no implementation activated |
+| 7 | Cashier shifts | CS-01 source awaiting review; CS-02 proposed | [Phase tracker](../../apps/api/src/modules/cashier-shifts/docs/features/drawer-sessions/phase-tracker.md); source authorized, database verification separately scoped |
 | 8 | Inventory | proposed | Stock model unresolved |
 | 9 | Reports | proposed | Not activated |
 

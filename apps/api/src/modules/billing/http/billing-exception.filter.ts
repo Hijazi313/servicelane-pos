@@ -19,12 +19,12 @@ export class BillingExceptionFilter implements ExceptionFilter {
 function billingStatus(code: BillingErrorCode): 400 | 404 | 409 | 503 {
   switch (code) {
     case 'INVALID_BILLING_INPUT': return 400;
-    case 'ORDER_NOT_FOUND': case 'BILL_NOT_FOUND': return 404;
+    case 'ORDER_NOT_FOUND': case 'BILL_NOT_FOUND': case 'CASH_DRAWER_NOT_FOUND': return 404;
     case 'BILLING_UNAVAILABLE': return 503;
     case 'BILLING_POLICY_UNCONFIGURED': case 'STALE_ASSESSMENT': case 'STALE_BILLING_POLICY':
     case 'SETTLEMENT_RETRY_CONFLICT': case 'ORDER_ALREADY_SETTLED': case 'BILL_CAPACITY':
     case 'POLICY_CAPACITY': case 'BILL_AMOUNT_OVERFLOW': case 'UNSUPPORTED_BILL_CURRENCY':
-    case 'UNSUPPORTED_ZERO_PAYABLE': case 'REVISION_CAPACITY': return 409;
+    case 'UNSUPPORTED_ZERO_PAYABLE': case 'REVISION_CAPACITY': case 'CASH_DRAWER_REQUIRED': case 'CASH_DRAWER_CONFLICT': return 409;
     default: { const exhaustive: never = code; throw new Error(`Unknown Billing error ${exhaustive}`); }
   }
 }

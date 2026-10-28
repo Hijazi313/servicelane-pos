@@ -8,6 +8,7 @@ export class AssessmentDto {
   @IsArray() @ArrayMaxSize(8) @ArrayUnique() @IsString({ each: true }) @Matches(UUID, { each: true }) declare optionalChargeIds: string[];
 }
 export class SettlementDto extends AssessmentDto {
+  @ValidateIf((_o: unknown, value: unknown) => value !== undefined) @IsString() @Matches(UUID) declare sessionId?: string;
   @IsString() @Matches(UUID) declare retryKey: string;
   @IsString() @Matches(/^[A-Z]{3}$/) declare expectedCurrencyCode: string;
   @IsInt() @Min(0) @Max(4) declare expectedScale: number;
