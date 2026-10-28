@@ -189,8 +189,29 @@ test('MN00-AC05: public HTTP policy/proof surface and sanitized consumer errors'
   assert.throws(() => requestProof({ headers: { cookie: '__Host-session=one; __Host-session=two' } }), error => error.reason === 'INVALID_INPUT');
   for (const [error, status, message] of [[new BadRequestException('private'), 400, 'Invalid input'], [new ConflictException('private'), 409, 'Conflict'], [new Error('private'), 503, 'Service unavailable']]) {
     const response = { headers: {}, header(key, value) { this.headers[key] = value; return this; }, status(value) { this.code = value; return this; }, send(value) { this.body = value; } };
-    new AccessExceptionFilter().catch(error, { switchToHttp: () => ({ getResponse: () => response }) });
+    new AccessExceptionFilter().catch(error, { switchToHttp: () => ({ getRequest: () => ({}), getResponse: () => response }) });
     assert.deepEqual(response.body, { statusCode: status, message });
     assert.equal(response.headers['Cache-Control'], 'no-store');
   }
+});
+
+test('cashier authorization supplies current role and transaction-bound staff eligibility', async () => {
+  const f = fixture();
+  let eligible;
+  await f.service.runCashierAuthorized(f.proof, 'staff', async scope => {
+    assert.equal(scope.actorRole, 'administrator');
+    assert.equal(await scope.staffEligible('admin-a'), true);
+    assert.equal(await scope.staffEligible('missing'), false);
+    f.state().account.status = 'disabled';
+    assert.equal(await scope.staffEligible('admin-a'), false);
+    f.state().account.status = 'active';
+    f.state().account.branchIds = [];
+    assert.equal(await scope.staffEligible('admin-a'), false);
+    eligible = scope.staffEligible;
+  });
+  await assert.rejects(eligible('admin-a'), /Inactive transaction context/);
+  const denied = fixture(); denied.proof.csrf = token();
+  let called = false;
+  await denies(denied.service.runCashierAuthorized(denied.proof, 'staff', async () => { called = true; }), 'FORBIDDEN');
+  assert.equal(called, false);
 });
