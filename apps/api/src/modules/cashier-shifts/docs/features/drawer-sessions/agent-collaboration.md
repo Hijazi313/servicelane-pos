@@ -10,3 +10,7 @@ Specification: [drawer sessions](spec.md). Progress: [phase tracker](phase-track
 | Integration, migration, documentation, Git and checks | root agent | Shared schema entry point, migration, trackers and shared documentation | Integrate and review all changes; serialize Git and shared files |
 
 Shared checkout: `/Users/macbookpro/Documents/personal/restaurant-pos-custom`, branch `codex/cashier-shifts`, base `main` / `9cbbb9a`. Root owns branch/index, migration metadata and shared contracts; agents coordinate interfaces before dependent edits. Combined-diff integration; no shared database, installation, deployment or publication is authorized. Existing staged planning work and untracked evidence remain preserved. Each agent reports changes, checks and evidence limits; acceptance remains separate.
+
+## CS-02 offline preparation — 2026-10-29
+
+Shared checkout and boundaries above remain unchanged. Root owns runner integration, case orchestration, shared documentation and Git. `cashier_service` owns only `cs02-controls.mjs` and its offline test; `billing_integration` owns only `cs02-fixtures.mjs`, `cs02-ledger.mjs` and fixture tests; `cashier_http` performs read-only source review. Agents do not access configuration or database, execute migrations, mutate Git or edit shared files. Separate authorization and target reservation remain required for execution.

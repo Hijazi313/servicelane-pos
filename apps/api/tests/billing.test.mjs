@@ -110,6 +110,6 @@ test('CS-A02/A03: Billing calls the real cashier attribution operation before re
   const bill = await h.service.settle(h.proof, request);
   assert.equal(session.cashSalesMinor, bill.payment.amountMinor); assert.equal(events.length, 1);
   assert.equal(events[0].payload.billId, bill.id);
-  session = closeDrawer(session, h.scope.actorId, false, { selfClose: true, replacementClose: false, replacementIds: [] }, '11000', null, session.revision);
+  session = closeDrawer(session, h.scope.actorId, false, { selfClose: true, replacementClose: false, replacementIds: [] }, '11000', null, session.revision, '2026-10-29T12:00:00.000Z');
   assert.deepEqual(await h.service.settle(h.proof, request), bill); assert.equal(events.length, 1);
 });
