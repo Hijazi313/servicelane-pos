@@ -50,6 +50,13 @@
       "when": 1793034600052,
       "tag": "0006_billing_cash",
       "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "7",
+      "when": 1793212371127,
+      "tag": "0007_dark_dagger",
+      "breakpoints": true
     }
   ]
 }

@@ -1,0 +1,18 @@
+{
+  "tag": "cs02.1dfdf24a-a733-4d59-bd44-071b54bfde29",
+  "runtime": "v24.22.1",
+  "results": {
+    "C01": "passed",
+    "C04": "passed",
+    "C05": "passed",
+    "C02": "passed",
+    "C03": "passed",
+    "C06": "passed"
+  },
+  "migration": "already-applied",
+  "cleanup": "passed",
+  "startedAt": "2026-10-31T05:08:50.436Z",
+  "tlsVerified": false,
+  "finishedAt": "2026-10-31T05:16:20.302Z",
+  "result": "passed"
+}

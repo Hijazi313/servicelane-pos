@@ -5,6 +5,8 @@ import { randomUUID } from 'node:crypto';
 import { BillingService } from '../dist/billing-check/modules/billing/application/billing.service.js';
 import { initialPolicy } from '../dist/billing-check/modules/billing/domain/billing.js';
 import { AccessError } from '../dist/billing-check/modules/authentication/application/access-policy.js';
+import { CashierSettlementService } from '../dist/billing-check/modules/cashier-shifts/public.js';
+import { openDrawer, closeDrawer } from '../dist/billing-check/modules/cashier-shifts/domain/drawer-session.js';
 
 import { billingFixture } from './billing-fixture.mjs';
 
@@ -56,4 +58,58 @@ test('BP-A03/13/16: stale revisions win removed-selector errors and revision-onl
   const fresh = await h.service.assess(h.proof, { orderId: h.order.orderId, optionalChargeIds: [] }), confirmed = h.request(fresh);
   await h.service.settle(h.proof, confirmed);
   await assert.rejects(h.service.settle(h.proof, { ...confirmed, expectedPolicyRevision: confirmed.expectedPolicyRevision + 1 }), code('SETTLEMENT_RETRY_CONFLICT'));
+});
+
+test('CS-A02/A03: settlement and attribution share transaction, replay survives close, legacy records remain recoverable', async () => {
+  const h = billingFixture(); await h.service.replacePolicy(h.proof, h.policy());
+  const assessed = await h.service.assess(h.proof, { orderId: h.order.orderId, optionalChargeIds: [] });
+  const request = h.request(assessed), { sessionId, ...legacy } = request;
+  await assert.rejects(h.service.settle(h.proof, legacy), code('CASH_DRAWER_REQUIRED'));
+  assert.equal(h.state().records.length, 0); assert.equal(h.state().attributions.length, 0);
+  const bill = await h.service.settle(h.proof, request);
+  assert.equal(h.state().records.length, 1); assert.equal(h.state().attributions.length, 1);
+  assert.equal(h.state().attributions[0].billId, bill.id); assert.equal(h.state().attributions[0].amountMinor, bill.payment.amountMinor);
+  h.drawerError('DRAWER_CLOSED');
+  assert.deepEqual(await h.service.settle(h.proof, request), bill);
+  assert.equal(h.state().attributions.length, 1);
+  await assert.rejects(h.service.settle(h.proof, { ...request, sessionId: randomUUID() }), code('SETTLEMENT_RETRY_CONFLICT'));
+  await assert.rejects(h.service.settle(h.proof, legacy), code('SETTLEMENT_RETRY_CONFLICT'));
+  // Model a previously committed record whose normalized request has the old shape.
+  h.state().records[0].request = legacy;
+  assert.deepEqual(await h.service.settle(h.proof, legacy), bill);
+  await assert.rejects(h.service.settle(h.proof, request), code('SETTLEMENT_RETRY_CONFLICT'));
+  assert.equal(h.state().attributions.length, 1);
+});
+
+test('CS-A02: drawer rejection and transaction failure retain neither settlement nor attribution', async () => {
+  const h = billingFixture(); await h.service.replacePolicy(h.proof, h.policy());
+  const request = h.request(await h.service.assess(h.proof, { orderId: h.order.orderId, optionalChargeIds: [] }));
+  for (const [drawerCode, billingCode] of [['DRAWER_NOT_FOUND', 'CASH_DRAWER_NOT_FOUND'], ['DRAWER_CLOSED', 'CASH_DRAWER_CONFLICT'], ['HANDOVER_PENDING', 'CASH_DRAWER_CONFLICT'], ['CURRENCY_MISMATCH', 'CASH_DRAWER_CONFLICT']]) {
+    h.drawerError(drawerCode); await assert.rejects(h.service.settle(h.proof, request), code(billingCode));
+    assert.equal(h.state().records.length, 0); assert.equal(h.state().attributions.length, 0);
+  }
+  h.drawerError(undefined); h.fail(true);
+  await assert.rejects(h.service.settle(h.proof, request), /Synthetic SQL secret/);
+  assert.equal(h.state().records.length, 0); assert.equal(h.state().attributions.length, 0);
+  h.fail(false); await h.service.settle(h.proof, request);
+  assert.equal(h.state().records.length, 1); assert.equal(h.state().attributions.length, 1);
+});
+
+test('CS-A02/A03: Billing calls the real cashier attribution operation before replay, using the same scope', async () => {
+  const h = billingFixture(); let session = openDrawer({ id: h.sessionId, drawerId: randomUUID(), actorId: h.scope.actorId,
+    currencyCode: 'PKR', scale: 2, openingMinor: '1000', openedAt: '2026-10-28T12:00:00.000Z' });
+  const events = [];
+  const shifts = new CashierSettlementService({
+    async session(scope, id, transaction) { assert.equal(scope, h.scope.installation); assert.equal(transaction, h.scope.transaction); return id === session.id ? session : undefined; },
+    async updateSession(scope, next, revision, transaction) { assert.equal(transaction, h.scope.transaction); assert.equal(revision, session.revision); session = next; return true; },
+    async appendEvent(scope, event, transaction) { assert.equal(transaction, h.scope.transaction); events.push(event); },
+  });
+  h.cashier.attribute = shifts.attribute.bind(shifts);
+  await h.service.replacePolicy(h.proof, h.policy());
+  const request = h.request(await h.service.assess(h.proof, { orderId: h.order.orderId, optionalChargeIds: [] }));
+  const bill = await h.service.settle(h.proof, request);
+  assert.equal(session.cashSalesMinor, bill.payment.amountMinor); assert.equal(events.length, 1);
+  assert.equal(events[0].payload.billId, bill.id);
+  session = closeDrawer(session, h.scope.actorId, false, { selfClose: true, replacementClose: false, replacementIds: [] }, '11000', null, session.revision, '2026-10-29T12:00:00.000Z');
+  assert.deepEqual(await h.service.settle(h.proof, request), bill); assert.equal(events.length, 1);
 });

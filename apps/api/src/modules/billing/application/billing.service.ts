@@ -4,6 +4,7 @@ import { CURRENCY_PRECISION } from '../../../common/currency-precision.js';
 import { AccessService, type AuthorizedScope, type Proof } from '../../authentication/public.js';
 import { OrderFinancialService } from '../../orders/public.js';
 import { DisplaySettingsService } from '../../business/public.js';
+import { CashierSettlementService, DrawerError } from '../../cashier-shifts/public.js';
 import { BillingStore, type BillingScope } from './billing-store.js';
 import { BillingError, assertBillCapacity, assertPolicyCapacity, assertRuleIdentities, calculateAssessment,
   canonical, identifier, initialPolicy, normalizeAssessment, normalizePolicyReplacement, normalizeSettlement,
@@ -12,7 +13,8 @@ import { BillingError, assertBillCapacity, assertPolicyCapacity, assertRuleIdent
 @Injectable()
 export class BillingService {
   constructor(private readonly access: AccessService, private readonly orders: OrderFinancialService,
-    private readonly display: DisplaySettingsService, private readonly store: BillingStore) {}
+    private readonly display: DisplaySettingsService, private readonly store: BillingStore,
+    private readonly cashier: CashierSettlementService) {}
 
   private async context(proof: Proof): Promise<BillingScope> {
     const context = await this.access.me(proof, true);
@@ -71,6 +73,7 @@ export class BillingService {
         if (canonical(existing.request) !== canonical(request)) throw new BillingError('SETTLEMENT_RETRY_CONFLICT');
         return existing.bill;
       }
+      if (!request.sessionId) throw new BillingError('CASH_DRAWER_REQUIRED');
       if (await this.store.forOrder(scope.installation, request.orderId, scope.transaction)) throw new BillingError('ORDER_ALREADY_SETTLED');
       const assessment = await this.assessment(scope, request.orderId, request.optionalChargeIds, request);
       if (request.expectedCurrencyCode !== assessment.currencyCode || request.expectedScale !== assessment.scale
@@ -80,6 +83,18 @@ export class BillingService {
       const bill: BillView = { ...assessment, id: randomUUID(), settledAt: new Date().toISOString(),
         payment: { method: 'cash', amountMinor: assessment.payableMinor } };
       assertBillCapacity(bill);
+      try {
+        await this.cashier.attribute(scope, { sessionId: request.sessionId, billId: bill.id,
+          amountMinor: bill.payment.amountMinor, currencyCode: bill.currencyCode, scale: bill.scale, occurredAt: bill.settledAt });
+      } catch (error) {
+        if (error instanceof DrawerError) {
+          if (error.code === 'DRAWER_NOT_FOUND') throw new BillingError('CASH_DRAWER_NOT_FOUND');
+          if (['DRAWER_CLOSED', 'NOT_CUSTODIAN', 'HANDOVER_PENDING', 'CURRENCY_MISMATCH', 'STALE_DRAWER', 'AMOUNT_CAPACITY', 'REVISION_CAPACITY'].includes(error.code)) {
+            throw new BillingError('CASH_DRAWER_CONFLICT');
+          }
+        }
+        throw error;
+      }
       await this.store.insert(scope.installation, { bill, request, actorId: scope.actorId }, scope.transaction);
       return bill;
     });

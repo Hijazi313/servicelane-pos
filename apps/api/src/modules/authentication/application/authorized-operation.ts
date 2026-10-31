@@ -11,3 +11,11 @@ export interface AuthorizedScope {
 
 // Await all work in this scope. No nested access calls, transactions or external I/O.
 export type AuthorizedOperation<T> = (scope: AuthorizedScope) => Promise<T>;
+
+// Cashier operations need the verified actor's role and current recipient eligibility
+// inside the same transaction; neither exposes account details or credentials.
+export interface CashierAuthorizedScope extends AuthorizedScope {
+  readonly actorRole: 'staff' | 'administrator';
+  staffEligible(accountId: string): Promise<boolean>;
+}
+export type CashierAuthorizedOperation<T> = (scope: CashierAuthorizedScope) => Promise<T>;

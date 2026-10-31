@@ -32,3 +32,7 @@ See the [acceptance record](../../../docs/acceptance/project-foundation.md). No-
 ## BP-01 source-only migration
 
 `0006_billing_cash.sql` adds Billing policy/history and immutable full-cash settlement storage with scoped order/retry uniqueness, and Business display revision/history. Generated offline with snapshot/journal; includes no installed sample policy or sample business data. It is **unexecuted**. Startup does not apply it. SQL construction/source checks do not prove PostgreSQL locking, rollback, constraints, migration compatibility or durable restart readback. [Owning source/offline evidence](../src/modules/billing/docs/features/settlement/phase-tracker.md#bp-01-delivery-evidence--2026-10-26). BP-02 preparation/execution and target reservation require separate authorization; upstream permissions do not transfer.
+
+## CS-01 source-only migration
+
+`0007_dark_dagger.sql` adds scoped drawer, session, policy/history, event and retry tables, partial uniqueness for open drawer/custody and cash attribution, plus scoped drawer/session references. Generated offline with its snapshot and journal. It has not been applied; PostgreSQL compatibility, concurrency, rollback and recovery remain unverified. [CS-01 tracker](../src/modules/cashier-shifts/docs/features/drawer-sessions/phase-tracker.md) owns evidence and execution boundaries.

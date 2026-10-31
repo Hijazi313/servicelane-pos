@@ -3,7 +3,8 @@ import { randomUUID } from 'node:crypto';
 import { BusinessService } from '../../business/public.js';
 import { AccessStore, type AccessUnit, type Account, type Session } from './access-store.js';
 import { AccessError, PasswordHasher, token, tokenDigest, digest, sameToken, sessionActive, safeAccount, object, uuid, password, identity, role } from './access-policy.js';
-import type { AuthorizedOperation, AuthorizedPolicy } from './authorized-operation.js';
+import { transactionDatabase } from '../../../infrastructure/database/transaction.js';
+import type { AuthorizedOperation, AuthorizedPolicy, CashierAuthorizedOperation } from './authorized-operation.js';
 
 // Keep consumer failures distinct from access/transaction failures until rollback finishes.
 class CallbackFailure extends Error {
@@ -78,18 +79,31 @@ export class AccessService {
     await this.execute('read', () => this.store.run(async (unit) => { await this.principal(unit, proof, admin, restricted); }));
   }
   async runAuthorized<T>(proof: Proof, policy: AuthorizedPolicy, work: AuthorizedOperation<T>): Promise<T> {
+    return this.authorized(proof, policy, (unit, account, context) =>
+      work({ actorId: account.id, installation: context, transaction: unit.context }));
+  }
+  async runCashierAuthorized<T>(proof: Proof, policy: AuthorizedPolicy, work: CashierAuthorizedOperation<T>): Promise<T> {
+    return this.authorized(proof, policy, (unit, account, context) => work({
+      actorId: account.id, actorRole: account.role, installation: context, transaction: unit.context,
+      staffEligible: async accountId => {
+        transactionDatabase(unit.context);
+        const target = await unit.findAccount(context.businessId, { id: accountId });
+        return !!target && target.status === 'active' && !target.passwordChangeRequired && target.branchIds.includes(context.branchId);
+      },
+    }));
+  }
+  private async authorized<T>(proof: Proof, policy: AuthorizedPolicy,
+    work: (unit: AccessUnit, account: Account, context: Awaited<ReturnType<AccessService['bound']>>) => Promise<T>): Promise<T> {
     try {
-      // Fail closed for untyped callers too; an unknown policy must not become staff access.
       if (policy !== 'staff' && policy !== 'administrator') throw new AccessError('FORBIDDEN', 'Access denied');
-      return await this.store.run(async (unit) => {
+      return await this.store.run(async unit => {
         const { session, account, context } = await this.principal(unit, proof, policy === 'administrator');
         this.csrf(proof, session.csrfToken);
         await this.touch(unit, session);
-        try { return await work({ actorId: account.id, installation: context, transaction: unit.context }); }
+        try { return await work(unit, account, context); }
         catch (error) { throw new CallbackFailure(error); }
       });
     } catch (error) {
-      // A rollback/commit failure replacing the callback marker is an infrastructure failure.
       if (error instanceof CallbackFailure) throw error.original;
       throw error instanceof AccessError ? error : new AccessError('UNAVAILABLE', 'Service unavailable');
     }
@@ -187,6 +201,13 @@ export class AccessService {
       const { session, account, context } = await this.principal(unit, proof);
       await this.touch(unit, session);
       return contextOnly ? context : safeAccount(account);
+    }));
+  }
+  async cashierReadContext(proof: Proof) {
+    return this.execute('read', () => this.store.run(async unit => {
+      const { session, account, context } = await this.principal(unit, proof);
+      await this.touch(unit, session);
+      return { actorId: account.id, actorRole: account.role, installation: context };
     }));
   }
   async list(proof: Proof) {

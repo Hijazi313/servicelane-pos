@@ -1,7 +1,7 @@
 import type { OrderFinancial } from '../../orders/public.js';
 import type { DisplayView } from '../../business/public.js';
 
-export type BillingErrorCode = 'INVALID_BILLING_INPUT' | 'ORDER_NOT_FOUND' | 'BILL_NOT_FOUND' | 'BILLING_POLICY_UNCONFIGURED' | 'STALE_ASSESSMENT' | 'STALE_BILLING_POLICY' | 'SETTLEMENT_RETRY_CONFLICT' | 'ORDER_ALREADY_SETTLED' | 'BILL_CAPACITY' | 'POLICY_CAPACITY' | 'BILL_AMOUNT_OVERFLOW' | 'UNSUPPORTED_BILL_CURRENCY' | 'UNSUPPORTED_ZERO_PAYABLE' | 'REVISION_CAPACITY' | 'BILLING_UNAVAILABLE';
+export type BillingErrorCode = 'INVALID_BILLING_INPUT' | 'ORDER_NOT_FOUND' | 'BILL_NOT_FOUND' | 'BILLING_POLICY_UNCONFIGURED' | 'STALE_ASSESSMENT' | 'STALE_BILLING_POLICY' | 'SETTLEMENT_RETRY_CONFLICT' | 'ORDER_ALREADY_SETTLED' | 'BILL_CAPACITY' | 'POLICY_CAPACITY' | 'BILL_AMOUNT_OVERFLOW' | 'UNSUPPORTED_BILL_CURRENCY' | 'UNSUPPORTED_ZERO_PAYABLE' | 'REVISION_CAPACITY' | 'BILLING_UNAVAILABLE' | 'CASH_DRAWER_REQUIRED' | 'CASH_DRAWER_NOT_FOUND' | 'CASH_DRAWER_CONFLICT';
 export class BillingError extends Error {
   constructor(readonly code: BillingErrorCode, readonly details?: { revision: number } | { policyRevision: number; displayRevision: number }) { super(code); }
 }
@@ -22,6 +22,7 @@ export interface AssessmentRequest { orderId: string; optionalChargeIds: string[
 export interface SettlementRequest extends AssessmentRequest {
   retryKey: string; expectedCurrencyCode: string; expectedScale: number; expectedPayableMinor: string;
   expectedPolicyRevision: number; expectedDisplayRevision: number;
+  sessionId?: string;
 }
 export interface TaxComponent { ruleId: string; baseMinor: string; amountMinor: string }
 export interface BillingLine {
@@ -117,9 +118,12 @@ export function normalizeAssessment(value: unknown): AssessmentRequest {
   return { orderId: identifier(row.orderId), optionalChargeIds: selection(row.optionalChargeIds) };
 }
 export function normalizeSettlement(value: unknown): SettlementRequest {
-  const row = object(value,['orderId','optionalChargeIds','retryKey','expectedCurrencyCode','expectedScale','expectedPayableMinor','expectedPolicyRevision','expectedDisplayRevision']);
+  const keys = ['orderId','optionalChargeIds','retryKey','expectedCurrencyCode','expectedScale','expectedPayableMinor','expectedPolicyRevision','expectedDisplayRevision'];
+  const hasSession = !!value && typeof value === 'object' && Object.hasOwn(value, 'sessionId');
+  const row = object(value, hasSession ? [...keys, 'sessionId'] : keys);
   return { orderId: identifier(row.orderId), optionalChargeIds: selection(row.optionalChargeIds), retryKey: identifier(row.retryKey), expectedCurrencyCode: currency(row.expectedCurrencyCode),
-    expectedScale: integer(row.expectedScale,4), expectedPayableMinor: minor(row.expectedPayableMinor,true), expectedPolicyRevision: integer(row.expectedPolicyRevision), expectedDisplayRevision: integer(row.expectedDisplayRevision) };
+    expectedScale: integer(row.expectedScale,4), expectedPayableMinor: minor(row.expectedPayableMinor,true), expectedPolicyRevision: integer(row.expectedPolicyRevision), expectedDisplayRevision: integer(row.expectedDisplayRevision),
+    ...(hasSession ? { sessionId: identifier(row.sessionId) } : {}) };
 }
 export function canonical(value: unknown): string {
   if (Array.isArray(value)) return '[' + value.map(canonical).join(',') + ']';
