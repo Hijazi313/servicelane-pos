@@ -2,6 +2,12 @@
 
 Specification: [drawer sessions](spec.md); client semantics: [integration guide](frontend-integration.md). Owner/integrator: root agent. Checkout: `/Users/macbookpro/Documents/personal/restaurant-pos-custom`, `codex/cashier-shifts`, base `main` / `9cbbb9a`. Git is authoritative for local/remote state. [Assignments](agent-collaboration.md) record shared ownership.
 
+## Route mounting — 2026-10-31
+
+At the user's request, AppModule wiring now imports Cashier Shifts and Billing. TypeScript and the HTTP boundary check passed; a Node 24.22.1 AppModule/Fastify injection check confirmed representative route registration and returned 403 for unauthenticated GET requests. Authenticated flows, database integration and listener startup were not checked. Operational release remains separate. [Billing record](../../../../billing/docs/features/settlement/phase-tracker.md#route-mounting--2026-10-31); [process correction](../../../../../../../../docs/quality/agent-incidents.md#inc-20261031-02--route-mounting-handoff-and-capability-index-incomplete).
+
+Follow-up: `test:app-routes` passed on Node 24.22.1 through actual AppModule and HTTP boundary, with substituted authorization and application services. Real authentication and database-backed behavior remain unverified by this check.
+
 ## Authorization and phases
 
 The user authorized CS-01 source implementation, affected docs, focused offline verification and coherent local commits. On 2026-10-30 the user granted full access to finish and test this module, including the previously identified disposable database. Preserve unrelated data and evidence; verify target and cleanup ownership before writes. Prior Billing, Kitchen and Orders evidence remains historical. User acceptance and live operational release remain distinct from test success.
@@ -11,7 +17,7 @@ The user authorized CS-01 source implementation, affected docs, focused offline 
 | Phase | Status | Outcome |
 | --- | --- | --- |
 | CS-00 | Business decisions confirmed | Drawer, handover, cash movement, closing and payment attribution scope defined. |
-| CS-01 | Accepted / closed | Isolated drawer API, Billing attribution and migration source; offline evidence below. Routes remain absent from AppModule. |
+| CS-01 | Accepted / closed | Isolated drawer API, Billing attribution and migration source; offline evidence below. Routes were absent from AppModule at acceptance; see route-mounting record above. |
 | CS-02 | Accepted / closed | C01–C06 and owned cleanup passed on the authorized disposable target on 2026-10-31. See result below. |
 
 ## Current handoff

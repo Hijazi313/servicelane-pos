@@ -10,7 +10,6 @@ import { BillingStore } from './application/billing-store.js';
 import { BillingController } from './http/billing.controller.js';
 import { PostgresBillingStore } from './infrastructure/postgres-billing-store.service.js';
 
-// BP-01 source composition only. Deliberately absent from AppModule until activation authorization.
 @Module({
   imports: [DatabaseModule, AuthenticationModule, BusinessModule, OrdersModule, BusinessDisplayHttpModule, CashierShiftsModule],
   controllers: [BillingController],

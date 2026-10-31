@@ -23,8 +23,8 @@ The following scopes have been accepted for backend development; operational rel
 | Menu catalogue | Catalogue maintenance, selectable sizes, optional extras, configurable combos, and selection pricing |
 | Order capture | Scoped takeaway capture/readback, immutable merchandise snapshots, configurable limits and duplicate-safe retries |
 | Kitchen | Dispatch, preparation queue/readback and preparation states |
-| Billing and payments | Settlement backend; routes remain unmounted |
-| Cashier shifts | Drawer sessions, cash movements, handover and closing controls; routes remain unmounted |
+| Billing and payments | Settlement backend; routes mounted in application source |
+| Cashier shifts | Drawer sessions, cash movements, handover and closing controls; routes mounted in application source |
 
 These scopes include focused offline and bounded PostgreSQL evidence, with limits recorded in their respective trackers. Cashier Shifts was integrated into main through [PR #21](https://github.com/Hijazi313/servicelane-pos/pull/21).
 
@@ -140,7 +140,7 @@ API contracts are maintained with their owning modules:
 - [Menu catalogue](apps/api/src/modules/menu/docs/README.md)
 - [Orders](apps/api/src/modules/orders/docs/README.md)
 - [Kitchen](apps/api/src/modules/kitchen/docs/README.md)
-- [Billing](apps/api/src/modules/billing/docs/README.md) and [Cashier Shifts](apps/api/src/modules/cashier-shifts/docs/README.md) (routes unmounted)
+- [Billing](apps/api/src/modules/billing/docs/README.md) and [Cashier Shifts](apps/api/src/modules/cashier-shifts/docs/README.md) (routes mounted in application source)
 
 ## Repository structure
 

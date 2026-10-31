@@ -13,6 +13,14 @@
 
 Entries below assess already-observed events in this active thread following the user’s instruction to apply the adopted skill. No repository-wide or unrelated historical audit was performed. Sandbox evaluation incidents are fictional fixtures and are not imported here. Severity and correction status remain provisional; only the user closes entries or decides prevention proposals.
 
+## INC-20261031-02 — Route mounting handoff and capability index incomplete
+
+- Severity / status: S3 / corrected locally; user review pending.
+- Violation and evidence: During the user-requested Billing and Cashier route mounting, the agent updated the Cashier capability index without identifying the individual public HTTP capabilities required by the [architecture upkeep convention](../architecture/README.md#capability-discovery-and-documentation-upkeep), left its module overview stale, and omitted the new work and evidence from the owning trackers, contrary to the delivery workflow. The user identified the convention gap.
+- Impact: The user had to request correction; documentation did not reliably describe available routes or the new verification limits. No data or operational harm is evidenced.
+- Correction: Local Cashier capability entries and overview now describe the mounted endpoints; Billing and Cashier trackers record the local change and bounded checks. Historical evidence remains dated. No authenticated or database-backed AppModule flow has been verified.
+- Prevention / user review: Apply existing capability-discovery and handoff guidance before reporting completion; no policy change proposed / pending.
+
 ## INC-20261031-01 — Cashier integration status remained stale
 
 - Severity / status: S2 / corrected locally; user review pending. The tracker and initial assessment incorrectly described the accepted Cashier Shifts branch as not integrated.

@@ -2,7 +2,7 @@
 
 ## Cashier Shifts CS-01 — 2026-10-28
 
-[Cashier Shifts](../../apps/api/src/modules/cashier-shifts/docs/features/drawer-sessions/phase-tracker.md) backend development scope was accepted and closed by the user on 2026-10-31 after six bounded PostgreSQL cases and cleanup passed. [PR #21](https://github.com/Hijazi313/servicelane-pos/pull/21) merged into main as `1c95417`. Billing and Cashier routes remain unmounted. [Inventory discovery](inventory/discovery.md) is the next planning focus; implementation is not activated.
+[Cashier Shifts](../../apps/api/src/modules/cashier-shifts/docs/features/drawer-sessions/phase-tracker.md) backend development scope was accepted and closed by the user on 2026-10-31 after six bounded PostgreSQL cases and cleanup passed. [PR #21](https://github.com/Hijazi313/servicelane-pos/pull/21) merged into main as `1c95417`. Billing and Cashier routes are mounted in application source; operational release remains separate. [Inventory discovery](inventory/discovery.md) is the next planning focus; implementation is not activated.
 
 ## Skill metadata maintenance — 2026-10-27
 
@@ -101,16 +101,17 @@ User selected the reviewed and consolidated skill update: optional independent d
 
 | Task | Branch | Checkout | Owner | Integration base | Publication | Tracker |
 | --- | --- | --- | --- | --- | --- | --- |
+| Billing and Cashier route mounting | `codex/mount-billing-cashier` | `/Users/macbookpro/Documents/personal/restaurant-pos-custom` | Primary agent | `main` / `4627a08` | Publication authorized; see Git for current state | [Billing](../../apps/api/src/modules/billing/docs/features/settlement/phase-tracker.md#route-mounting--2026-10-31) / [Cashier](../../apps/api/src/modules/cashier-shifts/docs/features/drawer-sessions/phase-tracker.md#route-mounting--2026-10-31) |
 
 Current designations follow [CONTRIBUTING](../../CONTRIBUTING.md#active-work-and-remote-checkpoints); Git is authoritative for heads and synchronization.
 
-No active source assignment. Cashier Shifts source and bounded PostgreSQL verification are user-accepted and integrated into main through [PR #21](https://github.com/Hijazi313/servicelane-pos/pull/21); its [phase tracker](../../apps/api/src/modules/cashier-shifts/docs/features/drawer-sessions/phase-tracker.md) records evidence and release limits. Inventory is in discovery only.
+Cashier Shifts source and bounded PostgreSQL verification are user-accepted and integrated into main through [PR #21](https://github.com/Hijazi313/servicelane-pos/pull/21); its [phase tracker](../../apps/api/src/modules/cashier-shifts/docs/features/drawer-sessions/phase-tracker.md) records evidence and release limits. Route mounting is the active assignment; Inventory remains in discovery only.
 
 ## Current planning handoff — 2026-10-28
 
 BA-01/02/03 accepted development scope and historical execution permissions are owned by the [joint BA tracker](business-access/phase-tracker.md). They do not authorize new Menu or database work.
 
-Current handoff: [Inventory discovery](inventory/discovery.md) proposes the smallest stock increment and owner decisions. [Cashier Shifts](../../apps/api/src/modules/cashier-shifts/docs/features/drawer-sessions/phase-tracker.md#current-handoff) is user-accepted for bounded backend development scope; operational release and mounting remain separate. Billing BP-01/BP-02 remain accepted/closed and locally integrated through PR #17 (`3c4a16b`); prior evidence is preserved, not rerun. Historical ownership ledgers and pending incident reviews remain preserved.
+Current handoff: [Inventory discovery](inventory/discovery.md) proposes the smallest stock increment and owner decisions. [Cashier Shifts](../../apps/api/src/modules/cashier-shifts/docs/features/drawer-sessions/phase-tracker.md#current-handoff) is user-accepted for bounded backend development scope; operational release remains separate. Billing BP-01/BP-02 remain accepted/closed and locally integrated through PR #17 (`3c4a16b`); prior evidence is preserved, not rerun. Historical ownership ledgers and pending incident reviews remain preserved.
 
 ## Proposed foundation follow-ups — 2026-10-12
 
@@ -134,8 +135,8 @@ Project foundation precedes Business/Branch and Authentication/Access, which pre
 | 3 | Menu | complete development scope; merged | [MN-00 → MN-01 plan](../../apps/api/src/modules/menu/docs/README.md); accepted, PR #9 squash `b09770e`; release limits retained |
 | 4 | Orders | OR-01 complete; accepted backend development scope | [Specification](../../apps/api/src/modules/orders/docs/features/capture/spec.md) / [phase tracker](../../apps/api/src/modules/orders/docs/features/capture/phase-tracker.md); bounded persistence verified; [acceptance/closeout](../../apps/api/src/modules/orders/docs/features/capture/phase-tracker.md#acceptance-and-closeout--2026-10-21) |
 | 5 | Kitchen | Backend development scope complete; user-accepted | [KT-01 handoff / completed KT-02](../../apps/api/src/modules/kitchen/docs/features/preparation/phase-tracker.md); migration 0005 applied; accepted bounded technical evidence; integration record PR #16 |
-| 6 | Billing and payments | BP-01/BP-02 accepted/closed backend development scope | [Plan](../../apps/api/src/modules/billing/docs/README.md) / [tracker](../../apps/api/src/modules/billing/docs/features/settlement/phase-tracker.md); integrated through [PR #17](https://github.com/Hijazi313/servicelane-pos/pull/17); routes unmounted, evidence limits retained |
-| 7 | Cashier shifts | Backend development scope accepted and closed | [Phase tracker](../../apps/api/src/modules/cashier-shifts/docs/features/drawer-sessions/phase-tracker.md); merged through [PR #21](https://github.com/Hijazi313/servicelane-pos/pull/21); routes unmounted, operational release separate |
+| 6 | Billing and payments | BP-01/BP-02 accepted/closed backend development scope | [Plan](../../apps/api/src/modules/billing/docs/README.md) / [tracker](../../apps/api/src/modules/billing/docs/features/settlement/phase-tracker.md); integrated through [PR #17](https://github.com/Hijazi313/servicelane-pos/pull/17); routes mounted in application source, evidence limits retained |
+| 7 | Cashier shifts | Backend development scope accepted and closed | [Phase tracker](../../apps/api/src/modules/cashier-shifts/docs/features/drawer-sessions/phase-tracker.md); merged through [PR #21](https://github.com/Hijazi313/servicelane-pos/pull/21); routes mounted in application source, operational release separate |
 | 8 | Inventory | discovery proposed | [IN-00 discovery](inventory/discovery.md); stock model unresolved |
 | 9 | Reports | proposed | Not activated |
 

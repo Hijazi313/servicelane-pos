@@ -8,7 +8,7 @@ Accepted **BP-01: settle one captured takeaway order in full with cash and read 
 
 Billing owns bill-time monetary/fiscal snapshots, settlement identity and cash-payment attribution. Orders retains captured merchandise history; Kitchen retains preparation only. Reuse existing Business configuration and Authentication authorization. No provider integration, new permission framework, accounting engine or cashier-shift dependency is justified for this technical slice.
 
-Public source capabilities: [capability index](capabilities.md). BillingModule composes five Billing and two Business display routes and is deliberately absent from AppModule. Source availability grants no live activation.
+Public source capabilities: [capability index](capabilities.md). BillingModule composes five Billing and two Business display routes and is imported by AppModule. Operational release remains separate.
 
 ## Scope and phases
 
