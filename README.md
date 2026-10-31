@@ -12,7 +12,7 @@ ServiceLane POS aims to bring everyday restaurant workflows into one system desi
 
 ## Project status
 
-**Active development · Backend API only · Not production-ready**
+**Active development · Not production-ready**
 
 The following scopes have been accepted for backend development; operational release validation remains separate:
 
@@ -28,7 +28,7 @@ The following scopes have been accepted for backend development; operational rel
 
 These scopes include focused offline and bounded PostgreSQL evidence, with limits recorded in their respective trackers. Cashier Shifts was integrated into main through [PR #21](https://github.com/Hijazi313/servicelane-pos/pull/21).
 
-[Inventory discovery](docs/planning/inventory/discovery.md) is the next planning focus; implementation has not been activated. Frontend, further order workflows, operational corrections and reporting remain ahead. Deployment, backup, recovery, an end-to-end trading flow and operational release validation remain incomplete.
+[Inventory discovery](docs/planning/inventory/discovery.md) remains in discovery. An [initial frontend setup](apps/web/README.md) provides a placeholder; browser rendering, integration and product workflows remain ahead. Deployment, backup, recovery, an end-to-end trading flow and operational release validation remain incomplete.
 
 See the [project tracker](docs/planning/TRACKER.md) for the roadmap, current acceptance status, and verification limits.
 
@@ -37,6 +37,7 @@ See the [project tracker](docs/planning/TRACKER.md) for the roadmap, current acc
 | Layer | Technology |
 | --- | --- |
 | Language | TypeScript |
+| Frontend | React, Vite |
 | API framework | NestJS |
 | Database | PostgreSQL |
 | Database tooling | Drizzle |

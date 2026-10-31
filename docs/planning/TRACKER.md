@@ -76,6 +76,8 @@ User authorized committing the reviewed staged changes and creating a PR from `c
 
 ## Current focus
 
+- Frontend foundation: user authorized a basic React, TypeScript and Vite project on 2026-11-01; solo assignment in this checkout. [Architecture proposal](../architecture/frontend-proposal.md) guides structure. P0: workspace app with a minimal visible entry point, strict TypeScript, development/build commands and focused verification. API integration, additional libraries, visual design and operational release are outside this increment. Status: awaiting acceptance; [web setup](../../apps/web/README.md) is implemented. A frozen, scripts-disabled frontend install in an isolated temporary workspace passed strict TypeScript and Vite build with Node 24.22.1 and pnpm 12.11.2; the local Vite server returned its page over HTTP. No browser rendering, API integration or production deployment was verified. Existing backend dependencies were not replaced; normal workspace installation remains needed in the checkout. React 19.3.1, Vite 8.3.5 and TypeScript 7.0.2 were selected as current stable releases; backend TypeScript is unchanged. Incidents: none in this increment; existing incident reviews remain pending.
+
 - Stage: Foundation F-01 remains complete; [acceptance and evidence limits](project-foundation/phase-tracker.md#closeout--2026-10-12).
 - Approved topology: one business per LAN installation, dedicated local PostgreSQL, locally served client assets and one maintained codebase; explicit user approval on 2026-10-12. [Decision and rationale](../architecture/vendor-isolation-proposal.md).
 - Current activity: [Inventory discovery](inventory/discovery.md) is the next planning focus; implementation is not activated. Menu and Orders were integrated through [PR #9](https://github.com/Hijazi313/servicelane-pos/pull/9) and [PR #10](https://github.com/Hijazi313/servicelane-pos/pull/10); their accepted development scopes and evidence limits remain recorded in their owning trackers.
@@ -101,6 +103,7 @@ User selected the reviewed and consolidated skill update: optional independent d
 
 | Task | Branch | Checkout | Owner | Integration base | Publication | Tracker |
 | --- | --- | --- | --- | --- | --- | --- |
+| Frontend foundation | `codex/frontend-foundation` | `/Users/macbookpro/Documents/personal/restaurant-pos-custom` | Current agent | `main` at `9dbaf2d` | Local only — publication unauthorized | [Current focus](#current-focus) |
 
 Current designations follow [CONTRIBUTING](../../CONTRIBUTING.md#active-work-and-remote-checkpoints); Git is authoritative for heads and synchronization.
 
