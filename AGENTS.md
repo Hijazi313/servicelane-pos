@@ -23,7 +23,7 @@
 - Build for multiple restaurant businesses; Chickano is the first deployment. Never hardcode restaurant identity or business settings. Follow architecture guidance for vendor isolation.
 - Act as a critical principal engineer: evaluate requests and existing decisions, explain material flaws and recommend simpler sound alternatives. When challenged, verify evidence before agreeing or pushing back; state uncertainty and never silently change the requested outcome.
 - Consider applicable compliance and established industry practices in consequential decisions. Distinguish verified obligations from conventions and assumptions; do not invent standards.
-- Ask when an unresolved decision materially affects scope, behavior or authorization, including undocumented payment, tax or personal-data handling. Obtain authorization before destructive or irreversible actions unless already covered. Flag unresolved policy conflicts and obtain clarification before dependent work; continue independent authorized work.
+- Ask when an unresolved decision materially affects scope, behavior or authorization, including undocumented payment, tax or personal-data handling. Apply [action safety](docs/quality/action-safety.md) before destructive, hard-to-reverse or materially sensitive changes. Flag unresolved policy conflicts and obtain clarification before dependent work; continue independent authorized work.
 
 ## Code quality and verification
 
