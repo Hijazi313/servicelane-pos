@@ -13,6 +13,14 @@
 
 Entries below assess already-observed events in this active thread following the user’s instruction to apply the adopted skill. No repository-wide or unrelated historical audit was performed. Sandbox evaluation incidents are fictional fixtures and are not imported here. Severity and correction status remain provisional; only the user closes entries or decides prevention proposals.
 
+## INC-20261031-01 — Cashier integration status remained stale
+
+- Severity / status: S2 / corrected locally; user review pending. The tracker and initial assessment incorrectly described the accepted Cashier Shifts branch as not integrated.
+- Violation and evidence: The delivery workflow requires global summaries to reflect status changes. After [PR #21](https://github.com/Hijazi313/servicelane-pos/pull/21) merged as `1c95417`, that commit's global tracker still said the branch was local and not integrated. In this conversation the agent repeated that statement without checking GitHub; the user challenged it and GitHub confirmed the merge.
+- Impact: Misleading integration status required user correction and documentation work. No operational or data harm is evidenced.
+- Correction: GitHub PR metadata verified the merge; local commit `de51965` updates the global tracker and root README. Publication of that correction remains separate.
+- Prevention / user review: Consider an explicit post-merge reconciliation of current status summaries and verification of remote state before reporting integration; proposal only / pending. Related earlier README status inconsistency: [INC-20261017-04](#inc-20261017-04--root-readme-retained-contradictory-ba-02-availability-and-acceptance-claims).
+
 ## INC-20261028-01 — Cashier planning omitted a concrete correction launch gate
 
 - Severity / status: S3 / corrected for the planning document. Observed impact: the owner had to identify the missing gate and request a clearer review framing; documentation required correction.

@@ -14,18 +14,21 @@ ServiceLane POS aims to bring everyday restaurant workflows into one system desi
 
 **Active development · Backend API only · Not production-ready**
 
-The backend currently includes:
+The following scopes have been accepted for backend development; operational release validation remains separate:
 
-| Area | Available functionality |
+| Area | Backend scope |
 | --- | --- |
 | Business setup | Business and branch foundation, installation provisioning, and initial administrator setup |
 | Authentication and access | Staff login, sessions, server-enforced permissions, and administrator recovery |
 | Menu catalogue | Catalogue maintenance, selectable sizes, optional extras, configurable combos, and selection pricing |
 | Order capture | Scoped takeaway capture/readback, immutable merchandise snapshots, configurable limits and duplicate-safe retries |
+| Kitchen | Dispatch, preparation queue/readback and preparation states |
+| Billing and payments | Settlement backend; routes remain unmounted |
+| Cashier shifts | Drawer sessions, cash movements, handover and closing controls; routes remain unmounted |
 
-Business setup, authentication/access, and menu catalogue are accepted under their recorded backend development scopes. Menu was integrated through [PR #9](https://github.com/Hijazi313/servicelane-pos/pull/9); Orders capture/readback was explicitly accepted on 2026-10-21 under its recorded backend development scope, with focused offline and bounded staging persistence evidence; [closeout and limits](apps/api/src/modules/orders/docs/features/capture/phase-tracker.md#acceptance-and-closeout--2026-10-21).
+These scopes include focused offline and bounded PostgreSQL evidence, with limits recorded in their respective trackers. Cashier Shifts was integrated into main through [PR #21](https://github.com/Hijazi313/servicelane-pos/pull/21).
 
-Kitchen [KT-01 source](apps/api/src/modules/kitchen/docs/README.md) provides explicit dispatch, preparation-only queue/readback and preparation states with bounded PostgreSQL evidence; KT-02 technical verification is complete and the recorded Kitchen backend development scope is user-accepted. [Billing](apps/api/src/modules/billing/docs/README.md) and [Cashier Shifts](apps/api/src/modules/cashier-shifts/docs/README.md) have user-accepted bounded backend development scopes and PostgreSQL evidence; their routes remain unmounted. Inventory discovery, frontend, further order workflows, operational corrections and reporting remain ahead. Deployment, backup, recovery and operational release validation remain incomplete.
+[Inventory discovery](docs/planning/inventory/discovery.md) is the next planning focus; implementation has not been activated. Frontend, further order workflows, operational corrections and reporting remain ahead. Deployment, backup, recovery, an end-to-end trading flow and operational release validation remain incomplete.
 
 See the [project tracker](docs/planning/TRACKER.md) for the roadmap, current acceptance status, and verification limits.
 
@@ -135,6 +138,9 @@ API contracts are maintained with their owning modules:
 - [Business and branch setup](apps/api/src/modules/business/docs/README.md)
 - [Authentication and access](apps/api/src/modules/authentication/docs/README.md)
 - [Menu catalogue](apps/api/src/modules/menu/docs/README.md)
+- [Orders](apps/api/src/modules/orders/docs/README.md)
+- [Kitchen](apps/api/src/modules/kitchen/docs/README.md)
+- [Billing](apps/api/src/modules/billing/docs/README.md) and [Cashier Shifts](apps/api/src/modules/cashier-shifts/docs/README.md) (routes unmounted)
 
 ## Repository structure
 

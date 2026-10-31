@@ -18,7 +18,7 @@ Use `feat`, `fix`, `docs`, `refactor`, `test`, `chore`, `build`, `ci`, `perf` or
 
 ### Commit checkpoints
 
-- When Git work is authorized, create a topic branch before implementation.
+- When Git work is authorized, create a topic branch before implementation. When branching from `origin/main`, use `git switch --no-track -c <branch> origin/main` so the topic branch does not inherit `origin/main` as its upstream.
 - Commit each coherent, reviewable increment; do not wait for an entire module.
 - Include related code, migrations, contracts, tests and documentation together. Separate unrelated changes; do not split mechanically by file or layer.
 - Before committing, inspect the staged diff and perform proportionate checks. Record relevant verification limits without presenting them as passed.
@@ -30,7 +30,7 @@ Use `feat`, `fix`, `docs`, `refactor`, `test`, `chore`, `build`, `ci`, `perf` or
 
 - At authorized work start/resume, maintain one current row per independent workstream in the global tracker's **Active work branches** table: phase/task, branch, checkout path, owner, integration base, upstream/publication state and owning tracker. Update the row when ownership, checkout, phase or publication changes; retain historical decisions in the owning tracker rather than adding duplicate current rows.
 - Verify the actual checkout and Git state before updating the designation. An active designation identifies responsibility; it grants no implementation, push, merge or database permission. Paused work stays listed with its blocker; remove the row when closed or superseded, leaving the closeout link in the owning tracker.
-- With publication authorization, push the first coherent committed checkpoint and subsequent completed handoff checkpoints to the same-named remote branch; set upstream on the first push. Otherwise record **local only — publication unauthorized**. Do not push unreviewed changes or include untracked evidence by default.
+- With publication authorization, push the first coherent committed checkpoint and subsequent completed handoff checkpoints to the same-named remote branch; use `git push -u origin <branch>` on the first push to set its upstream. If a topic branch already tracks `origin/main`, the same command sets the correct upstream. Otherwise record **local only — publication unauthorized**. Do not push unreviewed changes or include untracked evidence by default.
 - Before push, review the committed scope and applicable verification evidence. After push, verify the remote head matches the intended commit and update publication state. Use Git for commit/upstream/ahead-behind status rather than maintaining a second commit log in the tracker. PR creation, merge and feature acceptance remain separately governed.
 
 ### Checkout choice
