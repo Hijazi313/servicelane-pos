@@ -101,11 +101,10 @@ User selected the reviewed and consolidated skill update: optional independent d
 
 | Task | Branch | Checkout | Owner | Integration base | Publication | Tracker |
 | --- | --- | --- | --- | --- | --- | --- |
-| Cashier Shifts CS-01 | `codex/cashier-shifts` | `/Users/macbookpro/Documents/personal/restaurant-pos-custom` | current agent | `main` / `9cbbb9a` | local only; publication unauthorized | [phase tracker](../../apps/api/src/modules/cashier-shifts/docs/features/drawer-sessions/phase-tracker.md) |
 
 Current designations follow [CONTRIBUTING](../../CONTRIBUTING.md#active-work-and-remote-checkpoints); Git is authoritative for heads and synchronization.
 
-Cashier Shifts source and bounded PostgreSQL verification are user-accepted; its [phase tracker](../../apps/api/src/modules/cashier-shifts/docs/features/drawer-sessions/phase-tracker.md) records evidence and release limits. Inventory is in discovery only.
+No active source assignment. Cashier Shifts source and bounded PostgreSQL verification are user-accepted; its [phase tracker](../../apps/api/src/modules/cashier-shifts/docs/features/drawer-sessions/phase-tracker.md) records evidence and release limits. Its branch is local and has not been integrated into main. Inventory is in discovery only.
 
 ## Current planning handoff — 2026-10-28
 
