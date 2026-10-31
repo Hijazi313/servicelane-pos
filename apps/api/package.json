@@ -18,7 +18,8 @@
     "test:orders": "tsc -p tsconfig.json --outDir dist/orders-check --sourceMap false && node --test tests/orders.test.mjs tests/orders-http.test.mjs",
     "check:architecture": "node scripts/check-http-boundaries.mjs",
     "test:architecture": "node --test tests/http-boundaries.test.mjs",
-    "test:billing": "tsc -p tsconfig.json --outDir dist/billing-check --sourceMap false && node --test tests/billing-money.test.mjs tests/billing-interfaces.test.mjs tests/billing.test.mjs tests/billing-http.test.mjs tests/billing-persistence.test.mjs"
+    "test:billing": "tsc -p tsconfig.json --outDir dist/billing-check --sourceMap false && node --test tests/billing-money.test.mjs tests/billing-interfaces.test.mjs tests/billing.test.mjs tests/billing-http.test.mjs tests/billing-persistence.test.mjs",
+    "test:app-routes": "tsc -p tsconfig.json --outDir dist/app-routes-check --sourceMap false && node --test tests/app-routes.test.mjs"
   },
   "dependencies": {
     "@nestjs/common": "12.1.2",

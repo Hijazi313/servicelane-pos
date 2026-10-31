@@ -4,6 +4,12 @@ Parent: [global tracker](../../../../../../../../docs/planning/TRACKER.md). Plan
 
 Status: BP-00, BP-01 and BP-02 accepted/closed under the recorded backend development scope; BP-01/BP-02 acceptance dated 2026-10-27. Coordinator: primary agent; [read-only reviews](agent-collaboration.md).
 
+## Route mounting — 2026-10-31
+
+The user requested mounting Billing and Cashier Shifts. AppModule wiring now imports both; Billing also mounts Business display routes. TypeScript and HTTP boundary checks passed. A Node 24.22.1 AppModule/Fastify injection check confirmed registration of representative Billing, Cashier and Business GET routes; requests returned 403. It did not verify authenticated behavior, database integration, a listener or operational release. No database, migration or deployment was performed. [Process correction](../../../../../../../../docs/quality/agent-incidents.md#inc-20261031-02--route-mounting-handoff-and-capability-index-incomplete).
+
+Follow-up: `test:app-routes` passed on Node 24.22.1 using the actual AppModule and HTTP boundary; representative Billing and Cashier GET requests reached their controllers and returned expected responses. Authorization and application services were substituted, so this does not verify real authentication or database-backed behavior.
+
 ## Planning authorization — 2026-10-25
 
 User requested the smallest justified Billing/Payments backend plan from the global tracker, verification of checkout/integration, preserved accepted Orders/Kitchen scope/evidence/ledgers/incident reviews, existing documentation structure, suitable topic branch and focused local commits. Authorized: planning/documentation and local Git checkpoints only. No implementation, database access, tests, installation, publication, deployment or later-phase activation.
@@ -28,7 +34,7 @@ Assignment: this checkout `/Users/macbookpro/Documents/personal/restaurant-pos-c
 
 ## Current handoff
 
-BP-01 isolated source/offline delivery is implemented for the seven accepted routes and BP-A01–18 source scope. [Authorization and isolation](#bp-01-authorization-and-source-isolation--2026-10-26) precedes source edits. [Offline evidence and limits](#bp-01-delivery-evidence--2026-10-26) records what was executed and what remains unverified. BillingModule is absent from AppModule; no new route is live. Samples remain offline fixtures; no installed policy defaults. No upstream accepted suites/harnesses were rerun.
+BP-01 isolated source/offline delivery implemented the seven accepted routes and BP-A01–18 source scope. [Authorization and isolation](#bp-01-authorization-and-source-isolation--2026-10-26) precedes source edits. [Offline evidence and limits](#bp-01-delivery-evidence--2026-10-26) records what was executed and what remains unverified. At that checkpoint BillingModule was absent from AppModule; see the later route-mounting record above. Samples remain offline fixtures; no installed policy defaults. No upstream accepted suites/harnesses were rerun.
 
 User accepted BP-01 and BP-02 on 2026-10-27 under the recorded scope and limitations; [acceptance/closeout](#bp-01bp-02-user-acceptance-and-closeout--2026-10-27). Both phases are closed for backend development. No further tests are justified. Migration 0006 remains applied, twenty tables were verified empty and seven history entries intact at execution closeout; no new database access occurred for acceptance.
 

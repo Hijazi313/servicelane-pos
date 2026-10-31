@@ -8,7 +8,6 @@ import { DrawerStore } from './application/drawer-store.js';
 import { PostgresDrawerStore } from './infrastructure/postgres-drawer-store.service.js';
 import { DrawerController } from './http/drawer.controller.js';
 
-// Explicit composition only; AppModule does not activate these routes.
 @Module({
   imports: [DatabaseModule, AuthenticationModule, BusinessModule],
   controllers: [DrawerController],

@@ -1,4 +1,6 @@
 import { KitchenModule } from './modules/kitchen/public.js';
+import { BillingModule } from './modules/billing/public.js';
+import { CashierShiftsModule } from './modules/cashier-shifts/public.js';
 import { OrdersModule } from './modules/orders/public.js';
 import { MenuModule } from './modules/menu/public.js';
 import { AccessHttpModule } from './modules/authentication/http/access-http.module.js';
@@ -16,6 +18,8 @@ import { HealthController } from './infrastructure/health.controller.js';
     MenuModule,
     OrdersModule,
     KitchenModule,
+    BillingModule,
+    CashierShiftsModule,
   ],
   controllers: [HealthController],
 })
