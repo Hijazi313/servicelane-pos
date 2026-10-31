@@ -4,6 +4,11 @@ import { admitObservation, expectedBaseline } from './cs02-plan.mjs';
 import { authorize, baseline, fingerprint, safeFailure, sourceCatalog } from './cs02-controls.mjs';
 
 const env = { CS02_TEST_TARGET: 'YES', CS02_EXCLUSIVE: 'YES', CS02_SCHEMA: 'pre-0007', CS02_MODE: 'execute', CS02_APPLY_0007: 'YES', CS02_EXPECTED_TARGET: 'a'.repeat(64) };
+test('catalog expectations match PostgreSQL identifier truncation', async () => {
+  const table = (await sourceCatalog('post-0007')).find(item => item.name === 'cash_drawer_retries');
+  assert.ok(table.constraints.some(item => item.name === 'cash_drawer_retries_business_id_branch_id_operation_retry_key_p'));
+  assert.ok(table.indexes.some(item => item.name === 'cash_drawer_retries_business_id_branch_id_operation_retry_key_p'));
+});
 test('execution requires explicit target, reservation, stage, one migration, fingerprint and supported runtime', () => {
   authorize(env, 'v24.21.0');
   for (const key of Object.keys(env)) assert.throws(() => authorize({ ...env, [key]: undefined }, 'v24.21.0'));
@@ -12,6 +17,9 @@ test('execution requires explicit target, reservation, stage, one migration, fin
   assert.throws(() => authorize({ ...env, CS02_MODE: 'baseline' }, 'v24.21.0'));
   const { CS02_APPLY_0007, CS02_EXPECTED_TARGET, ...readOnly } = env;
   authorize({ ...readOnly, CS02_MODE: 'baseline' }, 'v24.21.0');
+  const { CS02_APPLY_0007: omitted, ...post } = env;
+  authorize({ ...post, CS02_SCHEMA: 'post-0007' }, 'v24.21.0');
+  assert.throws(() => authorize({ ...env, CS02_SCHEMA: 'post-0007' }, 'v24.21.0'));
 });
 
 async function fixture(stage = 'pre-0007') {

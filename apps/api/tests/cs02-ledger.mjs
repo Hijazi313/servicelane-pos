@@ -22,7 +22,17 @@ function identity(table, row) {
 function assertScoped(ledger, table, row) {
   const f = ledger.fixture;
   assert.equal(row.business_id, f.businesses[0]);
-  if ('branch_id' in row) assert.equal(row.branch_id, f.branches[0]);
+  if ('branch_id' in row && row.branch_id !== f.branches[0]) {
+    // One explicit foreign-scope drawer/session pair is used to prove cross-branch
+    // denial. No other row in that branch is owned or admitted by this harness.
+    assert.equal(row.branch_id, f.branches[1]);
+    if (table === 'cash_drawers') assert.equal(row.id, f.operationKeys[40]);
+    else if (table === 'cash_drawer_sessions') {
+      assert.equal(row.id, f.operationKeys[41]);
+      assert.equal(row.drawer_id, f.operationKeys[40]);
+      assert.equal(row.custodian_id, f.actors[0]);
+    } else assert.fail('Unexpected foreign-branch row');
+  }
   if (['cash_drawers', 'cash_drawer_sessions', 'cash_drawer_events', 'billing_settlements', 'business_display_history'].includes(table)) assert.match(row.id, uuid);
   if ('actor_id' in row) assert.ok(f.actors.includes(row.actor_id));
   if (table === 'cash_drawer_sessions') {
@@ -167,6 +177,11 @@ export async function cleanup(pool, ledger, tables, verifyTarget) {
     for (const table of ['cash_drawer_events', 'cash_drawer_retries', 'cash_drawer_policy_history', 'cash_drawer_policies', 'cash_drawer_sessions', 'cash_drawers']) {
       await client.query(`delete from public."${table}" where business_id=$1 and branch_id=$2`, [business, branch]);
     }
+    // Only the independently admitted cross-branch fixture pair may be removed.
+    await client.query('delete from cash_drawer_sessions where business_id=$1 and branch_id=$2 and id=$3 and drawer_id=$4',
+      [business, f.branches[1], f.operationKeys[41], f.operationKeys[40]]);
+    await client.query('delete from cash_drawers where business_id=$1 and branch_id=$2 and id=$3',
+      [business, f.branches[1], f.operationKeys[40]]);
     await client.query('delete from billing_settlements where order_id=any($1::uuid[])', [f.orders]);
     for (const table of ['billing_policy_history', 'billing_policies', 'business_display_history']) await client.query(`delete from public."${table}" where business_id=$1`, [business]);
     await client.query('delete from captured_orders where id=any($1::uuid[])', [f.orders]);

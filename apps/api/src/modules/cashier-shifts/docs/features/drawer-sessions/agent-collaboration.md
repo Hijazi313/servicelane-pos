@@ -14,3 +14,9 @@ Shared checkout: `/Users/macbookpro/Documents/personal/restaurant-pos-custom`, b
 ## CS-02 offline preparation — 2026-10-29
 
 Shared checkout and boundaries above remain unchanged. Root owns runner integration, case orchestration, shared documentation and Git. `cashier_service` owns only `cs02-controls.mjs` and its offline test; `billing_integration` owns only `cs02-fixtures.mjs`, `cs02-ledger.mjs` and fixture tests; `cashier_http` performs read-only source review. Agents do not access configuration or database, execute migrations, mutate Git or edit shared files. Separate authorization and target reservation remain required for execution.
+
+For CS-02 case preparation, `cashier_service` owns `cs02-drawer-cases.mjs` and its offline test; `billing_integration` owns `cs02-billing-cases.mjs` and its offline test. Both consume coordinator-provided capture/checkpoint and contention hooks; neither implements cleanup or independently claims database proof. Root owns capture, orchestration, restart, shared contracts and Git. Case code is not runnable against a database until the integrated runner, ownership proofs and execution authorization are reviewed.
+
+## CS-02 integration — 2026-10-30
+
+User authorized completing and testing the module. Coordinator owns database execution, shared files, integration and Git. `runner` owns new runner orchestration and tests; `capture` owns new independent write ownership integration and tests; `review` inspects the harness read-only. Agents do not use the database or mutate Git. Preserve existing untracked work and historical ledgers. Coordinate the hook interface before integrating; execute only after fresh target and cleanup checks.

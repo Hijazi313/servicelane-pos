@@ -12,10 +12,11 @@ export function authorize(env, version) {
   assert.ok(node && Number(node[1]) >= 21, 'Unsupported Node runtime');
   assert.equal(env.CS02_TEST_TARGET, 'YES');
   assert.equal(env.CS02_EXCLUSIVE, 'YES');
-  assert.equal(env.CS02_SCHEMA, 'pre-0007');
+  assert.ok(['pre-0007', 'post-0007'].includes(env.CS02_SCHEMA));
   assert.ok(['baseline', 'execute'].includes(env.CS02_MODE));
   if (env.CS02_MODE === 'execute') {
-    assert.equal(env.CS02_APPLY_0007, 'YES');
+    if (env.CS02_SCHEMA === 'pre-0007') assert.equal(env.CS02_APPLY_0007, 'YES');
+    else assert.equal(env.CS02_APPLY_0007, undefined);
     assert.match(env.CS02_EXPECTED_TARGET ?? '', /^[a-f0-9]{64}$/);
   } else {
     assert.equal(env.CS02_APPLY_0007, undefined);
@@ -40,6 +41,10 @@ export async function sourceCatalog(stage) {
     for (const constraint of Object.values(table.uniqueConstraints)) indexes.push({ name: constraint.name, unique: true, valid: true, partial: false, keys: constraint.columns });
     const primary = Object.values(table.columns).filter(column => column.primaryKey);
     if (primary.length) indexes.push({ name: `${table.name}_pkey`, unique: true, valid: true, partial: false, keys: primary.map(column => column.name) });
+    // PostgreSQL truncates unquoted identifier storage to 63 bytes. Snapshot names
+    // are ASCII identifiers generated from schema declarations, so slice is exact.
+    for (const constraint of constraints) constraint.name = constraint.name.slice(0, 63);
+    for (const index of indexes) index.name = index.name.slice(0, 63);
     return {
       name: table.name,
       rls: table.isRLSEnabled,

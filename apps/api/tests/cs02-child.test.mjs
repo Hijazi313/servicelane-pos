@@ -10,7 +10,7 @@ function spawn(marker) {
   };
 }
 test('child requires exact success marker and kills and joins a timed-out process', async () => {
-  assert.deepEqual(await runChild(spawn('CS02 restart passed'), 'node', 'restart', {}, {}, 50), { exit: 0, marker: 'CS02 restart passed' });
+  assert.deepEqual(await runChild(spawn(JSON.stringify({ marker: 'CS02 restart passed', access: [{ type: 'session', value: { digest: 'synthetic' } }] })), 'node', 'restart', {}, {}, 50), { exit: 0, marker: 'CS02 restart passed', access: [{ type: 'session', value: { digest: 'synthetic' } }] });
   await assert.rejects(runChild(spawn('wrong'), 'node', 'restart', {}, {}, 50), /CS02_CHILD_FAILED/);
   await assert.rejects(runChild(spawn(), 'node', 'restart', {}, {}, 10), /CS02_CHILD_TIMEOUT/);
 });

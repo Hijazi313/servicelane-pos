@@ -1,0 +1,15 @@
+{
+  "tag": "cs02.2e59d73c-de33-4a58-baef-6e40b02a9e55",
+  "runtime": "v24.22.1",
+  "results": {},
+  "migration": "uncertain-stop",
+  "cleanup": "not-required",
+  "startedAt": "2026-10-30T18:48:46.652Z",
+  "tlsVerified": false,
+  "failure": {
+    "stage": "migration",
+    "category": "assertion"
+  },
+  "finishedAt": "2026-10-30T18:49:52.624Z",
+  "result": "failed"
+}
