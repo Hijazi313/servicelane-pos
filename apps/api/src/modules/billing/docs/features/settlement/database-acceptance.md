@@ -8,7 +8,7 @@
 
 Verify the financial guarantees that require PostgreSQL. Reuse BP-01 money/DTO/HTTP edge evidence and accepted Orders/Kitchen evidence; do not rerun those suites. No additional Billing feature, operational activation, fiscal/receipt proof, physical-cash claim, server crash or backup/recovery exercise.
 
-The manual harness uses real Access/Billing/Business display/Orders financial adapters. All seven application routes stay unmounted in AppModule. The fresh child composes only the existing Billing controller and shared HTTP guard/adapter/interceptor/filter for in-memory injection; no listener or new HTTP contract. HTTP validation, envelopes, problems, scope and retry semantics remain the accepted specification. Collection/pagination work is inapplicable. Offline HTTP evidence proves only this test composition.
+The manual harness uses real Access/Billing/Business display/Orders financial adapters. All seven application routes were unmounted in AppModule during this run; the [later mounting record](phase-tracker.md#route-mounting--2026-10-31) states current availability. The fresh child composes only the existing Billing controller and shared HTTP guard/adapter/interceptor/filter for in-memory injection; no listener or new HTTP contract. HTTP validation, envelopes, problems, scope and retry semantics remain the accepted specification. Collection/pagination work is inapplicable. Offline HTTP evidence proves only this test composition.
 
 ## Baseline and migration gates
 
