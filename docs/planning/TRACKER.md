@@ -101,11 +101,10 @@ User selected the reviewed and consolidated skill update: optional independent d
 
 | Task | Branch | Checkout | Owner | Integration base | Publication | Tracker |
 | --- | --- | --- | --- | --- | --- | --- |
-| Billing and Cashier route mounting | `codex/mount-billing-cashier` | `/Users/macbookpro/Documents/personal/restaurant-pos-custom` | Primary agent | `main` / `4627a08` | Publication authorized; see Git for current state | [Billing](../../apps/api/src/modules/billing/docs/features/settlement/phase-tracker.md#route-mounting--2026-10-31) / [Cashier](../../apps/api/src/modules/cashier-shifts/docs/features/drawer-sessions/phase-tracker.md#route-mounting--2026-10-31) |
 
 Current designations follow [CONTRIBUTING](../../CONTRIBUTING.md#active-work-and-remote-checkpoints); Git is authoritative for heads and synchronization.
 
-Cashier Shifts source and bounded PostgreSQL verification are user-accepted and integrated into main through [PR #21](https://github.com/Hijazi313/servicelane-pos/pull/21); its [phase tracker](../../apps/api/src/modules/cashier-shifts/docs/features/drawer-sessions/phase-tracker.md) records evidence and release limits. Route mounting is the active assignment; Inventory remains in discovery only.
+Cashier Shifts source and bounded PostgreSQL verification are user-accepted and integrated into main through [PR #21](https://github.com/Hijazi313/servicelane-pos/pull/21); its [phase tracker](../../apps/api/src/modules/cashier-shifts/docs/features/drawer-sessions/phase-tracker.md) records evidence and release limits. Billing and Cashier route mounting was merged through [PR #23](https://github.com/Hijazi313/servicelane-pos/pull/23). Inventory remains in discovery only.
 
 ## Current planning handoff — 2026-10-28
 

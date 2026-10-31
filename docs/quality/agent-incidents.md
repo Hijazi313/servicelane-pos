@@ -21,6 +21,8 @@ Entries below assess already-observed events in this active thread following the
 - Correction: Local Cashier capability entries and overview now describe the mounted endpoints; Billing and Cashier trackers record the local change and bounded checks. Historical evidence remains dated. No authenticated or database-backed AppModule flow has been verified.
 - Prevention / user review: Apply existing capability-discovery and handoff guidance before reporting completion; no policy change proposed / pending.
 
+Follow-up: the frontend readiness review found that the Cashier integration guide also retained the pre-mount status. The post-merge correction updates that guide and distinguishes historical unmounted evidence from current route availability; the global tracker also records PR #23's merge.
+
 ## INC-20261031-01 — Cashier integration status remained stale
 
 - Severity / status: S2 / corrected locally; user review pending. The tracker and initial assessment incorrectly described the accepted Cashier Shifts branch as not integrated.
