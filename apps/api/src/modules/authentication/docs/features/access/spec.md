@@ -145,7 +145,7 @@ The forward offline `0002_login_reservations.sql` migration adds the bounded `pe
 
 ## MN-00 — Transactional module authorization
 
-MN-00 source extension for Menu delivery; user-accepted on 2026-10-18 under its recorded development scope; [phase tracker and authorization](../../../../../../../../docs/planning/TRACKER.md#current-planning-handoff--2026-10-18) route to the [owning MN-00/MN-01 tracker](../../../../menu/docs/features/catalogue/phase-tracker.md). Existing BA acceptance, implemented public capabilities and deferred release evidence remain unchanged.
+MN-00 source extension for Menu delivery; user-accepted on 2026-10-18 under its recorded development scope; [owning MN-00/MN-01 tracker and authorization](../../../../menu/docs/features/catalogue/phase-tracker.md#mn-00-acceptance-and-mn-01-activation--2026-10-18). Existing BA acceptance, implemented public capabilities and deferred release evidence remain unchanged.
 
 ### Outcome and reuse
 

@@ -3,9 +3,9 @@ name: spec-driven-delivery
 description: Scope modules and substantial features, define specifications and phases, assess delivery readiness, and coordinate evidence-based execution and handoffs in this repository. Use for planning, phase transitions or agent assignments; do not create packs for small isolated fixes.
 metadata:
   author: "Codex (AI-assisted; requested by project owner)"
-  version: "1.2.0"
+  version: "1.3.0"
   created: "2026-10-11"
-  updated: "2026-10-31"
+  updated: "2026-11-01"
   scope: "Repository module and feature scoping, specifications, delivery phases and handoffs"
   portability: "Agent-neutral Markdown; repository-relative references"
 ---
@@ -27,6 +27,7 @@ Follow the entry/resume and closeout gates in [workflow guidance](references/wor
 ## Ownership
 
 - Global `docs/`: product scope, architecture, compliance and global tracking.
+- `docs/planning/frontend/TRACKER.md` and `docs/planning/backend/TRACKER.md`: application overviews linking to owning work and evidence.
 - `apps/api/src/modules/<module>/docs/README.md`: module boundaries and feature/phase index.
 - `apps/api/src/modules/<module>/docs/capabilities.md`: implemented capability index; read directly for capability discovery.
 - `<module>/docs/features/<feature>/spec.md`: intended behavior and acceptance criteria.

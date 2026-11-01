@@ -1,10 +1,10 @@
 # Module and phase management
 
-Start with the repository `docs/planning/TRACKER.md`, then the assigned phase and relevant specification sections. Trackers coordinate work; they do not authorize implementation or supersede the verification policy. This is a project convention using specification, traceability and evidence practices; no particular file count or layout is claimed as an industry mandate.
+Use `docs/planning/TRACKER.md` to discover current work; for an identified assignment, consult its owning tracker and relevant specification sections directly after checking applicable scope and instructions. Trackers coordinate work; they do not authorize implementation or supersede the verification policy. This is a project convention using specification, traceability and evidence practices; no particular file count or layout is claimed as an industry mandate.
 
 ## Selective reading
 
-- Locate work through the global tracker; follow its links rather than recursively loading documentation.
+- Locate unassigned work through the global tracker and relevant application overview; when an assignment already identifies its owning tracker, go directly there after checking applicable scope and instructions. An index is a routing aid, not evidence. If a link is missing, stale or ambiguous, search the relevant scope and verify the source; if the fact remains unknown, state the uncertainty and ask when a decision requires it.
 - Read the assigned tracker and the specification sections needed for the current task. Read parent module boundaries when ownership or dependencies matter.
 - Load architecture decisions, compliance guidance, consumer contracts and source code only where the task touches them. Reuse unchanged documents already available in context; reload when changed or no longer available.
 - If a relevant constraint is missing, retrieve its owning document; selective reading must not become guessing. Handoffs link to authoritative details rather than copying them.
@@ -55,7 +55,8 @@ For a substantial feature with agreed scope, recommend independent delivery only
 
 ## Document ownership
 
-- `docs/planning/TRACKER.md`: current focus, module order/status, links and cross-module blockers. Do not duplicate task lists here.
+- `docs/planning/TRACKER.md`: shared priorities, integration, cross-application blockers, active work branches and links to application overviews. Do not duplicate task lists here.
+- `docs/planning/frontend/TRACKER.md` and `docs/planning/backend/TRACKER.md`: concise application-specific overviews and links to owning work. Identify material evidence limits and the last reconciliation; do not duplicate feature task lists or evidence.
 - `apps/api/src/modules/<module>/docs/README.md`: module purpose, boundaries, approved P0/P1 scope, dependencies and module phase tracker. Use [the module template](../templates/module.md).
 - For a substantial feature, `apps/api/src/modules/<module>/docs/features/<feature>/spec.md` owns intended behavior and acceptance criteria; `phase-tracker.md` owns progress, evidence and the current handoff. Use the [specification](../templates/feature-spec.md) and [tracker](../templates/phase-tracker.md) templates. A small feature can remain in the module plan; do not create a pack for every fix.
 - Architecture decisions and compliance evidence stay in their existing owning documents and are linked from plans.
@@ -68,10 +69,10 @@ For a substantial feature with agreed scope, recommend independent delivery only
 ## Workflow
 
 1. Define the module outcome and ownership before splitting work. Challenge each proposed P0 using `docs/decision-making.md`. Mark scope proposed until agreed.
-2. Identify prerequisites and cross-module contracts. Record unresolved decisions rather than inventing answers. One module at a time is the default focus, not permission to ignore integration dependencies.
+2. Identify prerequisites and cross-module contracts. Record unresolved decisions rather than inventing answers. Independent frontend and backend assignments may proceed in parallel within authorized scope; dependent work waits for its prerequisites.
 3. Specify business rules, invariants, affected contracts, relevant failures and observable acceptance examples before implementation. Label specification approval separately from implementation evidence. Resolve blocking decisions; do not invent answers to fill templates.
 4. Split the module into small outcome-based phases with entry/exit criteria. Detail only the active phase; retain later phases as objectives.
-5. Point the global tracker at the active module and phase. When independent feature work is delegated, record parallel assignments in its collaboration document and link it from the feature tracker.
+5. Point the relevant application overview and, when material to shared priorities or integration, the global tracker at the active work. When independent feature work is delegated, record parallel assignments in its collaboration document and link it from the feature tracker.
 6. Implement only the approved active P0. If requirements change, update the specification deliberately and assess affected contracts and acceptance criteria before continuing dependent work.
 7. Update the owning tracker after meaningful progress, a blocker, scope change or handoff. Update global/module summaries only when their status changes. Do not maintain duplicate percentage estimates or append routine activity logs.
 8. Close a phase only when its exit criteria have suitable evidence. Source inspection can establish implementation facts but cannot establish physical output, operational recovery or user acceptance. When code exists without behavioral evidence, report `implemented, unverified`; pending required acceptance means `awaiting acceptance`. An integration phase must establish cross-module behavior before release claims.
@@ -102,9 +103,11 @@ Use `proposed`, `ready`, `active`, `blocked`, `awaiting acceptance`, `complete` 
 
 ## Multiple-agent coordination
 
-- One coordinating agent owns the global tracker and module-level status; each delegated feature has one named owner. These are work assignments, not new application architecture.
+- One coordinating agent owns shared overview and global tracker reconciliation; each delegated feature has one named owner. Assign a single writer to each shared tracker, including a feature tracker used by multiple agents. Agents report material changes to the coordinator; independent work need not wait for summary edits. These are work assignments, not new application architecture.
+- At assignment, material status or dependency changes, integration, handoff and closeout, reconcile affected summaries against the owning tracker and available checkout/branch and agent reports before relying on them. Resolve conflicting claims or mark them unconfirmed with the missing source and next action. Record the last reconciliation without refreshing unrelated overviews merely to change a date. A checkout cannot establish live status in inaccessible chats or unmerged worktrees; explicitly mark that state unconfirmed and seek the relevant owner or evidence.
+- Update only summaries affected by a material change. Application-local activity does not update the other application's overview unless it changes its work or dependencies; update the global tracker for changed shared priorities, dependencies or integration. Preserve evidence limits and distinguish application completion from verified end-to-end behavior. Shared architecture, deployment and operational work stays in its existing owning documents, linked globally when material.
 - Before delegation, specify the bounded outcome, phase, relevant spec/contract links, file or resource ownership, allowed scope, dependencies, acceptance expectations and verification restrictions. Agents return changed files, decisions, completed/remaining work, blockers and actual checks/limits. The user permits multiple-agent work for this workflow; do not create user-facing chats unless explicitly requested.
-- Parallelize independent tasks inside the active module after shared contracts are agreed. Keep dependent work sequential. Cross-module changes require an explicit coordination assignment.
+- Parallelize independent assignments, including frontend and backend work, after applicable shared contracts are agreed. Keep dependent work sequential. Cross-module changes require an explicit coordination assignment.
 - Before concurrent implementation, record checkout paths, integration branch/base, shared-file owners and integration method in the collaboration document. Do not assume separate chats have isolated files.
 - In a shared checkout, use non-overlapping file ownership and one owner for branch/index operations, dependency manifests/lockfiles, migrations and shared contracts. Serialize conflicting edits and commands affecting shared state; do not switch branches or stage another agent's work.
 - Use separate worktrees when independent branch work is needed and authorized. They share repository history, not uncommitted changes; pass required specifications/contracts explicitly and avoid shared database or port collisions. Worktrees are an option, not mandatory overhead.

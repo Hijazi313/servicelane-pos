@@ -5,7 +5,7 @@ Authority: user approved one-business LAN installation, dedicated local PostgreS
 
 ## Requirement provenance
 
-The [project scope](../project-scope.md) records multi-business rollout and Business → Branch ownership. LAN operation without internet comes from the existing [architecture direction](README.md#stack-and-composition) and the supplied foundation handoff; it is the evaluation constraint used here, not a newly approved deployment decision. The user explicitly approved a local installation/database per business on 2026-10-12; this resolves the topology choice. Hardware, operational ownership and recovery targets remain open. Current status and authorization are owned by the [global planning handoff](../planning/TRACKER.md#current-planning-handoff--2026-10-12).
+The [project scope](../project-scope.md) records multi-business rollout and Business → Branch ownership. LAN operation without internet comes from the existing [architecture direction](README.md#stack-and-composition) and the supplied foundation handoff; it is the evaluation constraint used here, not a newly approved deployment decision. The user explicitly approved a local installation/database per business on 2026-10-12; this resolves the topology choice. Hardware, operational ownership and recovery targets remain open. Current status and authorization are owned by [project scope](../project-scope.md) and the [joint access tracker](../planning/business-access/phase-tracker.md).
 
 ## Approved topology
 
