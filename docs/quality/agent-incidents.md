@@ -13,6 +13,14 @@
 
 Entries below assess already-observed events in this active thread following the user’s instruction to apply the adopted skill. No repository-wide or unrelated historical audit was performed. Sandbox evaluation incidents are fictional fixtures and are not imported here. Severity and correction status remain provisional; only the user closes entries or decides prevention proposals.
 
+## INC-20261101-01 — Existing Supabase TLS context omitted from troubleshooting
+
+- Severity / status: S3 / corrected; user review pending. The user had to repeat the provider and request an actionable solution.
+- Violation and evidence: On 2026-11-01, after a `SELF_SIGNED_CERT_IN_CHAIN` result, the agent asked which database provider was in use and suggested generic recovery steps without applying available context. Root [AGENTS.md](../../AGENTS.md) requires actionable recommendations and reuse of current context. The [development setup](../development-setup.md) identifies Supabase and `DATABASE_CA_FILE`; the [foundation tracker](../planning/project-foundation/phase-tracker.md) records the same error and the provider-CA next step.
+- Impact: The user had to provide already-documented context and ask again before receiving the concrete certificate configuration steps. No data exposure or additional database mutation is evidenced by this communication failure.
+- Correction: The agent checked Supabase documentation and provided steps to download its server root certificate and configure `DATABASE_CA_FILE` with TLS verification enabled; the user reported that the connection worked. Browser/release readiness is not implied.
+- Prevention / user review: Apply the existing context-reuse and actionable-communication rules before recommending troubleshooting steps; no policy or skill change proposed / pending.
+
 ## INC-20261031-03 — Preserved test ownership ledgers deleted without explaining their value
 
 - Severity / status: S3 / open. Ten untracked ownership ledgers were deleted; recovery has not been established.

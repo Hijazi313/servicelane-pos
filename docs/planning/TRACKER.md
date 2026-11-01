@@ -76,6 +76,8 @@ User authorized committing the reviewed staged changes and creating a PR from `c
 
 ## Current focus
 
+- Workspace dependency repair: user reported the API watcher could not find `tsc-watch`. A full frozen, scripts-disabled workspace install with Node 24.21.0 and pnpm 12.11.2 restored both API and web executable entry points; combined server startup remains unverified to avoid starting database cleanup. Earlier filtered frontend installs are a possible cause, but the exact removal mechanism is unconfirmed. Owner: current agent; next: user retries `pnpm dev` on the authorized development target. Incident qualification remains unconfirmed pending causal evidence.
+
 - Frontend access: login, password change, minimal protected home and logout source implemented at user request; [scope, acceptance and evidence](frontend-access/phase-tracker.md). Same-origin HTTPS/browser verification remains a separate prerequisite; no working integrated login is claimed.
 
 - Frontend design baseline: user requested a reviewed theme-adjacent design foundation and selected desktop and tablet as equal targets. [Proposed baseline and review limits](../design/frontend-design-baseline.md) and its illustrative cashier layout are drafted. The user accepted the general visual direction, not the exact layout or every proposed default. The browser blocked the local review file, so agent visual inspection, keyboard and device behavior remain unverified; remaining design decisions are pending. This work does not activate cashier implementation or business branding configuration.
