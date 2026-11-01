@@ -1,8 +1,9 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { ConfigProvider } from 'antd';
+import { RouterProvider } from '@tanstack/react-router';
 
-import { App } from './app/app';
+import { router } from './app/router';
 import { appTheme } from './app/theme';
 import './styles.css';
 
@@ -15,7 +16,7 @@ if (!root) {
 createRoot(root).render(
   <StrictMode>
     <ConfigProvider theme={appTheme}>
-      <App />
+      <RouterProvider router={router} />
     </ConfigProvider>
   </StrictMode>,
 );

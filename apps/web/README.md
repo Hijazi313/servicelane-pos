@@ -2,6 +2,8 @@
 
 This React, TypeScript and Vite application contains a first access client for login, required password change, a protected placeholder and logout. Browser-to-API integration remains unverified and requires the same-origin HTTPS setup described below.
 
+TanStack Router defines `/login`, `/change-password` and `/`. The server session controls which access screen is shown; route guards do not authorize API calls. Browser navigation and host fallback for direct route refresh remain unverified.
+
 See the [web capability index](docs/capabilities.md) for implemented source and evidence limits.
 
 Ant Design is installed and its `ConfigProvider` uses the application-owned defaults in `src/app/theme.ts`. The primary color is currently configured in code through a small theme input; a future business configuration must be validated before it is used. Restaurant-specific configuration and any administrator UI are not implemented. Validate the theme on a representative cashier workflow before treating the visual direction as accepted.

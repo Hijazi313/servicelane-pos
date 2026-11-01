@@ -7,5 +7,6 @@ Status: active source work authorized by the user's request for login, protected
 - FE-A03: Enforce the backend's required password-change state in the UI; allow password change and logout, not protected home. Re-check server state after an uncertain mutation. Never blindly replay login, password change or logout.
 - FE-A04: Logout requires CSRF and is confirmed by server response. If the result is unknown, show an explicit recovery state and do not claim logout succeeded.
 - FE-A05: The initial home is deliberately minimal; navigation to unimplemented features is not enabled. Login and home must remain usable at desktop and tablet sizes, with labels and visible keyboard focus.
+- FE-A06: Use explicit local routes for login, password change and home. The current server session determines which screen is shown; direct navigation, reload and browser history must not show protected content without a confirmed account. Unknown or unavailable session state stays fail-closed. Route navigation is not server authorization. The eventual same-origin host must support route refresh.
 
 Evidence: focused offline checks for authentication state and request handling, typecheck/build, and browser/HTTPS integration when its prerequisites are available. Browser HTTPS/session cookies, target devices and operational deployment are separate verification gates.

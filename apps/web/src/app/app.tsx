@@ -1,12 +1,15 @@
 import { useCallback, useEffect, useState } from 'react';
 import { Alert, Button, Form, Input, Spin, Typography } from 'antd';
+import { useNavigate, useRouterState } from '@tanstack/react-router';
+import { pathForScreen, type Screen } from './session-route';
 import { AccessRequestError, changePassword, currentAccount, login, logout, type Account } from '../features/access/access-api';
 
-type Screen = 'checking' | 'login' | 'restricted' | 'home' | 'unavailable' | 'unknown';
 type LoginFields = { username: string; password: string };
 type PasswordFields = { currentPassword: string; newPassword: string };
 
 export function App() {
+  const navigate = useNavigate();
+  const pathname = useRouterState({ select: state => state.location.pathname });
   const [screen, setScreen] = useState<Screen>('checking');
   const [account, setAccount] = useState<Account>();
   const [pending, setPending] = useState(false);
@@ -26,6 +29,10 @@ export function App() {
     }
   }, []);
   useEffect(() => { void refresh(); }, [refresh]);
+  useEffect(() => {
+    const target = pathForScreen(screen);
+    if (target && pathname !== target) void navigate({ to: target, replace: true });
+  }, [screen, pathname, navigate]);
 
   async function signIn(values: LoginFields) {
     setPending(true); setMessage('');
