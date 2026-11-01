@@ -17,4 +17,4 @@ pnpm --filter @servicelane/web build
 node --experimental-transform-types --test apps/web/tests/access-api.test.mjs
 ```
 
-To start both the API watcher and frontend from the repository root, run `pnpm dev`. The Vite development server serves the frontend only; starting both processes does not configure API integration or the HTTPS proxy required for authentication. Deployment remains separate work. See the [frontend architecture proposal](../../docs/architecture/frontend-proposal.md).
+To start both the API watcher and frontend from the repository root, run `pnpm dev`. For authenticated browser requests, first configure the [local HTTPS development proxy](../../docs/development-setup.md#local-browser-development); starting both processes alone does not configure it. Deployment remains separate work. See the [frontend architecture proposal](../../docs/architecture/frontend-proposal.md).

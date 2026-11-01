@@ -7,5 +7,6 @@ Status: active. User requested login first, followed by protected home and logou
 - [ ] Verify browser flow with same-origin HTTPS and target devices when infrastructure and suitable test resources are authorized and available.
 - [x] Add explicit login (`/login`), password-change (`/change-password`) and home (`/`) routes. A focused route-state mapping check, TypeScript and Vite build pass with Node 24.22.1; the build reports a chunk-size warning.
 - [ ] Verify direct navigation, refresh, history and session gating in a browser, and verify route fallback under the eventual same-origin host. A route-state unit check is not browser-routing evidence.
+- [x] Prepare the loopback HTTPS development proxy. A synthetic loopback test passed with a temporary certificate and mock API, covering forwarding, safe headers and unconfigured 503 behavior; Vite build passed with a chunk-size warning. This does not verify browser trust, backend configuration, session cookies or live login.
 
-Separate acceptance and release remain pending. The Vite server does not yet provide the trusted same-origin HTTPS proxy required by the authentication contract, so a working browser login has not been verified. No backend, deployment, database or credential changes are included.
+Separate acceptance and release remain pending. The Vite HTTPS proxy still needs a browser-trusted certificate and matching backend settings before live login can be verified. No backend, deployment, database, trust-store or credential changes are included.
