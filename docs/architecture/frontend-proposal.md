@@ -1,131 +1,56 @@
 # Frontend architecture proposal
 
-Status: architecture proposal, updated 2026-11-01. The user selected React, TypeScript and Vite and chose the Ant Design direction with its forms and tables. Validate the visual and interaction fit on a representative cashier screen; this plan does not authorize implementation or establish accepted API contracts.
+Status: proposal, updated 2026-11-01. React, TypeScript and Vite are selected; the user chose the Ant Design direction, including forms and tables. Other boundaries and recommendations below remain proposed unless linked to an approved decision. This document does not authorize implementation, dependency installation or API contract changes. Validate the visual and interaction fit on a representative cashier screen.
 
-## Purpose and constraints
+## Context and authority
 
-Build one maintainable staff-facing web application for multiple restaurant businesses. The approved topology serves its assets on the restaurant LAN alongside the API and a dedicated database. The server remains authoritative for data, prices, permissions and business/branch scope. Business identity, branding, currency and timezone come from validated configuration, not customer-specific code.
+Build one maintainable staff-facing application for multiple restaurant businesses. The [approved topology](vendor-isolation-proposal.md) uses one business per restaurant-LAN installation, a dedicated local PostgreSQL database, locally served client assets and one maintained codebase. Business identity, branding, currency and timezone come from validated configuration, not customer-specific code. Business → Branch ownership is foundational; operating multiple branches remains future scope.
 
-The application should work without internet access when its local server and network are available. Device operation while disconnected from that server, including queued writes and conflict resolution, is unresolved; do not imply offline sales support. Deployment, browser security and operational recovery require their own design and evidence.
+The server is authoritative for data, prices, permissions and business/branch scope. UI access controls are navigation and feedback, not authorization. Follow the actual session, cookie, CSRF and origin contract; do not invent a browser authentication scheme or client-selected scope. Browser-delivered configuration is public and cannot contain secrets.
 
-## Proposed boundaries
+The application should work without internet while the local server and LAN are available. Device operation disconnected from that server, queued writes and conflict resolution remain unresolved; do not imply offline sales support. Deployment, browser security and operational recovery need separate design and evidence. A timeout does not establish whether a write succeeded: use each operation's actual recovery contract before allowing a potentially duplicate action.
 
-- `apps/web` owns the browser application and its build. It consumes HTTP interfaces, never backend services, database models or persistence types.
-- An application composition area owns startup, routing, session integration and shared providers. Feature areas own screens, user interactions and API use for a coherent staff workflow. Do not assume a frontend feature must mirror exactly one backend module: a cashier journey may consume several.
-- A small shared area holds business-neutral UI and technical code only after a concrete common need exists. Keep feature-specific code with its feature; avoid a general-purpose utilities bucket, speculative layers and circular feature dependencies.
-- API boundary code handles transport details and translates documented responses into useful client outcomes. Use the owning backend contract and actual route behavior; accepted routes may differ, so do not assume one error format or retry policy applies everywhere. Shared transport contracts are introduced only when a real consumer justifies them.
-- Server data remains server-owned. Keep temporary interaction state local to its feature; use shared client state only when an actual cross-screen need warrants it. Coordinate router loading and the server-data cache so freshness and error handling have clear ownership.
-- Access controls in the UI improve navigation and feedback; the API enforces authorization. Follow the existing session, cookie, CSRF and origin contract rather than inventing a browser authentication scheme.
+## Proposed application boundaries
 
-## Proposed library choices
+- `apps/web` owns the browser application and build. It consumes supported HTTP interfaces, not backend services, controllers, database models or persistence types.
+- Application composition owns startup, routing, session integration, shared providers and cross-feature orchestration. Features own coherent staff workflows, including screens, interactions and API use; a frontend workflow need not mirror one backend module.
+- Shared code is business-neutral and created for a demonstrated common need. App composes feature public interfaces; features may use shared code; shared code does not import app or features. Avoid circular dependencies and imports of other features' private files.
+- Server data stays server-owned. Keep temporary interaction state with its feature, and introduce shared client state only for a demonstrated need. Session or scope changes must not expose another staff member's cached data. Define the exact lifecycle before integration.
+- Shared transport handles genuinely common HTTP concerns; feature operations interpret their own endpoint contracts. Existing routes can differ in response, errors, revision and retry rules. Do not globally retry mutations or treat a cached result as proof of success.
 
-The following are the current recommendations, not installed dependencies or claims of production readiness. Confirm versions and compatibility when a feature first needs each dependency; avoid adding the whole stack to an empty application.
-
-| Need | Recommendation | Reason and boundary |
-| --- | --- | --- |
-| Routing | [TanStack Router](https://tanstack.com/router/latest/docs/overview) | Typed navigation and URL state help maintain a growing TypeScript application. Use client-side routing with Vite; TanStack Start is not required. Verify route refresh under the eventual local hosting arrangement. |
-| Server data | [TanStack Query](https://tanstack.com/query/latest/docs/framework/react/overview) | Coordinates fetching and cached server data. Explicitly choose freshness, invalidation and retry behavior by workflow; [read-query retries](https://tanstack.com/query/latest/docs/framework/react/guides/query-retries) have defaults that may need adjustment. Cached data is not proof that a write succeeded. |
-| HTTP | [Axios](https://axios-http.com/docs/intro) | A configured client, timeouts and interceptors can centralize transport behavior. This is a convenience choice, not proof of reliability; keep error handling explicit and respect existing session, CSRF and origin contracts. Never globally retry mutations. |
-| UI, forms and tables | [Ant Design](https://ant.design/components/overview/) | Use its themed components, form system and table by default. Configure existing behavior before building custom controls; native controls remain appropriate where simpler. Validate keyboard, touch and visual fit in our own workflows. |
-| Validation | [Zod](https://zod.dev/) | Candidate for runtime data validation or a concrete schema need beyond Ant Design's form validation. Validate responses selectively against actual contracts; TypeScript types alone do not validate runtime data. Avoid duplicated business rules and keep server validation authoritative. |
-| Verification | [Vitest](https://vitest.dev/), [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/) and [Playwright](https://playwright.dev/docs/intro) | Candidates for focused logic/component checks and browser journeys respectively. Adopt the minimum required for the active slice; browser tests alone do not verify physical hardware or operational recovery. |
-
-## State ownership
-
-Give each piece of state one clear owner and keep it as close as practical to its consumers:
-
-| State | Proposed owner | Example |
-| --- | --- | --- |
-| Server data | TanStack Query | Menu, saved orders and shift status |
-| Screen or workflow interaction | React state or a feature-owned reducer | An open dialog or an order being assembled |
-| Form input and validation feedback | Ant Design Form | Editable fields and their errors |
-| Navigation state | TanStack Router URL parameters | Appropriate list filters and pagination that should survive navigation |
-| Shared client-only state | React context initially, when necessary | A UI preference used across unrelated screens |
-
-Do not duplicate authoritative server data in a client store. An unsaved order draft may be feature-owned client state; once submitted, follow the actual API contract and treat the server's result as authoritative. Design an explicit response to an uncertain submission before allowing a potentially duplicate order; a client store or cached response does not prove whether a write succeeded.
-
-Start without a separate client-state library. Consider [Zustand](https://zustand.docs.pmnd.rs/learn/getting-started/introduction) when a demonstrated cross-feature or navigation-spanning client-state need is awkward to manage with React; keep any store scoped to its actual owner. Persisting drafts across refreshes is a separate product and data-handling decision, not implied by shared state. Avoid placing sensitive information in URL parameters.
-
-## Component and styling strategy
-
-Use Ant Design as the primary component and theming foundation. Establish an intentional visual direction with its theme tokens and component props, then validate a representative cashier screen for touch, keyboard use, accessibility, clarity and appearance. Customize where the workflow needs it; avoid extensive overrides that make upgrades difficult. The design and interaction details remain open, and library documentation alone does not establish our application's accessibility.
-
-Use Ant Design's form and table capabilities first; do not add React Hook Form or TanStack Table as parallel defaults. Reconsider a separate library only when a documented feature need cannot be met adequately and its maintenance cost is justified. For server-backed tables, define which filters and pagination live in URL state, how they map to the actual API contract, and how Query caches and refreshes the results. Avoid maintaining competing copies of the same state.
-
-Proposed ownership: features own workflow-specific components; promote a component to shared UI only when it has genuinely reusable behavior and a clear owner. Shared components handle presentation and interaction, not API calls or restaurant-specific policy. Use consistent design tokens for typography, spacing, color, focus and interaction states once the chosen approach is understood. Simple native controls are valid; do not recreate complex accessible interactions without a reason. Verify representative flows with keyboard and target devices, not just component-library documentation.
-
-## Illustrative application layout
-
-This is an ownership map, not a scaffold or mandatory set of empty directories. Names and route layout can evolve with the first approved slice.
+The existing app contains `main.tsx`, `app/app.tsx` and `styles.css`. The following is an illustrative destination, not a mandate to create empty folders or a claim they exist:
 
 ```text
 apps/web/src/
-  app/                  # startup, providers, route composition, session wiring
-  features/
-    <workflow>/         # screens, feature components, API operations and local state
-  shared/
-    ui/                 # reusable business-neutral components, when justified
-    api/                # shared HTTP setup and transport-level handling
-    styles/             # shared design tokens and global foundations, when justified
+  app/                  # composition, routing, providers and layouts
+  features/<workflow>/  # workflow screens, operations and local state
+  shared/ui/            # reusable business-neutral interaction, when justified
+  shared/api/           # genuinely shared transport, when justified
+  shared/styles/        # app-wide theme foundations, when justified
+  main.tsx
 ```
 
-Place feature-specific types, validation and focused tests beside the behavior they support. The app composes features; features consume shared facilities and documented backend APIs. A feature should not reach into another feature's private internals: extract a genuine shared capability or compose the workflow at the app level when needed. Routes may use the router's required file conventions, but route files should delegate feature behavior rather than become a second feature implementation. Do not make a global types, hooks or utilities directory for unrelated code.
+Exact router file conventions, route location, shared-contract packaging and any path aliases remain decisions for concrete use. A future cashier journey may compose several backend capabilities; it must not be assumed that a particular screen, operation or API exists.
 
-## Proposed frontend development standards
+## Technology direction
 
-These standards are proposed for review alongside this architecture. They guide future implementation; they do not create tooling, change agent instructions or approve a frontend implementation phase.
+| Need | Status and recommendation |
+| --- | --- |
+| React, TypeScript, Vite | Selected for the minimal foundation; its [tracker](../planning/TRACKER.md) records acceptance and evidence status. |
+| UI, forms and tables | Ant Design direction selected; configure its theme and components when authorized and validate the actual workflow. Native controls can be simpler. Avoid parallel form/table defaults without a demonstrated need. |
+| Routing | TanStack Router recommended, not installed or approved by this proposal. Verify refresh under eventual local hosting; TanStack Start is not required. |
+| Server data | TanStack Query recommended, not installed. Decide freshness, invalidation, retries and router coordination per workflow. |
+| HTTP | Axios recommended as a convenience, not installed; central transport does not establish reliable or safe mutation handling. |
+| Runtime validation | Zod is a candidate only for a concrete need beyond form validation; server validation remains authoritative. |
+| Verification | Vitest, React Testing Library and Playwright are candidates. Adopt only what an active slice needs; browser tests do not establish physical hardware or recovery behavior. |
+| Shared client state | Start without a separate state library; consider Zustand only for a demonstrated need. Draft persistence is a separate product and data-handling decision. |
 
-### Code organization and React
+Confirm compatibility, versions, licensing and authorization at adoption. Current implementation and evidence are owned by the [global tracker](../planning/TRACKER.md) and [web README](../../apps/web/README.md), not this table.
 
-- Use descriptive, lowercase kebab-case filenames and PascalCase component names. Group feature screens, components, hooks, types and tests with the workflow they support; create folders when they make discovery clearer, not as empty layers.
-- Keep components focused on rendering and interaction. Extract a hook when it owns a coherent reusable behavior or makes a complex component easier to understand; do not extract every event handler. Keep pure calculations separate when they have independent meaning or need focused verification.
-- Use the state ownership table above. Derive values during rendering when practical rather than synchronizing duplicate state with effects. Use effects for synchronization with external systems and clean up subscriptions and other resources.
-- Keep imports directed from application composition to features and from features to shared facilities. Cross-feature reuse needs an intentional interface or composition; avoid circular imports and importing another feature's private files. Use the router's required route-file convention without making route files a second home for business logic.
+## Delivery and discovery
 
-### Asynchronous states and errors
+The [frontend development skill](../../.agents/skills/frontend-development/SKILL.md) routes component and integration work to focused guidance. For substantial features, the [spec-driven delivery skill](../../.agents/skills/spec-driven-delivery/SKILL.md) owns planning, phases, feature integration and handoffs. Feature specifications own intended behavior; trackers own availability and evidence; feature integration guides own consumer-facing contracts and recovery. Discover the owning capability, actual route and evidence before use; an approved contract does not establish availability. Add a frontend capability index when implemented reusable capabilities justify one.
 
-- Each data-driven interaction must account for initial loading, empty results, failure and successful data as applicable. Keep existing useful content visible during a background refresh when doing so is safe and make stale or failed refreshes understandable.
-- Handle expected API and validation failures in the owning feature according to its actual contract. Use error boundaries for unexpected rendering failures with a clear recovery action and a safe message; they do not replace asynchronous request error handling. Never display raw internal errors or sensitive data.
-- Indicate pending actions and prevent accidental duplicate submissions where appropriate. Apply retry and conflict handling according to each operation's contract; do not infer success or failure from a timeout.
+## Open decisions and evidence
 
-### Forms and validation
-
-- Use Ant Design Form for field state, accessible feedback and client-side rules where appropriate. Translate documented server field errors into the form without discarding non-field errors. Keep server validation authoritative.
-- Add Zod only for a concrete runtime schema need; define the boundary it validates and avoid maintaining competing copies of the same rule. Never claim TypeScript validates incoming data at runtime.
-
-### Accessibility and visual consistency
-
-- Provide accessible names and associated labels, visible keyboard focus, logical focus order, actionable error messages and semantic controls. Check dialogs and other custom interactions for focus management. Test representative keyboard and touch journeys; a component library alone is not evidence of accessibility.
-- Use Ant Design theme tokens and deliberate shared design values for color, typography, spacing and interaction states. Support readable contrast and layouts appropriate to agreed devices; avoid scattered magic values and per-screen theme overrides. The precise visual system and target devices remain open.
-
-### Tooling, dependencies and configuration
-
-- Use TypeScript strict checking and follow the repository's existing Node and pnpm workspace policy. Select linting, formatting and test configuration when the first web slice is planned; integrate with existing checks without implying that current API-only commands already cover the web app. Avoid forced type assertions or `any` to silence errors.
-- Test meaningful feature behavior at the smallest suitable level; use browser tests for critical user journeys and avoid tests that only repeat implementation details. Test loading, errors and accessibility interactions where they affect the feature. Record actual checks and limits.
-- Add dependencies only for a concrete need, with compatible versions and license review. Check overlap with the chosen stack and plan for supported upgrades. Do not install packages or change the lockfile under this planning proposal.
-- Treat all browser-delivered configuration as public. Validate required values at the relevant boundary, never place secrets in the client bundle, and keep environment-specific settings out of business logic. Exact configuration and deployment conventions remain open.
-
-## Reliability and user experience
-
-Show useful loading, empty, denied and failure states where they arise. Distinguish loss of server connectivity from an individual failed request where evidence permits; a browser connectivity indicator alone cannot prove the API is reachable. Never automatically repeat a mutation unless that operation's contract makes retry safe. Reconcile uncertain outcomes before allowing a potentially duplicative action.
-
-Design for accessible keyboard and touch operation, readable information and practical cashier speed. Develop visual style and interaction details with real workflows rather than locking in a speculative design system. Extract reusable components as repeated needs become clear.
-
-## Agent discovery and work
-
-Use the existing root instructions and [spec-driven delivery skill](../../.agents/skills/spec-driven-delivery/SKILL.md) as the entry point. Start with the [global tracker](../planning/TRACKER.md), then this architecture and only the active feature's plan, acceptance criteria and integration guidance. For backend dependencies, inspect the owning module's capability index, actual HTTP contract and current evidence; do not import backend internals or assume a planned endpoint exists. The existing `frontend-integration.md` convention owns consumer-facing permissions, states, errors, retry semantics and links to canonical contracts; use it for each relevant feature before integration, rather than maintaining a second global API catalogue.
-
-Keep durable architecture decisions here or in a focused decision record; keep feature intent and progress in their owning specification and tracker. Add a compact frontend capability index only when implemented reusable capabilities make discovery worthwhile. If the integration spans modules, identify a natural feature or integration owner and link to each backend source. Where agents work concurrently, use the existing collaboration convention for explicit assignments, shared-file ownership and integration evidence; do not create assignments or parallel agents without applicable authorization.
-
-Potential future improvement: a short `apps/web/AGENTS.md` could link to stable frontend boundaries and relevant guidance once the application exists and there is evidence it helps. A frontend-specific skill or additional checks should address demonstrated recurring problems, not duplicate this document. These are proposals only: creating or changing agent instructions, skills, templates or guardrails requires explicit user approval. No frontend application scaffold or new agent guidance is created by this proposal.
-
-## Delivery and evidence
-
-1. Review and agree the boundaries and first milestone; record consequential decisions and unresolved dependencies.
-2. Before a frontend feature integrates with the API, prepare its consumer integration guidance: relevant capabilities, available contracts and evidence, permissions, states, errors and retry behavior. Follow links to actual routes and schemas; do not treat an approved specification as proof of availability.
-3. Implement small end-to-end slices with a visible staff outcome. Record the backend dependencies, demonstrated behavior, checks and limitations in the owning tracker. Choose the first journey after verifying its actual prerequisites.
-4. Verify important user flows and their API interactions with focused checks. Browser/device behavior, local deployment, connectivity recovery, physical receipt output and full trading flow need evidence appropriate to each; source review or isolated tests alone do not establish release readiness.
-
-## Deferred decisions
-
-Detailed visual direction, styling conventions around Ant Design, hosting/origin configuration, supported devices and browsers, disconnected-device behavior, and the first feature scope remain open. The recommended supporting libraries require review in the context of the first slice; no package versions or installation are approved by this document. Integration mapping and frontend agent guidance should follow concrete workflows.
+Detailed visual direction, Ant Design styling conventions, hosting/origin configuration, supported browsers and devices, disconnected-device behavior, draft persistence, cross-tab synchronization, session/cache lifecycle and the first feature scope remain open. Integration must define applicable loading, empty, denied, validation, conflict and recovery states. Verify representative browser and device workflows, local deployment and recovery separately; physical receipt output and a complete trading flow require their own evidence. Source review or a selected library alone does not establish release readiness.
