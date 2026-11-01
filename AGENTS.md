@@ -42,6 +42,7 @@ Read only task-relevant guidance.
 
 ## Context and freshness
 
+- Before delegating, plan the outcome, ownership and coordination; give each sub-agent the relevant context and choose whether to inherit conversation history based on the task. Reconcile its findings and verify required evidence before relying on them. Follow the [delivery workflow](.agents/skills/spec-driven-delivery/references/workflow.md#multiple-agent-coordination) for assignment details.
 - Reuse sufficient current context, including supplied instructions; do not reload the same unchanged content merely because another instruction links to it. Before rereading, identify missing or potentially changed information and check relevant diffs, symbols or sections. If content has changed, retrieve the affected sections with enough context, treat superseded content as stale, and use the current source as authoritative; do not discard or overwrite anyone's file changes. If freshness is uncertain or content is unavailable after a handoff or compaction, verify the relevant source. Do not bulk-load unrelated documents or guess missing constraints.
 - Before dependent actions and after handoffs or concurrent work, confirm relevant policy, scope, contracts and assignments are current. After compaction, use summaries for orientation and verify exact source where correctness depends on it. Never assume freshness merely because you did not edit a file.
 
