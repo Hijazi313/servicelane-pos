@@ -37,7 +37,7 @@ Exact router file conventions, route location, shared-contract packaging and any
 | Need | Status and recommendation |
 | --- | --- |
 | React, TypeScript, Vite | Selected for the minimal foundation; its [tracker](../planning/TRACKER.md) records acceptance and evidence status. |
-| UI, forms and tables | Ant Design direction selected; configure its theme and components when authorized and validate the actual workflow. Native controls can be simpler. Avoid parallel form/table defaults without a demonstrated need. |
+| UI, forms and tables | Ant Design is installed with application-owned theme defaults; validate the visual direction on a representative workflow. Native controls can be simpler. Avoid parallel form/table defaults without a demonstrated need. |
 | Routing | TanStack Router recommended, not installed or approved by this proposal. Verify refresh under eventual local hosting; TanStack Start is not required. |
 | Server data | TanStack Query recommended, not installed. Decide freshness, invalidation, retries and router coordination per workflow. |
 | HTTP | Axios recommended as a convenience, not installed; central transport does not establish reliable or safe mutation handling. |

@@ -10,7 +10,7 @@
     "start": "pnpm --filter @servicelane/api start",
     "db:migrate": "pnpm --filter @servicelane/api db:migrate",
     "db:generate": "pnpm --filter @servicelane/api db:generate",
-    "dev": "pnpm --filter @servicelane/api dev",
+    "dev": "pnpm --parallel --filter @servicelane/api --filter @servicelane/web run dev",
     "provision-installation": "pnpm --filter @servicelane/api provision-installation",
     "test:bootstrap": "pnpm --filter @servicelane/api test:bootstrap",
     "recover-administrator": "pnpm --filter @servicelane/api recover-administrator",

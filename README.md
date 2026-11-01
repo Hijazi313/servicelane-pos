@@ -80,13 +80,15 @@ pnpm db:migrate
 
 See [migration conventions](apps/api/migrations/README.md) for generation, review, and corrective changes.
 
-### Run the API
+### Run the development servers
 
-For development with compilation and automatic restart:
+To start the API watcher and the React development server together:
 
 ```sh
 pnpm dev
 ```
+
+For only one server, run `pnpm --filter @servicelane/api dev` or `pnpm --filter @servicelane/web dev`. Vite prints its local URL. Starting both servers does not configure browser-to-API authentication or an HTTPS proxy.
 
 To run the compiled application after building:
 
@@ -116,7 +118,9 @@ Run commands from the repository root.
 
 | Command | Description |
 | --- | --- |
-| `pnpm dev` | Watch source files and restart the API after successful compilation |
+| `pnpm dev` | Run the API watcher and React development server together |
+| `pnpm --filter @servicelane/api dev` | Watch and restart only the API |
+| `pnpm --filter @servicelane/web dev` | Run only the React development server |
 | `pnpm build` | Compile the API |
 | `pnpm start` | Run the compiled API |
 | `pnpm test:access` | Run focused database-free authentication and access checks |

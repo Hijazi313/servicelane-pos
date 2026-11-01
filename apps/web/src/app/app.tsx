@@ -1,8 +1,10 @@
+import { Typography } from 'antd';
+
 export function App() {
   return (
     <main>
-      <h1>Restaurant POS</h1>
-      <p>Frontend setup is ready for the next step.</p>
+      <Typography.Title>Restaurant POS</Typography.Title>
+      <Typography.Paragraph>Frontend setup is ready for the next step.</Typography.Paragraph>
     </main>
   );
 }

@@ -29,7 +29,7 @@ See the [authentication specification](../apps/api/src/modules/authentication/do
 
 `HOST`, `PORT` and `NODE_ENV` are validated before listening. Invalid configuration exits nonzero with field names rather than secret values. Built-in Nest logging/error handling is used; request-body logging is not enabled.
 
-`pnpm dev` compiles once and watches source changes. Each successful compilation restarts the API; compilation errors prevent a new start. It uses the same ignored `.env` as `pnpm start`. Restart the command after environment changes. Migrations are never applied by watch mode.
+`pnpm dev` starts the API watcher and Vite together. The API compiles once and watches source changes; each successful compilation restarts it, while compilation errors prevent a new start. It uses the same ignored `.env` as `pnpm start`. Restart the command after environment changes. Migrations are never applied by watch mode. Run `pnpm --filter @servicelane/api dev` or `pnpm --filter @servicelane/web dev` to start only one server. Starting both does not configure the same-origin HTTPS proxy required for authenticated browser requests.
 
 The API can start while the database is unavailable. The health query has a three-second deadline covering pool acquisition and query execution. Ctrl-C/SIGTERM closes the server and database pool.
 
