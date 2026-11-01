@@ -52,7 +52,7 @@ See the [project tracker](docs/planning/TRACKER.md) for the roadmap, current acc
 - pnpm **12.11.2**, as specified in [`package.json`](package.json).
 - A dedicated, user-managed hosted PostgreSQL development database.
 
-The current development workflow uses hosted PostgreSQL. Local database provisioning and Docker configuration are not included. Install the pinned runtime and package manager using your normal tooling.
+The current development workflow uses hosted PostgreSQL. Local database provisioning and Docker configuration are not included. If you use nvm, `npm run setup:toolchain` installs the Node version from `.node-version` and enables the pnpm Corepack shim. Then run `nvm use "$(cat .node-version)"` in your current terminal; the npm script cannot change its parent shell. You can also install the pinned tools using your normal tooling.
 
 ### Installation and configuration
 
@@ -60,7 +60,7 @@ From the repository root:
 
 ```sh
 pnpm install --frozen-lockfile --ignore-scripts
-cp .env.example .env
+if [ ! -e .env ] && [ ! -L .env ]; then cp .env.example .env; fi
 ```
 
 Configure `.env` using [`.env.example`](.env.example). Provide `DATABASE_URL` and `CLIENT_ORIGIN`, the canonical HTTPS client origin without a trailing slash. Keep credentials out of version control.

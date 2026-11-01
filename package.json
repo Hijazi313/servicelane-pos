@@ -6,6 +6,7 @@
     "node": ">=24.21.0 <25"
   },
   "scripts": {
+    "setup:toolchain": "bash scripts/setup-toolchain.sh",
     "build": "pnpm --filter @servicelane/api build",
     "start": "pnpm --filter @servicelane/api start",
     "db:migrate": "pnpm --filter @servicelane/api db:migrate",
