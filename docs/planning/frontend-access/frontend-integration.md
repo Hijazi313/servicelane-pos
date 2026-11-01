@@ -1,0 +1,7 @@
+# Frontend access — integration mapping
+
+[Specification](spec.md) · [Tracker](phase-tracker.md) · [Authentication contract](../../../apps/api/src/modules/authentication/docs/features/access/spec.md#http-interfaces) · [Controller](../../../apps/api/src/modules/authentication/http/access.controller.ts)
+
+Routes use `/api/v1`, same-origin HTTPS and Secure, HttpOnly session cookies. `GET /auth/csrf` returns `{csrfToken}` bound to prelogin or session state. `POST /auth/login` sends `{username,password}` with `X-CSRF-Token` and returns `{csrfToken,account}`; `GET /auth/me` returns a safe account; `POST /auth/logout` uses CSRF and returns 204. `POST /auth/password` accepts `{currentPassword,newPassword}`, returns a rotated session and account. A 403 from `/auth/me` can indicate a restricted session, but is not definitive; offer password change or sign-out without exposing protected content. Follow actual legacy status/error formats; do not infer account existence. Treat connection loss during mutation as an unknown outcome and refresh server state before another action. Refresh cannot always distinguish a restricted session from other 403 responses; remain fail-closed.
+
+The current Vite setup has no HTTPS or API proxy. Actual browser integration requires an appropriately trusted, same-origin HTTPS setup, separately reviewed and verified. No cross-origin or insecure-cookie workaround is authorized.

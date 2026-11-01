@@ -1,0 +1,11 @@
+# Frontend access — intended first slice
+
+Status: active source work authorized by the user's request for login, protected home and logout. This does not authorize deployment, database access, credentials, certificate provisioning or backend contract changes.
+
+- FE-A01: Start by checking the server session. Show the protected home only after a successful server identity response; unavailable service must not be treated as signed out or authorized.
+- FE-A02: A login form collects username and password, bootstraps CSRF and submits the documented same-origin session request. Show generic credential failure, throttling and safe unavailable feedback. Do not store credentials or tokens in browser storage.
+- FE-A03: Enforce the backend's required password-change state in the UI; allow password change and logout, not protected home. Re-check server state after an uncertain mutation. Never blindly replay login, password change or logout.
+- FE-A04: Logout requires CSRF and is confirmed by server response. If the result is unknown, show an explicit recovery state and do not claim logout succeeded.
+- FE-A05: The initial home is deliberately minimal; navigation to unimplemented features is not enabled. Login and home must remain usable at desktop and tablet sizes, with labels and visible keyboard focus.
+
+Evidence: focused offline checks for authentication state and request handling, typecheck/build, and browser/HTTPS integration when its prerequisites are available. Browser HTTPS/session cookies, target devices and operational deployment are separate verification gates.

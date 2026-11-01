@@ -53,4 +53,6 @@ The [frontend development skill](../../.agents/skills/frontend-development/SKILL
 
 ## Open decisions and evidence
 
+The [frontend design baseline](../design/frontend-design-baseline.md) records the proposed visual and interaction direction and its review limits.
+
 Detailed visual direction, Ant Design styling conventions, hosting/origin configuration, supported browsers and devices, disconnected-device behavior, draft persistence, cross-tab synchronization, session/cache lifecycle and the first feature scope remain open. Integration must define applicable loading, empty, denied, validation, conflict and recovery states. Verify representative browser and device workflows, local deployment and recovery separately; physical receipt output and a complete trading flow require their own evidence. Source review or a selected library alone does not establish release readiness.

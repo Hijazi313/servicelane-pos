@@ -5,7 +5,7 @@ type BrandTheme = {
 };
 
 // Product default; a future business configuration must be validated before use here.
-const defaultBrand: BrandTheme = { primaryColor: '#1677ff' };
+const defaultBrand: BrandTheme = { primaryColor: '#254c3c' };
 
 function createAppTheme(brand: BrandTheme): ThemeConfig {
   return {
