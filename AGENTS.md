@@ -12,7 +12,7 @@
 ## Before starting
 
 - Read [project scope](docs/project-scope.md) and locate current work in the [global tracker](docs/planning/TRACKER.md); stay within authorized scope. Use the [spec-driven delivery skill](.agents/skills/spec-driven-delivery/SKILL.md) for planning, delegation or progress updates; load only relevant module/feature details.
-- Read applicable ancestor/nested `AGENTS.md` instructions before editing their subtree, applying the context-reuse rule below.
+- Read applicable ancestor/nested `AGENTS.md` instructions before editing their subtree, applying the context-reuse rule below. For cross-application work, follow the scoped instructions for each affected application.
 - Before Git mutations or PR actions, read [CONTRIBUTING.md](CONTRIBUTING.md), inspect Git state and follow its workflow within authorization.
 - Read relevant `docs/capabilities.md` indexes before candidate code and maintain them with public capability changes; follow [discovery and upkeep](docs/architecture/README.md#capability-discovery-and-documentation-upkeep).
 
@@ -42,7 +42,7 @@ Read only task-relevant guidance.
 
 ## Context and freshness
 
-- Reuse sufficient current context, including supplied instructions. Before rereading, identify missing or potentially changed information; inspect relevant diffs, symbols or sections first. Do not bulk-load unrelated documents or guess missing constraints.
+- Reuse sufficient current context, including supplied instructions; do not reload the same unchanged content merely because another instruction links to it. Before rereading, identify missing or potentially changed information and check relevant diffs, symbols or sections. If content has changed, retrieve the affected sections with enough context, treat superseded content as stale, and use the current source as authoritative; do not discard or overwrite anyone's file changes. If freshness is uncertain or content is unavailable after a handoff or compaction, verify the relevant source. Do not bulk-load unrelated documents or guess missing constraints.
 - Before dependent actions and after handoffs or concurrent work, confirm relevant policy, scope, contracts and assignments are current. After compaction, use summaries for orientation and verify exact source where correctness depends on it. Never assume freshness merely because you did not edit a file.
 
 ## Incidents and instruction upkeep

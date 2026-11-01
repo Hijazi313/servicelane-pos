@@ -103,7 +103,7 @@ User selected the reviewed and consolidated skill update: optional independent d
 
 | Task | Branch | Checkout | Owner | Integration base | Publication | Tracker |
 | --- | --- | --- | --- | --- | --- | --- |
-| Frontend foundation | `codex/frontend-foundation` | `/Users/macbookpro/Documents/personal/restaurant-pos-custom` | Current agent | `main` at `9dbaf2d` | Local only — publication unauthorized | [Current focus](#current-focus) |
+| Frontend foundation | `codex/frontend-foundation` | `/Users/macbookpro/Documents/personal/restaurant-pos-custom` | Current agent | `main` at `9dbaf2d` | Push authorized; Git is authoritative for publication | [Current focus](#current-focus) |
 
 Current designations follow [CONTRIBUTING](../../CONTRIBUTING.md#active-work-and-remote-checkpoints); Git is authoritative for heads and synchronization.
 
