@@ -76,9 +76,9 @@ User authorized committing the reviewed staged changes and creating a PR from `c
 
 ## Current focus
 
-- Workspace dependency repair: user reported the API watcher could not find `tsc-watch`. A full frozen, scripts-disabled workspace install with Node 24.21.0 and pnpm 12.11.2 restored both API and web executable entry points; combined server startup remains unverified to avoid starting database cleanup. Earlier filtered frontend installs are a possible cause, but the exact removal mechanism is unconfirmed. Owner: current agent; next: user retries `pnpm dev` on the authorized development target. Incident qualification remains unconfirmed pending causal evidence.
+- Workspace dependency repair: user reported the API watcher could not find `tsc-watch`. A full frozen, scripts-disabled workspace install with Node 24.21.0 and pnpm 12.11.2 restored both API and web executable entry points. The user subsequently reported successful API startup; full integrated behavior remains unverified. Earlier filtered frontend installs are a possible cause, but the exact removal mechanism is unconfirmed. Incident qualification remains unconfirmed pending causal evidence.
 
-- Frontend access: login, password change, minimal protected home and logout source implemented at user request; [scope, acceptance and evidence](frontend-access/phase-tracker.md). Same-origin HTTPS/browser verification remains a separate prerequisite; no working integrated login is claimed.
+- Frontend access: login, password change, minimal protected home and logout source implemented at user request; [scope, evidence and current handoff](frontend-access/phase-tracker.md). User reports the login form is visible and Supabase connectivity works after CA configuration; successful authentication and full browser integration remain unverified. Next: determine safe first-administrator path and obtain any needed target-specific authorization.
 
 - Frontend design baseline: user requested a reviewed theme-adjacent design foundation and selected desktop and tablet as equal targets. [Proposed baseline and review limits](../design/frontend-design-baseline.md) and its illustrative cashier layout are drafted. The user accepted the general visual direction, not the exact layout or every proposed default. The browser blocked the local review file, so agent visual inspection, keyboard and device behavior remain unverified; remaining design decisions are pending. This work does not activate cashier implementation or business branding configuration.
 
@@ -111,7 +111,7 @@ User selected the reviewed and consolidated skill update: optional independent d
 
 | Task | Branch | Checkout | Owner | Integration base | Publication | Tracker |
 | --- | --- | --- | --- | --- | --- | --- |
-| Frontend foundation | `codex/frontend-foundation` | `/Users/macbookpro/Documents/personal/restaurant-pos-custom` | Current agent | `main` at `9dbaf2d` | Push authorized; Git is authoritative for publication | [Current focus](#current-focus) |
+| Frontend foundation | `codex/frontend-foundation` | `/Users/macbookpro/Documents/personal/restaurant-pos-custom` | Handoff pending | `main` at `9dbaf2d` | Remote not rechecked; earlier push rejected by automatic review | [Current handoff](frontend-access/phase-tracker.md#current-handoff--2026-11-01) |
 
 Current designations follow [CONTRIBUTING](../../CONTRIBUTING.md#active-work-and-remote-checkpoints); Git is authoritative for heads and synchronization.
 
