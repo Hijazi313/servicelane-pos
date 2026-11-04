@@ -1,6 +1,14 @@
 # React and interaction
 
-Status: proposed development conventions, except for separately approved choices linked from [frontend architecture](../../../../docs/architecture/frontend-proposal.md). Apply within authorized scope; resolve material decisions rather than presenting recommendations as accepted policy.
+Status: design judgment below is approved skill guidance. Other development conventions remain proposed except for separately approved choices linked from [frontend architecture](../../../../docs/architecture/frontend-proposal.md). Apply within authorized scope; resolve material decisions rather than presenting recommendations as accepted policy.
+
+## Design judgment
+
+Before proposing, implementing or reviewing an affected interface, identify its user, primary task and common path; distinguish the main action from secondary actions. For a new or materially changed workflow, state the primary task and common path in the proposal or handoff. Arrange related information, fields and actions in a meaningful task order, using clear labels and visual hierarchy so users can understand what to do without remembering details from another screen. Consider relevant loading, pending, success, failure and unknown outcomes and the user's safe next action. For consequential actions, show the information needed for the decision according to the approved workflow. Resolve material product or contract ambiguity rather than inventing behavior.
+
+For restaurant workflows, make frequent actions and important values easy to locate and read on desktop and tablet, with practical touch targets that do not force a cramped layout; distinguish applicable order, kitchen and payment states instead of collapsing them into an ambiguous completion state. Keep restaurant identity and settings configurable as supported by the product; follow the existing [API and state lifecycle](api-state.md) guidance for server authority and uncertain outcomes. Do not invent retry or optimistic behavior.
+
+Use the existing design direction and components when they fit. Question whether color, gradients, shadows, decoration and layout serve the task or merely repeat a template; do not introduce a visual identity without a product decision. Consider keyboard, focus, contrast and touch needs under the interaction guidance below. Review the rendered result and representative workflow when feasible, reporting unverified behavior. Scale this judgment to the change: a minor label adjustment needs no separate design document or exhaustive checklist.
 
 ## Ownership and state
 
