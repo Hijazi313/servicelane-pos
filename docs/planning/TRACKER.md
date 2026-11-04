@@ -4,7 +4,7 @@ Last reconciled: 2026-11-01 against the linked records in this checkout. Other c
 
 ## Current priorities and integration
 
-- **Frontend access:** login source exists and the user reports the form visible and Supabase connectivity working. Successful authentication, cookies, logout and browser routing remain unverified. The [current handoff](frontend-access/phase-tracker.md#current-handoff--2026-11-01) owns the first-administrator next step and target-specific authorization limits.
+- **Frontend access:** the user reports successful login; cookie details, logout and browser routing remain unverified. The [current handoff](frontend-access/phase-tracker.md#current-handoff--2026-11-04) owns next steps and authorization limits.
 - **Inventory:** [discovery](inventory/discovery.md) is proposed; implementation is not activated.
 - **Integration and release:** the [business/access tracker](business-access/phase-tracker.md) owns accepted scope and deferred two-installation validation. A complete trading flow, including amendments, reconnect and receipt output, remains to be accepted; before MVP release, reconcile menu, payments, shifts, stock and reports and verify recovery and repeatable isolated provisioning.
 
@@ -19,7 +19,7 @@ Feature trackers own progress, evidence, authorization and handoffs. The coordin
 
 | Task | Branch | Checkout | Owner | Integration base | Publication | Tracker |
 | --- | --- | --- | --- | --- | --- | --- |
-| Frontend foundation | `codex/frontend-foundation` | `/Users/macbookpro/Documents/personal/restaurant-pos-custom` | Handoff pending | `main` at `9dbaf2d` | Remote not rechecked; earlier push rejected by automatic review | [Current handoff](frontend-access/phase-tracker.md#current-handoff--2026-11-01) |
+| Frontend access | `codex/frontend-foundation` | `/Users/macbookpro/Documents/personal/restaurant-pos-custom` | Handoff pending | `main` at `9dbaf2d` | Prior checkpoint pushed; verify remote before relying on it | [Current handoff](frontend-access/phase-tracker.md#current-handoff--2026-11-04) |
 
 This is the last recorded designation, not a live claim. Follow [CONTRIBUTING](../../CONTRIBUTING.md#active-work-and-remote-checkpoints); Git and available owner reports establish current heads and synchronization.
 

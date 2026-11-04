@@ -4,7 +4,7 @@ Last reconciled: 2026-11-01, against the linked records in this checkout. Other 
 
 | Work | Status and material limits | Owning detail |
 | --- | --- | --- |
-| Access | Active; login form reported visible, but successful authentication, cookies, logout and browser routing remain unverified. | [Access phase tracker](../frontend-access/phase-tracker.md) |
+| Access | Active; user reports successful login. Cookie details, logout and browser routing remain unverified. | [Access phase tracker](../frontend-access/phase-tracker.md) |
 | Foundation | Awaiting acceptance; browser rendering and release are not established by its recorded checks. | [Web setup](../../../apps/web/README.md) / [recorded foundation evidence](../tracker-history-2026-11-01.md#current-focus) |
 | Design and theme | Visual direction accepted in general; design decisions and representative browser/device verification remain pending. | [Design baseline](../../design/frontend-design-baseline.md) / [web setup](../../../apps/web/README.md) |
 

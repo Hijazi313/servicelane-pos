@@ -4,7 +4,7 @@ Last reconciled: 2026-11-01, against the linked module and discovery records in 
 
 | Work | Status and material limits | Owning detail |
 | --- | --- | --- |
-| Business and access | Development scope accepted; two-installation validation remains deferred. Current first-administrator target state is unconfirmed. | [Joint tracker](../business-access/phase-tracker.md) / [access handoff](../frontend-access/phase-tracker.md#current-handoff--2026-11-01) |
+| Business and access | Development scope accepted; two-installation validation remains deferred. Current target provisioning history is unconfirmed. | [Joint tracker](../business-access/phase-tracker.md) / [access handoff](../frontend-access/phase-tracker.md#current-handoff--2026-11-04) |
 | Inventory | Discovery proposed; implementation not activated. | [Inventory discovery](../inventory/discovery.md) |
 
 ## Module roadmap
