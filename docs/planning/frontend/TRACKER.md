@@ -10,18 +10,18 @@ Last reconciled: 2026-11-20, against the linked records in this checkout. Other 
 
 ## Proposed workflow roadmap
 
-This is a suggested sequence for discussion, not approved scope or permission to implement. Frontend workflows may combine backend capabilities; each needs discovery, agreed behavior and verified contract availability before implementation. Adjacent work can proceed in parallel when its dependencies are clear.
+This sequence starts with the prerequisites for a fresh installation and follows the staff workflow. It is a planning recommendation; each workflow needs discovery, agreed behavior and verified contract availability before implementation. Independent work can proceed in parallel where dependencies permit.
 
 | Order | Workflow | Proposed outcome / dependency |
 | --- | --- | --- |
-| 1 | Access and application foundation | Complete the active [access flow](../frontend-access/phase-tracker.md) and resolve foundation/design decisions needed for the first workflow. The basic foundation is complete. Remaining access checks are tracked separately. |
-| 2 | Cashier: menu selection and order capture | Establish a representative cashier journey using the available [Menu](../../../apps/api/src/modules/menu/docs/README.md) and [Orders](../../../apps/api/src/modules/orders/docs/README.md) capabilities; confirm ordering behavior and API availability first. |
-| 3 | Kitchen preparation | Scope staff access to preparation queues and status changes using the [Kitchen plan](../../../apps/api/src/modules/kitchen/docs/README.md); coordinate the order-to-kitchen journey. |
-| 4 | Cashier shifts, billing and payment | Scope the smallest shift and settlement workflow against [Cashier Shifts](../../../apps/api/src/modules/cashier-shifts/docs/README.md) and [Billing](../../../apps/api/src/modules/billing/docs/README.md); payment, receipt and recovery decisions need their own approval and evidence. |
-| 5 | Menu management | Scope administrative catalogue workflows using the [Menu plan](../../../apps/api/src/modules/menu/docs/README.md); define permissions and configuration before implementation. |
+| 1 | Access and application foundation | The basic foundation is complete. Resolve the remaining [access checks and acceptance](../frontend-access/phase-tracker.md); administrator access is needed for catalogue maintenance. |
+| 2 | Initial menu setup | Scope the smallest administrator workflow to create and inspect saleable offerings using the [Menu capabilities](../../../apps/api/src/modules/menu/docs/capabilities.md). Confirm required business configuration and an initial catalogue before order capture. |
+| 3 | Cashier: menu selection and order capture | Scope a cashier journey using the configured catalogue and [Orders capabilities](../../../apps/api/src/modules/orders/docs/capabilities.md). Confirm selection behavior and API availability. |
+| 4 | Kitchen preparation | Scope staff access to preparation queues and status changes using the [Kitchen plan](../../../apps/api/src/modules/kitchen/docs/README.md); coordinate the captured order-to-kitchen journey. |
+| 5 | Cashier shifts, billing and payment | Scope the smallest shift and settlement workflow against [Cashier Shifts](../../../apps/api/src/modules/cashier-shifts/docs/README.md) and [Billing](../../../apps/api/src/modules/billing/docs/README.md); payment, receipt and recovery decisions need their own approval and evidence. |
 | 6 | Inventory | Follow [Inventory discovery](../inventory/discovery.md); frontend behavior depends on agreed stock workflows and available contracts. |
-| 7 | Reports | Proposed; identify audiences, reporting needs and available data before defining screens or contracts. |
+| 7 | Reports | Identify audiences, reporting needs and available data before defining screens or contracts. |
 
-The order is a planning recommendation, not a claim that any complete trading flow is already supported. Printing, reconnect and operational recovery require separate integration evidence.
+The later order is provisional and must be checked against actual operational dependencies during scoping. Menu maintenance beyond the initial catalogue belongs in its own agreed scope. A complete trading flow, printing, reconnect and operational recovery require separate integration evidence.
 
 Branch and checkout information is recorded in [active work branches](../TRACKER.md#active-work-branches); verify it before relying on it. This overview does not authorize work or replace feature evidence.
