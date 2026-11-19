@@ -13,9 +13,9 @@ Status: active. User requested login first, followed by protected home and logou
 
 The user accepted and closed the [basic frontend foundation](../frontend/TRACKER.md). The broader access flow remains active pending a separate user decision.
 
-The merged PR is present at `edf58d9` on local `main` and the cached `origin/main`. Its record reports six passing access, route and mock HTTPS proxy checks and a passing frontend typecheck. On local HTTPS the user reports login to the administrator welcome screen, logout, re-login and a successful hard refresh. The report does not specify the refreshed path or cover signed-out navigation.
+The merged PR is present at `edf58d9` on local `main` and the cached `origin/main`. Its record reports six passing access, route and mock HTTPS proxy checks and a passing frontend typecheck. On local HTTPS the user reports login to the administrator welcome screen, logout, re-login and a successful hard refresh. The user additionally reports that the browser back button does not restore access after logout. The refreshed path and signed-out direct navigation remain unspecified.
 
-Open checks include cookie attributes, password-change outcome, signed-out direct navigation and gating after logout, browser history, deployed route fallback and target devices. A session-check 403 can still show the password-change flow for an origin rejection. Production hosting and operational readiness remain unverified.
+Open checks include cookie attributes, password-change outcome, signed-out direct navigation, other browser-history cases, deployed route fallback and target devices. A session-check 403 can still show the password-change flow for an origin rejection. Production hosting and operational readiness remain unverified.
 
 Next decision belongs to the user: select any further access verification or decide acceptance under stated limits. Database-backed checks require target-specific authorization. This closeout authorized documentation only.
 
