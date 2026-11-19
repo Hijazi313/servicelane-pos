@@ -8,7 +8,7 @@ Before proposing, implementing or reviewing an affected interface, identify its 
 
 For restaurant workflows, make frequent actions and important values easy to locate and read on desktop and tablet, with practical touch targets that do not force a cramped layout; distinguish applicable order, kitchen and payment states instead of collapsing them into an ambiguous completion state. Keep restaurant identity and settings configurable as supported by the product; follow the existing [API and state lifecycle](api-state.md) guidance for server authority and uncertain outcomes. Do not invent retry or optimistic behavior.
 
-Use the existing design direction and components when they fit. Question whether color, gradients, shadows, decoration and layout serve the task or merely repeat a template; do not introduce a visual identity without a product decision. Consider keyboard, focus, contrast and touch needs under the interaction guidance below. Review the rendered result and representative workflow when feasible, reporting unverified behavior. Scale this judgment to the change: a minor label adjustment needs no separate design document or exhaustive checklist.
+Use the existing design direction and components when they fit. Question whether color, gradients, shadows, decoration and layout serve the task or merely repeat a template; do not introduce a visual identity without a product decision. Consider keyboard, focus, contrast and touch needs under the interaction guidance below. Apply the [browser review for UI readiness](../SKILL.md#browser-review-for-ui-readiness) to new screens and material interaction changes. Scale this judgment to the change: a minor label adjustment needs no separate design document or exhaustive checklist.
 
 ## Ownership and state
 
