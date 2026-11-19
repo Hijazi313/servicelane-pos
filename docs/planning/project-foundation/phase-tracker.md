@@ -79,7 +79,7 @@ Git delivery completed: [PR #2](https://github.com/Hijazi313/servicelane-pos/pul
 
 ### Transition to new planning
 
-F-01 remains closed. Current vendor-isolation planning, versioning/Swagger follow-ups, authorization and checkout cautions now belong to the [global tracker](../TRACKER.md#current-planning-handoff--2026-10-12), following the revised delivery workflow. Topology was subsequently approved on 2026-10-12; joint specification planning is linked from the global tracker. Subsequent BA-01 authorization and evidence belong to the joint tracker; F-01 is not reopened.
+F-01 remains closed. Current work is indexed by the [global tracker](../TRACKER.md); [historical foundation follow-ups](../tracker-history-2026-11-01.md#proposed-foundation-follow-ups--2026-10-12) preserve the earlier context. Topology was subsequently approved on 2026-10-12; joint specification planning is linked from the global tracker. Subsequent BA-01 authorization and evidence belong to the joint tracker; F-01 is not reopened.
 
 ### Remaining work, blockers and acceptance
 

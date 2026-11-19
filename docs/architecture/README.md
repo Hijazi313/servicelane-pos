@@ -10,7 +10,7 @@ Shared [HTTP boundary components](../../apps/api/src/infrastructure/http/README.
 
 - Node.js, TypeScript, NestJS with the Fastify adapter, PostgreSQL through Drizzle ORM and the `pg` driver. Drizzle Kit generates reviewed SQL migrations; the explicit runner applies them.
 - NestJS is the application framework; use `@nestjs/platform-fastify` as its HTTP adapter. Do not build a standalone Fastify application or a parallel Fastify routing/service layer. Define application routes through NestJS controllers and compose features through NestJS modules and providers.
-- Monorepo with `apps/api` and a future `apps/web`; frontend choice remains open between React and Next.js.
+- Monorepo with `apps/api` and an initial `apps/web`; the user selected React, TypeScript and Vite. See the [frontend architecture proposal](frontend-proposal.md).
 - Use a modular monolith. The initial deployment targets the restaurant LAN without internet, with authoritative server-side persistence; disconnected-device writes remain unresolved. Multiple vendor rollout is a product requirement. The user approved one business per LAN installation with local API, dedicated local PostgreSQL and locally served client assets on 2026-10-12; see the [topology record](vendor-isolation-proposal.md). Deployment execution remains unauthorized.
 - Follow NestJS module/provider conventions and supported Fastify integration. Check adapter compatibility before adopting middleware or plugins; do not assume Express-specific packages work.
 - Use Nest dependency injection for composition. Keep domain rules independent of NestJS, Fastify and database libraries.

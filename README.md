@@ -12,7 +12,7 @@ ServiceLane POS aims to bring everyday restaurant workflows into one system desi
 
 ## Project status
 
-**Active development · Backend API only · Not production-ready**
+**Active development · Not production-ready**
 
 The following scopes have been accepted for backend development; operational release validation remains separate:
 
@@ -28,7 +28,7 @@ The following scopes have been accepted for backend development; operational rel
 
 These scopes include focused offline and bounded PostgreSQL evidence, with limits recorded in their respective trackers. Cashier Shifts was integrated into main through [PR #21](https://github.com/Hijazi313/servicelane-pos/pull/21).
 
-[Inventory discovery](docs/planning/inventory/discovery.md) is the next planning focus; implementation has not been activated. Frontend, further order workflows, operational corrections and reporting remain ahead. Deployment, backup, recovery, an end-to-end trading flow and operational release validation remain incomplete.
+[Inventory discovery](docs/planning/inventory/discovery.md) remains in discovery. An [initial frontend setup](apps/web/README.md) provides a placeholder; browser rendering, integration and product workflows remain ahead. Deployment, backup, recovery, an end-to-end trading flow and operational release validation remain incomplete.
 
 See the [project tracker](docs/planning/TRACKER.md) for the roadmap, current acceptance status, and verification limits.
 
@@ -37,6 +37,7 @@ See the [project tracker](docs/planning/TRACKER.md) for the roadmap, current acc
 | Layer | Technology |
 | --- | --- |
 | Language | TypeScript |
+| Frontend | React, Vite |
 | API framework | NestJS |
 | Database | PostgreSQL |
 | Database tooling | Drizzle |
@@ -51,7 +52,24 @@ See the [project tracker](docs/planning/TRACKER.md) for the roadmap, current acc
 - pnpm **12.11.2**, as specified in [`package.json`](package.json).
 - A dedicated, user-managed hosted PostgreSQL development database.
 
-The current development workflow uses hosted PostgreSQL. Local database provisioning and Docker configuration are not included. Install the pinned runtime and package manager using your normal tooling.
+The current development workflow uses hosted PostgreSQL. Local database provisioning and Docker configuration are not included. If you use nvm, `npm run setup:toolchain` installs the Node version from `.node-version` and enables the pnpm Corepack shim. Run `nvm use` in your current terminal; `.nvmrc` points to the same version file. An npm script cannot change its parent shell. You can also install the pinned tools using your normal tooling.
+
+To select the project version automatically when entering this directory in zsh, add this after nvm is loaded in `~/.zshrc`:
+
+```sh
+autoload -U add-zsh-hook
+servicelane_nvm_use() {
+  local nvmrc
+  nvmrc="$(nvm_find_nvmrc)"
+  if [ -n "$nvmrc" ] && [ "$(nvm version)" != "$(nvm version "$(cat "$nvmrc")")" ]; then
+    nvm use --silent
+  fi
+}
+add-zsh-hook chpwd servicelane_nvm_use
+servicelane_nvm_use
+```
+
+The hook also respects `.nvmrc` files in other directories. It does not install missing Node versions; run `nvm install` in the project if needed. Restart the terminal or source `~/.zshrc` after adding it.
 
 ### Installation and configuration
 
@@ -59,7 +77,7 @@ From the repository root:
 
 ```sh
 pnpm install --frozen-lockfile --ignore-scripts
-cp .env.example .env
+if [ ! -e .env ] && [ ! -L .env ]; then cp .env.example .env; fi
 ```
 
 Configure `.env` using [`.env.example`](.env.example). Provide `DATABASE_URL` and `CLIENT_ORIGIN`, the canonical HTTPS client origin without a trailing slash. Keep credentials out of version control.
@@ -79,13 +97,15 @@ pnpm db:migrate
 
 See [migration conventions](apps/api/migrations/README.md) for generation, review, and corrective changes.
 
-### Run the API
+### Run the development servers
 
-For development with compilation and automatic restart:
+To start the API watcher and the React development server together:
 
 ```sh
 pnpm dev
 ```
+
+For only one server, run `pnpm --filter @servicelane/api dev` or `pnpm --filter @servicelane/web dev`. Vite prints its local URL. Starting both servers does not configure browser-to-API authentication or an HTTPS proxy.
 
 To run the compiled application after building:
 
@@ -115,7 +135,9 @@ Run commands from the repository root.
 
 | Command | Description |
 | --- | --- |
-| `pnpm dev` | Watch source files and restart the API after successful compilation |
+| `pnpm dev` | Run the API watcher and React development server together |
+| `pnpm --filter @servicelane/api dev` | Watch and restart only the API |
+| `pnpm --filter @servicelane/web dev` | Run only the React development server |
 | `pnpm build` | Compile the API |
 | `pnpm start` | Run the compiled API |
 | `pnpm test:access` | Run focused database-free authentication and access checks |
