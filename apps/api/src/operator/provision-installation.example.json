@@ -1,11 +1,11 @@
 {
   "business": {
-    "name": "Chickano example Restaurant",
+    "name": "Example Restaurant",
     "currencyCode": "PKR",
     "timezone": "Asia/Karachi"
   },
   "branch": {
-    "name": "Chickano example Main Branch",
+    "name": "Example Main Branch",
     "address": "Example address"
   },
   "administrator": {
