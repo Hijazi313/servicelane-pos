@@ -9,9 +9,19 @@ Status: active. User requested login first, followed by protected home and logou
 - [ ] Verify direct navigation, refresh, history and session gating in a browser, and verify route fallback under the eventual same-origin host. A route-state unit check is not browser-routing evidence.
 - [x] Prepare the loopback HTTPS development proxy. A synthetic loopback test passed with a temporary certificate and mock API, covering forwarding, safe headers and unconfigured 503 behavior; Vite build passed with a chunk-size warning. This does not verify browser trust, backend configuration, session cookies or live login.
 
-Separate acceptance and release remain pending. The user reports successful login, logout and re-login. These reports do not establish cookie attributes, password-change behavior or complete route behavior; these remain unverified.
+## Current handoff — 2026-11-20
 
-## Current handoff — 2026-11-19
+The user accepted and closed the [basic frontend foundation](../frontend/TRACKER.md). The broader access flow remains active pending a separate user decision.
+
+The merged PR is present at `edf58d9` on local `main` and the cached `origin/main`. Its record reports six passing access, route and mock HTTPS proxy checks and a passing frontend typecheck. On local HTTPS the user reports login to the administrator welcome screen, logout, re-login and a successful hard refresh. The report does not specify the refreshed path or cover signed-out navigation.
+
+Open checks include cookie attributes, password-change outcome, signed-out direct navigation and gating after logout, browser history, deployed route fallback and target devices. A session-check 403 can still show the password-change flow for an origin rejection. Production hosting and operational readiness remain unverified.
+
+Next decision belongs to the user: select any further access verification or decide acceptance under stated limits. Database-backed checks require target-specific authorization. This closeout authorized documentation only.
+
+Incidents: none in this closeout.
+
+## Historical handoff — 2026-11-19
 
 - The user reports successful login and seeing the initial administrator welcome screen after configuring the local HTTPS origin and trusted proxy, followed by successful logout and re-login. This is user-reported browser evidence, not independent verification of the full access flow.
 - The development frontend now defaults to HTTPS on loopback port 5174 and refuses startup without its certificate; the mock proxy check passed. The API's local origin and proxy settings were corrected separately in ignored `.env`. An unauthenticated local request subsequently returned 401 instead of the earlier origin-rejection 403.

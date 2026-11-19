@@ -13,7 +13,7 @@
 
 - Read [project scope](docs/project-scope.md) and locate current work in the [global tracker](docs/planning/TRACKER.md); stay within authorized scope. Use the [spec-driven delivery skill](.agents/skills/spec-driven-delivery/SKILL.md) for planning, delegation or progress updates; load only relevant module/feature details.
 - Read applicable ancestor/nested `AGENTS.md` instructions before editing their subtree, applying the context-reuse rule below. For cross-application work, follow the scoped instructions for each affected application.
-- Before Git mutations or PR actions, read [CONTRIBUTING.md](CONTRIBUTING.md), inspect Git state and follow its workflow within authorization.
+- Before Git mutations or PR actions or the first edit, including documentation-only work, inspect the current branch and working tree. Read [CONTRIBUTING.md](CONTRIBUTING.md) and follow its workflow within authorization, including creating a topic branch before editing when local Git work is authorized. If branch changes are explicitly prohibited, clarify the intended checkout before editing.
 - Read relevant `docs/capabilities.md` indexes before candidate code and maintain them with public capability changes; follow [discovery and upkeep](docs/architecture/README.md#capability-discovery-and-documentation-upkeep).
 
 ## Behavioral Guidelines
