@@ -11,7 +11,17 @@ Status: active. User requested login first, followed by protected home and logou
 
 Separate acceptance and release remain pending. The user reported that Supabase connectivity worked after configuring the provider CA, the login form was visible and they were able to log in. The login report does not establish cookie attributes, password-change behavior, logout or complete route behavior; these remain unverified.
 
+## Current handoff — 2026-11-19
+
+- The user reports successful login and seeing the initial administrator welcome screen after configuring the local HTTPS origin and trusted proxy. This is user-reported browser evidence, not independent verification of the full access flow.
+- The development frontend now defaults to HTTPS on loopback port 5174 and refuses startup without its certificate; the mock proxy check passed. The API's local origin and proxy settings were corrected separately in ignored `.env`. An unauthenticated local request subsequently returned 401 instead of the earlier origin-rejection 403.
+- Logout, cookie attributes, refresh, direct navigation, history, session gating and password-change outcome remain unverified. The client currently treats every session-check 403 as a possible password-change restriction, including an origin rejection; distinguish this limitation before treating the flow as accepted.
+- Next: verify the smallest remaining browser behavior on the identified development target; session checks may update session activity and logout writes to the database, so obtain target-specific authorization for those actions. Do not repeat a password change with an unknown outcome. Credentials stay out of chat and arguments. Acceptance, release and publication remain separate.
+- Incidents: none in this handoff; [INC-20261101-01](../../quality/agent-incidents.md#inc-20261101-01--existing-supabase-tls-context-omitted-from-troubleshooting) remains pending user review.
+
 ## Current handoff — 2026-11-04
+
+Historical record; superseded by the 2026-11-19 handoff above.
 
 - The user reports successful login. Exact steps, target, account provisioning history and cookie attributes were not provided; do not infer them. The agent did not independently verify the login.
 - Next: resume frontend access with the user, clarify the desired next action and verify remaining browser behavior within authorized scope: logout, session/cookie behavior, direct navigation, refresh, history and gating. Password change and target-device checks remain unverified where applicable. Use the existing [test plan](test-plan.md); do not assume all checks are required immediately.

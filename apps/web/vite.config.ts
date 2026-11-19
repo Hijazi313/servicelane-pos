@@ -1,32 +1,18 @@
 import { readFileSync } from 'node:fs';
+import { homedir } from 'node:os';
+import { join } from 'node:path';
 import react from '@vitejs/plugin-react';
-import { defineConfig, type Plugin } from 'vite';
-
-function unavailableApi(): Plugin {
-  return {
-    name: 'unconfigured-api',
-    configureServer(server) {
-      server.middlewares.use('/api', (_request, response) => {
-        response.statusCode = 503;
-        response.setHeader('Content-Type', 'application/json');
-        response.setHeader('Cache-Control', 'no-store');
-        response.end(JSON.stringify({ message: 'Local HTTPS API proxy is not configured.' }));
-      });
-    },
-  };
-}
+import { defineConfig } from 'vite';
 
 export default defineConfig(({ command }) => {
   if (command !== 'serve') return { plugins: [react()] };
 
-  const certPath = process.env.WEB_DEV_HTTPS_CERT;
-  const keyPath = process.env.WEB_DEV_HTTPS_KEY;
-  if (Boolean(certPath) !== Boolean(keyPath)) {
+  const certPath = process.env.WEB_DEV_HTTPS_CERT ?? join(homedir(), '.servicelane-dev', 'localhost.pem');
+  const keyPath = process.env.WEB_DEV_HTTPS_KEY ?? join(homedir(), '.servicelane-dev', 'localhost-key.pem');
+  if (Boolean(process.env.WEB_DEV_HTTPS_CERT) !== Boolean(process.env.WEB_DEV_HTTPS_KEY)) {
     throw new Error('Set both WEB_DEV_HTTPS_CERT and WEB_DEV_HTTPS_KEY, or neither.');
   }
-  if (!certPath || !keyPath) return { plugins: [react(), unavailableApi()] };
-
-  const port = Number(process.env.WEB_DEV_PORT ?? '5173');
+  const port = Number(process.env.WEB_DEV_PORT ?? '5174');
   const apiPort = Number(process.env.WEB_DEV_API_PORT ?? '3000');
   if (![port, apiPort].every(value => Number.isInteger(value) && value > 0 && value <= 65535) || port === apiPort) {
     throw new Error('WEB_DEV_PORT and WEB_DEV_API_PORT must be different valid TCP ports.');

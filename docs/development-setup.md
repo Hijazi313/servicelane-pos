@@ -25,7 +25,7 @@ Authenticated routes enforce HTTPS protocol, origin and Host, and emit Secure co
 
 ### Local browser development
 
-The Vite development server supports a loopback-only HTTPS proxy for `/api` when supplied a trusted certificate and key. Without both, `/api` returns 503 instead of the frontend HTML; unauthenticated HTTP preview is not a working login setup. The proxy is for local development only, not a deployment configuration.
+The Vite development server uses a loopback-only HTTPS proxy for `/api` at `https://127.0.0.1:5174`. It defaults to the certificate and key below and fails to start if they are unavailable. The proxy is for local development only, not a deployment configuration.
 
 One option is [mkcert](https://github.com/FiloSottile/mkcert). Install it using your normal package manager, then run `mkcert -install` yourself if you choose to trust its local CA. This changes your machine's certificate trust store. Protect its CA private key and never share it. Generate a certificate for the loopback IP outside the repository:
 
@@ -37,21 +37,21 @@ mkcert -cert-file "$HOME/.servicelane-dev/localhost.pem" -key-file "$HOME/.servi
 chmod 600 "$HOME/.servicelane-dev/localhost-key.pem"
 ```
 
-In the terminal that starts both servers, configure the exact same browser origin on the API and the proxy. These values are process-local overrides; they do not modify `.env`:
+Configure the exact same browser origin on the API and the proxy. For example, these process-local overrides do not modify `.env`:
 
 ```sh
 export WEB_DEV_HTTPS_CERT="$HOME/.servicelane-dev/localhost.pem"
 export WEB_DEV_HTTPS_KEY="$HOME/.servicelane-dev/localhost-key.pem"
-export WEB_DEV_PORT=5173
+export WEB_DEV_PORT=5174
 export WEB_DEV_API_PORT=3000
 export HOST=127.0.0.1
 export PORT=3000
-export CLIENT_ORIGIN=https://127.0.0.1:5173
+export CLIENT_ORIGIN=https://127.0.0.1:5174
 export TRUSTED_PROXY_ADDRESSES=127.0.0.1
 pnpm dev
 ```
 
-Open `https://127.0.0.1:5173` after both servers start. Vite uses a strict port in this mode; if 5173 is occupied, stop the conflicting process or choose another port and update both `WEB_DEV_PORT` and `CLIENT_ORIGIN`. If the API uses a different port, update both `PORT` and `WEB_DEV_API_PORT`. The browser origin, API `CLIENT_ORIGIN` and certificate IP must match exactly. The proxy forwards the browser Host and Origin and supplies the trusted HTTPS protocol header; it removes caller-supplied forwarded headers. Do not expose the plain API listener or this development proxy to the LAN, bypass browser certificate warnings, or commit certificate keys. API startup can perform background database cleanup, so use only an authorized development target.
+Open `https://127.0.0.1:5174` after both servers start. Vite uses a strict port; if 5174 is occupied, stop the conflicting process or choose another port and update both `WEB_DEV_PORT` and `CLIENT_ORIGIN`. If the API uses a different port, update both `PORT` and `WEB_DEV_API_PORT`. The browser origin, API `CLIENT_ORIGIN` and certificate IP must match exactly. The proxy forwards the browser Host and Origin and supplies the trusted HTTPS protocol header; it removes caller-supplied forwarded headers. Do not expose the plain API listener or this development proxy to the LAN, bypass browser certificate warnings, or commit certificate keys. API startup can perform background database cleanup, so use only an authorized development target.
 
 Proxy behavior has a focused synthetic test: from `apps/web`, run `node --test tests/dev-proxy.test.mjs` with the project Node version and OpenSSL installed. It uses loopback, a temporary certificate and a mock upstream; it does not prove trusted browser cookies or a live login.
 
@@ -61,7 +61,7 @@ See the [authentication specification](../apps/api/src/modules/authentication/do
 
 `HOST`, `PORT` and `NODE_ENV` are validated before listening. Invalid configuration exits nonzero with field names rather than secret values. Built-in Nest logging/error handling is used; request-body logging is not enabled.
 
-`pnpm dev` starts the API watcher and Vite together. The API compiles once and watches source changes; each successful compilation restarts it, while compilation errors prevent a new start. It uses the same ignored `.env` as `pnpm start`. Restart the command after environment changes. Migrations are never applied by watch mode. Run `pnpm --filter @servicelane/api dev` or `pnpm --filter @servicelane/web dev` to start only one server. Starting both does not configure the same-origin HTTPS proxy required for authenticated browser requests.
+`pnpm dev` starts the API watcher and Vite together. The API compiles once and watches source changes; each successful compilation restarts it, while compilation errors prevent a new start. It uses the same ignored `.env` as `pnpm start`. Restart the command after environment changes. Migrations are never applied by watch mode. Run `pnpm --filter @servicelane/api dev` or `pnpm --filter @servicelane/web dev` to start only one server. The API origin and trusted proxy must match the frontend configuration.
 
 The API can start while the database is unavailable. The health query has a three-second deadline covering pool acquisition and query execution. Ctrl-C/SIGTERM closes the server and database pool.
 

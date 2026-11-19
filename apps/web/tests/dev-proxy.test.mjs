@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { execFileSync } from 'node:child_process';
-import { createServer as createHttpServer, get as httpGet } from 'node:http';
+import { createServer as createHttpServer } from 'node:http';
 import { request as httpsRequest } from 'node:https';
 import { mkdtempSync, readFileSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
@@ -28,20 +28,14 @@ function request(options, transport) {
   });
 }
 
-test('development API fails closed without TLS and forwards trusted HTTPS metadata with TLS', async () => {
+test('development server requires TLS and forwards trusted HTTPS metadata', async () => {
   const directory = mkdtempSync(join(tmpdir(), 'pos-dev-proxy-'));
   const original = { ...process.env };
-  let api, plain, secure;
+  let api, secure;
   try {
-    delete process.env.WEB_DEV_HTTPS_CERT;
-    delete process.env.WEB_DEV_HTTPS_KEY;
-    plain = await createViteServer({ configFile: resolve('vite.config.ts'), cacheDir: join(directory, 'cache-plain'), server: { host: '127.0.0.1', port: 0, strictPort: true } });
-    await plain.listen();
-    const plainPort = plain.httpServer.address().port;
-    const unavailable = await request({ hostname: '127.0.0.1', port: plainPort, path: '/api/v1/auth/me' }, httpGet);
-    assert.equal(unavailable.status, 503);
-    assert.match(unavailable.body, /proxy is not configured/);
-    await plain.close(); plain = undefined;
+    process.env.WEB_DEV_HTTPS_CERT = join(directory, 'missing-cert.pem');
+    process.env.WEB_DEV_HTTPS_KEY = join(directory, 'missing-key.pem');
+    await assert.rejects(createViteServer({ configFile: resolve('vite.config.ts'), cacheDir: join(directory, 'cache-missing') }), /ENOENT/);
 
     const cert = join(directory, 'cert.pem');
     const key = join(directory, 'key.pem');
@@ -67,7 +61,6 @@ test('development API fails closed without TLS and forwards trusted HTTPS metada
     assert.equal(received['x-forwarded-for'], undefined);
     assert.equal(received.forwarded, undefined);
   } finally {
-    if (plain) await plain.close();
     if (secure) await secure.close();
     if (api) await close(api);
     for (const name of ['WEB_DEV_HTTPS_CERT', 'WEB_DEV_HTTPS_KEY', 'WEB_DEV_PORT', 'WEB_DEV_API_PORT']) {
