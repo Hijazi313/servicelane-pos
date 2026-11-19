@@ -52,7 +52,24 @@ See the [project tracker](docs/planning/TRACKER.md) for the roadmap, current acc
 - pnpm **12.11.2**, as specified in [`package.json`](package.json).
 - A dedicated, user-managed hosted PostgreSQL development database.
 
-The current development workflow uses hosted PostgreSQL. Local database provisioning and Docker configuration are not included. If you use nvm, `npm run setup:toolchain` installs the Node version from `.node-version` and enables the pnpm Corepack shim. Then run `nvm use "$(cat .node-version)"` in your current terminal; the npm script cannot change its parent shell. You can also install the pinned tools using your normal tooling.
+The current development workflow uses hosted PostgreSQL. Local database provisioning and Docker configuration are not included. If you use nvm, `npm run setup:toolchain` installs the Node version from `.node-version` and enables the pnpm Corepack shim. Run `nvm use` in your current terminal; `.nvmrc` points to the same version file. An npm script cannot change its parent shell. You can also install the pinned tools using your normal tooling.
+
+To select the project version automatically when entering this directory in zsh, add this after nvm is loaded in `~/.zshrc`:
+
+```sh
+autoload -U add-zsh-hook
+servicelane_nvm_use() {
+  local nvmrc
+  nvmrc="$(nvm_find_nvmrc)"
+  if [ -n "$nvmrc" ] && [ "$(nvm version)" != "$(nvm version "$(cat "$nvmrc")")" ]; then
+    nvm use --silent
+  fi
+}
+add-zsh-hook chpwd servicelane_nvm_use
+servicelane_nvm_use
+```
+
+The hook also respects `.nvmrc` files in other directories. It does not install missing Node versions; run `nvm install` in the project if needed. Restart the terminal or source `~/.zshrc` after adding it.
 
 ### Installation and configuration
 
