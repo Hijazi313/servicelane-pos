@@ -15,7 +15,7 @@ This sequence starts with the prerequisites for a fresh installation and follows
 | Order | Workflow | Proposed outcome / dependency |
 | --- | --- | --- |
 | 1 | Access and application foundation | The basic foundation is complete. Resolve the remaining [access checks and acceptance](../frontend-access/phase-tracker.md); administrator access is needed for catalogue maintenance. |
-| 2 | Initial menu setup | Scope the smallest administrator workflow to create and inspect saleable offerings using the [Menu capabilities](../../../apps/api/src/modules/menu/docs/capabilities.md). Confirm required business configuration and an initial catalogue before order capture. |
+| 2 | Initial menu setup | Review the [initial menu setup proposal](initial-menu-setup.md). Ordinary-item creation and active-catalogue readback are proposed. First-order needs, inspection scope and the access gate await the owner’s decision. |
 | 3 | Cashier: menu selection and order capture | Scope a cashier journey using the configured catalogue and [Orders capabilities](../../../apps/api/src/modules/orders/docs/capabilities.md). Confirm selection behavior and API availability. |
 | 4 | Kitchen preparation | Scope staff access to preparation queues and status changes using the [Kitchen plan](../../../apps/api/src/modules/kitchen/docs/README.md); coordinate the captured order-to-kitchen journey. |
 | 5 | Cashier shifts, billing and payment | Scope the smallest shift and settlement workflow against [Cashier Shifts](../../../apps/api/src/modules/cashier-shifts/docs/README.md) and [Billing](../../../apps/api/src/modules/billing/docs/README.md); payment, receipt and recovery decisions need their own approval and evidence. |
