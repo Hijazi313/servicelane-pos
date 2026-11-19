@@ -34,7 +34,7 @@ The owner chose a listing route with a side drawer and no separate create URL. U
 
 On opening, move focus into the drawer. On close, return focus to its trigger. Prevent accidental loss of unsaved input with a discard confirmation, including backdrop and Escape close. Keep the draft and errors when a save fails, block duplicate submits while pending, and refresh the list after success. During an uncertain write, explain the outcome is unknown and allow the administrator to inspect before retrying. Test scrolling, focus, keyboard operation, touch and text enlargement in the actual UI.
 
-The current [visual review mockup](../../design/menu-setup-review.html) predates the drawer proposal and illustrates fields only. Ant Design documents a form in a drawer, while Carbon recommends testing a dedicated page for longer or more complex forms. Review actual meal setup on desktop and tablet before accepting the pattern. [Ant Design Drawer](https://ant.design/components/drawer/) · [Carbon form guidance](https://www.carbondesignsystem.com/building-blocks/core/patterns/forms)
+The [visual review mockup](../../design/menu-setup-review.html) illustrates the open drawer and fields. Ant Design documents a form in a drawer, while Carbon recommends testing a dedicated page for longer or more complex forms. Review actual meal setup on desktop and tablet before accepting the pattern. [Ant Design Drawer](https://ant.design/components/drawer/) · [Carbon form guidance](https://www.carbondesignsystem.com/building-blocks/core/patterns/forms)
 
 ## Proposed authoring behavior
 
