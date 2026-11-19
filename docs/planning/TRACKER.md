@@ -4,7 +4,7 @@ Last reconciled: 2026-11-01 against the linked records in this checkout. Other c
 
 ## Current priorities and integration
 
-- **Frontend access:** the user reports successful login and a welcome screen; cookie details, logout and browser routing remain unverified. The [current handoff](frontend-access/phase-tracker.md#current-handoff--2026-11-19) owns next steps and authorization limits.
+- **Frontend access:** the user reports successful login, logout and re-login; cookie details and browser routing remain unverified. The [current handoff](frontend-access/phase-tracker.md#current-handoff--2026-11-19) owns next steps and authorization limits.
 - **Inventory:** [discovery](inventory/discovery.md) is proposed; implementation is not activated.
 - **Integration and release:** the [business/access tracker](business-access/phase-tracker.md) owns accepted scope and deferred two-installation validation. A complete trading flow, including amendments, reconnect and receipt output, remains to be accepted; before MVP release, reconcile menu, payments, shifts, stock and reports and verify recovery and repeatable isolated provisioning.
 
