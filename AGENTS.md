@@ -16,6 +16,15 @@
 - Before Git mutations or PR actions, read [CONTRIBUTING.md](CONTRIBUTING.md), inspect Git state and follow its workflow within authorization.
 - Read relevant `docs/capabilities.md` indexes before candidate code and maintain them with public capability changes; follow [discovery and upkeep](docs/architecture/README.md#capability-discovery-and-documentation-upkeep).
 
+## Behavioral Guidelines
+
+- Never ever make any assumptions on your behalf and just run along with them without checking. Always double check.
+- DO NOT Assume. Don’t hide confusion. Surface tradeoffs.
+- Minimum code that solves the problem. Nothing speculative.
+- Before adding a safeguard that materially increases complexity, explain the risk, its likely impact, and the cost of mitigation. Recommend whether to mitigate or accept it, and let me decide when the tradeoff affects the design. Do not implement a substantial safeguard for a rare scenario by default.
+- Touch only what you must. Clean up only your own mess.
+- Define success criteria. Loop until verified.
+
 ## Scope and engineering judgment
 
 - Deliver only justified phase P0; challenge labels and list P1 separately without implementing it unless authorized. Follow [decision and priority rules](docs/decision-making.md).
