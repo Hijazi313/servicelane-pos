@@ -1,6 +1,6 @@
 # Web application
 
-This React, TypeScript and Vite application contains a first access client for login, required password change, a protected placeholder and logout. Browser-to-API integration remains unverified and requires the same-origin HTTPS setup described below.
+This React, TypeScript and Vite application contains a first access client for login, required password change, a protected placeholder and logout. The user reports successful login, logout, re-login and hard refresh on local same-origin HTTPS. The [access tracker](../../docs/planning/frontend-access/phase-tracker.md) records the remaining verification and acceptance decision.
 
 TanStack Router defines `/login`, `/change-password` and `/`. The server session controls which access screen is shown; route guards do not authorize API calls. Browser navigation and host fallback for direct route refresh remain unverified.
 

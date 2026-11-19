@@ -4,7 +4,7 @@ Last reconciled: 2026-11-01 against the linked records in this checkout. Other c
 
 ## Current priorities and integration
 
-- **Frontend access:** the user reports successful login, logout and re-login; cookie details and browser routing remain unverified. The [current handoff](frontend-access/phase-tracker.md#current-handoff--2026-11-19) owns next steps and authorization limits.
+- **Frontend (2026-11-20):** the user accepted the [basic foundation](frontend/TRACKER.md). Access remains active after user-reported local login, logout, re-login and hard refresh. The [access handoff](frontend-access/phase-tracker.md#current-handoff--2026-11-20) owns the remaining checks and acceptance decision.
 - **Inventory:** [discovery](inventory/discovery.md) is proposed; implementation is not activated.
 - **Integration and release:** the [business/access tracker](business-access/phase-tracker.md) owns accepted scope and deferred two-installation validation. A complete trading flow, including amendments, reconnect and receipt output, remains to be accepted; before MVP release, reconcile menu, payments, shifts, stock and reports and verify recovery and repeatable isolated provisioning.
 
@@ -17,11 +17,7 @@ Feature trackers own progress, evidence, authorization and handoffs. The coordin
 
 ## Active work branches
 
-| Task | Branch | Checkout | Owner | Integration base | Publication | Tracker |
-| --- | --- | --- | --- | --- | --- | --- |
-| Frontend access | `codex/frontend-foundation` | `/Users/macbookpro/Documents/personal/restaurant-pos-custom` | Handoff pending | `main` at `9dbaf2d` | Local checkpoint; publication not authorized | [Current handoff](frontend-access/phase-tracker.md#current-handoff--2026-11-19) |
-
-This is the last recorded designation, not a live claim. Follow [CONTRIBUTING](../../CONTRIBUTING.md#active-work-and-remote-checkpoints); Git and available owner reports establish current heads and synchronization.
+The frontend foundation/access PR was integrated at `edf58d9` on local `main` and cached `origin/main`. This retires the recorded `codex/frontend-foundation` assignment. No successor branch is recorded.
 
 ## Historical records
 
