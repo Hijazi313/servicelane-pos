@@ -19,6 +19,8 @@ Use the existing design direction and components when they fit. Question whether
 
 ## Forms and interaction
 
+- The product direction for comparable listing-based workflows is a side drawer for creating, editing and viewing an entry, with one shared form for create and edit. Keep the listing route as the context and do not add a separate create URL unless the user approves a need for one. Adapt fields and API operations to the entry and mode. Check drawer usability on desktop and tablet, including focus, scrolling, touch and unsaved changes. If a workflow cannot be used comfortably in a drawer, bring the specific tradeoff to the user before selecting another pattern.
+
 - Ant Design is installed; its forms and tables are the selected direction, subject to representative workflow validation. Use its form facilities when appropriate, with client feedback supplementing authoritative server validation. Map documented field errors to fields and retain form-level errors. A separate validation or table library needs a concrete justification.
 - Make loading, empty, no-match, denied, error and success states distinguishable where they change the user's next action. Prevent accidental duplicate actions while pending. Handle documented request failures in the feature; an error boundary can isolate unexpected rendering failures but does not resolve rejected requests or safely retry writes.
 - Use semantic elements, accessible names, visible focus and logical keyboard interaction. Return focus sensibly after a dialog, direct attention to relevant validation errors, and do not rely on color alone. Verify relevant keyboard, contrast and touch interactions against agreed target conditions; library selection alone does not prove accessibility.
