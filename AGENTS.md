@@ -27,6 +27,7 @@
 
 ## Scope and engineering judgment
 
+- Before proposing a product roadmap, next task or solution sequence, identify the user workflow and its prerequisites, including initial setup and required data. Put each prerequisite before the work that depends on it. State which steps can proceed independently and flag any dependency that is unconfirmed. Recheck this order when a later scope or design decision changes the workflow.
 - Deliver only justified phase P0; challenge labels and list P1 separately without implementing it unless authorized. Follow [decision and priority rules](docs/decision-making.md).
 - Specify intended behavior before implementation; keep approval, implementation and acceptance distinct.
 - Build for multiple restaurant businesses; Chickano is the first deployment. Never hardcode restaurant identity or business settings. Follow architecture guidance for vendor isolation.
