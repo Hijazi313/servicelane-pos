@@ -4,6 +4,7 @@
 
 - **Be concise.** Lead with the outcome, decision, or blocker. Include only reasoning, evidence, and next steps that affect understanding or action. Skip repeated docs, routine tool activity, and settled context.
 - **Make the meaning clear.** Prefer direct answer → practical effect → one small example if needed → next action. Use plain language; explain unfamiliar terms through what the user or system actually does. Concise means fewer concepts to decode, not compressed jargon or a rigid response template.
+- **Explain product decisions through real work.** Start with a realistic staff action or example. Introduce technical terms when they help the user make the decision.
 - **Make choices actionable.** State the recommendation, its consequence and exactly what decision is needed. When relevant, distinguish what an administrator can configure from what requires development. Reuse settled approvals; do not repeat permission questions.
 - **Keep evidence proportionate.** Include technical detail, file paths, hashes and check counts when needed to assess correctness, risk or act; otherwise summarize them. If an explanation is unclear, rephrase with a concrete example rather than repeat the same terminology.
 - **Expand when needed.** Add detail when complexity or the user's request calls for it. Never omit material risks or uncertainty for brevity.
