@@ -9,6 +9,10 @@ Status: active. User requested login first, followed by protected home and logou
 - [ ] Verify direct navigation, refresh, history and session gating in a browser, and verify route fallback under the eventual same-origin host. A route-state unit check is not browser-routing evidence.
 - [x] Prepare the loopback HTTPS development proxy. A synthetic loopback test passed with a temporary certificate and mock API, covering forwarding, safe headers and unconfigured 503 behavior; Vite build passed with a chunk-size warning. This does not verify browser trust, backend configuration, session cookies or live login.
 
+## Routing refactor — 2026-11-21
+
+The user authorized route-specific screens with a shared session boundary. A focused route-admission check and web typecheck/build passed using Node 24.18.1, below the supported minimum. An independent review using a synthetic in-memory API and the default browser viewport verified signed-out direct Menu navigation, administrator Menu entry and refresh, logout followed by Back, and staff denial at Menu. This does not verify live cookies or backend integration. Password-change, uncertain responses, keyboard, tablet and the full UI Definition of Done remain pending. The broader access flow remains active and unaccepted. Incidents: none in this refactor.
+
 ## Current handoff — 2026-11-20
 
 The user accepted and closed the [basic frontend foundation](../frontend/TRACKER.md). The broader access flow remains active pending a separate user decision.

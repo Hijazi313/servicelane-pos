@@ -1,4 +1,4 @@
-export type Account = { displayName: string; passwordChangeRequired: boolean };
+export type Account = { displayName: string; passwordChangeRequired: boolean; role?: 'administrator' | 'staff' };
 
 export class AccessRequestError extends Error {
   constructor(public readonly status: number) { super('Access request failed'); }
@@ -19,7 +19,7 @@ function account(value: unknown): Account {
   if (!object(value) || typeof value.displayName !== 'string' || typeof value.passwordChangeRequired !== 'boolean') {
     throw new Error('Unexpected account response');
   }
-  return { displayName: value.displayName, passwordChangeRequired: value.passwordChangeRequired };
+  return { displayName: value.displayName, passwordChangeRequired: value.passwordChangeRequired, ...(value.role === 'administrator' || value.role === 'staff' ? { role: value.role } : {}) };
 }
 
 async function csrf(): Promise<string> {
