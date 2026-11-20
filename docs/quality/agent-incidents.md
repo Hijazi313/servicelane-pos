@@ -13,6 +13,14 @@
 
 Entries below assess already-observed events in this active thread following the user’s instruction to apply the adopted skill. No repository-wide or unrelated historical audit was performed. Sandbox evaluation incidents are fictional fixtures and are not imported here. Severity and correction status remain provisional; only the user closes entries or decides prevention proposals.
 
+## INC-20261121-02 — GitHub connection incorrectly reported unavailable
+
+- Severity / status: S2 / corrected; user review pending.
+- Violation and evidence: During the requested Menu merge, the agent called GitHub tools without the required account selector, then reported that no account connection was available. The tool metadata listed the repository owner's linked account. This contradicted the instruction to discover and use available tools and produced a misleading blocker.
+- Impact: The user had to correct the report before the merge continued. No unauthorized action or data loss was observed.
+- Correction: The agent inspected the tool metadata, selected the matching account, created [PR #29](https://github.com/Hijazi313/servicelane-pos/pull/29), verified exact-head checks and completed the authorized merge.
+- Prevention / user review: Inspect complete tool declarations and account selectors before declaring a connector unavailable; no policy change proposed / pending.
+
 ## INC-20261101-01 — Existing Supabase TLS context omitted from troubleshooting
 
 - Severity / status: S3 / corrected; user review pending. The user had to repeat the provider and request an actionable solution.
