@@ -15,3 +15,9 @@ body { margin: 0; }
 .access-footer { text-align: center; margin: 24px 0 0; }
 .state { display: flex; flex-direction: column; align-items: center; gap: 12px; padding: 24px 0; color: #69796f; }
 @media (max-width: 600px) { .access-header { padding: 0 20px; } .access-main { padding: 40px 16px 24px; } .access-card { padding: 28px 22px; } }
+
+/* The menu is operated with touch as well as a keyboard. */
+.menu-page .ant-btn, .menu-drawer .ant-btn,
+.menu-drawer .ant-input, .menu-drawer .ant-input-number,
+.menu-drawer .ant-select-single .ant-select-selector { min-height: 48px; }
+.menu-drawer .ant-select-single { height: 48px; }
