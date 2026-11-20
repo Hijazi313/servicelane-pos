@@ -5,7 +5,7 @@ import { useMenu } from './use-menu';
 
 export function MenuPage({ onBack }: { onBack: () => void }) {
   const {
-    definitions, active, currency, loading, error, saving, uncertain, conflict, latest, open, editing,
+    definitions, active, currency, loading, error, saving, uncertain, conflict, latest, savedId, open, editing,
     refresh, save, reloadWhileEditing, startEditing, closeEditor, useLatest, acknowledgeReview,
   } = useMenu();
 
@@ -23,6 +23,7 @@ export function MenuPage({ onBack }: { onBack: () => void }) {
       <Space direction="vertical" size="large" style={{ width: '100%' }}>
         <Button onClick={onBack}>Back to workspace</Button>
         <div><Typography.Title level={2}>Menu</Typography.Title><Typography.Paragraph type="secondary">Create and edit the items your restaurant sells.</Typography.Paragraph></div>
+        {savedId && !open && <Alert type={active.some(row => row.id === savedId) ? "success" : "info"} message={active.some(row => row.id === savedId) ? `Saved item found in the active menu (ID: ${savedId}).` : `Saved item ID: ${savedId}. ${error || loading ? "Reload the menu to check it." : "It is not in the active menu; check its availability in the list."}`} />}
         {uncertain && !open && <Alert type="warning" message="Check the reloaded list for your item before trying again. Names can repeat." action={<Button onClick={acknowledgeReview}>I have checked the menu</Button>}/>}
         {error && <Alert type="warning" showIcon message={error} action={<Button onClick={() => void refresh()}>Reload menu</Button>}/>}
         <Card title="Menu items" extra={<Button type="primary" disabled={loading || !!error || uncertain} onClick={() => startEditing()}>Add item</Button>}>

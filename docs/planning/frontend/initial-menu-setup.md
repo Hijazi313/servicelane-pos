@@ -94,3 +94,33 @@ The user requested local checkpoints and a fresh-chat handoff. The topic branch 
 The next owner should first inspect the current checkout and reconcile the pending save/recovery findings against source: the create response ID is discarded even though duplicate names are permitted, and legacy 409 responses cover several causes rather than uniquely identifying stale edits. Preserve unknown-write outcomes and existing contracts. Then complete focused authorized corrections and representative synthetic browser/independent review. Database-backed verification, deployment, push, PR and merge require their own authorization. Use the existing supported Node 24.21.0 and pnpm 12.11.2. Image upload remains deferred.
 
 Incidents: [INC-20261121-01](../../quality/agent-incidents.md#inc-20261121-01--offline-workspace-install-interrupted-local-dependencies), corrected with user review pending. Earlier evidence in this document is historical; the contracts package supersedes the initial relative-import arrangement. Check Git for exact current commit and publication state.
+
+## Save recovery continuation — 2026-11-21
+
+The saved response ID is retained for active-list readback, including when the first reload fails; reload retries reads only. An absent ID in a successful active list is reported as unavailable, not as a failed write. A malformed or lost save response remains an unknown outcome. Legacy 409 is reported without attributing a cause: it can represent stale revision, unavailable selection, changed currency or capacity. Edit recovery retains the draft and offers the refreshed definition and revision; a reload does not establish which cause occurred. The API contract is unchanged.
+
+Verification on Node 24.21.0: web typecheck passed; five focused Menu API checks passed, including returned create identity and no automatic retry on rejection. The first test invocation used strip-only mode, which cannot parse the existing TypeScript parameter property; rerunning with the existing transform-types option passed. These checks do not exercise rendered readback failure or prove real persistence. No database was accessed.
+
+Independent synthetic browser review and its limitations are recorded below. Access acceptance remains separate; image upload remains deferred. Incidents: none confirmed in this continuation; [INC-20261121-01](../../quality/agent-incidents.md#inc-20261121-01--offline-workspace-install-interrupted-local-dependencies) remains pending user review.
+
+### Independent UI review — synthetic, partial
+
+An independent reviewer used Chrome with a local Vite and in-memory synthetic API target, without a database. Desktop viewport was not measured reliably; responsive emulation was set to 768 × 1024. On desktop the reviewer opened Add item, observed focus on Name, saved a flatbread at USD 7.50 and saw its matching active ID. An empty submission showed required-field errors but initially left focus on Save. The form was corrected to focus the first invalid field; focused re-review observed focus on Name. In 768 × 1024 emulation, the reviewer corrected empty fields, saved an ordinary item at USD 2.00 and observed the matching active ID. The photo control was disabled and labelled coming soon. Emulation used mouse/accessibility interaction, not physical touch.
+
+UI Definition of Done for the current change (independent verdict **pending**):
+
+- [ ] Staff task: ordinary item save observed; sized items, add-ons, meal creation/editing and recovery remain untested.
+- [ ] Visual hierarchy and consistency: rendered empty list and drawer observed; full visual decision-point review remains open.
+- [ ] Layout and input: ordinary save at emulated 768 × 1024 observed; long labels, scrolling, text enlargement and physical tablet remain open.
+- [ ] Touch targets: dimensions not measured, including switches and checkboxes.
+- [x] Cashier hot path: N/A; this is administrator catalogue maintenance.
+- [ ] Body text: computed sizes not measured.
+- [ ] Contrast: text, controls and state ratios not measured.
+- [ ] Keyboard and focus: initial drawer and invalid-submission focus observed; complete keyboard journey and dismissal focus remain open.
+- [ ] Feedback and recovery: required-field errors and correction observed; write/readback and 409 recovery remain untested in browser.
+
+Independent review has not passed the current change. Complete the open checks on the synthetic target and re-review before marking UI readiness done; real devices, integrated persistence and user acceptance remain separate.
+
+### Discard confirmation — 2026-11-21
+
+Replaced the browser-native unsaved-draft confirmation with an Ant Design modal. Keep editing retains the draft; Discard changes closes the drawer. Web typecheck and diff check passed. Browser interaction was not exercised because an existing Menu drawer was open in the user's session; the broader UI review remains pending. Incidents: none confirmed.

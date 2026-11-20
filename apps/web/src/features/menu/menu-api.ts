@@ -97,7 +97,7 @@ export async function loadMenu(): Promise<{
 export async function saveMenu(
   definition: Definition,
   initial?: Offering,
-): Promise<void> {
+): Promise<string> {
   const proof = await request("auth/csrf");
   if (
     !proof ||
@@ -109,7 +109,7 @@ export async function saveMenu(
   const body: CreateOfferingRequest | UpdateOfferingRequest = initial
     ? { definition, expectedRevision: initial.revision }
     : { definition };
-  await request(initial ? `menu/offerings/${initial.id}` : "menu/offerings", {
+  const saved = await request(initial ? `menu/offerings/${initial.id}` : "menu/offerings", {
     method: initial ? "PUT" : "POST",
     headers: {
       "Content-Type": "application/json",
@@ -117,4 +117,6 @@ export async function saveMenu(
     },
     body: JSON.stringify(body),
   });
+  if (!record(saved) || typeof saved.id !== "string" || !saved.id) throw new Error("Unexpected save response");
+  return saved.id;
 }

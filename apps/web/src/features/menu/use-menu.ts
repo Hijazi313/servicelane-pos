@@ -11,6 +11,7 @@ export function useMenu() {
   const [uncertain, setUncertain] = useState(false);
   const [conflict, setConflict] = useState(false);
   const [latest, setLatest] = useState<Offering>();
+  const [savedId, setSavedId] = useState<string>();
   const [open, setOpen] = useState(false);
   const [editing, setEditing] = useState<Offering>();
 
@@ -39,7 +40,8 @@ export function useMenu() {
     setSaving(true);
     setError('');
     try {
-      await saveMenu(definition, editing);
+      const id = await saveMenu(definition, editing);
+      setSavedId(id);
       setOpen(false);
       await refresh();
     } catch (cause) {
@@ -48,8 +50,8 @@ export function useMenu() {
           setConflict(true);
           setLatest(undefined);
         }
-        setError(cause.status === 409 && editing
-          ? 'The item or one of its choices changed. Reload the menu below and review the current version before retrying.'
+        setError(cause.status === 409
+          ? 'The server could not save this item because the menu or its configuration may have changed. Reload and review the current menu before retrying.'
           : cause.status === 401 || cause.status === 403
             ? 'Your session or permission could not be confirmed. Your changes have not been saved.'
             : 'The server could not accept this item. Check the details and try again.');
@@ -93,7 +95,7 @@ export function useMenu() {
   }
 
   return {
-    definitions, active, currency, loading, error, saving, uncertain, conflict, latest, open, editing,
+    definitions, active, currency, loading, error, saving, uncertain, conflict, latest, savedId, open, editing,
     refresh, save, reloadWhileEditing, startEditing, closeEditor, useLatest,
     acknowledgeReview: () => setUncertain(false),
   };

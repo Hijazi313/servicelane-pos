@@ -24,14 +24,21 @@ test('edit sends a single complete definition with revision and fresh CSRF', asy
   const calls = [];
   globalThis.fetch = async (url, options) => {
     calls.push({ url, options });
-    return calls.length === 1 ? Response.json({ csrfToken: 'proof' }) : Response.json({});
+    return calls.length === 1 ? Response.json({ csrfToken: 'proof' }) : Response.json({ id: "saved" });
   };
   const definition = { kind: 'item', name: 'Fries', active: true, sized: false, variants: [], addOnGroups: [] };
-  await saveMenu(definition, { id: 'saved', revision: 3 });
+  assert.equal(await saveMenu(definition, { id: 'saved', revision: 3 }), "saved");
   assert.equal(calls[1].url, '/api/v1/menu/offerings/saved');
   assert.equal(calls[1].options.method, 'PUT');
   assert.equal(calls[1].options.headers['X-CSRF-Token'], 'proof');
   assert.deepEqual(JSON.parse(calls[1].options.body), { definition, expectedRevision: 3 });
+});
+
+test('create returns the server identity for readback', async () => {
+  globalThis.fetch = async url => url.endsWith('/auth/csrf')
+    ? Response.json({ csrfToken: 'proof' })
+    : Response.json({ id: 'created-offering' });
+  assert.equal(await saveMenu({ kind: 'item' }), 'created-offering');
 });
 
 test('save does not retry an uncertain request or hide rejection', async () => {

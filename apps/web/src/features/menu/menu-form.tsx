@@ -1,5 +1,5 @@
-import { useEffect } from 'react';
-import { Alert, Button, Checkbox, Divider, Drawer, Form, Input, InputNumber, Select, Space, Switch, Typography } from 'antd';
+import { useEffect, useState } from 'react';
+import { Alert, Button, Checkbox, Divider, Drawer, Form, Input, InputNumber, Modal, Select, Space, Switch, Typography } from 'antd';
 import type { Definition, Offering } from './menu-api';
 import { definitionFromDraft, type MenuDraft } from './menu-draft';
 
@@ -27,6 +27,7 @@ const priceRules = [
 
 export function MenuForm({ open, initial, offerings, currency, pending, blocked, error, latest, review, onReload, onUseLatest, onClose, onSave }: Props) {
   const [form] = Form.useForm<MenuDraft>();
+  const [confirmDiscard, setConfirmDiscard] = useState(false);
   const kind = Form.useWatch('kind', form);
   const sized = Form.useWatch('sized', form);
   const variants = offerings.flatMap(offering => offering.kind === 'item'
@@ -50,7 +51,10 @@ export function MenuForm({ open, initial, offerings, currency, pending, blocked,
 
   function close() {
     if (pending) return;
-    if (form.isFieldsTouched() && !window.confirm('Discard your unsaved changes?')) return;
+    if (form.isFieldsTouched()) {
+      setConfirmDiscard(true);
+      return;
+    }
     onClose();
   }
 
@@ -60,6 +64,13 @@ export function MenuForm({ open, initial, offerings, currency, pending, blocked,
 
   return <Drawer rootClassName="menu-drawer" title={initial ? 'Edit menu item' : 'Add menu item'} open={open} onClose={close}
     width="min(680px, 100%)" destroyOnHidden={false}>
+    <Modal open={confirmDiscard} title="Discard unsaved changes?" okText="Discard changes" cancelText="Keep editing"
+      okButtonProps={{ danger: true }} onCancel={() => setConfirmDiscard(false)} onOk={() => {
+        setConfirmDiscard(false);
+        onClose();
+      }}>
+      Your changes have not been saved.
+    </Modal>
     {error && <Alert type="error" showIcon message={error} action={<Button onClick={() => void onReload()}>Reload menu</Button>} style={{ marginBottom: 16 }} />}
     {review && <Alert style={{ marginBottom: 16 }} type="info" message="Menu items from the last successful load" description={<ul>{review.map(row => <li key={row.id}>{row.name} · {row.kind === 'item' ? row.variants.map(variant => variant.name + ': ' + variant.price).join(', ') : row.basePrice}</li>)}</ul>} />}
     {latest && <Alert style={{ marginBottom: 16 }} type="info" message="Current saved version"
@@ -71,7 +82,9 @@ export function MenuForm({ open, initial, offerings, currency, pending, blocked,
           }).join(', ') || 'None'}</p><ul>{latest.choiceGroups.map((group, index) => <li key={group.id ?? index}>{group.name} (choose {group.minimum}–{group.maximum}): {group.options.map(option => option.name + ' (' + (variants.find(variant => variant.value === option.variantId)?.label ?? option.variantId) + ') × ' + option.quantity + ' +' + option.surcharge + (option.active ? '' : ' (unavailable)')).join(', ')}</li>)}</ul></>}
         <p>Availability: {latest.active ? 'active' : 'inactive'}. Your draft is retained while this drawer remains open.</p>
         <Button onClick={onUseLatest}>Keep my draft and use current revision</Button></>} />}
-    <Form form={form} layout="vertical" onFinish={save} autoComplete="off">
+    <Form form={form} layout="vertical" onFinish={save} onFinishFailed={({ errorFields }) => {
+      if (errorFields[0]) form.scrollToField(errorFields[0].name, { focus: true });
+    }} autoComplete="off">
       <Form.Item name="kind" label="Type" rules={required}>
         <Select disabled={!!initial} options={[{ value: 'item', label: 'Item' }, { value: 'combo', label: 'Meal deal' }]} />
       </Form.Item>
