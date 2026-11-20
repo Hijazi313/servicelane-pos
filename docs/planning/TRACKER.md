@@ -4,7 +4,7 @@ Last reconciled: 2026-11-01 against the linked records in this checkout. Other c
 
 ## Current priorities and integration
 
-- **Frontend (2026-11-21):** initial Menu implementation and routing refactor are in progress on the topic branch. See the [Menu handoff](frontend/initial-menu-setup.md#current-handoff--2026-11-21). The broader access flow remains pending user acceptance.
+- **Frontend (2026-11-21):** initial Menu is accepted and closed under the [recorded walkthrough scope](frontend/initial-menu-setup.md#acceptance-and-closeout--2026-11-21); source remains on the topic branch. [Performance](../../KNOWN-ISSUES.md#ki-01--slow-authenticated-workflows-on-the-development-database) and broader access acceptance remain open.
 - **Frontend foundation (2026-11-20):** the user accepted the [basic foundation](frontend/TRACKER.md). Access remains active after user-reported local login, logout, re-login and hard refresh. The [access handoff](frontend-access/phase-tracker.md#current-handoff--2026-11-20) owns the remaining checks and acceptance decision.
 - **Inventory:** [discovery](inventory/discovery.md) is proposed; implementation is not activated.
 - **Integration and release:** the [business/access tracker](business-access/phase-tracker.md) owns accepted scope and deferred two-installation validation. A complete trading flow, including amendments, reconnect and receipt output, remains to be accepted; before MVP release, reconcile menu, payments, shifts, stock and reports and verify recovery and repeatable isolated provisioning.
@@ -22,7 +22,7 @@ The frontend foundation/access PR was integrated at `edf58d9` on local `main` an
 
 | Work | Branch and checkout | Owner | Base and publication | Handoff |
 | --- | --- | --- | --- | --- |
-| Initial Menu and frontend routing | `codex/initial-menu-plan`, `/Users/macbookpro/Documents/personal/restaurant-pos-custom` | Current chat; successor unassigned | Topic based on integrated frontend foundation; local commits after recorded upstream, no new push authorized | [Menu](frontend/initial-menu-setup.md#current-handoff--2026-11-21) |
+| Closed Menu and frontend routing; integration pending | `codex/initial-menu-plan`, `/Users/macbookpro/Documents/personal/restaurant-pos-custom` | Current chat; successor unassigned | Topic based on integrated frontend foundation; local commits after recorded upstream, no new push authorized | [Menu closeout](frontend/initial-menu-setup.md#acceptance-and-closeout--2026-11-21) |
 
 ## Historical records
 

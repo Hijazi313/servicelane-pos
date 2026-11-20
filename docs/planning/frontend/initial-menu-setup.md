@@ -124,3 +124,11 @@ Independent review has not passed the current change. Complete the open checks o
 ### Discard confirmation — 2026-11-21
 
 Replaced the browser-native unsaved-draft confirmation with an Ant Design modal. Keep editing retains the draft; Discard changes closes the drawer. Web typecheck and diff check passed. Browser interaction was not exercised because an existing Menu drawer was open in the user's session; the broader UI review remains pending. Incidents: none confirmed.
+
+## Acceptance and closeout — 2026-11-21
+
+The user requested closeout under the revised scope after reporting that all six guided local walkthroughs passed: ordinary and sized items, add-ons, meal creation, editing/reload, validation and discard confirmation. This is user-reported functional evidence for the initial administrator Menu workflow, not independent release or device acceptance. The owner explicitly deferred broader recovery, full keyboard, touch-target, text-size and physical-device testing and the remaining independent UI review. The partial synthetic review above remains historical evidence; its checklist is not marked passed. Image upload remains deferred; the disabled control remains in place. Access acceptance is separate.
+
+The user also reported slow save and readback; the cross-application [known issue](../../../KNOWN-ISSUES.md#ki-01--slow-authenticated-workflows-on-the-development-database) owns the measurements, hypotheses and proposed investigation. No performance solution is accepted or implemented by this closeout. Menu source is on the local topic branch; integration, publication, deployment and release acceptance are not implied. Future Menu work belongs in its own scoped follow-up rather than reopening this closed increment automatically. No new runtime or database checks were run for this documentation closeout.
+
+Incidents: none confirmed in this closeout. [INC-20261121-01](../../quality/agent-incidents.md#inc-20261121-01--offline-workspace-install-interrupted-local-dependencies) remains corrected with user review pending.

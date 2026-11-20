@@ -28,7 +28,7 @@ The following scopes have been accepted for backend development; operational rel
 
 These scopes include focused offline and bounded PostgreSQL evidence, with limits recorded in their respective trackers. Cashier Shifts was integrated into main through [PR #21](https://github.com/Hijazi313/servicelane-pos/pull/21).
 
-[Inventory discovery](docs/planning/inventory/discovery.md) remains in discovery. The [basic frontend foundation](docs/planning/frontend/TRACKER.md) is accepted. The merged access client supports a protected welcome screen. Local login, logout, re-login and hard refresh are user-reported; [access acceptance](docs/planning/frontend-access/phase-tracker.md) remains open. Deployment, backup, recovery, an end-to-end trading flow and operational release validation remain incomplete.
+[Inventory discovery](docs/planning/inventory/discovery.md) remains in discovery. The [basic frontend foundation](docs/planning/frontend/TRACKER.md) is accepted. The initial Menu workflow is accepted under the [recorded walkthrough scope](docs/planning/frontend/initial-menu-setup.md#acceptance-and-closeout--2026-11-21), with [performance](KNOWN-ISSUES.md#ki-01--slow-authenticated-workflows-on-the-development-database) and further verification deferred; its source remains on a topic branch. The merged access client supports a protected welcome screen. Local login, logout, re-login and hard refresh are user-reported; [access acceptance](docs/planning/frontend-access/phase-tracker.md) remains open. Deployment, backup, recovery, an end-to-end trading flow and operational release validation remain incomplete.
 
 See the [project tracker](docs/planning/TRACKER.md) for the roadmap, current acceptance status, and verification limits.
 
