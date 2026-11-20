@@ -34,6 +34,7 @@
     "rxjs": "7.8.2"
   },
   "devDependencies": {
+    "@servicelane/api-contracts": "workspace:*",
     "@types/node": "24.10.1",
     "@types/pg": "8.23.1",
     "drizzle-kit": "0.31.11",
