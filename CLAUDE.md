@@ -1,3 +1,7 @@
+## Repository instructions
+
+Before starting work, read and follow the root [AGENTS.md](AGENTS.md). Before editing a subtree, also read and follow any applicable ancestor and nested `AGENTS.md` files. Reuse current context when the instructions have not changed.
+
 ## Communication
 
 - **Be concise.** Lead with the outcome, decision, or blocker. Include only reasoning, evidence, and next steps that affect understanding or action. Skip repeated docs, routine tool activity, and settled context.
