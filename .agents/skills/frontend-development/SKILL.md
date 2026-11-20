@@ -3,11 +3,11 @@ name: frontend-development
 description: Design, implement or review this repository's frontend application, including UI/UX, screens, components, interaction, styling, accessibility, state and API integration. Use for frontend work in apps/web or cross-application consumer integration; exclude backend-only and generic planning work.
 metadata:
   author: "Repository contributors"
-  version: "1.4.0"
+  version: "1.5.0"
   project: "ServiceLane POS"
   scope: "Frontend design, implementation and review; feature and deployment authorization remain separate"
   created: "2026-11-01"
-  updated: "2026-11-20"
+  updated: "2026-11-21"
   compatibility: "React, TypeScript, Vite and Ant Design; repository guidance and owning specifications required; guidance only, no runtime enforcement"
   short-description: "Design and review POS frontend workflows"
 ---

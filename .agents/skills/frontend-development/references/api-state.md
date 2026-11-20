@@ -6,6 +6,8 @@ Status: proposed frontend conventions; endpoint behavior is owned by its actual 
 
 Find the owning backend capability index, specification, frontend integration guide, route and current evidence. Approved intent is not proof of an available or verified endpoint. Follow existing session, cookie, CSRF and origin contracts and server-resolved business/branch scope; the UI is not an authorization boundary. Do not import backend controllers, services, database models or persistence types. Feature operations own endpoint-specific mapping; shared transport owns only genuinely common HTTP mechanics.
 
+For API request and response shapes shared with the backend, follow the [shared contract and runtime boundary guidance](../../../../docs/architecture/README.md#persistence-and-public-contracts). Reuse those contracts instead of maintaining duplicate browser types. Validate untrusted response fields needed by the workflow before using them.
+
 Existing routes can differ in envelopes, stable error identifiers, validation, revisions and retry semantics. Follow the actual route; do not branch on translated message text or assume a universal error format. Map documented errors to actionable UI feedback and use a safe fallback. Do not log credentials, CSRF values, payloads or personal data. Define base URL, credentials and timeout only after hosting and session behavior are specified. All browser configuration is public.
 
 ## State and recovery

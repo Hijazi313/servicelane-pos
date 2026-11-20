@@ -30,7 +30,7 @@ apps/web/src/
   main.tsx
 ```
 
-Exact router file conventions, route location, shared-contract packaging and any path aliases remain decisions for concrete use. A future cashier journey may compose several backend capabilities; it must not be assumed that a particular screen, operation or API exists.
+Exact router file conventions, route location and any path aliases remain decisions for concrete use. Shared API request and response types belong in `packages/api-contracts/` as described in the [architecture guidance](README.md#persistence-and-public-contracts). A future cashier journey may compose several backend capabilities; it must not be assumed that a particular screen, operation or API exists.
 
 ## Technology direction
 
