@@ -60,7 +60,7 @@ export function readConfiguration(env: NodeJS.ProcessEnv): Configuration {
   }
   return {
     host, port, environment,
-    database: { connectionString, ssl, application_name: 'servicelane-api', max: 5, connectionTimeoutMillis: 2500, idleTimeoutMillis: 10000 },
+    database: { connectionString, ssl, application_name: 'servicelane-api', max: 5, connectionTimeoutMillis: 10000, idleTimeoutMillis: 10000 },
     migrationDatabase: { connectionString: migrationUrl, ssl, application_name: 'servicelane-migrations', connectionTimeoutMillis: 10000 },
   };
 }

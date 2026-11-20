@@ -5,16 +5,8 @@ export type MenuErrorReason = 'INVALID_INPUT' | 'DEFINITION_TOO_LARGE' | 'NOT_FO
 export class MenuError extends Error {
   constructor(readonly reason: MenuErrorReason, message: string) { super(message); }
 }
-export interface Variant { id: string; name: string; price: string; active: boolean }
-export interface Extra { id: string; name: string; surcharge: string; active: boolean }
-export interface ExtraGroup { id: string; name: string; maximum: number; options: Extra[] }
-export interface Component { variantId: string; quantity: number }
-export interface Choice extends Component, Extra {}
-export interface ChoiceGroup { id: string; name: string; minimum: number; maximum: number; options: Choice[] }
-interface Base { id: string; name: string; active: boolean; revision: number; currencyCode: string; scale: number }
-export interface Item extends Base { kind: 'item'; sized: boolean; variants: Variant[]; addOnGroups: ExtraGroup[] }
-export interface Combo extends Base { kind: 'combo'; basePrice: string; components: Component[]; choiceGroups: ChoiceGroup[] }
-export type Offering = Item | Combo;
+import type { Variant, Extra, ExtraGroup, Component, Choice, ChoiceGroup, Item, Combo, Offering } from '@servicelane/api-contracts/menu';
+export type { Variant, Extra, ExtraGroup, Component, Choice, ChoiceGroup, Item, Combo, Offering } from '@servicelane/api-contracts/menu';
 export function invalid(): never { throw new MenuError('INVALID_INPUT', 'Invalid menu input'); }
 export function unavailable(): never { throw new MenuError('SELECTION_UNAVAILABLE', 'Selection unavailable'); }
 export function object(value: unknown, keys: readonly string[]): Record<string, unknown> {

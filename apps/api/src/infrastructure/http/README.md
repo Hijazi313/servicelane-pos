@@ -9,7 +9,7 @@ Reusable components verified through the [offline harness](../../../tests/http-p
 | DtoValidationPipe / EmptyQueryDto | Nest ValidationPipe with strict concrete DTO validation, nested transformation and safe body/query/path field errors; empty DTO rejects all query keys |
 | HttpResponseInterceptor | Wrap marked ordinary JSON results and explicit HttpPage results with page metadata; leave unmarked results and 204 unchanged |
 | HttpContractFilter / writeProblemDetails | Compose module error mapping with shared formatting and an explicit legacy fallback |
-| createHttpAdapter | Server-generated IDs, early response headers and safe completion-event callback |
+| createHttpAdapter | Server-generated IDs, aggregate Server-Timing response header and safe completion-event callback |
 
 ## Integration order
 
@@ -38,3 +38,7 @@ The generic ValidatedInputPipe was removed. Existing application/domain parsers 
 ## BP-01 isolated source adoption — 2026-10-26
 
 Five Billing and two Business display controller methods opt into the same components in source. BillingModule composes them and is imported by AppModule. Operational release remains separate. Focused offline HTTP injection covers all seven routes, strict DTOs, envelopes, safe semantic failures, Location and no-store/correlation. Existing global guard/interceptor/filter registration remains unchanged; accepted upstream contracts/evidence were not rerun. [Owning evidence and persistence gaps](../../modules/billing/docs/features/settlement/phase-tracker.md#bp-01-delivery-evidence--2026-10-26).
+
+## Server timing
+
+The adapter adds `Server-Timing: app;dur=<milliseconds>` to responses before sending headers, appending to any existing metrics. It measures from the adapter request hook through the send hook; it excludes response transfer and is not a database breakdown. The existing completion log measures through response completion and can differ. The aggregate duration is visible to the client; no SQL, request data or internal breakdown is included. Cross-origin timing exposure is not configured. This additive header does not change response bodies, status codes or authorization.

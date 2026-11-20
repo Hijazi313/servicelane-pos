@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Menu setup — visual review</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#f4f6f4;color:#202b25;font:16px system-ui,sans-serif}header{background:#fff;border-bottom:1px solid #dce3de;padding:18px 5%;display:flex;justify-content:space-between;align-items:center}header strong{color:#254c3c}main{max-width:1250px;margin:auto;padding:32px 24px}.notice{font-size:14px;color:#58675d;margin-bottom:25px}h1{font-size:30px;margin:0 0 5px}h2{font-size:20px;margin:0 0 6px}h3{font-size:16px;margin:24px 0 8px}.muted{color:#65736a;font-size:14px;margin:0}.layout{display:block;margin-top:26px}.layout>section:first-child{max-width:850px}.layout>section:nth-child(2){position:fixed;z-index:2;right:0;top:0;bottom:0;width:min(620px,100%);overflow-y:auto;border-radius:0;box-shadow:-12px 0 38px #10251a33}.layout:after{content:"";position:fixed;inset:0;background:#14291d66;z-index:1}.card{background:white;border:1px solid #dce3de;border-radius:8px;padding:24px}.row{display:flex;justify-content:space-between;gap:16px;align-items:center;padding:17px 0;border-bottom:1px solid #e9eeea}.row:last-child{border:0}.row strong{display:block}.tag{color:#246542;background:#eaf5ed;border-radius:4px;padding:4px 8px;font-size:13px}.tabs{display:flex;gap:8px;margin:20px 0}button{font:inherit;min-height:44px;border-radius:6px;padding:9px 16px;border:1px solid #cbd6ce;background:white;color:#254c3c}button.selected,button.primary{background:#254c3c;color:white;border-color:#254c3c}button:disabled{color:#8c9990;background:#f2f4f2;border-color:#dde3de}label{display:block;font-size:14px;font-weight:600;margin:16px 0 6px}input{width:100%;border:1px solid #cbd6ce;border-radius:6px;padding:12px;font:inherit;background:white;color:#263a2d}.fields{display:grid;grid-template-columns:1fr 1fr;gap:14px}.box{border:1px solid #dce3de;border-radius:6px;padding:14px;margin-top:10px}.inline{display:flex;justify-content:space-between;gap:10px;align-items:center}.actions{display:flex;gap:10px;margin-top:24px}.sample{margin-top:16px;padding:14px;background:#f3f7f4;border-radius:6px;font-size:14px;line-height:1.6}@media(max-width:850px){.layout{grid-template-columns:1fr}main{padding:24px 16px}.fields{grid-template-columns:1fr 1fr}}@media(max-width:480px){.fields{grid-template-columns:1fr}.card{padding:18px}}
+</style>
+</head>
+<body>
+<header><strong>ServiceLane</strong><span>Administrator</span></header>
+<main>
+<p class="notice">Visual review · Drawer open for a new item · Controls do not save changes</p>
+<h1>Menu setup</h1><p class="muted">Create and review the items your restaurant sells.</p>
+<div class="layout">
+<section class="card" aria-label="Menu list">
+<div class="inline"><div><h2>Menu items</h2><p class="muted">Select an item to review or edit it.</p></div><button type="button">Add item</button></div>
+<div class="row"><div><strong>Zinger Burger</strong><span class="muted">One price · Optional extras</span></div><span class="tag">Available</span></div>
+<div class="row"><div><strong>Fries</strong><span class="muted">Small and large</span></div><span class="tag">Available</span></div>
+<div class="row"><div><strong>Burger meal</strong><span class="muted">Burger, fries and a drink choice</span></div><span class="tag">Available</span></div>
+<div class="sample"><strong>Meal example</strong><br>Set a meal price, add the burger and fries, then let the customer choose one drink. Meal components must be saved first.</div>
+</section>
+<section class="card" aria-label="Item form">
+<div class="inline"><h2>New menu item</h2><button type="button" aria-label="Close drawer">×</button></div><p class="muted">Add a name and price, then include choices if needed.</p>
+<div class="tabs"><button class="selected" type="button">Item</button><button type="button">Meal deal</button></div>
+<label for="name">Item name</label><input id="name" value="Fries" readonly>
+<div class="inline"><div><h3>Photo</h3><p class="muted">Image upload coming soon</p></div><button type="button" disabled>Upload photo</button></div>
+<h3>Prices</h3><p class="muted">Add a price for each size.</p>
+<div class="fields"><div><label for="small">Size</label><input id="small" value="Small" readonly></div><div><label for="small-price">Price · PKR</label><input id="small-price" value="180" readonly></div></div>
+<div class="fields"><div><label for="large">Size</label><input id="large" value="Large" readonly></div><div><label for="large-price">Price · PKR</label><input id="large-price" value="260" readonly></div></div>
+<div class="box"><div class="inline"><div><strong>Optional add-ons</strong><p class="muted">Cheese · + PKR 70 · Choose up to 1</p></div><button type="button">Edit</button></div></div>
+<div class="actions"><button class="primary" type="button">Save item</button><button type="button">Cancel</button></div>
+</section>
+</div>
+</main>
+</body>
+</html>

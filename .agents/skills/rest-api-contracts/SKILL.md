@@ -3,11 +3,11 @@ name: rest-api-contracts
 description: "Design, implement and review REST API contracts in this repository, including validation, query parameters, responses, errors, headers, retries and concurrency. Use for new or changed HTTP endpoints and contract reviews; exclude unrelated internal changes."
 metadata:
   author: "Codex"
-  version: "0.4.1"
+  version: "0.5.0"
   project: "ServiceLane POS"
   scope: "REST API contract design, implementation guidance and review; existing API migrations and CI enforcement require separate authorization"
   created: "2026-10-24"
-  updated: "2026-10-27"
+  updated: "2026-11-21"
   compatibility: "NestJS 12 with Fastify, TypeScript 6 and Node.js 24; repository source and owning specifications required; guidance only, no runtime enforcement"
   short-description: "Design and review consistent REST API contracts"
 ---
@@ -42,6 +42,8 @@ For listing/filter/pagination work, read the [query parameter examples](referenc
 Use [the endpoint template](templates/endpoint-contract.md) for a new endpoint or material contract change in its owning feature documentation. Adapt it; link existing canonical schemas instead of duplicating them. Small changes do not need new documents.
 
 HTTP code owns structural validation, public field selection and status/header translation. Application operations own use-case coordination and transactional authorization. Domain code retains business invariants needed by every caller. Preserve session/CSRF, trusted installation scope and the current authorized transaction model.
+
+For frontend-consumed APIs, follow the shared request/response type and runtime boundary rules in [architecture guidance](../../../docs/architecture/README.md#persistence-and-public-contracts). Reuse matching contracts across applications and preserve existing wire behavior.
 
 Use explicit public contracts and supported module interfaces. Do not expose database rows or add generic controller/filtering frameworks. A matching application result may be reused deliberately without ceremonial mapping classes.
 

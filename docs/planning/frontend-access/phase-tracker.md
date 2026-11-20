@@ -9,13 +9,17 @@ Status: active. User requested login first, followed by protected home and logou
 - [ ] Verify direct navigation, refresh, history and session gating in a browser, and verify route fallback under the eventual same-origin host. A route-state unit check is not browser-routing evidence.
 - [x] Prepare the loopback HTTPS development proxy. A synthetic loopback test passed with a temporary certificate and mock API, covering forwarding, safe headers and unconfigured 503 behavior; Vite build passed with a chunk-size warning. This does not verify browser trust, backend configuration, session cookies or live login.
 
+## Routing refactor — 2026-11-21
+
+The user authorized route-specific screens with a shared session boundary. A focused route-admission check and web typecheck/build passed using Node 24.18.1, below the supported minimum. An independent review using a synthetic in-memory API and the default browser viewport verified signed-out direct Menu navigation, administrator Menu entry and refresh, logout followed by Back, and staff denial at Menu. This does not verify live cookies or backend integration. Password-change, uncertain responses, keyboard, tablet and the full UI Definition of Done remain pending. The broader access flow remains active and unaccepted. Incidents: none in this refactor.
+
 ## Current handoff — 2026-11-20
 
 The user accepted and closed the [basic frontend foundation](../frontend/TRACKER.md). The broader access flow remains active pending a separate user decision.
 
-The merged PR is present at `edf58d9` on local `main` and the cached `origin/main`. Its record reports six passing access, route and mock HTTPS proxy checks and a passing frontend typecheck. On local HTTPS the user reports login to the administrator welcome screen, logout, re-login and a successful hard refresh. The report does not specify the refreshed path or cover signed-out navigation.
+The merged PR is present at `edf58d9` on local `main` and the cached `origin/main`. Its record reports six passing access, route and mock HTTPS proxy checks and a passing frontend typecheck. On local HTTPS the user reports login to the administrator welcome screen, logout, re-login and a successful hard refresh. The user additionally reports that the browser back button does not restore access after logout. The refreshed path and signed-out direct navigation remain unspecified.
 
-Open checks include cookie attributes, password-change outcome, signed-out direct navigation and gating after logout, browser history, deployed route fallback and target devices. A session-check 403 can still show the password-change flow for an origin rejection. Production hosting and operational readiness remain unverified.
+Open checks include cookie attributes, password-change outcome, signed-out direct navigation, other browser-history cases, deployed route fallback and target devices. A session-check 403 can still show the password-change flow for an origin rejection. Production hosting and operational readiness remain unverified.
 
 Next decision belongs to the user: select any further access verification or decide acceptance under stated limits. Database-backed checks require target-specific authorization. This closeout authorized documentation only.
 
@@ -48,3 +52,9 @@ Historical record; superseded by the 2026-11-04 handoff above.
 - Keep credentials out of chat, logs and command-line arguments. The existing operator command requests passwords through hidden terminal input. Do not claim an administrator account or default credentials already exist.
 - Continue to follow the user's instruction: explain the reason and proposed action first; do not run commands or change files until the user recommends or accepts the action. This closeout was explicitly requested.
 - Browser navigation, trusted-cookie/session behavior, logout and target-device checks remain unverified. Preserve the build chunk-size warning and existing acceptance/release limits. Incident [INC-20261101-01](../../quality/agent-incidents.md#inc-20261101-01--existing-supabase-tls-context-omitted-from-troubleshooting) is corrected; user review remains pending.
+
+## Local connection timeout diagnosis — 2026-11-21
+
+The user authorized investigation and testing of the reported local 503s. Existing request logs showed 2.5-second 503s and failed background access cleanup; no crash was established. Three fresh read-only database connections using the API configuration took 2.45–2.50 seconds, with an earlier connection taking 2.9 seconds. The runtime pool's 2.5-second acquisition limit left no margin. Increased it to 10 seconds; increased the health deadline from 3 to 12 seconds so a cold connection can complete. The tradeoff is slower failure reporting when the database is unavailable. TLS verification was enabled for the final configured probe.
+
+After the development watcher restarted the API, a cold health check returned 200 in 6.03 seconds, signed-out `/auth/me` returned 401, and `/auth/csrf` returned 200. Earlier three signed-out session checks also returned 401 after the timeout change; the first cold health check under the old deadline returned 503, motivating the deadline correction. API typecheck and `git diff --check` passed. No migrations or destructive operations were run. These checks do not establish authenticated login, sustained database availability, physical deployment readiness or access acceptance. The user's existing data was not inspected. Incidents: none confirmed in this investigation.

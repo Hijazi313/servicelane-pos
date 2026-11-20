@@ -15,6 +15,15 @@ P1: a standalone component catalogue, arbitrary tenant theme editor, dark mode, 
 - Semantic text, surface, border, focus, error, warning and success colors belong to the theme, not individual screens. A brand color is not automatically a safe text, focus or status color. Preserve readable contrast and never use color as the only signal.
 - The current global [stylesheet](../../apps/web/src/styles.css) independently defines background and foreground colors. Align it with the chosen theme when implementing the first layout; the review artifact does not prove that it has been corrected. Avoid broad component overrides.
 
+## Implemented token sources
+
+| Source | Purpose and constraints |
+| --- | --- |
+| [Application theme](../../apps/web/src/app/theme.ts) | Defines the current primary color, font family and border radius for Ant Design. Inspect the code for current values. Business-provided branding is not implemented. |
+| [Global stylesheet](../../apps/web/src/styles.css) | Defines root colors and access-screen styling separately from the theme. This is an existing alignment gap, not a shared token palette. |
+
+Before introducing a token, inspect these sources and Ant Design's semantic tokens. Add or extend a token when an affected workflow needs a shared value, and explain that need in the change. Update this table when a source or its ownership changes.
+
 ## Typography, spacing and layout
 
 - Initial candidate: system sans-serif and Ant Design typography defaults. Use one clear page heading, labels and normal reading sizes; do not shrink prices, controls or errors to fit. Verify actual font rendering and text resize on target devices before selecting exact values.
@@ -25,8 +34,16 @@ P1: a standalone component catalogue, arbitrary tenant theme editor, dark mode, 
 ## Components and interaction
 
 - Use Ant Design forms, tables, buttons, dialogs and feedback directly as the default. Name repeated patterns when at least two actual uses share behavior; extract reusable UI only when it has a clear owner. The mockup intentionally does not implement these components.
-- Candidate touch target: aim for at least 44 × 44 CSS px for primary cashier actions where practical; this is a design goal for review, not a claim of a legal requirement. Assess spacing and physical reach on actual devices. Keyboard focus must be visible; labels, errors and statuses must remain understandable without color. Test keyboard use, contrast, text resize and touch with the actual implementation.
+- For touch controls, use the 48 × 48 CSS pixel product criterion in the [UI Definition of Done](../../.agents/skills/frontend-development/references/ui-definition-of-done.md). Assess spacing and physical reach on actual devices. Keyboard focus must be visible; labels, errors and statuses must remain understandable without color. Test keyboard use, contrast, text resize and touch with the actual implementation.
 - Define loading, empty, unavailable, validation, denied, success and conflict states when applicable. Confirm destructive or financial actions only when the approved workflow calls for it. A timeout does not establish a write outcome; recovery belongs to the endpoint contract and feature integration guide.
+
+## Implemented components and patterns
+
+| Pattern | Implementation | Reuse and constraints |
+| --- | --- | --- |
+| Staff access form | [Access application](../../apps/web/src/app/app.tsx) | Existing login and password-change forms use Ant Design Form, Input, Button and Alert. Inspect the implementation for its access-specific validation and request handling; it is not a shared form component. |
+
+No application-owned shared UI component is currently exposed for reuse. Prefer Ant Design components and inspect existing patterns before adding a shared component. Extract a pattern when a concrete shared use justifies it. Add, update or remove entries in this table in the same change as the relevant shared component or reusable pattern, and check the links and constraints against the final code.
 
 ## Formatting and content
 

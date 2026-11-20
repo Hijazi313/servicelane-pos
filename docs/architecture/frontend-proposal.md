@@ -15,6 +15,7 @@ The application should work without internet while the local server and LAN are 
 - `apps/web` owns the browser application and build. It consumes supported HTTP interfaces, not backend services, controllers, database models or persistence types.
 - Application composition owns startup, routing, session integration, shared providers and cross-feature orchestration. Features own coherent staff workflows, including screens, interactions and API use; a frontend workflow need not mirror one backend module.
 - Shared code is business-neutral and created for a demonstrated common need. App composes feature public interfaces; features may use shared code; shared code does not import app or features. Avoid circular dependencies and imports of other features' private files.
+- Presentation components own rendering, user input and local interaction. Keep menu, pricing, authorization and other business rules authoritative on the server. Place feature-specific loading, saving, recovery and request mapping in the owning feature, separated from presentation when their complexity warrants it. A screen may coordinate a simple workflow directly.
 - Server data stays server-owned. Keep temporary interaction state with its feature, and introduce shared client state only for a demonstrated need. Session or scope changes must not expose another staff member's cached data. Define the exact lifecycle before integration.
 - Shared transport handles genuinely common HTTP concerns; feature operations interpret their own endpoint contracts. Existing routes can differ in response, errors, revision and retry rules. Do not globally retry mutations or treat a cached result as proof of success.
 
@@ -30,7 +31,7 @@ apps/web/src/
   main.tsx
 ```
 
-Exact router file conventions, route location, shared-contract packaging and any path aliases remain decisions for concrete use. A future cashier journey may compose several backend capabilities; it must not be assumed that a particular screen, operation or API exists.
+Exact router file conventions, route location and any path aliases remain decisions for concrete use. Shared API request and response types belong in `packages/api-contracts/` as described in the [architecture guidance](README.md#persistence-and-public-contracts). A future cashier journey may compose several backend capabilities; it must not be assumed that a particular screen, operation or API exists.
 
 ## Technology direction
 
