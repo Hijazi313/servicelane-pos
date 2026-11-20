@@ -40,7 +40,7 @@ export class DatabaseService implements OnModuleDestroy {
         expired = true;
         release(true);
         resolve(false);
-      }, 3000);
+      }, 12000);
     });
     try {
       return await Promise.race([operation, deadline]);

@@ -63,6 +63,6 @@ See the [authentication specification](../apps/api/src/modules/authentication/do
 
 `pnpm dev` starts the API watcher and Vite together. The API compiles once and watches source changes; each successful compilation restarts it, while compilation errors prevent a new start. It uses the same ignored `.env` as `pnpm start`. Restart the command after environment changes. Migrations are never applied by watch mode. Run `pnpm --filter @servicelane/api dev` or `pnpm --filter @servicelane/web dev` to start only one server. The API origin and trusted proxy must match the frontend configuration.
 
-The API can start while the database is unavailable. The health query has a three-second deadline covering pool acquisition and query execution. Ctrl-C/SIGTERM closes the server and database pool.
+The API can start while the database is unavailable. The health query has a twelve-second deadline covering pool acquisition and query execution. Ctrl-C/SIGTERM closes the server and database pool.
 
 Hosted development requires internet access and does not establish offline restaurant-LAN operation. See the [foundation acceptance record](acceptance/project-foundation.md) and [current tracker](planning/TRACKER.md) for evidence and remaining operational verification.
