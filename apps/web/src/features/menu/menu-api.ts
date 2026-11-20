@@ -1,20 +1,8 @@
 import type { Choice, ChoiceGroup, Component, CreateOfferingRequest, Definition, Extra, ExtraGroup, Offering, UpdateOfferingRequest, Variant } from '@servicelane/api-contracts/menu';
+import { HttpRequestError, request, write } from '../../shared/api/http-client.ts';
 export type { Definition, Offering } from '@servicelane/api-contracts/menu';
 
-export class MenuRequestError extends Error {
-  constructor(public status: number) {
-    super("Menu request failed");
-  }
-}
-async function request(path: string, options?: RequestInit): Promise<unknown> {
-  const response = await fetch(`/api/v1/${path}`, {
-    ...options,
-    credentials: "same-origin",
-    cache: "no-store",
-  });
-  if (!response.ok) throw new MenuRequestError(response.status);
-  return response.json();
-}
+export { HttpRequestError as MenuRequestError };
 function record(value: unknown): value is Record<string, unknown> {
   return typeof value === 'object' && value !== null && !Array.isArray(value);
 }
@@ -98,25 +86,10 @@ export async function saveMenu(
   definition: Definition,
   initial?: Offering,
 ): Promise<string> {
-  const proof = await request("auth/csrf");
-  if (
-    !proof ||
-    typeof proof !== "object" ||
-    !("csrfToken" in proof) ||
-    typeof proof.csrfToken !== "string"
-  )
-    throw new Error("Unexpected CSRF response");
   const body: CreateOfferingRequest | UpdateOfferingRequest = initial
     ? { definition, expectedRevision: initial.revision }
     : { definition };
-  const saved = await request(initial ? `menu/offerings/${initial.id}` : "menu/offerings", {
-    method: initial ? "PUT" : "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "X-CSRF-Token": proof.csrfToken,
-    },
-    body: JSON.stringify(body),
-  });
+  const saved = await write(initial ? `menu/offerings/${initial.id}` : "menu/offerings", initial ? 'PUT' : 'POST', body);
   if (!record(saved) || typeof saved.id !== "string" || !saved.id) throw new Error("Unexpected save response");
   return saved.id;
 }
