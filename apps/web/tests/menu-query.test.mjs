@@ -21,12 +21,15 @@ async function setup(fetcher) {
   function Probe() { current = useMenu(); return null; }
   const container = document.createElement('div');
   const root = createRoot(container);
-  await act(async () => { root.render(React.createElement(QueryClientProvider, { client }, React.createElement(Probe))); });
+  const render = show => root.render(React.createElement(QueryClientProvider, { client }, show ? React.createElement(Probe) : null));
+  await act(async () => { render(true); });
   async function waitFor(predicate) {
     for (let i = 0; i < 40 && !predicate(); i++) await act(async () => { await new Promise(resolve => setTimeout(resolve, 5)); });
     assert.ok(predicate(), 'expected state did not arrive');
   }
-  return { client, get current() { return current; }, waitFor, async close() { await act(async () => root.unmount()); client.clear(); } };
+  return { client, get current() { return current; }, waitFor,
+    async show(visible) { await act(async () => render(visible)); },
+    async close() { await act(async () => root.unmount()); client.clear(); } };
 }
 
 const emptyMenu = url => url.endsWith('/definitions') ? Response.json([])
@@ -40,6 +43,23 @@ test('reads on LAN when browser reports offline and clears cache', async () => {
   assert.ok(view.client.getQueryData(['menu']));
   view.client.clear();
   assert.equal(view.client.getQueryData(['menu']), undefined);
+  await view.close();
+});
+
+test('returning to Menu shows cached data while the server refreshes', async () => {
+  let hold = false;
+  let release;
+  const pending = new Promise(resolve => { release = resolve; });
+  const view = await setup(async url => { if (hold) await pending; return emptyMenu(url); });
+  await view.waitFor(() => view.current.currency === 'PKR');
+  await view.show(false);
+  hold = true;
+  await view.show(true);
+  await view.waitFor(() => view.current.refreshing);
+  assert.equal(view.current.currency, 'PKR');
+  assert.equal(view.current.loading, false);
+  await act(async () => { release(); });
+  await view.waitFor(() => !view.current.refreshing);
   await view.close();
 });
 

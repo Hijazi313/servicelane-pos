@@ -11,7 +11,7 @@ function loadErrorMessage(cause: unknown) {
 }
 
 export function useMenu() {
-  const menu = useQuery({ queryKey: menuKey, queryFn: loadMenu, gcTime: 0, refetchOnMount: 'always' });
+  const menu = useQuery({ queryKey: menuKey, queryFn: loadMenu, refetchOnMount: 'always' });
   const [error, setError] = useState('');
   const [readingAfterSave, setReadingAfterSave] = useState(false);
   const [uncertain, setUncertain] = useState(false);
@@ -89,7 +89,7 @@ export function useMenu() {
   const data = menu.isError ? undefined : menu.data;
   return {
     definitions: data?.definitions ?? [], active: data?.active ?? [], currency: data?.currency ?? '',
-    loading: menu.isFetching, error: error || (menu.isError ? loadErrorMessage(menu.error) : ''),
+    loading: !data && menu.isFetching, refreshing: menu.isFetching, error: error || (menu.isError ? loadErrorMessage(menu.error) : ''),
     saving: saveMutation.isPending || readingAfterSave, uncertain, conflict, latest, savedId, open, editing,
     refresh, save, reloadWhileEditing, startEditing, closeEditor, useLatest,
     acknowledgeReview: () => setUncertain(false),
