@@ -2,6 +2,8 @@
 
 Status: repository workflow, 2026-11-01. Applies the existing [verification policy](../project-scope.md#verification-policy); it does not authorize tooling installation, database access, credentials, infrastructure or production actions. Playwright is not currently installed or configured in `apps/web`.
 
+The web app uses jsdom for focused React DOM checks where necessary, including Menu query recovery. These simulated DOM checks are not browser journeys.
+
 ## Select the smallest useful check
 
 1. Identify the changed behavior, risk and acceptance criterion in the existing feature task or tracker. Reuse current evidence where it still applies; do not rerun checks merely because a task changed hands.

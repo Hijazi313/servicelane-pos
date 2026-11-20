@@ -1,5 +1,6 @@
 import { createContext, useCallback, useContext, useEffect, useState } from 'react';
 import { Outlet, useNavigate } from '@tanstack/react-router';
+import { useQueryClient } from '@tanstack/react-query';
 import { Button, Spin, Typography } from 'antd';
 import { AccessRequestError, changePassword, currentAccount, login, logout, type Account } from '../features/access/access-api';
 import { routeForAccess, type AccessRequirement, type Screen } from './session-route';
@@ -24,12 +25,14 @@ export function useSession(): Session {
 }
 
 export function App() {
+  const queryClient = useQueryClient();
   const [screen, setScreen] = useState<Screen>('checking');
   const [account, setAccount] = useState<Account>();
   const [pending, setPending] = useState(false);
   const [message, setMessage] = useState('');
 
   const refresh = useCallback(async () => {
+    queryClient.clear();
     setScreen('checking');
     setAccount(undefined);
     setMessage('');
@@ -42,11 +45,12 @@ export function App() {
       else if (error instanceof AccessRequestError && error.status === 403) setScreen('restricted');
       else setScreen('unavailable');
     }
-  }, []);
+  }, [queryClient]);
 
   useEffect(() => { void refresh(); }, [refresh]);
 
   async function signIn(username: string, password: string): Promise<void> {
+    queryClient.clear();
     setPending(true);
     setMessage('');
     try {
@@ -64,6 +68,7 @@ export function App() {
   }
 
   async function updatePassword(currentPassword: string, newPassword: string): Promise<void> {
+    queryClient.clear();
     setPending(true);
     setMessage('');
     try {
@@ -80,6 +85,7 @@ export function App() {
   }
 
   async function signOut() {
+    queryClient.clear();
     setPending(true);
     setMessage('');
     try {

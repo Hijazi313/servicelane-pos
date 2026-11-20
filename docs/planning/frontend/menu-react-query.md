@@ -1,0 +1,7 @@
+# Menu React Query
+
+User authorized the Menu-first React Query implementation on 2026-11-21. Preserve the existing Menu contract and draft, conflict and unknown-write recovery. Shared defaults must not retry writes or block LAN requests based on browser online status; session transitions clear cached data. Menu reads on entry and after saves; failed reads do not confirm an empty menu or a successful readback. Access authentication remains separately owned.
+
+Status: awaiting user review. Menu uses one query for the three existing reads, a mutation for save and an explicit readback. The shared query client disables retries and focus/reconnect refetch, and uses `networkMode: 'always'` for LAN access. Menu cache is discarded on unmount and the app clears the query client at session transitions. Query data is hidden after a failed read; the saved ID is retained when readback fails. No API contract changed.
+
+On Node 24.21.0, the web build passed with the existing large-chunk warning. Sixteen focused mocked API and DOM checks passed, including LAN-mode execution, failed reads, unknown saves, readback failure and 409 revision reload. The DOM checks use jsdom and do not prove a real browser session change, navigation or rendered readback behavior. Those checks and user acceptance remain pending. No database was accessed. Publication and integration are separate. Incidents: none in this task.

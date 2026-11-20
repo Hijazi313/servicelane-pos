@@ -23,6 +23,7 @@ The frontend foundation/access PR was integrated at `edf58d9` on local `main` an
 
 | Work | Branch and checkout | Owner | Base and publication | Handoff |
 | --- | --- | --- | --- | --- |
+| Menu React Query | `codex/menu-react-query`, repository checkout | Current agent | Based on `main`; local only | [Scope and evidence](frontend/menu-react-query.md). |
 
 ## Historical records
 
