@@ -59,3 +59,38 @@ After scope and source authorization, deliver access and read-only inspection fi
 **P1 for this screen.** Image upload and file storage, deactivation, categories, imports and branding configuration are deferred. Image storage, retrieval, validation and recovery need a separate design when that work is authorized. The later cashier workflow remains separately scoped.
 
 **Handoff.** Owner to review the proposed workflow and access gate before implementation. Planning/documentation only. Incidents: none in this task.
+
+## Implementation in progress — 2026-11-20
+
+The user authorized the menu implementation. Access acceptance remains separate. The initial implementation uses the existing listing, definition and save contracts and a shared drawer form. Image upload remains disabled.
+
+| Work | Status |
+| --- | --- |
+| Administrator route, context and catalogue read | Implemented, source and mocked client checks |
+| Item, size, add-on and meal create/edit | Implemented, browser coverage incomplete |
+| Desktop and tablet browser review, including error and correction paths | Pending. Synthetic desktop browser opened the drawer and saved one ordinary item. |
+| Independent UI review and user acceptance | Pending |
+
+Do not infer browser, database or release acceptance from source changes. Incidents: none in this implementation handoff.
+
+Verification: web typecheck and build passed on Node 24.18.1, below the repository supported minimum 24.21.0; build reports a large chunk warning. Seven synthetic API/access checks passed. A local in-memory mock browser demonstrated one ordinary item save. No database was accessed. Independent source review found conflict-recovery problems; the preview now shows saved nested choices, but rendered recovery and independent desktop/tablet review remain pending because the reviewer had no browser surface. User acceptance remains pending.
+
+## Shared Menu contract — 2026-11-21
+
+The backend and frontend use the shared [Menu declaration](../../../packages/api-contracts/menu.d.ts) for saved offerings. The frontend uses its separate create/edit definition type, where new nested IDs can be omitted, and checks response shapes at runtime. The declaration is imported as types through relative paths, without changing workspace installation or runtime dependencies. Existing Menu HTTP behavior remains unchanged. Offline Menu tests, frontend API checks and both application typechecks passed on the available Node 24.18.1, below the supported minimum. The web build passed with its existing large-chunk warning. The earlier browser and independent review limits remain open.
+
+## Frontend responsibility cleanup — 2026-11-21
+
+Menu loading, saving and recovery state now live in the feature's workflow hook. The form delegates request mapping to the draft module, while the server remains authoritative for catalogue rules. A create-time 409 no longer enters the edit-conflict recovery path. Web typecheck, existing Menu client checks and a focused draft-mapping check passed on Node 24.18.1, below the supported minimum. Browser and independent review remain pending. Incidents: none confirmed in this cleanup.
+
+## Contracts workspace package — 2026-11-21
+
+The shared Menu declaration is now exported by the type-only `@servicelane/api-contracts/menu` workspace package. Both applications declare a local workspace development dependency and use named type imports. This supersedes the earlier relative-import arrangement. The frozen lockfile records the local links. API typecheck, web build and existing Menu client checks passed using Node 24.21.0; the web build retains its large-chunk warning. Runtime API behavior is unchanged. Prior browser and access acceptance limits remain open. Incidents: [INC-20261121-01](../../quality/agent-incidents.md#inc-20261121-01--offline-workspace-install-interrupted-local-dependencies).
+
+## Current handoff — 2026-11-21
+
+The user requested local checkpoints and a fresh-chat handoff. The topic branch contains source for administrator Menu listing and create/edit drawer, shared contracts, and the access routing refactor. This is an implementation checkpoint, not feature acceptance or release readiness. Desktop/tablet Menu workflows, including complex definitions and recovery, and the independent UI review are pending. Access remains active and separately unaccepted.
+
+The next owner should first inspect the current checkout and reconcile the pending save/recovery findings against source: the create response ID is discarded even though duplicate names are permitted, and legacy 409 responses cover several causes rather than uniquely identifying stale edits. Preserve unknown-write outcomes and existing contracts. Then complete focused authorized corrections and representative synthetic browser/independent review. Database-backed verification, deployment, push, PR and merge require their own authorization. Use the existing supported Node 24.21.0 and pnpm 12.11.2. Image upload remains deferred.
+
+Incidents: [INC-20261121-01](../../quality/agent-incidents.md#inc-20261121-01--offline-workspace-install-interrupted-local-dependencies), corrected with user review pending. Earlier evidence in this document is historical; the contracts package supersedes the initial relative-import arrangement. Check Git for exact current commit and publication state.
