@@ -25,7 +25,7 @@ Shared [HTTP boundary components](../../apps/api/src/infrastructure/http/README.
 - Root `infrastructure/` owns shared technical setup such as configuration, database connections and logging. Module-specific SQL, Drizzle schema declarations and adapters remain in their module. The shared database schema entry point re-exports declarations for migration generation.
 - `common/` contains only small, business-neutral code with demonstrated reuse. No business entities, catch-all services, generic repository framework or speculative utilities.
 - No global `types/` bucket. Place types beside their behavior; persistence row types stay private to adapters.
-- [`packages/api-contracts/`](../../packages/api-contracts/menu.d.ts) contains explicit transport contracts when a consumer needs them. Never share database models or backend services with the frontend.
+- `packages/api-contracts/` contains explicit transport contracts when a consumer needs them. Never share database models or backend services with the frontend.
 - `docs/architecture/` records architecture decisions and boundaries; module-local `docs/` records business rules and feature lifecycles; global `docs/modules/` holds cross-cutting guidance; `docs/compliance/` records applicability and evidence; `docs/acceptance/` records user-run scenarios and outcomes.
 - Create files and folders only when useful; do not manufacture empty layers or interfaces for every class.
 

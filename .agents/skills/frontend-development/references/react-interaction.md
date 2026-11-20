@@ -12,6 +12,8 @@ Use the existing design direction and components when they fit. Question whether
 
 ## Ownership and state
 
+- Keep presentation focused on rendering, form interaction and user feedback. Server-side domain and application code remains authoritative for business rules. For a substantial workflow, give feature-owned loading, saving, recovery and request mapping a clear home outside the presentation component when that improves clarity. Reuse existing logic and keep simple local interaction in the component. Do not create hooks, layers or one-file-per-action scaffolding without a concrete responsibility.
+
 - For placement, naming, public interfaces and examples, use [naming and ownership](ownership.md).
 - Split components or extract hooks and pure calculations when responsibility, meaningful reuse or complexity warrants it. Keep state near consumers, lift to a common owner when needed, and derive values rather than maintaining duplicate state. Use effects for external synchronization and clean up subscriptions and timers; do not use effects to synchronize derived state. Memoize only for a demonstrated need.
 - Route files coordinate navigation; they do not duplicate workflows. Configure aliases consistently in all affected tools only when needed.
