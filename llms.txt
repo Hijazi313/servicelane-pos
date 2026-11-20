@@ -1,0 +1,30 @@
+# ServiceLane POS
+
+> ServiceLane POS is an in-development restaurant point-of-sale system for
+> independent businesses. It is not production-ready.
+
+The project uses TypeScript, React, Vite, NestJS, PostgreSQL, Drizzle, Node.js,
+and pnpm. It is designed for one installation per restaurant business on its
+local network, using a dedicated PostgreSQL database.
+
+## Start here
+
+- [README](https://raw.githubusercontent.com/Hijazi313/servicelane-pos/main/README.md): Project overview, status, technology stack, setup, and repository structure.
+- [Architecture](https://raw.githubusercontent.com/Hijazi313/servicelane-pos/main/docs/architecture/README.md): System structure, module boundaries, and dependency rules.
+- [Project tracker](https://raw.githubusercontent.com/Hijazi313/servicelane-pos/main/docs/planning/TRACKER.md): Current work, acceptance status, and verification limits.
+- [Project scope](https://raw.githubusercontent.com/Hijazi313/servicelane-pos/main/docs/project-scope.md): Product scope and delivery boundaries.
+
+## Code and modules
+
+- [API](https://github.com/Hijazi313/servicelane-pos/tree/main/apps/api): NestJS backend, business modules, and database migrations.
+- [Web application](https://github.com/Hijazi313/servicelane-pos/tree/main/apps/web): React frontend.
+- [Menu](https://raw.githubusercontent.com/Hijazi313/servicelane-pos/main/apps/api/src/modules/menu/docs/README.md): Menu catalogue documentation.
+- [Orders](https://raw.githubusercontent.com/Hijazi313/servicelane-pos/main/apps/api/src/modules/orders/docs/README.md): Order capture documentation.
+- [Kitchen](https://raw.githubusercontent.com/Hijazi313/servicelane-pos/main/apps/api/src/modules/kitchen/docs/README.md): Kitchen preparation documentation.
+- [Billing](https://raw.githubusercontent.com/Hijazi313/servicelane-pos/main/apps/api/src/modules/billing/docs/README.md): Billing and settlement documentation.
+
+## Development guidance
+
+- [Agent instructions](https://raw.githubusercontent.com/Hijazi313/servicelane-pos/main/AGENTS.md): Instructions for agents working in the repository.
+- [Contributing](https://raw.githubusercontent.com/Hijazi313/servicelane-pos/main/CONTRIBUTING.md): Contribution workflow.
+- [Known issues](https://raw.githubusercontent.com/Hijazi313/servicelane-pos/main/KNOWN-ISSUES.md): Recorded issues and limitations.
