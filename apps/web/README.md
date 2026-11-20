@@ -18,3 +18,7 @@ node --experimental-transform-types --test apps/web/tests/access-api.test.mjs
 ```
 
 To start both the API watcher and frontend from the repository root, run `pnpm dev`. The frontend defaults to HTTPS on `127.0.0.1:5174`; first configure the certificate and matching API settings as described in the [local HTTPS development guide](../../docs/development-setup.md#local-browser-development). API startup can modify the database through background cleanup. Deployment remains separate work. See the [frontend architecture proposal](../../docs/architecture/frontend-proposal.md).
+
+# Browser HTTP client
+
+Use `request` from `src/shared/api/http-client.ts` for reads and `write` for JSON POST/PUT operations that require CSRF proof. Both return `unknown`: feature operations validate their own response and interpret `HttpRequestError.status` according to the endpoint contract. A 204 response returns `undefined`. Network and JSON parsing failures propagate; writes are never automatically retried. Do not treat an interrupted write as a confirmed failure.

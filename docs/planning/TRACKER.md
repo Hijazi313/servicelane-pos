@@ -22,6 +22,7 @@ The frontend foundation/access PR was integrated at `edf58d9` on local `main` an
 
 | Work | Branch and checkout | Owner | Base and publication | Handoff |
 | --- | --- | --- | --- | --- |
+| Frontend HTTP client | `codex/frontend-http-client`, repository checkout | Current agent | Based on `main`; publication and integration authorized | Shared transport for Access and Menu; 12 focused mocked checks and web typecheck passed on Node 24.21.0. User reported local login, Menu listing and edit working; broader browser recovery remains unverified. Incidents: none in this task. |
 
 ## Historical records
 

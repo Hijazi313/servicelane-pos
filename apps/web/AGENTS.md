@@ -12,6 +12,8 @@ The current foundation uses React, TypeScript, Vite and Ant Design. Ant Design f
 
 For frontend design, implementation or review, use [frontend-development](../../.agents/skills/frontend-development/SKILL.md), which routes to task-specific references. Root instructions and the active feature's specification, integration guide and tracker still apply.
 
+Before adding browser API request handling, inspect the existing [shared HTTP client](src/shared/api/http-client.ts) and reuse it when it supports the endpoint's contract. Keep response validation and endpoint-specific error and recovery behavior with the owning feature. If the client does not fit, explain the concrete limitation before extending or bypassing it.
+
 ## Theme and configuration
 
 - When adding or changing visual behavior, first use the existing Ant Design theme and semantic tokens. Update the owning theme or shared design guidance in the same change when a reusable token or convention is needed; keep related foreground, background, focus and interaction states consistent.
