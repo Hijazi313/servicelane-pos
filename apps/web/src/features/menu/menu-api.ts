@@ -39,7 +39,7 @@ function choiceGroup(value: unknown): value is ChoiceGroup {
     Array.isArray(value.options) && value.options.every(choice);
 }
 
-function offering(value: unknown): value is Offering {
+export function offering(value: unknown): value is Offering {
   if (!named(value) || !Number.isSafeInteger(value.revision) ||
       typeof value.currencyCode !== 'string' || !Number.isSafeInteger(value.scale)) return false;
   if (value.kind === 'item') {

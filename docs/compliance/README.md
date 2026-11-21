@@ -2,7 +2,9 @@
 
 Read when making decisions affecting tax, invoicing, payments, personal data, licensing or compliance claims.
 
-- Consider applicable legal, tax, payment, privacy, security and licensing obligations in consequential decisions. Distinguish mandatory requirements from engineering guidance and business preferences.
+- For decisions affecting personal data, payments, tax, security, accessibility or other regulated behavior, identify the affected workflow, deployment jurisdictions and data or transactions involved. Apply this to frontend and backend behavior.
+- Check potentially applicable requirements against current authoritative sources. Consider UK and EU requirements where the product, business or processing brings them into scope, alongside the deployment's local requirements. Distinguish law and contractual obligations from technical standards, industry practices and product preferences.
+- Record what applies, what is uncertain, the source and affected behavior in the compliance register. Do not invent requirements or claim compliance without evidence. If an unresolved legal or business decision changes the design or release, raise it before dependent work and continue independent work.
 - Never claim the product is compliant merely because it resembles Odoo or follows this document. Compliance requires confirmed applicability, implemented controls and acceptance evidence.
 - Maintain a compliance register with requirement, authority/source and effective date, applicability/status, affected workflow, owner, control and evidence. Use statuses such as pending applicability, applicable, not applicable with rationale, and verified.
 - For Faisalabad, assess Punjab Revenue Authority requirements as well as any applicable FBR obligations with the business/accountant. Do not assume all restaurants have identical obligations or infer tax rates, exemptions, invoice numbering, retention periods or integration mandates.

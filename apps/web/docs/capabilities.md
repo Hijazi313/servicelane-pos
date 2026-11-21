@@ -6,6 +6,10 @@
 
 | Menu setup | [Menu page](../src/features/menu/menu-page.tsx), [drawer](../src/features/menu/menu-form.tsx) | Initial administrator workflow accepted under the user-reported local walkthrough; broader UI and recovery verification is deferred. Performance remains open; photo upload is disabled. [Plan and evidence](../../../docs/planning/frontend/initial-menu-setup.md). |
 
+| Menu offering validation | [Menu public interface](../src/features/menu/public.ts) | Exposes `validateOffering` for Cashier's active-catalogue response validation. Menu owns the validator; consumers use this interface rather than internal files. |
+
+| Cashier order capture | [Cashier screen](../src/features/cashier/cashier-screen.tsx) | Source implements active-menu selection, takeaway capture and paginated saved-order readback. Browser walkthrough, independent UI readiness and user acceptance remain pending; listing PostgreSQL and large-history performance are unverified. [Scope and evidence](../../../docs/planning/frontend/cashier-order-capture.md). |
+
 | Shared HTTP client | [Client](../src/shared/api/http-client.ts) | Same-origin JSON requests and fresh CSRF proof for writes; HTTP failures expose status. Feature operations validate responses and decide recovery. Requests are not automatically retried. |
 
 | Server data | [Query client](../src/app/query-client.ts), [Menu workflow](../src/features/menu/use-menu.ts) | Menu reads and saves use TanStack Query. Queries and mutations do not retry automatically or depend on browser online status; session transitions clear the cache. Menu refreshes after save and does not treat a failed readback as a failed write. Browser recovery verification remains pending. |

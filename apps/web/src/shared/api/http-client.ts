@@ -1,5 +1,5 @@
 export class HttpRequestError extends Error {
-  constructor(public readonly status: number) {
+  constructor(public readonly status: number, public readonly problem?: unknown) {
     super('HTTP request failed');
   }
 }
@@ -10,7 +10,11 @@ export async function request(path: string, options?: RequestInit): Promise<unkn
     credentials: 'same-origin',
     cache: 'no-store',
   });
-  if (!response.ok) throw new HttpRequestError(response.status);
+  if (!response.ok) {
+    let problem: unknown;
+    try { problem = await response.json(); } catch { /* Some failures have no JSON body. */ }
+    throw new HttpRequestError(response.status, problem);
+  }
   if (response.status === 204) return undefined;
   return response.json();
 }

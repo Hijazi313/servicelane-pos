@@ -9,6 +9,8 @@ import {
   Put,
   Req,
   Query,
+  RequestMapping,
+  RequestMethod,
   UseFilters,
   ServiceUnavailableException,
 } from "@nestjs/common";
@@ -26,6 +28,7 @@ import { MenuListExceptionFilter } from "./menu-list-exception.filter.js";
 import { MenuService } from "../application/menu.service.js";
 import { menuErrorStatus } from "./menu-error-mapping.js";
 import { MenuError } from "../domain/catalogue.js";
+import { ResolveSelectionDto } from "./resolve-selection.dto.js";
 
 @Controller("api/v1/menu")
 export class MenuController {
@@ -127,5 +130,10 @@ export class MenuController {
         this.menu.resolve(scope, body),
       ),
     );
+  }
+  @RequestMapping({ method: RequestMethod.QUERY, path: "resolve" })
+  @AccessEntry("staff")
+  queryResolve(@Req() request: AccessRequest, @Body(new DtoValidationPipe("body")) body: ResolveSelectionDto) {
+    return this.boundary(async () => this.menu.preview(await this.context(request), body));
   }
 }

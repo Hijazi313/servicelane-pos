@@ -48,7 +48,8 @@ export function HomeScreen() {
   const navigate = useNavigate();
   return <AccessLayout>
     <p className="eyebrow">WORKSPACE</p><Typography.Title level={2}>Welcome, {account?.displayName}</Typography.Title>
-    <Typography.Paragraph type="secondary">Your session is active. Your workspace will appear here as features become available.</Typography.Paragraph>
+    <Typography.Paragraph type="secondary">Choose a task to continue.</Typography.Paragraph>
+    <Button type="primary" onClick={() => void navigate({ to: '/cashier' })}>Cashier</Button>{' '}
     {account?.role === 'administrator' && <Button type="primary" onClick={() => void navigate({ to: '/menu' })}>Manage menu</Button>}{' '}
     <Button onClick={() => void signOut()} loading={pending}>Sign out</Button>
   </AccessLayout>;

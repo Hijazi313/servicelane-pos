@@ -21,3 +21,58 @@ body { margin: 0; }
 .menu-drawer .ant-input, .menu-drawer .ant-input-number,
 .menu-drawer .ant-select-single .ant-select-selector { min-height: 48px; }
 .menu-drawer .ant-select-single { height: 48px; }
+.cashier-main { max-width: 1500px; margin: 0 auto; padding: 32px 24px; }
+.cashier-page .ant-btn, .cashier-page .ant-input, .cashier-page .ant-input-number { min-height: 48px; }
+.cashier-page label { display: block; }
+
+/* Cashier catalogue and order panel: the catalogue needs a denser, touchable grid. */
+.cashier-main { max-width: 1600px; }
+.cashier-toolbar { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.cashier-heading { margin: 28px 0; }
+.cashier-heading .ant-typography { margin-bottom: 4px; }
+.cashier-feedback { display: grid; gap: 12px; margin-bottom: 16px; }
+.cashier-feedback:empty { display: none; }
+.cashier-workspace { display: grid; grid-template-columns: minmax(0, 1fr) minmax(360px, 420px); gap: 24px; align-items: start; }
+.cashier-section-heading { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 16px; }
+.cashier-section-heading h4.ant-typography { margin: 0; }
+.cashier-menu-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 12px; }
+.cashier-menu-item { min-width: 0; min-height: 148px; padding: 18px; border: 1px solid; border-radius: 10px; text-align: left; font: inherit; display: flex; flex-direction: column; gap: 8px; cursor: pointer; }
+.cashier-menu-item:hover:not(:disabled) { box-shadow: 0 2px 10px rgb(0 0 0 / 12%); }
+.cashier-menu-item:focus-visible { outline: 3px solid currentColor; outline-offset: 2px; }
+.cashier-menu-item:disabled { cursor: not-allowed; opacity: .55; }
+.cashier-item-name { font-size: 17px; font-weight: 650; overflow-wrap: anywhere; }
+.cashier-item-meta { font-size: 16px; }
+.cashier-item-bottom { display: flex; align-items: end; justify-content: space-between; gap: 8px; margin-top: auto; }
+.cashier-item-add { font-size: 24px; line-height: 1; }
+.cashier-empty, .cashier-loading { padding: 28px; border: 1px solid; border-radius: 10px; }
+.cashier-loading { display: flex; align-items: center; gap: 12px; border: 0; }
+.cashier-order { position: sticky; top: 16px; min-width: 0; padding: 22px; border: 1px solid; border-radius: 12px; }
+.cashier-order-heading { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.cashier-order-heading h4.ant-typography { margin: 4px 0 0; }
+.cashier-order-count { padding: 7px 10px; border-radius: 8px; white-space: nowrap; }
+.cashier-order-lines { margin-top: 18px; max-height: min(45vh, 500px); overflow-y: auto; }
+.cashier-order-empty { min-height: 136px; display: flex; flex-direction: column; justify-content: center; gap: 6px; }
+.cashier-line { padding: 16px 0; border-top: 1px solid; }
+.cashier-line-heading { display: flex; justify-content: space-between; gap: 12px; }
+.cashier-line-heading strong:first-child { overflow-wrap: anywhere; }
+.cashier-line-heading strong:last-child { text-align: right; white-space: nowrap; }
+.cashier-line-meta { margin-top: 6px; overflow-wrap: anywhere; }
+.cashier-line-actions { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+.cashier-quantity { display: flex; align-items: center; gap: 10px; }
+.cashier-quantity .ant-btn { min-width: 48px; font-size: 20px; }
+.cashier-quantity span { min-width: 24px; text-align: center; font-weight: 600; }
+.cashier-details { margin: 12px 0; }
+.cashier-page .ant-collapse-header { min-height: 48px; align-items: center !important; }
+.cashier-page .ant-collapse-content-box { padding: 8px 0 !important; }
+.cashier-order-footer { display: grid; gap: 10px; border-top: 1px solid; padding-top: 18px; }
+.cashier-total { display: flex; justify-content: space-between; gap: 12px; font-size: 18px; }
+.cashier-page { font-size: 16px; }
+.cashier-page .ant-btn, .cashier-page .ant-input, .cashier-page .ant-collapse, .cashier-page .ant-typography:not(h1):not(h2):not(h3):not(h4):not(h5) { font-size: inherit; }
+.cashier-page .ant-btn { min-width: 48px; }
+.cashier-selection .ant-drawer-body, .cashier-history .ant-drawer-body, .cashier-history .ant-modal-body { font-size: 16px; }
+.cashier-selection .ant-radio-wrapper, .cashier-selection .ant-checkbox-wrapper { min-height: 48px; align-items: center; font-size: 16px; }
+.cashier-selection .ant-btn, .cashier-history .ant-btn { min-width: 48px; min-height: 48px; font-size: 16px; }
+.cashier-selection .ant-drawer-close, .cashier-history .ant-drawer-close, .cashier-history .ant-modal-close { min-width: 48px; min-height: 48px; }
+.cashier-selection-actions { display: flex; justify-content: flex-end; }
+@media (max-width: 900px) { .cashier-workspace { grid-template-columns: minmax(0, 1fr) minmax(320px, 38%); gap: 16px; } .cashier-main { padding: 24px 16px; } .cashier-menu-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); } .cashier-order { padding: 16px; } }
+@media (max-width: 700px) { .cashier-workspace { grid-template-columns: 1fr; } .cashier-order { position: static; } .cashier-order-lines { max-height: none; } }
