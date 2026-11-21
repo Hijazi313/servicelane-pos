@@ -1,6 +1,6 @@
 import type { Extra, Offering } from '@servicelane/api-contracts/menu';
 import { request } from '../../shared/api/http-client.ts';
-import { offering } from '../menu/menu-api.ts';
+import { validateOffering } from '../menu/public.ts';
 
 export type Selection = {
   offeringId: string;
@@ -44,7 +44,7 @@ function choice(value: unknown): value is SelectedChoice {
 
 export async function loadCashierMenu(): Promise<Offering[]> {
   const response = await request('menu/offerings');
-  if (!record(response) || !Array.isArray(response.data) || !response.data.every(offering)) {
+  if (!record(response) || !Array.isArray(response.data) || !response.data.every(validateOffering)) {
     throw new Error('Unexpected menu response');
   }
   return response.data;
