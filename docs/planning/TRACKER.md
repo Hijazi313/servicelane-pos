@@ -26,6 +26,7 @@ The frontend foundation/access PR was integrated at `edf58d9` on local `main` an
 
 | Work | Branch and checkout | Owner | Base and publication | Handoff |
 | --- | --- | --- | --- | --- |
+| Order listing | `codex/order-listing`, main checkout | Primary agent | Local only; based on main, publication unauthorized | [Order listing](../../apps/api/src/modules/orders/docs/features/capture/order-list.md) |
 
 ## Historical records
 

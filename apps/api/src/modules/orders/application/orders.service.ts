@@ -3,6 +3,7 @@ import { randomUUID } from 'node:crypto';
 import { AccessService, type Proof } from '../../authentication/public.js';
 import { MenuOrderResolver } from '../../menu/public.js';
 import { OrderStore, type OrderSnapshot } from './order-store.js';
+import { OrderListCursor } from './order-list-cursor.js';
 import { parseOrderCapture } from './parse-order-capture.js';
 import { canonical, OrdersError, MAX_LINES, MAX_QUANTITY, RESPONSE_BYTES, object, integer, identifier, checkedAmount } from '../domain/capture.js';
 
@@ -11,7 +12,7 @@ export function snapshotFits(snapshot: OrderSnapshot): boolean {
 }
 @Injectable()
 export class OrdersService {
-  constructor(private readonly access: AccessService, private readonly menu: MenuOrderResolver, private readonly store: OrderStore) {}
+  constructor(private readonly access: AccessService, private readonly menu: MenuOrderResolver, private readonly store: OrderStore, private readonly cursors: OrderListCursor) {}
   async create(proof: Proof, value: unknown): Promise<OrderSnapshot> {
     const { key, request } = parseOrderCapture(value, selection => this.menu.normalize(selection));
     return this.access.runAuthorized(proof, 'staff', async scope => {
@@ -54,6 +55,15 @@ export class OrdersService {
     const snapshot = await this.store.get(context.businessId, context.branchId, orderId);
     if (!snapshot) throw new OrdersError('ORDER_NOT_FOUND');
     return snapshot;
+  }
+  async list(proof: Proof, query: { limit: string; cursor?: string }) {
+    if (!/^(?:[1-9]|[1-9][0-9]|100)$/.test(query.limit) || (query.cursor !== undefined && typeof query.cursor !== 'string')) throw new OrdersError('INVALID_ORDER_INPUT');
+    const limit = Number(query.limit), context = await this.context(proof);
+    const { businessId, branchId } = context;
+    const after = query.cursor === undefined ? undefined : this.cursors.read(query.cursor, businessId, branchId, limit);
+    const rows = await this.store.list(businessId, branchId, limit + 1, after);
+    const items = rows.slice(0, limit), last = items.at(-1);
+    return { items, nextCursor: rows.length > limit && last ? this.cursors.issue(last, businessId, branchId, limit) : null };
   }
   async policy(proof: Proof) { return this.store.policy((await this.context(proof)).businessId); }
   async updatePolicy(proof: Proof, value: unknown) {

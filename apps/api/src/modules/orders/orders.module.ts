@@ -4,6 +4,8 @@ import { AuthenticationModule } from "../authentication/public.js";
 import { MenuModule } from "../menu/public.js";
 import { OrderFinancialService } from "./application/order-financial.service.js";
 import { OrderPreparationService } from "./application/order-preparation.service.js";
+import { OrderListCursor } from "./application/order-list-cursor.js";
+import { readOrderCursorKey } from "./infrastructure/order-cursor-configuration.js";
 import { OrdersService } from "./application/orders.service.js";
 import { OrderStore } from "./application/order-store.js";
 import { PostgresOrderStore } from "./infrastructure/postgres-order-store.service.js";
@@ -15,6 +17,7 @@ import { OrdersController } from "./http/orders.controller.js";
   providers: [
     OrderPreparationService,
     OrderFinancialService,
+    { provide: OrderListCursor, useFactory: () => new OrderListCursor(readOrderCursorKey(process.env)) },
     OrdersService,
     { provide: OrderStore, useClass: PostgresOrderStore },
   ],

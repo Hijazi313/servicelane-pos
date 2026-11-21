@@ -13,6 +13,15 @@
 
 Entries below assess already-observed events in this active thread following the user’s instruction to apply the adopted skill. No repository-wide or unrelated historical audit was performed. Sandbox evaluation incidents are fictional fixtures and are not imported here. Severity and correction status remain provisional; only the user closes entries or decides prevention proposals.
 
+## INC-20261121-03 — Order-list cursor invalidated by restart
+
+- Severity / status: S3 / corrected locally; user review pending.
+- Violation and evidence: The staged order-listing API used a random signing key per process. The prior handoff presented the work for review despite the user expecting a stateless API. The user identified that restart invalidates pagination; multiple instances would likewise reject each other's cursors. The project requires checking assumptions affecting user-visible behavior and using the smallest solution consistent with scope.
+- Impact: User review and corrective work were required. No deployment or operational disruption is evidenced.
+- Correction: The staged [cursor](../../apps/api/src/modules/orders/application/order-list-cursor.ts) now uses a configured stable installation key; focused tests cover independent cursor instances, key changes and malformed configuration. PostgreSQL and deployment remain unverified.
+- Contributing cause: The Kitchen cursor was reused as a pattern without assessing its documented process-local key tradeoff for this order-list workflow.
+- Prevention / user review: Assess restart and multi-instance behavior before reusing process-local state; no policy change proposed / pending.
+
 ## INC-20261121-02 — GitHub connection incorrectly reported unavailable
 
 - Severity / status: S2 / corrected; user review pending.

@@ -4,6 +4,7 @@ import {
   Get,
   Param,
   Post,
+  Query,
   Put,
   Req,
   Res,
@@ -16,6 +17,8 @@ import {
 } from "../../authentication/http/public.js";
 import { HttpContract } from "../../../infrastructure/http/http-contract.decorator.js";
 import { DtoValidationPipe } from "../../../infrastructure/http/dto-validation.pipe.js";
+import { HttpPage } from "../../../infrastructure/http/http-response.interceptor.js";
+import { ListOrdersDto } from "./list-orders.dto.js";
 import { CreateOrderDto } from "./create-order.dto.js";
 import type { OrderSnapshot } from "../application/order-store.js";
 import { OrdersService } from "../application/orders.service.js";
@@ -36,6 +39,13 @@ export class OrdersController {
     const result = await this.orders.create(proof(request), value);
     reply.header("Location", `/api/v1/orders/${result.id}`);
     return result;
+  }
+  @Get()
+  @AccessEntry("staff")
+  @HttpContract()
+  async list(@Req() request: AccessRequest, @Query(new DtoValidationPipe("query")) query: ListOrdersDto) {
+    const page = await this.orders.list(proof(request), query);
+    return new HttpPage(page.items, page.nextCursor);
   }
   @Get("capture-policy")
   @AccessEntry("staff")

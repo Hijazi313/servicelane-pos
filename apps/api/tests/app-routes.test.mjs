@@ -11,6 +11,7 @@ import { DrawerService } from '../dist/app-routes-check/modules/cashier-shifts/a
 test('AppModule dispatches Billing and Cashier requests through their controllers', async () => {
   process.env.DATABASE_URL = 'postgres://test:test@127.0.0.1:1/test';
   process.env.CLIENT_ORIGIN = 'https://pos.test';
+  process.env.ORDER_CURSOR_SIGNING_KEY = 'ab'.repeat(32);
   process.env.NODE_ENV = 'test';
   const app = await NestFactory.create(AppModule,
     createHttpAdapter({ trustedProxies: ['127.0.0.1'], bodyLimit: 16_384 }, () => {}),

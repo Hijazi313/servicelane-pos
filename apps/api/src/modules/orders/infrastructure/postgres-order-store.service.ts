@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
-import { and, eq } from 'drizzle-orm';
+import { and, desc, eq, lt, or, sql } from 'drizzle-orm';
 import { DatabaseService } from '../../../infrastructure/database/database.service.js';
 import { transactionDatabase, type TransactionContext } from '../../../infrastructure/database/transaction.js';
-import { OrderStore, type StoredOrder } from '../application/order-store.js';
+import { OrderStore, type OrderPosition, type OrderSummary, type StoredOrder } from '../application/order-store.js';
 import { DEFAULT_POLICY, OrdersError, type LimitPolicy } from '../domain/capture.js';
 import { capturedOrders, orderCapturePolicies } from './schema.js';
 @Injectable()
@@ -34,6 +34,15 @@ export class PostgresOrderStore extends OrderStore {
     const [row] = await db.select({ snapshot: capturedOrders.snapshot }).from(capturedOrders)
       .where(and(eq(capturedOrders.businessId, businessId), eq(capturedOrders.branchId, branchId), eq(capturedOrders.id, orderId)));
     return row?.snapshot;
+  }
+  async list(businessId: string, branchId: string, limit: number, after?: OrderPosition): Promise<OrderSummary[]> {
+    const createdAt = sql<string>`${capturedOrders.snapshot}->>'createdAt'`;
+    const rows = await this.database.db.select({ snapshot: capturedOrders.snapshot }).from(capturedOrders)
+      .where(and(eq(capturedOrders.businessId, businessId), eq(capturedOrders.branchId, branchId),
+        after ? or(lt(createdAt, after.createdAt), and(eq(createdAt, after.createdAt), lt(capturedOrders.id, after.id))) : undefined))
+      .orderBy(desc(createdAt), desc(capturedOrders.id)).limit(limit);
+    return rows.map(({ snapshot }) => ({ id: snapshot.id, createdAt: snapshot.createdAt, state: snapshot.state,
+      fulfillment: snapshot.fulfillment, currencyCode: snapshot.currencyCode, scale: snapshot.scale, totalMinor: snapshot.totalMinor }));
   }
   async save(businessId: string, branchId: string, retryKey: string, order: StoredOrder, transaction: TransactionContext) {
     await transactionDatabase(transaction).insert(capturedOrders).values({ id: order.snapshot.id, businessId, branchId, retryKey, ...order });

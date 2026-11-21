@@ -80,7 +80,7 @@ pnpm install --frozen-lockfile --ignore-scripts
 if [ ! -e .env ] && [ ! -L .env ]; then cp .env.example .env; fi
 ```
 
-Configure `.env` using [`.env.example`](.env.example). Provide `DATABASE_URL` and `CLIENT_ORIGIN`, the canonical HTTPS client origin without a trailing slash. Keep credentials out of version control.
+Configure `.env` using [`.env.example`](.env.example). Provide `DATABASE_URL`, `CLIENT_ORIGIN` (the canonical HTTPS client origin without a trailing slash), and the stable secret `ORDER_CURSOR_SIGNING_KEY` described in [development setup](docs/development-setup.md). Keep credentials out of version control.
 
 Read the [development configuration guide](docs/development-setup.md) for connection URL requirements, provider endpoints, TLS certificates, and reverse-proxy settings before connecting. Database TLS verifies certificates and hostnames by default.
 
