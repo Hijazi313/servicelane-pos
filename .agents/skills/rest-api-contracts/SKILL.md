@@ -3,7 +3,7 @@ name: rest-api-contracts
 description: "Design, implement and review REST API contracts in this repository, including validation, query parameters, responses, errors, headers, retries and concurrency. Use for new or changed HTTP endpoints and contract reviews; exclude unrelated internal changes."
 metadata:
   author: "Codex"
-  version: "0.6.0"
+  version: "0.6.1"
   project: "ServiceLane POS"
   scope: "REST API contract design, implementation guidance and review; existing API migrations and CI enforcement require separate authorization"
   created: "2026-10-24"
@@ -31,7 +31,7 @@ Before implementing or changing HTTP handling, read the [shared HTTP guide](../.
 
 - Reuse applicable shared validation integration, response formatting, error formatting and correlation components; do not create parallel implementations in modules. If a documented limitation prevents reuse, explain the gap and smallest alternative before adding another mechanism.
 - Keep endpoint parsing rules, filter/sort allowlists, public field selection and semantic-error mappings module-owned. Application/domain code must not depend on HTTP pipes or formatters.
-- Preserve existing contracts until migration is authorized. Shared components are registered for two approved endpoint contracts; inspect the shared guide for current adoption. Do not mark additional methods or migrate legacy contracts as incidental cleanup.
+- Preserve existing contracts until migration is authorized. Inspect the shared guide for current component adoption. Do not mark additional methods or migrate legacy contracts as incidental cleanup.
 
 Use the shared DtoValidationPipe (Nest ValidationPipe + class-validator/class-transformer) and concrete module-owned DTO classes for migrated HTTP inputs. Disable implicit conversion; retain application/domain normalization and invariants. Do not introduce a competing generic parser pipe.
 
