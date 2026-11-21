@@ -15,7 +15,7 @@ Edit the ignored `.env` locally. Use a PostgreSQL connection URL with percent-en
 
 For Supabase, use a direct endpoint or a session-mode pooler when direct access is unavailable on your network. Use a direct/session connection for migrations, not a transaction pooler. `MIGRATION_DATABASE_URL` optionally supplies a separate endpoint/role; it defaults to `DATABASE_URL`. Both connections currently use the same optional CA file. A project requiring different CA roots can supply a PEM bundle. Select a dedicated development project and record its actual PostgreSQL version and connection budget. Supabase's other platform services are not dependencies.
 
-The API requires a database URL and canonical HTTPS `CLIENT_ORIGIN` even if the database is currently unreachable. It creates its pool lazily; startup does not create databases or apply migrations. Session cleanup runs after 60 seconds when the application is started and can modify the database. Use an authorized development target.
+The API requires a database URL, canonical HTTPS `CLIENT_ORIGIN`, and `ORDER_CURSOR_SIGNING_KEY` even if the database is currently unreachable. Generate a unique random 32-byte key encoded as 64 hexadecimal characters (for example, using `openssl rand -hex 32`) and store it in the ignored `.env`; keep it private, stable across restarts, and identical across instances for this installation. Rotating it invalidates active order-list cursors. It creates its pool lazily; startup does not create databases or apply migrations. Session cleanup runs after 60 seconds when the application is started and can modify the database. Use an authorized development target.
 
 ## HTTPS and reverse proxies
 

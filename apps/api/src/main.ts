@@ -1,6 +1,7 @@
 import "reflect-metadata";
 import { REQUEST_BODY_LIMIT_BYTES } from "./infrastructure/request-limits.js";
 import { readAccessHttpConfiguration } from "./modules/authentication/http/configuration.js";
+import { readOrderCursorKey } from "./modules/orders/infrastructure/order-cursor-configuration.js";
 import { createHttpAdapter } from "./infrastructure/http/http-adapter.js";
 import { reportHttpCompletion } from "./infrastructure/http/http-error-policy.js";
 import { Logger } from "@nestjs/common";
@@ -17,6 +18,7 @@ async function bootstrap(): Promise<void> {
   // Validate before loading the Nest module tree; errors must not expose values.
   const config = readConfiguration(process.env);
   const access = readAccessHttpConfiguration(process.env);
+  readOrderCursorKey(process.env);
   const { AppModule } = await import("./app.module.js");
   const app = await NestFactory.create<NestFastifyApplication>(
     AppModule,

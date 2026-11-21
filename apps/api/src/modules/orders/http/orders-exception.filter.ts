@@ -7,7 +7,7 @@ import { menuErrorStatus } from '../../menu/http/public.js';
 import { OrdersError, type OrdersErrorCode } from '../domain/capture.js';
 interface Reply { header(name: string, value: string): Reply; status(value: number): Reply; send(value: unknown): void }
 const statuses: Record<OrdersErrorCode, 400 | 404 | 409 | 503> = {
-  INVALID_ORDER_INPUT: 400, INVALID_RETRY_KEY: 400, INVALID_CURRENCY: 400, INVALID_LINES: 400, ORDER_LIMIT_EXCEEDED: 400,
+  INVALID_ORDER_CURSOR: 400, INVALID_ORDER_INPUT: 400, INVALID_RETRY_KEY: 400, INVALID_CURRENCY: 400, INVALID_LINES: 400, ORDER_LIMIT_EXCEEDED: 400,
   ORDER_NOT_FOUND: 404,
   ORDER_AMOUNT_CAPACITY: 409, RETRY_CONTENT_CONFLICT: 409, PRICE_CONFIRMATION_REQUIRED: 409, ORDER_RESPONSE_CAPACITY: 409, STALE_ORDER_POLICY: 409,
   MENU_RESULT_UNAVAILABLE: 503, INSTALLATION_UNAVAILABLE: 503,

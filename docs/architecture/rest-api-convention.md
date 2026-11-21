@@ -51,7 +51,7 @@ Default page size is 50, maximum 100 unless the owning contract justifies smalle
 
 Prefer cursor pagination for changing operational collections; bounded offset pagination is acceptable for a justified administrative workflow with explicit limits. Small bounded configuration collections may return complete lists with documented scope/response caps.
 
-Cursors are opaque, validated and bound to query/order/scope. Base64 alone is not tamper protection. Reauthorize each page; a cursor grants no access. Specify expiry if any and a 400 problem for invalid/incompatible cursors. Do not promise snapshot consistency across pages unless implemented.
+Cursors are opaque to clients, validated, tamper-resistant and bound to query/order/scope. Signing protects integrity, not confidentiality; encoding is not encryption, so never include secrets or personal data in a cursor. Reauthorize each page using trusted server scope; a cursor grants no access. For new stateless endpoints, continuation must survive restarts and requests to different instances: use stable, securely configured signing material shared by the relevant instances, and document key setup, rotation and cursor invalidation. Avoid process-local signing keys unless the user explicitly approves that operational tradeoff. Assess whether an existing key can safely be reused before introducing another required secret. Specify expiry if any and a 400 problem for invalid/incompatible cursors. Do not promise snapshot consistency across pages unless implemented. Existing contracts remain unchanged until a separately authorized migration.
 
 ## Success representations
 

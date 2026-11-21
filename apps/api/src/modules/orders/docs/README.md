@@ -5,5 +5,6 @@ Owns captured takeaway orders, immutable merchandise/customer/instruction snapsh
 - [Specification](features/capture/spec.md)
 - [Phase tracker](features/capture/phase-tracker.md)
 - [Capabilities](capabilities.md)
+- [Order listing contract](features/capture/order-list.md)
 
-No kitchen dispatch, payment, fiscal sale, amendments/cancellation or listing/search in OR-01.
+OR-01 has no kitchen dispatch, payment, fiscal sale, amendments/cancellation or listing/search. A subsequent listing increment is under review; search and order correction remain unavailable.

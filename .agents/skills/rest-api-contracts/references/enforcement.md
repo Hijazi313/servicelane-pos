@@ -53,7 +53,7 @@ Use focused existing HTTP tests for relevant cases:
 - Correlation before controller execution; safe unexpected-error logs without duplicate stacks/secrets.
 - No content for 204; preservation of Location/Allow/authentication/Retry-After where applicable.
 - Unknown fields/query keys, duplicate scalars, invalid values, malformed JSON/media/size limits.
-- Filter combinations, deterministic pagination, invalid/mismatched cursors and scope reauthorization.
+- Filter combinations, deterministic pagination, invalid/mismatched cursors and scope reauthorization. For new stateless cursors, test cross-instance key continuity and changed-key invalidation; record actual restart/deployment evidence separately.
 - Explicit response field selection and absence of sensitive fields.
 - Meaningful retry/revision behavior and transactional authorization where affected.
 

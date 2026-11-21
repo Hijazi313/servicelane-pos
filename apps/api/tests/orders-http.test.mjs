@@ -124,3 +124,42 @@ test('DTO validation rejects nested unknowns, nulls and coercion without leaking
     assert.deepEqual(replay.json().data, accepted.json().data); assert.equal(h.state().orders.length, 1);
   } finally { await h.app.close(); }
 });
+
+test('order listing validates queries, scopes pages and excludes private snapshot fields', async () => {
+  const h = await harness();
+  try {
+    const ids = [randomUUID(), randomUUID(), randomUUID()].sort().reverse();
+    const rows = ids.map(id => ({ id, createdAt: '2026-01-01T00:00:00.000Z', state: 'captured', fulfillment: 'takeaway', currencyCode: 'PKR', scale: 2, totalMinor: '100' }));
+    h.store.list = async (businessId, branchId, limit, after) => {
+      assert.equal(businessId, h.installation.businessId); assert.equal(branchId, h.installation.branchId);
+      return rows.filter(row => !after || row.id < after.id).slice(0, limit);
+    };
+    const first = await h.request('GET', '?limit=2');
+    assert.equal(first.statusCode, 200); assert.deepEqual(first.json().data, rows.slice(0, 2));
+    assert.equal(first.headers['cache-control'], 'no-store');
+    const cursor = first.json().meta.page.nextCursor; assert.ok(cursor);
+    const next = await h.request('GET', `?limit=2&cursor=${cursor}`);
+    assert.deepEqual(next.json().data, rows.slice(2)); assert.equal(next.json().meta.page.nextCursor, null);
+    for (const query of ['?limit=0', '?limit=101', '?limit=2oops', '?limit=1&limit=2', '?other=x', '?cursor=bad', `?limit=1&cursor=${cursor}`]) {
+      assert.equal((await h.request('GET', query)).statusCode, 400, query);
+    }
+    h.installation.branchId = randomUUID(); h.state().account.branchIds = [h.installation.branchId];
+    assert.equal((await h.request('GET', `?limit=2&cursor=${cursor}`)).statusCode, 400);
+    h.state().session.revokedAt = new Date(); assert.equal((await h.request('GET', '')).statusCode, 401);
+  } finally { await h.app.close(); }
+});
+
+test('order cursors survive independent instances with the same key and reject other keys', async () => {
+  const { OrderListCursor } = await import('../dist/orders-check/modules/orders/application/order-list-cursor.js');
+  const { readOrderCursorKey } = await import('../dist/orders-check/modules/orders/infrastructure/order-cursor-configuration.js');
+  const key = readOrderCursorKey({ ORDER_CURSOR_SIGNING_KEY: 'ab'.repeat(32) });
+  const first = new OrderListCursor(key), restarted = new OrderListCursor(readOrderCursorKey({ ORDER_CURSOR_SIGNING_KEY: 'ab'.repeat(32) }));
+  const position = { id: randomUUID(), createdAt: '2026-01-01T00:00:00.000Z' }, business = randomUUID(), branch = randomUUID();
+  const cursor = first.issue(position, business, branch, 50);
+  assert.deepEqual(restarted.read(cursor, business, branch, 50), position);
+  assert.throws(() => new OrderListCursor(Buffer.alloc(32, 43)).read(cursor, business, branch, 50), { code: 'INVALID_ORDER_CURSOR' });
+  assert.throws(() => restarted.read(cursor, business, randomUUID(), 50), { code: 'INVALID_ORDER_CURSOR' });
+  for (const value of [undefined, '', 'ab'.repeat(31), 'zz'.repeat(32)]) {
+    assert.throws(() => readOrderCursorKey({ ORDER_CURSOR_SIGNING_KEY: value }), /ORDER_CURSOR_SIGNING_KEY/);
+  }
+});

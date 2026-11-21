@@ -20,3 +20,11 @@ This is an index of selected cross-application issues and their current evidence
 4. Compare against an authorized representative local deployment. Test other workflows before claiming a product-wide impact or improvement.
 
 No performance fix or new verification is authorized by this record. Reconcile this entry with the owning tracker when work is actually completed.
+
+## KI-02 — Kitchen queue cursors do not survive API restarts
+
+**Status:** Open; existing Kitchen contract unchanged. **Affected:** Kitchen queue pagination.
+
+**Impact and evidence:** The [Kitchen cursor implementation](apps/api/src/modules/kitchen/application/kitchen-queue-cursor.ts) creates a random signing key per service instance. A cursor from before a restart or from another instance is rejected; the client must start a fresh first-page scan. The [Kitchen specification](apps/api/src/modules/kitchen/docs/features/preparation/spec.md#rest-api-adoption--2026-10-25) documents this behavior, and the [focused test](apps/api/tests/kitchen.test.mjs) covers a newly created service instance. A real deployment restart is not established by that test.
+
+**Proposed next action:** When Kitchen pagination is migrated, assess a stable shared signing key, key rotation, client recovery and compatibility with the finite queue scan. A contract change and its verification require separate authorization.

@@ -6,6 +6,7 @@ import { token, digest } from '../dist/orders-check/modules/authentication/appli
 import { MenuService } from '../dist/orders-check/modules/menu/application/menu.service.js';
 import { MenuOrderResolver } from '../dist/orders-check/modules/menu/public.js';
 import { definition } from '../dist/orders-check/modules/menu/domain/catalogue.js';
+import { OrderListCursor } from '../dist/orders-check/modules/orders/application/order-list-cursor.js';
 import { OrdersService } from '../dist/orders-check/modules/orders/application/orders.service.js';
 import { OrdersError } from '../dist/orders-check/modules/orders/domain/capture.js';
 export function fixture() {
@@ -34,7 +35,7 @@ export function fixture() {
     get: async (business, branch, id) => structuredClone(state.orders.find(row => row.business === business && row.branch === branch && row.order.snapshot.id === id)?.order.snapshot),
     save: async (business, branch, key, order, tx) => { assert.equal(tx, active); state.orders.push({ business, branch, key, order: structuredClone(order) }); if (failSave) throw new Error('synthetic private driver detail'); },
   };
-  const service = new OrdersService(access, menu, store);
+  const service = new OrdersService(access, menu, store, new OrderListCursor(Buffer.alloc(32, 42)));
   const item = definition({ kind: 'item', name: 'Synthetic meal', active: true, sized: false, variants: [{ name: 'Default', price: '12.34', active: true }], addOnGroups: [] }, 'PKR');
   state.catalogue.push(item);
   const body = (changes = {}) => ({ retryKey: randomUUID(), currencyCode: 'PKR', scale: 2, lines: [{ selection: { offeringId: item.id }, quantity: 2, expectedUnitMinor: '1234' }], ...changes });

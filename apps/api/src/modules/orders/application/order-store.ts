@@ -8,11 +8,14 @@ export interface OrderSnapshot {
   currencyCode: string; scale: number; totalMinor: string; policy: LimitPolicy; customer?: Customer; instructions?: string;
   lines: { selection: OrderSelection; quantity: number; instructions?: string; unit: ResolvedOrderUnit; lineMinor: string }[];
 }
+export interface OrderSummary { id: string; createdAt: string; state: 'captured'; fulfillment: 'takeaway'; currencyCode: string; scale: number; totalMinor: string }
+export interface OrderPosition { createdAt: string; id: string }
 export interface StoredOrder { snapshot: OrderSnapshot; request: CaptureRequest }
 export abstract class OrderStore {
   abstract policy(businessId: string, transaction?: TransactionContext): Promise<LimitPolicy>;
   abstract updatePolicy(businessId: string, policy: LimitPolicy, expectedRevision: number, transaction: TransactionContext): Promise<void>;
   abstract replay(businessId: string, branchId: string, key: string, transaction: TransactionContext): Promise<StoredOrder | undefined>;
   abstract get(businessId: string, branchId: string, orderId: string, transaction?: TransactionContext): Promise<OrderSnapshot | undefined>;
+  abstract list(businessId: string, branchId: string, limit: number, after?: OrderPosition): Promise<OrderSummary[]>;
   abstract save(businessId: string, branchId: string, key: string, order: StoredOrder, transaction: TransactionContext): Promise<void>;
 }
