@@ -7,6 +7,7 @@ Last reconciled: 2026-11-21, against the linked records in this checkout. Other 
 | Access | Active, pending user acceptance. The user reports local HTTPS login, logout, re-login and hard refresh. Cookie attributes and signed-out routing remain open. | [Access phase tracker](../frontend-access/phase-tracker.md) |
 | Foundation | Complete. On 2026-11-20 the user accepted the basic React, TypeScript and Vite workspace, visible entry point and dev/build commands. The recorded strict typecheck, build and local HTTP page response cover this increment. Access acceptance, representative device rendering and production release are separate. | [Web setup](../../../apps/web/README.md) / [recorded foundation evidence](../tracker-history-2026-11-01.md#current-focus) |
 | Design and theme | Visual direction accepted in general; design decisions and representative browser/device verification remain pending. | [Design baseline](../../design/frontend-design-baseline.md) / [web setup](../../../apps/web/README.md) |
+| Cashier order capture | Active: source implements the approved workflow; redesign, independent UI review and user acceptance remain pending. List pagination and large-history performance remain unverified. | [Scope and evidence](cashier-order-capture.md) |
 
 ## Proposed workflow roadmap
 
@@ -16,7 +17,7 @@ This sequence starts with the prerequisites for a fresh installation and follows
 | --- | --- | --- |
 | 1 | Access and application foundation | The basic foundation is complete. Resolve the remaining [access checks and acceptance](../frontend-access/phase-tracker.md); administrator access is needed for catalogue maintenance. |
 | 2 | Initial menu setup | [Initial Menu setup](initial-menu-setup.md#acceptance-and-closeout--2026-11-21) is accepted and closed under the user-reported walkthrough scope. Broader UI/recovery verification and image upload are deferred; [performance remains open](../../../KNOWN-ISSUES.md#ki-01--slow-authenticated-workflows-on-the-development-database). |
-| 3 | Cashier: menu selection and order capture | Scope a cashier journey using the configured catalogue and [Orders capabilities](../../../apps/api/src/modules/orders/docs/capabilities.md). Confirm selection behavior and API availability. |
+| 3 | Cashier: menu selection and order capture | Implement the [approved first slice](cashier-order-capture.md) using the configured catalogue and [Orders capabilities](../../../apps/api/src/modules/orders/docs/capabilities.md). |
 | 4 | Kitchen preparation | Scope staff access to preparation queues and status changes using the [Kitchen plan](../../../apps/api/src/modules/kitchen/docs/README.md); coordinate the captured order-to-kitchen journey. |
 | 5 | Cashier shifts, billing and payment | Scope the smallest shift and settlement workflow against [Cashier Shifts](../../../apps/api/src/modules/cashier-shifts/docs/README.md) and [Billing](../../../apps/api/src/modules/billing/docs/README.md); payment, receipt and recovery decisions need their own approval and evidence. |
 | 6 | Inventory | Follow [Inventory discovery](../inventory/discovery.md); frontend behavior depends on agreed stock workflows and available contracts. |

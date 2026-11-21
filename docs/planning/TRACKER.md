@@ -4,6 +4,7 @@ Last reconciled: 2026-11-01 against the linked records in this checkout. Other c
 
 ## Current priorities and integration
 
+- **Cashier frontend (2026-11-21):** [order capture and saved-order browsing](frontend/cashier-order-capture.md) are implemented in source and under redesign review. User acceptance and independent UI readiness remain pending; PostgreSQL pagination and large-history performance remain unverified.
 - **Frontend (2026-11-21):** initial Menu is accepted and closed under the [recorded walkthrough scope](frontend/initial-menu-setup.md#acceptance-and-closeout--2026-11-21); source was merged through [PR #29](https://github.com/Hijazi313/servicelane-pos/pull/29). [Performance](../../KNOWN-ISSUES.md#ki-01--slow-authenticated-workflows-on-the-development-database) and broader access acceptance remain open.
 - **Menu drawer follow-up (2026-11-21):** [PR #36](https://github.com/Hijazi313/servicelane-pos/pull/36) improves drawer actions and responsive field layout. The user reports it works well at desktop and tablet widths and that the independent UI review is complete. Exact viewports and the evidence for full keyboard and recovery checks were not provided.
 - **Menu choice grouping (2026-11-21):** The user accepted the grouping and action placement visually. Web typecheck passed on Node 24.18.1 (below the supported minimum); local browser checks covered an add-on group, discard confirmation and included-item action placement without saving. Exact review conditions, full keyboard and independent browser audit remain unverified. Contracts and recovery behavior are unchanged. Incidents: none confirmed.
@@ -22,11 +23,11 @@ Feature trackers own progress, evidence, authorization and handoffs. The coordin
 
 ## Active work branches
 
-The frontend foundation/access PR was integrated at `edf58d9` on local `main` and cached `origin/main`.
+The frontend foundation/access PR was integrated at `edf58d9`. Remote `main` was verified at `e32c065` for this work; PR #38 merged order listing.
 
 | Work | Branch and checkout | Owner | Base and publication | Handoff |
 | --- | --- | --- | --- | --- |
-| Order listing | `codex/order-listing`, main checkout | Primary agent | Local only; based on main, publication unauthorized | [Order listing](../../apps/api/src/modules/orders/docs/features/capture/order-list.md) |
+| Cashier order capture | `codex/cashier-order-capture`, `/Users/macbookpro/Documents/personal/restaurant-pos-custom` | Primary agent | Based on `main` at `e32c065`; local only, publication unauthorized | [Cashier capture](frontend/cashier-order-capture.md) |
 
 ## Historical records
 
