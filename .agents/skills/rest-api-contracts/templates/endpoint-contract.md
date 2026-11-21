@@ -19,7 +19,7 @@ Method/path; access policy; trusted business/branch scope; CSRF; side effects.
 ## Request
 
 Path parameters; query names/types/defaults/limits; AND/OR and repeated-key handling;
-sorting/tie-breaker; pagination/cursor validity; timezone/date interpretation;
+sorting/tie-breaker; pagination/cursor validity, restart/instance behavior, signing-key setup/rotation; timezone/date interpretation;
 headers/media/Accept policy; body schema; missing/null semantics; structural and
 business validation. Identify unresolved decisions explicitly.
 

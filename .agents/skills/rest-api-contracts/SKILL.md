@@ -3,7 +3,7 @@ name: rest-api-contracts
 description: "Design, implement and review REST API contracts in this repository, including validation, query parameters, responses, errors, headers, retries and concurrency. Use for new or changed HTTP endpoints and contract reviews; exclude unrelated internal changes."
 metadata:
   author: "Codex"
-  version: "0.5.0"
+  version: "0.6.0"
   project: "ServiceLane POS"
   scope: "REST API contract design, implementation guidance and review; existing API migrations and CI enforcement require separate authorization"
   created: "2026-10-24"
@@ -37,7 +37,7 @@ Use the shared DtoValidationPipe (Nest ValidationPipe + class-validator/class-tr
 
 For TypeScript HTTP contract work, read the [type-safety examples](references/type-safety.md). Follow the canonical requirements; examples do not authorize new dependencies.
 
-For listing/filter/pagination work, read the [query parameter examples](references/query-parameters.md).
+For listing/filter/pagination work, read the [query parameter examples](references/query-parameters.md). For new cursor endpoints, assess restart/multi-instance continuity and signing-key operations before implementation; signing does not encrypt or authorize access. Preserve existing contracts until migration is authorized.
 
 Use [the endpoint template](templates/endpoint-contract.md) for a new endpoint or material contract change in its owning feature documentation. Adapt it; link existing canonical schemas instead of duplicating them. Small changes do not need new documents.
 
