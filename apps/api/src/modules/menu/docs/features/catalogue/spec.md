@@ -40,8 +40,9 @@ Resolution reads the necessary Menu state in one database statement, giving one 
 Source routes use `/api/v1/menu`; [controller](../../../http/menu.controller.ts) and [strict definition/selection validation](../../../domain/catalogue.ts) own executable payload semantics. Runtime/database acceptance remains in the tracker. Menu owns its data and exposes supported operations, never tables, to later consumers.
 
 - Administrator: create/read/edit/deactivate complete item or combo definitions, including local groups; responses include offering revision. No separate size/option micro-CRUD API.
-- Administrator/staff: read active offerings/choices and POST one selection for resolution. Input identifies offering, size and selected option IDs; output includes configured currency, exact breakdown, resolved components and offering revision. Revision is an edit token, not a dependency freshness guarantee. Only administrators may inspect inactive definitions.
+- Administrator/staff: read active offerings/choices and submit one selection for resolution. Input identifies offering, size and selected option IDs; output includes configured currency, exact breakdown, resolved components and offering revision. Revision is an edit token, not a dependency freshness guarantee. Only administrators may inspect inactive definitions.
 - Reuse MN-00 access/CSRF and existing origin/error/no-store policies. Authentication failure: 401; permission/CSRF denial: 403; malformed or invalid selection: 400; unknown/foreign resource: 404; stale edit or unavailable selection: 409; context/storage failure: sanitized 503. Resolution POST requires session CSRF proof.
+- Authorized 2026-11-21: `QUERY /resolve` adds a nonbinding staff preview with the same selection and result semantics; it checks current session, branch and origin but does not require CSRF. The legacy POST remains available with its existing CSRF and transactional behavior. The QUERY read uses the existing point-in-time access context and one catalogue read; it does not save menu or order data, though the existing session read updates activity. It is not a price guarantee. Compatibility through browser/proxy/deployed stack and operational performance require separate verification.
 
 ## Illustrations — not confirmed business rules
 
@@ -95,6 +96,7 @@ All prices/surcharges are decimal strings; all active/sized flags and definition
 | PUT `/offerings/:id` | `{expectedRevision, definition}` → updated complete definition; 200 | Administrator + session CSRF |
 | POST `/offerings/:id/deactivate` | `{expectedRevision}` → inactive definition and next revision; 200 | Administrator + session CSRF |
 | POST `/resolve` | `{offeringId, variantId?, addOnIds?, choices?: [{groupId, optionIds}]}` → IDs/names/components, selected extras/choices, currency/scale, basePrice/surcharge/total and offering revision; 200 | Staff/administrator + session CSRF |
+| QUERY `/resolve` | Same selection and result; DTO validates the HTTP shape before Menu domain validation | Staff/administrator + session and origin; no CSRF token; point-in-time context and one catalogue read |
 
 An item definition is `{kind: "item", name, active, sized, variants: [{id?, name, price, active}], addOnGroups: [{id?, name, maximum, options: [{id?, name, surcharge, active}]}]}`. A combo definition is `{kind: "combo", name, active, basePrice, components: [{variantId, quantity}], choiceGroups: [{id?, name, minimum, maximum, options: [{id?, name, variantId, quantity, surcharge, active}]}]}`. No combo extras or required standalone extras. Reject mixed-kind fields, client prices/quantities in selections, repeated IDs and empty combos without a fixed component or positive required group.
 

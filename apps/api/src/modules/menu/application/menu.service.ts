@@ -89,4 +89,7 @@ export class MenuService {
   async resolve(scope: AuthorizedScope, value: unknown) {
     return resolveSelection(value, await this.snapshot(scope.installation, scope.transaction));
   }
+  async preview(context: InstallationContext, value: unknown) {
+    return resolveSelection(value, await this.snapshot(context));
+  }
 }

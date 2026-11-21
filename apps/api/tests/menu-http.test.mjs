@@ -52,6 +52,32 @@ async function harness() {
 const definition = { kind: 'item', name: 'Burger', active: true, sized: false, variants: [{ name: 'Default', price: '450', active: true }], addOnGroups: [] };
 const editable = row => { const { id, revision, currencyCode, scale, ...definition } = row; return definition; };
 
+test('QUERY previews are staff-scoped reads without CSRF; legacy POST remains protected', async () => {
+  const h = await harness();
+  try {
+    const created = await h.request('POST', '/offerings', { definition: { ...definition, addOnGroups: [{ name: 'Extras', maximum: 1, options: [{ name: 'Cheese', surcharge: '25', active: true }] }] } });
+    const item = created.json();
+    h.state().account.role = 'staff';
+    const before = structuredClone(h.state().catalogue);
+    const result = await h.request('QUERY', '/resolve', { offeringId: item.id }, { 'x-csrf-token': '' });
+    assert.equal(result.statusCode, 200);
+    assert.equal(result.json().total, '450.00');
+    const withExtra = await h.request('QUERY', '/resolve', { offeringId: item.id, addOnIds: [item.addOnGroups[0].options[0].id] }, { 'x-csrf-token': '' });
+    assert.equal(withExtra.statusCode, 200);
+    assert.equal(withExtra.json().total, '475.00');
+    assert.equal(result.headers['cache-control'], 'no-store');
+    assert.deepEqual(h.state().catalogue, before);
+    assert.equal((await h.request('POST', '/resolve', { offeringId: item.id }, { 'x-csrf-token': '' })).statusCode, 403);
+    assert.equal((await h.request('QUERY', '/resolve', { offeringId: item.id }, { origin: 'https://foreign.test' })).statusCode, 403);
+    assert.equal((await h.request('QUERY', '/resolve', { offeringId: item.id, extra: true })).statusCode, 400);
+    h.state().account.branchIds = [];
+    assert.equal((await h.request('QUERY', '/resolve', { offeringId: item.id })).statusCode, 403);
+    h.state().account.branchIds = [h.installation.branchId]; h.state().session.revokedAt = new Date();
+    assert.equal((await h.request('QUERY', '/resolve', { offeringId: item.id })).statusCode, 401);
+    assert.deepEqual(h.state().catalogue, before);
+  } finally { await h.app.close(); }
+});
+
 test('actual Menu HTTP uses MN-00: admin CRUD, staff active reads/resolution, no inactive disclosure', async () => {
   const h = await harness();
   try {
