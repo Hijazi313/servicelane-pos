@@ -5,7 +5,7 @@ import { useMenu } from './use-menu';
 
 export function MenuPage({ onBack }: { onBack: () => void }) {
   const {
-    definitions, active, currency, loading, error, saving, uncertain, conflict, latest, savedId, open, editing,
+    definitions, active, currency, loading, refreshing, error, saving, uncertain, conflict, latest, savedId, open, editing,
     refresh, save, reloadWhileEditing, startEditing, closeEditor, useLatest, acknowledgeReview,
   } = useMenu();
 
@@ -14,7 +14,7 @@ export function MenuPage({ onBack }: { onBack: () => void }) {
     { title: 'Type', key: 'kind', render: (_: unknown, row: Offering) => row.kind === 'item' ? 'Item' : 'Meal deal' },
     { title: 'Price', key: 'price', render: (_: unknown, row: Offering) => row.kind === 'combo' ? `${currency} ${row.basePrice}` : row.variants.map(variant => `${row.sized ? variant.name + ': ' : ''}${currency} ${variant.price}`).join(', ') },
     { title: 'Availability', key: 'availability', render: (_: unknown, row: Offering) => active.some(item => item.id === row.id) ? <Tag color="green">Available</Tag> : <Tag>Unavailable</Tag> },
-    { title: '', key: 'edit', render: (_: unknown, row: Offering) => <Button disabled={uncertain || !!error} onClick={() => startEditing(row)}>Edit</Button> },
+    { title: '', key: 'edit', render: (_: unknown, row: Offering) => <Button disabled={refreshing || uncertain || !!error} onClick={() => startEditing(row)}>Edit</Button> },
   ];
 
   return <div className="access-page menu-page">
@@ -23,10 +23,11 @@ export function MenuPage({ onBack }: { onBack: () => void }) {
       <Space direction="vertical" size="large" style={{ width: '100%' }}>
         <Button onClick={onBack}>Back to workspace</Button>
         <div><Typography.Title level={2}>Menu</Typography.Title><Typography.Paragraph type="secondary">Create and edit the items your restaurant sells.</Typography.Paragraph></div>
-        {savedId && !open && <Alert type={active.some(row => row.id === savedId) ? "success" : "info"} message={active.some(row => row.id === savedId) ? `Saved item found in the active menu (ID: ${savedId}).` : `Saved item ID: ${savedId}. ${error || loading ? "Reload the menu to check it." : "It is not in the active menu; check its availability in the list."}`} />}
+        {savedId && !open && <Alert type={!error && !refreshing && active.some(row => row.id === savedId) ? "success" : "info"} message={error || refreshing ? `Saved item ID: ${savedId}. ${refreshing ? "Checking the menu…" : "Reload the menu to check it."}` : active.some(row => row.id === savedId) ? `Saved item found in the active menu (ID: ${savedId}).` : `Saved item ID: ${savedId}. It is not in the active menu; check its availability in the list.`} />}
         {uncertain && !open && <Alert type="warning" message="Check the reloaded list for your item before trying again. Names can repeat." action={<Button onClick={acknowledgeReview}>I have checked the menu</Button>}/>}
         {error && <Alert type="warning" showIcon message={error} action={<Button onClick={() => void refresh()}>Reload menu</Button>}/>}
-        <Card title="Menu items" extra={<Button type="primary" disabled={loading || !!error || uncertain} onClick={() => startEditing()}>Add item</Button>}>
+        <Card title="Menu items" extra={<Button type="primary" disabled={refreshing || !!error || uncertain} onClick={() => startEditing()}>Add item</Button>}>
+          {refreshing && !loading && <Typography.Paragraph type="secondary">Refreshing menu…</Typography.Paragraph>}
           {loading ? <Spin/> : <Table rowKey="id" dataSource={definitions} columns={columns} pagination={false}
             expandable={{ expandedRowRender: row => row.kind === 'item'
               ? <div>{row.addOnGroups.length === 0 ? 'No add-ons' : row.addOnGroups.map(group => <p key={group.id}>{group.name} (up to {group.maximum}): {group.options.map(option => option.name + ' +' + option.surcharge + (option.active ? '' : ' (unavailable)')).join(', ')}</p>)}</div>

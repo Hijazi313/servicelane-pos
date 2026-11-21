@@ -1,49 +1,41 @@
-import { useCallback, useEffect, useState } from 'react';
-import { loadMenu, MenuRequestError, saveMenu, type Definition, type Offering } from './menu-api';
+import { useState } from 'react';
+import { useMutation, useQuery } from '@tanstack/react-query';
+import { loadMenu, MenuRequestError, saveMenu, type Definition, type Offering } from './menu-api.ts';
+
+const menuKey = ['menu'] as const;
+
+function loadErrorMessage(cause: unknown) {
+  return cause instanceof MenuRequestError && (cause.status === 401 || cause.status === 403)
+    ? 'Your session or permission could not be confirmed. Return to the workspace and sign in again.'
+    : 'The menu could not be loaded. Try again.';
+}
 
 export function useMenu() {
-  const [definitions, setDefinitions] = useState<Offering[]>([]);
-  const [active, setActive] = useState<Offering[]>([]);
-  const [currency, setCurrency] = useState('');
-  const [loading, setLoading] = useState(true);
+  const menu = useQuery({ queryKey: menuKey, queryFn: loadMenu, refetchOnMount: 'always' });
   const [error, setError] = useState('');
-  const [saving, setSaving] = useState(false);
+  const [readingAfterSave, setReadingAfterSave] = useState(false);
   const [uncertain, setUncertain] = useState(false);
   const [conflict, setConflict] = useState(false);
   const [latest, setLatest] = useState<Offering>();
   const [savedId, setSavedId] = useState<string>();
   const [open, setOpen] = useState(false);
   const [editing, setEditing] = useState<Offering>();
+  const saveMutation = useMutation({ mutationFn: (definition: Definition) => saveMenu(definition, editing) });
 
-  const refresh = useCallback(async () => {
-    setLoading(true);
+  async function refresh() {
     try {
-      const data = await loadMenu();
-      setDefinitions(data.definitions);
-      setActive(data.active);
-      setCurrency(data.currency);
+      await menu.refetch({ throwOnError: true });
       setError('');
     } catch (cause) {
-      setDefinitions([]);
-      setActive([]);
-      setError(cause instanceof MenuRequestError && (cause.status === 401 || cause.status === 403)
-        ? 'Your session or permission could not be confirmed. Return to the workspace and sign in again.'
-        : 'The menu could not be loaded. Try again.');
-    } finally {
-      setLoading(false);
+      setError(loadErrorMessage(cause));
     }
-  }, []);
-
-  useEffect(() => { void refresh(); }, [refresh]);
+  }
 
   async function save(definition: Definition) {
-    setSaving(true);
     setError('');
+    let id: string;
     try {
-      const id = await saveMenu(definition, editing);
-      setSavedId(id);
-      setOpen(false);
-      await refresh();
+      id = await saveMutation.mutateAsync(definition);
     } catch (cause) {
       if (cause instanceof MenuRequestError && cause.status < 500) {
         if (cause.status === 409 && editing) {
@@ -59,18 +51,18 @@ export function useMenu() {
         setUncertain(true);
         setError('The save result is unknown. Reload the menu and check for the item before trying again. Names can be repeated.');
       }
-    } finally {
-      setSaving(false);
+      return;
     }
+    setSavedId(id);
+    setOpen(false);
+    setReadingAfterSave(true);
+    try { await refresh(); } finally { setReadingAfterSave(false); }
   }
 
   async function reloadWhileEditing() {
     try {
-      const data = await loadMenu();
-      setDefinitions(data.definitions);
-      setActive(data.active);
-      setCurrency(data.currency);
-      if (conflict && editing) setLatest(data.definitions.find(row => row.id === editing.id));
+      const result = await menu.refetch({ throwOnError: true });
+      if (conflict && editing) setLatest(result.data?.definitions.find(row => row.id === editing.id));
     } catch {
       setError('Could not reload the menu. Your draft is still here.');
     }
@@ -94,8 +86,11 @@ export function useMenu() {
     setError('Review your draft against the current saved version before saving.');
   }
 
+  const data = menu.isError ? undefined : menu.data;
   return {
-    definitions, active, currency, loading, error, saving, uncertain, conflict, latest, savedId, open, editing,
+    definitions: data?.definitions ?? [], active: data?.active ?? [], currency: data?.currency ?? '',
+    loading: !data && menu.isFetching, refreshing: menu.isFetching, error: error || (menu.isError ? loadErrorMessage(menu.error) : ''),
+    saving: saveMutation.isPending || readingAfterSave, uncertain, conflict, latest, savedId, open, editing,
     refresh, save, reloadWhileEditing, startEditing, closeEditor, useLatest,
     acknowledgeReview: () => setUncertain(false),
   };

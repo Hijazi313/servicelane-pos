@@ -1,6 +1,6 @@
 # API integration and state lifecycle
 
-Status: proposed frontend conventions; endpoint behavior is owned by its actual contract and feature integration guide. [Frontend architecture](../../../../docs/architecture/frontend-proposal.md) records selected and proposed technology and deployment boundaries.
+Status: TanStack Query guidance is approved for frontend work; other conventions remain proposed. Endpoint behavior is owned by its actual contract and feature integration guide. [Frontend architecture](../../../../docs/architecture/frontend-proposal.md) records selected and proposed technology and deployment boundaries.
 
 ## Establish the boundary
 
@@ -9,6 +9,14 @@ Find the owning backend capability index, specification, frontend integration gu
 For API request and response shapes shared with the backend, follow the [shared contract and runtime boundary guidance](../../../../docs/architecture/README.md#persistence-and-public-contracts). Reuse those contracts instead of maintaining duplicate browser types. Validate untrusted response fields needed by the workflow before using them.
 
 Existing routes can differ in envelopes, stable error identifiers, validation, revisions and retry semantics. Follow the actual route; do not branch on translated message text or assume a universal error format. Map documented errors to actionable UI feedback and use a safe fallback. Do not log credentials, CSRF values, payloads or personal data. Define base URL, credentials and timeout only after hosting and session behavior are specified. All browser configuration is public.
+
+## TanStack Query
+
+Use the [server data and mutation template](../templates/server-data.md) as an illustrative starting shape; adapt it to the actual contract.
+
+Use the existing [query client](../../../../apps/web/src/app/query-client.ts) for feature server-state reads and mutations where it fits. Inspect its defaults and the relevant feature before introducing a different pattern; explain a concrete reason for exceptions. The [Menu workflow](../../../../apps/web/src/features/menu/use-menu.ts) is an example, not a template for every workflow. React Query Devtools is available in development only.
+
+Keep query keys, endpoint-specific mapping, freshness, invalidation and recovery with the feature. Keep drafts and transient UI state local; avoid copying query data into separate React state or adding generic query builders without a concrete need. Decide when cached data may be shown, how it is refreshed and which actions are safe while it may be stale. Account for in-flight work when identity or scope changes. The shared defaults disable retries and focus/reconnect refetch and use `networkMode: 'always'` for LAN access; justify workflow-specific overrides.
 
 ## State and recovery
 
