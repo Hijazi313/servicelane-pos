@@ -69,3 +69,5 @@ Focused offline checks: the API compiled and an in-memory actual-controller/Fast
 The user requested separating workflow logic from presentation. The cashier screen delegates order state, pricing recovery, save/retry and history to `use-cashier`; the selection component delegates selection and preview state to `use-offering-selection`; shared cashier money formatting and offering display prices live in `cashier-money`. The server remains authoritative for prices and capture. No screen behavior or API contract was intentionally changed.
 
 Focused simulated-DOM workflow check passed for an uncertain save followed by replay of the exact request and retry identity; web typecheck passed. Both used Node 24.18.1, below the supported minimum. Browser and independent UI readiness remain pending; no database or production action was performed. Incidents: none confirmed in this refactor.
+
+Cashier's active-menu consumer imports offering validation from Menu's explicit [public interface](../../../apps/web/src/features/menu/public.ts). The focused Menu client checks and web typecheck passed on Node 24.18.1; this boundary cleanup did not change API behavior.

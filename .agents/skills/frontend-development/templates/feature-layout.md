@@ -9,9 +9,9 @@ apps/web/src/features/<workflow>/
   use-<purpose>.ts            # coherent owned behavior, if needed
   <operation>.ts              # feature-specific HTTP operation, if needed
   <component>.test.tsx        # focused behavior check, when justified
-  index.ts                    # deliberate public interface, if a consumer needs it
+  public.ts                   # explicit cross-feature interface, if a consumer needs it
 ```
 
-Good: a fictional cashier workflow keeps `order-summary.tsx`, `use-order-draft.ts` and `submit-order.ts` together when each has a real responsibility; `SubmitOrderInput` can live in `submit-order.ts`. An app route consumes its deliberately exported screen if routing exists.
+Good: a fictional cashier workflow keeps `order-summary.tsx`, `use-order-draft.ts` and `submit-order.ts` together when each has a real responsibility; `SubmitOrderInput` can live in `submit-order.ts`. An app route consumes its screen. If another feature needs a supported capability, the owner explicitly exports it from `public.ts` and the consumer imports through that interface.
 
 Avoid: creating all these files for a simple screen; placing a cashier-specific component in shared UI; importing another feature's private component; or copying a server persistence type into frontend code. Shared UI and transport are separate owners, added only for actual common needs.
