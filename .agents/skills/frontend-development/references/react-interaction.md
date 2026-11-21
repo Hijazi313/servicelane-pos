@@ -1,6 +1,6 @@
 # React and interaction
 
-Status: design judgment below is approved skill guidance. Other development conventions remain proposed except for separately approved choices linked from [frontend architecture](../../../../docs/architecture/frontend-proposal.md). Apply within authorized scope; resolve material decisions rather than presenting recommendations as accepted policy.
+Status: design judgment and the component and drawer conventions below are approved skill guidance. Other development conventions remain proposed except for separately approved choices linked from [frontend architecture](../../../../docs/architecture/frontend-proposal.md). Apply within authorized scope; resolve material decisions rather than presenting recommendations as accepted policy.
 
 ## Design judgment
 
@@ -20,6 +20,10 @@ Use the existing design direction and components when they fit. Question whether
 - Give drafts a feature owner and lifecycle. Persistence across refresh, shared client stores and sensitive data in storage or URLs require separate decisions; do not assume them. For server state and session changes, use the [API reference](api-state.md).
 
 ## Forms and interaction
+
+- Prefer existing Ant Design components, layout primitives and theme tokens. Avoid custom styles, components or wrappers when they meet the need; identify the concrete gap and its user impact when an exception is necessary. Remove task-owned styles, classes and imports made unused by the change, while preserving unrelated work.
+- For long create/edit drawers, keep the primary and cancel actions visible in a right-aligned footer, with Cancel before Save. Preserve the form's validation, pending and blocked states, unsaved-draft confirmation and feature-owned recovery behavior. Adapt this pattern when the workflow requires different actions.
+- Group related fields in responsive rows when it improves scanning and reduces scrolling. Allocate width to the expected content and task: names and item selectors generally need more room than prices or quantities. Stack fields when space or label length requires it; verify the actual drawer, because Ant Design grid breakpoints follow the viewport. Keep keyboard order, field labels and validation feedback clear.
 
 - The product direction for comparable listing-based workflows is a side drawer for creating, editing and viewing an entry, with one shared form for create and edit. Keep the listing route as the context and do not add a separate create URL unless the user approves a need for one. Adapt fields and API operations to the entry and mode. Check drawer usability on desktop and tablet, including focus, scrolling, touch and unsaved changes. If a workflow cannot be used comfortably in a drawer, bring the specific tradeoff to the user before selecting another pattern.
 

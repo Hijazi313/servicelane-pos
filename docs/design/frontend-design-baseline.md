@@ -33,7 +33,7 @@ Before introducing a token, inspect these sources and Ant Design's semantic toke
 
 ## Components and interaction
 
-- Use Ant Design forms, tables, buttons, dialogs and feedback directly as the default. Name repeated patterns when at least two actual uses share behavior; extract reusable UI only when it has a clear owner. The mockup intentionally does not implement these components.
+- Prefer Ant Design components, layout primitives and theme tokens for frontend work. Avoid custom styles and components when the library meets the need; explain a concrete gap before adding an exception. Name repeated patterns when at least two actual uses share behavior; extract reusable UI only when it has a clear owner. The mockup intentionally does not implement these components.
 - For touch controls, use the 48 × 48 CSS pixel product criterion in the [UI Definition of Done](../../.agents/skills/frontend-development/references/ui-definition-of-done.md). Assess spacing and physical reach on actual devices. Keyboard focus must be visible; labels, errors and statuses must remain understandable without color. Test keyboard use, contrast, text resize and touch with the actual implementation.
 - Define loading, empty, unavailable, validation, denied, success and conflict states when applicable. Confirm destructive or financial actions only when the approved workflow calls for it. A timeout does not establish a write outcome; recovery belongs to the endpoint contract and feature integration guide.
 
@@ -42,6 +42,7 @@ Before introducing a token, inspect these sources and Ant Design's semantic toke
 | Pattern | Implementation | Reuse and constraints |
 | --- | --- | --- |
 | Staff access form | [Access application](../../apps/web/src/app/app.tsx) | Existing login and password-change forms use Ant Design Form, Input, Button and Alert. Inspect the implementation for its access-specific validation and request handling; it is not a shared form component. |
+| Long setup drawers | [Menu drawer](../../apps/web/src/features/menu/menu-form.tsx) | Right-aligned Cancel and Save remain in the footer while the form scrolls. Related fields share rows when space permits and stack in narrower layouts. The feature owns validation, pending state and recovery; a shared component is not yet needed. |
 
 No application-owned shared UI component is currently exposed for reuse. Prefer Ant Design components and inspect existing patterns before adding a shared component. Extract a pattern when a concrete shared use justifies it. Add, update or remove entries in this table in the same change as the relevant shared component or reusable pattern, and check the links and constraints against the final code.
 
