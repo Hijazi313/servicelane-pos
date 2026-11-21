@@ -4,11 +4,17 @@ Status: design judgment and the component and drawer conventions below are appro
 
 ## Design judgment
 
-Before proposing, implementing or reviewing an affected interface, identify its user, primary task and common path; distinguish the main action from secondary actions. For a new or materially changed workflow, state the primary task and common path in the proposal or handoff. Arrange related information, fields and actions in a meaningful task order, using clear labels and visual hierarchy so users can understand what to do without remembering details from another screen. Consider relevant loading, pending, success, failure and unknown outcomes and the user's safe next action. For consequential actions, show the information needed for the decision according to the approved workflow. Resolve material product or contract ambiguity rather than inventing behavior.
+**For a new screen or a material workflow change**, identify the staff member, common task and expected outcome. Inspect the relevant design reference and existing implementation, then define a task-specific benchmark for hierarchy, interaction and applicable accessibility criteria.
 
-For restaurant workflows, make frequent actions and important values easy to locate and read on desktop and tablet, with practical touch targets that do not force a cramped layout; distinguish applicable order, kitchen and payment states instead of collapsing them into an ambiguous completion state. Keep restaurant identity and settings configurable as supported by the product; follow the existing [API and state lifecycle](api-state.md) guidance for server authority and uncertain outcomes. Do not invent retry or optimistic behavior.
+Make the common action and important information easy to find; keep occasional details secondary. Follow the [browser review workflow](../SKILL.md#browser-review-for-ui-readiness) before claiming UI readiness.
 
-Use the existing design direction and components when they fit. Question whether color, gradients, shadows, decoration and layout serve the task or merely repeat a template; do not introduce a visual identity without a product decision. Consider keyboard, focus, contrast and touch needs under the interaction guidance below. Apply the [browser review for UI readiness](../SKILL.md#browser-review-for-ui-readiness) to new screens and material interaction changes. Scale this judgment to the change: a minor label adjustment needs no separate design document or exhaustive checklist.
+**For smaller changes**, use the relevant existing pattern and check the affected behavior. Scale review to the impact; do not require a separate benchmark or browser check for every edit.
+
+For failures and uncertain outcomes, follow the owning endpoint's documented recovery contract and [API and state lifecycle guidance](api-state.md). Do not add automatic retries or show optimistic success unless the contract supports them.
+
+For restaurant workflows, make frequent actions and important values easy to locate and read on desktop and tablet, with practical touch targets that do not force a cramped layout; distinguish applicable order, kitchen and payment states instead of collapsing them into an ambiguous completion state. Keep restaurant identity and settings configurable as supported by the product.
+
+Use the existing design direction and components when they fit. Question whether color, gradients, shadows, decoration and layout serve the task or merely repeat a template; do not introduce a visual identity without a product decision. Consider keyboard, focus, contrast and touch needs under the interaction guidance below. A component library or passing typecheck does not establish a good user experience.
 
 ## Ownership and state
 
