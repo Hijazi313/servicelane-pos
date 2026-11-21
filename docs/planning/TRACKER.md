@@ -5,7 +5,7 @@ Last reconciled: 2026-11-01 against the linked records in this checkout. Other c
 ## Current priorities and integration
 
 - **Frontend (2026-11-21):** initial Menu is accepted and closed under the [recorded walkthrough scope](frontend/initial-menu-setup.md#acceptance-and-closeout--2026-11-21); source was merged through [PR #29](https://github.com/Hijazi313/servicelane-pos/pull/29). [Performance](../../KNOWN-ISSUES.md#ki-01--slow-authenticated-workflows-on-the-development-database) and broader access acceptance remain open.
-- **Menu drawer follow-up (2026-11-21):** [PR #36](https://github.com/Hijazi313/servicelane-pos/pull/36) improves drawer actions and responsive field layout. The user reports it works well at desktop and tablet widths; exact viewports, full keyboard, recovery and independent UI review remain unverified.
+- **Menu drawer follow-up (2026-11-21):** [PR #36](https://github.com/Hijazi313/servicelane-pos/pull/36) improves drawer actions and responsive field layout. The user reports it works well at desktop and tablet widths and that the independent UI review is complete. Exact viewports and the evidence for full keyboard and recovery checks were not provided.
 - **Frontend HTTP client (2026-11-21):** shared Access and Menu transport merged in [PR #31](https://github.com/Hijazi313/servicelane-pos/pull/31). Twelve focused mocked checks and web typecheck passed; the user reported local login, Menu listing and edit working. Broader browser recovery remains unverified.
 - **Menu React Query (2026-11-21):** implementation and frontend guidance merged in [PR #34](https://github.com/Hijazi313/servicelane-pos/pull/34); [scope and evidence](frontend/menu-react-query.md) retain browser recovery and performance limits.
 - **Frontend foundation (2026-11-20):** the user accepted the [basic foundation](frontend/TRACKER.md). Access remains active after user-reported local login, logout, re-login and hard refresh. The [access handoff](frontend-access/phase-tracker.md#current-handoff--2026-11-20) owns the remaining checks and acceptance decision.
@@ -25,6 +25,7 @@ The frontend foundation/access PR was integrated at `edf58d9` on local `main` an
 
 | Work | Branch and checkout | Owner | Base and publication | Handoff |
 | --- | --- | --- | --- | --- |
+| Menu choice grouping | `codex/menu-choice-clarity`, repository checkout | Current chat | Local `main`; local only | User accepted the grouping and action placement visually. Web typecheck passed on Node 24.18.1 (below supported minimum); local browser showed the add-on group, discard confirmation and included-item action placement without saving. Exact review conditions, keyboard and independent browser audit remain unverified. Contracts and recovery behavior unchanged. Incidents: none confirmed. |
 
 ## Historical records
 

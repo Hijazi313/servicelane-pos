@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Alert, Button, Checkbox, Col, Divider, Drawer, Flex, Form, Input, InputNumber, Modal, Row, Select, Switch, Typography } from 'antd';
+import { Alert, Button, Card, Checkbox, Col, Divider, Drawer, Flex, Form, Input, InputNumber, Modal, Row, Select, Switch, Typography } from 'antd';
 import type { Definition, Offering } from './menu-api';
 import { definitionFromDraft, type MenuDraft } from './menu-draft';
 
@@ -107,34 +107,41 @@ export function MenuForm({ open, initial, offerings, currency, pending, blocked,
               {sized && <Col xs={24} sm={14}><Form.Item name={[name, 'name']} label="Size" rules={required}><Input /></Form.Item></Col>}
               <Col xs={24} sm={sized ? 10 : 24}><Form.Item name={[name, 'price']} label={`Price (${currency})`} rules={priceRules}><Input inputMode="decimal" /></Form.Item></Col>
             </Row>
-            <Form.Item name={[name, 'active']} label="Size available" valuePropName="checked"><Switch /></Form.Item>
-            {sized && !form.getFieldValue(['variants', name, 'id']) && <Button onClick={() => remove(name)}>Remove size</Button>}
+            <Flex align="center" justify="space-between" gap="small" wrap>
+              <Form.Item name={[name, 'active']} label="Size available" valuePropName="checked"><Switch /></Form.Item>
+              {sized && !form.getFieldValue(['variants', name, 'id']) && <Button danger type="text" onClick={() => remove(name)}>Remove size</Button>}
+            </Flex>
             <Divider />
           </div>)}
           {sized && <Button onClick={() => add({ name: '', price: '', active: true })}>Add size</Button>}
         </>}</Form.List>
         <Typography.Title level={5}>Optional add-ons</Typography.Title>
+        <Typography.Paragraph type="secondary">Customers may choose extras from each group, up to its selection limit. Add-ons apply to every size.</Typography.Paragraph>
         <Form.List name="addOnGroups">{(groups, { add, remove }) => <>
-          {groups.map(({ key, name }) => <div key={key} style={{ padding: 16, border: '1px solid #d9d9d9', marginBottom: 16 }}>
+          {groups.map(({ key, name }) => <Card key={key} size="small" title={`Add-on group ${name + 1}`} style={{ marginBottom: 16 }}
+            extra={!form.getFieldValue(['addOnGroups', name, 'id']) && <Button danger type="text" onClick={() => remove(name)}>Remove group</Button>}>
             <Form.Item name={[name, 'id']} hidden><Input /></Form.Item>
             <Row gutter={16}>
               <Col xs={24} sm={14}><Form.Item name={[name, 'name']} label="Add-on group name" rules={required}><Input /></Form.Item></Col>
               <Col xs={24} sm={10}><Form.Item name={[name, 'maximum']} label="Maximum selections" rules={required}><InputNumber min={0} precision={0} /></Form.Item></Col>
             </Row>
+            <Typography.Title level={5}>Add-ons in this group</Typography.Title>
             <Form.List name={[name, 'options']}>{(options, controls) => <>
               {options.map(option => <div key={option.key}>
+                {option.name > 0 && <Divider />}
                 <Form.Item name={[option.name, 'id']} hidden><Input /></Form.Item>
                 <Row gutter={16}>
                   <Col xs={24} sm={14}><Form.Item name={[option.name, 'name']} label="Add-on name" rules={required}><Input /></Form.Item></Col>
                   <Col xs={24} sm={10}><Form.Item name={[option.name, 'surcharge']} label={`Extra price (${currency})`} rules={priceRules}><Input inputMode="decimal" /></Form.Item></Col>
                 </Row>
-                <Form.Item name={[option.name, 'active']} label="Available" valuePropName="checked"><Switch /></Form.Item>
-                {!form.getFieldValue(['addOnGroups', name, 'options', option.name, 'id']) && <Button onClick={() => controls.remove(option.name)}>Remove add-on</Button>}
+                <Flex align="center" justify="space-between" gap="small" wrap>
+                  <Form.Item name={[option.name, 'active']} label="Available" valuePropName="checked"><Switch /></Form.Item>
+                  {!form.getFieldValue(['addOnGroups', name, 'options', option.name, 'id']) && <Button danger type="text" onClick={() => controls.remove(option.name)}>Remove add-on</Button>}
+                </Flex>
               </div>)}
               <Button onClick={() => controls.add({ name: '', surcharge: '0', active: true })}>Add option</Button>
             </>}</Form.List>
-            {!form.getFieldValue(['addOnGroups', name, 'id']) && <Button danger onClick={() => remove(name)}>Remove group</Button>}
-          </div>)}
+          </Card>)}
           <Button onClick={() => add({ name: '', maximum: 1, options: [{ name: '', surcharge: '0', active: true }] })}>Add add-on group</Button>
         </>}</Form.List>
       </>}
@@ -143,27 +150,32 @@ export function MenuForm({ open, initial, offerings, currency, pending, blocked,
         <Form.Item name="basePrice" label={`Meal price (${currency})`} rules={priceRules}><Input inputMode="decimal" /></Form.Item>
         <Alert type="info" showIcon message="Save the items and sizes before adding them to a meal." />
         <Typography.Title level={5}>Included items</Typography.Title>
+        <Typography.Paragraph type="secondary">These items are included in every meal at the meal price.</Typography.Paragraph>
         <Form.List name="components">{(fields, { add, remove }) => <>
           {fields.map(({ key, name }) => <div key={key}>
             <Row gutter={16}>
               <Col xs={24} sm={14}><Form.Item name={[name, 'variantId']} label="Item or size" rules={required}><Select options={variants} showSearch optionFilterProp="label" /></Form.Item></Col>
-              <Col xs={24} sm={10}><Form.Item name={[name, 'quantity']} label="Quantity" rules={required}><InputNumber min={1} max={1000} precision={0} /></Form.Item></Col>
+              <Col xs={14} sm={6}><Form.Item name={[name, 'quantity']} label="Quantity" rules={required}><InputNumber min={1} max={1000} precision={0} /></Form.Item></Col>
+              <Col xs={10} sm={4}><Form.Item label=" " colon={false}><Button danger type="text" aria-label={`Remove included item ${name + 1}`} onClick={() => remove(name)}>Remove</Button></Form.Item></Col>
             </Row>
-            <Button onClick={() => remove(name)}>Remove included item</Button>
           </div>)}
           <Button onClick={() => add({ quantity: 1 })}>Add included item</Button>
         </>}</Form.List>
         <Typography.Title level={5}>Customer choices</Typography.Title>
+        <Typography.Paragraph type="secondary">Use choice groups when customers select items, such as one drink. Limits count distinct choices, not quantities.</Typography.Paragraph>
         <Form.List name="choiceGroups">{(groups, { add, remove }) => <>
-          {groups.map(({ key, name }) => <div key={key} style={{ padding: 16, border: '1px solid #d9d9d9', marginBottom: 16 }}>
+          {groups.map(({ key, name }) => <Card key={key} size="small" title={`Choice group ${name + 1}`} style={{ marginBottom: 16 }}
+            extra={!form.getFieldValue(['choiceGroups', name, 'id']) && <Button danger type="text" onClick={() => remove(name)}>Remove group</Button>}>
             <Form.Item name={[name, 'id']} hidden><Input /></Form.Item>
             <Form.Item name={[name, 'name']} label="Choice group name" rules={required}><Input /></Form.Item>
             <Row gutter={16}>
               <Col xs={24} sm={12}><Form.Item name={[name, 'minimum']} label="Minimum selections" rules={required}><InputNumber min={0} precision={0} /></Form.Item></Col>
               <Col xs={24} sm={12}><Form.Item name={[name, 'maximum']} label="Maximum selections" rules={required}><InputNumber min={0} precision={0} /></Form.Item></Col>
             </Row>
+            <Typography.Title level={5}>Choices in this group</Typography.Title>
             <Form.List name={[name, 'options']}>{(options, controls) => <>
               {options.map(option => <div key={option.key}>
+                {option.name > 0 && <Divider />}
                 <Form.Item name={[option.name, 'id']} hidden><Input /></Form.Item>
                 <Row gutter={16}>
                   <Col xs={24} sm={12}><Form.Item name={[option.name, 'name']} label="Choice name" rules={required}><Input /></Form.Item></Col>
@@ -173,13 +185,14 @@ export function MenuForm({ open, initial, offerings, currency, pending, blocked,
                   <Col xs={24} sm={12}><Form.Item name={[option.name, 'quantity']} label="Quantity" rules={required}><InputNumber min={1} max={1000} precision={0} /></Form.Item></Col>
                   <Col xs={24} sm={12}><Form.Item name={[option.name, 'surcharge']} label={`Extra price (${currency})`} rules={priceRules}><Input inputMode="decimal" /></Form.Item></Col>
                 </Row>
-                <Form.Item name={[option.name, 'active']} label="Available" valuePropName="checked"><Switch /></Form.Item>
-                {!form.getFieldValue(['choiceGroups', name, 'options', option.name, 'id']) && <Button onClick={() => controls.remove(option.name)}>Remove choice</Button>}
+                <Flex align="center" justify="space-between" gap="small" wrap>
+                  <Form.Item name={[option.name, 'active']} label="Available" valuePropName="checked"><Switch /></Form.Item>
+                  {!form.getFieldValue(['choiceGroups', name, 'options', option.name, 'id']) && <Button danger type="text" onClick={() => controls.remove(option.name)}>Remove choice</Button>}
+                </Flex>
               </div>)}
               <Button onClick={() => controls.add({ name: '', quantity: 1, surcharge: '0', active: true })}>Add choice</Button>
             </>}</Form.List>
-            {!form.getFieldValue(['choiceGroups', name, 'id']) && <Button danger onClick={() => remove(name)}>Remove choice group</Button>}
-          </div>)}
+          </Card>)}
           <Button onClick={() => add({ name: '', minimum: 1, maximum: 1, options: [{ name: '', quantity: 1, surcharge: '0', active: true }] })}>Add choice group</Button>
         </>}</Form.List>
       </>}
