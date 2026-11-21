@@ -14,6 +14,8 @@ For frontend design, implementation or review, use [frontend-development](../../
 
 Before adding browser API request handling, inspect the existing [shared HTTP client](src/shared/api/http-client.ts) and reuse it when it supports the endpoint's contract. Keep response validation and endpoint-specific error and recovery behavior with the owning feature. If the client does not fit, explain the concrete limitation before extending or bypassing it.
 
+For frontend server data and writes, follow the [API and state lifecycle guidance](../../.agents/skills/frontend-development/references/api-state.md) and inspect the existing query client and relevant feature before adding another pattern. Document a concrete reason for any exception.
+
 ## Theme and configuration
 
 - When adding or changing visual behavior, first use the existing Ant Design theme and semantic tokens. Update the owning theme or shared design guidance in the same change when a reusable token or convention is needed; keep related foreground, background, focus and interaction states consistent.
