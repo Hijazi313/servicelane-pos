@@ -24,6 +24,7 @@ The frontend foundation/access PR was integrated at `edf58d9` on local `main` an
 
 | Work | Branch and checkout | Owner | Base and publication | Handoff |
 | --- | --- | --- | --- | --- |
+| Menu drawer layout | `codex/menu-drawer-actions`, repository checkout | Current chat | Local `main`; local only | Footer actions are right-aligned and related fields use Ant Design responsive rows. The user reports the drawer looks and works well at desktop and tablet widths. Web typecheck passed (Node 24.18.1, below the declared minimum); local browser confirmed empty-submit validation/focus. Exact viewports, full keyboard, recovery and independent UI review remain unverified. |
 
 ## Historical records
 

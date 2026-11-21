@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Alert, Button, Checkbox, Divider, Drawer, Form, Input, InputNumber, Modal, Select, Space, Switch, Typography } from 'antd';
+import { Alert, Button, Checkbox, Col, Divider, Drawer, Flex, Form, Input, InputNumber, Modal, Row, Select, Switch, Typography } from 'antd';
 import type { Definition, Offering } from './menu-api';
 import { definitionFromDraft, type MenuDraft } from './menu-draft';
 
@@ -63,7 +63,8 @@ export function MenuForm({ open, initial, offerings, currency, pending, blocked,
   }
 
   return <Drawer rootClassName="menu-drawer" title={initial ? 'Edit menu item' : 'Add menu item'} open={open} onClose={close}
-    width="min(680px, 100%)" destroyOnHidden={false}>
+    width="min(680px, 100%)" destroyOnHidden={false}
+    footer={<Flex justify="end" gap="small"><Button onClick={close}>Cancel</Button><Button type="primary" htmlType="submit" form="menu-form" loading={pending} disabled={blocked}>Save</Button></Flex>}>
     <Modal open={confirmDiscard} title="Discard unsaved changes?" okText="Discard changes" cancelText="Keep editing"
       okButtonProps={{ danger: true }} onCancel={() => setConfirmDiscard(false)} onOk={() => {
         setConfirmDiscard(false);
@@ -82,13 +83,17 @@ export function MenuForm({ open, initial, offerings, currency, pending, blocked,
           }).join(', ') || 'None'}</p><ul>{latest.choiceGroups.map((group, index) => <li key={group.id ?? index}>{group.name} (choose {group.minimum}–{group.maximum}): {group.options.map(option => option.name + ' (' + (variants.find(variant => variant.value === option.variantId)?.label ?? option.variantId) + ') × ' + option.quantity + ' +' + option.surcharge + (option.active ? '' : ' (unavailable)')).join(', ')}</li>)}</ul></>}
         <p>Availability: {latest.active ? 'active' : 'inactive'}. Your draft is retained while this drawer remains open.</p>
         <Button onClick={onUseLatest}>Keep my draft and use current revision</Button></>} />}
-    <Form form={form} layout="vertical" onFinish={save} onFinishFailed={({ errorFields }) => {
+    <Form id="menu-form" form={form} layout="vertical" onFinish={save} onFinishFailed={({ errorFields }) => {
       if (errorFields[0]) form.scrollToField(errorFields[0].name, { focus: true });
     }} autoComplete="off">
-      <Form.Item name="kind" label="Type" rules={required}>
-        <Select disabled={!!initial} options={[{ value: 'item', label: 'Item' }, { value: 'combo', label: 'Meal deal' }]} />
-      </Form.Item>
-      <Form.Item name="name" label="Name" rules={required}><Input maxLength={240} autoFocus /></Form.Item>
+      <Row gutter={16}>
+        <Col xs={24} sm={8}>
+          <Form.Item name="kind" label="Type" rules={required}>
+            <Select disabled={!!initial} options={[{ value: 'item', label: 'Item' }, { value: 'combo', label: 'Meal deal' }]} />
+          </Form.Item>
+        </Col>
+        <Col xs={24} sm={16}><Form.Item name="name" label="Name" rules={required}><Input maxLength={240} autoFocus /></Form.Item></Col>
+      </Row>
       <Form.Item name="active" label="Available" valuePropName="checked"><Switch /></Form.Item>
       <Form.Item label="Photo" extra="Image upload coming soon."><Button disabled>Upload photo</Button></Form.Item>
 
@@ -98,8 +103,10 @@ export function MenuForm({ open, initial, offerings, currency, pending, blocked,
         <Form.List name="variants">{(fields, { add, remove }) => <>
           {fields.map(({ key, name }) => <div key={key}>
             <Form.Item name={[name, 'id']} hidden><Input /></Form.Item>
-            {sized && <Form.Item name={[name, 'name']} label="Size" rules={required}><Input /></Form.Item>}
-            <Form.Item name={[name, 'price']} label={`Price (${currency})`} rules={priceRules}><Input inputMode="decimal" /></Form.Item>
+            <Row gutter={16}>
+              {sized && <Col xs={24} sm={14}><Form.Item name={[name, 'name']} label="Size" rules={required}><Input /></Form.Item></Col>}
+              <Col xs={24} sm={sized ? 10 : 24}><Form.Item name={[name, 'price']} label={`Price (${currency})`} rules={priceRules}><Input inputMode="decimal" /></Form.Item></Col>
+            </Row>
             <Form.Item name={[name, 'active']} label="Size available" valuePropName="checked"><Switch /></Form.Item>
             {sized && !form.getFieldValue(['variants', name, 'id']) && <Button onClick={() => remove(name)}>Remove size</Button>}
             <Divider />
@@ -110,13 +117,17 @@ export function MenuForm({ open, initial, offerings, currency, pending, blocked,
         <Form.List name="addOnGroups">{(groups, { add, remove }) => <>
           {groups.map(({ key, name }) => <div key={key} style={{ padding: 16, border: '1px solid #d9d9d9', marginBottom: 16 }}>
             <Form.Item name={[name, 'id']} hidden><Input /></Form.Item>
-            <Form.Item name={[name, 'name']} label="Add-on group name" rules={required}><Input /></Form.Item>
-            <Form.Item name={[name, 'maximum']} label="Maximum selections" rules={required}><InputNumber min={0} precision={0} /></Form.Item>
+            <Row gutter={16}>
+              <Col xs={24} sm={14}><Form.Item name={[name, 'name']} label="Add-on group name" rules={required}><Input /></Form.Item></Col>
+              <Col xs={24} sm={10}><Form.Item name={[name, 'maximum']} label="Maximum selections" rules={required}><InputNumber min={0} precision={0} /></Form.Item></Col>
+            </Row>
             <Form.List name={[name, 'options']}>{(options, controls) => <>
               {options.map(option => <div key={option.key}>
                 <Form.Item name={[option.name, 'id']} hidden><Input /></Form.Item>
-                <Form.Item name={[option.name, 'name']} label="Add-on name" rules={required}><Input /></Form.Item>
-                <Form.Item name={[option.name, 'surcharge']} label={`Extra price (${currency})`} rules={priceRules}><Input inputMode="decimal" /></Form.Item>
+                <Row gutter={16}>
+                  <Col xs={24} sm={14}><Form.Item name={[option.name, 'name']} label="Add-on name" rules={required}><Input /></Form.Item></Col>
+                  <Col xs={24} sm={10}><Form.Item name={[option.name, 'surcharge']} label={`Extra price (${currency})`} rules={priceRules}><Input inputMode="decimal" /></Form.Item></Col>
+                </Row>
                 <Form.Item name={[option.name, 'active']} label="Available" valuePropName="checked"><Switch /></Form.Item>
                 {!form.getFieldValue(['addOnGroups', name, 'options', option.name, 'id']) && <Button onClick={() => controls.remove(option.name)}>Remove add-on</Button>}
               </div>)}
@@ -134,8 +145,10 @@ export function MenuForm({ open, initial, offerings, currency, pending, blocked,
         <Typography.Title level={5}>Included items</Typography.Title>
         <Form.List name="components">{(fields, { add, remove }) => <>
           {fields.map(({ key, name }) => <div key={key}>
-            <Form.Item name={[name, 'variantId']} label="Item or size" rules={required}><Select options={variants} showSearch optionFilterProp="label" /></Form.Item>
-            <Form.Item name={[name, 'quantity']} label="Quantity" rules={required}><InputNumber min={1} max={1000} precision={0} /></Form.Item>
+            <Row gutter={16}>
+              <Col xs={24} sm={14}><Form.Item name={[name, 'variantId']} label="Item or size" rules={required}><Select options={variants} showSearch optionFilterProp="label" /></Form.Item></Col>
+              <Col xs={24} sm={10}><Form.Item name={[name, 'quantity']} label="Quantity" rules={required}><InputNumber min={1} max={1000} precision={0} /></Form.Item></Col>
+            </Row>
             <Button onClick={() => remove(name)}>Remove included item</Button>
           </div>)}
           <Button onClick={() => add({ quantity: 1 })}>Add included item</Button>
@@ -145,15 +158,21 @@ export function MenuForm({ open, initial, offerings, currency, pending, blocked,
           {groups.map(({ key, name }) => <div key={key} style={{ padding: 16, border: '1px solid #d9d9d9', marginBottom: 16 }}>
             <Form.Item name={[name, 'id']} hidden><Input /></Form.Item>
             <Form.Item name={[name, 'name']} label="Choice group name" rules={required}><Input /></Form.Item>
-            <Form.Item name={[name, 'minimum']} label="Minimum selections" rules={required}><InputNumber min={0} precision={0} /></Form.Item>
-            <Form.Item name={[name, 'maximum']} label="Maximum selections" rules={required}><InputNumber min={0} precision={0} /></Form.Item>
+            <Row gutter={16}>
+              <Col xs={24} sm={12}><Form.Item name={[name, 'minimum']} label="Minimum selections" rules={required}><InputNumber min={0} precision={0} /></Form.Item></Col>
+              <Col xs={24} sm={12}><Form.Item name={[name, 'maximum']} label="Maximum selections" rules={required}><InputNumber min={0} precision={0} /></Form.Item></Col>
+            </Row>
             <Form.List name={[name, 'options']}>{(options, controls) => <>
               {options.map(option => <div key={option.key}>
                 <Form.Item name={[option.name, 'id']} hidden><Input /></Form.Item>
-                <Form.Item name={[option.name, 'name']} label="Choice name" rules={required}><Input /></Form.Item>
-                <Form.Item name={[option.name, 'variantId']} label="Item or size" rules={required}><Select options={variants} showSearch optionFilterProp="label" /></Form.Item>
-                <Form.Item name={[option.name, 'quantity']} label="Quantity" rules={required}><InputNumber min={1} max={1000} precision={0} /></Form.Item>
-                <Form.Item name={[option.name, 'surcharge']} label={`Extra price (${currency})`} rules={priceRules}><Input inputMode="decimal" /></Form.Item>
+                <Row gutter={16}>
+                  <Col xs={24} sm={12}><Form.Item name={[option.name, 'name']} label="Choice name" rules={required}><Input /></Form.Item></Col>
+                  <Col xs={24} sm={12}><Form.Item name={[option.name, 'variantId']} label="Item or size" rules={required}><Select options={variants} showSearch optionFilterProp="label" /></Form.Item></Col>
+                </Row>
+                <Row gutter={16}>
+                  <Col xs={24} sm={12}><Form.Item name={[option.name, 'quantity']} label="Quantity" rules={required}><InputNumber min={1} max={1000} precision={0} /></Form.Item></Col>
+                  <Col xs={24} sm={12}><Form.Item name={[option.name, 'surcharge']} label={`Extra price (${currency})`} rules={priceRules}><Input inputMode="decimal" /></Form.Item></Col>
+                </Row>
                 <Form.Item name={[option.name, 'active']} label="Available" valuePropName="checked"><Switch /></Form.Item>
                 {!form.getFieldValue(['choiceGroups', name, 'options', option.name, 'id']) && <Button onClick={() => controls.remove(option.name)}>Remove choice</Button>}
               </div>)}
@@ -164,8 +183,6 @@ export function MenuForm({ open, initial, offerings, currency, pending, blocked,
           <Button onClick={() => add({ name: '', minimum: 1, maximum: 1, options: [{ name: '', quantity: 1, surcharge: '0', active: true }] })}>Add choice group</Button>
         </>}</Form.List>
       </>}
-      <Divider />
-      <Space><Button type="primary" htmlType="submit" loading={pending} disabled={blocked}>Save</Button><Button onClick={close}>Cancel</Button></Space>
     </Form>
   </Drawer>;
 }
