@@ -60,97 +60,70 @@ See the [project tracker](docs/planning/TRACKER.md) for the roadmap, current acc
 
 ## Development setup
 
-### Prerequisites
+This path starts the API and web app and creates an initial administrator for a **new, empty development database**. Allow extra time for installing tools, creating a hosted database and trusting a local certificate; the complete setup has not been timed.
 
-- Node.js **24.21.0**, as specified in [`.node-version`](.node-version).
-- pnpm **12.11.2**, as specified in [`package.json`](package.json).
-- A dedicated, user-managed hosted PostgreSQL development database.
+### Before you start
 
-The current development workflow uses hosted PostgreSQL. Local database provisioning and Docker configuration are not included. If you use nvm, `npm run setup:toolchain` installs the Node version from `.node-version` and enables the pnpm Corepack shim. Run `nvm use` in your current terminal; `.nvmrc` points to the same version file. An npm script cannot change its parent shell. You can also install the pinned tools using your normal tooling.
+- Install Node.js **24.21.0** ([`.node-version`](.node-version)) and pnpm **12.11.2** ([`package.json`](package.json)). With nvm installed, run `npm run setup:toolchain`, then `nvm use` in your current terminal. You can use your own tool manager instead.
+- Have a dedicated, empty hosted PostgreSQL database you are authorized to modify, with internet access and a direct or session-mode connection URL. Local database provisioning and Docker configuration are not included. See [database connection requirements](docs/development-setup.md#environment-and-database-connection), including TLS and provider CA certificates.
+- Install [mkcert](https://github.com/FiloSottile/mkcert) and OpenSSL. The certificate step below asks mkcert to add a local CA to your machine's trust store.
 
-To select the project version automatically when entering this directory in zsh, add this after nvm is loaded in `~/.zshrc`:
+### 1. Install and configure
 
-```sh
-autoload -U add-zsh-hook
-servicelane_nvm_use() {
-  local nvmrc
-  nvmrc="$(nvm_find_nvmrc)"
-  if [ -n "$nvmrc" ] && [ "$(nvm version)" != "$(nvm version "$(cat "$nvmrc")")" ]; then
-    nvm use --silent
-  fi
-}
-add-zsh-hook chpwd servicelane_nvm_use
-servicelane_nvm_use
-```
-
-The hook also respects `.nvmrc` files in other directories. It does not install missing Node versions; run `nvm install` in the project if needed. Restart the terminal or source `~/.zshrc` after adding it.
-
-### Installation and configuration
-
-From the repository root:
+Clone the repository, enter its root directory, and run:
 
 ```sh
 pnpm install --frozen-lockfile --ignore-scripts
 if [ ! -e .env ] && [ ! -L .env ]; then cp .env.example .env; fi
+openssl rand -hex 32
 ```
 
-Configure `.env` using [`.env.example`](.env.example). Provide `DATABASE_URL`, `CLIENT_ORIGIN` (the canonical HTTPS client origin without a trailing slash), and the stable secret `ORDER_CURSOR_SIGNING_KEY` described in [development setup](docs/development-setup.md). Keep credentials out of version control.
+Edit `.env` and set:
 
-Read the [development configuration guide](docs/development-setup.md) for connection URL requirements, provider endpoints, TLS certificates, and reverse-proxy settings before connecting. Database TLS verifies certificates and hostnames by default.
+- `DATABASE_URL` to your development database URL, with percent-encoded credentials and no query parameters. Set `DATABASE_CA_FILE` if your provider requires a CA certificate.
+- `CLIENT_ORIGIN=https://127.0.0.1:5174` and `TRUSTED_PROXY_ADDRESSES=127.0.0.1` (uncomment the latter).
+- `ORDER_CURSOR_SIGNING_KEY` to the 64-character output of `openssl rand -hex 32`. Keep it private and stable across restarts.
 
-### Database setup
+Keep `.env` and credentials out of version control. Shell environment variables override `.env`; see the [configuration guide](docs/development-setup.md) for details.
 
-Build the application, then apply the reviewed migrations:
+### 2. Prepare the database and administrator
+
+**These commands write to the configured database.** Check the target before running them; do not use a database containing real business data.
 
 ```sh
 pnpm build
 pnpm db:migrate
+cp apps/api/src/operator/provision-installation.example.json "$HOME/servicelane-installation.json"
 ```
 
-**Migrations modify the configured database.** Confirm the intended, authorized development target before running them. Application startup does not apply migrations.
-
-See [migration conventions](apps/api/migrations/README.md) for generation, review, and corrective changes.
-
-### Run the development servers
-
-For browser access, first configure the certificate, matching origin and local proxy described in the [local HTTPS development guide](docs/development-setup.md#local-browser-development). Then start the API watcher and React development server together:
+Edit the copied JSON with your development business, branch and administrator details. Then run the command below in an interactive terminal and enter a 15–128-character password at its hidden prompts:
 
 ```sh
+pnpm provision-installation "$HOME/servicelane-installation.json"
+```
+
+Provisioning is for an uninitialized installation and does not overwrite an existing one. See the [operator guide](apps/api/src/operator/README.md) for requirements and troubleshooting. Migrations are not applied automatically when the app starts.
+
+### 3. Trust a local certificate and start
+
+```sh
+mkdir -p "$HOME/.servicelane-dev"
+chmod 700 "$HOME/.servicelane-dev"
+mkcert -install
+mkcert -cert-file "$HOME/.servicelane-dev/localhost.pem" -key-file "$HOME/.servicelane-dev/localhost-key.pem" 127.0.0.1
+chmod 600 "$HOME/.servicelane-dev/localhost-key.pem"
 pnpm dev
 ```
 
-For only one server, run `pnpm --filter @servicelane/api dev` or `pnpm --filter @servicelane/web dev`. Vite serves the client and proxies API requests over the configured local HTTPS origin; this development setup is not a deployment configuration.
+Open [https://127.0.0.1:5174](https://127.0.0.1:5174) and sign in with the administrator username and password you created. Follow the password-change prompt. The API listens at `http://127.0.0.1:3000`; Vite proxies browser requests over HTTPS because authenticated routes require Secure cookies. Stop both servers with Ctrl-C. API startup also runs background database cleanup, so use an authorized development target.
 
-With the default local configuration:
-
-| Service | Address |
-| --- | --- |
-| Web client and API proxy | `https://127.0.0.1:5174` |
-| API listener | `http://127.0.0.1:3000` |
-
-The browser origin, certificate and API configuration must match; see the local HTTPS guide above when changing ports.
-
-To run the compiled application after building:
-
-```sh
-pnpm start
-```
-
-The default address is `http://127.0.0.1:3000`. Restart the process after changing environment configuration. Starting the API activates background database cleanup, so use an authorized development target.
-
-### Verify connectivity
+If the browser cannot connect or login fails, check that the certificate, browser address and `CLIENT_ORIGIN` match, the proxy address is trusted, and ports 5174 and 3000 are free. See [local HTTPS development](docs/development-setup.md#local-browser-development) for alternative ports and certificate paths. Check database reachability separately:
 
 ```sh
 curl -i http://127.0.0.1:3000/health
 ```
 
-A successful database connectivity check returns HTTP `200`:
-
-```json
-{"status":"ok"}
-```
-
-The endpoint returns HTTP `503` with `{"status":"unavailable"}` when the database is unavailable. It checks reachability, not migration currency or complete application readiness.
+HTTP `200` with `{"status":"ok"}` confirms database connectivity; `503` means it is unavailable. This does not check migration currency or full application readiness. See [migration conventions](apps/api/migrations/README.md) for migration review and changes.
 
 ## Development commands
 

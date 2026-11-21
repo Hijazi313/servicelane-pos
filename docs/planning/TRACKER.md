@@ -27,7 +27,8 @@ The frontend foundation/access PR was integrated at `edf58d9`. Remote `main` was
 
 | Work | Branch and checkout | Owner | Base and publication | Handoff |
 | --- | --- | --- | --- | --- |
-| Cashier order capture | `codex/cashier-order-capture`, `/Users/macbookpro/Documents/personal/restaurant-pos-custom` | Primary agent | Based on `main` at `e32c065`; local only, publication unauthorized | [Cashier capture](frontend/cashier-order-capture.md) |
+| Cashier order capture | `codex/cashier-order-capture` (checkout temporarily on contributor quickstart) | Primary agent | Based on `main` at `e32c065`; local only, publication unauthorized | [Cashier capture](frontend/cashier-order-capture.md) |
+| Contributor quickstart | `codex/contributor-quickstart`, `/Users/macbookpro/Documents/personal/restaurant-pos-custom` | Primary agent | Based on cashier branch; local only, publication unauthorized | Root README |
 
 ## Historical records
 
