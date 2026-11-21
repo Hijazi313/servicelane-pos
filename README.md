@@ -1,5 +1,7 @@
 # ServiceLane POS
 
+![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white) ![React](https://img.shields.io/badge/React-087EA4?style=for-the-badge&logo=react&logoColor=white) ![NestJS](https://img.shields.io/badge/NestJS-E0234E?style=for-the-badge&logo=nestjs&logoColor=white) ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?style=for-the-badge&logo=postgresql&logoColor=white)
+
 ServiceLane POS is a restaurant point-of-sale system designed for independent restaurant businesses using one maintained codebase.
 
 The product is intended to support restaurant operations from menu configuration through ordering, kitchen fulfilment, billing, and reporting. The planned deployment model is one installation per restaurant business, running on its local network with a dedicated PostgreSQL database and locally served client assets.
@@ -13,6 +15,18 @@ ServiceLane POS aims to bring everyday restaurant workflows into one system desi
 ## Project status
 
 **Active development · Not production-ready**
+
+### Frontend
+
+The React application has an accepted foundation and three workflows at different stages:
+
+| Workflow | Current status |
+| --- | --- |
+| Staff access | Login, required password change and logout are implemented. Local login, logout, re-login and hard refresh are user-reported; remaining checks and acceptance are open. [Access tracker](docs/planning/frontend-access/phase-tracker.md) |
+| Menu setup | The initial administrator workflow is accepted under the recorded local walkthrough. Broader UI and recovery verification are deferred, and [performance remains open](KNOWN-ISSUES.md#ki-01--slow-authenticated-workflows-on-the-development-database). [Menu scope and evidence](docs/planning/frontend/initial-menu-setup.md) |
+| Cashier order capture | Active-menu selection, takeaway capture and saved-order browsing are implemented in source on the current work branch. The walkthrough, independent UI readiness and acceptance remain pending; pagination and large-history performance are unverified. [Cashier scope and evidence](docs/planning/frontend/cashier-order-capture.md) |
+
+### Backend
 
 The following scopes have been accepted for backend development; operational release validation remains separate:
 
@@ -28,7 +42,7 @@ The following scopes have been accepted for backend development; operational rel
 
 These scopes include focused offline and bounded PostgreSQL evidence, with limits recorded in their respective trackers. Cashier Shifts was integrated into main through [PR #21](https://github.com/Hijazi313/servicelane-pos/pull/21).
 
-[Inventory discovery](docs/planning/inventory/discovery.md) remains in discovery. The [basic frontend foundation](docs/planning/frontend/TRACKER.md) is accepted. The initial Menu workflow is accepted under the [recorded walkthrough scope](docs/planning/frontend/initial-menu-setup.md#acceptance-and-closeout--2026-11-21), with [performance](KNOWN-ISSUES.md#ki-01--slow-authenticated-workflows-on-the-development-database) and further verification deferred; its source was integrated through [PR #29](https://github.com/Hijazi313/servicelane-pos/pull/29). The merged access client supports a protected welcome screen. Local login, logout, re-login and hard refresh are user-reported; [access acceptance](docs/planning/frontend-access/phase-tracker.md) remains open. Deployment, backup, recovery, an end-to-end trading flow and operational release validation remain incomplete.
+[Inventory](docs/planning/inventory/discovery.md) remains in discovery. Deployment, backup, recovery, an end-to-end trading flow and operational release validation remain incomplete.
 
 See the [project tracker](docs/planning/TRACKER.md) for the roadmap, current acceptance status, and verification limits.
 
@@ -37,7 +51,7 @@ See the [project tracker](docs/planning/TRACKER.md) for the roadmap, current acc
 | Layer | Technology |
 | --- | --- |
 | Language | TypeScript |
-| Frontend | React, Vite |
+| Frontend | React, Vite, TanStack Router and Query, Ant Design |
 | API framework | NestJS |
 | Database | PostgreSQL |
 | Database tooling | Drizzle |
@@ -99,13 +113,22 @@ See [migration conventions](apps/api/migrations/README.md) for generation, revie
 
 ### Run the development servers
 
-To start the API watcher and the React development server together:
+For browser access, first configure the certificate, matching origin and local proxy described in the [local HTTPS development guide](docs/development-setup.md#local-browser-development). Then start the API watcher and React development server together:
 
 ```sh
 pnpm dev
 ```
 
-For only one server, run `pnpm --filter @servicelane/api dev` or `pnpm --filter @servicelane/web dev`. Vite prints its local URL. Starting both servers does not configure browser-to-API authentication or an HTTPS proxy.
+For only one server, run `pnpm --filter @servicelane/api dev` or `pnpm --filter @servicelane/web dev`. Vite serves the client and proxies API requests over the configured local HTTPS origin; this development setup is not a deployment configuration.
+
+With the default local configuration:
+
+| Service | Address |
+| --- | --- |
+| Web client and API proxy | `https://127.0.0.1:5174` |
+| API listener | `http://127.0.0.1:3000` |
+
+The browser origin, certificate and API configuration must match; see the local HTTPS guide above when changing ports.
 
 To run the compiled application after building:
 
@@ -139,6 +162,8 @@ Run commands from the repository root.
 | `pnpm --filter @servicelane/api dev` | Watch and restart only the API |
 | `pnpm --filter @servicelane/web dev` | Run only the React development server |
 | `pnpm build` | Compile the API |
+| `pnpm --filter @servicelane/web typecheck` | Typecheck the frontend |
+| `pnpm --filter @servicelane/web build` | Typecheck and build the frontend |
 | `pnpm start` | Run the compiled API |
 | `pnpm test:access` | Run focused database-free authentication and access checks |
 | `pnpm test:menu` | Run focused database-free menu checks |
@@ -167,17 +192,24 @@ API contracts are maintained with their owning modules:
 ## Repository structure
 
 ```text
-apps/api/
-├── src/
-│   ├── infrastructure/   # Configuration, database connectivity, and health
-│   ├── modules/          # Business modules and their documentation
-│   └── operator/         # Provisioning and recovery commands
-└── migrations/           # Database migrations
-
-docs/                     # Scope, architecture, planning, and acceptance
+apps/
+├── api/
+│   ├── src/modules/      # Business modules and their documentation
+│   ├── src/operator/     # Provisioning and recovery commands
+│   └── migrations/       # Database migrations
+└── web/
+    ├── src/app/          # Application setup and routing
+    ├── src/features/     # Access, Menu and Cashier workflows
+    ├── src/shared/       # Shared frontend code
+    └── docs/             # Frontend capability index
+packages/
+└── api-contracts/        # Shared API contracts
+docs/                     # Scope, architecture, planning and acceptance
+scripts/                  # Repository-level tooling
+.github/                  # CI workflows and pull request template
 ```
 
-Modules own their business rules, persistence, and public interfaces. Shared infrastructure provides technical capabilities such as configuration and database connectivity.
+API modules own their business rules, persistence, and public interfaces. Shared infrastructure provides technical capabilities such as configuration and database connectivity. See the [web application guide](apps/web/README.md) for frontend development and its [capability index](apps/web/docs/capabilities.md) for implemented work.
 
 See the [architecture guide](docs/architecture/README.md) for dependency rules and module boundaries.
 
@@ -191,7 +223,17 @@ The [project scope](docs/project-scope.md) defines delivery boundaries, and the 
 
 - [Development configuration](docs/development-setup.md)
 - [Project scope and working policy](docs/project-scope.md)
-- [Roadmap and delivery status](docs/planning/TRACKER.md)
+- [Roadmap and delivery status](docs/planning/TRACKER.md), including the [frontend overview](docs/planning/frontend/TRACKER.md)
 - [Architecture](docs/architecture/README.md)
 - [Operational procedures](apps/api/src/operator/README.md)
 - [Compliance guidance](docs/compliance/README.md)
+
+## Author
+
+👨‍💻 **Muhammad Hamza** · Software engineer
+
+🔗 [LinkedIn](https://www.linkedin.com/in/hijazi313/) · ✉️ [Email](mailto:imhamzaa313@gmail.com)
+
+---
+
+Made with ❤️ for independent restaurants.
