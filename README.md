@@ -1,50 +1,21 @@
 # ServiceLane POS
 
-![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white) ![React](https://img.shields.io/badge/React-087EA4?style=for-the-badge&logo=react&logoColor=white) ![NestJS](https://img.shields.io/badge/NestJS-E0234E?style=for-the-badge&logo=nestjs&logoColor=white) ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?style=for-the-badge&logo=postgresql&logoColor=white)
+ServiceLane POS is a restaurant POS for independent restaurants, designed for local networks with one NestJS and React codebase; backend modules are in place, while the full trading flow and production readiness are still in progress.
 
-ServiceLane POS is a restaurant point-of-sale system designed for independent restaurant businesses using one maintained codebase.
+## Why this exists
 
-The product is intended to support restaurant operations from menu configuration through ordering, kitchen fulfilment, billing, and reporting. The planned deployment model is one installation per restaurant business, running on its local network with a dedicated PostgreSQL database and locally served client assets.
+Restaurants should have local control over their operations without a separate software fork for each business. ServiceLane is designed around shared code and configurable business settings, including identity, currency and timezone.
 
-Restaurant identity, branding, currency, timezone, and fiscal settings belong to business configuration.
-
-## Why this project?
-
-ServiceLane POS aims to bring everyday restaurant workflows into one system designed to run on the restaurant's local network. The goal is to support independent businesses through configurable menus and business settings, while keeping improvements shared across one maintained codebase.
-
-## Project status
+## Current status
 
 **Active development · Not production-ready**
 
-### Frontend
+- ✅ **Backend development accepted:** business setup, staff access, menu, order capture, kitchen, billing and cashier shifts have accepted backend scopes. Operational release validation remains separate.
+- ✅ **Frontend foundation and initial menu setup accepted:** menu acceptance covers the recorded local walkthrough; broader UI and recovery verification remain open.
+- 🔄 **Staff access and cashier screens:** implemented workflows are under further review; cashier acceptance and independent UI readiness remain pending.
+- ⏳ **Full trading flow and release:** amendments, reconnect, receipt output, deployment, backup and recovery remain incomplete or unaccepted. Inventory is in discovery.
 
-The React application has an accepted foundation and three workflows at different stages:
-
-| Workflow | Current status |
-| --- | --- |
-| Staff access | Login, required password change and logout are implemented. Local login, logout, re-login and hard refresh are user-reported; remaining checks and acceptance are open. [Access tracker](docs/planning/frontend-access/phase-tracker.md) |
-| Menu setup | The initial administrator workflow is accepted under the recorded local walkthrough. Broader UI and recovery verification are deferred, and [performance remains open](KNOWN-ISSUES.md#ki-01--slow-authenticated-workflows-on-the-development-database). [Menu scope and evidence](docs/planning/frontend/initial-menu-setup.md) |
-| Cashier order capture | Active-menu selection, takeaway capture and saved-order browsing are implemented in source on the current work branch. The walkthrough, independent UI readiness and acceptance remain pending; pagination and large-history performance are unverified. [Cashier scope and evidence](docs/planning/frontend/cashier-order-capture.md) |
-
-### Backend
-
-The following scopes have been accepted for backend development; operational release validation remains separate:
-
-| Area | Backend scope |
-| --- | --- |
-| Business setup | Business and branch foundation, installation provisioning, and initial administrator setup |
-| Authentication and access | Staff login, sessions, server-enforced permissions, and administrator recovery |
-| Menu catalogue | Catalogue maintenance, selectable sizes, optional extras, configurable combos, and selection pricing |
-| Order capture | Scoped takeaway capture/readback, immutable merchandise snapshots, configurable limits and duplicate-safe retries |
-| Kitchen | Dispatch, preparation queue/readback and preparation states |
-| Billing and payments | Settlement backend; routes mounted in application source |
-| Cashier shifts | Drawer sessions, cash movements, handover and closing controls; routes mounted in application source |
-
-These scopes include focused offline and bounded PostgreSQL evidence, with limits recorded in their respective trackers. Cashier Shifts was integrated into main through [PR #21](https://github.com/Hijazi313/servicelane-pos/pull/21).
-
-[Inventory](docs/planning/inventory/discovery.md) remains in discovery. Deployment, backup, recovery, an end-to-end trading flow and operational release validation remain incomplete.
-
-See the [project tracker](docs/planning/TRACKER.md) for the roadmap, current acceptance status, and verification limits.
+See the [project tracker](docs/planning/TRACKER.md) for current work and evidence limits, the [frontend overview](docs/planning/frontend/TRACKER.md) for client status, and [known issues](KNOWN-ISSUES.md) for outstanding problems.
 
 ## Technology stack
 
